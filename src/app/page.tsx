@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
-import { Bot, TrendingUp, Cpu, Users, ArrowRight } from 'lucide-react'
-import { getArticles, getFeaturedArticles, getCategories } from '@/lib/sanity'
+import { Bot, TrendingUp, Cpu, Users, ArrowRight, Package } from 'lucide-react'
+import { getArticles, getFeaturedArticles, getCategories, getFeaturedProducts } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import FeaturedArticle from '@/components/FeaturedArticle'
 import CategoryFilter from '@/components/CategoryFilter'
 import NewsletterForm from '@/components/NewsletterForm'
+import ProductCard from '@/components/ProductCard'
 
 const stats = [
   { label: 'Global Market', value: '$185B+', icon: TrendingUp, detail: '+14% YoY Growth' },
@@ -17,10 +18,11 @@ const stats = [
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [articles, featuredArticles, categories] = await Promise.all([
+  const [articles, featuredArticles, categories, featuredProducts] = await Promise.all([
     getArticles(9),
     getFeaturedArticles(1),
     getCategories(),
+    getFeaturedProducts(4),
   ])
 
   const featuredArticle = featuredArticles[0]
@@ -82,9 +84,43 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      {featuredProducts.length > 0 && (
+        <section className="py-12 md:py-16 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            {/* Section Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-medium mb-3">
+                  <Package className="w-4 h-4" />
+                  Featured Products
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+                  Discover Robotics Products
+                </h2>
+              </div>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 text-gray-900 hover:text-emerald-600 font-medium transition-colors"
+              >
+                View All Products
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Products Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Featured Article Section */}
       {featuredArticle && (
-        <section className="py-12 md:py-16 bg-gray-50">
+        <section className="py-12 md:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <FeaturedArticle article={featuredArticle} />
           </div>
@@ -92,7 +128,7 @@ export default async function HomePage() {
       )}
 
       {/* Latest Articles Section */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
@@ -128,7 +164,7 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-16 bg-gray-50 rounded-2xl">
+            <div className="text-center py-16 bg-white rounded-2xl">
               <Bot className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles yet</h3>
               <p className="text-gray-500">

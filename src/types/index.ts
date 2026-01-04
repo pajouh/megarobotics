@@ -64,3 +64,73 @@ export interface CodeBlock {
   code: string
   filename?: string
 }
+
+// Product system types
+export interface Manufacturer {
+  _id: string
+  _type: 'manufacturer'
+  name: string
+  slug: {
+    current: string
+  }
+  logo?: SanityImage
+  description?: string
+  website?: string
+  headquarters?: string
+  founded?: string
+  specialties?: string[]
+  featured?: boolean
+  productCount?: number
+}
+
+export interface ProductCategory {
+  _id: string
+  _type: 'productCategory'
+  name: string
+  slug: {
+    current: string
+  }
+  description?: string
+  icon?: string
+  image?: SanityImage
+  order?: number
+  productCount?: number
+}
+
+export interface ProductSpecification {
+  label: string
+  value: string
+}
+
+export interface ProductGalleryImage extends SanityImage {
+  alt?: string
+  caption?: string
+}
+
+export interface Product {
+  _id: string
+  _type: 'product'
+  name: string
+  slug: {
+    current: string
+  }
+  manufacturer: Manufacturer
+  category: ProductCategory
+  tagline?: string
+  description?: string
+  fullDescription?: PortableTextBlock[]
+  mainImage?: SanityImage
+  gallery?: ProductGalleryImage[]
+  videoUrl?: string
+  specifications?: ProductSpecification[]
+  features?: string[]
+  applications?: string[]
+  priceRange?: string
+  availability?: 'available' | 'preorder' | 'coming_soon' | 'contact'
+  productUrl?: string
+  datasheetUrl?: string
+  featured?: boolean
+  isNew?: boolean
+  publishedAt?: string
+  order?: number
+}

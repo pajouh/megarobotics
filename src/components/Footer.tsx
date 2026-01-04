@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { Twitter, Linkedin, Youtube, Mail } from 'lucide-react'
 
-const categories = [
-  { name: 'News', href: '/articles' },
+const products = [
+  { name: 'All Products', href: '/products' },
+  { name: 'Humanoid & Legged', href: '/products/category/humanoid-legged-robots' },
+  { name: 'Industrial & Cobots', href: '/products/category/industrial-cobots' },
+  { name: 'Consumer & Home', href: '/products/category/consumer-home' },
+  { name: 'Manufacturers', href: '/manufacturers' },
+]
+
+const news = [
+  { name: 'All News', href: '/articles' },
   { name: 'Reviews', href: '/category/reviews' },
   { name: 'Companies', href: '/category/companies' },
   { name: 'Events', href: '/category/events' },
@@ -26,9 +34,9 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
               <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
                 <span className="text-white font-bold text-lg">M</span>
@@ -57,11 +65,28 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Categories */}
+          {/* Products */}
           <div>
-            <h3 className="text-gray-900 font-semibold mb-4">Categories</h3>
+            <h3 className="text-gray-900 font-semibold mb-4">Products</h3>
             <ul className="space-y-2">
-              {categories.map((item) => (
+              {products.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* News */}
+          <div>
+            <h3 className="text-gray-900 font-semibold mb-4">News</h3>
+            <ul className="space-y-2">
+              {news.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
@@ -90,15 +115,19 @@ export default function Footer() {
               ))}
             </ul>
           </div>
+        </div>
 
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-gray-900 font-semibold mb-4">Stay Updated</h3>
-            <p className="text-gray-500 text-sm mb-4">
-              Get the latest robotics news delivered to your inbox.
-            </p>
-            <form className="space-y-3">
-              <div className="relative">
+        {/* Newsletter */}
+        <div className="mt-10 pt-8 border-t border-gray-200">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-gray-900 font-semibold mb-1">Stay Updated</h3>
+              <p className="text-gray-500 text-sm">
+                Get the latest robotics news delivered to your inbox.
+              </p>
+            </div>
+            <form className="flex gap-3 w-full md:w-auto">
+              <div className="relative flex-grow md:w-64">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="email"
@@ -108,7 +137,7 @@ export default function Footer() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition-colors"
+                className="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 Subscribe
               </button>
@@ -117,7 +146,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
             &copy; 2025 MegaRobotics. All rights reserved.
           </p>
