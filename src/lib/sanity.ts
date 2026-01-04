@@ -1,19 +1,36 @@
-import { createClient } from '@sanity/client'
+import { createClient, type SanityClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 import { SanityImage, Article, Category, Author } from '@/types'
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-  apiVersion: '2024-01-01',
-  useCdn: process.env.NODE_ENV === 'production',
-})
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
-const builder = imageUrlBuilder(client)
+// Create a null-safe client that handles missing configuration
+function createSanityClient(): SanityClient | null {
+  if (!projectId) {
+    console.warn('Missing NEXT_PUBLIC_SANITY_PROJECT_ID environment variable')
+    return null
+  }
+  return createClient({
+    projectId,
+    dataset,
+    apiVersion: '2024-01-01',
+    useCdn: process.env.NODE_ENV === 'production',
+  })
+}
+
+export const client = createSanityClient()
+
+const builder = client ? imageUrlBuilder(client) : null
 
 export function urlFor(source: SanityImage) {
+  if (!builder) {
+    // Return a placeholder during build or when config is missing
+    return { url: () => '/placeholder.jpg', width: () => ({ height: () => ({ url: () => '/placeholder.jpg' }) }) }
+  }
   return builder.image(source)
 }
+
 
 // GROQ Queries
 const articleFields = `
@@ -51,6 +68,7 @@ const articleWithBodyFields = `
 
 // Get all articles with optional limit
 export async function getArticles(limit?: number): Promise<Article[]> {
+  if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "article"] | order(publishedAt desc)${limitQuery} {
@@ -61,6 +79,7 @@ export async function getArticles(limit?: number): Promise<Article[]> {
 
 // Get a single article by slug
 export async function getArticle(slug: string): Promise<Article | null> {
+  if (!client) return null
   return client.fetch(
     `*[_type == "article" && slug.current == $slug][0] {
       ${articleWithBodyFields}
@@ -71,6 +90,7 @@ export async function getArticle(slug: string): Promise<Article | null> {
 
 // Get featured articles
 export async function getFeaturedArticles(limit: number = 3): Promise<Article[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "article" && featured == true] | order(publishedAt desc)[0...${limit}] {
       ${articleFields}
@@ -80,6 +100,7 @@ export async function getFeaturedArticles(limit: number = 3): Promise<Article[]>
 
 // Get articles by category
 export async function getArticlesByCategory(categorySlug: string, limit?: number): Promise<Article[]> {
+  if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "article" && category->slug.current == $categorySlug] | order(publishedAt desc)${limitQuery} {
@@ -91,6 +112,7 @@ export async function getArticlesByCategory(categorySlug: string, limit?: number
 
 // Get all categories
 export async function getCategories(): Promise<Category[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "category"] | order(title asc) {
       _id,
@@ -105,6 +127,7 @@ export async function getCategories(): Promise<Category[]> {
 
 // Get a single category by slug
 export async function getCategory(slug: string): Promise<Category | null> {
+  if (!client) return null
   return client.fetch(
     `*[_type == "category" && slug.current == $slug][0] {
       _id,
@@ -120,6 +143,7 @@ export async function getCategory(slug: string): Promise<Category | null> {
 
 // Get all authors
 export async function getAuthors(): Promise<Author[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "author"] | order(name asc) {
       _id,
@@ -135,6 +159,7 @@ export async function getAuthors(): Promise<Author[]> {
 
 // Get related articles (same category, excluding current)
 export async function getRelatedArticles(articleId: string, categorySlug: string, limit: number = 3): Promise<Article[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "article" && _id != $articleId && category->slug.current == $categorySlug] | order(publishedAt desc)[0...${limit}] {
       ${articleFields}
@@ -144,17 +169,20 @@ export async function getRelatedArticles(articleId: string, categorySlug: string
 }
 
 // Search articles
-export async function searchArticles(query: string): Promise<Article[]> {
-  return client.fetch(
-    `*[_type == "article" && (title match $query || excerpt match $query)] | order(publishedAt desc) {
+export async function searchArticles(searchTerm: string): Promise<Article[]> {
+  if (!client) return []
+  const searchQuery = `*${searchTerm}*`
+  return client.fetch<Article[]>(
+    `*[_type == "article" && (title match $searchQuery || excerpt match $searchQuery)] | order(publishedAt desc) {
       ${articleFields}
     }`,
-    { query: `*${query}*` }
+    { searchQuery }
   )
 }
 
 // Get all article slugs (for static generation)
 export async function getAllArticleSlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "article" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
@@ -162,6 +190,7 @@ export async function getAllArticleSlugs(): Promise<{ slug: string }[]> {
 
 // Get all category slugs (for static generation)
 export async function getAllCategorySlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
   return client.fetch(
     `*[_type == "category" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
