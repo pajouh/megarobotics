@@ -3,7 +3,11 @@
 import { useState } from 'react'
 import { Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 
-export default function NewsletterForm() {
+interface NewsletterFormProps {
+  variant?: 'light' | 'dark'
+}
+
+export default function NewsletterForm({ variant = 'light' }: NewsletterFormProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -42,11 +46,13 @@ export default function NewsletterForm() {
     }
   }
 
+  const isDark = variant === 'dark'
+
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md">
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-grow">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+          <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
           <input
             type="email"
             value={email}
@@ -55,14 +61,22 @@ export default function NewsletterForm() {
               if (status !== 'idle') setStatus('idle')
             }}
             placeholder="Enter your email"
-            className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+            className={`w-full pl-12 pr-4 py-3 rounded-xl font-medium transition-all focus:outline-none focus:ring-2 ${
+              isDark
+                ? 'bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:border-emerald-500/50 focus:ring-emerald-500/20'
+                : 'bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:border-gray-400 focus:ring-gray-200'
+            }`}
             disabled={status === 'loading'}
           />
         </div>
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2 min-w-[140px] glow-emerald hover:glow-emerald"
+          className={`px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 min-w-[140px] ${
+            isDark
+              ? 'bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-white'
+              : 'bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white'
+          }`}
         >
           {status === 'loading' ? (
             <>
@@ -77,13 +91,13 @@ export default function NewsletterForm() {
 
       {/* Status Messages */}
       {status === 'success' && (
-        <div className="mt-3 flex items-center gap-2 text-sm text-emerald-400">
+        <div className={`mt-3 flex items-center gap-2 text-sm ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}>
           <CheckCircle className="w-4 h-4" />
           {message}
         </div>
       )}
       {status === 'error' && (
-        <div className="mt-3 flex items-center gap-2 text-sm text-rose-400">
+        <div className={`mt-3 flex items-center gap-2 text-sm ${isDark ? 'text-rose-400' : 'text-rose-600'}`}>
           <AlertCircle className="w-4 h-4" />
           {message}
         </div>

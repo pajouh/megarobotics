@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Bot, Search } from 'lucide-react'
+import { Bot } from 'lucide-react'
 import { getArticles, getCategories } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
@@ -18,14 +18,14 @@ export default async function ArticlesPage() {
   ])
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             All Articles
           </h1>
-          <p className="text-slate-400 max-w-2xl">
+          <p className="text-gray-600 max-w-2xl">
             Explore the latest robotics news, in-depth reviews, company profiles,
             and research insights from the world of intelligent machines.
           </p>
@@ -44,12 +44,12 @@ export default async function ArticlesPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
-            <Bot className="w-20 h-20 text-slate-600 mx-auto mb-6" />
-            <h2 className="text-2xl font-semibold text-white mb-3">
+          <div className="text-center py-20 bg-gray-50 rounded-2xl">
+            <Bot className="w-20 h-20 text-gray-300 mx-auto mb-6" />
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
               No articles yet
             </h2>
-            <p className="text-slate-400 max-w-md mx-auto">
+            <p className="text-gray-500 max-w-md mx-auto">
               We&apos;re working on bringing you the latest robotics news and insights.
               Check back soon!
             </p>

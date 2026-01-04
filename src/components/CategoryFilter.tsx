@@ -15,8 +15,8 @@ export default function CategoryFilter({ categories, activeCategory }: CategoryF
         href="/articles"
         className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
           !activeCategory
-            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            : 'bg-white/5 text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
+            ? 'bg-gray-900 text-white'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900'
         }`}
       >
         All
@@ -27,8 +27,8 @@ export default function CategoryFilter({ categories, activeCategory }: CategoryF
           href={`/category/${category.slug.current}`}
           className={`flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
             activeCategory === category.slug.current
-              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-              : 'bg-white/5 text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
+              ? 'bg-gray-900 text-white'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900'
           }`}
         >
           {category.icon && <span>{category.icon}</span>}

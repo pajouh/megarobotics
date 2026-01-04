@@ -46,12 +46,12 @@ export default async function CategoryPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <Link
           href="/articles"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           All Articles
@@ -63,12 +63,12 @@ export default async function CategoryPage({ params }: Props) {
             {category.icon && (
               <span className="text-4xl">{category.icon}</span>
             )}
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
               {category.title}
             </h1>
           </div>
           {category.description && (
-            <p className="text-slate-400 max-w-2xl">
+            <p className="text-gray-600 max-w-2xl">
               {category.description}
             </p>
           )}
@@ -87,18 +87,18 @@ export default async function CategoryPage({ params }: Props) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
-            <Bot className="w-20 h-20 text-slate-600 mx-auto mb-6" />
-            <h2 className="text-2xl font-semibold text-white mb-3">
+          <div className="text-center py-20 bg-gray-50 rounded-2xl">
+            <Bot className="w-20 h-20 text-gray-300 mx-auto mb-6" />
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
               No articles in this category yet
             </h2>
-            <p className="text-slate-400 max-w-md mx-auto mb-6">
+            <p className="text-gray-500 max-w-md mx-auto mb-6">
               We&apos;re working on bringing you the latest {category.title.toLowerCase()} news.
               Check back soon!
             </p>
             <Link
               href="/articles"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 rounded-lg transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white hover:bg-gray-800 rounded-lg transition-all font-medium"
             >
               Browse All Articles
             </Link>

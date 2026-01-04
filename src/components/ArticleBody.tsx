@@ -11,7 +11,7 @@ const portableTextComponents: PortableTextComponents = {
       if (!value?.asset?._ref) return null
       return (
         <figure className="my-8">
-          <div className="relative aspect-video rounded-xl overflow-hidden">
+          <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100">
             <Image
               src={urlFor(value).width(1200).height(675).url()}
               alt={value.alt || ''}
@@ -20,7 +20,7 @@ const portableTextComponents: PortableTextComponents = {
             />
           </div>
           {value.caption && (
-            <figcaption className="text-center text-sm text-slate-500 mt-3">
+            <figcaption className="text-center text-sm text-gray-500 mt-3">
               {value.caption}
             </figcaption>
           )}
@@ -30,12 +30,12 @@ const portableTextComponents: PortableTextComponents = {
     code: ({ value }) => (
       <div className="my-6">
         {value.filename && (
-          <div className="bg-slate-800 text-slate-400 text-xs px-4 py-2 rounded-t-lg font-mono">
+          <div className="bg-gray-800 text-gray-400 text-xs px-4 py-2 rounded-t-lg font-mono">
             {value.filename}
           </div>
         )}
-        <pre className={`bg-slate-900 p-4 overflow-x-auto ${value.filename ? 'rounded-b-lg' : 'rounded-lg'}`}>
-          <code className="text-sm text-slate-300 font-mono">
+        <pre className={`bg-gray-900 p-4 overflow-x-auto ${value.filename ? 'rounded-b-lg' : 'rounded-lg'}`}>
+          <code className="text-sm text-gray-300 font-mono">
             {value.code}
           </code>
         </pre>
@@ -44,36 +44,36 @@ const portableTextComponents: PortableTextComponents = {
   },
   block: {
     h2: ({ children }) => (
-      <h2 className="text-2xl md:text-3xl font-bold text-white mt-12 mb-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-12 mb-4">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl md:text-2xl font-semibold text-white mt-8 mb-3">
+      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mt-8 mb-3">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-lg font-semibold text-white mt-6 mb-2">
+      <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">
         {children}
       </h4>
     ),
     normal: ({ children }) => (
-      <p className="text-slate-300 leading-relaxed mb-4">{children}</p>
+      <p className="text-gray-600 leading-relaxed mb-4">{children}</p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-emerald-500 pl-4 my-6 italic text-slate-400">
+      <blockquote className="border-l-4 border-emerald-500 pl-4 my-6 italic text-gray-500">
         {children}
       </blockquote>
     ),
   },
   marks: {
     strong: ({ children }) => (
-      <strong className="font-semibold text-white">{children}</strong>
+      <strong className="font-semibold text-gray-900">{children}</strong>
     ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="bg-slate-800 px-1.5 py-0.5 rounded text-emerald-400 font-mono text-sm">
+      <code className="bg-gray-100 px-1.5 py-0.5 rounded text-emerald-600 font-mono text-sm">
         {children}
       </code>
     ),
@@ -82,7 +82,7 @@ const portableTextComponents: PortableTextComponents = {
         href={value?.href}
         target={value?.blank ? '_blank' : undefined}
         rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2"
+        className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2"
       >
         {children}
       </a>
@@ -90,12 +90,12 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc list-inside space-y-2 text-slate-300 mb-4 ml-4">
+      <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4 ml-4">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal list-inside space-y-2 text-slate-300 mb-4 ml-4">
+      <ol className="list-decimal list-inside space-y-2 text-gray-600 mb-4 ml-4">
         {children}
       </ol>
     ),
@@ -108,7 +108,7 @@ interface ArticleBodyProps {
 
 export default function ArticleBody({ body }: ArticleBodyProps) {
   return (
-    <div className="prose-dark max-w-none">
+    <div className="prose-light max-w-none">
       <PortableText value={body} components={portableTextComponents} />
     </div>
   )

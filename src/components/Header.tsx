@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 
 const navigation = [
   { name: 'News', href: '/articles' },
@@ -28,7 +28,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-950/80 backdrop-blur-lg border-b border-white/10'
+          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -36,12 +36,11 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center overflow-hidden">
-              <span className="text-white font-bold text-xl">M</span>
-              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center overflow-hidden">
+              <span className="text-white font-bold text-lg">M</span>
             </div>
-            <span className="hidden sm:block text-white font-semibold tracking-wider">
-              MEGAROBOTICS
+            <span className="hidden sm:block text-gray-900 font-semibold tracking-tight text-lg">
+              MegaRobotics
             </span>
           </Link>
 
@@ -51,7 +50,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-slate-400 hover:text-white transition-colors"
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
               >
                 {item.name}
               </Link>
@@ -62,10 +61,10 @@ export default function Header() {
           <div className="hidden md:flex md:items-center gap-4">
             <Link
               href="#newsletter"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-all text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors text-sm font-medium"
             >
-              <Zap className="w-4 h-4" />
               Subscribe
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -73,7 +72,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               type="button"
-              className="text-slate-400 hover:text-white"
+              className="text-gray-600 hover:text-gray-900"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Toggle menu</span>
@@ -88,13 +87,13 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/10">
-            <div className="flex flex-col gap-4">
+          <div className="md:hidden py-4 border-t border-gray-100 bg-white">
+            <div className="flex flex-col gap-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-slate-400 hover:text-white transition-colors px-2 py-1"
+                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors px-3 py-2 rounded-lg font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -102,11 +101,11 @@ export default function Header() {
               ))}
               <Link
                 href="#newsletter"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mt-2"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium mt-3"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Zap className="w-4 h-4" />
                 Subscribe
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

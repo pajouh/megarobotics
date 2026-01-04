@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, Calendar, ArrowRight } from 'lucide-react'
+import { Clock, ArrowRight } from 'lucide-react'
 import { format } from 'date-fns'
 import { Article } from '@/types'
 import { urlFor } from '@/lib/sanity'
@@ -14,48 +14,49 @@ export default function FeaturedArticle({ article }: FeaturedArticleProps) {
 
   return (
     <Link href={`/articles/${slug.current}`} className="group block">
-      <article className="relative h-full min-h-[400px] md:min-h-[500px] rounded-2xl overflow-hidden border border-white/10 hover:border-emerald-500/30 transition-all">
-        {/* Background Image */}
-        <div className="absolute inset-0">
+      <article className="relative grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+        {/* Image */}
+        <div className="relative aspect-[16/10] md:aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
           {mainImage ? (
             <Image
-              src={urlFor(mainImage).width(1200).height(700).url()}
+              src={urlFor(mainImage).width(800).height(600).url()}
               alt={mainImage.alt || title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"
               priority
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-6xl opacity-30">🤖</span>
+            </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
-        </div>
 
-        {/* Content */}
-        <div className="relative h-full flex flex-col justify-end p-6 md:p-8">
           {/* Featured Badge */}
-          <div className="absolute top-6 left-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/20 backdrop-blur-sm text-emerald-400 border border-emerald-500/30">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="absolute top-4 left-4">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-600 text-white shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               Featured
             </span>
           </div>
+        </div>
 
+        {/* Content */}
+        <div className="flex flex-col">
           {/* Category */}
           {category && (
-            <span className="inline-flex items-center gap-1 text-sm text-cyan-400 mb-3">
+            <span className="inline-flex items-center gap-1.5 text-sm text-emerald-600 font-medium mb-3">
               {category.icon} {category.title}
             </span>
           )}
 
           {/* Title */}
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-4 max-w-3xl">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors mb-4">
             {title}
           </h2>
 
           {/* Excerpt */}
           {excerpt && (
-            <p className="text-slate-300 text-sm md:text-base mb-6 max-w-2xl line-clamp-2 md:line-clamp-3">
+            <p className="text-gray-600 text-base md:text-lg mb-6 line-clamp-3">
               {excerpt}
             </p>
           )}
@@ -66,7 +67,7 @@ export default function FeaturedArticle({ article }: FeaturedArticleProps) {
             {author && (
               <div className="flex items-center gap-3">
                 {author.image && (
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-500/30">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
                     <Image
                       src={urlFor(author.image).width(80).height(80).url()}
                       alt={author.name}
@@ -76,9 +77,9 @@ export default function FeaturedArticle({ article }: FeaturedArticleProps) {
                   </div>
                 )}
                 <div>
-                  <span className="block text-sm font-medium text-white">{author.name}</span>
+                  <span className="block text-sm font-medium text-gray-900">{author.name}</span>
                   {publishedAt && (
-                    <span className="text-xs text-slate-400">
+                    <span className="text-xs text-gray-500">
                       {format(new Date(publishedAt), 'MMMM d, yyyy')}
                     </span>
                   )}
@@ -88,15 +89,17 @@ export default function FeaturedArticle({ article }: FeaturedArticleProps) {
 
             {/* Read Time */}
             {readTime && (
-              <span className="flex items-center gap-1.5 text-sm text-slate-400">
+              <span className="flex items-center gap-1.5 text-sm text-gray-500">
                 <Clock className="w-4 h-4" />
                 {readTime} min read
               </span>
             )}
+          </div>
 
-            {/* Read More */}
-            <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 group-hover:text-emerald-300 ml-auto">
-              Read Article
+          {/* Read More */}
+          <div className="mt-6">
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-gray-900 group-hover:text-emerald-600 transition-colors">
+              Read Full Article
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </span>
           </div>

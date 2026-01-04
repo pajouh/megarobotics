@@ -23,13 +23,13 @@ export default function CopyLinkButton({ url }: CopyLinkButtonProps) {
   return (
     <button
       onClick={handleCopy}
-      className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-white/10 transition-all"
+      className="p-3 rounded-lg bg-gray-100 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all"
       title="Copy link"
     >
       {copied ? (
-        <Check className="w-5 h-5 text-emerald-400" />
+        <Check className="w-5 h-5 text-emerald-600" />
       ) : (
-        <Link2 className="w-5 h-5 text-slate-400" />
+        <Link2 className="w-5 h-5 text-gray-600" />
       )}
     </button>
   )
