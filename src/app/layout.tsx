@@ -77,9 +77,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-slate-950 text-white min-h-screen flex flex-col`}
+        suppressHydrationWarning
       >
         <Header />
         <main className="flex-grow">{children}</main>

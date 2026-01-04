@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { format } from 'date-fns'
-import { Clock, Calendar, ArrowLeft, Twitter, Linkedin, Link2 } from 'lucide-react'
+import { Clock, Calendar, ArrowLeft, Twitter, Linkedin } from 'lucide-react'
 import { getArticle, getRelatedArticles, getAllArticleSlugs, urlFor } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
+import CopyLinkButton from '@/components/CopyLinkButton'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -295,12 +296,7 @@ export default async function ArticlePage({ params }: Props) {
             >
               <Linkedin className="w-5 h-5 text-slate-400" />
             </a>
-            <button
-              onClick={() => navigator.clipboard.writeText(shareUrl)}
-              className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-emerald-500/30 hover:bg-white/10 transition-all"
-            >
-              <Link2 className="w-5 h-5 text-slate-400" />
-            </button>
+            <CopyLinkButton url={shareUrl} />
           </div>
         </div>
 
