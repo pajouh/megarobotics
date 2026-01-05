@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 import { ArrowLeft, Package } from 'lucide-react'
 import {
   getProductCategory,
@@ -88,11 +89,13 @@ export default async function ProductCategoryPage({ params }: Props) {
 
         {/* Filters */}
         <div className="mb-8">
-          <ProductFilter
-            categories={categories}
-            manufacturers={manufacturers}
-            activeCategory={slug}
-          />
+          <Suspense fallback={<div className="h-24 bg-gray-100 rounded-xl animate-pulse" />}>
+            <ProductFilter
+              categories={categories}
+              manufacturers={manufacturers}
+              activeCategory={slug}
+            />
+          </Suspense>
         </div>
 
         {/* Products Grid */}
