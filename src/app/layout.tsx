@@ -15,38 +15,54 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://megarobotics.de"),
   title: {
-    default: "MegaRobotics - Robotics News & Industry Insights",
+    default: "MegaRobotics - Robotics News, Reviews & Industry Insights",
     template: "%s | MegaRobotics",
   },
   description:
-    "Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, AI integration, and the future of intelligent machines.",
+    "Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, quadrupeds, industrial automation, AI integration, and the future of intelligent machines.",
   keywords: [
-    "robotics",
-    "robots",
-    "automation",
-    "AI",
-    "humanoid robots",
-    "industrial robots",
     "robotics news",
     "robot reviews",
+    "humanoid robots",
+    "industrial robots",
+    "quadruped robots",
+    "AI robots",
+    "robotics industry",
+    "automation",
+    "Unitree",
+    "robot vacuum",
+    "cobots",
+    "robot dog",
+    "warehouse robots",
+    "service robots",
+    "Chinese robotics",
+    "robotik nachrichten",
   ],
-  authors: [{ name: "MegaRobotics" }],
+  authors: [{ name: "MegaRobotics", url: "https://megarobotics.de" }],
   creator: "MegaRobotics",
+  publisher: "MegaRobotics",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: ["de_DE"],
     url: "https://megarobotics.de",
     siteName: "MegaRobotics",
-    title: "MegaRobotics - Robotics News & Industry Insights",
+    title: "MegaRobotics - Robotics News, Reviews & Industry Insights",
     description:
-      "Your source for the latest robotics news, reviews, and industry insights.",
+      "Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, industrial automation, and AI integration.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "MegaRobotics",
+        alt: "MegaRobotics - Robotics News & Industry Insights",
       },
     ],
   },
@@ -54,8 +70,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "MegaRobotics - Robotics News & Industry Insights",
     description:
-      "Your source for the latest robotics news, reviews, and industry insights.",
-    images: ["/og-image.jpg"],
+      "Your premier source for robotics news, product reviews, and industry analysis.",
+    images: ["/og-image.png"],
     creator: "@megarobotics",
   },
   robots: {
@@ -69,6 +85,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: {
+    canonical: "https://megarobotics.de",
+    types: {
+      "application/rss+xml": "/feed.xml",
+    },
+  },
+  category: "technology",
 };
 
 export default function RootLayout({

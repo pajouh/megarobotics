@@ -8,6 +8,9 @@ import { getArticle, getRelatedArticles, getAllArticleSlugs, urlFor } from '@/li
 import ArticleCard from '@/components/ArticleCard'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import ArticleBody from '@/components/ArticleBody'
+import StructuredData from '@/components/StructuredData'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import { generateArticleSchema } from '@/lib/structured-data'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -23,21 +26,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const imageUrl = article.mainImage
+    ? urlFor(article.mainImage).width(1200).height(630).url()
+    : undefined
+
   return {
     title: article.title,
     description: article.excerpt,
+    keywords: [
+      article.category?.title,
+      'robotics',
+      'robots',
+      ...article.title.split(' ').slice(0, 5),
+    ].filter((k): k is string => Boolean(k)),
+    authors: article.author ? [{ name: article.author.name }] : undefined,
     openGraph: {
       title: article.title,
       description: article.excerpt,
       type: 'article',
       publishedTime: article.publishedAt,
       authors: article.author ? [article.author.name] : undefined,
-      images: article.mainImage
+      images: imageUrl
         ? [
             {
-              url: urlFor(article.mainImage).width(1200).height(630).url(),
+              url: imageUrl,
               width: 1200,
               height: 630,
+              alt: article.title,
             },
           ]
         : undefined,
@@ -46,9 +61,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: article.title,
       description: article.excerpt,
-      images: article.mainImage
-        ? [urlFor(article.mainImage).width(1200).height(630).url()]
-        : undefined,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+    alternates: {
+      canonical: `https://megarobotics.de/articles/${slug}`,
     },
   }
 }
@@ -72,9 +88,36 @@ export default async function ArticlePage({ params }: Props) {
 
   const shareUrl = `https://megarobotics.de/articles/${slug}`
 
+  // Generate structured data for the article
+  const articleSchema = generateArticleSchema({
+    title: article.title,
+    excerpt: article.excerpt || '',
+    slug: slug,
+    publishedAt: article.publishedAt || new Date().toISOString(),
+    author: {
+      name: article.author?.name || 'MegaRobotics',
+      image: article.author?.image ? urlFor(article.author.image).url() : undefined,
+    },
+    mainImage: article.mainImage ? urlFor(article.mainImage).width(1200).height(630).url() : undefined,
+    category: article.category?.title,
+  })
+
+  // Build breadcrumb items
+  const breadcrumbItems = [
+    { name: 'Articles', href: '/articles' },
+    ...(article.category
+      ? [{ name: article.category.title, href: `/category/${article.category.slug.current}` }]
+      : []),
+    { name: article.title, href: `/articles/${slug}` },
+  ]
+
   return (
     <article className="min-h-screen pt-24 pb-16 bg-white">
+      <StructuredData data={articleSchema} />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
         {/* Back Link */}
         <Link
           href="/articles"

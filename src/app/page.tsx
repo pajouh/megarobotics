@@ -7,6 +7,8 @@ import FeaturedArticle from '@/components/FeaturedArticle'
 import CategoryFilter from '@/components/CategoryFilter'
 import NewsletterForm from '@/components/NewsletterForm'
 import ProductCard from '@/components/ProductCard'
+import StructuredData from '@/components/StructuredData'
+import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
 
 const stats = [
   { label: 'Global Market', value: '$185B+', icon: TrendingUp, detail: '+14% YoY Growth' },
@@ -28,8 +30,15 @@ export default async function HomePage() {
   const featuredArticle = featuredArticles[0]
   const gridArticles = articles.filter((a) => a._id !== featuredArticle?._id).slice(0, 6)
 
+  const structuredData = [
+    generateOrganizationSchema(),
+    generateWebSiteSchema(),
+  ]
+
   return (
     <div className="min-h-screen">
+      <StructuredData data={structuredData} />
+
       {/* Hero Section */}
       <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
         {/* Subtle Background */}
