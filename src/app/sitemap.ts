@@ -5,12 +5,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://megarobotics.de'
 
   // Fetch all content from Sanity
-  const [articles, categories, products, productCategories, manufacturers] = await Promise.all([
+  const [articles, categories, products, productCategories, manufacturers, buyersGuides] = await Promise.all([
     client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "product"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "productCategory"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],
   ])
 
   // Static pages
@@ -44,6 +45,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/guides`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
   ]
 
@@ -87,6 +94,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
+  // Buyers guide pages
+  const buyersGuidePages: MetadataRoute.Sitemap = (buyersGuides || []).map((guide: { slug: string; _updatedAt: string }) => ({
+    url: `${baseUrl}/guides/${guide.slug}`,
+    lastModified: new Date(guide._updatedAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }))
+
   return [
     ...staticPages,
     ...articlePages,
@@ -94,5 +109,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productPages,
     ...productCategoryPages,
     ...manufacturerPages,
+    ...buyersGuidePages,
   ]
 }

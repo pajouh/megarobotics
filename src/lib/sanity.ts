@@ -430,3 +430,72 @@ export async function getAllProductCategorySlugs(): Promise<{ slug: string }[]> 
     `*[_type == "productCategory" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
+
+
+// ==========================================
+// BUYERS GUIDE QUERIES
+// ==========================================
+
+const buyersGuideFields = `
+  _id,
+  _type,
+  title,
+  slug,
+  shortDescription,
+  mainImage,
+  publishedAt,
+  updatedAt,
+  author,
+  readTime,
+  seo,
+  news
+`
+
+const buyersGuideWithBodyFields = `
+  ${buyersGuideFields},
+  body[] {
+    ...,
+    _type == "richImage" => {
+      _type,
+      alt,
+      caption,
+      credit,
+      sourceUrl,
+      licenseUrl,
+      image {
+        asset,
+        hotspot
+      }
+    }
+  }
+`
+
+// Get all buyers guides
+export async function getBuyersGuides(limit?: number) {
+  if (!client) return []
+  const limitQuery = limit ? `[0...${limit}]` : ''
+  return client.fetch(
+    `*[_type == "buyersGuide"] | order(updatedAt desc)${limitQuery} {
+      ${buyersGuideFields}
+    }`
+  )
+}
+
+// Get a single buyers guide by slug
+export async function getBuyersGuide(slug: string) {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "buyersGuide" && slug.current == $slug][0] {
+      ${buyersGuideWithBodyFields}
+    }`,
+    { slug }
+  )
+}
+
+// Get all buyers guide slugs (for static generation)
+export async function getAllBuyersGuideSlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "buyersGuide" && defined(slug.current)][].slug.current`
+  ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
+}
