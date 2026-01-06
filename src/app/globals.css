@@ -197,3 +197,37 @@ body {
   background-color: #f9fafb;
   border-color: #9ca3af;
 }
+
+/* HTML Embed Containment */
+.html-embed {
+  contain: layout;
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.html-embed * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.html-embed iframe,
+.html-embed video,
+.html-embed embed,
+.html-embed object {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+.html-embed img {
+  max-width: 100%;
+  height: auto;
+}
+
+.html-embed table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}

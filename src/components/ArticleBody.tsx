@@ -45,7 +45,8 @@ const portableTextComponents: PortableTextComponents = {
       if (!value?.html) return null
       return (
         <div
-          className="my-6 html-embed"
+          className="my-6 html-embed relative overflow-hidden w-full max-w-full"
+          style={{ contain: 'layout' }}
           dangerouslySetInnerHTML={{ __html: value.html }}
         />
       )
