@@ -499,3 +499,71 @@ export async function getAllBuyersGuideSlugs(): Promise<{ slug: string }[]> {
     `*[_type == "buyersGuide" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
+
+
+// ==========================================
+// SITE SETTINGS & PAGES QUERIES
+// ==========================================
+
+// Get site settings (singleton)
+export async function getSiteSettings() {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "siteSettings"][0] {
+      siteName,
+      siteTagline,
+      logo,
+      footerDescription,
+      footerLinks,
+      copyrightText,
+      socialLinks,
+      contactEmail,
+      contactPhone,
+      address
+    }`
+  )
+}
+
+// Get a page by slug
+export async function getPage(slug: string) {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "page" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      pageType,
+      subtitle,
+      body,
+      seo,
+      lastUpdated
+    }`,
+    { slug }
+  )
+}
+
+// Get a page by type (e.g., 'about', 'imprint', 'privacy')
+export async function getPageByType(pageType: string) {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "page" && pageType == $pageType][0] {
+      _id,
+      title,
+      slug,
+      pageType,
+      subtitle,
+      body,
+      seo,
+      lastUpdated
+    }`,
+    { pageType }
+  )
+}
+
+// Get all page slugs (for static generation)
+export async function getAllPageSlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "page" && defined(slug.current)][].slug.current`
+  ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
+}

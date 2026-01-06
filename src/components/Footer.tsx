@@ -20,8 +20,8 @@ const news = [
 const company = [
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/about#contact' },
-  { name: 'Careers', href: '/about#careers' },
-  { name: 'Advertise', href: '/about#advertise' },
+  { name: 'Imprint', href: '/imprint' },
+  { name: 'Privacy Policy', href: '/privacy' },
 ]
 
 const socials = [
@@ -148,17 +148,14 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            &copy; 2025 MegaRobotics. All rights reserved.
+            &copy; {new Date().getFullYear()} MegaRobotics. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/privacy" className="text-gray-400 hover:text-gray-600 transition-colors">
-              Privacy
+              Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-gray-600 transition-colors">
-              Terms
-            </Link>
-            <Link href="/cookies" className="text-gray-400 hover:text-gray-600 transition-colors">
-              Cookies
+            <Link href="/imprint" className="text-gray-400 hover:text-gray-600 transition-colors">
+              Imprint
             </Link>
           </div>
         </div>

@@ -7,6 +7,8 @@ import productCategory from './productCategory'
 import product from './product'
 import richImage from './richImage'
 import buyersGuide from './buyersGuide'
+import siteSettings from './siteSettings'
+import page from './page'
 
 export const schemaTypes = [
   // Document types
@@ -17,6 +19,8 @@ export const schemaTypes = [
   productCategory,
   product,
   buyersGuide,
+  page,
+  siteSettings,
   // Object types
   blockContent,
   richImage,

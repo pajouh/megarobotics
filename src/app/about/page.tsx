@@ -2,13 +2,17 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { Bot, Target, Users, Zap, Mail, MapPin, Building } from 'lucide-react'
 import NewsletterForm from '@/components/NewsletterForm'
+import { getPageByType, getSiteSettings } from '@/lib/sanity'
+import PageBody from '@/components/PageBody'
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'Learn about MegaRobotics - your trusted source for robotics news, reviews, and industry insights.',
 }
 
-const values = [
+export const revalidate = 3600
+
+const defaultValues = [
   {
     icon: Target,
     title: 'Accuracy First',
@@ -26,30 +30,15 @@ const values = [
   },
 ]
 
-const team = [
-  {
-    name: 'Dr. Sarah Chen',
-    role: 'Editor-in-Chief',
-    bio: 'Former MIT robotics researcher with 15 years in tech journalism.',
-  },
-  {
-    name: 'Marcus Weber',
-    role: 'Senior Technical Writer',
-    bio: 'Ex-Boston Dynamics engineer turned technology analyst.',
-  },
-  {
-    name: 'Elena Rodriguez',
-    role: 'Industry Reporter',
-    bio: 'Covers industrial automation and manufacturing robotics.',
-  },
-  {
-    name: 'James Liu',
-    role: 'AI & Robotics Analyst',
-    bio: 'Specializes in AI integration and humanoid robotics trends.',
-  },
-]
+export default async function AboutPage() {
+  const [page, settings] = await Promise.all([
+    getPageByType('about'),
+    getSiteSettings(),
+  ])
 
-export default function AboutPage() {
+  const contactEmail = settings?.contactEmail || 'contact@megarobotics.de'
+  const address = settings?.address || 'Berlin, Germany'
+
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
       {/* Hero Section */}
@@ -64,15 +53,16 @@ export default function AboutPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Powering the Future of{' '}
-              <span className="gradient-text">Robotics Intelligence</span>
+              {page?.title || (
+                <>
+                  Powering the Future of{' '}
+                  <span className="gradient-text">Robotics Intelligence</span>
+                </>
+              )}
             </h1>
 
             <p className="text-lg text-gray-600 mb-8">
-              MegaRobotics is your premier destination for robotics news, in-depth analysis,
-              and industry insights. We cover everything from industrial automation to humanoid
-              robots, helping professionals and enthusiasts stay informed about the rapidly
-              evolving world of intelligent machines.
+              {page?.subtitle || 'MegaRobotics is your premier destination for robotics news, in-depth analysis, and industry insights. We cover everything from industrial automation to humanoid robots, helping professionals and enthusiasts stay informed about the rapidly evolving world of intelligent machines.'}
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -93,89 +83,62 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Our Mission
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Founded in 2024, MegaRobotics was created to bridge the gap between
-                cutting-edge robotics research and the broader technology community.
-                We believe that understanding robotics is essential for anyone looking
-                to navigate the future of technology and automation.
-              </p>
-              <p className="text-gray-600 mb-6">
-                Our team of experienced journalists, engineers, and industry analysts
-                work tirelessly to bring you accurate, timely, and insightful coverage
-                of the robotics industry.
-              </p>
-              <p className="text-gray-600">
-                From breakthrough research at top universities to product launches from
-                industry leaders, we cover the stories that matter to robotics
-                professionals, investors, and enthusiasts alike.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4">
-              {values.map((value) => (
-                <div
-                  key={value.title}
-                  className="p-6 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all"
-                >
-                  <value.icon className="w-8 h-8 text-emerald-600 mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {value.description}
-                  </p>
-                </div>
-              ))}
-            </div>
+      {/* CMS Body Content or Default Mission Section */}
+      {page?.body ? (
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <PageBody body={page.body} />
           </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 md:py-24" id="team">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              A dedicated group of robotics experts and journalists bringing you
-              the best coverage in the industry.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member) => (
-              <div
-                key={member.name}
-                className="p-6 rounded-xl bg-gray-50 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-center"
-              >
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                  <span className="text-2xl font-bold text-white">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-emerald-600 text-sm mb-3">{member.role}</p>
-                <p className="text-gray-500 text-sm">{member.bio}</p>
+        </section>
+      ) : (
+        <section className="py-16 md:py-24 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  Our Mission
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  Founded in 2024, MegaRobotics was created to bridge the gap between
+                  cutting-edge robotics research and the broader technology community.
+                  We believe that understanding robotics is essential for anyone looking
+                  to navigate the future of technology and automation.
+                </p>
+                <p className="text-gray-600 mb-6">
+                  Our team of experienced journalists, engineers, and industry analysts
+                  work tirelessly to bring you accurate, timely, and insightful coverage
+                  of the robotics industry.
+                </p>
+                <p className="text-gray-600">
+                  From breakthrough research at top universities to product launches from
+                  industry leaders, we cover the stories that matter to robotics
+                  professionals, investors, and enthusiasts alike.
+                </p>
               </div>
-            ))}
+
+              <div className="grid grid-cols-1 gap-4">
+                {defaultValues.map((value) => (
+                  <div
+                    key={value.title}
+                    className="p-6 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all"
+                  >
+                    <value.icon className="w-8 h-8 text-emerald-600 mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      {value.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Contact Section */}
-      <section className="py-16 md:py-24 bg-gray-50" id="contact">
+      <section className="py-16 md:py-24 bg-white" id="contact">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
@@ -194,8 +157,8 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
-                    <a href="mailto:contact@megarobotics.de" className="text-gray-900 hover:text-emerald-600 transition-colors font-medium">
-                      contact@megarobotics.de
+                    <a href={`mailto:${contactEmail}`} className="text-gray-900 hover:text-emerald-600 transition-colors font-medium">
+                      {contactEmail}
                     </a>
                   </div>
                 </div>
@@ -206,7 +169,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Location</p>
-                    <p className="text-gray-900 font-medium">Berlin, Germany</p>
+                    <p className="text-gray-900 font-medium">{address}</p>
                   </div>
                 </div>
 
@@ -224,7 +187,7 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="p-8 rounded-2xl bg-white border border-gray-200" id="advertise">
+            <div className="p-8 rounded-2xl bg-gray-50 border border-gray-200">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Stay Updated
               </h3>
