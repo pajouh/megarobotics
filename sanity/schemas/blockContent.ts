@@ -142,5 +142,177 @@ export default defineType({
         },
       },
     }),
+    // Stats Grid - for displaying key statistics
+    defineArrayMember({
+      title: 'Stats Grid',
+      name: 'statsGrid',
+      type: 'object',
+      fields: [
+        {
+          title: 'Stats',
+          name: 'stats',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                { name: 'value', type: 'string', title: 'Value' },
+                { name: 'label', type: 'string', title: 'Label' },
+              ],
+            },
+          ],
+          validation: (Rule) => Rule.max(4),
+        },
+      ],
+      preview: {
+        select: { stats: 'stats' },
+        prepare({ stats }) {
+          return {
+            title: 'Stats Grid',
+            subtitle: stats ? `${stats.length} statistics` : 'No stats',
+          }
+        },
+      },
+    }),
+    // Feature Grid - for feature cards
+    defineArrayMember({
+      title: 'Feature Grid',
+      name: 'featureGrid',
+      type: 'object',
+      fields: [
+        {
+          title: 'Features',
+          name: 'features',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                { name: 'icon', type: 'string', title: 'Icon (emoji)' },
+                { name: 'title', type: 'string', title: 'Title' },
+                { name: 'description', type: 'text', title: 'Description', rows: 2 },
+              ],
+            },
+          ],
+        },
+      ],
+      preview: {
+        select: { features: 'features' },
+        prepare({ features }) {
+          return {
+            title: 'Feature Grid',
+            subtitle: features ? `${features.length} features` : 'No features',
+          }
+        },
+      },
+    }),
+    // Highlight Box - callout box with list
+    defineArrayMember({
+      title: 'Highlight Box',
+      name: 'highlightBox',
+      type: 'object',
+      fields: [
+        { name: 'title', type: 'string', title: 'Title' },
+        {
+          name: 'items',
+          type: 'array',
+          title: 'Items',
+          of: [{ type: 'text', rows: 2 }],
+        },
+      ],
+      preview: {
+        select: { title: 'title', items: 'items' },
+        prepare({ title, items }) {
+          return {
+            title: title || 'Highlight Box',
+            subtitle: items ? `${items.length} items` : 'No items',
+          }
+        },
+      },
+    }),
+    // Quote Box - styled quote with author
+    defineArrayMember({
+      title: 'Quote Box',
+      name: 'quoteBox',
+      type: 'object',
+      fields: [
+        { name: 'quote', type: 'text', title: 'Quote', rows: 3 },
+        { name: 'author', type: 'string', title: 'Author' },
+      ],
+      preview: {
+        select: { quote: 'quote', author: 'author' },
+        prepare({ quote, author }) {
+          return {
+            title: 'Quote Box',
+            subtitle: author ? `— ${author}` : quote?.substring(0, 50),
+          }
+        },
+      },
+    }),
+    // Info Table - for product/comparison tables
+    defineArrayMember({
+      title: 'Info Table',
+      name: 'infoTable',
+      type: 'object',
+      fields: [
+        {
+          name: 'headers',
+          type: 'array',
+          title: 'Column Headers',
+          of: [{ type: 'string' }],
+        },
+        {
+          name: 'rows',
+          type: 'array',
+          title: 'Rows',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                {
+                  name: 'cells',
+                  type: 'array',
+                  title: 'Cells',
+                  of: [{ type: 'string' }],
+                },
+              ],
+              preview: {
+                select: { cells: 'cells' },
+                prepare({ cells }) {
+                  return { title: cells?.[0] || 'Row' }
+                },
+              },
+            },
+          ],
+        },
+      ],
+      preview: {
+        select: { headers: 'headers', rows: 'rows' },
+        prepare({ headers, rows }) {
+          return {
+            title: 'Info Table',
+            subtitle: `${headers?.length || 0} columns, ${rows?.length || 0} rows`,
+          }
+        },
+      },
+    }),
+    // CTA Box - call to action section
+    defineArrayMember({
+      title: 'CTA Box',
+      name: 'ctaBox',
+      type: 'object',
+      fields: [
+        { name: 'title', type: 'string', title: 'Title' },
+        { name: 'description', type: 'text', title: 'Description', rows: 3 },
+        { name: 'buttonText', type: 'string', title: 'Button Text (optional)' },
+        { name: 'buttonUrl', type: 'url', title: 'Button URL (optional)' },
+      ],
+      preview: {
+        select: { title: 'title' },
+        prepare({ title }) {
+          return { title: 'CTA Box', subtitle: title }
+        },
+      },
+    }),
   ],
 })

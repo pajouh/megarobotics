@@ -5,6 +5,21 @@ import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { PortableTextBlock } from '@portabletext/types'
 import { urlFor } from '@/lib/sanity'
 
+interface StatItem {
+  value: string
+  label: string
+}
+
+interface FeatureItem {
+  icon?: string
+  title: string
+  description: string
+}
+
+interface TableRow {
+  cells: string[]
+}
+
 const portableTextComponents: PortableTextComponents = {
   types: {
     image: ({ value }) => {
@@ -49,6 +64,130 @@ const portableTextComponents: PortableTextComponents = {
           style={{ contain: 'layout' }}
           dangerouslySetInnerHTML={{ __html: value.html }}
         />
+      )
+    },
+    statsGrid: ({ value }) => {
+      if (!value?.stats?.length) return null
+      return (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
+          {value.stats.map((stat: StatItem, index: number) => (
+            <div key={index} className="text-center p-6 bg-gray-50 rounded-xl">
+              <span className="block text-2xl md:text-3xl font-bold text-emerald-600">
+                {stat.value}
+              </span>
+              <span className="text-sm text-gray-600 mt-2 block">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    featureGrid: ({ value }) => {
+      if (!value?.features?.length) return null
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+          {value.features.map((feature: FeatureItem, index: number) => (
+            <div
+              key={index}
+              className="p-6 bg-gray-50 rounded-xl border-l-4 border-emerald-500"
+            >
+              <h4 className="font-semibold text-gray-900 mb-2">
+                {feature.icon && <span className="mr-2">{feature.icon}</span>}
+                {feature.title}
+              </h4>
+              <p className="text-gray-600 text-sm">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    highlightBox: ({ value }) => {
+      if (!value?.items?.length) return null
+      return (
+        <div className="my-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+          {value.title && (
+            <h4 className="font-bold text-gray-900 mb-4 text-lg">{value.title}</h4>
+          )}
+          <ul className="space-y-3">
+            {value.items.map((item: string, index: number) => (
+              <li
+                key={index}
+                className="flex items-start gap-3 text-gray-700 border-b border-gray-200 pb-3 last:border-0"
+              >
+                <span className="text-emerald-500 font-bold">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    },
+    quoteBox: ({ value }) => {
+      if (!value?.quote) return null
+      return (
+        <div className="my-8 p-8 bg-gray-900 text-white rounded-xl relative">
+          <span className="absolute top-2 left-4 text-6xl text-gray-700 font-serif">
+            &ldquo;
+          </span>
+          <p className="text-lg italic mb-4 pl-8">{value.quote}</p>
+          {value.author && (
+            <p className="text-gray-400 text-sm pl-8">— {value.author}</p>
+          )}
+        </div>
+      )
+    },
+    infoTable: ({ value }) => {
+      if (!value?.headers?.length || !value?.rows?.length) return null
+      return (
+        <div className="my-8 overflow-x-auto rounded-xl shadow-lg">
+          <table className="w-full text-sm">
+            <thead className="bg-gray-900 text-white">
+              <tr>
+                {value.headers.map((header: string, index: number) => (
+                  <th key={index} className="px-4 py-3 text-left font-semibold">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {value.rows.map((row: TableRow, rowIndex: number) => (
+                <tr
+                  key={rowIndex}
+                  className={`border-b border-gray-200 ${
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                  } hover:bg-blue-50 transition-colors`}
+                >
+                  {row.cells?.map((cell: string, cellIndex: number) => (
+                    <td key={cellIndex} className="px-4 py-3 text-gray-700">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    },
+    ctaBox: ({ value }) => {
+      if (!value?.title) return null
+      return (
+        <div className="my-10 p-8 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl text-center">
+          <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
+          {value.description && (
+            <p className="text-emerald-50 mb-6 max-w-xl mx-auto">
+              {value.description}
+            </p>
+          )}
+          {value.buttonText && value.buttonUrl && (
+            <a
+              href={value.buttonUrl}
+              className="inline-block px-6 py-3 bg-white text-emerald-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              {value.buttonText}
+            </a>
+          )}
+        </div>
       )
     },
   },
