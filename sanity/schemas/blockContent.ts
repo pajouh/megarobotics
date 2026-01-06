@@ -82,6 +82,8 @@ export default defineType({
           type: 'string',
           options: {
             list: [
+              { title: 'HTML', value: 'html' },
+              { title: 'CSS', value: 'css' },
               { title: 'JavaScript', value: 'javascript' },
               { title: 'TypeScript', value: 'typescript' },
               { title: 'Python', value: 'python' },
@@ -91,6 +93,7 @@ export default defineType({
               { title: 'JSON', value: 'json' },
               { title: 'Bash', value: 'bash' },
               { title: 'YAML', value: 'yaml' },
+              { title: 'XML', value: 'xml' },
               { title: 'Other', value: 'text' },
             ],
           },
