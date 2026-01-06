@@ -131,6 +131,38 @@ export default defineType({
         defineArrayMember({
           type: 'richImage',
         }),
+        defineArrayMember({
+          title: 'HTML Embed',
+          name: 'htmlEmbed',
+          type: 'object',
+          fields: [
+            {
+              title: 'HTML Code',
+              name: 'html',
+              type: 'text',
+              description: 'Raw HTML code that will be rendered on the page.',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              title: 'Label',
+              name: 'label',
+              type: 'string',
+              description: 'Optional label to identify this embed in the editor.',
+            },
+          ],
+          preview: {
+            select: {
+              label: 'label',
+              html: 'html',
+            },
+            prepare({ label, html }) {
+              return {
+                title: label || 'HTML Embed',
+                subtitle: html ? `${html.substring(0, 50)}...` : 'No HTML content',
+              }
+            },
+          },
+        }),
       ],
     }),
 

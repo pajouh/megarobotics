@@ -86,6 +86,15 @@ const buyersGuideComponents: PortableTextComponents = {
         </figure>
       )
     },
+    htmlEmbed: ({ value }: { value: { html?: string } }) => {
+      if (!value?.html) return null
+      return (
+        <div
+          className="my-6 html-embed"
+          dangerouslySetInnerHTML={{ __html: value.html }}
+        />
+      )
+    },
   },
   block: {
     h2: ({ children }) => (
