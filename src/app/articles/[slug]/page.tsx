@@ -204,12 +204,13 @@ export default async function ArticlePage({ params }: Props) {
 
         {/* Main Image */}
         {article.mainImage && (
-          <div className="relative aspect-video rounded-2xl overflow-hidden mb-10 bg-gray-100">
+          <div className="rounded-2xl overflow-hidden mb-10">
             <Image
               src={urlFor(article.mainImage).width(1200).url()}
               alt={article.mainImage.alt || article.title}
-              fill
-              className="object-contain"
+              width={1200}
+              height={800}
+              className="w-full h-auto"
               priority
             />
           </div>
