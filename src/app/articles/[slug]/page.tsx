@@ -206,7 +206,7 @@ export default async function ArticlePage({ params }: Props) {
         {article.mainImage && (
           <div className="rounded-2xl overflow-hidden mb-10">
             <Image
-              src={urlFor(article.mainImage).width(1200).url()}
+              src={urlFor(article.mainImage).width(1200).fit('max').auto('format').url()}
               alt={article.mainImage.alt || article.title}
               width={1200}
               height={800}
