@@ -34,6 +34,8 @@ interface SiteSettings {
 interface FooterProps {
   settings?: SiteSettings | null
   logoUrl?: string | null
+  logoWidth?: number
+  logoHeight?: number
 }
 
 // Default fallback data
@@ -60,7 +62,7 @@ const defaultCompany = [
   { name: 'Privacy Policy', href: '/privacy' },
 ]
 
-export default function Footer({ settings, logoUrl }: FooterProps) {
+export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight = 36 }: FooterProps) {
   const siteName = settings?.siteName || 'MegaRobotics'
   const footerDescription = settings?.footerDescription || 'Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.'
   const copyrightText = settings?.copyrightText || `© ${new Date().getFullYear()} MegaRobotics. All rights reserved.`
@@ -94,12 +96,12 @@ export default function Footer({ settings, logoUrl }: FooterProps) {
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
               {logoUrl ? (
-                <div className="relative w-9 h-9 overflow-hidden">
+                <div className="relative overflow-hidden" style={{ width: logoWidth, height: logoHeight }}>
                   <Image
                     src={logoUrl}
                     alt={siteName}
-                    width={36}
-                    height={36}
+                    width={logoWidth}
+                    height={logoHeight}
                     className="object-contain"
                   />
                 </div>

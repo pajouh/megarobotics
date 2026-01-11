@@ -34,6 +34,24 @@ export default defineType({
       group: 'general',
       options: { hotspot: true },
     }),
+    defineField({
+      name: 'logoWidth',
+      title: 'Logo Width (px)',
+      type: 'number',
+      group: 'general',
+      description: 'Width of the logo in pixels (default: 36)',
+      initialValue: 36,
+      validation: (Rule) => Rule.min(16).max(200),
+    }),
+    defineField({
+      name: 'logoHeight',
+      title: 'Logo Height (px)',
+      type: 'number',
+      group: 'general',
+      description: 'Height of the logo in pixels (default: 36)',
+      initialValue: 36,
+      validation: (Rule) => Rule.min(16).max(200),
+    }),
 
     // Footer
     defineField({

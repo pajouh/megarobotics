@@ -16,9 +16,11 @@ const navigation = [
 interface HeaderProps {
   siteName?: string
   logoUrl?: string | null
+  logoWidth?: number
+  logoHeight?: number
 }
 
-export default function Header({ siteName, logoUrl }: HeaderProps) {
+export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight = 36 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -43,12 +45,12 @@ export default function Header({ siteName, logoUrl }: HeaderProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             {logoUrl ? (
-              <div className="relative w-9 h-9 overflow-hidden">
+              <div className="relative overflow-hidden" style={{ width: logoWidth, height: logoHeight }}>
                 <Image
                   src={logoUrl}
                   alt={siteName || 'MegaRobotics'}
-                  width={36}
-                  height={36}
+                  width={logoWidth}
+                  height={logoHeight}
                   className="object-contain"
                   priority
                 />

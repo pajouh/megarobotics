@@ -545,6 +545,8 @@ export async function getSiteSettings() {
       siteName,
       siteTagline,
       logo,
+      logoWidth,
+      logoHeight,
       footerDescription,
       footerLinks,
       copyrightText,
