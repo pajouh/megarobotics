@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Twitter, Linkedin, Youtube, Github, Instagram, Mail } from 'lucide-react'
 
 interface FooterLink {
@@ -32,6 +33,7 @@ interface SiteSettings {
 
 interface FooterProps {
   settings?: SiteSettings | null
+  logoUrl?: string | null
 }
 
 // Default fallback data
@@ -58,7 +60,7 @@ const defaultCompany = [
   { name: 'Privacy Policy', href: '/privacy' },
 ]
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings, logoUrl }: FooterProps) {
   const siteName = settings?.siteName || 'MegaRobotics'
   const footerDescription = settings?.footerDescription || 'Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.'
   const copyrightText = settings?.copyrightText || `© ${new Date().getFullYear()} MegaRobotics. All rights reserved.`
@@ -91,9 +93,21 @@ export default function Footer({ settings }: FooterProps) {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">M</span>
-              </div>
+              {logoUrl ? (
+                <div className="relative w-9 h-9 overflow-hidden">
+                  <Image
+                    src={logoUrl}
+                    alt={siteName}
+                    width={36}
+                    height={36}
+                    className="object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">M</span>
+                </div>
+              )}
               <span className="text-gray-900 font-semibold tracking-tight text-lg">
                 {siteName}
               </span>

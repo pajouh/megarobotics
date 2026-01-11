@@ -23,10 +23,42 @@ export const client = createSanityClient()
 
 const builder = client ? imageUrlBuilder(client) : null
 
+// Create a chainable placeholder for when builder is not available
+function createPlaceholder(): ReturnType<typeof imageUrlBuilder>['image'] {
+  const placeholder = {
+    url: () => '/placeholder.jpg',
+    width: () => placeholder,
+    height: () => placeholder,
+    fit: () => placeholder,
+    auto: () => placeholder,
+    quality: () => placeholder,
+    format: () => placeholder,
+    crop: () => placeholder,
+    blur: () => placeholder,
+    sharpen: () => placeholder,
+    rect: () => placeholder,
+    flipHorizontal: () => placeholder,
+    flipVertical: () => placeholder,
+    orientation: () => placeholder,
+    minWidth: () => placeholder,
+    maxWidth: () => placeholder,
+    minHeight: () => placeholder,
+    maxHeight: () => placeholder,
+    size: () => placeholder,
+    focalPoint: () => placeholder,
+    saturation: () => placeholder,
+    dpr: () => placeholder,
+    pad: () => placeholder,
+    bg: () => placeholder,
+    image: () => placeholder,
+  } as unknown as ReturnType<ReturnType<typeof imageUrlBuilder>['image']>
+  return () => placeholder
+}
+
 export function urlFor(source: SanityImage) {
   if (!builder) {
     // Return a placeholder during build or when config is missing
-    return { url: () => '/placeholder.jpg', width: () => ({ height: () => ({ url: () => '/placeholder.jpg' }) }) }
+    return createPlaceholder()(source)
   }
   return builder.image(source)
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import HeaderWrapper from "@/components/HeaderWrapper";
 import FooterWrapper from "@/components/FooterWrapper";
 
 const inter = Inter({
@@ -105,7 +105,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
-        <Header />
+        <HeaderWrapper />
         <main className="flex-grow">{children}</main>
         <FooterWrapper />
       </body>

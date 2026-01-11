@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
 const navigation = [
@@ -12,7 +13,12 @@ const navigation = [
   { name: 'Research', href: '/category/research' },
 ]
 
-export default function Header() {
+interface HeaderProps {
+  siteName?: string
+  logoUrl?: string | null
+}
+
+export default function Header({ siteName, logoUrl }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -36,11 +42,24 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center overflow-hidden">
-              <span className="text-white font-bold text-lg">M</span>
-            </div>
+            {logoUrl ? (
+              <div className="relative w-9 h-9 overflow-hidden">
+                <Image
+                  src={logoUrl}
+                  alt={siteName || 'MegaRobotics'}
+                  width={36}
+                  height={36}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center overflow-hidden">
+                <span className="text-white font-bold text-lg">M</span>
+              </div>
+            )}
             <span className="hidden sm:block text-gray-900 font-semibold tracking-tight text-lg">
-              MegaRobotics
+              {siteName || 'MegaRobotics'}
             </span>
           </Link>
 

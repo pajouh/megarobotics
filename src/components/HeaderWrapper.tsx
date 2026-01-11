@@ -1,7 +1,7 @@
 import { getSiteSettings, urlFor } from '@/lib/sanity'
-import Footer from './Footer'
+import Header from './Header'
 
-export default async function FooterWrapper() {
+export default async function HeaderWrapper() {
   const settings = await getSiteSettings()
 
   // Process logo URL on server side for client component
@@ -9,5 +9,10 @@ export default async function FooterWrapper() {
     ? urlFor(settings.logo).width(120).height(120).url()
     : null
 
-  return <Footer settings={settings} logoUrl={logoUrl} />
+  return (
+    <Header
+      siteName={settings?.siteName}
+      logoUrl={logoUrl}
+    />
+  )
 }
