@@ -41,7 +41,7 @@ export default defineType({
       group: 'general',
       description: 'Width of the logo in pixels (default: 36)',
       initialValue: 36,
-      validation: (Rule) => Rule.min(16).max(200),
+      validation: (Rule) => Rule.min(16).max(300),
     }),
     defineField({
       name: 'logoHeight',
@@ -50,7 +50,7 @@ export default defineType({
       group: 'general',
       description: 'Height of the logo in pixels (default: 36)',
       initialValue: 36,
-      validation: (Rule) => Rule.min(16).max(200),
+      validation: (Rule) => Rule.min(16).max(300),
     }),
 
     // Footer
