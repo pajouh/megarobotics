@@ -1,7 +1,7 @@
 // /src/app/guides/[slug]/page.tsx
 import { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Clock, Calendar, RefreshCw, ArrowLeft, User } from 'lucide-react'

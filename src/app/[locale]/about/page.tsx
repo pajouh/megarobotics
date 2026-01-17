@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Bot, Target, Users, Zap, Mail, MapPin, Building } from 'lucide-react'
 import NewsletterForm from '@/components/NewsletterForm'
 import { getPageByType, getSiteSettings } from '@/lib/sanity'

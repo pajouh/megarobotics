@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { Link, useRouter } from '@/i18n/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Search } from 'lucide-react'
 import { ProductCategory, Manufacturer } from '@/types'
 import { useState, useCallback } from 'react'

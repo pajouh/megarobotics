@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Bot } from 'lucide-react'
 import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs, type Locale } from '@/lib/sanity'
