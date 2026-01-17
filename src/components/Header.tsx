@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ArrowRight } from 'lucide-react'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const navigation = [
   { name: 'Products', href: '/products' },
@@ -78,8 +79,9 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
             ))}
           </div>
 
-          {/* Subscribe Button */}
-          <div className="hidden md:flex md:items-center gap-4">
+          {/* Subscribe Button & Language Switcher */}
+          <div className="hidden md:flex md:items-center gap-3">
+            <LanguageSwitcher />
             <Link
               href="#newsletter"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors text-sm font-medium"
@@ -120,6 +122,9 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                   {item.name}
                 </Link>
               ))}
+              <div className="px-3 py-2">
+                <LanguageSwitcher />
+              </div>
               <Link
                 href="#newsletter"
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium mt-3"
