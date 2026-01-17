@@ -7,17 +7,18 @@ import {
   getManufacturer,
   getProductsByManufacturer,
   getAllManufacturerSlugs,
-  urlFor
+  urlFor,
+  type Locale
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const manufacturer = await getManufacturer(slug)
+  const { slug, locale } = await params
+  const manufacturer = await getManufacturer(slug, locale as Locale)
 
   if (!manufacturer) {
     return {
@@ -52,10 +53,10 @@ export async function generateStaticParams() {
 export const revalidate = 60
 
 export default async function ManufacturerPage({ params }: Props) {
-  const { slug } = await params
+  const { slug, locale } = await params
   const [manufacturer, products] = await Promise.all([
-    getManufacturer(slug),
-    getProductsByManufacturer(slug),
+    getManufacturer(slug, locale as Locale),
+    getProductsByManufacturer(slug, undefined, locale as Locale),
   ])
 
   if (!manufacturer) {

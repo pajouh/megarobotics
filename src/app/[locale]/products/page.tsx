@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Package } from 'lucide-react'
-import { getProducts, getProductCategories, getManufacturers, getFeaturedProducts, searchProducts } from '@/lib/sanity'
+import { getProducts, getProductCategories, getManufacturers, getFeaturedProducts, searchProducts, type Locale } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
 
@@ -13,18 +13,20 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 interface Props {
+  params: Promise<{ locale: string }>
   searchParams: Promise<{ q?: string }>
 }
 
-export default async function ProductsPage({ searchParams }: Props) {
-  const params = await searchParams
-  const searchQuery = params.q
+export default async function ProductsPage({ params, searchParams }: Props) {
+  const { locale } = await params
+  const searchParamsResolved = await searchParams
+  const searchQuery = searchParamsResolved.q
 
   const [products, categories, manufacturers, featuredProducts] = await Promise.all([
-    searchQuery ? searchProducts(searchQuery) : getProducts(),
-    getProductCategories(),
-    getManufacturers(),
-    getFeaturedProducts(4),
+    searchQuery ? searchProducts(searchQuery, locale as Locale) : getProducts(undefined, locale as Locale),
+    getProductCategories(locale as Locale),
+    getManufacturers(locale as Locale),
+    getFeaturedProducts(4, locale as Locale),
   ])
 
   // Show featured products only when not searching

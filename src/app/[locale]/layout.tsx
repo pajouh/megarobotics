@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { locales, type Locale } from '@/i18n/config'
+import { type Locale as SanityLocale } from '@/lib/sanity'
 import HeaderWrapper from '@/components/HeaderWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 
@@ -30,9 +31,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <HeaderWrapper />
+      <HeaderWrapper locale={locale as SanityLocale} />
       <main className="flex-grow">{children}</main>
-      <FooterWrapper />
+      <FooterWrapper locale={locale as SanityLocale} />
     </NextIntlClientProvider>
   )
 }

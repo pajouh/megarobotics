@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { Bot } from 'lucide-react'
-import { getArticles, getCategories } from '@/lib/sanity'
+import { getArticles, getCategories, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
 
@@ -11,10 +11,15 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
-export default async function ArticlesPage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function ArticlesPage({ params }: Props) {
+  const { locale } = await params
   const [articles, categories] = await Promise.all([
-    getArticles(),
-    getCategories(),
+    getArticles(undefined, locale as Locale),
+    getCategories(locale as Locale),
   ])
 
   return (

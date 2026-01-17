@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { Bot, TrendingUp, Cpu, Users, ArrowRight, Package } from 'lucide-react'
-import { getArticles, getFeaturedArticles, getCategories, getFeaturedProducts } from '@/lib/sanity'
+import { getArticles, getFeaturedArticles, getCategories, getFeaturedProducts, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import FeaturedArticle from '@/components/FeaturedArticle'
 import CategoryFilter from '@/components/CategoryFilter'
@@ -19,12 +19,17 @@ const stats = [
 
 export const revalidate = 60
 
-export default async function HomePage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params
   const [articles, featuredArticles, categories, featuredProducts] = await Promise.all([
-    getArticles(9),
-    getFeaturedArticles(1),
-    getCategories(),
-    getFeaturedProducts(4),
+    getArticles(9, locale as Locale),
+    getFeaturedArticles(1, locale as Locale),
+    getCategories(locale as Locale),
+    getFeaturedProducts(4, locale as Locale),
   ])
 
   const featuredArticle = featuredArticles[0]

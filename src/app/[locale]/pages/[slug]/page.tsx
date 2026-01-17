@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPage, getAllPageSlugs } from '@/lib/sanity'
+import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 
 type Props = {
@@ -13,8 +13,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const page = await getPage(slug)
+  const { slug, locale } = await params
+  const page = await getPage(slug, locale as Locale)
 
   if (!page) {
     return { title: 'Page Not Found' }
@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 3600
 
 export default async function DynamicPage({ params }: Props) {
-  const { slug } = await params
-  const page = await getPage(slug)
+  const { slug, locale } = await params
+  const page = await getPage(slug, locale as Locale)
 
   if (!page) {
     notFound()

@@ -1,7 +1,7 @@
 'use client'
 
 import { useLocale } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from '@/i18n/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { Globe, ChevronDown } from 'lucide-react'
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config'
@@ -25,24 +25,8 @@ export default function LanguageSwitcher() {
   }, [])
 
   const switchLocale = (newLocale: Locale) => {
-    // Remove current locale prefix if present
-    let newPathname = pathname
-
-    // Check if pathname starts with a locale
-    for (const loc of locales) {
-      if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
-        newPathname = pathname.replace(`/${loc}`, '') || '/'
-        break
-      }
-    }
-
-    // Add new locale prefix (except for default locale 'en')
-    if (newLocale === 'en') {
-      router.push(newPathname)
-    } else {
-      router.push(`/${newLocale}${newPathname}`)
-    }
-
+    // Use next-intl's router which handles locale switching properly
+    router.replace(pathname, { locale: newLocale })
     setIsOpen(false)
   }
 

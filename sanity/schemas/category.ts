@@ -1,30 +1,25 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './helpers/localizedFields'
 
 export default defineType({
   name: 'category',
   title: 'Category',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+    localizedString('title', 'Title', {
+      required: true,
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.en',
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+    localizedText('description', 'Description', {
       rows: 3,
     }),
     defineField({
@@ -42,13 +37,15 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
+      titleDe: 'title.de',
       icon: 'icon',
     },
     prepare(selection) {
-      const { title, icon } = selection
+      const { title, titleDe, icon } = selection
+      const displayTitle = title || titleDe || 'Untitled'
       return {
-        title: icon ? `${icon} ${title}` : title,
+        title: icon ? `${icon} ${displayTitle}` : displayTitle,
       }
     },
   },

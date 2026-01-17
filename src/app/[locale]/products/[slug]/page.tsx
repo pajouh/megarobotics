@@ -8,7 +8,8 @@ import {
   getRelatedProducts,
   getProductsBySameManufacturer,
   getAllProductSlugs,
-  urlFor
+  urlFor,
+  type Locale
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 import ProductGallery from '@/components/ProductGallery'
@@ -16,12 +17,12 @@ import SpecificationsTable from '@/components/SpecificationsTable'
 import ArticleBody from '@/components/ArticleBody'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const product = await getProduct(slug)
+  const { slug, locale } = await params
+  const product = await getProduct(slug, locale as Locale)
 
   if (!product) {
     return {
@@ -55,8 +56,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await params
-  const product = await getProduct(slug)
+  const { slug, locale } = await params
+  const product = await getProduct(slug, locale as Locale)
 
   if (!product) {
     notFound()
@@ -64,10 +65,10 @@ export default async function ProductPage({ params }: Props) {
 
   const [relatedProducts, sameManufacturerProducts] = await Promise.all([
     product.category
-      ? getRelatedProducts(product._id, product.category.slug.current, 4)
+      ? getRelatedProducts(product._id, product.category.slug.current, 4, locale as Locale)
       : Promise.resolve([]),
     product.manufacturer
-      ? getProductsBySameManufacturer(product._id, product.manufacturer.slug.current, 4)
+      ? getProductsBySameManufacturer(product._id, product.manufacturer.slug.current, 4, locale as Locale)
       : Promise.resolve([]),
   ])
 

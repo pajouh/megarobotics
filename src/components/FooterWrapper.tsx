@@ -1,8 +1,12 @@
-import { getSiteSettings, urlFor } from '@/lib/sanity'
+import { getSiteSettings, urlFor, type Locale } from '@/lib/sanity'
 import Footer from './Footer'
 
-export default async function FooterWrapper() {
-  const settings = await getSiteSettings()
+interface FooterWrapperProps {
+  locale?: Locale
+}
+
+export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProps) {
+  const settings = await getSiteSettings(locale)
 
   const logoWidth = settings?.logoWidth || 36
   const logoHeight = settings?.logoHeight || 36

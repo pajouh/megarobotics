@@ -90,6 +90,9 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  other: {
+    "facebook-domain-verification": "f4d1i9dpm7pulx55nx1tuprhlkn36o",
+  },
 };
 
 export default function RootLayout({

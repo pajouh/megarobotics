@@ -2,17 +2,17 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, Bot } from 'lucide-react'
-import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs } from '@/lib/sanity'
+import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const category = await getCategory(slug)
+  const { slug, locale } = await params
+  const category = await getCategory(slug, locale as Locale)
 
   if (!category) {
     return {
@@ -34,11 +34,11 @@ export async function generateStaticParams() {
 export const revalidate = 60
 
 export default async function CategoryPage({ params }: Props) {
-  const { slug } = await params
+  const { slug, locale } = await params
   const [category, articles, categories] = await Promise.all([
-    getCategory(slug),
-    getArticlesByCategory(slug),
-    getCategories(),
+    getCategory(slug, locale as Locale),
+    getArticlesByCategory(slug, undefined, locale as Locale),
+    getCategories(locale as Locale),
   ])
 
   if (!category) {

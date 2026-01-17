@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { Building2 } from 'lucide-react'
-import { getManufacturers } from '@/lib/sanity'
+import { getManufacturers, type Locale } from '@/lib/sanity'
 import ManufacturerCard from '@/components/ManufacturerCard'
 
 export const metadata: Metadata = {
@@ -10,8 +10,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 60
 
-export default async function ManufacturersPage() {
-  const manufacturers = await getManufacturers()
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function ManufacturersPage({ params }: Props) {
+  const { locale } = await params
+  const manufacturers = await getManufacturers(locale as Locale)
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">

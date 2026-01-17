@@ -5,6 +5,10 @@ import { SanityImage, Article, Category, Author, Product, ProductCategory, Manuf
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
+// Default locale for queries
+export type Locale = 'en' | 'de'
+const defaultLocale: Locale = 'en'
+
 // Create a null-safe client that handles missing configuration
 function createSanityClient(): SanityClient | null {
   if (!projectId) {
@@ -63,94 +67,111 @@ export function urlFor(source: SanityImage) {
   return builder.image(source)
 }
 
+// Helper to create localized field projections with fallback
+function localizedField(field: string, locale: Locale = defaultLocale): string {
+  const fallback = locale === 'en' ? 'de' : 'en'
+  return `coalesce(${field}.${locale}, ${field}.${fallback}, ${field})`
+}
+
+// Helper for localized array fields
+function localizedArrayField(field: string, locale: Locale = defaultLocale): string {
+  const fallback = locale === 'en' ? 'de' : 'en'
+  return `coalesce(${field}.${locale}, ${field}.${fallback}, ${field})`
+}
+
 
 // GROQ Queries - Articles
-const articleFields = `
-  _id,
-  _type,
-  title,
-  slug,
-  excerpt,
-  mainImage,
-  publishedAt,
-  readTime,
-  featured,
-  category->{
+function getArticleFields(locale: Locale = defaultLocale) {
+  return `
     _id,
-    title,
+    _type,
+    "title": ${localizedField('title', locale)},
     slug,
-    icon,
-    color
-  },
-  author->{
-    _id,
-    name,
-    slug,
-    image,
-    bio,
-    twitter,
-    linkedin
-  }
-`
+    "excerpt": ${localizedField('excerpt', locale)},
+    mainImage,
+    publishedAt,
+    readTime,
+    featured,
+    category->{
+      _id,
+      "title": ${localizedField('title', locale)},
+      slug,
+      "description": ${localizedField('description', locale)},
+      icon,
+      color
+    },
+    author->{
+      _id,
+      name,
+      slug,
+      image,
+      bio,
+      twitter,
+      linkedin
+    }
+  `
+}
 
-const articleWithBodyFields = `
-  ${articleFields},
-  body
-`
+function getArticleWithBodyFields(locale: Locale = defaultLocale) {
+  return `
+    ${getArticleFields(locale)},
+    "body": ${localizedField('body', locale)}
+  `
+}
 
 // Get all articles with optional limit
-export async function getArticles(limit?: number): Promise<Article[]> {
+export async function getArticles(limit?: number, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "article"] | order(publishedAt desc)${limitQuery} {
-      ${articleFields}
+      ${getArticleFields(locale)}
     }`
   )
 }
 
 // Get a single article by slug
-export async function getArticle(slug: string): Promise<Article | null> {
+export async function getArticle(slug: string, locale: Locale = defaultLocale): Promise<Article | null> {
   if (!client) return null
   return client.fetch(
     `*[_type == "article" && slug.current == $slug][0] {
-      ${articleWithBodyFields}
+      ${getArticleWithBodyFields(locale)}
     }`,
     { slug }
   )
 }
 
 // Get featured articles
-export async function getFeaturedArticles(limit: number = 3): Promise<Article[]> {
+export async function getFeaturedArticles(limit: number = 3, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "article" && featured == true] | order(publishedAt desc)[0...${limit}] {
-      ${articleFields}
+      ${getArticleFields(locale)}
     }`
   )
 }
 
 // Get articles by category
-export async function getArticlesByCategory(categorySlug: string, limit?: number): Promise<Article[]> {
+export async function getArticlesByCategory(categorySlug: string, limit?: number, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "article" && category->slug.current == $categorySlug] | order(publishedAt desc)${limitQuery} {
-      ${articleFields}
+      ${getArticleFields(locale)}
     }`,
     { categorySlug }
   )
 }
 
 // Get all categories
-export async function getCategories(): Promise<Category[]> {
+export async function getCategories(locale: Locale = defaultLocale): Promise<Category[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "category"] | order(title asc) {
+    `*[_type == "category"] | order(title.${locale} asc) {
       _id,
-      title,
+      "title": ${localizedField('title', locale)},
       slug,
-      description,
+      "description": ${localizedField('description', locale)},
       icon,
       color
     }`
@@ -158,14 +179,14 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 // Get a single category by slug
-export async function getCategory(slug: string): Promise<Category | null> {
+export async function getCategory(slug: string, locale: Locale = defaultLocale): Promise<Category | null> {
   if (!client) return null
   return client.fetch(
     `*[_type == "category" && slug.current == $slug][0] {
       _id,
-      title,
+      "title": ${localizedField('title', locale)},
       slug,
-      description,
+      "description": ${localizedField('description', locale)},
       icon,
       color
     }`,
@@ -190,23 +211,23 @@ export async function getAuthors(): Promise<Author[]> {
 }
 
 // Get related articles (same category, excluding current)
-export async function getRelatedArticles(articleId: string, categorySlug: string, limit: number = 3): Promise<Article[]> {
+export async function getRelatedArticles(articleId: string, categorySlug: string, limit: number = 3, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "article" && _id != $articleId && category->slug.current == $categorySlug] | order(publishedAt desc)[0...${limit}] {
-      ${articleFields}
+      ${getArticleFields(locale)}
     }`,
     { articleId, categorySlug }
   )
 }
 
 // Search articles
-export async function searchArticles(searchTerm: string): Promise<Article[]> {
+export async function searchArticles(searchTerm: string, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   const searchQuery = `*${searchTerm}*`
   return client.fetch<Article[]>(
-    `*[_type == "article" && (title match $searchQuery || excerpt match $searchQuery)] | order(publishedAt desc) {
-      ${articleFields}
+    `*[_type == "article" && (title.${locale} match $searchQuery || title.en match $searchQuery || excerpt.${locale} match $searchQuery)] | order(publishedAt desc) {
+      ${getArticleFields(locale)}
     }`,
     { searchQuery }
   )
@@ -233,171 +254,179 @@ export async function getAllCategorySlugs(): Promise<{ slug: string }[]> {
 // PRODUCT SYSTEM QUERIES
 // ==========================================
 
-const manufacturerFields = `
-  _id,
-  _type,
-  name,
-  slug,
-  logo,
-  description,
-  website,
-  headquarters,
-  founded,
-  specialties,
-  featured
-`
+function getManufacturerFields(locale: Locale = defaultLocale) {
+  return `
+    _id,
+    _type,
+    name,
+    slug,
+    logo,
+    "description": ${localizedField('description', locale)},
+    website,
+    headquarters,
+    founded,
+    "specialties": ${localizedArrayField('specialties', locale)},
+    featured
+  `
+}
 
-const productCategoryFields = `
-  _id,
-  _type,
-  name,
-  slug,
-  description,
-  icon,
-  image,
-  order
-`
+function getProductCategoryFields(locale: Locale = defaultLocale) {
+  return `
+    _id,
+    _type,
+    "name": ${localizedField('name', locale)},
+    slug,
+    "description": ${localizedField('description', locale)},
+    icon,
+    image,
+    order
+  `
+}
 
-const productFields = `
-  _id,
-  _type,
-  name,
-  slug,
-  tagline,
-  description,
-  mainImage,
-  priceRange,
-  availability,
-  featured,
-  isNew,
-  publishedAt,
-  order,
-  manufacturer->{
-    ${manufacturerFields}
-  },
-  category->{
-    ${productCategoryFields}
-  }
-`
+function getProductFields(locale: Locale = defaultLocale) {
+  return `
+    _id,
+    _type,
+    name,
+    slug,
+    "tagline": ${localizedField('tagline', locale)},
+    "description": ${localizedField('description', locale)},
+    mainImage,
+    priceRange,
+    availability,
+    featured,
+    isNew,
+    publishedAt,
+    order,
+    manufacturer->{
+      ${getManufacturerFields(locale)}
+    },
+    category->{
+      ${getProductCategoryFields(locale)}
+    }
+  `
+}
 
-const productWithFullFields = `
-  ${productFields},
-  fullDescription,
-  gallery,
-  videoUrl,
-  specifications,
-  features,
-  applications,
-  productUrl,
-  datasheetUrl
-`
+function getProductWithFullFields(locale: Locale = defaultLocale) {
+  return `
+    ${getProductFields(locale)},
+    "fullDescription": ${localizedField('fullDescription', locale)},
+    gallery,
+    videoUrl,
+    specifications,
+    "features": ${localizedArrayField('features', locale)},
+    "applications": ${localizedArrayField('applications', locale)},
+    productUrl,
+    datasheetUrl
+  `
+}
 
 // Get all products with optional limit
-export async function getProducts(limit?: number): Promise<Product[]> {
+export async function getProducts(limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "product"] | order(order asc, name asc)${limitQuery} {
-      ${productFields}
+      ${getProductFields(locale)}
     }`
   )
 }
 
 // Get a single product by slug
-export async function getProduct(slug: string): Promise<Product | null> {
+export async function getProduct(slug: string, locale: Locale = defaultLocale): Promise<Product | null> {
   if (!client) return null
   return client.fetch(
     `*[_type == "product" && slug.current == $slug][0] {
-      ${productWithFullFields}
+      ${getProductWithFullFields(locale)}
     }`,
     { slug }
   )
 }
 
 // Get featured products
-export async function getFeaturedProducts(limit: number = 6): Promise<Product[]> {
+export async function getFeaturedProducts(limit: number = 6, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "product" && featured == true] | order(order asc, name asc)[0...${limit}] {
-      ${productFields}
+      ${getProductFields(locale)}
     }`
   )
 }
 
 // Get products by category
-export async function getProductsByCategory(categorySlug: string, limit?: number): Promise<Product[]> {
+export async function getProductsByCategory(categorySlug: string, limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "product" && category->slug.current == $categorySlug] | order(order asc, name asc)${limitQuery} {
-      ${productFields}
+      ${getProductFields(locale)}
     }`,
     { categorySlug }
   )
 }
 
 // Get products by manufacturer
-export async function getProductsByManufacturer(manufacturerSlug: string, limit?: number): Promise<Product[]> {
+export async function getProductsByManufacturer(manufacturerSlug: string, limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
     `*[_type == "product" && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)${limitQuery} {
-      ${productFields}
+      ${getProductFields(locale)}
     }`,
     { manufacturerSlug }
   )
 }
 
 // Get related products (same category, excluding current)
-export async function getRelatedProducts(productId: string, categorySlug: string, limit: number = 4): Promise<Product[]> {
+export async function getRelatedProducts(productId: string, categorySlug: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "product" && _id != $productId && category->slug.current == $categorySlug] | order(order asc, name asc)[0...${limit}] {
-      ${productFields}
+      ${getProductFields(locale)}
     }`,
     { productId, categorySlug }
   )
 }
 
 // Get products by same manufacturer (excluding current)
-export async function getProductsBySameManufacturer(productId: string, manufacturerSlug: string, limit: number = 4): Promise<Product[]> {
+export async function getProductsBySameManufacturer(productId: string, manufacturerSlug: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "product" && _id != $productId && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)[0...${limit}] {
-      ${productFields}
+      ${getProductFields(locale)}
     }`,
     { productId, manufacturerSlug }
   )
 }
 
 // Get all manufacturers
-export async function getManufacturers(): Promise<Manufacturer[]> {
+export async function getManufacturers(locale: Locale = defaultLocale): Promise<Manufacturer[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "manufacturer"] | order(name asc) {
-      ${manufacturerFields},
+      ${getManufacturerFields(locale)},
       "productCount": count(*[_type == "product" && references(^._id)])
     }`
   )
 }
 
 // Get featured manufacturers
-export async function getFeaturedManufacturers(limit: number = 8): Promise<Manufacturer[]> {
+export async function getFeaturedManufacturers(limit: number = 8, locale: Locale = defaultLocale): Promise<Manufacturer[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "manufacturer" && featured == true] | order(name asc)[0...${limit}] {
-      ${manufacturerFields},
+      ${getManufacturerFields(locale)},
       "productCount": count(*[_type == "product" && references(^._id)])
     }`
   )
 }
 
 // Get a single manufacturer by slug
-export async function getManufacturer(slug: string): Promise<Manufacturer | null> {
+export async function getManufacturer(slug: string, locale: Locale = defaultLocale): Promise<Manufacturer | null> {
   if (!client) return null
   return client.fetch(
     `*[_type == "manufacturer" && slug.current == $slug][0] {
-      ${manufacturerFields},
+      ${getManufacturerFields(locale)},
       "productCount": count(*[_type == "product" && references(^._id)])
     }`,
     { slug }
@@ -405,22 +434,22 @@ export async function getManufacturer(slug: string): Promise<Manufacturer | null
 }
 
 // Get all product categories
-export async function getProductCategories(): Promise<ProductCategory[]> {
+export async function getProductCategories(locale: Locale = defaultLocale): Promise<ProductCategory[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "productCategory"] | order(order asc, name asc) {
-      ${productCategoryFields},
+    `*[_type == "productCategory"] | order(order asc, name.${locale} asc) {
+      ${getProductCategoryFields(locale)},
       "productCount": count(*[_type == "product" && references(^._id)])
     }`
   )
 }
 
 // Get a single product category by slug
-export async function getProductCategory(slug: string): Promise<ProductCategory | null> {
+export async function getProductCategory(slug: string, locale: Locale = defaultLocale): Promise<ProductCategory | null> {
   if (!client) return null
   return client.fetch(
     `*[_type == "productCategory" && slug.current == $slug][0] {
-      ${productCategoryFields},
+      ${getProductCategoryFields(locale)},
       "productCount": count(*[_type == "product" && references(^._id)])
     }`,
     { slug }
@@ -428,12 +457,12 @@ export async function getProductCategory(slug: string): Promise<ProductCategory 
 }
 
 // Search products
-export async function searchProducts(searchTerm: string): Promise<Product[]> {
+export async function searchProducts(searchTerm: string, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   const searchQuery = `*${searchTerm}*`
   return client.fetch<Product[]>(
-    `*[_type == "product" && (name match $searchQuery || description match $searchQuery || tagline match $searchQuery)] | order(name asc) {
-      ${productFields}
+    `*[_type == "product" && (name match $searchQuery || description.${locale} match $searchQuery || tagline.${locale} match $searchQuery)] | order(name asc) {
+      ${getProductFields(locale)}
     }`,
     { searchQuery }
   )
@@ -538,38 +567,47 @@ export async function getAllBuyersGuideSlugs(): Promise<{ slug: string }[]> {
 // ==========================================
 
 // Get site settings (singleton)
-export async function getSiteSettings() {
+export async function getSiteSettings(locale: Locale = defaultLocale) {
   if (!client) return null
   return client.fetch(
     `*[_type == "siteSettings"][0] {
       siteName,
-      siteTagline,
+      "siteTagline": ${localizedField('siteTagline', locale)},
       logo,
       logoWidth,
       logoHeight,
-      footerDescription,
-      footerLinks,
-      copyrightText,
+      "footerDescription": ${localizedField('footerDescription', locale)},
+      footerLinks[] {
+        "title": ${localizedField('title', locale)},
+        links[] {
+          "label": ${localizedField('label', locale)},
+          url
+        }
+      },
+      "copyrightText": ${localizedField('copyrightText', locale)},
       socialLinks,
       contactEmail,
       contactPhone,
-      address
+      "address": ${localizedField('address', locale)}
     }`
   )
 }
 
 // Get a page by slug
-export async function getPage(slug: string) {
+export async function getPage(slug: string, locale: Locale = defaultLocale) {
   if (!client) return null
   return client.fetch(
     `*[_type == "page" && slug.current == $slug][0] {
       _id,
-      title,
+      "title": ${localizedField('title', locale)},
       slug,
       pageType,
-      subtitle,
-      body,
-      seo,
+      "subtitle": ${localizedField('subtitle', locale)},
+      "body": ${localizedField('body', locale)},
+      seo {
+        "metaTitle": ${localizedField('metaTitle', locale)},
+        "metaDescription": ${localizedField('metaDescription', locale)}
+      },
       lastUpdated
     }`,
     { slug }
@@ -577,17 +615,20 @@ export async function getPage(slug: string) {
 }
 
 // Get a page by type (e.g., 'about', 'imprint', 'privacy')
-export async function getPageByType(pageType: string) {
+export async function getPageByType(pageType: string, locale: Locale = defaultLocale) {
   if (!client) return null
   return client.fetch(
     `*[_type == "page" && pageType == $pageType][0] {
       _id,
-      title,
+      "title": ${localizedField('title', locale)},
       slug,
       pageType,
-      subtitle,
-      body,
-      seo,
+      "subtitle": ${localizedField('subtitle', locale)},
+      "body": ${localizedField('body', locale)},
+      seo {
+        "metaTitle": ${localizedField('metaTitle', locale)},
+        "metaDescription": ${localizedField('metaDescription', locale)}
+      },
       lastUpdated
     }`,
     { pageType }

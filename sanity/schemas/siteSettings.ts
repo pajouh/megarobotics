@@ -1,5 +1,6 @@
 // /sanity/schemas/siteSettings.ts
 import { defineType, defineField } from 'sanity'
+import { localizedString, localizedText } from './helpers/localizedFields'
 
 export default defineType({
   name: 'siteSettings',
@@ -20,12 +21,9 @@ export default defineType({
       group: 'general',
       initialValue: 'MegaRobotics',
     }),
-    defineField({
-      name: 'siteTagline',
-      title: 'Site Tagline',
-      type: 'string',
+    localizedString('siteTagline', 'Site Tagline', {
       group: 'general',
-      initialValue: 'Your Source for Robotics News & Products',
+      description: 'Your Source for Robotics News & Products',
     }),
     defineField({
       name: 'logo',
@@ -54,10 +52,7 @@ export default defineType({
     }),
 
     // Footer
-    defineField({
-      name: 'footerDescription',
-      title: 'Footer Description',
-      type: 'text',
+    localizedText('footerDescription', 'Footer Description', {
       group: 'footer',
       rows: 3,
       description: 'Short description shown in the footer',
@@ -71,7 +66,7 @@ export default defineType({
         {
           type: 'object',
           fields: [
-            { name: 'title', type: 'string', title: 'Column Title' },
+            localizedString('title', 'Column Title'),
             {
               name: 'links',
               type: 'array',
@@ -80,7 +75,7 @@ export default defineType({
                 {
                   type: 'object',
                   fields: [
-                    { name: 'label', type: 'string', title: 'Label' },
+                    localizedString('label', 'Label'),
                     { name: 'url', type: 'string', title: 'URL' },
                   ],
                 },
@@ -90,10 +85,7 @@ export default defineType({
         },
       ],
     }),
-    defineField({
-      name: 'copyrightText',
-      title: 'Copyright Text',
-      type: 'string',
+    localizedString('copyrightText', 'Copyright Text', {
       group: 'footer',
       description: 'e.g., "© 2026 MegaRobotics. All rights reserved."',
     }),
@@ -126,10 +118,7 @@ export default defineType({
       type: 'string',
       group: 'contact',
     }),
-    defineField({
-      name: 'address',
-      title: 'Address',
-      type: 'text',
+    localizedText('address', 'Address', {
       group: 'contact',
       rows: 3,
     }),

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Clock, Calendar, ArrowLeft, Twitter, Linkedin } from 'lucide-react'
-import { getArticle, getRelatedArticles, getAllArticleSlugs, urlFor } from '@/lib/sanity'
+import { getArticle, getRelatedArticles, getAllArticleSlugs, urlFor, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import ArticleBody from '@/components/ArticleBody'
@@ -13,12 +13,12 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import { generateArticleSchema } from '@/lib/structured-data'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const article = await getArticle(slug)
+  const { slug, locale } = await params
+  const article = await getArticle(slug, locale as Locale)
 
   if (!article) {
     return {
@@ -75,15 +75,15 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const { slug } = await params
-  const article = await getArticle(slug)
+  const { slug, locale } = await params
+  const article = await getArticle(slug, locale as Locale)
 
   if (!article) {
     notFound()
   }
 
   const relatedArticles = article.category
-    ? await getRelatedArticles(article._id, article.category.slug.current, 3)
+    ? await getRelatedArticles(article._id, article.category.slug.current, 3, locale as Locale)
     : []
 
   const shareUrl = `https://megarobotics.de/articles/${slug}`

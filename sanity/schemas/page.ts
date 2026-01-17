@@ -1,23 +1,27 @@
 // /sanity/schemas/page.ts
-import { defineType, defineField, defineArrayMember } from 'sanity'
+import { defineType, defineField } from 'sanity'
+import { localizedString, localizedText, localizedBlockContent } from './helpers/localizedFields'
 
 export default defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
+  groups: [
+    { name: 'content', title: 'Content', default: true },
+    { name: 'seo', title: 'SEO' },
+  ],
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+    localizedString('title', 'Title', {
+      group: 'content',
+      required: true,
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      group: 'content',
       options: {
-        source: 'title',
+        source: 'title.en',
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
@@ -26,6 +30,7 @@ export default defineType({
       name: 'pageType',
       title: 'Page Type',
       type: 'string',
+      group: 'content',
       options: {
         list: [
           { title: 'About', value: 'about' },
@@ -38,81 +43,41 @@ export default defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'string',
+    localizedString('subtitle', 'Subtitle', {
+      group: 'content',
       description: 'Optional subtitle shown below the title',
     }),
-    defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'H2', value: 'h2' },
-            { title: 'H3', value: 'h3' },
-            { title: 'H4', value: 'h4' },
-          ],
-          lists: [
-            { title: 'Bullet', value: 'bullet' },
-            { title: 'Numbered', value: 'number' },
-          ],
-          marks: {
-            decorators: [
-              { title: 'Strong', value: 'strong' },
-              { title: 'Emphasis', value: 'em' },
-            ],
-            annotations: [
-              {
-                title: 'URL',
-                name: 'link',
-                type: 'object',
-                fields: [
-                  {
-                    title: 'URL',
-                    name: 'href',
-                    type: 'url',
-                    validation: (Rule) =>
-                      Rule.uri({
-                        allowRelative: true,
-                        scheme: ['https', 'http', 'mailto', 'tel'],
-                      }),
-                  },
-                ],
-              },
-            ],
-          },
-        }),
-      ],
+    localizedBlockContent('body', 'Body', {
+      group: 'content',
     }),
     defineField({
       name: 'seo',
       title: 'SEO',
       type: 'object',
+      group: 'seo',
       fields: [
-        { name: 'metaTitle', type: 'string', title: 'Meta Title' },
-        { name: 'metaDescription', type: 'text', title: 'Meta Description', rows: 3 },
+        localizedString('metaTitle', 'Meta Title'),
+        localizedText('metaDescription', 'Meta Description', { rows: 3 }),
       ],
     }),
     defineField({
       name: 'lastUpdated',
       title: 'Last Updated',
       type: 'datetime',
+      group: 'content',
       description: 'When was this page last updated (shown on legal pages)',
     }),
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
+      titleDe: 'title.de',
       pageType: 'pageType',
     },
-    prepare({ title, pageType }) {
+    prepare({ title, titleDe, pageType }) {
+      const displayTitle = title || titleDe || 'Untitled'
       return {
-        title,
+        title: displayTitle,
         subtitle: pageType ? pageType.charAt(0).toUpperCase() + pageType.slice(1) : 'Page',
       }
     },
