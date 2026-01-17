@@ -19,7 +19,8 @@ function createSanityClient(): SanityClient | null {
     projectId,
     dataset,
     apiVersion: '2024-01-01',
-    useCdn: process.env.NODE_ENV === 'production',
+    // Disable CDN to always get fresh data - Next.js ISR handles caching
+    useCdn: false,
   })
 }
 
