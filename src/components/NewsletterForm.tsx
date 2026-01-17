@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface NewsletterFormProps {
   variant?: 'light' | 'dark'
@@ -11,13 +12,14 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  const t = useTranslations('newsletter')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!email || !email.includes('@')) {
       setStatus('error')
-      setMessage('Please enter a valid email address')
+      setMessage(t('invalidEmail'))
       return
     }
 
@@ -34,15 +36,15 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
 
       if (res.ok) {
         setStatus('success')
-        setMessage(data.message || 'Thanks for subscribing!')
+        setMessage(data.message || t('success'))
         setEmail('')
       } else {
         setStatus('error')
-        setMessage(data.message || 'Something went wrong. Please try again.')
+        setMessage(data.message || t('error'))
       }
     } catch {
       setStatus('error')
-      setMessage('Network error. Please try again.')
+      setMessage(t('networkError'))
     }
   }
 
@@ -60,7 +62,7 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
               setEmail(e.target.value)
               if (status !== 'idle') setStatus('idle')
             }}
-            placeholder="Enter your email"
+            placeholder={t('placeholder')}
             className={`w-full pl-12 pr-4 py-3 rounded-xl font-medium transition-all focus:outline-none focus:ring-2 ${
               isDark
                 ? 'bg-white/10 border border-white/20 text-white placeholder:text-gray-400 focus:border-emerald-500/50 focus:ring-emerald-500/20'
@@ -81,10 +83,10 @@ export default function NewsletterForm({ variant = 'light' }: NewsletterFormProp
           {status === 'loading' ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Subscribing...
+              {t('subscribing')}
             </>
           ) : (
-            'Subscribe'
+            t('subscribe')
           )}
         </button>
       </div>

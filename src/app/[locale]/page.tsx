@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { Bot, TrendingUp, Cpu, Users, ArrowRight, Package } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { getArticles, getFeaturedArticles, getCategories, getFeaturedProducts, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import FeaturedArticle from '@/components/FeaturedArticle'
@@ -10,13 +11,6 @@ import ProductCard from '@/components/ProductCard'
 import StructuredData from '@/components/StructuredData'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
 
-const stats = [
-  { label: 'Global Market', value: '$185B+', icon: TrendingUp, detail: '+14% YoY Growth' },
-  { label: 'Humanoid CAGR', value: '138%', icon: Bot, detail: '2024-2030 Forecast' },
-  { label: 'Industrial Robots', value: '4.2M', icon: Cpu, detail: 'Units Deployed' },
-  { label: 'Industry Jobs', value: '2.1M', icon: Users, detail: 'Created by 2030' },
-]
-
 export const revalidate = 60
 
 type Props = {
@@ -25,6 +19,10 @@ type Props = {
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params
+  const t = await getTranslations('home')
+  const tCommon = await getTranslations('common')
+  const tArticles = await getTranslations('articles')
+
   const [articles, featuredArticles, categories, featuredProducts] = await Promise.all([
     getArticles(9, locale as Locale),
     getFeaturedArticles(1, locale as Locale),
@@ -34,6 +32,13 @@ export default async function HomePage({ params }: Props) {
 
   const featuredArticle = featuredArticles[0]
   const gridArticles = articles.filter((a) => a._id !== featuredArticle?._id).slice(0, 6)
+
+  const stats = [
+    { label: t('stats.globalMarket'), value: '$185B+', icon: TrendingUp, detail: t('stats.globalMarketDetail') },
+    { label: t('stats.humanoidCagr'), value: '138%', icon: Bot, detail: t('stats.humanoidCagrDetail') },
+    { label: t('stats.industrialRobots'), value: '4.2M', icon: Cpu, detail: t('stats.industrialRobotsDetail') },
+    { label: t('stats.industryJobs'), value: '2.1M', icon: Users, detail: t('stats.industryJobsDetail') },
+  ]
 
   const structuredData = [
     generateOrganizationSchema(),
@@ -58,19 +63,18 @@ export default async function HomePage({ params }: Props) {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span className="text-sm text-gray-600 font-medium">
-                Live Robotics Intelligence
+                {t('badge')}
               </span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-              The Future of{' '}
-              <span className="gradient-text">Robotics</span>
-              <br />Starts Here
+              {t('title')}{' '}
+              <span className="gradient-text">{t('titleHighlight')}</span>
+              <br />{t('titleEnd')}
             </h1>
 
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              Your trusted source for robotics news, in-depth analysis, and industry insights.
-              From industrial automation to humanoid innovations.
+              {t('subtitle')}
             </p>
 
             {/* Newsletter Signup */}
@@ -107,17 +111,17 @@ export default async function HomePage({ params }: Props) {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-sm font-medium mb-3">
                   <Package className="w-4 h-4" />
-                  Featured Products
+                  {t('featuredProducts')}
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                  Discover Robotics Products
+                  {t('featuredProductsSubtitle')}
                 </h2>
               </div>
               <Link
                 href="/products"
                 className="inline-flex items-center gap-2 text-gray-900 hover:text-emerald-600 font-medium transition-colors"
               >
-                View All Products
+                {t('viewAllProducts')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -148,17 +152,17 @@ export default async function HomePage({ params }: Props) {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                Latest News
+                {t('latestNews')}
               </h2>
               <p className="text-gray-600">
-                Stay informed with the latest developments in robotics
+                {t('latestNewsSubtitle')}
               </p>
             </div>
             <Link
               href="/articles"
               className="inline-flex items-center gap-2 text-gray-900 hover:text-emerald-600 font-medium transition-colors"
             >
-              View All Articles
+              {t('viewAllNews')}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -180,9 +184,9 @@ export default async function HomePage({ params }: Props) {
           ) : (
             <div className="text-center py-16 bg-white rounded-2xl">
               <Bot className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No articles yet</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{tArticles('noArticles')}</h3>
               <p className="text-gray-500">
-                Check back soon for the latest robotics news and insights.
+                {t('noArticlesDescription')}
               </p>
             </div>
           )}
@@ -194,17 +198,16 @@ export default async function HomePage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Never Miss a Breakthrough
+              {t('ctaTitle')}
             </h2>
             <p className="text-gray-400 mb-8 text-lg">
-              Get weekly insights on AI-powered robots, industry trends, and exclusive analysis
-              delivered straight to your inbox.
+              {t('ctaSubtitle')}
             </p>
             <div className="flex justify-center">
               <NewsletterForm variant="dark" />
             </div>
             <p className="text-gray-500 text-sm mt-6">
-              Join 50,000+ robotics professionals and enthusiasts
+              {t('ctaNote')}
             </p>
           </div>
         </div>

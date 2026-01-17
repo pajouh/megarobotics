@@ -1,4 +1,5 @@
 import { getSiteSettings, urlFor, type Locale } from '@/lib/sanity'
+import { getTranslations } from 'next-intl/server'
 import Footer from './Footer'
 
 interface FooterWrapperProps {
@@ -7,6 +8,33 @@ interface FooterWrapperProps {
 
 export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProps) {
   const settings = await getSiteSettings(locale)
+  const t = await getTranslations('footer')
+  const tNav = await getTranslations('nav')
+  const tNewsletter = await getTranslations('newsletter')
+
+  const translations = {
+    products: t('products'),
+    news: t('news'),
+    company: t('company'),
+    allProducts: tNav('products'),
+    allNews: tNav('news'),
+    manufacturers: tNav('manufacturers'),
+    reviews: tNav('reviews'),
+    research: tNav('research'),
+    about: tNav('about'),
+    contact: tNav('contact'),
+    imprint: t('imprint'),
+    privacyPolicy: t('privacyPolicy'),
+    stayUpdated: tNewsletter('title'),
+    newsletterSubtitle: tNewsletter('subtitle'),
+    enterEmail: tNewsletter('placeholder'),
+    subscribe: tNewsletter('subscribe'),
+    humanoidLegged: t('humanoidLegged'),
+    industrialCobots: t('industrialCobots'),
+    consumerHome: t('consumerHome'),
+    companies: t('companies'),
+    events: t('events'),
+  }
 
   const logoWidth = settings?.logoWidth || 36
   const logoHeight = settings?.logoHeight || 36
@@ -23,6 +51,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
       logoUrl={logoUrl}
       logoWidth={logoWidth}
       logoHeight={logoHeight}
+      translations={translations}
     />
   )
 }

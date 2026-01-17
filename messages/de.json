@@ -44,7 +44,11 @@
     "viewAllProducts": "Alle Produkte anzeigen",
     "latestNews": "Aktuelle Nachrichten",
     "latestNewsSubtitle": "Bleiben Sie auf dem Laufenden über die neuesten Entwicklungen in der Robotik",
-    "viewAllNews": "Alle Nachrichten anzeigen"
+    "viewAllNews": "Alle Nachrichten anzeigen",
+    "noArticlesDescription": "Schauen Sie bald wieder vorbei für die neuesten Robotik-Nachrichten und Einblicke.",
+    "ctaTitle": "Verpassen Sie keinen Durchbruch",
+    "ctaSubtitle": "Erhalten Sie wöchentliche Einblicke zu KI-gesteuerten Robotern, Branchentrends und exklusive Analysen direkt in Ihr Postfach.",
+    "ctaNote": "Schließen Sie sich 50.000+ Robotik-Fachleuten und Enthusiasten an"
   },
   "products": {
     "title": "Produkte",
@@ -105,7 +109,11 @@
     "subtitle": "Erhalten Sie die neuesten Robotik-Nachrichten direkt in Ihr Postfach.",
     "placeholder": "E-Mail eingeben",
     "success": "Vielen Dank für Ihre Anmeldung!",
-    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "networkError": "Netzwerkfehler. Bitte versuchen Sie es erneut.",
+    "subscribing": "Wird angemeldet...",
+    "subscribe": "Abonnieren"
   },
   "footer": {
     "description": "Ihre Quelle für die neuesten Robotik-Nachrichten, Bewertungen und Brancheneinblicke. Wir berichten über industrielle Automatisierung, humanoide Roboter und KI-Integration.",
@@ -114,7 +122,12 @@
     "company": "Unternehmen",
     "privacyPolicy": "Datenschutz",
     "imprint": "Impressum",
-    "copyright": "Alle Rechte vorbehalten."
+    "copyright": "Alle Rechte vorbehalten.",
+    "humanoidLegged": "Humanoide & Laufroboter",
+    "industrialCobots": "Industrie & Cobots",
+    "consumerHome": "Verbraucher & Haushalt",
+    "companies": "Unternehmen",
+    "events": "Veranstaltungen"
   },
   "about": {
     "title": "Über uns",

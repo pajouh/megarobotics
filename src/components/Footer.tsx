@@ -31,38 +31,85 @@ interface SiteSettings {
   contactEmail?: string
 }
 
+interface FooterTranslations {
+  products: string
+  news: string
+  company: string
+  allProducts: string
+  allNews: string
+  manufacturers: string
+  reviews: string
+  research: string
+  about: string
+  contact: string
+  imprint: string
+  privacyPolicy: string
+  stayUpdated: string
+  newsletterSubtitle: string
+  enterEmail: string
+  subscribe: string
+  humanoidLegged: string
+  industrialCobots: string
+  consumerHome: string
+  companies: string
+  events: string
+}
+
 interface FooterProps {
   settings?: SiteSettings | null
   logoUrl?: string | null
   logoWidth?: number
   logoHeight?: number
+  translations?: FooterTranslations
 }
 
-// Default fallback data
-const defaultProducts = [
-  { name: 'All Products', href: '/products' },
-  { name: 'Humanoid & Legged', href: '/products/category/humanoid-legged-robots' },
-  { name: 'Industrial & Cobots', href: '/products/category/industrial-cobots' },
-  { name: 'Consumer & Home', href: '/products/category/consumer-home' },
-  { name: 'Manufacturers', href: '/manufacturers' },
-]
+export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight = 36, translations }: FooterProps) {
+  const t = translations || {
+    products: 'Products',
+    news: 'News',
+    company: 'Company',
+    allProducts: 'All Products',
+    allNews: 'All News',
+    manufacturers: 'Manufacturers',
+    reviews: 'Reviews',
+    research: 'Research',
+    about: 'About',
+    contact: 'Contact',
+    imprint: 'Imprint',
+    privacyPolicy: 'Privacy Policy',
+    stayUpdated: 'Stay Updated',
+    newsletterSubtitle: 'Get the latest robotics news delivered to your inbox.',
+    enterEmail: 'Enter your email',
+    subscribe: 'Subscribe',
+    humanoidLegged: 'Humanoid & Legged',
+    industrialCobots: 'Industrial & Cobots',
+    consumerHome: 'Consumer & Home',
+    companies: 'Companies',
+    events: 'Events',
+  }
 
-const defaultNews = [
-  { name: 'All News', href: '/articles' },
-  { name: 'Reviews', href: '/category/reviews' },
-  { name: 'Companies', href: '/category/companies' },
-  { name: 'Events', href: '/category/events' },
-  { name: 'Research', href: '/category/research' },
-]
+  const defaultProducts = [
+    { name: t.allProducts, href: '/products' },
+    { name: t.humanoidLegged, href: '/products/category/humanoid-legged-robots' },
+    { name: t.industrialCobots, href: '/products/category/industrial-cobots' },
+    { name: t.consumerHome, href: '/products/category/consumer-home' },
+    { name: t.manufacturers, href: '/manufacturers' },
+  ]
 
-const defaultCompany = [
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/about#contact' },
-  { name: 'Imprint', href: '/imprint' },
-  { name: 'Privacy Policy', href: '/privacy' },
-]
+  const defaultNews = [
+    { name: t.allNews, href: '/articles' },
+    { name: t.reviews, href: '/category/reviews' },
+    { name: t.companies, href: '/category/companies' },
+    { name: t.events, href: '/category/events' },
+    { name: t.research, href: '/category/research' },
+  ]
 
-export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight = 36 }: FooterProps) {
+  const defaultCompany = [
+    { name: t.about, href: '/about' },
+    { name: t.contact, href: '/about#contact' },
+    { name: t.imprint, href: '/imprint' },
+    { name: t.privacyPolicy, href: '/privacy' },
+  ]
   const siteName = settings?.siteName || 'MegaRobotics'
   const footerDescription = settings?.footerDescription || 'Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.'
   const copyrightText = settings?.copyrightText || `© ${new Date().getFullYear()} MegaRobotics. All rights reserved.`
@@ -157,7 +204,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
             // Fallback columns
             <>
               <div>
-                <h3 className="text-gray-900 font-semibold mb-4">Products</h3>
+                <h3 className="text-gray-900 font-semibold mb-4">{t.products}</h3>
                 <ul className="space-y-2">
                   {defaultProducts.map((item) => (
                     <li key={item.name}>
@@ -173,7 +220,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
               </div>
 
               <div>
-                <h3 className="text-gray-900 font-semibold mb-4">News</h3>
+                <h3 className="text-gray-900 font-semibold mb-4">{t.news}</h3>
                 <ul className="space-y-2">
                   {defaultNews.map((item) => (
                     <li key={item.name}>
@@ -189,7 +236,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
               </div>
 
               <div>
-                <h3 className="text-gray-900 font-semibold mb-4">Company</h3>
+                <h3 className="text-gray-900 font-semibold mb-4">{t.company}</h3>
                 <ul className="space-y-2">
                   {defaultCompany.map((item) => (
                     <li key={item.name}>
@@ -211,9 +258,9 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
         <div className="mt-10 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="text-gray-900 font-semibold mb-1">Stay Updated</h3>
+              <h3 className="text-gray-900 font-semibold mb-1">{t.stayUpdated}</h3>
               <p className="text-gray-500 text-sm">
-                Get the latest robotics news delivered to your inbox.
+                {t.newsletterSubtitle}
               </p>
             </div>
             <form className="flex gap-3 w-full md:w-auto" action="/api/newsletter" method="POST">
@@ -222,7 +269,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
                 <input
                   type="email"
                   name="email"
-                  placeholder="Enter your email"
+                  placeholder={t.enterEmail}
                   className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 text-sm"
                 />
               </div>
@@ -230,7 +277,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
                 type="submit"
                 className="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition-colors"
               >
-                Subscribe
+                {t.subscribe}
               </button>
             </form>
           </div>
@@ -243,10 +290,10 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/privacy" className="text-gray-400 hover:text-gray-600 transition-colors">
-              Privacy Policy
+              {t.privacyPolicy}
             </Link>
             <Link href="/imprint" className="text-gray-400 hover:text-gray-600 transition-colors">
-              Imprint
+              {t.imprint}
             </Link>
           </div>
         </div>

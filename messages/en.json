@@ -44,7 +44,11 @@
     "viewAllProducts": "View all products",
     "latestNews": "Latest News",
     "latestNewsSubtitle": "Stay updated with the latest developments in robotics",
-    "viewAllNews": "View all news"
+    "viewAllNews": "View all news",
+    "noArticlesDescription": "Check back soon for the latest robotics news and insights.",
+    "ctaTitle": "Never Miss a Breakthrough",
+    "ctaSubtitle": "Get weekly insights on AI-powered robots, industry trends, and exclusive analysis delivered straight to your inbox.",
+    "ctaNote": "Join 50,000+ robotics professionals and enthusiasts"
   },
   "products": {
     "title": "Products",
@@ -105,7 +109,11 @@
     "subtitle": "Get the latest robotics news delivered to your inbox.",
     "placeholder": "Enter your email",
     "success": "Thank you for subscribing!",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "invalidEmail": "Please enter a valid email address",
+    "networkError": "Network error. Please try again.",
+    "subscribing": "Subscribing...",
+    "subscribe": "Subscribe"
   },
   "footer": {
     "description": "Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.",
@@ -114,7 +122,12 @@
     "company": "Company",
     "privacyPolicy": "Privacy Policy",
     "imprint": "Imprint",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "humanoidLegged": "Humanoid & Legged",
+    "industrialCobots": "Industrial & Cobots",
+    "consumerHome": "Consumer & Home",
+    "companies": "Companies",
+    "events": "Events"
   },
   "about": {
     "title": "About Us",
