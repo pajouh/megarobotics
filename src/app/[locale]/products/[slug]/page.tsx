@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, FileText, Mail, Check } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import {
   getProduct,
   getRelatedProducts,
@@ -58,6 +59,8 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: Props) {
   const { slug, locale } = await params
   const product = await getProduct(slug, locale as Locale)
+  const t = await getTranslations('products')
+  const tCommon = await getTranslations('common')
 
   if (!product) {
     notFound()
@@ -73,10 +76,10 @@ export default async function ProductPage({ params }: Props) {
   ])
 
   const availabilityLabels: Record<string, string> = {
-    available: 'Available Now',
-    preorder: 'Pre-order',
-    coming_soon: 'Coming Soon',
-    contact: 'Contact for Availability',
+    available: t('availability.available'),
+    preorder: t('availability.preorder'),
+    coming_soon: t('availability.comingSoon'),
+    contact: t('availability.contact'),
   }
 
   const availabilityColors: Record<string, string> = {
@@ -95,7 +98,7 @@ export default async function ProductPage({ params }: Props) {
           className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Products
+          {t('backToProducts')}
         </Link>
 
         {/* Product Header */}
@@ -186,7 +189,7 @@ export default async function ProductPage({ params }: Props) {
             {product.features && product.features.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
-                  Key Features
+                  {t('features')}
                 </h3>
                 <ul className="space-y-2">
                   {product.features.slice(0, 5).map((feature, index) => (
@@ -209,7 +212,7 @@ export default async function ProductPage({ params }: Props) {
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-lg font-medium transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Visit Official Site
+                  {t('visitOfficialSite')}
                 </a>
               )}
               {product.datasheetUrl && (
@@ -220,7 +223,7 @@ export default async function ProductPage({ params }: Props) {
                   className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-900 rounded-lg font-medium transition-colors"
                 >
                   <FileText className="w-4 h-4" />
-                  Download Datasheet
+                  {t('downloadDatasheet')}
                 </a>
               )}
               <Link
@@ -228,7 +231,7 @@ export default async function ProductPage({ params }: Props) {
                 className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 hover:border-gray-300 text-gray-900 rounded-lg font-medium transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                Request Quote
+                {t('requestQuote')}
               </Link>
             </div>
           </div>
@@ -237,7 +240,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Specifications */}
         {product.specifications && product.specifications.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Specifications</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('specifications')}</h2>
             <SpecificationsTable specifications={product.specifications} />
           </section>
         )}
@@ -245,7 +248,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Full Description */}
         {product.fullDescription && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Description</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('description')}</h2>
             <div className="prose-light max-w-none">
               <ArticleBody body={product.fullDescription} />
             </div>
@@ -255,7 +258,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Applications */}
         {product.applications && product.applications.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Applications</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('applications')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {product.applications.map((application, index) => (
                 <div
@@ -272,7 +275,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Video */}
         {product.videoUrl && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Video</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('video')}</h2>
             <div className="aspect-video rounded-2xl overflow-hidden bg-gray-100">
               <iframe
                 src={product.videoUrl.replace('watch?v=', 'embed/')}
@@ -289,14 +292,14 @@ export default async function ProductPage({ params }: Props) {
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">
-                More from {product.manufacturer?.name}
+                {t('moreFrom', { manufacturer: product.manufacturer?.name })}
               </h2>
               {product.manufacturer && (
                 <Link
                   href={`/manufacturers/${product.manufacturer.slug.current}`}
                   className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
                 >
-                  View All
+                  {tCommon('viewAll')}
                 </Link>
               )}
             </div>
@@ -311,7 +314,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('relatedProducts')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct._id} product={relatedProduct} />

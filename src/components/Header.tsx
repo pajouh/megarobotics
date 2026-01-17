@@ -4,15 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ArrowRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import LanguageSwitcher from './LanguageSwitcher'
-
-const navigation = [
-  { name: 'Products', href: '/products' },
-  { name: 'News', href: '/articles' },
-  { name: 'Manufacturers', href: '/manufacturers' },
-  { name: 'Reviews', href: '/category/reviews' },
-  { name: 'Research', href: '/category/research' },
-]
 
 interface HeaderProps {
   siteName?: string
@@ -24,6 +17,16 @@ interface HeaderProps {
 export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight = 36 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const t = useTranslations('nav')
+  const tCommon = useTranslations('common')
+
+  const navigation = [
+    { name: t('products'), href: '/products' },
+    { name: t('news'), href: '/articles' },
+    { name: t('manufacturers'), href: '/manufacturers' },
+    { name: t('reviews'), href: '/category/reviews' },
+    { name: t('research'), href: '/category/research' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -86,7 +89,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
               href="#newsletter"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors text-sm font-medium"
             >
-              Subscribe
+              {tCommon('subscribe')}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -130,7 +133,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium mt-3"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Subscribe
+                {tCommon('subscribe')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

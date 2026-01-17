@@ -53,13 +53,13 @@
     "categories": "Kategorien",
     "manufacturers": "Hersteller",
     "availability": {
-      "available": "Verfügbar",
+      "available": "Sofort verfügbar",
       "preorder": "Vorbestellung",
       "comingSoon": "Demnächst",
-      "contact": "Preis auf Anfrage"
+      "contact": "Verfügbarkeit anfragen"
     },
     "specifications": "Spezifikationen",
-    "features": "Funktionen",
+    "features": "Hauptmerkmale",
     "applications": "Anwendungen",
     "relatedProducts": "Ähnliche Produkte",
     "noProducts": "Keine Produkte gefunden",
@@ -68,7 +68,13 @@
     "priceRange": "Preisbereich",
     "viewProduct": "Produkt ansehen",
     "requestQuote": "Angebot anfordern",
-    "downloadDatasheet": "Datenblatt herunterladen"
+    "downloadDatasheet": "Datenblatt herunterladen",
+    "backToProducts": "Zurück zu Produkten",
+    "visitOfficialSite": "Offizielle Website besuchen",
+    "description": "Beschreibung",
+    "video": "Video",
+    "moreFrom": "Mehr von {manufacturer}",
+    "new": "Neu"
   },
   "articles": {
     "title": "Nachrichten & Artikel",

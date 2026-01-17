@@ -53,13 +53,13 @@
     "categories": "Categories",
     "manufacturers": "Manufacturers",
     "availability": {
-      "available": "Available",
+      "available": "Available Now",
       "preorder": "Pre-order",
       "comingSoon": "Coming Soon",
-      "contact": "Contact for Pricing"
+      "contact": "Contact for Availability"
     },
     "specifications": "Specifications",
-    "features": "Features",
+    "features": "Key Features",
     "applications": "Applications",
     "relatedProducts": "Related Products",
     "noProducts": "No products found",
@@ -68,7 +68,13 @@
     "priceRange": "Price Range",
     "viewProduct": "View Product",
     "requestQuote": "Request Quote",
-    "downloadDatasheet": "Download Datasheet"
+    "downloadDatasheet": "Download Datasheet",
+    "backToProducts": "Back to Products",
+    "visitOfficialSite": "Visit Official Site",
+    "description": "Description",
+    "video": "Video",
+    "moreFrom": "More from {manufacturer}",
+    "new": "New"
   },
   "articles": {
     "title": "News & Articles",
