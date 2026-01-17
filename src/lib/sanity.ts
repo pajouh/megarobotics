@@ -601,3 +601,63 @@ export async function getAllPageSlugs(): Promise<{ slug: string }[]> {
     `*[_type == "page" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
+
+
+// ==========================================
+// HERO BANNER QUERIES
+// ==========================================
+
+export interface HeroBannerSlide {
+  _id: string
+  title: string
+  subtitle?: string
+  mediaType: 'image' | 'video' | 'youtube'
+  image?: SanityImage
+  video?: {
+    asset: {
+      _ref: string
+      url?: string
+    }
+  }
+  youtubeUrl?: string
+  overlayOpacity?: number
+  textColor?: 'white' | 'dark'
+  ctaButton?: {
+    text?: string
+    url?: string
+    style?: 'primary' | 'secondary'
+  }
+  secondaryButton?: {
+    text?: string
+    url?: string
+  }
+  order: number
+  isActive: boolean
+}
+
+// Get active hero banner slides
+export async function getHeroBannerSlides(): Promise<HeroBannerSlide[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "heroBanner" && isActive == true] | order(order asc) {
+      _id,
+      title,
+      subtitle,
+      mediaType,
+      image,
+      "video": video {
+        "asset": asset->{
+          _ref,
+          url
+        }
+      },
+      youtubeUrl,
+      overlayOpacity,
+      textColor,
+      ctaButton,
+      secondaryButton,
+      order,
+      isActive
+    }`
+  )
+}

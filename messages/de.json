@@ -1,0 +1,130 @@
+{
+  "common": {
+    "readMore": "Mehr lesen",
+    "viewAll": "Alle anzeigen",
+    "learnMore": "Mehr erfahren",
+    "subscribe": "Abonnieren",
+    "search": "Suchen",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "notFound": "Nicht gefunden",
+    "backToHome": "Zurück zur Startseite",
+    "share": "Teilen",
+    "copyLink": "Link kopieren",
+    "copied": "Kopiert!"
+  },
+  "nav": {
+    "products": "Produkte",
+    "news": "Nachrichten",
+    "manufacturers": "Hersteller",
+    "reviews": "Bewertungen",
+    "research": "Forschung",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "guides": "Ratgeber"
+  },
+  "home": {
+    "badge": "Live Robotik-Intelligenz",
+    "title": "Die Zukunft der",
+    "titleHighlight": "Robotik",
+    "titleEnd": "beginnt hier",
+    "subtitle": "Ihre vertrauenswürdige Quelle für Robotik-Nachrichten, tiefgehende Analysen und Brancheneinblicke. Von industrieller Automatisierung bis zu humanoiden Innovationen.",
+    "stats": {
+      "globalMarket": "Globaler Markt",
+      "globalMarketDetail": "+14% Wachstum p.a.",
+      "humanoidCagr": "Humanoid CAGR",
+      "humanoidCagrDetail": "Prognose 2024-2030",
+      "industrialRobots": "Industrieroboter",
+      "industrialRobotsDetail": "Einheiten im Einsatz",
+      "industryJobs": "Arbeitsplätze",
+      "industryJobsDetail": "Bis 2030 geschaffen"
+    },
+    "featuredProducts": "Ausgewählte Produkte",
+    "featuredProductsSubtitle": "Entdecken Sie die neuesten Innovationen der Robotik-Technologie",
+    "viewAllProducts": "Alle Produkte anzeigen",
+    "latestNews": "Aktuelle Nachrichten",
+    "latestNewsSubtitle": "Bleiben Sie auf dem Laufenden über die neuesten Entwicklungen in der Robotik",
+    "viewAllNews": "Alle Nachrichten anzeigen"
+  },
+  "products": {
+    "title": "Produkte",
+    "subtitle": "Erkunden Sie unseren umfassenden Katalog an Robotik-Produkten",
+    "allProducts": "Alle Produkte",
+    "categories": "Kategorien",
+    "manufacturers": "Hersteller",
+    "availability": {
+      "available": "Verfügbar",
+      "preorder": "Vorbestellung",
+      "comingSoon": "Demnächst",
+      "contact": "Preis auf Anfrage"
+    },
+    "specifications": "Spezifikationen",
+    "features": "Funktionen",
+    "applications": "Anwendungen",
+    "relatedProducts": "Ähnliche Produkte",
+    "noProducts": "Keine Produkte gefunden",
+    "filterBy": "Filtern nach",
+    "sortBy": "Sortieren nach",
+    "priceRange": "Preisbereich",
+    "viewProduct": "Produkt ansehen",
+    "requestQuote": "Angebot anfordern",
+    "downloadDatasheet": "Datenblatt herunterladen"
+  },
+  "articles": {
+    "title": "Nachrichten & Artikel",
+    "subtitle": "Die neuesten Einblicke und Updates aus der Welt der Robotik",
+    "readTime": "{minutes} Min. Lesezeit",
+    "publishedOn": "Veröffentlicht am {date}",
+    "by": "Von",
+    "relatedArticles": "Ähnliche Artikel",
+    "categories": "Kategorien",
+    "allCategories": "Alle Kategorien",
+    "featured": "Empfohlen",
+    "latest": "Neueste",
+    "noArticles": "Keine Artikel gefunden"
+  },
+  "manufacturers": {
+    "title": "Hersteller",
+    "subtitle": "Führende Robotik-Unternehmen und Innovatoren",
+    "products": "{count} Produkte",
+    "headquarters": "Hauptsitz",
+    "founded": "Gegründet",
+    "website": "Webseite",
+    "specialties": "Spezialgebiete",
+    "viewProducts": "Produkte anzeigen",
+    "noManufacturers": "Keine Hersteller gefunden"
+  },
+  "newsletter": {
+    "title": "Bleiben Sie informiert",
+    "subtitle": "Erhalten Sie die neuesten Robotik-Nachrichten direkt in Ihr Postfach.",
+    "placeholder": "E-Mail eingeben",
+    "success": "Vielen Dank für Ihre Anmeldung!",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "description": "Ihre Quelle für die neuesten Robotik-Nachrichten, Bewertungen und Brancheneinblicke. Wir berichten über industrielle Automatisierung, humanoide Roboter und KI-Integration.",
+    "products": "Produkte",
+    "news": "Nachrichten",
+    "company": "Unternehmen",
+    "privacyPolicy": "Datenschutz",
+    "imprint": "Impressum",
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "about": {
+    "title": "Über uns",
+    "subtitle": "Ihre vertrauenswürdige Quelle für Robotik-Intelligenz",
+    "contact": "Kontakt",
+    "email": "E-Mail",
+    "address": "Adresse"
+  },
+  "errors": {
+    "pageNotFound": "Seite nicht gefunden",
+    "pageNotFoundDescription": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "serverError": "Serverfehler",
+    "serverErrorDescription": "Auf unserer Seite ist etwas schiefgelaufen. Bitte versuchen Sie es später erneut."
+  },
+  "meta": {
+    "siteTitle": "MegaRobotics",
+    "siteDescription": "Ihre vertrauenswürdige Quelle für Robotik-Nachrichten, tiefgehende Analysen und Brancheneinblicke."
+  }
+}

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import HeaderWrapper from "@/components/HeaderWrapper";
-import FooterWrapper from "@/components/FooterWrapper";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -100,14 +98,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
-        <HeaderWrapper />
-        <main className="flex-grow">{children}</main>
-        <FooterWrapper />
+        {children}
       </body>
     </html>
   );

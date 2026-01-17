@@ -1,0 +1,130 @@
+{
+  "common": {
+    "readMore": "Read more",
+    "viewAll": "View all",
+    "learnMore": "Learn more",
+    "subscribe": "Subscribe",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "notFound": "Not found",
+    "backToHome": "Back to home",
+    "share": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied!"
+  },
+  "nav": {
+    "products": "Products",
+    "news": "News",
+    "manufacturers": "Manufacturers",
+    "reviews": "Reviews",
+    "research": "Research",
+    "about": "About",
+    "contact": "Contact",
+    "guides": "Guides"
+  },
+  "home": {
+    "badge": "Live Robotics Intelligence",
+    "title": "The Future of",
+    "titleHighlight": "Robotics",
+    "titleEnd": "Starts Here",
+    "subtitle": "Your trusted source for robotics news, in-depth analysis, and industry insights. From industrial automation to humanoid innovations.",
+    "stats": {
+      "globalMarket": "Global Market",
+      "globalMarketDetail": "+14% YoY Growth",
+      "humanoidCagr": "Humanoid CAGR",
+      "humanoidCagrDetail": "2024-2030 Forecast",
+      "industrialRobots": "Industrial Robots",
+      "industrialRobotsDetail": "Units Deployed",
+      "industryJobs": "Industry Jobs",
+      "industryJobsDetail": "Created by 2030"
+    },
+    "featuredProducts": "Featured Products",
+    "featuredProductsSubtitle": "Discover the latest innovations in robotics technology",
+    "viewAllProducts": "View all products",
+    "latestNews": "Latest News",
+    "latestNewsSubtitle": "Stay updated with the latest developments in robotics",
+    "viewAllNews": "View all news"
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Explore our comprehensive catalog of robotics products",
+    "allProducts": "All Products",
+    "categories": "Categories",
+    "manufacturers": "Manufacturers",
+    "availability": {
+      "available": "Available",
+      "preorder": "Pre-order",
+      "comingSoon": "Coming Soon",
+      "contact": "Contact for Pricing"
+    },
+    "specifications": "Specifications",
+    "features": "Features",
+    "applications": "Applications",
+    "relatedProducts": "Related Products",
+    "noProducts": "No products found",
+    "filterBy": "Filter by",
+    "sortBy": "Sort by",
+    "priceRange": "Price Range",
+    "viewProduct": "View Product",
+    "requestQuote": "Request Quote",
+    "downloadDatasheet": "Download Datasheet"
+  },
+  "articles": {
+    "title": "News & Articles",
+    "subtitle": "The latest insights and updates from the world of robotics",
+    "readTime": "{minutes} min read",
+    "publishedOn": "Published on {date}",
+    "by": "By",
+    "relatedArticles": "Related Articles",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "featured": "Featured",
+    "latest": "Latest",
+    "noArticles": "No articles found"
+  },
+  "manufacturers": {
+    "title": "Manufacturers",
+    "subtitle": "Leading robotics companies and innovators",
+    "products": "{count} products",
+    "headquarters": "Headquarters",
+    "founded": "Founded",
+    "website": "Website",
+    "specialties": "Specialties",
+    "viewProducts": "View Products",
+    "noManufacturers": "No manufacturers found"
+  },
+  "newsletter": {
+    "title": "Stay Updated",
+    "subtitle": "Get the latest robotics news delivered to your inbox.",
+    "placeholder": "Enter your email",
+    "success": "Thank you for subscribing!",
+    "error": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "description": "Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.",
+    "products": "Products",
+    "news": "News",
+    "company": "Company",
+    "privacyPolicy": "Privacy Policy",
+    "imprint": "Imprint",
+    "copyright": "All rights reserved."
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your trusted source for robotics intelligence",
+    "contact": "Contact",
+    "email": "Email",
+    "address": "Address"
+  },
+  "errors": {
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "serverError": "Server Error",
+    "serverErrorDescription": "Something went wrong on our end. Please try again later."
+  },
+  "meta": {
+    "siteTitle": "MegaRobotics",
+    "siteDescription": "Your trusted source for robotics news, in-depth analysis, and industry insights."
+  }
+}
