@@ -1,9 +1,39 @@
 'use client'
 
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { PortableText, PortableTextComponents } from '@portabletext/react'
 import { PortableTextBlock } from '@portabletext/types'
 import { urlFor } from '@/lib/sanity'
+
+// Component to render HTML embeds in an isolated iframe
+function HtmlEmbedIframe({ html }: { html: string }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const [height, setHeight] = useState(600) // Default height
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === 'resize-iframe' && typeof event.data.height === 'number') {
+        setHeight(event.data.height)
+      }
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
+
+  return (
+    <div className="my-6 w-full">
+      <iframe
+        ref={iframeRef}
+        srcDoc={html}
+        className="w-full border-0 rounded-xl"
+        style={{ height: `${height}px`, minHeight: '400px' }}
+        sandbox="allow-scripts allow-same-origin"
+        title="Embedded content"
+      />
+    </div>
+  )
+}
 
 interface StatItem {
   value: string
@@ -58,12 +88,39 @@ const portableTextComponents: PortableTextComponents = {
     ),
     htmlEmbed: ({ value }) => {
       if (!value?.html) return null
+      // Use iframe with srcdoc for full style isolation
+      const fullHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <style>
+            * { box-sizing: border-box; }
+            body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+          </style>
+        </head>
+        <body>
+          ${value.html}
+          <script>
+            // Auto-resize iframe to content height
+            function sendHeight() {
+              const height = document.documentElement.scrollHeight;
+              window.parent.postMessage({ type: 'resize-iframe', height: height }, '*');
+            }
+            // Send height on load and resize
+            window.addEventListener('load', sendHeight);
+            window.addEventListener('resize', sendHeight);
+            // Also send after a short delay for dynamic content
+            setTimeout(sendHeight, 100);
+            setTimeout(sendHeight, 500);
+            setTimeout(sendHeight, 1000);
+          </script>
+        </body>
+        </html>
+      `
       return (
-        <div
-          className="my-6 html-embed relative overflow-hidden w-full max-w-full"
-          style={{ contain: 'layout' }}
-          dangerouslySetInnerHTML={{ __html: value.html }}
-        />
+        <HtmlEmbedIframe html={fullHtml} />
       )
     },
     statsGrid: ({ value }) => {
