@@ -89,11 +89,41 @@ const portableTextComponents: PortableTextComponents = {
     htmlEmbed: ({ value }) => {
       if (!value?.html) return null
 
+      // CSS fixes for iframe context - position:fixed doesn't work well in iframes
+      const iframeFixStyles = `
+        <style>
+          /* Convert fixed positioning to absolute for iframe context */
+          .bg-grid, .bg-gradient, [class*="bg-"] {
+            position: absolute !important;
+            height: 100% !important;
+            max-height: 100vh !important;
+          }
+          /* Ensure main content is visible above backgrounds */
+          section, main, article, .container, .content {
+            position: relative !important;
+            z-index: 1 !important;
+          }
+          /* Fix any 100vh elements that cause issues */
+          .hero, [class*="hero"] {
+            min-height: auto !important;
+            height: auto !important;
+          }
+        </style>
+      `
+
       // Script to auto-resize iframe to content height
       const resizeScript = `
         <script>
           (function() {
             function sendHeight() {
+              // Fix any fixed positioned elements
+              document.querySelectorAll('*').forEach(function(el) {
+                var style = window.getComputedStyle(el);
+                if (style.position === 'fixed') {
+                  el.style.position = 'absolute';
+                }
+              });
+
               var height = Math.max(
                 document.body.scrollHeight,
                 document.body.offsetHeight,
@@ -123,12 +153,25 @@ const portableTextComponents: PortableTextComponents = {
 
       // Check if the HTML is already a complete document
       if (htmlTrimmed.toLowerCase().startsWith('<!doctype') || htmlTrimmed.toLowerCase().startsWith('<html')) {
+        // Inject fix styles after opening <head> and resize script before closing </body>
+        let modifiedHtml = htmlTrimmed
+
+        // Inject fix styles into head
+        if (modifiedHtml.toLowerCase().includes('<head>')) {
+          modifiedHtml = modifiedHtml.replace(/<head>/i, '<head>' + iframeFixStyles)
+        } else if (modifiedHtml.toLowerCase().includes('<head ')) {
+          modifiedHtml = modifiedHtml.replace(/<head[^>]*>/i, '$&' + iframeFixStyles)
+        } else {
+          // No head tag, add styles at the beginning of body or html
+          modifiedHtml = iframeFixStyles + modifiedHtml
+        }
+
         // Inject resize script before closing </body> tag
-        if (htmlTrimmed.toLowerCase().includes('</body>')) {
-          finalHtml = htmlTrimmed.replace(/<\/body>/i, resizeScript + '</body>')
+        if (modifiedHtml.toLowerCase().includes('</body>')) {
+          finalHtml = modifiedHtml.replace(/<\/body>/i, resizeScript + '</body>')
         } else {
           // No body tag, append script at the end
-          finalHtml = htmlTrimmed + resizeScript
+          finalHtml = modifiedHtml + resizeScript
         }
       } else {
         // Wrap in a proper HTML document
