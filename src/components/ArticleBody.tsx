@@ -93,20 +93,23 @@ const portableTextComponents: PortableTextComponents = {
       const iframeFixStyles = `
         <style>
           /* Convert fixed positioning to absolute for iframe context */
-          .bg-grid, .bg-gradient, [class*="bg-"] {
+          .bg-grid, .bg-gradient {
             position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
             height: 100% !important;
-            max-height: 100vh !important;
+            pointer-events: none !important;
           }
           /* Ensure main content is visible above backgrounds */
           section, main, article, .container, .content {
             position: relative !important;
             z-index: 1 !important;
           }
-          /* Fix any 100vh elements that cause issues */
+          /* Hero section - allow full viewport height but cap it reasonably */
           .hero, [class*="hero"] {
-            min-height: auto !important;
-            height: auto !important;
+            min-height: 80vh !important;
+            max-height: 900px !important;
           }
         </style>
       `
