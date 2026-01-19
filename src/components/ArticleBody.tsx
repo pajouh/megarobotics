@@ -88,39 +88,71 @@ const portableTextComponents: PortableTextComponents = {
     ),
     htmlEmbed: ({ value }) => {
       if (!value?.html) return null
-      // Use iframe with srcdoc for full style isolation
-      const fullHtml = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <style>
-            * { box-sizing: border-box; }
-            body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-          </style>
-        </head>
-        <body>
-          ${value.html}
-          <script>
-            // Auto-resize iframe to content height
+
+      // Script to auto-resize iframe to content height
+      const resizeScript = `
+        <script>
+          (function() {
             function sendHeight() {
-              const height = document.documentElement.scrollHeight;
+              var height = Math.max(
+                document.body.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight
+              );
+              // Cap at reasonable max to prevent runaway values
+              height = Math.min(height, 50000);
               window.parent.postMessage({ type: 'resize-iframe', height: height }, '*');
             }
-            // Send height on load and resize
-            window.addEventListener('load', sendHeight);
+            if (document.readyState === 'complete') {
+              sendHeight();
+            } else {
+              window.addEventListener('load', sendHeight);
+            }
             window.addEventListener('resize', sendHeight);
-            // Also send after a short delay for dynamic content
             setTimeout(sendHeight, 100);
             setTimeout(sendHeight, 500);
             setTimeout(sendHeight, 1000);
-          </script>
-        </body>
-        </html>
+            setTimeout(sendHeight, 2000);
+          })();
+        </script>
       `
+
+      let finalHtml: string
+      const htmlTrimmed = value.html.trim()
+
+      // Check if the HTML is already a complete document
+      if (htmlTrimmed.toLowerCase().startsWith('<!doctype') || htmlTrimmed.toLowerCase().startsWith('<html')) {
+        // Inject resize script before closing </body> tag
+        if (htmlTrimmed.toLowerCase().includes('</body>')) {
+          finalHtml = htmlTrimmed.replace(/<\/body>/i, resizeScript + '</body>')
+        } else {
+          // No body tag, append script at the end
+          finalHtml = htmlTrimmed + resizeScript
+        }
+      } else {
+        // Wrap in a proper HTML document
+        finalHtml = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+              * { box-sizing: border-box; }
+              body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+            </style>
+          </head>
+          <body>
+            ${value.html}
+            ${resizeScript}
+          </body>
+          </html>
+        `
+      }
+
       return (
-        <HtmlEmbedIframe html={fullHtml} />
+        <HtmlEmbedIframe html={finalHtml} />
       )
     },
     statsGrid: ({ value }) => {
