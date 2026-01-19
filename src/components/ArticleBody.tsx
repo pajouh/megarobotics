@@ -106,10 +106,11 @@ const portableTextComponents: PortableTextComponents = {
             position: relative !important;
             z-index: 1 !important;
           }
-          /* Hero section - allow full viewport height but cap it reasonably */
+          /* Hero section - use fixed height since vh units don't work well in iframes */
           .hero, [class*="hero"] {
-            min-height: 80vh !important;
-            max-height: 900px !important;
+            min-height: 600px !important;
+            max-height: 800px !important;
+            height: auto !important;
           }
         </style>
       `
