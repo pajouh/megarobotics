@@ -106,11 +106,13 @@ const portableTextComponents: PortableTextComponents = {
             position: relative !important;
             z-index: 1 !important;
           }
-          /* Hero section - use fixed height since vh units don't work well in iframes */
+          /* Hero section - fix vertical centering issues in iframe context */
           .hero, [class*="hero"] {
-            min-height: 600px !important;
-            max-height: 800px !important;
+            min-height: auto !important;
             height: auto !important;
+            justify-content: flex-start !important;
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
           }
         </style>
       `
