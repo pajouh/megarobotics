@@ -114,7 +114,7 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <article className="min-h-screen pt-24 pb-16 bg-white">
       <StructuredData data={articleSchema} />
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
