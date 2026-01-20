@@ -11,6 +11,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
   const t = await getTranslations('footer')
   const tNav = await getTranslations('nav')
   const tNewsletter = await getTranslations('newsletter')
+  const tDisclaimers = await getTranslations('disclaimers')
 
   const translations = {
     products: t('products'),
@@ -34,6 +35,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
     consumerHome: t('consumerHome'),
     companies: t('companies'),
     events: t('events'),
+    trademarkDisclaimer: tDisclaimers('footer'),
   }
 
   const logoWidth = settings?.logoWidth || 36

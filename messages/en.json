@@ -145,5 +145,19 @@
   "meta": {
     "siteTitle": "MegaRobotics",
     "siteDescription": "Your trusted source for robotics news, in-depth analysis, and industry insights."
+  },
+  "disclaimers": {
+    "product": "All product images, logos, specifications, and trademarks displayed on this page are the property of their respective manufacturers and are used for informational and identification purposes only. Megaforce GmbH is not affiliated with {manufacturer} unless explicitly stated as an authorized distributor.",
+    "productListing": "Product information and images are provided for reference purposes. All trademarks and registered trademarks are the property of their respective owners.",
+    "manufacturer": "The manufacturer profiles, logos, and product information presented on this page are for informational purposes only. All trademarks, company names, and logos are the property of their respective owners. Inclusion on this page does not imply any business relationship or endorsement unless explicitly stated.",
+    "footer": "All trademarks are property of their respective owners.",
+    "ipTitle": "Intellectual Property & Trademark Notice",
+    "trademarkNoticeTitle": "Trademark Notice",
+    "trademarkNotice": "All product names, logos, brands, trademarks, and registered trademarks mentioned on this website are the property of their respective owners. All company, product, and service names used on this website are for identification purposes only. Use of these names, logos, and brands does not imply endorsement or affiliation unless explicitly stated.",
+    "imageUsageTitle": "Image Usage",
+    "imageUsage": "Product images displayed on megarobotics.de are used for informational and commercial reference purposes. We endeavor to use only images for which we have obtained permission or which are provided through official manufacturer press resources. If you are a rights holder and believe your intellectual property has been used inappropriately, please contact us at",
+    "imageUsageEnd": "and we will promptly address your concerns.",
+    "editorialContentTitle": "Editorial Content",
+    "editorialContent": "News articles and editorial content may include product images and company information under fair use principles for commentary, criticism, and news reporting purposes."
   }
 }

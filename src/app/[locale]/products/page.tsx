@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Package } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { getProducts, getProductCategories, getManufacturers, getFeaturedProducts, searchProducts, type Locale } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
@@ -26,6 +27,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
   const { locale } = await params
   const searchParamsResolved = await searchParams
   const searchQuery = searchParamsResolved.q
+  const tDisclaimers = await getTranslations('disclaimers')
 
   const [products, categories, manufacturers, featuredProducts] = await Promise.all([
     searchQuery ? searchProducts(searchQuery, locale as Locale) : getProducts(undefined, locale as Locale),
@@ -107,7 +109,10 @@ export default async function ProductsPage({ params, searchParams }: Props) {
         </section>
 
         {/* Legal Disclaimer */}
-        <Disclaimer variant="productListing" />
+        <Disclaimer
+          variant="productListing"
+          translations={{ productListing: tDisclaimers('productListing') }}
+        />
       </div>
     </div>
   )

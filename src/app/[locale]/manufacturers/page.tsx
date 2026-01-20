@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { Building2 } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { getManufacturers, type Locale } from '@/lib/sanity'
 import ManufacturerCard from '@/components/ManufacturerCard'
 import Disclaimer from '@/components/Disclaimer'
@@ -18,6 +19,7 @@ type Props = {
 export default async function ManufacturersPage({ params }: Props) {
   const { locale } = await params
   const manufacturers = await getManufacturers(locale as Locale)
+  const tDisclaimers = await getTranslations('disclaimers')
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
@@ -53,7 +55,10 @@ export default async function ManufacturersPage({ params }: Props) {
         )}
 
         {/* Legal Disclaimer */}
-        <Disclaimer variant="manufacturer" />
+        <Disclaimer
+          variant="manufacturer"
+          translations={{ manufacturer: tDisclaimers('manufacturer') }}
+        />
       </div>
     </div>
   )

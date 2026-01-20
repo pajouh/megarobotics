@@ -145,5 +145,19 @@
   "meta": {
     "siteTitle": "MegaRobotics",
     "siteDescription": "Ihre vertrauenswürdige Quelle für Robotik-Nachrichten, tiefgehende Analysen und Brancheneinblicke."
+  },
+  "disclaimers": {
+    "product": "Alle auf dieser Seite angezeigten Produktbilder, Logos, Spezifikationen und Marken sind Eigentum der jeweiligen Hersteller und werden ausschließlich zu Informations- und Identifikationszwecken verwendet. Die Megaforce GmbH ist nicht mit {manufacturer} verbunden, sofern nicht ausdrücklich als autorisierter Händler angegeben.",
+    "productListing": "Produktinformationen und Bilder dienen nur zu Referenzzwecken. Alle Marken und eingetragenen Marken sind Eigentum ihrer jeweiligen Inhaber.",
+    "manufacturer": "Die auf dieser Seite dargestellten Herstellerprofile, Logos und Produktinformationen dienen ausschließlich Informationszwecken. Alle Marken, Firmennamen und Logos sind Eigentum ihrer jeweiligen Inhaber. Die Aufnahme auf dieser Seite impliziert keine Geschäftsbeziehung oder Empfehlung, sofern nicht ausdrücklich angegeben.",
+    "footer": "Alle Marken sind Eigentum ihrer jeweiligen Inhaber.",
+    "ipTitle": "Geistiges Eigentum & Markenhinweis",
+    "trademarkNoticeTitle": "Markenhinweis",
+    "trademarkNotice": "Alle auf dieser Website genannten Produktnamen, Logos, Marken und eingetragenen Marken sind Eigentum ihrer jeweiligen Inhaber. Alle auf dieser Website verwendeten Unternehmens-, Produkt- und Dienstleistungsnamen dienen ausschließlich der Identifikation. Die Verwendung dieser Namen, Logos und Marken impliziert keine Empfehlung oder Zugehörigkeit, sofern nicht ausdrücklich angegeben.",
+    "imageUsageTitle": "Bildnutzung",
+    "imageUsage": "Produktbilder auf megarobotics.de werden zu Informations- und kommerziellen Referenzzwecken verwendet. Wir bemühen uns, nur Bilder zu verwenden, für die wir eine Genehmigung erhalten haben oder die über offizielle Hersteller-Presseressourcen bereitgestellt werden. Wenn Sie Rechteinhaber sind und der Meinung sind, dass Ihr geistiges Eigentum unangemessen verwendet wurde, kontaktieren Sie uns bitte unter",
+    "imageUsageEnd": "und wir werden Ihre Anliegen umgehend bearbeiten.",
+    "editorialContentTitle": "Redaktionelle Inhalte",
+    "editorialContent": "Nachrichtenartikel und redaktionelle Inhalte können Produktbilder und Unternehmensinformationen im Rahmen des Fair-Use-Prinzips für Kommentare, Kritik und Berichterstattung enthalten."
   }
 }

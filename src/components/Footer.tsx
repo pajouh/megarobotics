@@ -54,6 +54,7 @@ interface FooterTranslations {
   consumerHome: string
   companies: string
   events: string
+  trademarkDisclaimer?: string
 }
 
 interface FooterProps {
@@ -301,7 +302,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
           </div>
           {/* Trademark Disclaimer */}
           <div className="mt-4 text-center sm:text-left">
-            <Disclaimer variant="footer" />
+            <Disclaimer variant="footer" translations={{ footer: t.trademarkDisclaimer }} />
           </div>
         </div>
       </div>

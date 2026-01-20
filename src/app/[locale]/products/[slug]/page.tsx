@@ -68,6 +68,7 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(slug, locale as Locale)
   const t = await getTranslations('products')
   const tCommon = await getTranslations('common')
+  const tDisclaimers = await getTranslations('disclaimers')
 
   if (!product) {
     notFound()
@@ -359,7 +360,11 @@ export default async function ProductPage({ params }: Props) {
         )}
 
         {/* Legal Disclaimer */}
-        <Disclaimer variant="product" manufacturerName={product.manufacturer?.name} />
+        <Disclaimer
+          variant="product"
+          manufacturerName={product.manufacturer?.name}
+          translations={{ product: tDisclaimers('product') }}
+        />
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 // /src/app/imprint/page.tsx
 import { Metadata } from 'next'
 import { format } from 'date-fns'
+import { getTranslations } from 'next-intl/server'
 import { getPageByType } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import IntellectualPropertyNotice from '@/components/IntellectualPropertyNotice'
@@ -14,6 +15,18 @@ export const revalidate = 3600
 
 export default async function ImprintPage() {
   const page = await getPageByType('imprint')
+  const tDisclaimers = await getTranslations('disclaimers')
+
+  const ipTranslations = {
+    ipTitle: tDisclaimers('ipTitle'),
+    trademarkNoticeTitle: tDisclaimers('trademarkNoticeTitle'),
+    trademarkNotice: tDisclaimers('trademarkNotice'),
+    imageUsageTitle: tDisclaimers('imageUsageTitle'),
+    imageUsage: tDisclaimers('imageUsage'),
+    imageUsageEnd: tDisclaimers('imageUsageEnd'),
+    editorialContentTitle: tDisclaimers('editorialContentTitle'),
+    editorialContent: tDisclaimers('editorialContent'),
+  }
 
   // Fallback content if no page exists in Sanity
   if (!page) {
@@ -39,7 +52,7 @@ export default async function ImprintPage() {
             </ol>
 
             {/* Intellectual Property Notice - always shown */}
-            <IntellectualPropertyNotice />
+            <IntellectualPropertyNotice translations={ipTranslations} />
           </div>
         </div>
       </div>
@@ -63,7 +76,7 @@ export default async function ImprintPage() {
         {page.body && <PageBody body={page.body} />}
 
         {/* Intellectual Property Notice - always shown */}
-        <IntellectualPropertyNotice />
+        <IntellectualPropertyNotice translations={ipTranslations} />
       </div>
     </div>
   )
