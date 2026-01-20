@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { format } from 'date-fns'
 import { getPageByType } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
+import IntellectualPropertyNotice from '@/components/IntellectualPropertyNotice'
 
 export const metadata: Metadata = {
   title: 'Imprint - MegaRobotics',
@@ -36,6 +37,9 @@ export default async function ImprintPage() {
               <li>Add your legal content</li>
               <li>Publish the document</li>
             </ol>
+
+            {/* Intellectual Property Notice - always shown */}
+            <IntellectualPropertyNotice />
           </div>
         </div>
       </div>
@@ -57,6 +61,9 @@ export default async function ImprintPage() {
           </p>
         )}
         {page.body && <PageBody body={page.body} />}
+
+        {/* Intellectual Property Notice - always shown */}
+        <IntellectualPropertyNotice />
       </div>
     </div>
   )

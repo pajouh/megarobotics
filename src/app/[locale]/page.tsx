@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { Link } from '@/i18n/navigation'
 import { Bot, TrendingUp, Cpu, Users, ArrowRight, Package } from 'lucide-react'
@@ -9,7 +10,13 @@ import CategoryFilter from '@/components/CategoryFilter'
 import NewsletterForm from '@/components/NewsletterForm'
 import ProductCard from '@/components/ProductCard'
 import StructuredData from '@/components/StructuredData'
-import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
+import { generateOrganizationSchema, generateWebSiteSchema, generateAlternates } from '@/lib/structured-data'
+
+export function generateMetadata(): Metadata {
+  return {
+    alternates: generateAlternates(''),
+  }
+}
 
 export const revalidate = 60
 

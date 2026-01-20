@@ -1,6 +1,7 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Twitter, Linkedin, Youtube, Github, Instagram, Mail } from 'lucide-react'
+import Disclaimer from '@/components/Disclaimer'
 
 interface FooterLink {
   _key: string
@@ -284,17 +285,23 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
         </div>
 
         {/* Bottom */}
-        <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            {copyrightText}
-          </p>
-          <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-gray-400 hover:text-gray-600 transition-colors">
-              {t.privacyPolicy}
-            </Link>
-            <Link href="/imprint" className="text-gray-400 hover:text-gray-600 transition-colors">
-              {t.imprint}
-            </Link>
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm">
+              {copyrightText}
+            </p>
+            <div className="flex gap-6 text-sm">
+              <Link href="/privacy" className="text-gray-400 hover:text-gray-600 transition-colors">
+                {t.privacyPolicy}
+              </Link>
+              <Link href="/imprint" className="text-gray-400 hover:text-gray-600 transition-colors">
+                {t.imprint}
+              </Link>
+            </div>
+          </div>
+          {/* Trademark Disclaimer */}
+          <div className="mt-4 text-center sm:text-left">
+            <Disclaimer variant="footer" />
           </div>
         </div>
       </div>

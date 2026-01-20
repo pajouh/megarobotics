@@ -4,10 +4,15 @@ import { Package } from 'lucide-react'
 import { getProducts, getProductCategories, getManufacturers, getFeaturedProducts, searchProducts, type Locale } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
+import Disclaimer from '@/components/Disclaimer'
+import { generateAlternates } from '@/lib/structured-data'
 
-export const metadata: Metadata = {
-  title: 'Robotics Products',
-  description: 'Browse our catalog of robotics products from leading Chinese manufacturers. From humanoid robots to industrial automation.',
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Robotics Products',
+    description: 'Browse our catalog of robotics products from leading Chinese manufacturers. From humanoid robots to industrial automation.',
+    alternates: generateAlternates('/products'),
+  }
 }
 
 export const revalidate = 60
@@ -100,6 +105,9 @@ export default async function ProductsPage({ params, searchParams }: Props) {
             </div>
           )}
         </section>
+
+        {/* Legal Disclaimer */}
+        <Disclaimer variant="productListing" />
       </div>
     </div>
   )

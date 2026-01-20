@@ -16,6 +16,10 @@ import ProductCard from '@/components/ProductCard'
 import ProductGallery from '@/components/ProductGallery'
 import SpecificationsTable from '@/components/SpecificationsTable'
 import ArticleBody from '@/components/ArticleBody'
+import StructuredData from '@/components/StructuredData'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import Disclaimer from '@/components/Disclaimer'
+import { generateProductSchema, generateBreadcrumbSchema, generateAlternates } from '@/lib/structured-data'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -31,9 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const alternates = generateAlternates(`/products/${slug}`)
+
   return {
     title: `${product.name} by ${product.manufacturer?.name || 'Unknown'}`,
     description: product.description || product.tagline,
+    alternates,
     openGraph: {
       title: product.name,
       description: product.description || product.tagline,
@@ -75,6 +82,29 @@ export default async function ProductPage({ params }: Props) {
       : Promise.resolve([]),
   ])
 
+  // Generate structured data schemas
+  const productSchema = generateProductSchema({
+    name: product.name,
+    description: product.description || product.tagline || '',
+    slug: slug,
+    manufacturer: product.manufacturer?.name,
+    category: product.category?.name,
+    mainImage: product.mainImage ? urlFor(product.mainImage).width(800).height(600).url() : undefined,
+    priceRange: product.priceRange,
+    availability: product.availability,
+    specifications: product.specifications,
+  })
+
+  const breadcrumbItems = [
+    { name: 'Products', href: '/products' },
+    ...(product.category
+      ? [{ name: product.category.name, href: `/products/category/${product.category.slug.current}` }]
+      : []),
+    { name: product.name, href: `/products/${slug}` },
+  ]
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
+
   const availabilityLabels: Record<string, string> = {
     available: t('availability.available'),
     preorder: t('availability.preorder'),
@@ -91,7 +121,12 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <StructuredData data={productSchema} />
+      <StructuredData data={breadcrumbSchema} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
         {/* Back Link */}
         <Link
           href="/products"
@@ -322,6 +357,9 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* Legal Disclaimer */}
+        <Disclaimer variant="product" manufacturerName={product.manufacturer?.name} />
       </div>
     </div>
   )

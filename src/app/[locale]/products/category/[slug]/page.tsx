@@ -13,6 +13,9 @@ import {
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
+import { generateAlternates, generateCategorySchema, generateBreadcrumbSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -31,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${category.name} - Robotics Products`,
     description: category.description || `Browse ${category.name} robotics products from MegaRobotics.`,
+    alternates: generateAlternates(`/products/category/${slug}`),
   }
 }
 
@@ -54,9 +58,28 @@ export default async function ProductCategoryPage({ params }: Props) {
     notFound()
   }
 
+  const categorySchema = generateCategorySchema({
+    name: category.name,
+    description: category.description,
+    slug: slug,
+    productCount: category.productCount,
+  })
+
+  const breadcrumbItems = [
+    { name: 'Products', href: '/products' },
+    { name: category.name, href: `/products/category/${slug}` },
+  ]
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
+
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <StructuredData data={categorySchema} />
+      <StructuredData data={breadcrumbSchema} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
         {/* Back Link */}
         <Link
           href="/products"

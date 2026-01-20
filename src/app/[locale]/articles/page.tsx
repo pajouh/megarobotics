@@ -3,10 +3,14 @@ import { Bot } from 'lucide-react'
 import { getArticles, getCategories, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
+import { generateAlternates } from '@/lib/structured-data'
 
-export const metadata: Metadata = {
-  title: 'All Articles',
-  description: 'Browse all robotics news, reviews, and industry insights from MegaRobotics.',
+export function generateMetadata(): Metadata {
+  return {
+    title: 'All Articles',
+    description: 'Browse all robotics news, reviews, and industry insights from MegaRobotics.',
+    alternates: generateAlternates('/articles'),
+  }
 }
 
 export const revalidate = 60

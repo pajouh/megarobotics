@@ -97,33 +97,46 @@ export function generateProductSchema(product: {
   description: string
   slug: string
   image?: string
+  mainImage?: string
   priceRange?: string
-  manufacturer: string
-  category: string
+  manufacturer?: string
+  category?: string
   availability?: string
+  specifications?: { label: string; value: string }[]
 }) {
+  const imageUrl = product.mainImage || product.image || `${baseUrl}/og-image.png`
+
+  // Map availability values to schema.org values
+  const availabilityMap: Record<string, string> = {
+    available: 'https://schema.org/InStock',
+    preorder: 'https://schema.org/PreOrder',
+    coming_soon: 'https://schema.org/PreSale',
+    contact: 'https://schema.org/LimitedAvailability',
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
     description: product.description,
     url: `${baseUrl}/products/${product.slug}`,
-    image: product.image || `${baseUrl}/og-image.png`,
-    brand: {
+    image: imageUrl,
+    brand: product.manufacturer ? {
       '@type': 'Brand',
       name: product.manufacturer,
-    },
+    } : undefined,
     category: product.category,
     offers: product.priceRange ? {
       '@type': 'AggregateOffer',
-      priceCurrency: 'USD',
-      availability: product.availability === 'Available'
-        ? 'https://schema.org/InStock'
-        : product.availability === 'Pre-order'
-          ? 'https://schema.org/PreOrder'
-          : 'https://schema.org/OutOfStock',
+      priceCurrency: 'EUR',
+      availability: availabilityMap[product.availability || ''] || 'https://schema.org/LimitedAvailability',
       description: product.priceRange,
     } : undefined,
+    additionalProperty: product.specifications?.slice(0, 10).map(spec => ({
+      '@type': 'PropertyValue',
+      name: spec.label,
+      value: spec.value,
+    })),
   }
 }
 
@@ -152,7 +165,7 @@ export function generateManufacturerSchema(manufacturer: {
   }
 }
 
-export function generateBreadcrumbSchema(items: { name: string; url: string }[]) {
+export function generateBreadcrumbSchema(items: { name: string; href?: string; url?: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -160,8 +173,22 @@ export function generateBreadcrumbSchema(items: { name: string; url: string }[])
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: `${baseUrl}${item.href || item.url || ''}`,
     })),
+  }
+}
+
+// Helper to generate hreflang alternates for Next.js metadata
+export function generateAlternates(path: string, locales: string[] = ['en', 'de']) {
+  const languages: Record<string, string> = {}
+  locales.forEach(locale => {
+    languages[locale] = `${baseUrl}/${locale}${path}`
+  })
+  languages['x-default'] = `${baseUrl}/en${path}`
+
+  return {
+    canonical: `${baseUrl}${path}`,
+    languages,
   }
 }
 
@@ -198,5 +225,42 @@ export function generateFAQSchema(faqs: { question: string; answer: string }[]) 
         text: faq.answer,
       },
     })),
+  }
+}
+
+export function generateGuideSchema(guide: {
+  title: string
+  description: string
+  slug: string
+  publishedAt: string
+  updatedAt?: string
+  author: string
+  mainImage?: string
+  readTime?: number
+  tags?: string[]
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: guide.title,
+    description: guide.description,
+    url: `${baseUrl}/guides/${guide.slug}`,
+    datePublished: guide.publishedAt,
+    dateModified: guide.updatedAt || guide.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: guide.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'MegaRobotics',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logo.png`,
+      },
+    },
+    image: guide.mainImage || `${baseUrl}/og-image.png`,
+    totalTime: guide.readTime ? `PT${guide.readTime}M` : undefined,
+    keywords: guide.tags?.join(', '),
   }
 }

@@ -11,6 +11,9 @@ import {
   type Locale
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
+import { generateAlternates, generateManufacturerSchema, generateBreadcrumbSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -29,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${manufacturer.name} - Robotics Products`,
     description: manufacturer.description || `Browse robotics products from ${manufacturer.name}.`,
+    alternates: generateAlternates(`/manufacturers/${slug}`),
     openGraph: {
       title: manufacturer.name,
       description: manufacturer.description || `Browse robotics products from ${manufacturer.name}.`,
@@ -63,9 +67,31 @@ export default async function ManufacturerPage({ params }: Props) {
     notFound()
   }
 
+  const manufacturerSchema = generateManufacturerSchema({
+    name: manufacturer.name,
+    description: manufacturer.description,
+    slug: slug,
+    logo: manufacturer.logo ? urlFor(manufacturer.logo).width(400).height(400).url() : undefined,
+    website: manufacturer.website,
+    headquarters: manufacturer.headquarters,
+    founded: manufacturer.founded,
+  })
+
+  const breadcrumbItems = [
+    { name: 'Manufacturers', href: '/manufacturers' },
+    { name: manufacturer.name, href: `/manufacturers/${slug}` },
+  ]
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
+
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <StructuredData data={manufacturerSchema} />
+      <StructuredData data={breadcrumbSchema} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
         {/* Back Link */}
         <Link
           href="/manufacturers"

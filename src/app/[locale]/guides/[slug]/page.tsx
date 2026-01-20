@@ -9,7 +9,7 @@ import { getBuyersGuide, getAllBuyersGuideSlugs, urlFor } from '@/lib/sanity'
 import BuyersGuideBody from '@/components/BuyersGuideBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { generateArticleSchema } from '@/lib/structured-data'
+import { generateGuideSchema, generateBreadcrumbSchema, generateAlternates } from '@/lib/structured-data'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -59,9 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? [urlFor(guide.mainImage.image).width(1200).height(630).url()]
         : undefined,
     },
-    alternates: {
-      canonical: guide.news?.canonicalUrl || `https://megarobotics.de/guides/${slug}`,
-    },
+    alternates: generateAlternates(`/guides/${slug}`),
   }
 }
 
@@ -81,19 +79,18 @@ export default async function BuyersGuidePage({ params }: Props) {
   }
 
   // Generate structured data
-  const articleSchema = generateArticleSchema({
+  const guideSchema = generateGuideSchema({
     title: guide.title,
-    excerpt: guide.shortDescription || '',
-    slug: `guides/${slug}`,
+    description: guide.shortDescription || '',
+    slug: slug,
     publishedAt: guide.publishedAt || new Date().toISOString(),
     updatedAt: guide.updatedAt,
-    author: {
-      name: guide.author || 'MegaRobotics Editorial',
-    },
+    author: guide.author || 'MegaRobotics Editorial',
     mainImage: guide.mainImage?.image
       ? urlFor(guide.mainImage.image).width(1200).height(630).url()
       : undefined,
-    category: guide.news?.primaryTopic || 'Buyers Guide',
+    readTime: guide.readTime,
+    tags: guide.news?.tags,
   })
 
   const breadcrumbItems = [
@@ -101,9 +98,12 @@ export default async function BuyersGuidePage({ params }: Props) {
     { name: guide.title, href: `/guides/${slug}` },
   ]
 
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
+
   return (
     <article className="min-h-screen pt-24 pb-16 bg-white">
-      <StructuredData data={articleSchema} />
+      <StructuredData data={guideSchema} />
+      <StructuredData data={breadcrumbSchema} />
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}

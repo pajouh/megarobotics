@@ -10,7 +10,7 @@ import CopyLinkButton from '@/components/CopyLinkButton'
 import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { generateArticleSchema } from '@/lib/structured-data'
+import { generateArticleSchema, generateAlternates } from '@/lib/structured-data'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -63,9 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       images: imageUrl ? [imageUrl] : undefined,
     },
-    alternates: {
-      canonical: `https://megarobotics.de/articles/${slug}`,
-    },
+    alternates: generateAlternates(`/articles/${slug}`),
   }
 }
 
