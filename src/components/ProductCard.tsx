@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="absolute top-3 right-3">
               <div className="w-10 h-10 rounded-lg bg-white shadow-sm border border-gray-100 p-1.5">
                 <Image
-                  src={urlFor(manufacturer.logo).width(64).height(64).url()}
+                  src={urlFor(manufacturer.logo).width(64).height(64).fit('max').url()}
                   alt={manufacturer.name}
                   width={28}
                   height={28}

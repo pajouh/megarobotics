@@ -63,6 +63,9 @@ export async function generateStaticParams() {
   return slugs
 }
 
+// Revalidate product pages every 60 seconds to pick up content changes
+export const revalidate = 60
+
 export default async function ProductPage({ params }: Props) {
   const { slug, locale } = await params
   const product = await getProduct(slug, locale as Locale)
@@ -179,7 +182,7 @@ export default async function ProductPage({ params }: Props) {
                 {product.manufacturer.logo && (
                   <div className="w-10 h-10 rounded-lg bg-gray-100 p-1.5">
                     <Image
-                      src={urlFor(product.manufacturer.logo).width(64).height(64).url()}
+                      src={urlFor(product.manufacturer.logo).width(64).height(64).fit('max').url()}
                       alt={product.manufacturer.name}
                       width={32}
                       height={32}

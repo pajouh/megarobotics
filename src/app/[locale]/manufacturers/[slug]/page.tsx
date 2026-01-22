@@ -109,7 +109,7 @@ export default async function ManufacturerPage({ params }: Props) {
               {manufacturer.logo ? (
                 <div className="w-32 h-32 bg-white rounded-2xl p-4 flex items-center justify-center border border-gray-200">
                   <Image
-                    src={urlFor(manufacturer.logo).width(200).height(200).url()}
+                    src={urlFor(manufacturer.logo).width(200).height(200).fit('max').url()}
                     alt={manufacturer.name}
                     width={100}
                     height={100}
