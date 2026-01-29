@@ -8,6 +8,7 @@ export default defineType({
   type: 'document',
   groups: [
     { name: 'general', title: 'General', default: true },
+    { name: 'heroBanner', title: 'Hero Banner' },
     { name: 'footer', title: 'Footer' },
     { name: 'social', title: 'Social Media' },
     { name: 'contact', title: 'Contact' },
@@ -49,6 +50,17 @@ export default defineType({
       description: 'Height of the logo in pixels (default: 36)',
       initialValue: 36,
       validation: (Rule) => Rule.min(16).max(300),
+    }),
+
+    // Hero Banner
+    defineField({
+      name: 'heroBannerDuration',
+      title: 'Hero Banner Slide Duration (seconds)',
+      type: 'number',
+      group: 'heroBanner',
+      description: 'How long each slide is displayed before auto-advancing (default: 6 seconds)',
+      initialValue: 6,
+      validation: (Rule) => Rule.min(2).max(30),
     }),
 
     // Footer

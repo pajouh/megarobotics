@@ -1,12 +1,18 @@
-import { getHeroBannerSlides, urlFor } from '@/lib/sanity'
+import { getHeroBannerSlides, getSiteSettings, urlFor } from '@/lib/sanity'
 import HeroBanner from './HeroBanner'
 
 export default async function HeroBannerWrapper() {
-  const slides = await getHeroBannerSlides()
+  const [slides, settings] = await Promise.all([
+    getHeroBannerSlides(),
+    getSiteSettings(),
+  ])
 
   if (!slides || slides.length === 0) {
     return null
   }
+
+  // Get duration from settings (in seconds), convert to milliseconds, default to 6000ms
+  const autoPlayInterval = (settings?.heroBannerDuration ?? 6) * 1000
 
   // Process slides for client component
   const processedSlides = slides.map((slide) => ({
@@ -25,5 +31,5 @@ export default async function HeroBannerWrapper() {
     secondaryButton: slide.secondaryButton,
   }))
 
-  return <HeroBanner slides={processedSlides} />
+  return <HeroBanner slides={processedSlides} autoPlayInterval={autoPlayInterval} />
 }

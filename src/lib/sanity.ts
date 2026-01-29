@@ -577,6 +577,7 @@ export async function getSiteSettings(locale: Locale = defaultLocale) {
       logo,
       logoWidth,
       logoHeight,
+      heroBannerDuration,
       "footerDescription": ${localizedField('footerDescription', locale)},
       footerLinks[] {
         "title": ${localizedField('title', locale)},
