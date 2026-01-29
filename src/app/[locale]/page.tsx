@@ -10,6 +10,7 @@ import CategoryFilter from '@/components/CategoryFilter'
 import NewsletterForm from '@/components/NewsletterForm'
 import ProductCard from '@/components/ProductCard'
 import StructuredData from '@/components/StructuredData'
+import HeroBannerWrapper from '@/components/HeroBannerWrapper'
 import { generateOrganizationSchema, generateWebSiteSchema, generateAlternates } from '@/lib/structured-data'
 
 export function generateMetadata(): Metadata {
@@ -56,40 +57,14 @@ export default async function HomePage({ params }: Props) {
     <div className="min-h-screen">
       <StructuredData data={structuredData} />
 
-      {/* Hero Section */}
-      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
-        {/* Subtle Background */}
-        <div className="absolute inset-0 grid-bg" />
+      {/* Hero Banner from Sanity */}
+      <Suspense fallback={<div className="h-[500px] md:h-[600px] lg:h-[700px] bg-gray-100 animate-pulse" />}>
+        <HeroBannerWrapper />
+      </Suspense>
 
+      {/* Stats Section */}
+      <section className="relative py-12 md:py-16 overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Hero Content */}
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-sm text-gray-600 font-medium">
-                {t('badge')}
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-              {t('title')}{' '}
-              <span className="gradient-text">{t('titleHighlight')}</span>
-              <br />{t('titleEnd')}
-            </h1>
-
-            <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-              {t('subtitle')}
-            </p>
-
-            {/* Newsletter Signup */}
-            <div className="flex justify-center mb-16" id="newsletter">
-              <NewsletterForm />
-            </div>
-          </div>
-
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
             {stats.map((stat) => (
