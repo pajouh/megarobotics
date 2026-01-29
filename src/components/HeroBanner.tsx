@@ -89,7 +89,7 @@ export default function HeroBanner({ slides, autoPlayInterval = 6000 }: HeroBann
   const overlayOpacity = currentSlide.overlayOpacity ?? 40
 
   return (
-    <section className="relative w-full h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
+    <section className="relative w-full h-[calc(500px+4rem)] md:h-[calc(600px+4rem)] lg:h-[calc(700px+4rem)] pt-16 overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
