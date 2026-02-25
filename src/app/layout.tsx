@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -102,6 +103,20 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-SNS31SW7WM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-SNS31SW7WM');
+          `}
+        </Script>
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
         suppressHydrationWarning
