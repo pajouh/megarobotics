@@ -271,7 +271,7 @@ export default async function ProductPage({ params }: Props) {
                 </a>
               )}
               <Link
-                href="/about#contact"
+                href={`/contact?subject=${encodeURIComponent(product.name)}`}
                 className="inline-flex items-center gap-2 px-6 py-3 border border-gray-200 hover:border-gray-300 text-gray-900 rounded-lg font-medium transition-colors"
               >
                 <Mail className="w-4 h-4" />

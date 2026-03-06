@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Send, CheckCircle, AlertCircle, Loader2, Paperclip, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 
@@ -8,9 +9,10 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 const ACCEPTED_TYPES = '.pdf,.doc,.docx,.png,.jpg,.jpeg,.zip'
 
 export default function ContactForm() {
+  const searchParams = useSearchParams()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
-  const [subject, setSubject] = useState('')
+  const [subject, setSubject] = useState(searchParams.get('subject') || '')
   const [message, setMessage] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
