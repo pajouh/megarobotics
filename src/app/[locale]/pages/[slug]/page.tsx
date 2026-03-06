@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
+import { generateAlternates } from '@/lib/structured-data'
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>
@@ -20,9 +21,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Page Not Found' }
   }
 
+  const title = page.seo?.metaTitle || page.title
+  const description = page.seo?.metaDescription || page.subtitle
+
   return {
-    title: page.title,
-    description: page.seo?.metaDescription || page.subtitle,
+    title,
+    description,
+    alternates: generateAlternates(`/pages/${slug}`),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${page.title} - MegaRobotics` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
   }
 }
 

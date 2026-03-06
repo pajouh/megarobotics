@@ -134,6 +134,44 @@ export default defineType({
       group: 'contact',
       rows: 3,
     }),
+    localizedString('contactPageBadge', 'Contact Page Badge', {
+      group: 'contact',
+      description: 'Small badge text at the top of the contact page (e.g. "Contact")',
+    }),
+    localizedString('contactPageTitle', 'Contact Page Title', {
+      group: 'contact',
+      description: 'Main heading on the contact page (e.g. "Get in Touch")',
+    }),
+    localizedText('contactPageSubtitle', 'Contact Page Subtitle', {
+      group: 'contact',
+      rows: 2,
+      description: 'Subtitle text below the heading',
+    }),
+    localizedString('contactInfoTitle', 'Contact Info Section Title', {
+      group: 'contact',
+      description: 'Heading for the contact info column (e.g. "Contact Information")',
+    }),
+    localizedString('contactEmailLabel', 'Email Label', {
+      group: 'contact',
+      description: 'Label above the email address (e.g. "Email")',
+    }),
+    localizedString('contactLocationLabel', 'Location Label', {
+      group: 'contact',
+      description: 'Label above the address (e.g. "Location")',
+    }),
+    localizedString('contactBusinessLabel', 'Business Label', {
+      group: 'contact',
+      description: 'Label above the business email (e.g. "For Business")',
+    }),
+    localizedString('contactMetaTitle', 'Contact Page Meta Title', {
+      group: 'contact',
+      description: 'SEO title for the contact page',
+    }),
+    localizedText('contactMetaDescription', 'Contact Page Meta Description', {
+      group: 'contact',
+      rows: 2,
+      description: 'SEO description for the contact page',
+    }),
   ],
   preview: {
     prepare() {

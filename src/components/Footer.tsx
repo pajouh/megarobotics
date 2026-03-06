@@ -108,7 +108,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
 
   const defaultCompany = [
     { name: t.about, href: '/about' },
-    { name: t.contact, href: '/about#contact' },
+    { name: t.contact, href: '/contact' },
     { name: t.imprint, href: '/imprint' },
     { name: t.privacyPolicy, href: '/privacy' },
   ]

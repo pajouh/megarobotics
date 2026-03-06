@@ -590,7 +590,16 @@ export async function getSiteSettings(locale: Locale = defaultLocale) {
       socialLinks,
       contactEmail,
       contactPhone,
-      "address": ${localizedField('address', locale)}
+      "address": ${localizedField('address', locale)},
+      "contactPageBadge": ${localizedField('contactPageBadge', locale)},
+      "contactPageTitle": ${localizedField('contactPageTitle', locale)},
+      "contactPageSubtitle": ${localizedField('contactPageSubtitle', locale)},
+      "contactInfoTitle": ${localizedField('contactInfoTitle', locale)},
+      "contactEmailLabel": ${localizedField('contactEmailLabel', locale)},
+      "contactLocationLabel": ${localizedField('contactLocationLabel', locale)},
+      "contactBusinessLabel": ${localizedField('contactBusinessLabel', locale)},
+      "contactMetaTitle": ${localizedField('contactMetaTitle', locale)},
+      "contactMetaDescription": ${localizedField('contactMetaDescription', locale)}
     }`
   )
 }

@@ -31,10 +31,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const catTitle = `${category.name} - Robotics Products`
+  const catDescription = category.description || `Browse ${category.name} robotics products from MegaRobotics.`
+
   return {
-    title: `${category.name} - Robotics Products`,
-    description: category.description || `Browse ${category.name} robotics products from MegaRobotics.`,
+    title: catTitle,
+    description: catDescription,
     alternates: generateAlternates(`/products/category/${slug}`),
+    openGraph: {
+      title: catTitle,
+      description: catDescription,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${category.name} - MegaRobotics` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: catTitle,
+      description: catDescription,
+      images: ['/og-image.png'],
+    },
   }
 }
 

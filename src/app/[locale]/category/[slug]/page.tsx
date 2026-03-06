@@ -5,6 +5,7 @@ import { ArrowLeft, Bot } from 'lucide-react'
 import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
+import { generateAlternates } from '@/lib/structured-data'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -20,9 +21,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const title = `${category.title} News & Articles`
+  const description = category.description || `Browse all ${category.title.toLowerCase()} articles and news from MegaRobotics.`
+
   return {
-    title: `${category.title} News & Articles`,
-    description: category.description || `Browse all ${category.title.toLowerCase()} articles and news from MegaRobotics.`,
+    title,
+    description,
+    alternates: generateAlternates(`/category/${slug}`),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${category.title} - MegaRobotics` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
   }
 }
 

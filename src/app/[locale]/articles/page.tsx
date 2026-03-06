@@ -6,10 +6,25 @@ import CategoryFilter from '@/components/CategoryFilter'
 import { generateAlternates } from '@/lib/structured-data'
 
 export function generateMetadata(): Metadata {
+  const title = 'All Articles'
+  const description = 'Browse all robotics news, reviews, and industry insights from MegaRobotics.'
+
   return {
-    title: 'All Articles',
-    description: 'Browse all robotics news, reviews, and industry insights from MegaRobotics.',
+    title,
+    description,
     alternates: generateAlternates('/articles'),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'MegaRobotics Articles' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
   }
 }
 

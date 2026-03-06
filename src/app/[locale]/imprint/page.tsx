@@ -2,19 +2,46 @@
 import { Metadata } from 'next'
 import { format } from 'date-fns'
 import { getTranslations } from 'next-intl/server'
-import { getPageByType } from '@/lib/sanity'
+import { getPageByType, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import IntellectualPropertyNotice from '@/components/IntellectualPropertyNotice'
+import { generateAlternates } from '@/lib/structured-data'
 
-export const metadata: Metadata = {
-  title: 'Imprint - MegaRobotics',
-  description: 'Legal information and imprint for MegaRobotics',
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const page = await getPageByType('imprint', locale as Locale)
+
+  const title = page?.seo?.metaTitle || (locale === 'de' ? 'Impressum - MegaRobotics' : 'Imprint - MegaRobotics')
+  const description = page?.seo?.metaDescription || (locale === 'de'
+    ? 'Rechtliche Informationen und Impressum für MegaRobotics'
+    : 'Legal information and imprint for MegaRobotics')
+
+  return {
+    title,
+    description,
+    alternates: generateAlternates('/imprint'),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+  }
 }
 
 export const revalidate = 3600
 
-export default async function ImprintPage() {
-  const page = await getPageByType('imprint')
+export default async function ImprintPage({ params }: Props) {
+  const { locale } = await params
+  const page = await getPageByType('imprint', locale as Locale)
   const tDisclaimers = await getTranslations('disclaimers')
 
   const ipTranslations = {

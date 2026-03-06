@@ -9,10 +9,25 @@ import Disclaimer from '@/components/Disclaimer'
 import { generateAlternates } from '@/lib/structured-data'
 
 export function generateMetadata(): Metadata {
+  const title = 'Robotics Products'
+  const description = 'Browse our catalog of robotics products from leading manufacturers. From humanoid robots to industrial automation.'
+
   return {
-    title: 'Robotics Products',
-    description: 'Browse our catalog of robotics products from leading Chinese manufacturers. From humanoid robots to industrial automation.',
+    title,
+    description,
     alternates: generateAlternates('/products'),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'MegaRobotics Products' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
   }
 }
 

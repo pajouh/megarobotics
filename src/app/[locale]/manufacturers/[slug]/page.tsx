@@ -29,22 +29,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const mfDescription = manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
+  const logoUrl = manufacturer.logo
+    ? urlFor(manufacturer.logo).width(1200).height(630).url()
+    : undefined
+
   return {
     title: `${manufacturer.name} - Robotics Products`,
-    description: manufacturer.description || `Browse robotics products from ${manufacturer.name}.`,
+    description: mfDescription,
     alternates: generateAlternates(`/manufacturers/${slug}`),
     openGraph: {
       title: manufacturer.name,
-      description: manufacturer.description || `Browse robotics products from ${manufacturer.name}.`,
-      images: manufacturer.logo
-        ? [
-            {
-              url: urlFor(manufacturer.logo).width(1200).height(630).url(),
-              width: 1200,
-              height: 630,
-            },
-          ]
+      description: mfDescription,
+      images: logoUrl
+        ? [{ url: logoUrl, width: 1200, height: 630, alt: manufacturer.name }]
         : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${manufacturer.name} - Robotics Products`,
+      description: mfDescription,
+      images: logoUrl ? [logoUrl] : undefined,
     },
   }
 }

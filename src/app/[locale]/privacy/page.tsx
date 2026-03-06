@@ -1,18 +1,45 @@
 // /src/app/privacy/page.tsx
 import { Metadata } from 'next'
 import { format } from 'date-fns'
-import { getPageByType } from '@/lib/sanity'
+import { getPageByType, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
+import { generateAlternates } from '@/lib/structured-data'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy - MegaRobotics',
-  description: 'Privacy policy and data protection information for MegaRobotics',
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  const page = await getPageByType('privacy', locale as Locale)
+
+  const title = page?.seo?.metaTitle || (locale === 'de' ? 'Datenschutz - MegaRobotics' : 'Privacy Policy - MegaRobotics')
+  const description = page?.seo?.metaDescription || (locale === 'de'
+    ? 'Datenschutzrichtlinie und Informationen zum Datenschutz für MegaRobotics'
+    : 'Privacy policy and data protection information for MegaRobotics')
+
+  return {
+    title,
+    description,
+    alternates: generateAlternates('/privacy'),
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+  }
 }
 
 export const revalidate = 3600
 
-export default async function PrivacyPage() {
-  const page = await getPageByType('privacy')
+export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params
+  const page = await getPageByType('privacy', locale as Locale)
 
   // Fallback content if no page exists in Sanity
   if (!page) {
