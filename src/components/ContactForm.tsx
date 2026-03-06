@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Send, CheckCircle, AlertCircle, Loader2, Paperclip, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -9,6 +9,28 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 const ACCEPTED_TYPES = '.pdf,.doc,.docx,.png,.jpg,.jpeg,.zip'
 
 export default function ContactForm() {
+  return (
+    <Suspense fallback={<ContactFormSkeleton />}>
+      <ContactFormInner />
+    </Suspense>
+  )
+}
+
+function ContactFormSkeleton() {
+  return (
+    <div className="space-y-5 animate-pulse">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="h-12 bg-gray-100 rounded-xl" />
+        <div className="h-12 bg-gray-100 rounded-xl" />
+      </div>
+      <div className="h-12 bg-gray-100 rounded-xl" />
+      <div className="h-32 bg-gray-100 rounded-xl" />
+      <div className="h-12 w-48 bg-gray-100 rounded-xl" />
+    </div>
+  )
+}
+
+function ContactFormInner() {
   const searchParams = useSearchParams()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
