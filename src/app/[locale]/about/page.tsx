@@ -36,7 +36,7 @@ export default async function AboutPage() {
     getSiteSettings(),
   ])
 
-  const contactEmail = settings?.contactEmail || 'contact@megarobotics.de'
+  const contactEmail = settings?.contactEmail || 'info@megarobotics.de'
   const address = settings?.address || 'Berlin, Germany'
 
   return (
@@ -179,8 +179,8 @@ export default async function AboutPage() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">For Business</p>
-                    <a href="mailto:partnerships@megarobotics.de" className="text-gray-900 hover:text-emerald-600 transition-colors font-medium">
-                      partnerships@megarobotics.de
+                    <a href="mailto:info@megarobotics.de" className="text-gray-900 hover:text-emerald-600 transition-colors font-medium">
+                      info@megarobotics.de
                     </a>
                   </div>
                 </div>
@@ -212,11 +212,11 @@ export default async function AboutPage() {
             we want to hear from you.
           </p>
           <a
-            href="mailto:careers@megarobotics.de"
+            href="mailto:info@megarobotics.de"
             className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg font-medium transition-colors"
           >
             <Mail className="w-5 h-5" />
-            careers@megarobotics.de
+            info@megarobotics.de
           </a>
         </div>
       </section>
