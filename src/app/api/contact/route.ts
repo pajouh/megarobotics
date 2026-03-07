@@ -95,29 +95,33 @@ export async function POST(request: NextRequest) {
       attachments,
     })
 
-    // Send confirmation email to sender
-    await transporter.sendMail({
-      from: `"MegaRobotics" <${process.env.SMTP_FROM || 'info@megarobotics.de'}>`,
-      to: email.trim(),
-      subject: 'We received your message - MegaRobotics',
-      text: `Hi ${name.trim()},\n\nThank you for contacting MegaRobotics. We have received your message and will get back to you as soon as possible.\n\nBest regards,\nMegaRobotics Team\nmegarobotics.de`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #111827;">Thank you for your message!</h2>
-          <p style="color: #4b5563;">Hi ${name.trim()},</p>
-          <p style="color: #4b5563;">We have received your message and will get back to you as soon as possible.</p>
-          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
-          <p style="color: #9ca3af; font-size: 12px;">MegaRobotics - megarobotics.de</p>
-        </div>
-      `,
-    })
+    // Send confirmation email to sender (non-blocking — don't fail if this fails)
+    try {
+      await transporter.sendMail({
+        from: `"MegaRobotics" <${process.env.SMTP_FROM || 'info@megarobotics.de'}>`,
+        to: email.trim(),
+        subject: 'We received your message - MegaRobotics',
+        text: `Hi ${name.trim()},\n\nThank you for contacting MegaRobotics. We have received your message and will get back to you as soon as possible.\n\nBest regards,\nMegaRobotics Team\nmegarobotics.de`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #111827;">Thank you for your message!</h2>
+            <p style="color: #4b5563;">Hi ${name.trim()},</p>
+            <p style="color: #4b5563;">We have received your message and will get back to you as soon as possible.</p>
+            <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
+            <p style="color: #9ca3af; font-size: 12px;">MegaRobotics - megarobotics.de</p>
+          </div>
+        `,
+      })
+    } catch (confirmError) {
+      console.error('Failed to send confirmation email:', confirmError)
+    }
 
     return NextResponse.json({
       success: true,
       message: 'Your message has been sent successfully!',
     })
   } catch (error) {
-    console.error('Contact form error:', error)
+    console.error('Contact form error:', error instanceof Error ? error.message : error)
     return NextResponse.json(
       { success: false, message: 'Something went wrong. Please try again.' },
       { status: 500 }
