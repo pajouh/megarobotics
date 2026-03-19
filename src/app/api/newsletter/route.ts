@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { appendSubscriber } from '@/lib/google-sheets'
 
 function createTransporter() {
   return nodemailer.createTransport({
@@ -58,6 +59,13 @@ export async function POST(request: NextRequest) {
         <p><strong>Subscribed at:</strong> ${new Date().toISOString()}</p>
       `,
     })
+
+    // Save subscriber to Google Sheet (non-blocking)
+    try {
+      await appendSubscriber(email)
+    } catch (sheetError) {
+      console.error('Failed to save subscriber to Google Sheet:', sheetError)
+    }
 
     // Send confirmation email to subscriber
     try {
