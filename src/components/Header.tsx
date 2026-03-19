@@ -86,7 +86,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
           <div className="hidden md:flex md:items-center gap-3">
             <LanguageSwitcher />
             <Link
-              href="#newsletter"
+              href="/contact"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors text-sm font-medium"
             >
               {tCommon('subscribe')}
@@ -129,7 +129,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                 <LanguageSwitcher />
               </div>
               <Link
-                href="#newsletter"
+                href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium mt-3"
                 onClick={() => setMobileMenuOpen(false)}
               >
