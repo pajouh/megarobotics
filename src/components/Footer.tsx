@@ -1,7 +1,8 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
-import { Twitter, Linkedin, Youtube, Github, Instagram, Mail } from 'lucide-react'
+import { Twitter, Linkedin, Youtube, Github, Instagram } from 'lucide-react'
 import Disclaimer from '@/components/Disclaimer'
+import NewsletterForm from '@/components/NewsletterForm'
 
 interface FooterLink {
   _key: string
@@ -265,23 +266,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
                 {t.newsletterSubtitle}
               </p>
             </div>
-            <form className="flex gap-3 w-full md:w-auto" action="/api/newsletter" method="POST">
-              <div className="relative flex-grow md:w-64">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={t.enterEmail}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 text-sm"
-                />
-              </div>
-              <button
-                type="submit"
-                className="px-5 py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition-colors"
-              >
-                {t.subscribe}
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 
