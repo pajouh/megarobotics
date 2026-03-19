@@ -3,18 +3,32 @@ import nodemailer from 'nodemailer'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.strato.de',
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-})
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.strato.de',
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
+    // Check env vars first
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('Contact form error: SMTP_USER or SMTP_PASS not configured')
+      return NextResponse.json(
+        { success: false, message: 'Email service is not configured. Please contact us directly at info@megarobotics.de' },
+        { status: 503 }
+      )
+    }
+
     const formData = await request.formData()
 
     const name = formData.get('name') as string | null
@@ -61,6 +75,8 @@ export async function POST(request: NextRequest) {
       ? `Contact Form: ${subject.trim()}`
       : `Contact Form Message from ${name.trim()}`
 
+    const transporter = createTransporter()
+
     // Send email to admin
     await transporter.sendMail({
       from: `"MegaRobotics Contact" <${process.env.SMTP_FROM || 'info@megarobotics.de'}>`,
@@ -87,7 +103,7 @@ export async function POST(request: NextRequest) {
           </table>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
           <div style="color: #374151; white-space: pre-wrap;">${message.trim()}</div>
-          ${attachments.length > 0 ? `<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" /><p style="color: #6b7280; font-size: 12px;">📎 Attachment: ${file!.name} (${(file!.size / 1024).toFixed(1)} KB)</p>` : ''}
+          ${attachments.length > 0 ? `<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" /><p style="color: #6b7280; font-size: 12px;">Attachment: ${file!.name} (${(file!.size / 1024).toFixed(1)} KB)</p>` : ''}
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
           <p style="color: #9ca3af; font-size: 12px;">Sent via MegaRobotics contact form at ${new Date().toISOString()}</p>
         </div>
@@ -121,9 +137,20 @@ export async function POST(request: NextRequest) {
       message: 'Your message has been sent successfully!',
     })
   } catch (error) {
-    console.error('Contact form error:', error instanceof Error ? error.message : error)
+    const err = error instanceof Error ? error : new Error(String(error))
+    const errCode = (error as { code?: string })?.code
+    console.error('Contact form error:', err.message, 'Code:', errCode)
+
+    // Return specific message based on error type
+    let userMessage = 'Something went wrong. Please try again.'
+    if (errCode === 'ECONNREFUSED' || errCode === 'ECONNRESET' || errCode === 'ETIMEDOUT') {
+      userMessage = 'Could not connect to email server. Please email us directly at info@megarobotics.de'
+    } else if (errCode === 'EAUTH') {
+      userMessage = 'Email authentication failed. Please email us directly at info@megarobotics.de'
+    }
+
     return NextResponse.json(
-      { success: false, message: 'Something went wrong. Please try again.' },
+      { success: false, message: userMessage },
       { status: 500 }
     )
   }
