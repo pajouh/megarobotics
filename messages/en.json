@@ -188,5 +188,21 @@
     "imageUsageEnd": "and we will promptly address your concerns.",
     "editorialContentTitle": "Editorial Content",
     "editorialContent": "News articles and editorial content may include product images and company information under fair use principles for commentary, criticism, and news reporting purposes."
+  },
+  "cookies": {
+    "title": "Cookie Settings",
+    "description": "We use cookies to enhance your browsing experience and analyze site traffic. You can choose which cookies to accept.",
+    "privacyLink": "Privacy Policy",
+    "customize": "Customize",
+    "necessary": "Necessary",
+    "necessaryDesc": "Required for the website to function properly. Cannot be disabled.",
+    "analytics": "Analytics",
+    "analyticsDesc": "Help us understand how visitors interact with our website.",
+    "marketing": "Marketing",
+    "marketingDesc": "Used to deliver personalized ads and track campaigns.",
+    "acceptAll": "Accept All",
+    "rejectAll": "Reject All",
+    "savePreferences": "Save Preferences",
+    "settings": "Cookie Settings"
   }
 }
