@@ -29,26 +29,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const mfDescription = manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
+  const metaTitle = manufacturer.seo?.metaTitle || `${manufacturer.name} - Robotics Products`
+  const metaDescription = manufacturer.seo?.metaDescription || manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
   const logoUrl = manufacturer.logo
     ? urlFor(manufacturer.logo).width(1200).height(630).url()
     : undefined
 
   return {
-    title: `${manufacturer.name} - Robotics Products`,
-    description: mfDescription,
+    title: metaTitle,
+    description: metaDescription,
+    keywords: manufacturer.seo?.keywords,
     alternates: generateAlternates(`/manufacturers/${slug}`),
     openGraph: {
-      title: manufacturer.name,
-      description: mfDescription,
+      title: metaTitle,
+      description: metaDescription,
       images: logoUrl
         ? [{ url: logoUrl, width: 1200, height: 630, alt: manufacturer.name }]
         : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${manufacturer.name} - Robotics Products`,
-      description: mfDescription,
+      title: metaTitle,
+      description: metaDescription,
       images: logoUrl ? [logoUrl] : undefined,
     },
   }

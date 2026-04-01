@@ -56,8 +56,21 @@ export default defineType({
       type: 'object',
       group: 'seo',
       fields: [
-        localizedString('metaTitle', 'Meta Title'),
-        localizedText('metaDescription', 'Meta Description', { rows: 3 }),
+        localizedString('metaTitle', 'Meta Title', {
+          description: 'Custom title for search engines (max 60 chars recommended)',
+        }),
+        localizedText('metaDescription', 'Meta Description', {
+          rows: 3,
+          description: 'Custom description for search engines (max 160 chars recommended)',
+        }),
+        defineField({
+          name: 'keywords',
+          title: 'Keywords',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: { layout: 'tags' },
+          description: 'SEO keywords / tags',
+        }),
       ],
     }),
     defineField({

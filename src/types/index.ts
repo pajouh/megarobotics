@@ -1,5 +1,11 @@
 import { PortableTextBlock } from '@portabletext/types'
 
+export interface SeoFields {
+  metaTitle?: string
+  metaDescription?: string
+  keywords?: string[]
+}
+
 export interface SanityImage {
   _type: 'image'
   asset: {
@@ -56,6 +62,7 @@ export interface Article {
   readTime?: number
   featured?: boolean
   body?: PortableTextBlock[]
+  seo?: SeoFields
 }
 
 export interface CodeBlock {
@@ -81,6 +88,7 @@ export interface Manufacturer {
   specialties?: string[]
   featured?: boolean
   productCount?: number
+  seo?: SeoFields
 }
 
 export interface ProductCategory {
@@ -95,6 +103,7 @@ export interface ProductCategory {
   image?: SanityImage
   order?: number
   productCount?: number
+  seo?: SeoFields
 }
 
 export interface ProductSpecification {
@@ -133,4 +142,5 @@ export interface Product {
   isNew?: boolean
   publishedAt?: string
   order?: number
+  seo?: SeoFields
 }

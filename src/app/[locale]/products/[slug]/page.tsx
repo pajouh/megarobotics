@@ -37,18 +37,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const alternates = generateAlternates(`/products/${slug}`)
 
-  const ogDescription = product.description || product.tagline
+  const metaTitle = product.seo?.metaTitle || `${product.name} by ${product.manufacturer?.name || 'Unknown'}`
+  const metaDescription = product.seo?.metaDescription || product.description || product.tagline
   const imageUrl = product.mainImage
     ? urlFor(product.mainImage).width(1200).height(630).url()
     : undefined
 
   return {
-    title: `${product.name} by ${product.manufacturer?.name || 'Unknown'}`,
-    description: ogDescription,
+    title: metaTitle,
+    description: metaDescription,
+    keywords: product.seo?.keywords,
     alternates,
     openGraph: {
-      title: product.name,
-      description: ogDescription,
+      title: metaTitle,
+      description: metaDescription,
       type: 'website',
       images: imageUrl
         ? [{ url: imageUrl, width: 1200, height: 630, alt: product.name }]
@@ -56,8 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: product.name,
-      description: ogDescription,
+      title: metaTitle,
+      description: metaDescription,
       images: imageUrl ? [imageUrl] : undefined,
     },
   }

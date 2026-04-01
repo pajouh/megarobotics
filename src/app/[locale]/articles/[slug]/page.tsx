@@ -30,19 +30,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? urlFor(article.mainImage).width(1200).height(630).url()
     : undefined
 
+  const metaTitle = article.seo?.metaTitle || article.title
+  const metaDescription = article.seo?.metaDescription || article.excerpt
+  const keywords = article.seo?.keywords?.length
+    ? article.seo.keywords
+    : [
+        article.category?.title,
+        'robotics',
+        'robots',
+        ...article.title.split(' ').slice(0, 5),
+      ].filter((k): k is string => Boolean(k))
+
   return {
-    title: article.title,
-    description: article.excerpt,
-    keywords: [
-      article.category?.title,
-      'robotics',
-      'robots',
-      ...article.title.split(' ').slice(0, 5),
-    ].filter((k): k is string => Boolean(k)),
+    title: metaTitle,
+    description: metaDescription,
+    keywords,
     authors: article.author ? [{ name: article.author.name }] : undefined,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       type: 'article',
       publishedTime: article.publishedAt,
       authors: article.author ? [article.author.name] : undefined,
@@ -59,8 +65,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: article.title,
-      description: article.excerpt,
+      title: metaTitle,
+      description: metaDescription,
       images: imageUrl ? [imageUrl] : undefined,
     },
     alternates: generateAlternates(`/articles/${slug}`),

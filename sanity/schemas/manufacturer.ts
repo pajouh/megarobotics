@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { localizedText, localizedStringArray } from './helpers/localizedFields'
+import { localizedString, localizedText, localizedStringArray } from './helpers/localizedFields'
 
 export default defineType({
   name: 'manufacturer',
@@ -8,6 +8,7 @@ export default defineType({
   groups: [
     { name: 'basic', title: 'Basic Info', default: true },
     { name: 'details', title: 'Details' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
@@ -71,6 +72,30 @@ export default defineType({
       group: 'details',
       description: 'Show on homepage',
       initialValue: false,
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      group: 'seo',
+      description: 'Override auto-generated SEO metadata. Leave blank to use name/description as defaults.',
+      fields: [
+        localizedString('metaTitle', 'Meta Title', {
+          description: 'Custom title for search engines (max 60 chars recommended)',
+        }),
+        localizedText('metaDescription', 'Meta Description', {
+          rows: 3,
+          description: 'Custom description for search engines (max 160 chars recommended)',
+        }),
+        defineField({
+          name: 'keywords',
+          title: 'Keywords',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: { layout: 'tags' },
+          description: 'SEO keywords / tags',
+        }),
+      ],
     }),
   ],
   preview: {

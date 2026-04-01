@@ -116,7 +116,12 @@ function getArticleFields(locale: Locale = defaultLocale) {
 function getArticleWithBodyFields(locale: Locale = defaultLocale) {
   return `
     ${getArticleFields(locale)},
-    "body": ${localizedField('body', locale)}
+    "body": ${localizedField('body', locale)},
+    seo {
+      "metaTitle": ${localizedField('metaTitle', locale)},
+      "metaDescription": ${localizedField('metaDescription', locale)},
+      keywords
+    }
   `
 }
 
@@ -318,7 +323,12 @@ function getProductWithFullFields(locale: Locale = defaultLocale) {
     "features": ${localizedArrayField('features', locale)},
     "applications": ${localizedArrayField('applications', locale)},
     productUrl,
-    datasheetUrl
+    datasheetUrl,
+    seo {
+      "metaTitle": ${localizedField('metaTitle', locale)},
+      "metaDescription": ${localizedField('metaDescription', locale)},
+      keywords
+    }
   `
 }
 
@@ -428,7 +438,12 @@ export async function getManufacturer(slug: string, locale: Locale = defaultLoca
   return client.fetch(
     `*[_type == "manufacturer" && slug.current == $slug][0] {
       ${getManufacturerFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)])
+      "productCount": count(*[_type == "product" && references(^._id)]),
+      seo {
+        "metaTitle": ${localizedField('metaTitle', locale)},
+        "metaDescription": ${localizedField('metaDescription', locale)},
+        keywords
+      }
     }`,
     { slug }
   )
@@ -451,7 +466,12 @@ export async function getProductCategory(slug: string, locale: Locale = defaultL
   return client.fetch(
     `*[_type == "productCategory" && slug.current == $slug][0] {
       ${getProductCategoryFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)])
+      "productCount": count(*[_type == "product" && references(^._id)]),
+      seo {
+        "metaTitle": ${localizedField('metaTitle', locale)},
+        "metaDescription": ${localizedField('metaDescription', locale)},
+        keywords
+      }
     }`,
     { slug }
   )
@@ -617,7 +637,8 @@ export async function getPage(slug: string, locale: Locale = defaultLocale) {
       "body": ${localizedField('body', locale)},
       seo {
         "metaTitle": ${localizedField('metaTitle', locale)},
-        "metaDescription": ${localizedField('metaDescription', locale)}
+        "metaDescription": ${localizedField('metaDescription', locale)},
+        keywords
       },
       lastUpdated
     }`,
@@ -638,7 +659,8 @@ export async function getPageByType(pageType: string, locale: Locale = defaultLo
       "body": ${localizedField('body', locale)},
       seo {
         "metaTitle": ${localizedField('metaTitle', locale)},
-        "metaDescription": ${localizedField('metaDescription', locale)}
+        "metaDescription": ${localizedField('metaDescription', locale)},
+        keywords
       },
       lastUpdated
     }`,

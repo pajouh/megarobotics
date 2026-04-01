@@ -11,6 +11,7 @@ export default defineType({
     { name: 'media', title: 'Media' },
     { name: 'specs', title: 'Specifications' },
     { name: 'settings', title: 'Settings' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     defineField({
@@ -191,6 +192,30 @@ export default defineType({
       group: 'settings',
       description: 'Sort order within category',
       initialValue: 0,
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      group: 'seo',
+      description: 'Override auto-generated SEO metadata. Leave blank to use name/description as defaults.',
+      fields: [
+        localizedString('metaTitle', 'Meta Title', {
+          description: 'Custom title for search engines (max 60 chars recommended)',
+        }),
+        localizedText('metaDescription', 'Meta Description', {
+          rows: 3,
+          description: 'Custom description for search engines (max 160 chars recommended)',
+        }),
+        defineField({
+          name: 'keywords',
+          title: 'Keywords',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: { layout: 'tags' },
+          description: 'SEO keywords / tags',
+        }),
+      ],
     }),
   ],
   orderings: [

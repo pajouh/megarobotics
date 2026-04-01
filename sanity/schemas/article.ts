@@ -8,6 +8,7 @@ export default defineType({
   groups: [
     { name: 'content', title: 'Content', default: true },
     { name: 'meta', title: 'Meta' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     localizedString('title', 'Title', {
@@ -83,6 +84,30 @@ export default defineType({
       group: 'meta',
       initialValue: false,
       description: 'Show this article in the featured section',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      group: 'seo',
+      description: 'Override auto-generated SEO metadata. Leave blank to use title/excerpt as defaults.',
+      fields: [
+        localizedString('metaTitle', 'Meta Title', {
+          description: 'Custom title for search engines (max 60 chars recommended)',
+        }),
+        localizedText('metaDescription', 'Meta Description', {
+          rows: 3,
+          description: 'Custom description for search engines (max 160 chars recommended)',
+        }),
+        defineField({
+          name: 'keywords',
+          title: 'Keywords',
+          type: 'array',
+          of: [{ type: 'string' }],
+          options: { layout: 'tags' },
+          description: 'SEO keywords / tags',
+        }),
+      ],
     }),
   ],
   preview: {
