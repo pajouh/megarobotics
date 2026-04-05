@@ -1,6 +1,6 @@
 import { createClient, type SanityClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
-import { SanityImage, Article, Category, Author, Product, ProductCategory, Manufacturer } from '@/types'
+import { SanityImage, Article, Category, Author, Product, ProductCategory, Manufacturer, Institute } from '@/types'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -733,5 +733,96 @@ export async function getHeroBannerSlides(): Promise<HeroBannerSlide[]> {
       order,
       isActive
     }`
+  )
+}
+
+
+// ==========================================
+// INSTITUTE QUERIES
+// ==========================================
+
+const instituteFields = `
+  _id,
+  _type,
+  name,
+  slug,
+  parentInstitution,
+  region,
+  country,
+  city,
+  centerType,
+  focusAreas,
+  website,
+  outreachPriority,
+  profileStatus
+`
+
+const instituteFullFields = `
+  ${instituteFields},
+  summary,
+  verifiedDate,
+  seo {
+    metaTitle,
+    metaDescription,
+    keywords
+  }
+`
+
+// Get all institutes (directory page)
+export async function getInstitutes(): Promise<Institute[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "institute" && profileStatus in ["Ready", "Foundational"]] | order(country asc, name asc) {
+      ${instituteFields}
+    }`
+  )
+}
+
+// Get a single institute by slug
+export async function getInstitute(slug: string): Promise<Institute | null> {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "institute" && slug.current == $slug][0] {
+      ${instituteFullFields}
+    }`,
+    { slug }
+  )
+}
+
+// Get institutes by country
+export async function getInstitutesByCountry(country: string): Promise<Institute[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "institute" && country == $country && profileStatus in ["Ready", "Foundational"]] | order(outreachPriority asc, name asc) {
+      ${instituteFields}
+    }`,
+    { country }
+  )
+}
+
+// Get related institutes (same country, excluding current)
+export async function getRelatedInstitutes(instituteId: string, country: string, limit: number = 3): Promise<Institute[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "institute" && _id != $instituteId && country == $country && profileStatus in ["Ready", "Foundational"]] | order(outreachPriority asc, name asc)[0...${limit}] {
+      ${instituteFields}
+    }`,
+    { instituteId, country }
+  )
+}
+
+// Get all institute slugs (for static generation)
+export async function getAllInstituteSlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "institute" && defined(slug.current) && profileStatus in ["Ready", "Foundational"]][].slug.current`
+  ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
+}
+
+// Get unique countries (for static generation and filters)
+export async function getInstituteCountries(): Promise<string[]> {
+  if (!client) return []
+  return client.fetch(
+    `array::unique(*[_type == "institute" && profileStatus in ["Ready", "Foundational"]].country)`
   )
 }

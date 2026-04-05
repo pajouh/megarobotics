@@ -1,5 +1,27 @@
 import { PortableTextBlock } from '@portabletext/types'
 
+export interface Institute {
+  _id: string
+  _type: 'institute'
+  name: string
+  slug: {
+    current: string
+  }
+  parentInstitution: string
+  region?: string
+  country: string
+  city?: string
+  centerType?: string
+  focusAreas?: string[]
+  summary?: string
+  website?: string
+  outreachPriority?: number
+  profileStatus?: string
+  verifiedDate?: string
+  notes?: string
+  seo?: SeoFields
+}
+
 export interface SeoFields {
   metaTitle?: string
   metaDescription?: string

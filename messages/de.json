@@ -21,7 +21,8 @@
     "research": "Forschung",
     "about": "Über uns",
     "contact": "Kontakt",
-    "guides": "Ratgeber"
+    "guides": "Ratgeber",
+    "institutes": "Institute"
   },
   "home": {
     "badge": "Live Robotik-Intelligenz",
@@ -127,7 +128,8 @@
     "industrialCobots": "Industrie & Cobots",
     "consumerHome": "Verbraucher & Haushalt",
     "companies": "Unternehmen",
-    "events": "Veranstaltungen"
+    "events": "Veranstaltungen",
+    "institutes": "Institute"
   },
   "about": {
     "title": "Über uns",
@@ -188,6 +190,47 @@
     "imageUsageEnd": "und wir werden Ihre Anliegen umgehend bearbeiten.",
     "editorialContentTitle": "Redaktionelle Inhalte",
     "editorialContent": "Nachrichtenartikel und redaktionelle Inhalte können Produktbilder und Unternehmensinformationen im Rahmen des Fair-Use-Prinzips für Kommentare, Kritik und Berichterstattung enthalten."
+  },
+  "institutes": {
+    "title": "Robotik-Forschungsinstitute",
+    "subtitle": "Verifiziertes Verzeichnis von Robotik-Laboren, Zentren und Instituten — DACH und weltweit",
+    "showing": "{count} von {total} Instituten angezeigt",
+    "allCountries": "Alle Länder",
+    "allTypes": "Alle Typen",
+    "allTopics": "Alle Themen",
+    "allRegions": "Alle",
+    "dach": "DACH",
+    "global": "Global",
+    "searchPlaceholder": "Institute suchen...",
+    "sortByName": "Name A→Z",
+    "sortByPriority": "Priorität zuerst",
+    "priority": "Priorität",
+    "moreAreas": "+{count} weitere",
+    "visitWebsite": "Website besuchen",
+    "officialWebsite": "Offizielle Website",
+    "verifiedProfile": "Verifiziertes Profil",
+    "moreInCountry": "Weitere Institute in {country}",
+    "backToInstitutes": "Zurück zu Instituten",
+    "noInstitutes": "Keine Institute gefunden",
+    "noInstitutesDescription": "Versuchen Sie, Ihre Filter oder Suchbegriffe anzupassen.",
+    "countryTitle": "Robotik-Forschung in {country}",
+    "countryCount": "{count} verifizierte Institute und Labore",
+    "countryIntroGeneric": "Entdecken Sie führende Robotik-Forschungsinstitute, Labore und Zentren in {country}.",
+    "countryIntroGermany": "Deutschland beherbergt weltbekannte Robotik-Forschungseinrichtungen, vom DLR und Fraunhofer-Instituten bis hin zu führenden Universitätslaboren, die Humanoide, industrielle Automatisierung und KI-gesteuerte Systeme vorantreiben.",
+    "countryIntroAustria": "Österreichs Robotik-Forschungslandschaft umfasst innovative Labore und Zentren mit Schwerpunkt auf autonomen Systemen, Mensch-Roboter-Interaktion und industrieller Automatisierung.",
+    "countryIntroSwitzerland": "Die Schweiz beherbergt einige der weltweit renommiertesten Robotik-Labore, darunter die Institute der ETH Zürich und die Forschungszentren der EPFL, die Laufroboter, Drohnen und Soft-Robotik vorantreiben.",
+    "focusAreas": "Forschungsschwerpunkte",
+    "infoGrid": {
+      "country": "Land",
+      "city": "Stadt",
+      "type": "Typ",
+      "region": "Region"
+    },
+    "stats": {
+      "institutes": "Institute",
+      "countries": "Länder",
+      "lastUpdated": "Letzte Aktualisierung"
+    }
   },
   "cookies": {
     "title": "Cookie-Einstellungen",

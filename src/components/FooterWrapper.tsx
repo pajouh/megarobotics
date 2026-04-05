@@ -35,6 +35,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
     consumerHome: t('consumerHome'),
     companies: t('companies'),
     events: t('events'),
+    institutes: t('institutes'),
     trademarkDisclaimer: tDisclaimers('footer'),
   }
 

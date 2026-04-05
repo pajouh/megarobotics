@@ -24,13 +24,15 @@ function localizedEntries(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all content from Sanity
-  const [articles, categories, products, productCategories, manufacturers, buyersGuides] = await Promise.all([
+  const [articles, categories, products, productCategories, manufacturers, buyersGuides, institutes, instituteCountries] = await Promise.all([
     client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "product"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "productCategory"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "institute" && profileStatus in ["Ready", "Foundational"]]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`array::unique(*[_type == "institute" && profileStatus in ["Ready", "Foundational"]].country)`) || [],
   ])
 
   // Static pages with locale variants
@@ -40,6 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...localizedEntries('/products', { changeFrequency: 'daily', priority: 0.9 }),
     ...localizedEntries('/guides', { changeFrequency: 'weekly', priority: 0.9 }),
     ...localizedEntries('/manufacturers', { changeFrequency: 'weekly', priority: 0.8 }),
+    ...localizedEntries('/institutes', { changeFrequency: 'weekly', priority: 0.8 }),
     ...localizedEntries('/about', { changeFrequency: 'monthly', priority: 0.5 }),
     ...localizedEntries('/contact', { changeFrequency: 'monthly', priority: 0.5 }),
     ...localizedEntries('/privacy', { changeFrequency: 'monthly', priority: 0.3 }),
@@ -95,6 +98,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
+  const institutePages: MetadataRoute.Sitemap = (institutes || []).flatMap((inst: { slug: string; _updatedAt: string }) =>
+    localizedEntries(`/institutes/${inst.slug}`, {
+      lastModified: new Date(inst._updatedAt),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    })
+  )
+
+  const instituteCountryPages: MetadataRoute.Sitemap = (instituteCountries || []).flatMap((country: string) =>
+    localizedEntries(`/institutes/country/${country.toLowerCase().replace(/\s+/g, '-')}`, {
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    })
+  )
+
   return [
     ...staticPages,
     ...articlePages,
@@ -103,5 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productCategoryPages,
     ...manufacturerPages,
     ...buyersGuidePages,
+    ...institutePages,
+    ...instituteCountryPages,
   ]
 }

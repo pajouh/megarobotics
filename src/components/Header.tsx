@@ -24,7 +24,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
     { name: t('products'), href: '/products' },
     { name: t('news'), href: '/articles' },
     { name: t('manufacturers'), href: '/manufacturers' },
-    { name: t('reviews'), href: '/category/reviews' },
+    { name: t('institutes'), href: '/institutes' },
     { name: t('research'), href: '/category/research' },
   ]
 

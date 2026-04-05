@@ -21,7 +21,8 @@
     "research": "Research",
     "about": "About",
     "contact": "Contact",
-    "guides": "Guides"
+    "guides": "Guides",
+    "institutes": "Institutes"
   },
   "home": {
     "badge": "Live Robotics Intelligence",
@@ -127,7 +128,8 @@
     "industrialCobots": "Industrial & Cobots",
     "consumerHome": "Consumer & Home",
     "companies": "Companies",
-    "events": "Events"
+    "events": "Events",
+    "institutes": "Institutes"
   },
   "about": {
     "title": "About Us",
@@ -188,6 +190,47 @@
     "imageUsageEnd": "and we will promptly address your concerns.",
     "editorialContentTitle": "Editorial Content",
     "editorialContent": "News articles and editorial content may include product images and company information under fair use principles for commentary, criticism, and news reporting purposes."
+  },
+  "institutes": {
+    "title": "Robotics Research Institutes",
+    "subtitle": "Verified directory of robotics labs, centers and institutes — DACH and worldwide",
+    "showing": "Showing {count} of {total} institutes",
+    "allCountries": "All Countries",
+    "allTypes": "All Types",
+    "allTopics": "All Topics",
+    "allRegions": "All",
+    "dach": "DACH",
+    "global": "Global",
+    "searchPlaceholder": "Search institutes...",
+    "sortByName": "Name A→Z",
+    "sortByPriority": "Priority first",
+    "priority": "Priority",
+    "moreAreas": "+{count} more",
+    "visitWebsite": "Visit Website",
+    "officialWebsite": "Official Website",
+    "verifiedProfile": "Verified profile",
+    "moreInCountry": "More institutes in {country}",
+    "backToInstitutes": "Back to Institutes",
+    "noInstitutes": "No institutes found",
+    "noInstitutesDescription": "Try adjusting your filters or search terms.",
+    "countryTitle": "Robotics Research in {country}",
+    "countryCount": "{count} verified institutes and labs",
+    "countryIntroGeneric": "Explore leading robotics research institutes, laboratories, and centers in {country}.",
+    "countryIntroGermany": "Germany is home to world-renowned robotics research institutions, from the DLR and Fraunhofer institutes to leading university labs pioneering humanoids, industrial automation, and AI-driven systems.",
+    "countryIntroAustria": "Austria's robotics research landscape features innovative labs and centers focused on autonomous systems, human-robot interaction, and industrial automation.",
+    "countryIntroSwitzerland": "Switzerland hosts some of the world's most prestigious robotics labs, including ETH Zurich's institutes and EPFL's research centers, advancing legged robots, drones, and soft robotics.",
+    "focusAreas": "Focus Areas",
+    "infoGrid": {
+      "country": "Country",
+      "city": "City",
+      "type": "Type",
+      "region": "Region"
+    },
+    "stats": {
+      "institutes": "Institutes",
+      "countries": "Countries",
+      "lastUpdated": "Last Updated"
+    }
   },
   "cookies": {
     "title": "Cookie Settings",

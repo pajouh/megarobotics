@@ -55,6 +55,7 @@ interface FooterTranslations {
   consumerHome: string
   companies: string
   events: string
+  institutes: string
   trademarkDisclaimer?: string
 }
 
@@ -89,6 +90,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
     consumerHome: 'Consumer & Home',
     companies: 'Companies',
     events: 'Events',
+    institutes: 'Institutes',
   }
 
   const defaultProducts = [
@@ -105,6 +107,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
     { name: t.companies, href: '/category/companies' },
     { name: t.events, href: '/category/events' },
     { name: t.research, href: '/category/research' },
+    { name: t.institutes, href: '/institutes' },
   ]
 
   const defaultCompany = [
