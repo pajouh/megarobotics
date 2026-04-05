@@ -1,5 +1,19 @@
 import { PortableTextBlock } from '@portabletext/types'
 
+export interface InstituteSocialLinks {
+  twitter?: string
+  linkedin?: string
+  youtube?: string
+  github?: string
+  googleScholar?: string
+}
+
+export interface InstituteProject {
+  title: string
+  description?: string
+  url?: string
+}
+
 export interface Institute {
   _id: string
   _type: 'institute'
@@ -13,8 +27,27 @@ export interface Institute {
   city?: string
   centerType?: string
   focusAreas?: string[]
-  summary?: string
+  founded?: string
+  director?: string
+  staffCount?: string
+  // Contact
+  email?: string
+  phone?: string
+  address?: string
   website?: string
+  socialLinks?: InstituteSocialLinks
+  openPositionsUrl?: string
+  publicationsUrl?: string
+  // Content
+  summary?: string
+  body?: PortableTextBlock[]
+  keyProjects?: InstituteProject[]
+  // Media
+  logo?: SanityImage
+  mainImage?: SanityImage
+  gallery?: SanityImage[]
+  videoUrl?: string
+  // Internal
   outreachPriority?: number
   profileStatus?: string
   verifiedDate?: string

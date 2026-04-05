@@ -1,6 +1,8 @@
 import { Link } from '@/i18n/navigation'
+import Image from 'next/image'
 import { ExternalLink, Star, MapPin } from 'lucide-react'
 import { Institute } from '@/types'
+import { urlFor } from '@/lib/sanity'
 
 interface InstituteCardProps {
   institute: Institute
@@ -37,6 +39,18 @@ export default function InstituteCard({ institute, moreLabel }: InstituteCardPro
 
   return (
     <article className="h-full flex flex-col bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all p-6">
+      {/* Logo */}
+      {institute.logo && (
+        <div className="flex items-center justify-center h-12 mb-3">
+          <Image
+            src={urlFor(institute.logo).width(160).height(80).fit('max').url()}
+            alt={name}
+            width={100}
+            height={48}
+            className="object-contain max-h-12"
+          />
+        </div>
+      )}
       {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-2">
         <Link href={`/institutes/${slug.current}`} className="group flex-1 min-w-0">

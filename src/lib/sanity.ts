@@ -753,13 +753,47 @@ const instituteFields = `
   centerType,
   focusAreas,
   website,
+  logo,
   outreachPriority,
   profileStatus
 `
 
 const instituteFullFields = `
   ${instituteFields},
+  founded,
+  director,
+  staffCount,
+  email,
+  phone,
+  address,
+  socialLinks,
+  openPositionsUrl,
+  publicationsUrl,
   summary,
+  body[] {
+    ...,
+    _type == "image" => {
+      _type,
+      alt,
+      caption,
+      asset,
+      hotspot
+    }
+  },
+  keyProjects[] {
+    title,
+    description,
+    url
+  },
+  mainImage,
+  gallery[] {
+    _key,
+    alt,
+    caption,
+    asset,
+    hotspot
+  },
+  videoUrl,
   verifiedDate,
   seo {
     metaTitle,
