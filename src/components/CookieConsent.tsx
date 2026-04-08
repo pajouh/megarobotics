@@ -39,7 +39,14 @@ function initGtagDataLayer() {
   }
 }
 
+function isProductionHost() {
+  if (typeof window === 'undefined') return false
+  const h = window.location.hostname
+  return h === 'megarobotics.de' || h === 'www.megarobotics.de'
+}
+
 function loadGA(analyticsGranted: boolean, marketingGranted: boolean) {
+  if (!isProductionHost()) return
   initGtagDataLayer()
   window.gtag('consent', 'default', {
     analytics_storage: 'denied',
