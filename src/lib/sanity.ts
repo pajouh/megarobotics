@@ -19,8 +19,8 @@ function createSanityClient(): SanityClient | null {
     projectId,
     dataset,
     apiVersion: '2024-01-01',
-    // Disable CDN to always get fresh data - Next.js ISR handles caching
-    useCdn: false,
+        // Use Sanity CDN for public pages - reduces bandwidth vs direct API calls
+    useCdn: true,
   })
 }
 
