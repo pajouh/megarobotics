@@ -1,6 +1,9 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity'
 
+// Cache sitemap for 1 hour to prevent excessive Sanity API calls from crawlers
+export const revalidate = 3600
+
 const baseUrl = 'https://megarobotics.de'
 const locales = ['en', 'de']
 
