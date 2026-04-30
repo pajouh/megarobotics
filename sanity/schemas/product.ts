@@ -165,6 +165,14 @@ export default defineType({
       description: 'Link to PDF datasheet',
     }),
     defineField({
+      name: 'isActive',
+      title: 'Active',
+      type: 'boolean',
+      group: 'settings',
+      description: 'Set to inactive to hide this product from the website without deleting it',
+      initialValue: true,
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured Product',
       type: 'boolean',
@@ -240,11 +248,13 @@ export default defineType({
       title: 'name',
       subtitle: 'manufacturer.name',
       media: 'mainImage',
+      isActive: 'isActive',
     },
     prepare(selection) {
-      const { title, subtitle, media } = selection
+      const { title, subtitle, media, isActive } = selection
+      const inactive = isActive === false
       return {
-        title,
+        title: inactive ? `[INACTIVE] ${title}` : title,
         subtitle: subtitle ? `by ${subtitle}` : 'No manufacturer',
         media,
       }

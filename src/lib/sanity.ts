@@ -337,7 +337,7 @@ export async function getProducts(limit?: number, locale: Locale = defaultLocale
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
-    `*[_type == "product"] | order(order asc, name asc)${limitQuery} {
+    `*[_type == "product" && isActive != false] | order(order asc, name asc)${limitQuery} {
       ${getProductFields(locale)}
     }`
   )
@@ -358,7 +358,7 @@ export async function getProduct(slug: string, locale: Locale = defaultLocale): 
 export async function getFeaturedProducts(limit: number = 6, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "product" && featured == true] | order(order asc, name asc)[0...${limit}] {
+    `*[_type == "product" && featured == true && isActive != false] | order(order asc, name asc)[0...${limit}] {
       ${getProductFields(locale)}
     }`
   )
@@ -369,7 +369,7 @@ export async function getProductsByCategory(categorySlug: string, limit?: number
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
-    `*[_type == "product" && category->slug.current == $categorySlug] | order(order asc, name asc)${limitQuery} {
+    `*[_type == "product" && isActive != false && category->slug.current == $categorySlug] | order(order asc, name asc)${limitQuery} {
       ${getProductFields(locale)}
     }`,
     { categorySlug }
@@ -381,7 +381,7 @@ export async function getProductsByManufacturer(manufacturerSlug: string, limit?
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
-    `*[_type == "product" && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)${limitQuery} {
+    `*[_type == "product" && isActive != false && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)${limitQuery} {
       ${getProductFields(locale)}
     }`,
     { manufacturerSlug }
@@ -392,7 +392,7 @@ export async function getProductsByManufacturer(manufacturerSlug: string, limit?
 export async function getRelatedProducts(productId: string, categorySlug: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "product" && _id != $productId && category->slug.current == $categorySlug] | order(order asc, name asc)[0...${limit}] {
+    `*[_type == "product" && isActive != false && _id != $productId && category->slug.current == $categorySlug] | order(order asc, name asc)[0...${limit}] {
       ${getProductFields(locale)}
     }`,
     { productId, categorySlug }
@@ -403,7 +403,7 @@ export async function getRelatedProducts(productId: string, categorySlug: string
 export async function getProductsBySameManufacturer(productId: string, manufacturerSlug: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "product" && _id != $productId && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)[0...${limit}] {
+    `*[_type == "product" && isActive != false && _id != $productId && manufacturer->slug.current == $manufacturerSlug] | order(order asc, name asc)[0...${limit}] {
       ${getProductFields(locale)}
     }`,
     { productId, manufacturerSlug }
@@ -416,7 +416,7 @@ export async function getManufacturers(locale: Locale = defaultLocale): Promise<
   return client.fetch(
     `*[_type == "manufacturer"] | order(name asc) {
       ${getManufacturerFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)])
+      "productCount": count(*[_type == "product" && isActive != false && references(^._id)])
     }`
   )
 }
@@ -427,7 +427,7 @@ export async function getFeaturedManufacturers(limit: number = 8, locale: Locale
   return client.fetch(
     `*[_type == "manufacturer" && featured == true] | order(name asc)[0...${limit}] {
       ${getManufacturerFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)])
+      "productCount": count(*[_type == "product" && isActive != false && references(^._id)])
     }`
   )
 }
@@ -438,7 +438,7 @@ export async function getManufacturer(slug: string, locale: Locale = defaultLoca
   return client.fetch(
     `*[_type == "manufacturer" && slug.current == $slug][0] {
       ${getManufacturerFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)]),
+      "productCount": count(*[_type == "product" && isActive != false && references(^._id)]),
       seo {
         "metaTitle": ${localizedField('metaTitle', locale)},
         "metaDescription": ${localizedField('metaDescription', locale)},
@@ -455,7 +455,7 @@ export async function getProductCategories(locale: Locale = defaultLocale): Prom
   return client.fetch(
     `*[_type == "productCategory"] | order(order asc, name.${locale} asc) {
       ${getProductCategoryFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)])
+      "productCount": count(*[_type == "product" && isActive != false && references(^._id)])
     }`
   )
 }
@@ -466,7 +466,7 @@ export async function getProductCategory(slug: string, locale: Locale = defaultL
   return client.fetch(
     `*[_type == "productCategory" && slug.current == $slug][0] {
       ${getProductCategoryFields(locale)},
-      "productCount": count(*[_type == "product" && references(^._id)]),
+      "productCount": count(*[_type == "product" && isActive != false && references(^._id)]),
       seo {
         "metaTitle": ${localizedField('metaTitle', locale)},
         "metaDescription": ${localizedField('metaDescription', locale)},
@@ -482,7 +482,7 @@ export async function searchProducts(searchTerm: string, locale: Locale = defaul
   if (!client) return []
   const searchQuery = `*${searchTerm}*`
   return client.fetch<Product[]>(
-    `*[_type == "product" && (name match $searchQuery || description.${locale} match $searchQuery || tagline.${locale} match $searchQuery)] | order(name asc) {
+    `*[_type == "product" && isActive != false && (name match $searchQuery || description.${locale} match $searchQuery || tagline.${locale} match $searchQuery)] | order(name asc) {
       ${getProductFields(locale)}
     }`,
     { searchQuery }
@@ -493,7 +493,7 @@ export async function searchProducts(searchTerm: string, locale: Locale = defaul
 export async function getAllProductSlugs(): Promise<{ slug: string }[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "product" && defined(slug.current)][].slug.current`
+    `*[_type == "product" && isActive != false && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
 
