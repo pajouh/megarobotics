@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings().catch(() => null);
-  const twitterSite = extractTwitterHandle(settings?.socialLinks?.twitter) ?? "@megarobotics";
+  const twitterSite = extractTwitterHandle(settings?.socialLinks?.twitter) ?? "@megarobotics_de";
 
   return {
   metadataBase: new URL("https://www.megarobotics.de"),

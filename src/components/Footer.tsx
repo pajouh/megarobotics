@@ -136,7 +136,7 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
 
   // Fallback socials if none from CMS
   const displaySocials = socials.length > 0 ? socials : [
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/megarobotics' },
+    { name: 'Twitter', icon: Twitter, href: 'https://x.com/megarobotics_de' },
     { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/megarobotics' },
     { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@megarobotics' },
   ]

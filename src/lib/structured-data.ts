@@ -9,7 +9,7 @@ export function generateOrganizationSchema() {
     logo: `${baseUrl}/logo.png`,
     description: 'Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, quadrupeds, industrial automation, AI integration, and the future of intelligent machines.',
     sameAs: [
-      'https://twitter.com/megarobotics',
+      'https://x.com/megarobotics_de',
       'https://linkedin.com/company/megarobotics',
       'https://youtube.com/@megarobotics',
     ],
