@@ -82,7 +82,7 @@ export async function generateStaticParams() {
 
 export const revalidate = 60
 
-const baseUrl = 'https://megarobotics.de'
+const baseUrl = 'https://www.megarobotics.de'
 
 function getYoutubeEmbedUrl(url: string): string | null {
   const match = url.match(

@@ -12,7 +12,7 @@ export async function GET() {
     }
   `) || []
 
-  const baseUrl = 'https://megarobotics.de'
+  const baseUrl = 'https://www.megarobotics.de'
 
   const escapeXml = (str: string) => {
     return str

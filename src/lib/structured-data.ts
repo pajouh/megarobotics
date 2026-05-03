@@ -1,4 +1,4 @@
-const baseUrl = 'https://megarobotics.de'
+const baseUrl = 'https://www.megarobotics.de'
 
 export function generateOrganizationSchema() {
   return {
@@ -169,12 +169,18 @@ export function generateBreadcrumbSchema(items: { name: string; href?: string; u
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: `${baseUrl}${item.href || item.url || ''}`,
-    })),
+    itemListElement: items.map((item, index) => {
+      const path = item.href || item.url || ''
+      const absolute = /^https?:\/\//i.test(path)
+        ? path
+        : `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        item: absolute,
+      }
+    }),
   }
 }
 

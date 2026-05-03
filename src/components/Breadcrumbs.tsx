@@ -14,8 +14,6 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
-  const baseUrl = 'https://megarobotics.de'
-
   const allItems = [
     { name: 'Home', href: '/' },
     ...items,
@@ -23,7 +21,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
 
   const schemaItems = allItems.map((item) => ({
     name: item.name,
-    url: `${baseUrl}${item.href}`,
+    href: item.href,
   }))
 
   return (

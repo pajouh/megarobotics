@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { getLocale } from "next-intl/server";
+import { getSiteSettings } from "@/lib/sanity";
 import "./globals.css";
+
+function extractTwitterHandle(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  const match = url.match(/(?:twitter\.com|x\.com)\/@?([A-Za-z0-9_]{1,15})/i);
+  if (!match) return undefined;
+  return `@${match[1]}`;
+}
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -12,8 +21,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://megarobotics.de"),
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings().catch(() => null);
+  const twitterSite = extractTwitterHandle(settings?.socialLinks?.twitter) ?? "@megarobotics";
+
+  return {
+  metadataBase: new URL("https://www.megarobotics.de"),
   title: {
     default: "MegaRobotics - Robotics News, Reviews & Industry Insights",
     template: "%s | MegaRobotics",
@@ -38,7 +51,7 @@ export const metadata: Metadata = {
     "Chinese robotics",
     "robotik nachrichten",
   ],
-  authors: [{ name: "MegaRobotics", url: "https://megarobotics.de" }],
+  authors: [{ name: "MegaRobotics", url: "https://www.megarobotics.de" }],
   creator: "MegaRobotics",
   publisher: "MegaRobotics",
   formatDetection: {
@@ -50,7 +63,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: ["de_DE"],
-    url: "https://megarobotics.de",
+    url: "https://www.megarobotics.de",
     siteName: "MegaRobotics",
     title: "MegaRobotics - Robotics News, Reviews & Industry Insights",
     description:
@@ -70,7 +83,8 @@ export const metadata: Metadata = {
     description:
       "Your premier source for robotics news, product reviews, and industry analysis.",
     images: ["/og-image.png"],
-    creator: "@megarobotics",
+    site: twitterSite,
+    creator: twitterSite,
   },
   robots: {
     index: true,
@@ -84,7 +98,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://megarobotics.de",
+    canonical: "https://www.megarobotics.de",
     types: {
       "application/rss+xml": "/feed.xml",
     },
@@ -93,15 +107,17 @@ export const metadata: Metadata = {
   other: {
     "facebook-domain-verification": "f4d1i9dpm7pulx55nx1tuprhlkn36o",
   },
-};
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
         suppressHydrationWarning

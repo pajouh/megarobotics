@@ -104,8 +104,10 @@ export default function HeroBanner({ slides, autoPlayInterval = 6000 }: HeroBann
               src={slide.imageUrl}
               alt={slide.title}
               fill
+              sizes="100vw"
               className="object-cover"
               priority={index === 0}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
             />
           )}
 

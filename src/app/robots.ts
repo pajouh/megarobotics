@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://megarobotics.de/sitemap.xml',
-    host: 'https://megarobotics.de',
+    sitemap: 'https://www.megarobotics.de/sitemap.xml',
+    host: 'https://www.megarobotics.de',
   }
 }

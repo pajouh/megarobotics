@@ -90,7 +90,7 @@ export default async function ArticlePage({ params }: Props) {
     ? await getRelatedArticles(article._id, article.category.slug.current, 3, locale as Locale)
     : []
 
-  const shareUrl = `https://megarobotics.de/articles/${slug}`
+  const shareUrl = `https://www.megarobotics.de/articles/${slug}`
 
   // Generate structured data for the article
   const articleSchema = generateArticleSchema({
