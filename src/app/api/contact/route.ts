@@ -33,14 +33,29 @@ export async function POST(request: NextRequest) {
 
     const name = formData.get('name') as string | null
     const email = formData.get('email') as string | null
+    const company = (formData.get('company') as string | null) || ''
+    const phone = (formData.get('phone') as string | null) || ''
+    const country = (formData.get('country') as string | null) || ''
+    const industry = (formData.get('industry') as string | null) || ''
+    const applicationArea = (formData.get('applicationArea') as string | null) || ''
+    const projectStage = (formData.get('projectStage') as string | null) || ''
     const subject = formData.get('subject') as string | null
     const message = formData.get('message') as string | null
+    const consent = formData.get('consent') as string | null
     const file = formData.get('file') as File | null
 
     // Validate required fields
     if (!name?.trim() || !email?.trim() || !message?.trim()) {
       return NextResponse.json(
         { success: false, message: 'Name, email, and message are required.' },
+        { status: 400 }
+      )
+    }
+
+    // Require consent
+    if (consent !== 'true') {
+      return NextResponse.json(
+        { success: false, message: 'Please confirm the privacy consent to send your inquiry.' },
         { status: 400 }
       )
     }
@@ -72,10 +87,48 @@ export async function POST(request: NextRequest) {
     }
 
     const emailSubject = subject?.trim()
-      ? `Contact Form: ${subject.trim()}`
-      : `Contact Form Message from ${name.trim()}`
+      ? `Robotics Inquiry: ${subject.trim()}`
+      : applicationArea.trim()
+        ? `Robotics Inquiry — ${applicationArea.trim()}`
+        : `Robotics Inquiry from ${name.trim()}`
 
     const transporter = createTransporter()
+
+    const escape = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+    const meta: { label: string; value: string }[] = [
+      { label: 'Name', value: name.trim() },
+      { label: 'Email', value: email.trim() },
+      { label: 'Company', value: company.trim() },
+      { label: 'Phone', value: phone.trim() },
+      { label: 'Country', value: country.trim() },
+      { label: 'Industry', value: industry.trim() },
+      { label: 'Application area', value: applicationArea.trim() },
+      { label: 'Project stage', value: projectStage.trim() },
+      { label: 'Subject', value: subject?.trim() || '' },
+    ].filter((row) => row.value)
+
+    const textBody = [
+      ...meta.map((row) => `${row.label}: ${row.value}`),
+      '',
+      'Message:',
+      message.trim(),
+    ].join('\n')
+
+    const htmlMetaRows = meta
+      .map(
+        (row) => `
+            <tr>
+              <td style="padding: 6px 0; color: #6b7280; width: 130px; vertical-align: top;"><strong>${escape(row.label)}:</strong></td>
+              <td style="padding: 6px 0; color: #111827;">${
+                row.label === 'Email'
+                  ? `<a href="mailto:${escape(row.value)}">${escape(row.value)}</a>`
+                  : escape(row.value)
+              }</td>
+            </tr>`,
+      )
+      .join('')
 
     // Send email to admin
     await transporter.sendMail({
@@ -83,29 +136,18 @@ export async function POST(request: NextRequest) {
       to: process.env.SMTP_TO || 'info@megarobotics.de',
       replyTo: email.trim(),
       subject: emailSubject,
-      text: `Name: ${name.trim()}\nEmail: ${email.trim()}\nSubject: ${subject?.trim() || '(none)'}\n\nMessage:\n${message.trim()}`,
+      text: textBody,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #111827;">New Contact Form Message</h2>
+        <div style="font-family: Arial, sans-serif; max-width: 640px; margin: 0 auto;">
+          <h2 style="color: #111827;">New Robotics Inquiry</h2>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
-            <tr>
-              <td style="padding: 8px 0; color: #6b7280; width: 100px;"><strong>Name:</strong></td>
-              <td style="padding: 8px 0; color: #111827;">${name.trim()}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6b7280;"><strong>Email:</strong></td>
-              <td style="padding: 8px 0; color: #111827;"><a href="mailto:${email.trim()}">${email.trim()}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #6b7280;"><strong>Subject:</strong></td>
-              <td style="padding: 8px 0; color: #111827;">${subject?.trim() || '(none)'}</td>
-            </tr>
+            ${htmlMetaRows}
           </table>
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-          <div style="color: #374151; white-space: pre-wrap;">${message.trim()}</div>
-          ${attachments.length > 0 ? `<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" /><p style="color: #6b7280; font-size: 12px;">Attachment: ${file!.name} (${(file!.size / 1024).toFixed(1)} KB)</p>` : ''}
+          <div style="color: #374151; white-space: pre-wrap;">${escape(message.trim())}</div>
+          ${attachments.length > 0 ? `<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" /><p style="color: #6b7280; font-size: 12px;">Attachment: ${escape(file!.name)} (${(file!.size / 1024).toFixed(1)} KB)</p>` : ''}
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
-          <p style="color: #9ca3af; font-size: 12px;">Sent via MegaRobotics contact form at ${new Date().toISOString()}</p>
+          <p style="color: #9ca3af; font-size: 12px;">Sent via MegaRobotics contact form at ${new Date().toISOString()} — consent confirmed by sender.</p>
         </div>
       `,
       attachments,

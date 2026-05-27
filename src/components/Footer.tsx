@@ -2,7 +2,6 @@ import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Twitter, Linkedin, Youtube, Github, Instagram } from 'lucide-react'
 import Disclaimer from '@/components/Disclaimer'
-import NewsletterForm from '@/components/NewsletterForm'
 
 interface FooterLink {
   _key: string
@@ -33,29 +32,31 @@ interface SiteSettings {
   contactEmail?: string
 }
 
-interface FooterTranslations {
-  products: string
-  news: string
-  company: string
-  allProducts: string
-  allNews: string
-  manufacturers: string
-  reviews: string
-  research: string
-  about: string
-  contact: string
-  imprint: string
-  privacyPolicy: string
-  stayUpdated: string
-  newsletterSubtitle: string
-  enterEmail: string
-  subscribe: string
-  humanoidLegged: string
-  industrialCobots: string
-  consumerHome: string
-  companies: string
-  events: string
-  institutes: string
+export interface IndustrialFooterTranslations {
+  tagline: string
+  columns: {
+    platform: string
+    network: string
+    company: string
+    legal: string
+  }
+  links: {
+    solutions: string
+    industries: string
+    robotTechnologies: string
+    technologyNetwork: string
+    forCustomers: string
+    forManufacturers: string
+    projects: string
+    insights: string
+    company: string
+    contact: string
+    products: string
+    manufacturers: string
+    institutes: string
+    imprint: string
+    privacy: string
+  }
   trademarkDisclaimer?: string
 }
 
@@ -64,67 +65,51 @@ interface FooterProps {
   logoUrl?: string | null
   logoWidth?: number
   logoHeight?: number
-  translations?: FooterTranslations
+  translations: IndustrialFooterTranslations
 }
 
-export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight = 36, translations }: FooterProps) {
-  const t = translations || {
-    products: 'Products',
-    news: 'News',
-    company: 'Company',
-    allProducts: 'All Products',
-    allNews: 'All News',
-    manufacturers: 'Manufacturers',
-    reviews: 'Reviews',
-    research: 'Research',
-    about: 'About',
-    contact: 'Contact',
-    imprint: 'Imprint',
-    privacyPolicy: 'Privacy Policy',
-    stayUpdated: 'Stay Updated',
-    newsletterSubtitle: 'Get the latest robotics news delivered to your inbox.',
-    enterEmail: 'Enter your email',
-    subscribe: 'Subscribe',
-    humanoidLegged: 'Humanoid & Legged',
-    industrialCobots: 'Industrial & Cobots',
-    consumerHome: 'Consumer & Home',
-    companies: 'Companies',
-    events: 'Events',
-    institutes: 'Institutes',
-  }
-
-  const defaultProducts = [
-    { name: t.allProducts, href: '/products' },
-    { name: t.humanoidLegged, href: '/products/category/humanoid-legged-robots' },
-    { name: t.industrialCobots, href: '/products/category/industrial-cobots' },
-    { name: t.consumerHome, href: '/products/category/consumer-home' },
-    { name: t.manufacturers, href: '/manufacturers' },
+export default function Footer({
+  settings,
+  logoUrl,
+  logoWidth = 36,
+  logoHeight = 36,
+  translations: t,
+}: FooterProps) {
+  const platformLinks = [
+    { name: t.links.solutions, href: '/solutions' },
+    { name: t.links.industries, href: '/industries' },
+    { name: t.links.robotTechnologies, href: '/robot-technologies' },
+    { name: t.links.projects, href: '/projects' },
+    { name: t.links.insights, href: '/articles' },
   ]
 
-  const defaultNews = [
-    { name: t.allNews, href: '/articles' },
-    { name: t.reviews, href: '/category/reviews' },
-    { name: t.companies, href: '/category/companies' },
-    { name: t.events, href: '/category/events' },
-    { name: t.research, href: '/category/research' },
-    { name: t.institutes, href: '/institutes' },
+  const networkLinks = [
+    { name: t.links.technologyNetwork, href: '/technology-network' },
+    { name: t.links.forCustomers, href: '/for-customers' },
+    { name: t.links.forManufacturers, href: '/for-manufacturers' },
+    { name: t.links.products, href: '/products' },
+    { name: t.links.manufacturers, href: '/manufacturers' },
+    { name: t.links.institutes, href: '/institutes' },
   ]
 
-  const defaultCompany = [
-    { name: t.about, href: '/about' },
-    { name: t.contact, href: '/contact' },
-    { name: t.imprint, href: '/imprint' },
-    { name: t.privacyPolicy, href: '/privacy' },
+  const companyLinks = [
+    { name: t.links.company, href: '/about' },
+    { name: t.links.contact, href: '/contact' },
   ]
+
+  const legalLinks = [
+    { name: t.links.imprint, href: '/imprint' },
+    { name: t.links.privacy, href: '/privacy' },
+  ]
+
   const siteName = settings?.siteName || 'MegaRobotics'
-  const footerDescription = settings?.footerDescription || 'Your source for the latest robotics news, reviews, and industry insights. Covering industrial automation, humanoid robots, and AI integration.'
-  const copyrightText = settings?.copyrightText || `© ${new Date().getFullYear()} MegaRobotics. All rights reserved.`
+  const footerTagline = settings?.footerDescription || t.tagline
+  const copyrightText =
+    settings?.copyrightText || `© ${new Date().getFullYear()} MegaRobotics. All rights reserved.`
   const socialLinks = settings?.socialLinks
 
-  // Use CMS footer links if available, otherwise use defaults
-  const footerColumns = settings?.footerLinks && settings.footerLinks.length > 0
-    ? settings.footerLinks
-    : null
+  // CMS-driven columns take precedence if defined
+  const cmsColumns = settings?.footerLinks && settings.footerLinks.length > 0 ? settings.footerLinks : null
 
   const socials = [
     socialLinks?.twitter && { name: 'Twitter', icon: Twitter, href: socialLinks.twitter },
@@ -134,17 +119,19 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
     socialLinks?.instagram && { name: 'Instagram', icon: Instagram, href: socialLinks.instagram },
   ].filter(Boolean) as { name: string; icon: typeof Twitter; href: string }[]
 
-  // Fallback socials if none from CMS
-  const displaySocials = socials.length > 0 ? socials : [
-    { name: 'Twitter', icon: Twitter, href: 'https://x.com/megarobotics_de' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/megarobotics' },
-    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@megarobotics' },
-  ]
+  const displaySocials =
+    socials.length > 0
+      ? socials
+      : [
+          { name: 'Twitter', icon: Twitter, href: 'https://x.com/megarobotics_de' },
+          { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/megarobotics' },
+          { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@megarobotics' },
+        ]
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+    <footer className="bg-[color:var(--ind-graphite-950)] text-gray-300 border-t border-white/5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
@@ -159,45 +146,41 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
                   />
                 </div>
               ) : (
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+                <div className="w-9 h-9 rounded bg-[color:var(--ind-blue)] flex items-center justify-center">
                   <span className="text-white font-bold text-lg">M</span>
                 </div>
               )}
-              <span className="text-gray-900 font-semibold tracking-tight text-lg">
-                {siteName}
-              </span>
+              <span className="text-white font-semibold tracking-tight text-lg">{siteName}</span>
             </Link>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              {footerDescription}
-            </p>
-            <div className="flex gap-3 mt-4">
+            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">{footerTagline}</p>
+            <div className="flex gap-2 mt-5">
               {displaySocials.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                  className="p-2 rounded text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
                 >
                   <span className="sr-only">{social.name}</span>
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4.5 h-4.5" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Dynamic columns from CMS or fallback */}
-          {footerColumns ? (
-            // Use CMS columns
-            footerColumns.map((column) => (
+          {cmsColumns ? (
+            cmsColumns.map((column) => (
               <div key={column._key}>
-                <h3 className="text-gray-900 font-semibold mb-4">{column.title}</h3>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
+                  {column.title}
+                </h3>
                 <ul className="space-y-2">
                   {column.links?.map((link) => (
                     <li key={link._key}>
                       <Link
                         href={link.url}
-                        className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
+                        className="text-gray-300 hover:text-white transition-colors text-sm"
                       >
                         {link.label}
                       </Link>
@@ -207,93 +190,58 @@ export default function Footer({ settings, logoUrl, logoWidth = 36, logoHeight =
               </div>
             ))
           ) : (
-            // Fallback columns
             <>
-              <div>
-                <h3 className="text-gray-900 font-semibold mb-4">{t.products}</h3>
-                <ul className="space-y-2">
-                  {defaultProducts.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-gray-900 font-semibold mb-4">{t.news}</h3>
-                <ul className="space-y-2">
-                  {defaultNews.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-gray-900 font-semibold mb-4">{t.company}</h3>
-                <ul className="space-y-2">
-                  {defaultCompany.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-gray-500 hover:text-gray-900 transition-colors text-sm"
-                      >
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <FooterColumn title={t.columns.platform} items={platformLinks} />
+              <FooterColumn title={t.columns.network} items={networkLinks} />
+              <FooterColumn title={t.columns.company} items={[...companyLinks, ...legalLinks]} />
             </>
           )}
         </div>
 
-        {/* Newsletter */}
-        <div className="mt-10 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-gray-900 font-semibold mb-1">{t.stayUpdated}</h3>
-              <p className="text-gray-500 text-sm">
-                {t.newsletterSubtitle}
-              </p>
-            </div>
-            <NewsletterForm />
-          </div>
-        </div>
-
         {/* Bottom */}
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
-              {copyrightText}
-            </p>
-            <div className="flex gap-6 text-sm">
-              <Link href="/privacy" className="text-gray-400 hover:text-gray-600 transition-colors">
-                {t.privacyPolicy}
+        <div className="mt-12 pt-6 border-t border-white/5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <p className="text-gray-500 text-xs">{copyrightText}</p>
+            <div className="flex gap-6 text-xs">
+              <Link href="/imprint" className="text-gray-500 hover:text-white transition-colors">
+                {t.links.imprint}
               </Link>
-              <Link href="/imprint" className="text-gray-400 hover:text-gray-600 transition-colors">
-                {t.imprint}
+              <Link href="/privacy" className="text-gray-500 hover:text-white transition-colors">
+                {t.links.privacy}
               </Link>
             </div>
           </div>
-          {/* Trademark Disclaimer */}
-          <div className="mt-4 text-center sm:text-left">
+          <div className="mt-4">
             <Disclaimer variant="footer" translations={{ footer: t.trademarkDisclaimer }} />
           </div>
         </div>
       </div>
     </footer>
+  )
+}
+
+function FooterColumn({
+  title,
+  items,
+}: {
+  title: string
+  items: { name: string; href: string }[]
+}) {
+  return (
+    <div>
+      <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">{title}</h3>
+      <ul className="space-y-2">
+        {items.map((item) => (
+          <li key={item.name}>
+            <Link
+              href={item.href}
+              className="text-gray-300 hover:text-white transition-colors text-sm"
+            >
+              {item.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

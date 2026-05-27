@@ -240,3 +240,212 @@ body {
   overflow-x: auto;
   display: block;
 }
+
+/* ============================================================
+ * Industrial design system (additive — used by new pages only)
+ * Palette: graphite/steel + restrained electric blue and orange
+ * ============================================================ */
+
+:root {
+  --ind-graphite-950: #0b0f14;
+  --ind-graphite-900: #11161d;
+  --ind-graphite-800: #1a2029;
+  --ind-graphite-700: #232a35;
+  --ind-steel-600: #4b5563;
+  --ind-steel-500: #6b7280;
+  --ind-steel-400: #9ca3af;
+  --ind-steel-200: #e5e7eb;
+  --ind-steel-100: #f3f4f6;
+  --ind-offwhite: #f7f8fa;
+  --ind-blue: #2563eb;
+  --ind-blue-hover: #1d4ed8;
+  --ind-orange: #ea580c;
+  --ind-orange-hover: #c2410c;
+}
+
+/* Section backgrounds */
+.ind-section-dark {
+  background-color: var(--ind-graphite-950);
+  color: #e5e7eb;
+}
+.ind-section-graphite {
+  background-color: var(--ind-graphite-900);
+  color: #e5e7eb;
+}
+.ind-section-light {
+  background-color: var(--ind-offwhite);
+  color: var(--ind-graphite-900);
+}
+.ind-section-white {
+  background-color: #ffffff;
+  color: var(--ind-graphite-900);
+}
+
+/* Industrial grid background — denser, technical feel */
+.ind-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+.ind-grid-bg-light {
+  background-image:
+    linear-gradient(rgba(17, 22, 29, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 22, 29, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+}
+
+/* Industrial card — restrained, sharper corners */
+.ind-card {
+  background: #ffffff;
+  border: 1px solid var(--ind-steel-200);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+.ind-card:hover {
+  border-color: var(--ind-steel-400);
+  box-shadow: 0 8px 24px -12px rgba(11, 15, 20, 0.18);
+  transform: translateY(-1px);
+}
+
+.ind-card-dark {
+  background: var(--ind-graphite-800);
+  border: 1px solid var(--ind-graphite-700);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  color: #e5e7eb;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.ind-card-dark:hover {
+  border-color: var(--ind-blue);
+  background: #1f2733;
+}
+
+/* Industrial buttons */
+.ind-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--ind-blue);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 0.18s ease;
+}
+.ind-btn-primary:hover {
+  background-color: var(--ind-blue-hover);
+}
+
+.ind-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--ind-graphite-900);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--ind-graphite-700);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.ind-btn-secondary:hover {
+  background-color: var(--ind-graphite-900);
+  color: #ffffff;
+}
+
+.ind-btn-secondary-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #e5e7eb;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid #374151;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+.ind-btn-secondary-dark:hover {
+  background-color: #1f2733;
+  border-color: var(--ind-blue);
+}
+
+/* Accent label — technical, small caps feel */
+.ind-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ind-blue);
+}
+.ind-eyebrow-orange {
+  color: var(--ind-orange);
+}
+.ind-eyebrow-light {
+  color: #93c5fd;
+}
+
+/* Headings — tight tracking for technical look */
+.ind-h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.ind-h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+.ind-h3 {
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Numbered process step badge */
+.ind-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.375rem;
+  background: var(--ind-graphite-900);
+  color: #ffffff;
+  font-family: var(--font-mono), monospace;
+  font-weight: 600;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* Accent rule — left border for safe-notice / pull-out blocks */
+.ind-rule-blue {
+  border-left: 3px solid var(--ind-blue);
+  padding-left: 1rem;
+}
+.ind-rule-orange {
+  border-left: 3px solid var(--ind-orange);
+  padding-left: 1rem;
+}
+
+/* Subtle hero gradient — abstract industrial visual fallback */
+.ind-hero-gradient {
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(37, 99, 235, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(234, 88, 12, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, var(--ind-graphite-950) 0%, var(--ind-graphite-900) 100%);
+}
