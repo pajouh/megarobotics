@@ -17,15 +17,16 @@ interface HeaderProps {
 export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight = 36 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const t = useTranslations('nav')
-  const tCommon = useTranslations('common')
+  const t = useTranslations('industrial.nav')
 
   const navigation = [
-    { name: t('products'), href: '/products' },
-    { name: t('news'), href: '/articles' },
-    { name: t('manufacturers'), href: '/manufacturers' },
-    { name: t('institutes'), href: '/institutes' },
-    { name: t('research'), href: '/category/research' },
+    { name: t('solutions'), href: '/solutions' },
+    { name: t('industries'), href: '/industries' },
+    { name: t('robotTechnologies'), href: '/robot-technologies' },
+    { name: t('technologyNetwork'), href: '/technology-network' },
+    { name: t('projects'), href: '/projects' },
+    { name: t('insights'), href: '/articles' },
+    { name: t('company'), href: '/about' },
   ]
 
   useEffect(() => {
@@ -40,8 +41,8 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm'
-          : 'bg-transparent'
+          ? 'bg-[color:var(--ind-graphite-950)]/95 backdrop-blur-md border-b border-white/10 shadow-sm'
+          : 'bg-[color:var(--ind-graphite-950)]/70 backdrop-blur-sm'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -60,66 +61,62 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                 />
               </div>
             ) : (
-              <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center overflow-hidden">
+              <div className="relative w-9 h-9 rounded bg-[color:var(--ind-blue)] flex items-center justify-center overflow-hidden">
                 <span className="text-white font-bold text-lg">M</span>
               </div>
             )}
-            <span className="hidden sm:block text-gray-900 font-semibold tracking-tight text-lg">
+            <span className="hidden sm:block text-white font-semibold tracking-tight text-lg">
               {siteName || 'MegaRobotics'}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:gap-8">
+          <div className="hidden lg:flex lg:items-center lg:gap-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-gray-600 hover:text-gray-900 transition-colors font-medium"
+                className="text-sm text-gray-300 hover:text-white transition-colors font-medium"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          {/* Subscribe Button & Language Switcher */}
-          <div className="hidden md:flex md:items-center gap-3">
+          {/* CTA & Language Switcher */}
+          <div className="hidden lg:flex lg:items-center gap-3">
             <LanguageSwitcher />
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[color:var(--ind-blue)] text-white hover:bg-[color:var(--ind-blue-hover)] transition-colors text-sm font-semibold"
             >
-              {tCommon('subscribe')}
+              {t('discussProject')}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               type="button"
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-300 hover:text-white"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Toggle menu</span>
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 bg-white">
+          <div className="lg:hidden py-4 border-t border-white/10 bg-[color:var(--ind-graphite-950)]">
             <div className="flex flex-col gap-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors px-3 py-2 rounded-lg font-medium"
+                  className="text-gray-300 hover:text-white hover:bg-white/5 transition-colors px-3 py-2 rounded font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -130,10 +127,10 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
               </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-medium mt-3"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded bg-[color:var(--ind-blue)] text-white text-sm font-semibold mt-3"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {tCommon('subscribe')}
+                {t('discussProject')}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

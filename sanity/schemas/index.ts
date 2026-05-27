@@ -11,6 +11,10 @@ import siteSettings from './siteSettings'
 import page from './page'
 import heroBanner from './heroBanner'
 import institute from './institute'
+import solution from './solution'
+import industry from './industry'
+import robotTechnology from './robotTechnology'
+import projectStudy from './projectStudy'
 
 export const schemaTypes = [
   // Document types
@@ -25,6 +29,10 @@ export const schemaTypes = [
   siteSettings,
   heroBanner,
   institute,
+  solution,
+  industry,
+  robotTechnology,
+  projectStudy,
   // Object types
   blockContent,
   richImage,

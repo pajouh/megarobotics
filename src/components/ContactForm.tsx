@@ -20,12 +20,12 @@ function ContactFormSkeleton() {
   return (
     <div className="space-y-5 animate-pulse">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div className="h-12 bg-gray-100 rounded-xl" />
-        <div className="h-12 bg-gray-100 rounded-xl" />
+        <div className="h-12 bg-gray-100 rounded-md" />
+        <div className="h-12 bg-gray-100 rounded-md" />
       </div>
-      <div className="h-12 bg-gray-100 rounded-xl" />
-      <div className="h-32 bg-gray-100 rounded-xl" />
-      <div className="h-12 w-48 bg-gray-100 rounded-xl" />
+      <div className="h-12 bg-gray-100 rounded-md" />
+      <div className="h-32 bg-gray-100 rounded-md" />
+      <div className="h-12 w-48 bg-gray-100 rounded-md" />
     </div>
   )
 }
@@ -34,13 +34,21 @@ function ContactFormInner() {
   const searchParams = useSearchParams()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [company, setCompany] = useState('')
+  const [phone, setPhone] = useState('')
+  const [country, setCountry] = useState('')
+  const [industry, setIndustry] = useState('')
+  const [applicationArea, setApplicationArea] = useState('')
+  const [projectStage, setProjectStage] = useState('')
   const [subject, setSubject] = useState(searchParams.get('subject') || '')
   const [message, setMessage] = useState('')
+  const [consent, setConsent] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   const t = useTranslations('contact')
+  const tExtra = useTranslations('industrial.contactExtra')
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0]
@@ -78,14 +86,27 @@ function ContactFormInner() {
       return
     }
 
+    if (!consent) {
+      setStatus('error')
+      setStatusMessage(tExtra('fields.consentRequired'))
+      return
+    }
+
     setStatus('loading')
 
     try {
       const formData = new FormData()
       formData.append('name', name.trim())
       formData.append('email', email.trim())
+      formData.append('company', company.trim())
+      formData.append('phone', phone.trim())
+      formData.append('country', country.trim())
+      formData.append('industry', industry.trim())
+      formData.append('applicationArea', applicationArea.trim())
+      formData.append('projectStage', projectStage.trim())
       formData.append('subject', subject.trim())
       formData.append('message', message.trim())
+      formData.append('consent', consent ? 'true' : 'false')
       if (file) formData.append('file', file)
 
       const res = await fetch('/api/contact', {
@@ -100,8 +121,15 @@ function ContactFormInner() {
         setStatusMessage(data.message || t('success'))
         setName('')
         setEmail('')
+        setCompany('')
+        setPhone('')
+        setCountry('')
+        setIndustry('')
+        setApplicationArea('')
+        setProjectStage('')
         setSubject('')
         setMessage('')
+        setConsent(false)
         removeFile()
       } else {
         setStatus('error')
@@ -114,15 +142,21 @@ function ContactFormInner() {
   }
 
   const inputClass =
-    'w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-gray-400 focus:ring-gray-200 transition-all'
+    'w-full px-4 py-3 rounded-md bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-blue-600 focus:ring-blue-100 transition-all'
+
+  const stageOptions: { value: string; key: string }[] = [
+    { value: 'exploring', key: 'exploring' },
+    { value: 'feasibility', key: 'feasibility' },
+    { value: 'supplier_selection', key: 'supplierSelection' },
+    { value: 'pilot', key: 'pilot' },
+    { value: 'integration', key: 'integration' },
+    { value: 'manufacturer_cooperation', key: 'manufacturerCooperation' },
+  ]
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-          <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-1.5">
-            {t('name')} *
-          </label>
+        <Field id="contact-name" label={`${t('name')} *`}>
           <input
             id="contact-name"
             type="text"
@@ -134,12 +168,10 @@ function ContactFormInner() {
             placeholder={t('namePlaceholder')}
             className={inputClass}
             disabled={status === 'loading'}
+            required
           />
-        </div>
-        <div>
-          <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-1.5">
-            {t('email')} *
-          </label>
+        </Field>
+        <Field id="contact-email" label={`${t('email')} *`}>
           <input
             id="contact-email"
             type="email"
@@ -151,29 +183,91 @@ function ContactFormInner() {
             placeholder={t('emailPlaceholder')}
             className={inputClass}
             disabled={status === 'loading'}
+            required
           />
-        </div>
+        </Field>
       </div>
 
-      <div>
-        <label htmlFor="contact-subject" className="block text-sm font-medium text-gray-700 mb-1.5">
-          {t('subject')}
-        </label>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <Field id="contact-company" label={tExtra('fields.company')}>
+          <input
+            id="contact-company"
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            placeholder={tExtra('fields.companyPlaceholder')}
+            className={inputClass}
+            disabled={status === 'loading'}
+          />
+        </Field>
+        <Field id="contact-phone" label={tExtra('fields.phone')}>
+          <input
+            id="contact-phone"
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder={tExtra('fields.phonePlaceholder')}
+            className={inputClass}
+            disabled={status === 'loading'}
+          />
+        </Field>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <Field id="contact-country" label={tExtra('fields.country')}>
+          <input
+            id="contact-country"
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            placeholder={tExtra('fields.countryPlaceholder')}
+            className={inputClass}
+            disabled={status === 'loading'}
+          />
+        </Field>
+        <Field id="contact-industry" label={tExtra('fields.industry')}>
+          <input
+            id="contact-industry"
+            type="text"
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+            placeholder={tExtra('fields.industryPlaceholder')}
+            className={inputClass}
+            disabled={status === 'loading'}
+          />
+        </Field>
+      </div>
+
+      <Field id="contact-application" label={tExtra('fields.applicationArea')}>
         <input
-          id="contact-subject"
+          id="contact-application"
           type="text"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder={t('subjectPlaceholder')}
+          value={applicationArea}
+          onChange={(e) => setApplicationArea(e.target.value)}
+          placeholder={tExtra('fields.applicationAreaPlaceholder')}
           className={inputClass}
           disabled={status === 'loading'}
         />
-      </div>
+      </Field>
 
-      <div>
-        <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-1.5">
-          {t('message')} *
-        </label>
+      <Field id="contact-stage" label={tExtra('fields.projectStage')}>
+        <select
+          id="contact-stage"
+          value={projectStage}
+          onChange={(e) => setProjectStage(e.target.value)}
+          className={inputClass}
+          disabled={status === 'loading'}
+        >
+          <option value="">—</option>
+          {stageOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {tExtra(`fields.projectStageOptions.${opt.key}`)}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <Field id="contact-message" label={`${t('message')} *`}>
         <textarea
           id="contact-message"
           value={message}
@@ -185,16 +279,15 @@ function ContactFormInner() {
           rows={5}
           className={`${inputClass} resize-vertical`}
           disabled={status === 'loading'}
+          required
         />
-      </div>
+      </Field>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">
-          {t('attachment')}
-        </label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('attachment')}</label>
         <div className="flex items-center gap-3">
           <label
-            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-gray-300 bg-white text-sm text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition-all cursor-pointer ${
               status === 'loading' ? 'opacity-50 pointer-events-none' : ''
             }`}
           >
@@ -222,10 +315,24 @@ function ContactFormInner() {
         </div>
       </div>
 
+      <label className="flex items-start gap-2.5 cursor-pointer text-sm text-gray-700">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => {
+            setConsent(e.target.checked)
+            if (status !== 'idle' && status !== 'loading') setStatus('idle')
+          }}
+          className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          disabled={status === 'loading'}
+        />
+        <span className="leading-relaxed">{tExtra('fields.consent')}</span>
+      </label>
+
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full sm:w-auto px-8 py-3 rounded-xl bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white font-medium transition-all flex items-center justify-center gap-2"
+        className="w-full sm:w-auto ind-btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? (
           <>
@@ -235,13 +342,13 @@ function ContactFormInner() {
         ) : (
           <>
             <Send className="w-5 h-5" />
-            {t('send')}
+            {tExtra('sendButton')}
           </>
         )}
       </button>
 
       {status === 'success' && (
-        <div className="flex items-center gap-2 text-sm text-emerald-600">
+        <div className="flex items-center gap-2 text-sm text-emerald-700">
           <CheckCircle className="w-4 h-4 flex-shrink-0" />
           {statusMessage}
         </div>
@@ -253,5 +360,24 @@ function ContactFormInner() {
         </div>
       )}
     </form>
+  )
+}
+
+function Field({
+  id,
+  label,
+  children,
+}: {
+  id: string
+  label: string
+  children: React.ReactNode
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1.5">
+        {label}
+      </label>
+      {children}
+    </div>
   )
 }
