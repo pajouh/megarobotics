@@ -1098,431 +1098,431 @@
     },
     "catalog": {
       "meta": {
-        "title": "Robotics & Automation Technologies | MegaRobotics",
-        "description": "MegaRobotics distributes, sources and evaluates robot platforms, PLCs, actuators, drives, sensors, grippers, safety systems and automation technologies for industrial applications."
+        "title": "Robotik & Automatisierungstechnologien | MegaRobotics",
+        "description": "MegaRobotics vertreibt, beschafft und evaluiert Roboterplattformen, SPS, Aktoren, Antriebe, Sensoren, Greifer, Sicherheitssysteme und Automatisierungstechnologien für industrielle Anwendungen."
       },
       "page": {
-        "eyebrow": "Catalog",
-        "title": "Robotics & Automation Technologies",
-        "intro": "MegaRobotics distributes, sources and evaluates robotic platforms, automation components and system technologies for industrial, logistics, research and service applications. A complete robotic solution may include robot platforms, PLCs, motion systems, sensors, end-effectors, safety systems, software and integration with existing production infrastructure.",
-        "ctaInquiry": "Request Product Inquiry",
-        "ctaProject": "Discuss Automation Project"
+        "eyebrow": "Katalog",
+        "title": "Robotik & Automatisierungstechnologien",
+        "intro": "MegaRobotics vertreibt, beschafft und evaluiert robotische Plattformen, Automatisierungskomponenten und Systemtechnologien für industrielle, logistische, forschungs- und servicebezogene Anwendungen. Eine vollständige robotische Lösung kann Roboterplattformen, SPS, Bewegungssysteme, Sensoren, Endeffektoren, Sicherheitssysteme, Software und die Integration in bestehende Produktionsinfrastruktur umfassen.",
+        "ctaInquiry": "Produktanfrage stellen",
+        "ctaProject": "Automatisierungsprojekt besprechen"
       },
       "familiesSection": {
-        "eyebrow": "Browse",
-        "title": "Product families",
-        "subtitle": "Twelve families that cover robot platforms and the automation technologies needed to make them work in real production environments."
+        "eyebrow": "Übersicht",
+        "title": "Produktfamilien",
+        "subtitle": "Zwölf Familien, die Roboterplattformen und die Automatisierungstechnologien abdecken, die für ihren zuverlässigen Einsatz in realen Produktionsumgebungen erforderlich sind."
       },
       "catalogSection": {
-        "eyebrow": "Full catalog",
-        "title": "Distributor product catalog",
-        "subtitle": "All listed products. Use filters to narrow by category or manufacturer.",
-        "featured": "Featured distributor products"
+        "eyebrow": "Gesamtkatalog",
+        "title": "Distributor-Produktkatalog",
+        "subtitle": "Alle gelisteten Produkte. Verwenden Sie die Filter, um nach Kategorie oder Hersteller einzugrenzen.",
+        "featured": "Empfohlene Distributor-Produkte"
       },
       "componentsTeaser": {
-        "eyebrow": "Components",
-        "title": "Automation components for robotic systems",
-        "body": "PLCs, drives, sensors, end-effectors, safety systems and industrial communication — the technologies that make a robot work reliably in a real production environment.",
-        "cta": "Explore automation components"
+        "eyebrow": "Komponenten",
+        "title": "Automatisierungskomponenten für robotische Systeme",
+        "body": "SPS, Antriebe, Sensoren, Endeffektoren, Sicherheitssysteme und industrielle Kommunikation — die Technologien, die einen Roboter zuverlässig in einer realen Produktionsumgebung arbeiten lassen.",
+        "cta": "Automatisierungskomponenten entdecken"
       },
       "distributorTeaser": {
         "eyebrow": "Distributor",
-        "title": "Robot distributor & technology reseller",
-        "body": "MegaRobotics supports sourcing, evaluation and commercial coordination for robotic platforms and automation technologies in Europe.",
-        "cta": "Discover our distributor role"
+        "title": "Roboter-Distributor & Technologie-Reseller",
+        "body": "MegaRobotics unterstützt Beschaffung, Evaluierung und kommerzielle Koordination für robotische Plattformen und Automatisierungstechnologien in Europa.",
+        "cta": "Unsere Distributor-Rolle entdecken"
       },
       "family": {
-        "backToCatalog": "Back to catalog",
-        "labelSubcategories": "Subcategories",
-        "labelApplications": "Typical applications",
-        "labelSelectionCriteria": "Key selection criteria",
-        "labelRelatedProducts": "Related products in this family",
-        "labelEcosystems": "Common industrial ecosystems",
-        "ecosystemsDisclaimer": "Common industrial ecosystems and reference technologies may include the brands listed above. Availability, sourcing status and commercial terms are confirmed project by project. All trademarks are property of their respective owners.",
-        "noProductsTitle": "No products tagged for this family yet",
-        "noProductsBody": "Contact us to discuss sourcing options for this category.",
-        "noProductsCta": "Request sourcing inquiry",
-        "inquiryCtaTitle": "Discuss a project in this category",
-        "inquiryCtaBody": "Tell us about your automation requirement and we'll help identify suitable technologies.",
-        "inquiryCtaButton": "Request product inquiry"
+        "backToCatalog": "Zurück zum Katalog",
+        "labelSubcategories": "Unterkategorien",
+        "labelApplications": "Typische Anwendungen",
+        "labelSelectionCriteria": "Wichtige Auswahlkriterien",
+        "labelRelatedProducts": "Verwandte Produkte in dieser Familie",
+        "labelEcosystems": "Verbreitete industrielle Ökosysteme",
+        "ecosystemsDisclaimer": "Verbreitete industrielle Ökosysteme und Referenztechnologien können die oben aufgeführten Marken umfassen. Verfügbarkeit, Beschaffungsstatus und kommerzielle Bedingungen werden projektbezogen bestätigt. Alle Marken sind Eigentum ihrer jeweiligen Inhaber.",
+        "noProductsTitle": "Noch keine Produkte für diese Familie zugeordnet",
+        "noProductsBody": "Kontaktieren Sie uns, um Beschaffungsoptionen für diese Kategorie zu besprechen.",
+        "noProductsCta": "Beschaffungsanfrage stellen",
+        "inquiryCtaTitle": "Ein Projekt in dieser Kategorie besprechen",
+        "inquiryCtaBody": "Erzählen Sie uns von Ihrer Automatisierungsanforderung — wir helfen, geeignete Technologien zu identifizieren.",
+        "inquiryCtaButton": "Produktanfrage stellen"
       },
       "automationComponents": {
         "meta": {
-          "title": "Automation Components for Robotic Systems | MegaRobotics",
-          "description": "PLC systems, actuators, drives, sensors, vision, grippers, safety systems and industrial communication technologies for robotic automation projects."
+          "title": "Automatisierungskomponenten für robotische Systeme | MegaRobotics",
+          "description": "SPS-Systeme, Aktoren, Antriebe, Sensoren, Vision, Greifer, Sicherheitssysteme und industrielle Kommunikationstechnologien für robotische Automatisierungsprojekte."
         },
-        "title": "Automation Components for Robotic Systems",
-        "eyebrow": "Components",
-        "intro": "Robotic systems depend on more than the robot itself. PLCs, actuators, drives, sensors, end-effectors, safety systems and industrial communication define whether a robot can be integrated reliably into a real production environment.",
-        "sectionsTitle": "Six pillars of an integrated robotic system",
+        "title": "Automatisierungskomponenten für robotische Systeme",
+        "eyebrow": "Komponenten",
+        "intro": "Robotische Systeme bestehen aus mehr als nur dem Roboter selbst. SPS, Aktoren, Antriebe, Sensoren, Endeffektoren, Sicherheitssysteme und industrielle Kommunikation entscheiden darüber, ob ein Roboter zuverlässig in einer realen Produktionsumgebung integriert werden kann.",
+        "sectionsTitle": "Sechs Säulen eines integrierten robotischen Systems",
         "sections": [
           {
-            "title": "PLC, IPC & industrial control",
-            "body": "Programmable logic controllers, industrial PCs, remote I/O and edge controllers — the brains that orchestrate robots, machines, conveyors and safety logic."
+            "title": "SPS, IPC & industrielle Steuerung",
+            "body": "Speicherprogrammierbare Steuerungen, Industrie-PCs, Remote-I/O und Edge-Controller — das Gehirn, das Roboter, Maschinen, Förderer und Sicherheitslogik orchestriert."
           },
           {
-            "title": "Actuators, drives & motion",
-            "body": "Servo motors, drives, linear axes, gear motors, pneumatic and rotary actuators that move every fixture, feeder and auxiliary axis around the robot."
+            "title": "Aktoren, Antriebe & Bewegung",
+            "body": "Servomotoren, Antriebe, Linearachsen, Getriebemotoren, pneumatische und rotatorische Aktoren, die jede Vorrichtung, jeden Förderer und jede Zusatzachse rund um den Roboter bewegen."
           },
           {
-            "title": "Grippers & end-effectors",
-            "body": "Mechanical, electric, pneumatic, vacuum, adaptive and dexterous tools, plus dispensing, sanding, welding and polishing heads — the part that does the actual work."
+            "title": "Greifer & Endeffektoren",
+            "body": "Mechanische, elektrische, pneumatische, Vakuum-, adaptive und dexterische Werkzeuge sowie Dosier-, Schleif-, Schweiß- und Polierköpfe — das Element, das die eigentliche Arbeit verrichtet."
           },
           {
-            "title": "Sensors, vision & perception",
-            "body": "2D and 3D cameras, LiDAR, safety scanners, force / torque sensors, proximity and AI-driven inspection systems — the senses of modern robotic automation."
+            "title": "Sensoren, Vision & Wahrnehmung",
+            "body": "2D- und 3D-Kameras, LiDAR, Sicherheitsscanner, Kraft-/Drehmomentsensoren, Näherungs- und KI-gestützte Inspektionssysteme — die Sinne moderner robotischer Automatisierung."
           },
           {
-            "title": "Safety & machine protection",
-            "body": "Safety scanners, light curtains, safety PLCs, interlocks, cell guarding, emergency-stop systems and risk assessment support for compliant deployments."
+            "title": "Sicherheit & Maschinenschutz",
+            "body": "Sicherheitsscanner, Lichtvorhänge, Sicherheits-SPS, Verriegelungen, Zellenschutz, Not-Halt-Systeme und Unterstützung bei der Risikobeurteilung für konforme Anlagen."
           },
           {
-            "title": "Communication, HMI & software",
-            "body": "PROFINET, EtherCAT, EtherNet/IP, OPC UA, IO-Link, MQTT, HMI panels, SCADA, fleet management and digital twin software for production integration."
+            "title": "Kommunikation, HMI & Software",
+            "body": "PROFINET, EtherCAT, EtherNet/IP, OPC UA, IO-Link, MQTT, HMI-Panels, SCADA, Flottenmanagement und Digital-Twin-Software für die Produktionsintegration."
           }
         ],
-        "safeWording": "MegaRobotics supports sourcing, evaluation and coordination of automation components for robotic systems. Specific brand availability and distributor status are confirmed individually before any commercial engagement.",
-        "ctaTitle": "Discuss component requirements",
-        "ctaBody": "Tell us which components you are evaluating — we help structure the technical and commercial discussion.",
-        "ctaButton": "Discuss component requirements"
+        "safeWording": "MegaRobotics unterstützt Beschaffung, Evaluierung und Koordination von Automatisierungskomponenten für robotische Systeme. Konkrete Markenverfügbarkeit und Distributorstatus werden vor jeder kommerziellen Zusammenarbeit individuell bestätigt.",
+        "ctaTitle": "Komponentenanforderungen besprechen",
+        "ctaBody": "Erzählen Sie uns, welche Komponenten Sie evaluieren — wir helfen, die technische und kommerzielle Diskussion zu strukturieren.",
+        "ctaButton": "Komponentenanforderungen besprechen"
       },
       "robotDistributor": {
         "meta": {
-          "title": "Robot Distributor & Robotics Technology Reseller | MegaRobotics",
-          "description": "Germany-based robot distributor and robotics technology reseller supporting sourcing, evaluation and commercial coordination for industrial, service and research robotics."
+          "title": "Roboter-Distributor & Robotik-Technologie-Reseller | MegaRobotics",
+          "description": "Roboter-Distributor mit Sitz in Deutschland und Robotik-Technologie-Reseller, der Beschaffung, Evaluierung und kommerzielle Koordination für industrielle, Service- und Forschungsrobotik unterstützt."
         },
-        "title": "Robot Distributor & Robotics Technology Reseller",
+        "title": "Roboter-Distributor & Robotik-Technologie-Reseller",
         "eyebrow": "Distributor",
-        "intro": "MegaRobotics supports European customers with robot sourcing, product evaluation, price and availability inquiries, and commercial coordination for selected robotic platforms and automation technologies.",
-        "whatWeDistributeTitle": "What we distribute and source",
+        "intro": "MegaRobotics unterstützt europäische Kunden bei der Roboterbeschaffung, Produktevaluierung, Preis- und Verfügbarkeitsanfragen sowie der kommerziellen Koordination für ausgewählte robotische Plattformen und Automatisierungstechnologien.",
+        "whatWeDistributeTitle": "Was wir vertreiben und beschaffen",
         "whatWeDistribute": [
           {
-            "title": "Robot platforms",
-            "body": "Industrial arms, cobots, mobile robots, quadruped, humanoid and service-robot platforms — sourced and evaluated per customer requirement."
+            "title": "Roboterplattformen",
+            "body": "Industrielle Arme, Cobots, mobile Roboter, vierbeinige, humanoide und Service-Roboter-Plattformen — beschafft und evaluiert nach Kundenanforderung."
           },
           {
-            "title": "Automation components",
-            "body": "PLCs, drives, sensors, grippers, safety systems and industrial communication — coordinated alongside the robot for a complete solution."
+            "title": "Automatisierungskomponenten",
+            "body": "SPS, Antriebe, Sensoren, Greifer, Sicherheitssysteme und industrielle Kommunikation — koordiniert zusammen mit dem Roboter zu einer vollständigen Lösung."
           },
           {
-            "title": "Application packages",
-            "body": "Pre-engineered robotic cells for palletizing, packaging, machine tending, inspection, finishing and cleaning, in coordination with integration partners."
+            "title": "Anwendungspakete",
+            "body": "Vorkonfigurierte robotische Zellen für Palettieren, Verpacken, Maschinenbeschickung, Inspektion, Oberflächenbearbeitung und Reinigung, in Koordination mit Integrationspartnern."
           }
         ],
-        "audiencesTitle": "Who we work with",
+        "audiencesTitle": "Mit wem wir arbeiten",
         "audiences": [
           {
-            "title": "For industrial customers",
-            "body": "Sourcing, evaluation and procurement support for robotic and automation technologies. Pilot-project structuring and integrator coordination."
+            "title": "Für industrielle Kunden",
+            "body": "Beschaffung, Evaluierung und Procurement-Unterstützung für robotische und Automatisierungstechnologien. Strukturierung von Pilotprojekten und Koordination von Integratoren."
           },
           {
-            "title": "For research institutions",
-            "body": "Procurement, platform evaluation and long-term-support assessment for university and applied-research labs."
+            "title": "Für Forschungseinrichtungen",
+            "body": "Beschaffung, Plattformevaluierung und Bewertung des langfristigen Supports für Universitäts- und anwendungsorientierte Forschungslabore."
           },
           {
-            "title": "For system integrators",
-            "body": "Joint sourcing of robotic platforms and components for integration projects. Manufacturer coordination and commercial structuring."
+            "title": "Für Systemintegratoren",
+            "body": "Gemeinsame Beschaffung von Roboterplattformen und Komponenten für Integrationsprojekte. Hersteller-Koordination und kommerzielle Strukturierung."
           },
           {
-            "title": "For manufacturers",
-            "body": "European market development, customer discovery, pilot-project structuring and local partner coordination for selected robotics manufacturers."
+            "title": "Für Hersteller",
+            "body": "Europäische Markterschließung, Kundenentwicklung, Pilotprojekt-Strukturierung und lokale Partner-Koordination für ausgewählte Robotik-Hersteller."
           }
         ],
-        "safeWording": "MegaRobotics may act as distributor, reseller, sourcing partner or project-development partner depending on product line, territory and manufacturer agreement.",
-        "legalNote": "Manufacturer relationship, product availability and territorial rights are confirmed before quotation or commercial engagement.",
-        "ctaTitle": "Request a sourcing inquiry",
-        "ctaBody": "Tell us which platform, component or application you are evaluating. We will structure the next technical and commercial steps.",
-        "ctaButton": "Request sourcing inquiry"
+        "safeWording": "MegaRobotics kann je nach Produktlinie, Gebiet und Hersteller-Vereinbarung als Distributor, Reseller, Beschaffungspartner oder Projektentwicklungs-Partner agieren.",
+        "legalNote": "Herstellerbeziehung, Produktverfügbarkeit und Gebietsrechte werden vor Angebotsstellung oder kommerzieller Zusammenarbeit bestätigt.",
+        "ctaTitle": "Beschaffungsanfrage stellen",
+        "ctaBody": "Erzählen Sie uns, welche Plattform, Komponente oder Anwendung Sie evaluieren. Wir strukturieren die nächsten technischen und kommerziellen Schritte.",
+        "ctaButton": "Beschaffungsanfrage stellen"
       },
       "families": {
         "robot-platforms": {
-          "title": "Robot Platforms",
-          "shortDescription": "Industrial arms, cobots, mobile robots, quadruped, humanoid and service platforms.",
-          "intro": "Robot platforms are the moving body of an automation system. The right platform depends on task, payload, environment, safety profile and integration complexity.",
+          "title": "Roboterplattformen",
+          "shortDescription": "Industrielle Arme, Cobots, mobile Roboter, vierbeinige, humanoide und Service-Plattformen.",
+          "intro": "Roboterplattformen sind der bewegliche Körper eines Automatisierungssystems. Die richtige Plattform hängt von Aufgabe, Traglast, Umgebung, Sicherheitsprofil und Integrationskomplexität ab.",
           "body": [
-            "Industrial 6-axis robots, collaborative arms, delta and SCARA robots, AMRs and AGVs, quadruped inspection robots, humanoid platforms and mobile manipulators each address a different class of automation problem.",
-            "Selection starts from the application — payload, reach, cycle time, environment and safety drive everything else: gripper, vision, controller and integration choices."
+            "Industrielle 6-Achs-Roboter, kollaborative Arme, Delta- und SCARA-Roboter, AMR und AGV, vierbeinige Inspektionsroboter, humanoide Plattformen und mobile Manipulatoren adressieren jeweils eine andere Klasse von Automatisierungsproblemen.",
+            "Die Auswahl beginnt mit der Anwendung — Traglast, Reichweite, Taktzeit, Umgebung und Sicherheit bestimmen alles Weitere: Greifer, Vision, Controller und Integrationsentscheidungen."
           ],
           "subcategories": [
-            "Industrial 6-axis robots",
-            "Collaborative robots / cobots",
-            "Delta / parallel robots",
-            "SCARA robots",
-            "Cartesian / gantry robots",
-            "AMR / AGV / mobile robots",
-            "Unmanned forklifts",
-            "Quadruped / legged robots",
-            "Humanoid robots",
-            "Mobile manipulators",
-            "Dual-arm robots",
-            "Cleaning robots",
-            "Service robots",
-            "Research robots"
+            "Industrielle 6-Achs-Roboter",
+            "Kollaborative Roboter / Cobots",
+            "Delta- / Parallelroboter",
+            "SCARA-Roboter",
+            "Kartesische / Portalroboter",
+            "AMR / AGV / mobile Roboter",
+            "Fahrerlose Gabelstapler",
+            "Vierbeinige / schreitende Roboter",
+            "Humanoide Roboter",
+            "Mobile Manipulatoren",
+            "Doppelarm-Roboter",
+            "Reinigungsroboter",
+            "Service-Roboter",
+            "Forschungsroboter"
           ],
           "applications": [
-            "Assembly",
-            "Machine tending",
+            "Montage",
+            "Maschinenbeschickung",
             "Handling",
-            "Packaging",
-            "Inspection",
-            "Logistics transport",
-            "Facility inspection",
-            "Service automation"
+            "Verpackung",
+            "Inspektion",
+            "Logistiktransport",
+            "Anlageninspektion",
+            "Service-Automatisierung"
           ],
           "selectionCriteria": [
-            "Payload",
-            "Reach",
-            "Repeatability",
-            "Speed",
-            "Environment",
-            "Safety profile",
-            "Integration interfaces",
-            "Software ecosystem"
+            "Traglast",
+            "Reichweite",
+            "Wiederholgenauigkeit",
+            "Geschwindigkeit",
+            "Umgebung",
+            "Sicherheitsprofil",
+            "Integrationsschnittstellen",
+            "Software-Ökosystem"
           ],
           "meta": {
-            "title": "Robot Platforms | MegaRobotics",
-            "description": "Industrial arms, cobots, parallel robots, AMR/AGV, quadruped, humanoid and mobile manipulators — sourced and evaluated for European applications."
+            "title": "Roboterplattformen | MegaRobotics",
+            "description": "Industrielle Arme, Cobots, Parallelroboter, AMR/AGV, vierbeinige, humanoide und mobile Manipulatoren — beschafft und evaluiert für europäische Anwendungen."
           }
         },
         "end-effectors-robot-tooling": {
-          "title": "End Effectors & Robot Tooling",
-          "shortDescription": "Grippers, force sensors, tool changers and application-specific end tooling.",
-          "intro": "The end-effector defines what the robot can actually do. Grippers, vacuum tools, force sensors, sanding heads, polishing tools, dispensing systems and tool changers turn a robot platform into an application-specific solution.",
+          "title": "Endeffektoren & Roboterwerkzeuge",
+          "shortDescription": "Greifer, Kraftsensoren, Werkzeugwechsler und anwendungsspezifische Endwerkzeuge.",
+          "intro": "Der Endeffektor definiert, was der Roboter tatsächlich tun kann. Greifer, Vakuumwerkzeuge, Kraftsensoren, Schleifköpfe, Polierwerkzeuge, Dosiersysteme und Werkzeugwechsler machen aus einer Roboterplattform eine anwendungsspezifische Lösung.",
           "body": [
-            "End-of-arm tooling is often the deciding factor for whether a robotic cell is reliable in production. The choice depends on the part geometry, surface, weight, throughput and the kind of force or compliance required.",
-            "Tool changers, force / torque sensors and adaptive grippers enable a single robot to perform multiple tasks across product variants."
+            "Das End-of-Arm-Tooling ist oft entscheidend dafür, ob eine robotische Zelle in der Produktion zuverlässig läuft. Die Wahl hängt von Geometrie und Oberfläche des Teils, Gewicht, Durchsatz und der erforderlichen Kraft oder Nachgiebigkeit ab.",
+            "Werkzeugwechsler, Kraft-/Drehmomentsensoren und adaptive Greifer ermöglichen es einem einzigen Roboter, mehrere Aufgaben über Produktvarianten hinweg auszuführen."
           ],
           "subcategories": [
-            "Mechanical grippers",
-            "Electric grippers",
-            "Pneumatic grippers",
-            "Vacuum grippers",
-            "Adaptive grippers",
-            "Dexterous hands",
-            "Force/torque sensors",
-            "Tool changers",
-            "Sanding tools",
-            "Polishing tools",
-            "Painting/coating tools",
-            "Dispensing/gluing tools",
-            "Welding torches",
-            "Screwdriving tools",
-            "Cutting/deburring tools",
-            "Palletizing grippers",
-            "Packaging end-effectors"
+            "Mechanische Greifer",
+            "Elektrische Greifer",
+            "Pneumatische Greifer",
+            "Vakuumgreifer",
+            "Adaptive Greifer",
+            "Dexterische Hände",
+            "Kraft-/Drehmomentsensoren",
+            "Werkzeugwechsler",
+            "Schleifwerkzeuge",
+            "Polierwerkzeuge",
+            "Lackier-/Beschichtungswerkzeuge",
+            "Dosier-/Klebewerkzeuge",
+            "Schweißbrenner",
+            "Schraubwerkzeuge",
+            "Schneid-/Entgratwerkzeuge",
+            "Palettiergreifer",
+            "Verpackungs-Endeffektoren"
           ],
           "applications": [
-            "Pick-and-place",
-            "Assembly",
-            "Surface finishing",
-            "Welding",
-            "Dispensing",
-            "Palletizing",
-            "Packaging"
+            "Pick-and-Place",
+            "Montage",
+            "Oberflächenbearbeitung",
+            "Schweißen",
+            "Dosieren",
+            "Palettieren",
+            "Verpacken"
           ],
           "selectionCriteria": [
-            "Payload",
-            "Stroke",
-            "Gripping force",
+            "Traglast",
+            "Hub",
+            "Greifkraft",
             "Compliance",
-            "Cycle time",
-            "Mounting interface",
-            "Cleanroom / hygiene class"
+            "Taktzeit",
+            "Montageschnittstelle",
+            "Reinraum- / Hygieneklasse"
           ],
           "meta": {
-            "title": "End Effectors & Robot Tooling | MegaRobotics",
-            "description": "Grippers, vacuum tools, force/torque sensors, dispensing and finishing tools — the end-of-arm technology that defines what a robotic cell can actually do."
+            "title": "Endeffektoren & Roboterwerkzeuge | MegaRobotics",
+            "description": "Greifer, Vakuumwerkzeuge, Kraft-/Drehmomentsensoren, Dosier- und Bearbeitungswerkzeuge — die End-of-Arm-Technologie, die definiert, was eine robotische Zelle tatsächlich leisten kann."
           }
         },
         "motion-actuators-drives": {
-          "title": "Motion, Actuators & Drives",
-          "shortDescription": "Servo motors, drives, linear axes, gear motors and pneumatic actuators around the robot.",
-          "intro": "Many automation tasks require dedicated motion beyond the robot itself. Servo motors, drives, linear axes, pneumatic cylinders, gear motors and rotary actuators are used in feeders, fixtures, conveyors, handling modules and robotic workcells.",
+          "title": "Bewegung, Aktoren & Antriebe",
+          "shortDescription": "Servomotoren, Antriebe, Linearachsen, Getriebemotoren und pneumatische Aktoren rund um den Roboter.",
+          "intro": "Viele Automatisierungsaufgaben erfordern eigenständige Bewegung über den Roboter hinaus. Servomotoren, Antriebe, Linearachsen, Pneumatikzylinder, Getriebemotoren und rotatorische Aktoren werden in Zuführungen, Vorrichtungen, Förderern, Handhabungsmodulen und robotischen Workcells eingesetzt.",
           "body": [
-            "A typical robotic cell contains far more motion than the robot itself: 7th-axis rails, indexers, conveyors, feeders and auxiliary axes. Choosing the right drive technology — servo, stepper, frequency inverter, pneumatic — depends on speed, accuracy, duty cycle and integration with the robot controller.",
-            "Gearboxes, harmonic drives and encoders determine the achievable repeatability and stiffness of these auxiliary axes."
+            "Eine typische robotische Zelle enthält weit mehr Bewegung als nur den Roboter: 7. Achse / Roboterschienen, Indexer, Förderer, Zuführungen und Zusatzachsen. Die Wahl der richtigen Antriebstechnologie — Servo, Schrittmotor, Frequenzumrichter, Pneumatik — hängt von Geschwindigkeit, Genauigkeit, Einschaltdauer und der Integration mit der Robotersteuerung ab.",
+            "Getriebe, Harmonic Drives und Encoder bestimmen die erreichbare Wiederholgenauigkeit und Steifigkeit dieser Zusatzachsen."
           ],
           "subcategories": [
-            "Servo motors",
-            "Servo drives",
-            "Stepper motors",
-            "Gear motors",
-            "Frequency inverters / VFD",
-            "Electric linear actuators",
-            "Pneumatic cylinders",
-            "Rotary actuators",
-            "Linear axes",
-            "Belt-driven axes",
-            "Ball-screw axes",
-            "7th axis / robot rail",
-            "Gearboxes",
-            "Harmonic drives",
-            "Cycloidal reducers",
-            "Encoders",
-            "Brakes and clutches",
-            "Motion controllers"
+            "Servomotoren",
+            "Servoantriebe",
+            "Schrittmotoren",
+            "Getriebemotoren",
+            "Frequenzumrichter / VFD",
+            "Elektrische Linearaktoren",
+            "Pneumatikzylinder",
+            "Rotatorische Aktoren",
+            "Linearachsen",
+            "Riemenangetriebene Achsen",
+            "Kugelgewindespindel-Achsen",
+            "7. Achse / Roboterschiene",
+            "Getriebe",
+            "Harmonic Drives",
+            "Zykloid-Getriebe",
+            "Encoder",
+            "Bremsen und Kupplungen",
+            "Bewegungssteuerungen"
           ],
           "applications": [
-            "Auxiliary motion",
-            "7th-axis robot transport",
-            "Feeders & indexers",
-            "Conveyor automation",
-            "Custom motion modules"
+            "Zusatzbewegung",
+            "Robotertransport auf 7. Achse",
+            "Zuführungen & Indexer",
+            "Förderbandautomatisierung",
+            "Kundenspezifische Bewegungsmodule"
           ],
           "selectionCriteria": [
-            "Speed",
-            "Accuracy",
-            "Duty cycle",
-            "Force / torque",
-            "Bus protocol",
-            "Form factor",
-            "Service availability"
+            "Geschwindigkeit",
+            "Genauigkeit",
+            "Einschaltdauer",
+            "Kraft / Drehmoment",
+            "Bus-Protokoll",
+            "Bauform",
+            "Service-Verfügbarkeit"
           ],
           "meta": {
-            "title": "Motion, Actuators & Drives | MegaRobotics",
-            "description": "Servo motors, drives, linear axes, pneumatic cylinders, gearboxes and motion controllers for robotic cells and industrial automation."
+            "title": "Bewegung, Aktoren & Antriebe | MegaRobotics",
+            "description": "Servomotoren, Antriebe, Linearachsen, Pneumatikzylinder, Getriebe und Bewegungssteuerungen für robotische Zellen und industrielle Automatisierung."
           }
         },
         "plc-control-industrial-automation": {
-          "title": "PLC, Control & Industrial Automation",
-          "shortDescription": "PLCs, IPCs, edge controllers, I/O, HMI and electrical control architecture.",
-          "intro": "Robotic systems often need to communicate with existing factory control architectures. PLCs, IPCs, I/O systems, HMI panels and industrial networks are essential for integrating robots into production lines, machines and safety systems.",
+          "title": "SPS, Steuerung & industrielle Automatisierung",
+          "shortDescription": "SPS, IPC, Edge-Controller, I/O, HMI und elektrische Steuerungsarchitektur.",
+          "intro": "Robotische Systeme müssen oft mit bestehenden Fabriksteuerungsarchitekturen kommunizieren. SPS, IPC, I/O-Systeme, HMI-Panels und industrielle Netzwerke sind essenziell für die Integration von Robotern in Produktionslinien, Maschinen und Sicherheitssysteme.",
           "body": [
-            "The PLC layer remains the backbone of industrial automation. A robot rarely operates in isolation — it is supervised, sequenced and interlocked by a PLC or industrial PC that also handles auxiliary motion, safety logic, HMI and connectivity to MES / ERP systems.",
-            "The choice of PLC family typically follows the plant's existing standards (Siemens, Beckhoff, Rockwell, Schneider, Mitsubishi, Omron, B&R) and the required protocol stack."
+            "Die SPS-Ebene bleibt das Rückgrat der industriellen Automatisierung. Ein Roboter arbeitet selten isoliert — er wird von einer SPS oder einem Industrie-PC überwacht, gesequenziert und verriegelt, die auch Zusatzbewegung, Sicherheitslogik, HMI und die Anbindung an MES- / ERP-Systeme übernehmen.",
+            "Die Wahl der SPS-Familie folgt in der Regel den bestehenden Standards der Anlage (Siemens, Beckhoff, Rockwell, Schneider, Mitsubishi, Omron, B&R) und dem erforderlichen Protokollstack."
           ],
           "subcategories": [
-            "PLC systems",
-            "Safety PLCs",
-            "Industrial PCs / IPC",
-            "Edge controllers",
-            "Robot controllers",
-            "Motion controllers",
-            "Remote I/O",
-            "HMI panels",
-            "Electrical cabinets",
-            "Control panels",
-            "Power supplies",
-            "Industrial relays",
-            "Signal converters",
-            "Fieldbus gateways"
+            "SPS-Systeme",
+            "Sicherheits-SPS",
+            "Industrie-PCs / IPC",
+            "Edge-Controller",
+            "Robotersteuerungen",
+            "Bewegungssteuerungen",
+            "Remote-I/O",
+            "HMI-Panels",
+            "Schaltschränke",
+            "Steuerungspaneele",
+            "Netzteile",
+            "Industrielle Relais",
+            "Signalumsetzer",
+            "Feldbus-Gateways"
           ],
           "applications": [
-            "Line control",
-            "Cell control",
-            "Robot supervision",
-            "Safety logic",
-            "MES / ERP integration"
+            "Liniensteuerung",
+            "Zellensteuerung",
+            "Roboterüberwachung",
+            "Sicherheitslogik",
+            "MES- / ERP-Integration"
           ],
           "selectionCriteria": [
-            "Plant standard",
-            "I/O count",
-            "Protocol support",
-            "Safety integration",
-            "Software ecosystem",
-            "Service & support"
+            "Anlagen-Standard",
+            "I/O-Anzahl",
+            "Protokoll-Unterstützung",
+            "Sicherheitsintegration",
+            "Software-Ökosystem",
+            "Service & Support"
           ],
           "meta": {
-            "title": "PLC, Control & Industrial Automation | MegaRobotics",
-            "description": "PLCs, IPCs, edge controllers, robot controllers, I/O systems and HMI panels for integrating robots into industrial control architectures."
+            "title": "SPS, Steuerung & industrielle Automatisierung | MegaRobotics",
+            "description": "SPS, IPC, Edge-Controller, Robotersteuerungen, I/O-Systeme und HMI-Panels für die Integration von Robotern in industrielle Steuerungsarchitekturen."
           }
         },
         "sensors-vision-perception": {
-          "title": "Sensors, Vision & Perception",
-          "shortDescription": "Cameras, LiDAR, safety scanners and force sensors that let robots see and feel.",
-          "intro": "Perception is critical for modern robotic systems. Cameras, LiDAR, safety scanners, proximity sensors, force sensors and AI inspection systems help robots locate parts, navigate environments and verify quality.",
+          "title": "Sensoren, Vision & Wahrnehmung",
+          "shortDescription": "Kameras, LiDAR, Sicherheitsscanner und Kraftsensoren, die Roboter sehen und fühlen lassen.",
+          "intro": "Wahrnehmung ist entscheidend für moderne robotische Systeme. Kameras, LiDAR, Sicherheitsscanner, Näherungssensoren, Kraftsensoren und KI-Inspektionssysteme helfen Robotern, Teile zu lokalisieren, sich in Umgebungen zu bewegen und Qualität zu prüfen.",
           "body": [
-            "Modern robotic applications increasingly depend on perception — bin picking, AGV navigation, AI inspection, force-controlled finishing. The right sensor depends on accuracy, frame rate, lighting tolerance and the software ecosystem you can integrate with.",
-            "Safety-rated sensors (laser scanners, light curtains) are a separate category and must follow the cell's risk assessment."
+            "Moderne robotische Anwendungen hängen zunehmend von Wahrnehmung ab — Bin-Picking, AGV-Navigation, KI-Inspektion, kraftgeregelte Oberflächenbearbeitung. Der richtige Sensor hängt von Genauigkeit, Bildrate, Lichttoleranz und dem Software-Ökosystem ab, in das integriert werden kann.",
+            "Sicherheitsbewertete Sensoren (Laserscanner, Lichtvorhänge) bilden eine separate Kategorie und müssen der Risikobeurteilung der Zelle folgen."
           ],
           "subcategories": [
-            "2D cameras",
-            "3D cameras",
-            "Machine vision systems",
-            "AI inspection cameras",
+            "2D-Kameras",
+            "3D-Kameras",
+            "Machine-Vision-Systeme",
+            "KI-Inspektionskameras",
             "LiDAR",
-            "Safety scanners",
-            "Proximity sensors",
-            "Photoelectric sensors",
-            "Ultrasonic sensors",
-            "Encoders",
-            "Barcode readers",
+            "Sicherheitsscanner",
+            "Näherungssensoren",
+            "Photoelektrische Sensoren",
+            "Ultraschallsensoren",
+            "Encoder",
+            "Barcode-Leser",
             "RFID",
-            "Thermal cameras",
-            "Force sensors",
-            "Torque sensors",
-            "IMU sensors",
-            "Environmental sensors"
+            "Wärmebildkameras",
+            "Kraftsensoren",
+            "Drehmomentsensoren",
+            "IMU-Sensoren",
+            "Umgebungssensoren"
           ],
           "applications": [
-            "Bin picking",
-            "Quality inspection",
-            "AGV navigation",
-            "Presence detection",
-            "Force-controlled tasks",
-            "Asset identification"
+            "Bin-Picking",
+            "Qualitätsprüfung",
+            "AGV-Navigation",
+            "Anwesenheitserkennung",
+            "Kraftgeregelte Aufgaben",
+            "Asset-Identifikation"
           ],
           "selectionCriteria": [
-            "Accuracy",
-            "Frame rate",
-            "Lighting tolerance",
-            "Field of view",
-            "Software ecosystem",
-            "Integration protocol"
+            "Genauigkeit",
+            "Bildrate",
+            "Lichttoleranz",
+            "Sichtfeld",
+            "Software-Ökosystem",
+            "Integrationsprotokoll"
           ],
           "meta": {
-            "title": "Sensors, Vision & Perception | MegaRobotics",
-            "description": "2D/3D cameras, LiDAR, safety scanners, force sensors and AI inspection systems for robotic automation and industrial perception."
+            "title": "Sensoren, Vision & Wahrnehmung | MegaRobotics",
+            "description": "2D-/3D-Kameras, LiDAR, Sicherheitsscanner, Kraftsensoren und KI-Inspektionssysteme für robotische Automatisierung und industrielle Wahrnehmung."
           }
         },
         "safety-machine-protection": {
-          "title": "Safety & Machine Protection",
-          "shortDescription": "Safety scanners, light curtains, safety PLCs, interlocks and cell guarding.",
-          "intro": "Industrial robot projects require safety concepts, protective devices and risk reduction measures. Safety scanners, light curtains, interlocks, safety PLCs, robot cell guarding and emergency stop systems are part of a reliable automation architecture.",
+          "title": "Sicherheit & Maschinenschutz",
+          "shortDescription": "Sicherheitsscanner, Lichtvorhänge, Sicherheits-SPS, Verriegelungen und Zellenschutz.",
+          "intro": "Industrielle Roboterprojekte erfordern Sicherheitskonzepte, Schutzeinrichtungen und Maßnahmen zur Risikominderung. Sicherheitsscanner, Lichtvorhänge, Verriegelungen, Sicherheits-SPS, Roboterzellen-Schutz und Not-Halt-Systeme sind Teil einer zuverlässigen Automatisierungsarchitektur.",
           "body": [
-            "Functional safety is not optional. The choice of safety scanners, light curtains, safety relays and safety PLCs must follow a documented risk assessment per the relevant standards (e.g. EN ISO 12100, EN ISO 13849, EN ISO 10218 for industrial robots, EN ISO 13482 for service robots).",
-            "MegaRobotics coordinates with integration partners and accredited bodies on CE conformity. We do not act as a certification body — the certification itself is performed by accredited assessors."
+            "Funktionale Sicherheit ist nicht optional. Die Wahl von Sicherheitsscannern, Lichtvorhängen, Sicherheitsrelais und Sicherheits-SPS muss einer dokumentierten Risikobeurteilung nach den relevanten Normen folgen (z. B. EN ISO 12100, EN ISO 13849, EN ISO 10218 für Industrieroboter, EN ISO 13482 für Service-Roboter).",
+            "MegaRobotics koordiniert mit Integrationspartnern und akkreditierten Stellen zur CE-Konformität. Wir agieren nicht als Zertifizierungsstelle — die Zertifizierung selbst wird von akkreditierten Prüfern durchgeführt."
           ],
           "subcategories": [
-            "Safety scanners",
-            "Light curtains",
-            "Safety PLC",
-            "Emergency stop systems",
-            "Safety relays",
-            "Safety doors and interlocks",
-            "Machine guarding",
-            "Robot cell fencing",
-            "Safety mats",
-            "Safety-rated monitored stop systems",
-            "Risk assessment support",
-            "CE documentation support"
+            "Sicherheitsscanner",
+            "Lichtvorhänge",
+            "Sicherheits-SPS",
+            "Not-Halt-Systeme",
+            "Sicherheitsrelais",
+            "Sicherheitstüren und Verriegelungen",
+            "Maschinenschutz",
+            "Roboterzellen-Umzäunung",
+            "Sicherheitsmatten",
+            "Sicherheitsbewertete überwachte Halt-Systeme",
+            "Unterstützung bei Risikobeurteilung",
+            "Unterstützung bei CE-Dokumentation"
           ],
           "applications": [
-            "Robot cell protection",
-            "Operator safety",
-            "Process supervision",
-            "Risk reduction",
-            "CE conformity support"
+            "Schutz robotischer Zellen",
+            "Bedienersicherheit",
+            "Prozessüberwachung",
+            "Risikominderung",
+            "Unterstützung bei CE-Konformität"
           ],
           "selectionCriteria": [
-            "Safety integrity (PL/SIL)",
-            "Field of view / detection zone",
-            "Reaction time",
-            "Integration with PLC",
-            "Resistance to environment"
+            "Sicherheitsintegrität (PL / SIL)",
+            "Sichtfeld / Detektionszone",
+            "Reaktionszeit",
+            "Integration mit SPS",
+            "Umgebungsbeständigkeit"
           ],
           "meta": {
-            "title": "Safety & Machine Protection | MegaRobotics",
-            "description": "Safety scanners, light curtains, safety PLCs, interlocks and cell guarding for compliant industrial robot deployments."
+            "title": "Sicherheit & Maschinenschutz | MegaRobotics",
+            "description": "Sicherheitsscanner, Lichtvorhänge, Sicherheits-SPS, Verriegelungen und Zellenschutz für konforme industrielle Roboteranlagen."
           }
         },
         "industrial-communication-connectivity": {
-          "title": "Industrial Communication & Connectivity",
-          "shortDescription": "Field networks, gateways and edge connectivity for robotic systems.",
-          "intro": "Industrial communication protocols define how robots, PLCs, sensors and IT systems exchange data. Reliable Ethernet-based field networks and edge-to-cloud connectivity are essential for modern automation.",
+          "title": "Industrielle Kommunikation & Konnektivität",
+          "shortDescription": "Feldnetzwerke, Gateways und Edge-Konnektivität für robotische Systeme.",
+          "intro": "Industrielle Kommunikationsprotokolle definieren, wie Roboter, SPS, Sensoren und IT-Systeme Daten austauschen. Zuverlässige Ethernet-basierte Feldnetzwerke und Edge-to-Cloud-Konnektivität sind essenziell für moderne Automatisierung.",
           "body": [
-            "PROFINET, EtherCAT, EtherNet/IP, Modbus TCP, IO-Link and OPC UA cover most of the modern industrial communication landscape. The choice depends on the plant standard, the robot controller and the integration with MES / ERP systems.",
-            "Edge connectivity (industrial routers, MQTT, OPC UA, 5G modules) enables remote monitoring, predictive maintenance and integration with cloud and IoT platforms."
+            "PROFINET, EtherCAT, EtherNet/IP, Modbus TCP, IO-Link und OPC UA decken den Großteil der modernen industriellen Kommunikationslandschaft ab. Die Wahl hängt vom Anlagen-Standard, der Robotersteuerung und der Integration mit MES- / ERP-Systemen ab.",
+            "Edge-Konnektivität (industrielle Router, MQTT, OPC UA, 5G-Module) ermöglicht Fernüberwachung, Predictive Maintenance und die Integration mit Cloud- und IoT-Plattformen."
           ],
           "subcategories": [
             "PROFINET",
@@ -1532,261 +1532,260 @@
             "IO-Link",
             "OPC UA",
             "MQTT",
-            "Industrial routers",
+            "Industrielle Router",
             "Gateways",
-            "Remote maintenance modules",
-            "5G / private network integration",
-            "MES / ERP connectivity"
+            "Module für Fernwartung",
+            "5G / privates Netzwerk-Integration",
+            "MES- / ERP-Konnektivität"
           ],
           "applications": [
-            "Robot ↔ PLC integration",
-            "MES / ERP connectivity",
-            "Remote monitoring",
-            "Predictive maintenance",
-            "Cloud / edge data flow"
+            "Roboter ↔ SPS-Integration",
+            "MES- / ERP-Konnektivität",
+            "Fernüberwachung",
+            "Predictive Maintenance",
+            "Cloud- / Edge-Datenfluss"
           ],
           "selectionCriteria": [
-            "Protocol stack",
-            "Latency / determinism",
-            "Security model",
-            "Network topology",
-            "Plant standard"
+            "Protokollstack",
+            "Latenz / Determinismus",
+            "Sicherheitsmodell",
+            "Netzwerk-Topologie",
+            "Anlagen-Standard"
           ],
           "meta": {
-            "title": "Industrial Communication & Connectivity | MegaRobotics",
-            "description": "PROFINET, EtherCAT, EtherNet/IP, IO-Link, OPC UA and MQTT for connecting robots, PLCs, sensors and IT systems."
+            "title": "Industrielle Kommunikation & Konnektivität | MegaRobotics",
+            "description": "PROFINET, EtherCAT, EtherNet/IP, IO-Link, OPC UA und MQTT zur Vernetzung von Robotern, SPS, Sensoren und IT-Systemen."
           }
         },
         "software-hmi-scada-digital-twin": {
           "title": "Software, HMI, SCADA & Digital Twin",
-          "shortDescription": "Robot programming, simulation, HMI, SCADA, fleet management and digital twin software.",
-          "intro": "Robot programming, simulation, fleet management and operator interfaces — software defines how operators, engineers and IT systems interact with robotic assets.",
+          "shortDescription": "Roboterprogrammierung, Simulation, HMI, SCADA, Flottenmanagement und Digital-Twin-Software.",
+          "intro": "Roboterprogrammierung, Simulation, Flottenmanagement und Bedienoberflächen — Software definiert, wie Bediener, Ingenieure und IT-Systeme mit robotischen Anlagen interagieren.",
           "body": [
-            "Robot programming environments, offline programming, simulation and digital-twin tools shorten commissioning time and let engineers validate cells before hardware exists.",
-            "Production-side software — HMI, SCADA, AMR fleet management, AI inspection software, predictive maintenance — closes the loop between robots and the rest of the plant."
+            "Roboter-Programmierumgebungen, Offline-Programmierung, Simulation und Digital-Twin-Tools verkürzen die Inbetriebnahme und ermöglichen es Ingenieuren, Zellen zu validieren, bevor die Hardware existiert.",
+            "Produktionsseitige Software — HMI, SCADA, AMR-Flottenmanagement, KI-Inspektionssoftware, Predictive Maintenance — schließt die Schleife zwischen Robotern und dem Rest der Anlage."
           ],
           "subcategories": [
-            "Robot programming",
-            "Offline programming",
+            "Roboterprogrammierung",
+            "Offline-Programmierung",
             "Simulation",
-            "Digital twin",
+            "Digital Twin",
             "HMI",
             "SCADA",
-            "Fleet management",
-            "AMR traffic management",
-            "Vision software",
-            "AI inspection software",
-            "Predictive maintenance",
-            "Data logging",
-            "OPC UA integration",
-            "MES connectivity"
+            "Flottenmanagement",
+            "AMR-Verkehrsmanagement",
+            "Vision-Software",
+            "KI-Inspektionssoftware",
+            "Predictive Maintenance",
+            "Daten-Logging",
+            "OPC-UA-Integration",
+            "MES-Konnektivität"
           ],
           "applications": [
-            "Engineering / commissioning",
-            "Operator interface",
-            "Fleet supervision",
-            "AI-driven inspection",
-            "Predictive maintenance"
+            "Engineering / Inbetriebnahme",
+            "Bedienoberfläche",
+            "Flottenüberwachung",
+            "KI-gestützte Inspektion",
+            "Predictive Maintenance"
           ],
           "selectionCriteria": [
-            "Ecosystem fit",
-            "Open APIs",
-            "Maintenance & licensing model",
-            "On-prem vs cloud",
-            "IT / OT integration"
+            "Ökosystem-Kompatibilität",
+            "Offene APIs",
+            "Wartungs- & Lizenzmodell",
+            "On-Prem vs. Cloud",
+            "IT- / OT-Integration"
           ],
           "meta": {
             "title": "Software, HMI, SCADA & Digital Twin | MegaRobotics",
-            "description": "Robot programming, simulation, digital twin, HMI, SCADA, fleet management and AI inspection software for robotic and industrial automation."
+            "description": "Roboterprogrammierung, Simulation, Digital Twin, HMI, SCADA, Flottenmanagement und KI-Inspektionssoftware für robotische und industrielle Automatisierung."
           }
         },
         "robotic-cells-application-packages": {
-          "title": "Robotic Cells & Application Packages",
-          "shortDescription": "Pre-engineered robotic cells for palletizing, machine tending, inspection and finishing.",
-          "intro": "Pre-engineered robotic cells combine robot platforms, end-effectors, vision, safety and software into application-specific solutions for handling, palletizing, packaging, inspection and finishing tasks.",
+          "title": "Robotische Zellen & Anwendungspakete",
+          "shortDescription": "Vorkonfigurierte robotische Zellen für Palettieren, Maschinenbeschickung, Inspektion und Oberflächenbearbeitung.",
+          "intro": "Vorkonfigurierte robotische Zellen kombinieren Roboterplattformen, Endeffektoren, Vision, Sicherheit und Software zu anwendungsspezifischen Lösungen für Handling-, Palettier-, Verpackungs-, Inspektions- und Oberflächenbearbeitungsaufgaben.",
           "body": [
-            "Application packages reduce engineering risk and shorten time-to-production. They package a robot, end-effector, safety concept and software for a defined task — palletizing, machine tending, pick-and-place, surface finishing or inspection.",
-            "MegaRobotics coordinates with integration partners on cell engineering, commissioning and operational hand-over."
+            "Anwendungspakete reduzieren das Engineering-Risiko und verkürzen die Time-to-Production. Sie bündeln Roboter, Endeffektor, Sicherheitskonzept und Software für eine definierte Aufgabe — Palettieren, Maschinenbeschickung, Pick-and-Place, Oberflächenbearbeitung oder Inspektion.",
+            "MegaRobotics koordiniert mit Integrationspartnern bei Zellenkonstruktion, Inbetriebnahme und operativer Übergabe."
           ],
           "subcategories": [
-            "Machine tending cells",
-            "Palletizing cells",
-            "Pick-and-place cells",
-            "Packaging cells",
-            "Sanding cells",
-            "Polishing cells",
-            "Painting/coating cells",
-            "Welding cells",
-            "Gluing/dispensing cells",
-            "Inspection cells",
-            "Lab automation cells",
-            "Mobile inspection packages",
-            "Cleaning robot deployment packages"
+            "Maschinenbeschickungs-Zellen",
+            "Palettier-Zellen",
+            "Pick-and-Place-Zellen",
+            "Verpackungs-Zellen",
+            "Schleif-Zellen",
+            "Polier-Zellen",
+            "Lackier- / Beschichtungs-Zellen",
+            "Schweiß-Zellen",
+            "Kleb- / Dosier-Zellen",
+            "Inspektions-Zellen",
+            "Laborautomatisierungs-Zellen",
+            "Mobile Inspektionspakete",
+            "Pakete für den Einsatz von Reinigungsrobotern"
           ],
           "applications": [
-            "Discrete manufacturing",
-            "Process manufacturing",
-            "Inspection",
-            "Surface finishing",
-            "Logistics handling"
+            "Diskrete Fertigung",
+            "Prozessfertigung",
+            "Inspektion",
+            "Oberflächenbearbeitung",
+            "Logistik-Handling"
           ],
           "selectionCriteria": [
-            "Throughput",
-            "Footprint",
-            "Safety concept",
-            "Integration with existing line",
-            "Maintenance"
+            "Durchsatz",
+            "Stellfläche",
+            "Sicherheitskonzept",
+            "Integration in bestehende Linie",
+            "Wartung"
           ],
           "meta": {
-            "title": "Robotic Cells & Application Packages | MegaRobotics",
-            "description": "Pre-engineered robotic cells for palletizing, machine tending, picking, packaging, inspection and surface finishing."
+            "title": "Robotische Zellen & Anwendungspakete | MegaRobotics",
+            "description": "Vorkonfigurierte robotische Zellen für Palettieren, Maschinenbeschickung, Picken, Verpacken, Inspektion und Oberflächenbearbeitung."
           }
         },
         "service-cleaning-facility-robots": {
-          "title": "Service, Cleaning & Facility Robots",
-          "shortDescription": "Cleaning, delivery, security and facility robots for commercial environments.",
-          "intro": "Service robots automate recurring facility tasks such as cleaning, delivery, security patrol and reception. Suited for commercial, retail, hospitality and industrial environments.",
+          "title": "Service-, Reinigungs- & Facility-Roboter",
+          "shortDescription": "Reinigungs-, Liefer-, Sicherheits- und Facility-Roboter für gewerbliche Umgebungen.",
+          "intro": "Service-Roboter automatisieren wiederkehrende Anlagentätigkeiten wie Reinigung, Lieferung, Sicherheitspatrouille und Empfang. Geeignet für gewerbliche, Einzelhandels-, Hospitality- und industrielle Umgebungen.",
           "body": [
-            "Service and cleaning robots are increasingly deployed in commercial environments — large-surface scrubbers, autonomous delivery, security patrol and reception robots that complement human staff.",
-            "Deployment success depends as much on operational fit (charging, scheduling, hand-over) as on the robot itself."
+            "Service- und Reinigungsroboter werden zunehmend in gewerblichen Umgebungen eingesetzt — Großflächen-Scheuermaschinen, autonome Lieferung, Sicherheitspatrouille und Empfangsroboter, die menschliches Personal ergänzen.",
+            "Der Einsatzerfolg hängt ebenso sehr vom operativen Fit (Ladung, Zeitplanung, Übergabe) ab wie vom Roboter selbst."
           ],
           "subcategories": [
-            "Delivery robots",
-            "Cleaning robots",
-            "Reception robots",
-            "Hotel robots",
-            "Restaurant robots",
-            "Security patrol robots",
-            "Facility monitoring robots",
-            "Retail robots"
+            "Lieferroboter",
+            "Reinigungsroboter",
+            "Empfangsroboter",
+            "Hotel-Roboter",
+            "Restaurant-Roboter",
+            "Sicherheitspatrouille-Roboter",
+            "Anlagenüberwachungs-Roboter",
+            "Einzelhandels-Roboter"
           ],
           "applications": [
-            "Floor cleaning",
-            "Internal transport",
-            "Reception / demo",
-            "Patrol",
-            "Hospitality service"
+            "Bodenreinigung",
+            "Interner Transport",
+            "Empfang / Demo",
+            "Patrouille",
+            "Hospitality-Service"
           ],
           "selectionCriteria": [
-            "Battery life",
-            "Navigation in dynamic environments",
-            "Fleet management",
-            "Service model",
-            "Customer experience"
+            "Akku-Laufzeit",
+            "Navigation in dynamischen Umgebungen",
+            "Flottenmanagement",
+            "Service-Modell",
+            "Kundenerlebnis"
           ],
           "meta": {
-            "title": "Service, Cleaning & Facility Robots | MegaRobotics",
-            "description": "Autonomous cleaning, delivery, security patrol and facility-service robots for commercial and industrial environments."
+            "title": "Service-, Reinigungs- & Facility-Roboter | MegaRobotics",
+            "description": "Autonome Reinigungs-, Liefer-, Sicherheitspatrouille- und Facility-Service-Roboter für gewerbliche und industrielle Umgebungen."
           }
         },
         "research-education-embodied-ai": {
-          "title": "Research, Education & Embodied AI",
-          "shortDescription": "Humanoid, quadruped, mobile manipulation and teleoperation platforms for labs.",
-          "intro": "Research-grade platforms for universities, applied-research labs and embodied-AI groups. Humanoid, quadruped, mobile manipulation and teleoperation platforms used to study locomotion, manipulation and learning.",
+          "title": "Forschung, Bildung & Embodied AI",
+          "shortDescription": "Humanoide, vierbeinige, mobile Manipulations- und Teleoperations-Plattformen für Labore.",
+          "intro": "Plattformen in Forschungsqualität für Universitäten, anwendungsorientierte Forschungslabore und Embodied-AI-Gruppen. Humanoide, vierbeinige, mobile Manipulations- und Teleoperations-Plattformen zur Untersuchung von Lokomotion, Manipulation und Lernen.",
           "body": [
-            "Research robotics has its own selection criteria: openness of the platform, software-stack maturity, sensor access, simulation parity and long-term support.",
-            "MegaRobotics supports procurement, evaluation and platform comparison for research groups and teaching labs."
+            "Forschungsrobotik hat eigene Auswahlkriterien: Offenheit der Plattform, Reife des Software-Stacks, Sensorzugang, Simulationsparität und langfristiger Support.",
+            "MegaRobotics unterstützt Beschaffung, Evaluierung und Plattformvergleich für Forschungsgruppen und Lehrlabore."
           ],
           "subcategories": [
-            "Humanoid research platforms",
-            "Quadruped research platforms",
-            "Mobile manipulation platforms",
-            "Robot arms for research",
-            "Teaching cells",
-            "AI robotics kits",
-            "Teleoperation systems",
-            "Dexterous manipulation platforms"
+            "Humanoide Forschungs-Plattformen",
+            "Vierbeinige Forschungs-Plattformen",
+            "Mobile Manipulations-Plattformen",
+            "Roboterarme für die Forschung",
+            "Lehrzellen",
+            "KI-Robotik-Kits",
+            "Teleoperations-Systeme",
+            "Dexterische Manipulations-Plattformen"
           ],
           "applications": [
-            "Locomotion research",
-            "Manipulation research",
+            "Lokomotionsforschung",
+            "Manipulationsforschung",
             "Embodied AI",
-            "Teaching",
-            "Human-robot interaction"
+            "Lehre",
+            "Mensch-Roboter-Interaktion"
           ],
           "selectionCriteria": [
-            "Openness of platform",
-            "Software-stack maturity",
-            "Sensor access",
-            "Simulation parity",
-            "Long-term support"
+            "Offenheit der Plattform",
+            "Reife des Software-Stacks",
+            "Sensorzugang",
+            "Simulationsparität",
+            "Langfristiger Support"
           ],
           "meta": {
-            "title": "Research, Education & Embodied AI | MegaRobotics",
-            "description": "Humanoid, quadruped, mobile manipulation and teleoperation platforms for university research and embodied AI labs."
+            "title": "Forschung, Bildung & Embodied AI | MegaRobotics",
+            "description": "Humanoide, vierbeinige, mobile Manipulations- und Teleoperations-Plattformen für Universitätsforschung und Embodied-AI-Labore."
           }
         },
         "spare-parts-modules-accessories": {
-          "title": "Spare Parts, Modules & Accessories",
-          "shortDescription": "Robot joints, batteries, controllers, end-effector accessories and mounting kits.",
-          "intro": "Modular components and spares — robot joints, batteries, controllers, end-effector accessories and mounting kits — for maintaining and extending existing robotic deployments.",
+          "title": "Ersatzteile, Module & Zubehör",
+          "shortDescription": "Robotergelenke, Akkus, Controller, Endeffektor-Zubehör und Befestigungssets.",
+          "intro": "Modulare Komponenten und Ersatzteile — Robotergelenke, Akkus, Controller, Endeffektor-Zubehör und Befestigungssets — zur Wartung und Erweiterung bestehender Roboteranlagen.",
           "body": [
-            "Long-term operation of a robotic deployment depends on the availability of spares and modular components: joints, batteries, chargers, controllers, payload mounts and cabling.",
-            "MegaRobotics supports sourcing of spares and modular components to keep deployed systems in service."
+            "Der langfristige Betrieb einer Roboteranlage hängt von der Verfügbarkeit von Ersatzteilen und modularen Komponenten ab: Gelenke, Akkus, Ladegeräte, Controller, Traglast-Halterungen und Kabel.",
+            "MegaRobotics unterstützt die Beschaffung von Ersatzteilen und modularen Komponenten, um eingesetzte Systeme im Einsatz zu halten."
           ],
           "subcategories": [
-            "Robot joints",
-            "Batteries",
-            "Chargers",
-            "Controllers",
-            "Cables",
-            "Mounting plates",
-            "Mobile chassis",
-            "Robot covers",
-            "Payload mounts",
-            "Sensor mounts",
-            "Replacement grippers",
-            "End-effector accessories"
+            "Robotergelenke",
+            "Akkus",
+            "Ladegeräte",
+            "Controller",
+            "Kabel",
+            "Montageplatten",
+            "Mobile Chassis",
+            "Roboterhüllen",
+            "Traglast-Halterungen",
+            "Sensor-Halterungen",
+            "Ersatzgreifer",
+            "Endeffektor-Zubehör"
           ],
           "applications": [
-            "Maintenance",
-            "Repair",
-            "Extension of existing cells",
-            "Custom adaptation"
+            "Wartung",
+            "Reparatur",
+            "Erweiterung bestehender Zellen",
+            "Kundenspezifische Anpassung"
           ],
           "selectionCriteria": [
-            "OEM compatibility",
-            "Lead time",
-            "Service availability",
-            "Quality / lifetime"
+            "OEM-Kompatibilität",
+            "Lieferzeit",
+            "Service-Verfügbarkeit",
+            "Qualität / Lebensdauer"
           ],
           "meta": {
-            "title": "Spare Parts, Modules & Accessories | MegaRobotics",
-            "description": "Robot joints, batteries, chargers, controllers, cables, mounting plates and end-effector accessories for ongoing robotic deployments."
+            "title": "Ersatzteile, Module & Zubehör | MegaRobotics",
+            "description": "Robotergelenke, Akkus, Ladegeräte, Controller, Kabel, Montageplatten und Endeffektor-Zubehör für laufende Roboteranlagen."
           }
         }
-      },
-      "_translatorNote": "DE strings below mirror the English source. Replace each value when translating."
+      }
     },
     "productDetail": {
       "cta": {
-        "requestAvailability": "Request Price & Availability",
-        "discussApplication": "Discuss Application Fit",
-        "askForDatasheet": "Ask for Datasheet"
+        "requestAvailability": "Preis & Verfügbarkeit anfragen",
+        "discussApplication": "Anwendungs-Fit besprechen",
+        "askForDatasheet": "Datenblatt anfordern"
       },
-      "distributorNotice": "Product availability, specifications, pricing and distributor status may vary by region and project. Please contact MegaRobotics for current sourcing and commercial information.",
-      "inquiryOnlyBadge": "Inquiry only",
-      "viewManufacturer": "View manufacturer",
+      "distributorNotice": "Produktverfügbarkeit, Spezifikationen, Preise und Distributorstatus können je nach Region und Projekt variieren. Bitte kontaktieren Sie MegaRobotics für aktuelle Beschaffungs- und kommerzielle Informationen.",
+      "inquiryOnlyBadge": "Nur auf Anfrage",
+      "viewManufacturer": "Hersteller ansehen",
       "availability": {
-        "inStock": "In stock",
-        "availableOnRequest": "Available on request",
-        "sourcingOnRequest": "Sourcing on request",
-        "leadTimeRequired": "Lead time required",
-        "informationOnly": "Information only",
-        "discontinued": "Discontinued"
+        "inStock": "Auf Lager",
+        "availableOnRequest": "Auf Anfrage verfügbar",
+        "sourcingOnRequest": "Beschaffung auf Anfrage",
+        "leadTimeRequired": "Lieferzeit erforderlich",
+        "informationOnly": "Nur zur Information",
+        "discontinued": "Eingestellt"
       },
       "relationship": {
-        "officialDistributor": "Official distributor",
-        "authorizedReseller": "Authorized reseller",
-        "salesPartner": "Sales partner",
-        "technologyPartner": "Technology partner"
+        "officialDistributor": "Offizieller Distributor",
+        "authorizedReseller": "Autorisierter Reseller",
+        "salesPartner": "Vertriebspartner",
+        "technologyPartner": "Technologiepartner"
       },
       "filter": {
-        "searchPlaceholder": "Search products…",
-        "allFamilies": "All product families",
-        "allAvailability": "Any availability",
-        "allManufacturers": "All manufacturers",
-        "allCategories": "All categories"
+        "searchPlaceholder": "Produkte suchen …",
+        "allFamilies": "Alle Produktfamilien",
+        "allAvailability": "Beliebige Verfügbarkeit",
+        "allManufacturers": "Alle Hersteller",
+        "allCategories": "Alle Kategorien"
       }
     }
   }
