@@ -1049,21 +1049,21 @@
         },
         "consent": "Ich willige ein, dass MegaRobotics diese Anfrage verarbeiten darf, um mir zu antworten. Details in der Datenschutzerklärung.",
         "consentRequired": "Bitte bestätigen Sie die Datenschutz-Einwilligung, um Ihre Anfrage abzuschicken.",
-        "inquiryType": "Inquiry type",
+        "inquiryType": "Anfragetyp",
         "inquiryTypeOptions": {
-          "robotSourcing": "Robot purchase / sourcing",
-          "componentSourcing": "Automation component sourcing",
-          "automationProject": "Industrial automation project",
-          "systemIntegration": "System integration cooperation",
-          "manufacturerCooperation": "Manufacturer cooperation",
-          "researchEducation": "Research / education robotics",
-          "serviceCleaning": "Service / cleaning robotics",
-          "other": "Other"
+          "robotSourcing": "Roboterkauf / Beschaffung",
+          "componentSourcing": "Beschaffung von Automatisierungskomponenten",
+          "automationProject": "Industrielles Automatisierungsprojekt",
+          "systemIntegration": "Kooperation Systemintegration",
+          "manufacturerCooperation": "Hersteller-Kooperation",
+          "researchEducation": "Forschungs- / Bildungsrobotik",
+          "serviceCleaning": "Service- / Reinigungsrobotik",
+          "other": "Sonstiges"
         },
-        "productFamily": "Product family of interest",
-        "productFamilyNotSure": "Not sure / general inquiry",
-        "manufacturerOrProduct": "Manufacturer or product of interest",
-        "manufacturerOrProductPlaceholder": "e.g. Unitree Go2, Festo CPX-AP-I, Siemens S7-1500"
+        "productFamily": "Produktfamilie von Interesse",
+        "productFamilyNotSure": "Nicht sicher / allgemeine Anfrage",
+        "manufacturerOrProduct": "Hersteller oder Produkt von Interesse",
+        "manufacturerOrProductPlaceholder": "z. B. Unitree Go2, Festo CPX-AP-I, Siemens S7-1500"
       },
       "sendButton": "Robotik-Anfrage senden"
     },
@@ -1074,7 +1074,7 @@
         "network": "Netzwerk",
         "company": "Unternehmen",
         "legal": "Rechtliches",
-        "catalog": "Catalog"
+        "catalog": "Katalog"
       },
       "links": {
         "solutions": "Lösungen",
@@ -1092,8 +1092,8 @@
         "institutes": "Forschungsinstitute",
         "imprint": "Impressum",
         "privacy": "Datenschutz",
-        "automationComponents": "Automation Components",
-        "robotDistributor": "Robot Distributor"
+        "automationComponents": "Automatisierungskomponenten",
+        "robotDistributor": "Roboter-Distributor"
       }
     },
     "catalog": {
