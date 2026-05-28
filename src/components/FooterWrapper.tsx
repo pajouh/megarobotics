@@ -15,6 +15,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
     tagline: t('tagline'),
     columns: {
       platform: t('columns.platform'),
+      catalog: t('columns.catalog'),
       network: t('columns.network'),
       company: t('columns.company'),
       legal: t('columns.legal'),
@@ -31,6 +32,8 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
       company: t('links.company'),
       contact: t('links.contact'),
       products: t('links.products'),
+      automationComponents: t('links.automationComponents'),
+      robotDistributor: t('links.robotDistributor'),
       manufacturers: t('links.manufacturers'),
       institutes: t('links.institutes'),
       imprint: t('links.imprint'),

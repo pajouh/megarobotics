@@ -515,6 +515,145 @@ export async function getAllProductCategorySlugs(): Promise<{ slug: string }[]> 
 
 
 // ==========================================
+// PRODUCT FAMILY & ECOSYSTEM QUERIES
+// ==========================================
+
+export interface ProductFamily {
+  _id: string
+  _type: 'productFamily'
+  title: string
+  slug: { current: string }
+  shortDescription?: string
+  icon?: string
+  image?: SanityImage
+  body?: unknown
+  subcategories?: string[]
+  applications?: string[]
+  selectionCriteria?: string[]
+  referenceEcosystems?: ReferenceEcosystem[]
+  order?: number
+  featured?: boolean
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export interface ReferenceEcosystem {
+  _id: string
+  _type: 'referenceEcosystem'
+  name: string
+  slug?: { current: string }
+  shortDescription?: string
+  category?: string
+  logo?: SanityImage
+  websiteUrl?: string
+  relationshipStatus: string
+  disclaimerOverride?: string
+  order?: number
+}
+
+function getProductFamilyFields(locale: Locale = defaultLocale) {
+  return `
+    _id,
+    _type,
+    "title": ${localizedField('title', locale)},
+    slug,
+    "shortDescription": ${localizedField('shortDescription', locale)},
+    icon,
+    image,
+    order,
+    featured
+  `
+}
+
+function getProductFamilyFullFields(locale: Locale = defaultLocale) {
+  return `
+    ${getProductFamilyFields(locale)},
+    "body": ${localizedField('body', locale)},
+    "subcategories": ${localizedArrayField('subcategories', locale)},
+    "applications": ${localizedArrayField('applications', locale)},
+    "selectionCriteria": ${localizedArrayField('selectionCriteria', locale)},
+    referenceEcosystems[]->{
+      _id,
+      _type,
+      name,
+      slug,
+      "shortDescription": ${localizedField('shortDescription', locale)},
+      category,
+      logo,
+      websiteUrl,
+      relationshipStatus,
+      "disclaimerOverride": ${localizedField('disclaimerOverride', locale)},
+      order
+    },
+    seo {
+      "metaTitle": ${localizedField('metaTitle', locale)},
+      "metaDescription": ${localizedField('metaDescription', locale)},
+    }
+  `
+}
+
+export async function getProductFamilies(locale: Locale = defaultLocale): Promise<ProductFamily[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "productFamily" && isActive != false] | order(order asc, title.${locale} asc) {
+      ${getProductFamilyFields(locale)}
+    }`
+  )
+}
+
+export async function getProductFamily(slug: string, locale: Locale = defaultLocale): Promise<ProductFamily | null> {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "productFamily" && slug.current == $slug && isActive != false][0] {
+      ${getProductFamilyFullFields(locale)}
+    }`,
+    { slug }
+  )
+}
+
+export async function getProductsByFamily(familyId: string, limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
+  if (!client) return []
+  const limitQuery = limit ? `[0...${limit}]` : ''
+  return client.fetch(
+    `*[_type == "product" && isActive != false && productFamily._ref == $familyId] | order(order asc, name asc)${limitQuery} {
+      ${getProductFields(locale)}
+    }`,
+    { familyId }
+  )
+}
+
+export async function getAllProductFamilySlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "productFamily" && isActive != false && defined(slug.current)][].slug.current`
+  ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
+}
+
+export async function getReferenceEcosystems(category: string | null = null, locale: Locale = defaultLocale): Promise<ReferenceEcosystem[]> {
+  if (!client) return []
+  const filter = category ? ` && category == $category` : ''
+  return client.fetch(
+    `*[_type == "referenceEcosystem" && isActive != false${filter}] | order(order asc, name asc) {
+      _id,
+      _type,
+      name,
+      slug,
+      "shortDescription": ${localizedField('shortDescription', locale)},
+      category,
+      logo,
+      websiteUrl,
+      relationshipStatus,
+      "disclaimerOverride": ${localizedField('disclaimerOverride', locale)},
+      order
+    }`,
+    category ? { category } : {}
+  )
+}
+
+
+// ==========================================
 // BUYERS GUIDE QUERIES
 // ==========================================
 

@@ -36,6 +36,7 @@ export interface IndustrialFooterTranslations {
   tagline: string
   columns: {
     platform: string
+    catalog: string
     network: string
     company: string
     legal: string
@@ -52,6 +53,8 @@ export interface IndustrialFooterTranslations {
     company: string
     contact: string
     products: string
+    automationComponents: string
+    robotDistributor: string
     manufacturers: string
     institutes: string
     imprint: string
@@ -83,12 +86,17 @@ export default function Footer({
     { name: t.links.insights, href: '/articles' },
   ]
 
+  const catalogLinks = [
+    { name: t.links.products, href: '/products' },
+    { name: t.links.automationComponents, href: '/automation-components' },
+    { name: t.links.robotDistributor, href: '/robot-distributor' },
+    { name: t.links.manufacturers, href: '/manufacturers' },
+  ]
+
   const networkLinks = [
     { name: t.links.technologyNetwork, href: '/technology-network' },
     { name: t.links.forCustomers, href: '/for-customers' },
     { name: t.links.forManufacturers, href: '/for-manufacturers' },
-    { name: t.links.products, href: '/products' },
-    { name: t.links.manufacturers, href: '/manufacturers' },
     { name: t.links.institutes, href: '/institutes' },
   ]
 
@@ -131,9 +139,9 @@ export default function Footer({
   return (
     <footer className="bg-[color:var(--ind-graphite-950)] text-gray-300 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-10">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
               {logoUrl ? (
                 <div className="relative overflow-hidden" style={{ width: logoWidth, height: logoHeight }}>
@@ -170,28 +178,38 @@ export default function Footer({
           </div>
 
           {cmsColumns ? (
-            cmsColumns.map((column) => (
-              <div key={column._key}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
-                  {column.title}
-                </h3>
-                <ul className="space-y-2">
-                  {column.links?.map((link) => (
-                    <li key={link._key}>
-                      <Link
-                        href={link.url}
-                        className="text-gray-300 hover:text-white transition-colors text-sm"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
+            <>
+              {cmsColumns.map((column) => (
+                <div key={column._key}>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
+                    {column.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {column.links?.map((link) => (
+                      <li key={link._key}>
+                        <Link
+                          href={link.url}
+                          className="text-gray-300 hover:text-white transition-colors text-sm"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {/* Always append the Catalog column so the new catalog pages
+                * stay reachable even when CMS-driven footerLinks exist
+                * (admin may not have it). De-duplicates if a CMS column
+                * already shares the Catalog title (case-insensitive match). */}
+              {!cmsColumns.some(
+                (c) => c.title?.toLowerCase() === t.columns.catalog.toLowerCase(),
+              ) && <FooterColumn title={t.columns.catalog} items={catalogLinks} />}
+            </>
           ) : (
             <>
               <FooterColumn title={t.columns.platform} items={platformLinks} />
+              <FooterColumn title={t.columns.catalog} items={catalogLinks} />
               <FooterColumn title={t.columns.network} items={networkLinks} />
               <FooterColumn title={t.columns.company} items={[...companyLinks, ...legalLinks]} />
             </>
