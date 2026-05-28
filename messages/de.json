@@ -265,375 +265,815 @@
     "settings": "Cookie-Einstellungen"
   },
   "industrial": {
-    "_translatorNote": "DE strings below mirror the English source. Replace each value when translating. Keep the JSON keys unchanged.",
     "nav": {
-      "solutions": "Solutions",
-      "industries": "Industries",
-      "robotTechnologies": "Robot Technologies",
-      "technologyNetwork": "Technology Network",
-      "projects": "Projects",
+      "solutions": "Lösungen",
+      "industries": "Branchen",
+      "robotTechnologies": "Robotertechnologien",
+      "technologyNetwork": "Technologienetzwerk",
+      "projects": "Projekte",
       "insights": "Insights",
-      "company": "Company",
-      "contact": "Contact",
-      "forCustomers": "For Customers",
-      "forManufacturers": "For Manufacturers",
-      "discussProject": "Discuss Project"
+      "company": "Unternehmen",
+      "contact": "Kontakt",
+      "forCustomers": "Für Kunden",
+      "forManufacturers": "Für Hersteller",
+      "discussProject": "Projekt besprechen"
     },
     "safeNotice": {
-      "label": "Note"
+      "label": "Hinweis"
     },
     "home": {
       "meta": {
-        "title": "MegaRobotics | Industrial Robotics & Automation Solutions",
-        "description": "MegaRobotics helps European industrial customers and research institutions identify, evaluate and develop advanced robotic technologies for manufacturing, logistics, inspection, cleaning, research and service robotics."
+        "title": "MegaRobotics | Industrielle Robotik & Automatisierungslösungen",
+        "description": "MegaRobotics unterstützt europäische Industriekunden und Forschungseinrichtungen bei der Identifikation, Evaluierung und Entwicklung fortschrittlicher Robotiktechnologien für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service-Robotik."
       },
       "hero": {
-        "eyebrow": "Industrial Robotics & Automation",
-        "title": "From Advanced Robots to Real Industrial Applications",
-        "subtitle": "MegaRobotics is a Germany-based industrial robotics and automation partner focused on evaluating, sourcing and developing robotic solutions for manufacturing, logistics, inspection, cleaning, research and service environments.",
-        "primaryCta": "Discuss an Automation Project",
-        "secondaryCta": "Explore Robotics Solutions"
+        "eyebrow": "Industrielle Robotik & Automatisierung",
+        "title": "Von fortschrittlichen Robotern zu realen industriellen Anwendungen",
+        "subtitle": "MegaRobotics ist ein in Deutschland ansässiger Partner für industrielle Robotik und Automatisierung. Wir konzentrieren uns auf die Evaluierung, Beschaffung und Entwicklung robotischer Lösungen für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service-Umgebungen.",
+        "primaryCta": "Automatisierungsprojekt besprechen",
+        "secondaryCta": "Robotik-Lösungen entdecken"
       },
       "whatWeDo": {
-        "eyebrow": "What We Do",
-        "title": "Robotics technology, industrial use cases and integration expertise",
-        "body": "MegaRobotics connects industrial automation challenges with suitable robotic technologies. We support customers and partners in defining requirements, evaluating platforms, coordinating with manufacturers and developing feasible pilot projects.",
+        "eyebrow": "Was wir tun",
+        "title": "Robotiktechnologie, industrielle Anwendungsfälle und Integrationsexpertise",
+        "body": "MegaRobotics verbindet industrielle Automatisierungsanforderungen mit geeigneten Robotiktechnologien. Wir unterstützen Kunden und Partner bei der Definition von Anforderungen, der Evaluierung von Plattformen, der Koordination mit Herstellern und der Entwicklung umsetzbarer Pilotprojekte.",
         "cards": [
-          { "title": "Application analysis", "body": "Defining the task, environment, payload, cycle time, safety and integration constraints before hardware selection." },
-          { "title": "Robot / platform evaluation", "body": "Comparing robot arms, mobile platforms, end effectors and perception across the relevant suppliers." },
-          { "title": "Manufacturer coordination", "body": "Structuring technical and commercial discussions with robotics manufacturers and technology providers." },
-          { "title": "Pilot project development", "body": "Translating evaluations into feasible first deployments — scope, success criteria, timeline, budget." },
-          { "title": "Integration partner matching", "body": "Connecting customers with system integrators when in-house integration is not the right path." },
-          { "title": "European market development", "body": "Use-case mapping, customer discovery and partner coordination for robotics manufacturers entering Europe." }
+          {
+            "title": "Anwendungsanalyse",
+            "body": "Definition von Aufgabe, Umgebung, Traglast, Taktzeit, Sicherheit und Integrationsanforderungen vor der Hardware-Auswahl."
+          },
+          {
+            "title": "Roboter- / Plattformevaluierung",
+            "body": "Vergleich von Roboterarmen, mobilen Plattformen, Endeffektoren und Wahrnehmungssystemen über die relevanten Anbieter hinweg."
+          },
+          {
+            "title": "Hersteller-Koordination",
+            "body": "Strukturierung technischer und kaufmännischer Gespräche mit Robotik-Herstellern und Technologieanbietern."
+          },
+          {
+            "title": "Pilotprojekt-Entwicklung",
+            "body": "Überführung von Evaluierungen in umsetzbare Erstanwendungen — Scope, Erfolgskriterien, Zeitplan, Budget."
+          },
+          {
+            "title": "Vermittlung von Integrationspartnern",
+            "body": "Verbindung von Kunden mit Systemintegratoren, wenn eine Inhouse-Integration nicht der richtige Weg ist."
+          },
+          {
+            "title": "Europäische Markterschließung",
+            "body": "Use-Case-Mapping, Kundenentwicklung und Partner-Koordination für Robotik-Hersteller mit Europa-Fokus."
+          }
         ]
       },
       "techCoverage": {
-        "eyebrow": "Technology Coverage",
-        "title": "Robotics technologies we cover",
-        "subtitle": "Across the spectrum of industrial, mobile, legged, humanoid and service robotics.",
+        "eyebrow": "Technologie-Spektrum",
+        "title": "Robotiktechnologien, die wir abdecken",
+        "subtitle": "Über das gesamte Spektrum industrieller, mobiler, schreitender, humanoider und Service-Robotik hinweg.",
         "items": [
-          "Industrial robot arms and collaborative automation",
-          "Parallel robots for high-speed picking and packaging",
-          "AMR, AGV and intralogistics robots",
-          "Quadruped and legged inspection robots",
-          "Humanoid and embodied AI platforms",
-          "Cleaning and facility automation robots",
-          "Grippers, force sensors, controllers and robot modules"
+          "Industrieroboterarme und kollaborative Automatisierung",
+          "Parallelroboter für High-Speed-Picking und Verpackung",
+          "AMR, AGV und Intralogistik-Roboter",
+          "Vierbeinige und schreitende Inspektionsroboter",
+          "Humanoide und Embodied-AI-Plattformen",
+          "Reinigungs- und Gebäudeautomatisierungs-Roboter",
+          "Greifer, Kraftsensoren, Steuerungen und Robotermodule"
         ]
       },
       "industriesSection": {
-        "eyebrow": "Industries",
-        "title": "Industries we support",
+        "eyebrow": "Branchen",
+        "title": "Branchen, die wir unterstützen",
         "items": [
-          "Automotive and aftermarket body shops",
-          "Consumer electronics and precision manufacturing",
-          "Food and beverage production",
-          "Pharmaceutical and healthcare-related production",
-          "Daily chemical, cosmetics and consumer goods",
-          "Logistics and warehousing",
-          "Industrial inspection and security",
-          "Research, education and robotics laboratories",
-          "Facility management and service robotics"
+          "Automobilindustrie und Karosseriewerkstätten im Aftermarket",
+          "Unterhaltungselektronik und Präzisionsfertigung",
+          "Lebensmittel- und Getränkeproduktion",
+          "Pharmazeutische und gesundheitsbezogene Produktion",
+          "Haushaltschemie, Kosmetik und Konsumgüter",
+          "Logistik und Lagerhaltung",
+          "Industrielle Inspektion und Sicherheit",
+          "Forschung, Bildung und Robotiklabore",
+          "Facility Management und Service-Robotik"
         ]
       },
       "process": {
-        "eyebrow": "Process",
-        "title": "How we work",
+        "eyebrow": "Prozess",
+        "title": "So arbeiten wir",
         "steps": [
-          "Understand the task and environment",
-          "Define technical and commercial requirements",
-          "Identify suitable robotic technologies",
-          "Compare platforms and suppliers",
-          "Coordinate feasibility discussions",
-          "Support pilot-project development",
-          "Connect customers with integration partners where needed"
+          "Aufgabe und Umgebung verstehen",
+          "Technische und kaufmännische Anforderungen definieren",
+          "Geeignete Robotiktechnologien identifizieren",
+          "Plattformen und Lieferanten vergleichen",
+          "Machbarkeitsgespräche koordinieren",
+          "Pilotprojekt-Entwicklung begleiten",
+          "Kunden bei Bedarf mit Integrationspartnern verbinden"
         ]
       },
       "network": {
-        "eyebrow": "Technology Network",
-        "title": "Robotics technology network",
-        "body": "MegaRobotics works at the intersection of industrial customers, robotics manufacturers, technology providers and system integrators. We continuously evaluate robotic platforms and automation technologies from international manufacturers to identify suitable solutions for European industrial and research applications.",
-        "legalNote": "Manufacturer relationships, availability, product scope and territorial rights may vary by project and are confirmed individually before any commercial engagement.",
+        "eyebrow": "Technologienetzwerk",
+        "title": "Robotik-Technologienetzwerk",
+        "body": "MegaRobotics arbeitet an der Schnittstelle zwischen Industriekunden, Robotik-Herstellern, Technologieanbietern und Systemintegratoren. Wir evaluieren kontinuierlich robotische Plattformen und Automatisierungstechnologien internationaler Hersteller, um passende Lösungen für europäische industrielle und Forschungs-Anwendungen zu identifizieren.",
+        "legalNote": "Herstellerbeziehungen, Verfügbarkeit, Produktumfang und Gebietsrechte können je nach Projekt variieren und werden vor jeder kommerziellen Zusammenarbeit individuell bestätigt.",
         "categories": [
-          "AI-enabled robotic automation",
-          "High-speed parallel robotics",
-          "Legged and humanoid platforms",
-          "Mobile robotics",
-          "Robot components and end effectors"
+          "KI-gestützte Roboterautomatisierung",
+          "High-Speed-Parallelrobotik",
+          "Schreitende und humanoide Plattformen",
+          "Mobile Robotik",
+          "Roboterkomponenten und Endeffektoren"
         ]
       },
       "projects": {
-        "eyebrow": "Projects & Concept Studies",
-        "title": "Selected concept and feasibility studies",
-        "subtitle": "Examples of automation scenarios MegaRobotics develops with customers and integration partners.",
+        "eyebrow": "Projekte & Konzeptstudien",
+        "title": "Ausgewählte Konzept- und Machbarkeitsstudien",
+        "subtitle": "Beispiele für Automatisierungsszenarien, die MegaRobotics gemeinsam mit Kunden und Integrationspartnern entwickelt.",
         "items": [
-          { "title": "Robotic sanding, polishing and painting cell", "subtitle": "Automotive aftermarket body shop concept." },
-          { "title": "Quadruped inspection pilot", "subtitle": "Mobile and legged robots for industrial facility inspection." },
-          { "title": "AMR / intralogistics automation concept", "subtitle": "Material flow and warehouse operations." },
-          { "title": "Research and education robotics evaluation", "subtitle": "Humanoid, quadruped and mobile platforms for labs." },
-          { "title": "Industrial cleaning robot deployment", "subtitle": "Commercial and industrial cleaning automation." }
+          {
+            "title": "Roboter-Zelle für Schleifen, Polieren und Lackieren",
+            "subtitle": "Konzept für Karosseriewerkstätten im Automotive-Aftermarket."
+          },
+          {
+            "title": "Pilotprojekt mit vierbeinigen Inspektionsrobotern",
+            "subtitle": "Mobile und schreitende Roboter für die industrielle Anlageninspektion."
+          },
+          {
+            "title": "AMR / Intralogistik-Automatisierungskonzept",
+            "subtitle": "Materialfluss und Lageroperationen."
+          },
+          {
+            "title": "Evaluierung von Forschungs- und Bildungsrobotik",
+            "subtitle": "Humanoide, vierbeinige und mobile Plattformen für Labore."
+          },
+          {
+            "title": "Industrielle Reinigungsroboter im Einsatz",
+            "subtitle": "Gewerbliche und industrielle Reinigungsautomatisierung."
+          }
         ]
       },
       "finalCta": {
-        "eyebrow": "Get in Touch",
-        "title": "Tell us your automation challenge",
-        "body": "Whether you are evaluating a robot for a factory, warehouse, research lab or service environment, MegaRobotics can help structure the first technical and commercial steps.",
-        "button": "Contact MegaRobotics"
+        "eyebrow": "Kontakt aufnehmen",
+        "title": "Erzählen Sie uns von Ihrer Automatisierungs-Herausforderung",
+        "body": "Ob Sie einen Roboter für eine Fabrik, ein Lager, ein Forschungslabor oder eine Service-Umgebung evaluieren — MegaRobotics hilft Ihnen, die ersten technischen und kaufmännischen Schritte zu strukturieren.",
+        "button": "MegaRobotics kontaktieren"
       }
     },
     "solutions": {
       "meta": {
-        "title": "Industrial Robotics Solutions | MegaRobotics",
-        "description": "MegaRobotics supports robotic automation concepts across manufacturing, logistics, inspection, cleaning, research and service environments."
+        "title": "Industrielle Robotik-Lösungen | MegaRobotics",
+        "description": "MegaRobotics unterstützt robotische Automatisierungskonzepte für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service-Umgebungen."
       },
-      "title": "Industrial Robotics Solutions",
-      "eyebrow": "Solutions",
-      "intro": "MegaRobotics supports the development of robotic automation concepts across manufacturing, logistics, inspection, cleaning, research and service environments.",
-      "labelApplications": "Typical applications",
-      "labelRobotTypes": "Suitable robot types",
-      "ctaLabel": "Discuss this application",
+      "title": "Industrielle Robotik-Lösungen",
+      "eyebrow": "Lösungen",
+      "intro": "MegaRobotics unterstützt die Entwicklung robotischer Automatisierungskonzepte für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service-Umgebungen.",
+      "labelApplications": "Typische Anwendungen",
+      "labelRobotTypes": "Geeignete Robotertypen",
+      "ctaLabel": "Diese Anwendung besprechen",
       "items": [
         {
           "id": "industrial-arms",
-          "title": "Industrial automation and robotic arms",
-          "description": "Articulated and collaborative robots for assembly, machine tending, handling and quality tasks across discrete and process manufacturing.",
-          "applications": ["Assembly support", "Machine tending", "Handling", "Quality inspection", "Dispensing"],
-          "robotTypes": ["6-axis industrial arms", "Collaborative robots", "Dual-arm cells"]
+          "title": "Industrielle Automatisierung und Roboterarme",
+          "description": "Knickarm- und kollaborative Roboter für Montage, Maschinenbestückung, Handling und Qualitätsaufgaben in der diskreten und Prozess-Fertigung.",
+          "applications": [
+            "Montage-Support",
+            "Maschinenbestückung",
+            "Handling",
+            "Qualitätsprüfung",
+            "Dosieren"
+          ],
+          "robotTypes": [
+            "6-Achs-Industrieroboter",
+            "Kollaborative Roboter",
+            "Doppelarm-Zellen"
+          ]
         },
         {
           "id": "high-speed-picking",
-          "title": "High-speed picking, packaging and parallel robotics",
-          "description": "Delta and parallel kinematic robots for high-throughput pick-and-place, packaging and end-of-line tasks in consumer goods, food and pharma.",
-          "applications": ["Pick-and-place", "Packaging", "Sorting", "Line feeding"],
-          "robotTypes": ["Delta / parallel robots", "Top-load packers", "Vision-guided pickers"]
+          "title": "High-Speed-Picking, Verpackung und Parallelrobotik",
+          "description": "Delta- und parallelkinematische Roboter für Pick-and-Place mit hoher Taktrate, Verpackung und End-of-Line-Aufgaben in Konsumgütern, Lebensmitteln und Pharma.",
+          "applications": [
+            "Pick-and-Place",
+            "Verpackung",
+            "Sortierung",
+            "Linienzuführung"
+          ],
+          "robotTypes": [
+            "Delta- / Parallelroboter",
+            "Top-Load-Packer",
+            "Vision-gestützte Picker"
+          ]
         },
         {
           "id": "amr-agv",
-          "title": "AMR, AGV and intralogistics",
-          "description": "Mobile robots for material transport, autonomous pallet movement and goods-to-person concepts across warehouses and production lines.",
-          "applications": ["Material transport", "Pallet movement", "Goods-to-person", "Inventory patrol"],
-          "robotTypes": ["AMR", "AGV", "Unmanned forklifts", "Tunnel AMR"]
+          "title": "AMR, AGV und Intralogistik",
+          "description": "Mobile Roboter für Materialtransport, autonomen Palettentransport und Goods-to-Person-Konzepte in Lagern und Produktionslinien.",
+          "applications": [
+            "Materialtransport",
+            "Palettentransport",
+            "Goods-to-Person",
+            "Inventur-Patrouille"
+          ],
+          "robotTypes": [
+            "AMR",
+            "AGV",
+            "Fahrerlose Gabelstapler",
+            "Tunnel-AMR"
+          ]
         },
         {
           "id": "sanding-polishing-painting",
-          "title": "Robotic sanding, polishing and painting",
-          "description": "Surface-finishing cells for automotive aftermarket and metalworking environments combining force-controlled arms and end-effectors.",
-          "applications": ["Body-shop sanding", "Polishing", "Paint prep", "Surface treatment"],
-          "robotTypes": ["Force-controlled arms", "End effectors with compliance", "Paint robots"]
+          "title": "Robotisches Schleifen, Polieren und Lackieren",
+          "description": "Oberflächenbearbeitungs-Zellen für den Automotive-Aftermarket und die Metallverarbeitung, die kraftgeregelte Arme und Endeffektoren kombinieren.",
+          "applications": [
+            "Karosserie-Schleifen",
+            "Polieren",
+            "Lackiervorbereitung",
+            "Oberflächenbehandlung"
+          ],
+          "robotTypes": [
+            "Kraftgeregelte Arme",
+            "Endeffektoren mit Compliance",
+            "Lackierroboter"
+          ]
         },
         {
           "id": "inspection-security",
-          "title": "Industrial inspection and security robotics",
-          "description": "Mobile, legged and stationary inspection systems for factory patrol, thermal imaging and remote monitoring.",
-          "applications": ["Facility patrol", "Thermal inspection", "Remote monitoring", "Hazardous-area inspection"],
-          "robotTypes": ["Quadruped robots", "Indoor AMR", "Pan-tilt-zoom inspection stations"]
+          "title": "Industrielle Inspektions- und Sicherheitsrobotik",
+          "description": "Mobile, schreitende und stationäre Inspektionssysteme für Anlagen-Patrouillen, Thermografie und Fernüberwachung.",
+          "applications": [
+            "Anlagen-Patrouille",
+            "Thermografische Inspektion",
+            "Fernüberwachung",
+            "Inspektion in Gefahrenbereichen"
+          ],
+          "robotTypes": [
+            "Vierbeinige Roboter",
+            "Indoor-AMR",
+            "Pan-Tilt-Zoom-Inspektionsstationen"
+          ]
         },
         {
           "id": "cleaning-facility",
-          "title": "Cleaning and facility automation",
-          "description": "Commercial and industrial cleaning robots for floors, large surfaces and recurring facility tasks.",
-          "applications": ["Floor cleaning", "Large-surface scrubbing", "Facility upkeep"],
-          "robotTypes": ["Autonomous scrubbers", "Sweepers", "Service robots"]
+          "title": "Reinigung und Gebäudeautomatisierung",
+          "description": "Gewerbliche und industrielle Reinigungsroboter für Böden, große Flächen und wiederkehrende Anlagenaufgaben.",
+          "applications": [
+            "Bodenreinigung",
+            "Großflächen-Scheuern",
+            "Anlagen-Instandhaltung"
+          ],
+          "robotTypes": [
+            "Autonome Scheuersaugmaschinen",
+            "Kehrmaschinen",
+            "Service-Roboter"
+          ]
         },
         {
           "id": "research-education",
-          "title": "Research and education robotics",
-          "description": "Platform evaluation and procurement support for universities, applied-research labs and robotics teaching environments.",
-          "applications": ["Humanoid platforms", "Quadruped research", "Embodied AI experiments", "Teaching cells"],
-          "robotTypes": ["Humanoid", "Quadruped", "Research-grade arms", "Mobile manipulators"]
+          "title": "Forschungs- und Bildungsrobotik",
+          "description": "Plattform-Evaluierung und Beschaffungsunterstützung für Universitäten, anwendungsorientierte Forschungslabore und robotische Lehrumgebungen.",
+          "applications": [
+            "Humanoide Plattformen",
+            "Vierbeinige Forschung",
+            "Embodied-AI-Experimente",
+            "Lehrzellen"
+          ],
+          "robotTypes": [
+            "Humanoide",
+            "Vierbeinige",
+            "Forschungs-Roboterarme",
+            "Mobile Manipulatoren"
+          ]
         },
         {
           "id": "humanoid-embodied-ai",
-          "title": "Humanoid and embodied AI pilot projects",
-          "description": "Early-stage feasibility and pilot work with humanoid and embodied-AI platforms in controlled industrial and service environments.",
-          "applications": ["Locomotion pilots", "Manipulation studies", "Human-robot interaction"],
-          "robotTypes": ["Humanoid robots", "Bi-manual platforms", "Embodied AI research kits"]
+          "title": "Humanoide und Embodied-AI-Pilotprojekte",
+          "description": "Frühphasen-Machbarkeitsstudien und Pilotarbeiten mit humanoiden und Embodied-AI-Plattformen in kontrollierten industriellen und Service-Umgebungen.",
+          "applications": [
+            "Lokomotions-Pilotprojekte",
+            "Manipulationsstudien",
+            "Mensch-Roboter-Interaktion"
+          ],
+          "robotTypes": [
+            "Humanoide Roboter",
+            "Beidarmige Plattformen",
+            "Embodied-AI-Forschungs-Kits"
+          ]
         }
       ]
     },
     "industries": {
       "meta": {
-        "title": "Industries We Support | MegaRobotics",
-        "description": "Industrial robotics and automation across automotive, electronics, food & beverage, pharma, consumer goods, logistics, inspection, research and service environments."
+        "title": "Branchen, die wir unterstützen | MegaRobotics",
+        "description": "Industrielle Robotik und Automatisierung für Automotive, Elektronik, Lebensmittel & Getränke, Pharma, Konsumgüter, Logistik, Inspektion, Forschung und Service-Umgebungen."
       },
-      "title": "Industries",
-      "eyebrow": "Industries",
-      "intro": "MegaRobotics supports robotic automation across nine industrial and research domains in Europe.",
-      "labelApplications": "Application areas",
-      "ctaLabel": "Discuss your application",
+      "title": "Branchen",
+      "eyebrow": "Branchen",
+      "intro": "MegaRobotics unterstützt robotische Automatisierung in neun industriellen und Forschungs-Domänen in Europa.",
+      "labelApplications": "Anwendungsbereiche",
+      "ctaLabel": "Ihre Anwendung besprechen",
       "items": [
-        { "id": "automotive", "title": "Automotive & Aftermarket Body Shops", "applications": ["Robotic sanding", "Polishing", "Painting concepts", "Parts handling", "Inspection", "Machine tending"] },
-        { "id": "electronics", "title": "Consumer Electronics & Precision Manufacturing", "applications": ["Small-part handling", "Assembly support", "Testing", "Inspection", "Dispensing", "Screwdriving"] },
-        { "id": "food-beverage", "title": "Food & Beverage", "applications": ["Picking", "Sorting", "Packaging", "Palletizing", "Line feeding", "Quality inspection"] },
-        { "id": "pharma", "title": "Pharmaceutical & Healthcare Production", "applications": ["Packaging", "Sorting", "Lab automation", "Sample handling", "Inspection", "Controlled material handling"] },
-        { "id": "daily-chemical", "title": "Daily Chemical, Cosmetics & Consumer Goods", "applications": ["Bottle handling", "Cartoning", "Sorting", "Labelling support", "Palletizing", "End-of-line automation"] },
-        { "id": "logistics", "title": "Logistics & Warehousing", "applications": ["AMR/AGV transport", "Autonomous pallet movement", "Unmanned forklifts", "Goods-to-person concepts", "Inventory patrol"] },
-        { "id": "inspection-security", "title": "Industrial Inspection & Security", "applications": ["Factory patrol", "Thermal inspection", "Remote monitoring", "Hazardous-area inspection", "Construction-site inspection", "Energy infrastructure inspection"] },
-        { "id": "research-education", "title": "Research & Education", "applications": ["Humanoid platforms", "Quadruped robots", "Embodied AI research", "Locomotion research", "Robot control", "Human-robot interaction"] },
-        { "id": "facility-service", "title": "Facility Management & Service Robotics", "applications": ["Cleaning", "Facility monitoring", "Internal transport", "Reception/demo robots", "Service robotics pilots"] }
+        {
+          "id": "automotive",
+          "title": "Automotive & Aftermarket-Karosseriewerkstätten",
+          "applications": [
+            "Robotisches Schleifen",
+            "Polieren",
+            "Lackier-Konzepte",
+            "Teile-Handling",
+            "Inspektion",
+            "Maschinenbestückung"
+          ]
+        },
+        {
+          "id": "electronics",
+          "title": "Unterhaltungselektronik & Präzisionsfertigung",
+          "applications": [
+            "Kleinteil-Handling",
+            "Montage-Support",
+            "Prüfung",
+            "Inspektion",
+            "Dosieren",
+            "Schraubarbeiten"
+          ]
+        },
+        {
+          "id": "food-beverage",
+          "title": "Lebensmittel & Getränke",
+          "applications": [
+            "Picking",
+            "Sortierung",
+            "Verpackung",
+            "Palettierung",
+            "Linienzuführung",
+            "Qualitätsprüfung"
+          ]
+        },
+        {
+          "id": "pharma",
+          "title": "Pharmazeutische & Healthcare-Produktion",
+          "applications": [
+            "Verpackung",
+            "Sortierung",
+            "Laborautomatisierung",
+            "Probenhandling",
+            "Inspektion",
+            "Kontrolliertes Material-Handling"
+          ]
+        },
+        {
+          "id": "daily-chemical",
+          "title": "Haushaltschemie, Kosmetik & Konsumgüter",
+          "applications": [
+            "Flaschenhandling",
+            "Kartonierung",
+            "Sortierung",
+            "Etikettierungs-Support",
+            "Palettierung",
+            "End-of-Line-Automatisierung"
+          ]
+        },
+        {
+          "id": "logistics",
+          "title": "Logistik & Lagerhaltung",
+          "applications": [
+            "AMR/AGV-Transport",
+            "Autonomer Palettentransport",
+            "Fahrerlose Gabelstapler",
+            "Goods-to-Person-Konzepte",
+            "Inventur-Patrouille"
+          ]
+        },
+        {
+          "id": "inspection-security",
+          "title": "Industrielle Inspektion & Sicherheit",
+          "applications": [
+            "Werks-Patrouille",
+            "Thermografische Inspektion",
+            "Fernüberwachung",
+            "Inspektion in Gefahrenbereichen",
+            "Baustellen-Inspektion",
+            "Inspektion von Energieinfrastruktur"
+          ]
+        },
+        {
+          "id": "research-education",
+          "title": "Forschung & Bildung",
+          "applications": [
+            "Humanoide Plattformen",
+            "Vierbeinige Roboter",
+            "Embodied-AI-Forschung",
+            "Lokomotionsforschung",
+            "Robotersteuerung",
+            "Mensch-Roboter-Interaktion"
+          ]
+        },
+        {
+          "id": "facility-service",
+          "title": "Facility Management & Service-Robotik",
+          "applications": [
+            "Reinigung",
+            "Anlagenüberwachung",
+            "Interner Transport",
+            "Empfangs- / Demo-Roboter",
+            "Service-Robotik-Pilotprojekte"
+          ]
+        }
       ]
     },
     "robotTechnologies": {
       "meta": {
-        "title": "Robot Technologies | MegaRobotics",
-        "description": "Industrial arms, collaborative robots, parallel robots, AMR/AGV, quadruped, humanoid platforms and components — selection criteria for European industrial automation."
+        "title": "Robotertechnologien | MegaRobotics",
+        "description": "Industrielle Arme, kollaborative Roboter, Parallelroboter, AMR/AGV, vierbeinige und humanoide Plattformen sowie Komponenten — Auswahlkriterien für die europäische industrielle Automatisierung."
       },
-      "title": "Robot Technologies",
-      "eyebrow": "Technologies",
-      "intro": "Industrial automation increasingly combines multiple robot classes. The right choice depends on payload, reach, speed, environment, safety, perception and integration complexity.",
-      "labelApplications": "Suitable applications",
-      "labelCriteria": "Key selection criteria",
+      "title": "Robotertechnologien",
+      "eyebrow": "Technologien",
+      "intro": "Industrielle Automatisierung kombiniert zunehmend mehrere Roboterklassen. Die richtige Wahl hängt von Traglast, Reichweite, Geschwindigkeit, Umgebung, Sicherheit, Wahrnehmung und Integrationskomplexität ab.",
+      "labelApplications": "Geeignete Anwendungen",
+      "labelCriteria": "Wichtige Auswahlkriterien",
       "items": [
-        { "id": "industrial-arms", "title": "Industrial Robot Arms", "description": "Articulated 6-axis robots for heavy-duty, high-payload and high-reach industrial tasks.", "applications": ["Welding", "Material handling", "Machine tending", "Palletizing"], "criteria": ["Payload", "Reach", "Repeatability", "Cycle time", "Integration interfaces"] },
-        { "id": "cobots", "title": "Collaborative Robots", "description": "Force-limited arms designed to operate near humans without traditional safety fencing.", "applications": ["Assembly", "Light machine tending", "Quality tasks", "Bench-top automation"], "criteria": ["Payload", "Reach", "Safety profile", "Programming ease", "Integration complexity"] },
-        { "id": "parallel-robots", "title": "Parallel Robots", "description": "Delta and parallel-kinematic systems for high-speed pick-and-place at low payload.", "applications": ["High-speed picking", "Packaging", "Sorting"], "criteria": ["Throughput", "Workspace", "Vision integration", "Hygiene class"] },
-        { "id": "amr-agv", "title": "AMR / AGV / Mobile Robots", "description": "Autonomous and guided mobile platforms for material flow in warehouses and production.", "applications": ["Pallet transport", "Goods-to-person", "Cross-floor logistics"], "criteria": ["Payload", "Navigation", "Fleet management", "Charging strategy", "Safety"] },
-        { "id": "quadruped-legged", "title": "Quadruped / Legged Robots", "description": "Four-legged platforms for terrain-tolerant inspection and patrol in industrial environments.", "applications": ["Facility inspection", "Thermal imaging", "Remote monitoring"], "criteria": ["Payload", "Battery runtime", "Sensor stack", "IP rating", "Tele-operation"] },
-        { "id": "humanoid", "title": "Humanoid Robots", "description": "Bi-pedal, bi-manual platforms used today in research and early-stage industrial pilots.", "applications": ["Locomotion research", "Manipulation studies", "Human-robot interaction"], "criteria": ["Degrees of freedom", "Battery", "Safety", "Software stack", "Maturity"] },
-        { "id": "end-effectors-components", "title": "End Effectors & Robot Components", "description": "Grippers, force/torque sensors, controllers, joint modules and robot subsystems.", "applications": ["Application-specific grasping", "Force-controlled finishing", "Custom robot cells"], "criteria": ["Grasp type", "Force/torque range", "Mounting interface", "Lifetime", "Service"] },
-        { "id": "sensors-vision-ai", "title": "Sensors, Vision and AI Control", "description": "2D/3D cameras, LiDAR, perception software and AI-driven control stacks.", "applications": ["Bin picking", "Part inspection", "Navigation", "Manipulation planning"], "criteria": ["Accuracy", "Frame rate", "Lighting tolerance", "Software ecosystem", "Maintenance"] }
+        {
+          "id": "industrial-arms",
+          "title": "Industrieroboterarme",
+          "description": "Knickarm-6-Achs-Roboter für anspruchsvolle industrielle Aufgaben mit hoher Traglast und Reichweite.",
+          "applications": [
+            "Schweißen",
+            "Materialhandling",
+            "Maschinenbestückung",
+            "Palettierung"
+          ],
+          "criteria": [
+            "Traglast",
+            "Reichweite",
+            "Wiederholgenauigkeit",
+            "Taktzeit",
+            "Integrationsschnittstellen"
+          ]
+        },
+        {
+          "id": "cobots",
+          "title": "Kollaborative Roboter",
+          "description": "Kraftbegrenzte Arme, die ohne klassische Schutzzäune in unmittelbarer Nähe zum Menschen arbeiten können.",
+          "applications": [
+            "Montage",
+            "Leichte Maschinenbestückung",
+            "Qualitätsaufgaben",
+            "Tisch-Automatisierung"
+          ],
+          "criteria": [
+            "Traglast",
+            "Reichweite",
+            "Sicherheitsprofil",
+            "Programmierfreundlichkeit",
+            "Integrationskomplexität"
+          ]
+        },
+        {
+          "id": "parallel-robots",
+          "title": "Parallelroboter",
+          "description": "Delta- und parallelkinematische Systeme für High-Speed-Pick-and-Place bei geringer Traglast.",
+          "applications": [
+            "High-Speed-Picking",
+            "Verpackung",
+            "Sortierung"
+          ],
+          "criteria": [
+            "Durchsatz",
+            "Arbeitsraum",
+            "Vision-Integration",
+            "Hygieneklasse"
+          ]
+        },
+        {
+          "id": "amr-agv",
+          "title": "AMR / AGV / Mobile Roboter",
+          "description": "Autonome und geführte mobile Plattformen für den Materialfluss in Lagern und Produktion.",
+          "applications": [
+            "Palettentransport",
+            "Goods-to-Person",
+            "Etagenübergreifende Logistik"
+          ],
+          "criteria": [
+            "Traglast",
+            "Navigation",
+            "Flottenmanagement",
+            "Ladestrategie",
+            "Sicherheit"
+          ]
+        },
+        {
+          "id": "quadruped-legged",
+          "title": "Vierbeinige / schreitende Roboter",
+          "description": "Vierbeinige Plattformen für geländetaugliche Inspektion und Patrouille in industriellen Umgebungen.",
+          "applications": [
+            "Anlageninspektion",
+            "Thermografie",
+            "Fernüberwachung"
+          ],
+          "criteria": [
+            "Traglast",
+            "Akku-Laufzeit",
+            "Sensor-Stack",
+            "IP-Schutzart",
+            "Tele-Operation"
+          ]
+        },
+        {
+          "id": "humanoid",
+          "title": "Humanoide Roboter",
+          "description": "Zweibeinige, beidarmige Plattformen, die heute in Forschung und frühen industriellen Pilotprojekten eingesetzt werden.",
+          "applications": [
+            "Lokomotionsforschung",
+            "Manipulationsstudien",
+            "Mensch-Roboter-Interaktion"
+          ],
+          "criteria": [
+            "Freiheitsgrade",
+            "Akku",
+            "Sicherheit",
+            "Software-Stack",
+            "Reifegrad"
+          ]
+        },
+        {
+          "id": "end-effectors-components",
+          "title": "Endeffektoren & Roboterkomponenten",
+          "description": "Greifer, Kraft- / Drehmomentsensoren, Steuerungen, Gelenkmodule und Roboter-Subsysteme.",
+          "applications": [
+            "Anwendungsspezifisches Greifen",
+            "Kraftgeregelte Oberflächenbearbeitung",
+            "Kundenspezifische Roboterzellen"
+          ],
+          "criteria": [
+            "Greifertyp",
+            "Kraft- / Drehmomentbereich",
+            "Montageschnittstelle",
+            "Lebensdauer",
+            "Service"
+          ]
+        },
+        {
+          "id": "sensors-vision-ai",
+          "title": "Sensoren, Vision und KI-Steuerung",
+          "description": "2D- / 3D-Kameras, LiDAR, Wahrnehmungssoftware und KI-gestützte Steuerungs-Stacks.",
+          "applications": [
+            "Bin-Picking",
+            "Teile-Inspektion",
+            "Navigation",
+            "Manipulationsplanung"
+          ],
+          "criteria": [
+            "Genauigkeit",
+            "Bildrate",
+            "Lichttoleranz",
+            "Software-Ökosystem",
+            "Wartung"
+          ]
+        }
       ]
     },
     "technologyNetwork": {
       "meta": {
-        "title": "Robotics Technology Network | MegaRobotics",
-        "description": "MegaRobotics' robotics technology network spans international manufacturers, component suppliers, AI providers and integration partners across Europe."
+        "title": "Robotik-Technologienetzwerk | MegaRobotics",
+        "description": "Das Robotik-Technologienetzwerk von MegaRobotics umfasst internationale Hersteller, Komponentenanbieter, KI-Anbieter und Integrationspartner in Europa."
       },
-      "title": "Robotics Technology Network",
-      "eyebrow": "Network",
-      "intro": "MegaRobotics works with and evaluates technologies from international robotics manufacturers, component suppliers, AI providers and system integration partners. The goal is to match the right platform with the right application and to structure realistic pilot projects for European customers.",
-      "sectionsTitle": "Categories we work across",
-      "legalNote": "Manufacturer relationships, availability, product scope and territorial rights may vary by project and are confirmed individually before any commercial engagement.",
+      "title": "Robotik-Technologienetzwerk",
+      "eyebrow": "Netzwerk",
+      "intro": "MegaRobotics arbeitet mit internationalen Robotik-Herstellern, Komponentenanbietern, KI-Anbietern und Systemintegrationspartnern zusammen und evaluiert deren Technologien. Ziel ist es, die richtige Plattform mit der richtigen Anwendung zu verbinden und realistische Pilotprojekte für europäische Kunden zu strukturieren.",
+      "sectionsTitle": "Kategorien, in denen wir arbeiten",
+      "legalNote": "Herstellerbeziehungen, Verfügbarkeit, Produktumfang und Gebietsrechte können je nach Projekt variieren und werden vor jeder kommerziellen Zusammenarbeit individuell bestätigt.",
       "items": [
-        { "id": "arms-cobots", "title": "Robotic arms and collaborative automation", "description": "Articulated and collaborative robots from international suppliers, selected per application requirements." },
-        { "id": "parallel-high-speed", "title": "Parallel robotics and high-speed production", "description": "Delta and parallel-kinematic platforms for packaging, sorting and high-throughput tasks." },
-        { "id": "mobile-intralogistics", "title": "Mobile robotics and intralogistics", "description": "AMR, AGV and unmanned forklift platforms for warehousing and production logistics." },
-        { "id": "legged-humanoid", "title": "Legged and humanoid robotics", "description": "Quadruped and humanoid platforms for inspection, service and embodied-AI research." },
-        { "id": "cleaning-service", "title": "Cleaning and facility automation", "description": "Autonomous scrubbers and service robots for commercial and industrial environments." },
-        { "id": "components-sensing", "title": "Components, grippers and sensing", "description": "End effectors, force/torque sensors, vision systems and robot subsystems." },
-        { "id": "system-integrators", "title": "System integrator collaboration", "description": "Cooperation with regional and specialist integrators for cell engineering and deployment." }
+        {
+          "id": "arms-cobots",
+          "title": "Roboterarme und kollaborative Automatisierung",
+          "description": "Knickarm- und kollaborative Roboter von internationalen Anbietern, je nach Anwendungsanforderung ausgewählt."
+        },
+        {
+          "id": "parallel-high-speed",
+          "title": "Parallelrobotik und High-Speed-Produktion",
+          "description": "Delta- und parallelkinematische Plattformen für Verpackung, Sortierung und Aufgaben mit hoher Taktrate."
+        },
+        {
+          "id": "mobile-intralogistics",
+          "title": "Mobile Robotik und Intralogistik",
+          "description": "AMR-, AGV- und fahrerlose Gabelstapler-Plattformen für Lager- und Produktionslogistik."
+        },
+        {
+          "id": "legged-humanoid",
+          "title": "Schreitende und humanoide Robotik",
+          "description": "Vierbeinige und humanoide Plattformen für Inspektion, Service und Embodied-AI-Forschung."
+        },
+        {
+          "id": "cleaning-service",
+          "title": "Reinigung und Gebäudeautomatisierung",
+          "description": "Autonome Scheuersaugmaschinen und Service-Roboter für gewerbliche und industrielle Umgebungen."
+        },
+        {
+          "id": "components-sensing",
+          "title": "Komponenten, Greifer und Sensorik",
+          "description": "Endeffektoren, Kraft- / Drehmomentsensoren, Vision-Systeme und Roboter-Subsysteme."
+        },
+        {
+          "id": "system-integrators",
+          "title": "Zusammenarbeit mit Systemintegratoren",
+          "description": "Kooperation mit regionalen und spezialisierten Integratoren für die Zellen-Konstruktion und den Einsatz."
+        }
       ]
     },
     "forCustomers": {
       "meta": {
-        "title": "Find the Right Robot for Your Application | MegaRobotics",
-        "description": "Application discussion, technical requirement check, platform comparison, supplier coordination, feasibility planning and integration partner matching."
+        "title": "Den richtigen Roboter für Ihre Anwendung finden | MegaRobotics",
+        "description": "Anwendungsdiskussion, technische Anforderungsprüfung, Plattformvergleich, Lieferanten-Koordination, Machbarkeitsplanung und Vermittlung von Integrationspartnern."
       },
-      "title": "Find the Right Robot for Your Application",
-      "eyebrow": "For Customers",
-      "intro": "Choosing a robotic system is not only a product decision. It requires understanding the task, environment, safety, payload, perception, integration, service model and commercial feasibility.",
-      "ctaLabel": "Submit your automation challenge",
+      "title": "Den richtigen Roboter für Ihre Anwendung finden",
+      "eyebrow": "Für Kunden",
+      "intro": "Die Wahl eines robotischen Systems ist nicht nur eine Produktentscheidung. Sie erfordert Verständnis für Aufgabe, Umgebung, Sicherheit, Traglast, Wahrnehmung, Integration, Service-Modell und kaufmännische Machbarkeit.",
+      "ctaLabel": "Ihre Automatisierungs-Herausforderung einreichen",
       "sections": [
-        { "id": "application-discussion", "title": "Application discussion", "body": "Clarifying the task, environment and constraints before any platform is recommended." },
-        { "id": "technical-requirements", "title": "Technical requirement check", "body": "Payload, reach, cycle time, safety, perception, footprint and integration interfaces." },
-        { "id": "platform-comparison", "title": "Robot / platform comparison", "body": "Comparing candidate robot classes and suppliers against the application criteria." },
-        { "id": "supplier-coordination", "title": "Supplier coordination", "body": "Structuring technical and commercial discussions with manufacturers and providers." },
-        { "id": "feasibility-pilot", "title": "Feasibility and pilot planning", "body": "Scope, success criteria, timeline and budget for a meaningful first deployment." },
-        { "id": "integrator-matching", "title": "Integration partner matching", "body": "Connecting customers with system integrators where in-house engineering is not the right path." },
-        { "id": "deployment-support", "title": "Deployment and support path", "body": "Planning the operational hand-over, maintenance and continuous improvement model." }
+        {
+          "id": "application-discussion",
+          "title": "Anwendungsdiskussion",
+          "body": "Klärung von Aufgabe, Umgebung und Rahmenbedingungen, bevor eine Plattform empfohlen wird."
+        },
+        {
+          "id": "technical-requirements",
+          "title": "Technische Anforderungsprüfung",
+          "body": "Traglast, Reichweite, Taktzeit, Sicherheit, Wahrnehmung, Stellfläche und Integrationsschnittstellen."
+        },
+        {
+          "id": "platform-comparison",
+          "title": "Roboter- / Plattformvergleich",
+          "body": "Vergleich von Kandidaten-Roboterklassen und -anbietern anhand der Anwendungskriterien."
+        },
+        {
+          "id": "supplier-coordination",
+          "title": "Lieferanten-Koordination",
+          "body": "Strukturierung technischer und kaufmännischer Gespräche mit Herstellern und Anbietern."
+        },
+        {
+          "id": "feasibility-pilot",
+          "title": "Machbarkeits- und Pilotplanung",
+          "body": "Scope, Erfolgskriterien, Zeitplan und Budget für eine sinnvolle Erstanwendung."
+        },
+        {
+          "id": "integrator-matching",
+          "title": "Vermittlung von Integrationspartnern",
+          "body": "Verbindung von Kunden mit Systemintegratoren, wenn ein Inhouse-Engineering nicht der richtige Weg ist."
+        },
+        {
+          "id": "deployment-support",
+          "title": "Bereitstellungs- und Support-Pfad",
+          "body": "Planung der operativen Übergabe, Wartung und kontinuierlichen Verbesserung."
+        }
       ]
     },
     "forManufacturers": {
       "meta": {
-        "title": "European Market Development for Robotics Manufacturers | MegaRobotics",
-        "description": "Market positioning, use-case mapping, customer discovery, pilot-project development and integration partner coordination for selected robotics manufacturers."
+        "title": "Europäische Markterschließung für Robotik-Hersteller | MegaRobotics",
+        "description": "Marktpositionierung, Use-Case-Mapping, Kundenentwicklung, Pilotprojekt-Entwicklung und Koordination von Integrationspartnern für ausgewählte Robotik-Hersteller."
       },
-      "title": "European Market Development for Robotics Manufacturers",
-      "eyebrow": "For Manufacturers",
-      "intro": "MegaRobotics supports selected robotics manufacturers and technology providers with European market positioning, customer development, application discovery and local partner coordination.",
-      "careful": "CE and GDPR support refers to coordination and process guidance — not certification itself, which is performed by accredited bodies.",
-      "ctaLabel": "Discuss European market development",
+      "title": "Europäische Markterschließung für Robotik-Hersteller",
+      "eyebrow": "Für Hersteller",
+      "intro": "MegaRobotics unterstützt ausgewählte Robotik-Hersteller und Technologieanbieter bei europäischer Marktpositionierung, Kundenentwicklung, Anwendungsentdeckung und lokaler Partner-Koordination.",
+      "careful": "CE- und DSGVO-Unterstützung bezieht sich auf Koordination und Prozessbegleitung — nicht auf die Zertifizierung selbst, die von akkreditierten Stellen durchgeführt wird.",
+      "ctaLabel": "Europäische Markterschließung besprechen",
       "services": [
-        { "title": "Market positioning", "description": "Sharpening the value proposition for European industrial and research audiences." },
-        { "title": "Use-case mapping", "description": "Translating platform capabilities into concrete European industrial applications." },
-        { "title": "Customer discovery", "description": "Structured outreach into target industries and decision-maker layers." },
-        { "title": "Trade-fair follow-up", "description": "Qualified follow-up on leads from European industry events." },
-        { "title": "Technical presentation adaptation", "description": "Reworking decks, datasheets and demos for European technical buyers." },
-        { "title": "Pilot-project development", "description": "Structuring first commercial pilots with European customers." },
-        { "title": "Integration partner coordination", "description": "Identifying suitable system integrators per region and application." },
-        { "title": "Documentation localization", "description": "German and English documentation review and adaptation support." },
-        { "title": "CE / GDPR / compliance coordination support", "description": "Coordinating with specialists and customers on compliance topics — not certification itself." }
+        {
+          "title": "Marktpositionierung",
+          "description": "Schärfung des Wertversprechens für europäische industrielle und Forschungs-Zielgruppen."
+        },
+        {
+          "title": "Use-Case-Mapping",
+          "description": "Übersetzung von Plattform-Fähigkeiten in konkrete europäische industrielle Anwendungen."
+        },
+        {
+          "title": "Kundenentwicklung",
+          "description": "Strukturierte Ansprache in Ziel-Branchen und Entscheidungsebenen."
+        },
+        {
+          "title": "Messe-Nachbearbeitung",
+          "description": "Qualifizierte Nachbearbeitung von Leads aus europäischen Industrie-Events."
+        },
+        {
+          "title": "Anpassung technischer Präsentationen",
+          "description": "Überarbeitung von Pitch-Decks, Datenblättern und Demos für europäische technische Käufer."
+        },
+        {
+          "title": "Pilotprojekt-Entwicklung",
+          "description": "Strukturierung erster kommerzieller Pilotprojekte mit europäischen Kunden."
+        },
+        {
+          "title": "Koordination von Integrationspartnern",
+          "description": "Identifikation geeigneter Systemintegratoren je nach Region und Anwendung."
+        },
+        {
+          "title": "Dokumentations-Lokalisierung",
+          "description": "Review und Anpassung deutscher und englischer Dokumentation."
+        },
+        {
+          "title": "CE- / DSGVO- / Compliance-Koordinationsunterstützung",
+          "description": "Koordination mit Spezialisten und Kunden zu Compliance-Themen — nicht die Zertifizierung selbst."
+        }
       ]
     },
     "projects": {
       "meta": {
-        "title": "Projects & Concept Studies | MegaRobotics",
-        "description": "Concept and feasibility studies for automotive aftermarket robotic cells, mobile inspection, intralogistics, research robotics platforms and industrial cleaning automation."
+        "title": "Projekte & Konzeptstudien | MegaRobotics",
+        "description": "Konzept- und Machbarkeitsstudien für robotische Zellen im Automotive-Aftermarket, mobile Inspektion, Intralogistik, Forschungs-Robotik-Plattformen und industrielle Reinigungsautomatisierung."
       },
-      "title": "Projects & Concept Studies",
-      "eyebrow": "Projects",
-      "intro": "The projects below describe automation scenarios MegaRobotics develops with customers and integration partners. Items labelled \"Concept / Feasibility Study\" are scoped frameworks, not deployed references.",
-      "conceptLabel": "Concept / Feasibility Study",
+      "title": "Projekte & Konzeptstudien",
+      "eyebrow": "Projekte",
+      "intro": "Die folgenden Projekte beschreiben Automatisierungsszenarien, die MegaRobotics gemeinsam mit Kunden und Integrationspartnern entwickelt. Mit „Konzept- / Machbarkeitsstudie\" gekennzeichnete Einträge sind strukturierte Rahmenkonzepte, keine umgesetzten Referenzen.",
+      "conceptLabel": "Konzept- / Machbarkeitsstudie",
       "items": [
-        { "id": "automotive-body-shop", "title": "Automotive Body-Shop Robotic Cell", "subtitle": "Robotic sanding, polishing and painting concept for aftermarket environments.", "body": "Force-controlled arm with compliant end-effector, targeted at small- and mid-volume aftermarket body shops. Scope covers cell layout, safety concept, dust extraction interface, and integration with existing paint-prep workflows." },
-        { "id": "inspection-pilot", "title": "Industrial Inspection Robot Pilot", "subtitle": "Mobile and legged robot concepts for repetitive inspection and remote monitoring.", "body": "Comparison of indoor AMR and quadruped options for facility patrol routes, thermal inspection, gauge reading and shift-handover reporting. Includes data path to existing maintenance systems." },
-        { "id": "intralogistics", "title": "Intralogistics Automation Concept", "subtitle": "AMR and mobile robot concepts for material flow and warehouse operations.", "body": "Scenario design for inter-zone transport, goods-to-person stations and unmanned forklift segments. Covers fleet sizing, charging, traffic management and IT integration." },
-        { "id": "research-platform-evaluation", "title": "Research Robotics Platform Evaluation", "subtitle": "Humanoid, quadruped and mobile platforms for universities and robotics labs.", "body": "Platform comparison and procurement support for research groups working on locomotion, manipulation and embodied AI. Includes software-stack maturity and long-term support assessment." },
-        { "id": "industrial-cleaning", "title": "Industrial Cleaning Automation", "subtitle": "Commercial and industrial cleaning robot deployment concepts.", "body": "Site survey, cleaning-pattern definition and platform selection for large-surface industrial and commercial cleaning, including charging infrastructure and operational hand-over." }
+        {
+          "id": "automotive-body-shop",
+          "title": "Roboterzelle für Automotive-Karosseriewerkstatt",
+          "subtitle": "Konzept für robotisches Schleifen, Polieren und Lackieren im Aftermarket-Umfeld.",
+          "body": "Kraftgeregelter Arm mit nachgiebigem Endeffektor, ausgerichtet auf kleine und mittelgroße Aftermarket-Karosseriewerkstätten. Der Umfang umfasst Zellen-Layout, Sicherheitskonzept, Staubabsaugungs-Schnittstelle und die Integration in bestehende Lackiervorbereitungs-Workflows."
+        },
+        {
+          "id": "inspection-pilot",
+          "title": "Pilotprojekt für industrielle Inspektionsroboter",
+          "subtitle": "Konzepte für mobile und schreitende Roboter zur wiederkehrenden Inspektion und Fernüberwachung.",
+          "body": "Vergleich von Indoor-AMR- und vierbeinigen Optionen für Anlagen-Patrouillen, thermografische Inspektion, Manometer-Ablesung und Schichtwechsel-Berichterstattung. Inklusive Datenpfad zu bestehenden Wartungssystemen."
+        },
+        {
+          "id": "intralogistics",
+          "title": "Intralogistik-Automatisierungskonzept",
+          "subtitle": "AMR- und mobile Roboterkonzepte für Materialfluss und Lageroperationen.",
+          "body": "Szenario-Design für Inter-Zonen-Transport, Goods-to-Person-Stationen und Segmente mit fahrerlosen Gabelstaplern. Umfasst Flottendimensionierung, Laden, Verkehrsmanagement und IT-Integration."
+        },
+        {
+          "id": "research-platform-evaluation",
+          "title": "Evaluierung von Forschungs-Robotik-Plattformen",
+          "subtitle": "Humanoide, vierbeinige und mobile Plattformen für Universitäten und Robotiklabore.",
+          "body": "Plattformvergleich und Beschaffungsunterstützung für Forschungsgruppen, die an Lokomotion, Manipulation und Embodied AI arbeiten. Inklusive Bewertung der Software-Stack-Reife und der langfristigen Unterstützung."
+        },
+        {
+          "id": "industrial-cleaning",
+          "title": "Industrielle Reinigungsautomatisierung",
+          "subtitle": "Einsatzkonzepte für gewerbliche und industrielle Reinigungsroboter.",
+          "body": "Standort-Begehung, Definition des Reinigungsmusters und Plattformauswahl für die Reinigung großer industrieller und gewerblicher Flächen, einschließlich Ladeinfrastruktur und operativer Übergabe."
+        }
       ]
     },
     "company": {
       "meta": {
-        "title": "Company | MegaRobotics",
-        "description": "MegaRobotics is based in Germany and focuses on industrial robotics, automation technologies and advanced robotic platforms for European industrial, research and service applications."
+        "title": "Unternehmen | MegaRobotics",
+        "description": "MegaRobotics hat seinen Sitz in Deutschland und fokussiert sich auf industrielle Robotik, Automatisierungstechnologien und fortschrittliche Roboterplattformen für europäische industrielle, Forschungs- und Service-Anwendungen."
       },
-      "title": "About MegaRobotics",
-      "eyebrow": "Company",
-      "body": "MegaRobotics is based in Germany and focuses on industrial robotics, automation technologies and advanced robotic platforms. The company works across customer discovery, robot sourcing, feasibility development and technology coordination for European industrial, research and service applications.",
-      "positioningTitle": "Positioning",
-      "positioning": "MegaRobotics helps European industrial customers and research institutions identify, evaluate and develop advanced robotic technologies across manufacturing, logistics, inspection, cleaning, service robotics and embodied AI applications.",
-      "approachTitle": "How we work",
-      "approach": "We start from the application, not the product. Requirements, environment and feasibility are clarified before any platform recommendation. Manufacturer and integrator relationships are confirmed on a per-project basis."
+      "title": "Über MegaRobotics",
+      "eyebrow": "Unternehmen",
+      "body": "MegaRobotics hat seinen Sitz in Deutschland und fokussiert sich auf industrielle Robotik, Automatisierungstechnologien und fortschrittliche Roboterplattformen. Das Unternehmen arbeitet entlang von Kundenentdeckung, Roboter-Beschaffung, Machbarkeitsentwicklung und Technologie-Koordination für europäische industrielle, Forschungs- und Service-Anwendungen.",
+      "positioningTitle": "Positionierung",
+      "positioning": "MegaRobotics hilft europäischen Industriekunden und Forschungseinrichtungen, fortschrittliche Robotiktechnologien für Fertigung, Logistik, Inspektion, Reinigung, Service-Robotik und Embodied-AI-Anwendungen zu identifizieren, zu evaluieren und zu entwickeln.",
+      "approachTitle": "So arbeiten wir",
+      "approach": "Wir beginnen mit der Anwendung, nicht mit dem Produkt. Anforderungen, Umgebung und Machbarkeit werden geklärt, bevor eine Plattform empfohlen wird. Hersteller- und Integrator-Beziehungen werden projektbezogen bestätigt."
     },
     "contactExtra": {
-      "intro": "Tell us about your automation task, robotic platform interest or manufacturer cooperation proposal.",
+      "intro": "Erzählen Sie uns von Ihrer Automatisierungsaufgabe, Ihrem Interesse an einer Roboter-Plattform oder Ihrem Vorschlag für eine Hersteller-Kooperation.",
       "fields": {
-        "company": "Company",
-        "companyPlaceholder": "Your company",
-        "phone": "Phone",
+        "company": "Unternehmen",
+        "companyPlaceholder": "Ihr Unternehmen",
+        "phone": "Telefon",
         "phonePlaceholder": "Optional",
-        "country": "Country",
-        "countryPlaceholder": "e.g. Germany",
-        "industry": "Industry",
-        "industryPlaceholder": "e.g. Automotive aftermarket",
-        "applicationArea": "Application area",
-        "applicationAreaPlaceholder": "e.g. Robotic sanding, AMR transport, facility inspection",
-        "projectStage": "Project stage",
+        "country": "Land",
+        "countryPlaceholder": "z. B. Deutschland",
+        "industry": "Branche",
+        "industryPlaceholder": "z. B. Automotive-Aftermarket",
+        "applicationArea": "Anwendungsbereich",
+        "applicationAreaPlaceholder": "z. B. Robotisches Schleifen, AMR-Transport, Anlageninspektion",
+        "projectStage": "Projektphase",
         "projectStageOptions": {
-          "exploring": "Exploring",
-          "feasibility": "Feasibility",
-          "supplierSelection": "Supplier selection",
-          "pilot": "Pilot project",
+          "exploring": "Sondierung",
+          "feasibility": "Machbarkeit",
+          "supplierSelection": "Lieferantenauswahl",
+          "pilot": "Pilotprojekt",
           "integration": "Integration",
-          "manufacturerCooperation": "Manufacturer cooperation"
+          "manufacturerCooperation": "Herstellerkooperation"
         },
-        "consent": "I agree that MegaRobotics may process this inquiry to respond to me. See the privacy policy for details.",
-        "consentRequired": "Please confirm the privacy consent to send your inquiry."
+        "consent": "Ich willige ein, dass MegaRobotics diese Anfrage verarbeiten darf, um mir zu antworten. Details in der Datenschutzerklärung.",
+        "consentRequired": "Bitte bestätigen Sie die Datenschutz-Einwilligung, um Ihre Anfrage abzuschicken."
       },
-      "sendButton": "Send Robotics Inquiry"
+      "sendButton": "Robotik-Anfrage senden"
     },
     "footerExtra": {
-      "tagline": "MegaRobotics — Industrial Robotics & Automation Solutions",
+      "tagline": "MegaRobotics — Industrielle Robotik & Automatisierungslösungen",
       "columns": {
-        "platform": "Platform",
-        "network": "Network",
-        "company": "Company",
-        "legal": "Legal"
+        "platform": "Plattform",
+        "network": "Netzwerk",
+        "company": "Unternehmen",
+        "legal": "Rechtliches"
       },
       "links": {
-        "solutions": "Solutions",
-        "industries": "Industries",
-        "robotTechnologies": "Robot Technologies",
-        "technologyNetwork": "Technology Network",
-        "forCustomers": "For Customers",
-        "forManufacturers": "For Manufacturers",
-        "projects": "Projects",
+        "solutions": "Lösungen",
+        "industries": "Branchen",
+        "robotTechnologies": "Robotertechnologien",
+        "technologyNetwork": "Technologienetzwerk",
+        "forCustomers": "Für Kunden",
+        "forManufacturers": "Für Hersteller",
+        "projects": "Projekte",
         "insights": "Insights",
-        "company": "Company",
-        "contact": "Contact",
-        "products": "Product Catalog",
-        "manufacturers": "Manufacturer Directory",
-        "institutes": "Research Institutes",
+        "company": "Unternehmen",
+        "contact": "Kontakt",
+        "products": "Produktkatalog",
+        "manufacturers": "Hersteller-Verzeichnis",
+        "institutes": "Forschungsinstitute",
         "imprint": "Impressum",
         "privacy": "Datenschutz"
       }
