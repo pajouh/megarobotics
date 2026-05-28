@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { ArrowRight } from 'lucide-react'
+import { Link } from '@/i18n/navigation'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import ProcessSteps from '@/components/industrial/ProcessSteps'
 import ProjectCard from '@/components/industrial/ProjectCard'
 import SafeNotice from '@/components/industrial/SafeNotice'
 import CTASection from '@/components/industrial/CTASection'
+import ProductCard from '@/components/ProductCard'
+import ArticleCard from '@/components/ArticleCard'
 import StructuredData from '@/components/StructuredData'
+import { getFeaturedProducts, getArticles, type Locale } from '@/lib/sanity'
 import { generateOrganizationSchema, generateWebSiteSchema, generateAlternates } from '@/lib/structured-data'
 import { heroImage } from '@/lib/industrial-images'
 import type { WhatWeDoCard, HomeProjectItem } from '@/data/industrial-types'
@@ -26,9 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 60
 
 export default async function HomePage({ params }: Props) {
-  await params
+  const { locale } = await params
   const t = await getTranslations('industrial.home')
+  const tHomeLegacy = await getTranslations('home')
   const tNotice = await getTranslations('industrial.safeNotice')
+  const tNav = await getTranslations('industrial.nav')
 
   const whatWeDoCards = t.raw('whatWeDo.cards') as WhatWeDoCard[]
   const techItems = t.raw('techCoverage.items') as string[]
@@ -36,6 +43,12 @@ export default async function HomePage({ params }: Props) {
   const processSteps = t.raw('process.steps') as string[]
   const networkCategories = t.raw('network.categories') as string[]
   const projectItems = t.raw('projects.items') as HomeProjectItem[]
+
+  // CMS-driven content surfaced from Sanity (Studio edits land here)
+  const [featuredProducts, latestArticles] = await Promise.all([
+    getFeaturedProducts(4, locale as Locale),
+    getArticles(3, locale as Locale),
+  ])
 
   const structuredData = [generateOrganizationSchema(), generateWebSiteSchema()]
 
@@ -182,7 +195,60 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      {/* SECTION 8 — Final CTA */}
+      {/* SECTION 8 — Featured Products (CMS-driven) */}
+      {featuredProducts.length > 0 && (
+        <section className="py-16 md:py-24 ind-section-white">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <SectionHeader
+                eyebrow="Catalog"
+                title={tHomeLegacy('featuredProductsSubtitle')}
+              />
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors whitespace-nowrap"
+              >
+                {tHomeLegacy('viewAllProducts')}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* SECTION 9 — Latest Insights (CMS-driven) */}
+      {latestArticles.length > 0 && (
+        <section className="py-16 md:py-24 ind-section-light">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <SectionHeader
+                eyebrow={tNav('insights')}
+                title={tHomeLegacy('latestNews')}
+                subtitle={tHomeLegacy('latestNewsSubtitle')}
+              />
+              <Link
+                href="/articles"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors whitespace-nowrap"
+              >
+                {tHomeLegacy('viewAllNews')}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {latestArticles.slice(0, 3).map((article) => (
+                <ArticleCard key={article._id} article={article} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* SECTION 10 — Final CTA */}
       <CTASection
         eyebrow={t('finalCta.eyebrow')}
         title={t('finalCta.title')}

@@ -18,6 +18,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const t = useTranslations('industrial.nav')
+  const tLegacy = useTranslations('nav')
 
   const navigation = [
     { name: t('solutions'), href: '/solutions' },
@@ -25,6 +26,9 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
     { name: t('robotTechnologies'), href: '/robot-technologies' },
     { name: t('technologyNetwork'), href: '/technology-network' },
     { name: t('projects'), href: '/projects' },
+    { name: tLegacy('products'), href: '/products' },
+    { name: tLegacy('manufacturers'), href: '/manufacturers' },
+    { name: tLegacy('institutes'), href: '/institutes' },
     { name: t('insights'), href: '/articles' },
     { name: t('company'), href: '/about' },
   ]
@@ -71,12 +75,12 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-6">
+          <div className="hidden xl:flex xl:items-center xl:gap-5">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm text-gray-300 hover:text-white transition-colors font-medium"
+                className="text-sm text-gray-300 hover:text-white transition-colors font-medium whitespace-nowrap"
               >
                 {item.name}
               </Link>
@@ -84,7 +88,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
           </div>
 
           {/* CTA & Language Switcher */}
-          <div className="hidden lg:flex lg:items-center gap-3">
+          <div className="hidden xl:flex xl:items-center gap-3">
             <LanguageSwitcher />
             <Link
               href="/contact"
@@ -96,7 +100,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <button
               type="button"
               className="text-gray-300 hover:text-white"
@@ -108,9 +112,9 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile / tablet Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-white/10 bg-[color:var(--ind-graphite-950)]">
+          <div className="xl:hidden py-4 border-t border-white/10 bg-[color:var(--ind-graphite-950)]">
             <div className="flex flex-col gap-1">
               {navigation.map((item) => (
                 <Link
