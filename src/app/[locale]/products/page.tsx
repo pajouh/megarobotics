@@ -4,11 +4,10 @@ import { Package, ArrowRight } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import {
-  getProducts,
+  getProductsWithFilters,
   getProductCategories,
   getManufacturers,
   getFeaturedProducts,
-  searchProducts,
   type Locale,
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
@@ -53,26 +52,30 @@ export const revalidate = 60
 
 interface Props {
   params: Promise<{ locale: string }>
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; family?: string; availability?: string }>
 }
 
 export default async function ProductsPage({ params, searchParams }: Props) {
   const { locale } = await params
-  const searchParamsResolved = await searchParams
-  const searchQuery = searchParamsResolved.q
+  const sp = await searchParams
+  const searchQuery = sp.q
+  const familySlug = sp.family
+  const availabilityStatus = sp.availability
+  const hasAnyFilter = Boolean(searchQuery || familySlug || availabilityStatus)
   const tDisclaimers = await getTranslations('disclaimers')
   const tCatalog = await getTranslations('industrial.catalog')
 
   const [products, categories, manufacturers, featuredProducts] = await Promise.all([
-    searchQuery
-      ? searchProducts(searchQuery, locale as Locale)
-      : getProducts(undefined, locale as Locale),
+    getProductsWithFilters(
+      { search: searchQuery, familySlug, availabilityStatus },
+      locale as Locale,
+    ),
     getProductCategories(locale as Locale),
     getManufacturers(locale as Locale),
     getFeaturedProducts(4, locale as Locale),
   ])
 
-  const showFeatured = !searchQuery && featuredProducts.length > 0
+  const showFeatured = !hasAnyFilter && featuredProducts.length > 0
   const families = tCatalog.raw('families') as Record<string, FamilyContent>
 
   return (

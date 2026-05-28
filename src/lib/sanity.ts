@@ -300,15 +300,26 @@ function getProductFields(locale: Locale = defaultLocale) {
     mainImage,
     priceRange,
     availability,
+    availabilityStatus,
+    manufacturerRelationshipStatus,
+    inquiryOnly,
+    subcategory,
     featured,
     isNew,
     publishedAt,
     order,
     manufacturer->{
-      ${getManufacturerFields(locale)}
+      ${getManufacturerFields(locale)},
+      relationshipStatus,
+      "disclaimerOverride": ${localizedField('disclaimerOverride', locale)}
     },
     category->{
       ${getProductCategoryFields(locale)}
+    },
+    productFamily->{
+      _id,
+      "title": ${localizedField('title', locale)},
+      slug
     }
   `
 }
@@ -486,6 +497,45 @@ export async function searchProducts(searchTerm: string, locale: Locale = defaul
       ${getProductFields(locale)}
     }`,
     { searchQuery }
+  )
+}
+
+// Products with combined filters (search + family + availability)
+export interface ProductFilters {
+  search?: string
+  familySlug?: string
+  availabilityStatus?: string
+}
+
+export async function getProductsWithFilters(
+  filters: ProductFilters,
+  locale: Locale = defaultLocale,
+): Promise<Product[]> {
+  if (!client) return []
+
+  const clauses: string[] = ['_type == "product"', 'isActive != false']
+  const params: Record<string, string> = {}
+
+  if (filters.search) {
+    clauses.push(
+      `(name match $searchQuery || description.${locale} match $searchQuery || tagline.${locale} match $searchQuery)`,
+    )
+    params.searchQuery = `*${filters.search}*`
+  }
+  if (filters.familySlug) {
+    clauses.push(`productFamily->slug.current == $familySlug`)
+    params.familySlug = filters.familySlug
+  }
+  if (filters.availabilityStatus) {
+    clauses.push(`availabilityStatus == $availabilityStatus`)
+    params.availabilityStatus = filters.availabilityStatus
+  }
+
+  return client.fetch<Product[]>(
+    `*[${clauses.join(' && ')}] | order(order asc, name asc) {
+      ${getProductFields(locale)}
+    }`,
+    params,
   )
 }
 

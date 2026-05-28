@@ -32,6 +32,21 @@ function ContactFormSkeleton() {
 
 function ContactFormInner() {
   const searchParams = useSearchParams()
+  // Map ?inquiry= from product detail CTAs to inquiry-type values
+  const inquiryParamToValue = (p: string | null): string => {
+    if (!p) return ''
+    if (p === 'availability') return 'robot_sourcing'
+    if (p === 'project') return 'automation_project'
+    if (p === 'datasheet') return 'robot_sourcing'
+    return ''
+  }
+  const initialProduct = searchParams.get('product') || ''
+  const initialManufacturer = searchParams.get('manufacturer') || ''
+  const initialFamily = searchParams.get('family') || ''
+  const initialManufacturerOrProduct = [initialManufacturer, initialProduct]
+    .filter(Boolean)
+    .join(' — ')
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
@@ -40,7 +55,10 @@ function ContactFormInner() {
   const [industry, setIndustry] = useState('')
   const [applicationArea, setApplicationArea] = useState('')
   const [projectStage, setProjectStage] = useState('')
-  const [subject, setSubject] = useState(searchParams.get('subject') || '')
+  const [inquiryType, setInquiryType] = useState(inquiryParamToValue(searchParams.get('inquiry')))
+  const [productFamily, setProductFamily] = useState(initialFamily)
+  const [manufacturerOrProduct, setManufacturerOrProduct] = useState(initialManufacturerOrProduct)
+  const [subject, setSubject] = useState(searchParams.get('subject') || initialProduct || '')
   const [message, setMessage] = useState('')
   const [consent, setConsent] = useState(false)
   const [file, setFile] = useState<File | null>(null)
@@ -49,6 +67,7 @@ function ContactFormInner() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const t = useTranslations('contact')
   const tExtra = useTranslations('industrial.contactExtra')
+  const tFamilies = useTranslations('industrial.catalog.families')
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0]
@@ -104,6 +123,9 @@ function ContactFormInner() {
       formData.append('industry', industry.trim())
       formData.append('applicationArea', applicationArea.trim())
       formData.append('projectStage', projectStage.trim())
+      formData.append('inquiryType', inquiryType.trim())
+      formData.append('productFamily', productFamily.trim())
+      formData.append('manufacturerOrProduct', manufacturerOrProduct.trim())
       formData.append('subject', subject.trim())
       formData.append('message', message.trim())
       formData.append('consent', consent ? 'true' : 'false')
@@ -127,6 +149,9 @@ function ContactFormInner() {
         setIndustry('')
         setApplicationArea('')
         setProjectStage('')
+        setInquiryType('')
+        setProductFamily('')
+        setManufacturerOrProduct('')
         setSubject('')
         setMessage('')
         setConsent(false)
@@ -151,6 +176,32 @@ function ContactFormInner() {
     { value: 'pilot', key: 'pilot' },
     { value: 'integration', key: 'integration' },
     { value: 'manufacturer_cooperation', key: 'manufacturerCooperation' },
+  ]
+
+  const inquiryTypeOptions: { value: string; key: string }[] = [
+    { value: 'robot_sourcing', key: 'robotSourcing' },
+    { value: 'component_sourcing', key: 'componentSourcing' },
+    { value: 'automation_project', key: 'automationProject' },
+    { value: 'system_integration', key: 'systemIntegration' },
+    { value: 'manufacturer_cooperation', key: 'manufacturerCooperation' },
+    { value: 'research_education', key: 'researchEducation' },
+    { value: 'service_cleaning', key: 'serviceCleaning' },
+    { value: 'other', key: 'other' },
+  ]
+
+  const familyOptionSlugs = [
+    'robot-platforms',
+    'end-effectors-robot-tooling',
+    'motion-actuators-drives',
+    'plc-control-industrial-automation',
+    'sensors-vision-perception',
+    'safety-machine-protection',
+    'industrial-communication-connectivity',
+    'software-hmi-scada-digital-twin',
+    'robotic-cells-application-packages',
+    'service-cleaning-facility-robots',
+    'research-education-embodied-ai',
+    'spare-parts-modules-accessories',
   ]
 
   return (
@@ -232,6 +283,57 @@ function ContactFormInner() {
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
             placeholder={tExtra('fields.industryPlaceholder')}
+            className={inputClass}
+            disabled={status === 'loading'}
+          />
+        </Field>
+      </div>
+
+      <Field id="contact-inquiry-type" label={tExtra('fields.inquiryType')}>
+        <select
+          id="contact-inquiry-type"
+          value={inquiryType}
+          onChange={(e) => setInquiryType(e.target.value)}
+          className={inputClass}
+          disabled={status === 'loading'}
+        >
+          <option value="">—</option>
+          {inquiryTypeOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {tExtra(`fields.inquiryTypeOptions.${opt.key}`)}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <Field id="contact-family" label={tExtra('fields.productFamily')}>
+          <select
+            id="contact-family"
+            value={productFamily}
+            onChange={(e) => setProductFamily(e.target.value)}
+            className={inputClass}
+            disabled={status === 'loading'}
+          >
+            <option value="">{tExtra('fields.productFamilyNotSure')}</option>
+            {familyOptionSlugs.map((slug) => {
+              let title = slug
+              try { title = tFamilies(`${slug}.title`) } catch {}
+              return (
+                <option key={slug} value={slug}>
+                  {title}
+                </option>
+              )
+            })}
+          </select>
+        </Field>
+        <Field id="contact-mfr-product" label={tExtra('fields.manufacturerOrProduct')}>
+          <input
+            id="contact-mfr-product"
+            type="text"
+            value={manufacturerOrProduct}
+            onChange={(e) => setManufacturerOrProduct(e.target.value)}
+            placeholder={tExtra('fields.manufacturerOrProductPlaceholder')}
             className={inputClass}
             disabled={status === 'loading'}
           />
