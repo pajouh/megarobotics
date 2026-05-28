@@ -105,8 +105,8 @@ export default async function ProductPage({ params }: Props) {
   }
 
   const [relatedProducts, sameManufacturerProducts] = await Promise.all([
-    product.category
-      ? getRelatedProducts(product._id, product.category.slug.current, 4, locale as Locale)
+    product.productFamily
+      ? getRelatedProducts(product._id, product.productFamily._id, 4, locale as Locale)
       : Promise.resolve([]),
     product.manufacturer
       ? getProductsBySameManufacturer(product._id, product.manufacturer.slug.current, 4, locale as Locale)
@@ -118,7 +118,7 @@ export default async function ProductPage({ params }: Props) {
     description: product.description || product.tagline || '',
     slug,
     manufacturer: product.manufacturer?.name,
-    category: product.category?.name,
+    category: product.productFamily?.title,
     mainImage: product.mainImage
       ? urlFor(product.mainImage).width(800).height(600).url()
       : undefined,
@@ -136,9 +136,7 @@ export default async function ProductPage({ params }: Props) {
             href: `/products/categories/${product.productFamily.slug.current}`,
           },
         ]
-      : product.category
-        ? [{ name: product.category.name, href: `/products/category/${product.category.slug.current}` }]
-        : []),
+      : []),
     { name: product.name, href: `/products/${slug}` },
   ]
 
@@ -201,14 +199,6 @@ export default async function ProductPage({ params }: Props) {
                 <span className="inline-flex items-center px-2.5 py-1 rounded text-xs text-gray-700 bg-gray-100 border border-gray-200">
                   {product.subcategory}
                 </span>
-              )}
-              {product.category && !product.productFamily && (
-                <Link
-                  href={`/products/category/${product.category.slug.current}`}
-                  className="inline-flex items-center px-2.5 py-1 rounded text-xs text-gray-700 bg-gray-100 border border-gray-200 hover:bg-gray-200 transition-colors"
-                >
-                  {product.category.name}
-                </Link>
               )}
               {product.isNew && (
                 <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wider bg-orange-500 text-white">

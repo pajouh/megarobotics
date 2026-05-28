@@ -76,6 +76,43 @@ const nextConfig: NextConfig = {
         destination: '/articles/:slug',
         permanent: true,
       },
+      // Legacy productCategory routes — redirect to the unified product family system
+      {
+        source: '/products/category/humanoid-legged-robots',
+        destination: '/products/categories/robot-platforms',
+        permanent: true,
+      },
+      {
+        source: '/products/category/industrial-cobots',
+        destination: '/products/categories/robot-platforms',
+        permanent: true,
+      },
+      {
+        source: '/products/category/warehouse-logistics',
+        destination: '/products/categories/robot-platforms',
+        permanent: true,
+      },
+      {
+        source: '/products/category/drones-aerial',
+        destination: '/products/categories/robot-platforms',
+        permanent: true,
+      },
+      {
+        source: '/products/category/service-robots',
+        destination: '/products/categories/service-cleaning-facility-robots',
+        permanent: true,
+      },
+      // Catch-all for any other /products/category/... route (incl. /de variant)
+      {
+        source: '/products/category/:slug',
+        destination: '/products',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|de)/products/category/:slug',
+        destination: '/:locale/products',
+        permanent: true,
+      },
     ];
   },
 };

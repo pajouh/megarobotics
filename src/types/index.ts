@@ -166,21 +166,6 @@ export interface Manufacturer {
   seo?: SeoFields
 }
 
-export interface ProductCategory {
-  _id: string
-  _type: 'productCategory'
-  name: string
-  slug: {
-    current: string
-  }
-  description?: string
-  icon?: string
-  image?: SanityImage
-  order?: number
-  productCount?: number
-  seo?: SeoFields
-}
-
 export interface ProductSpecification {
   label: string
   value: string
@@ -205,7 +190,6 @@ export interface Product {
     current: string
   }
   manufacturer: Manufacturer
-  category: ProductCategory
   productFamily?: ProductFamilyRef
   subcategory?: string
   tagline?: string

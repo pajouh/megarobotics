@@ -5,8 +5,6 @@ import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import {
   getProductsWithFilters,
-  getProductCategories,
-  getManufacturers,
   getFeaturedProducts,
   type Locale,
 } from '@/lib/sanity'
@@ -65,13 +63,11 @@ export default async function ProductsPage({ params, searchParams }: Props) {
   const tDisclaimers = await getTranslations('disclaimers')
   const tCatalog = await getTranslations('industrial.catalog')
 
-  const [products, categories, manufacturers, featuredProducts] = await Promise.all([
+  const [products, featuredProducts] = await Promise.all([
     getProductsWithFilters(
       { search: searchQuery, familySlug, availabilityStatus },
       locale as Locale,
     ),
-    getProductCategories(locale as Locale),
-    getManufacturers(locale as Locale),
     getFeaturedProducts(4, locale as Locale),
   ])
 
@@ -164,7 +160,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
           />
           <div className="mb-8">
             <Suspense fallback={<div className="h-24 bg-white border border-gray-200 rounded animate-pulse" />}>
-              <ProductFilter categories={categories} manufacturers={manufacturers} />
+              <ProductFilter />
             </Suspense>
           </div>
 

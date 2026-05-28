@@ -41,21 +41,14 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'category',
-      title: 'Product Category',
-      type: 'reference',
-      to: [{ type: 'productCategory' }],
-      group: 'basic',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'productFamily',
       title: 'Product family',
       type: 'reference',
       to: [{ type: 'productFamily' }],
       group: 'basic',
       description:
-        'Top-level family (e.g. Robot Platforms, End Effectors & Robot Tooling). Used by the new /products/categories/<slug> pages. Optional — leave blank to keep the product on the legacy category structure only.',
+        'Top-level family (e.g. Robot Platforms, End Effectors & Robot Tooling). Used by the /products/categories/<slug> pages.',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'subcategory',
