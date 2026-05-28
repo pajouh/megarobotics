@@ -78,6 +78,12 @@ const BRAND_DOMAINS = {
   'onrobot': 'onrobot.com',
   'robotiq': 'robotiq.com',
   'zimmer-group': 'zimmer-group.com',
+  'sick': 'sick.com',
+  'keyence': 'keyence.com',
+  'pilz': 'pilz.com',
+  'hilscher': 'hilscher.com',
+  'hirschmann': 'belden.com',
+  'inductive-automation': 'inductiveautomation.com',
 }
 
 async function fetchManufacturers() {
