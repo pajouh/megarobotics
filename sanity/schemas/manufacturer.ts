@@ -8,6 +8,7 @@ export default defineType({
   groups: [
     { name: 'basic', title: 'Basic Info', default: true },
     { name: 'details', title: 'Details' },
+    { name: 'status', title: 'Relationship & disclaimer' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -72,6 +73,34 @@ export default defineType({
       group: 'details',
       description: 'Show on homepage',
       initialValue: false,
+    }),
+    defineField({
+      name: 'relationshipStatus',
+      title: 'Relationship status',
+      type: 'string',
+      group: 'status',
+      description:
+        'Defines how MegaRobotics may publicly describe its relationship with this manufacturer. Defaults to "Unknown" to prevent unintended claims. Set to a verified value ONLY when legally confirmed.',
+      options: {
+        list: [
+          { title: 'Official distributor (verified)', value: 'official_distributor' },
+          { title: 'Authorized reseller (verified)', value: 'authorized_reseller' },
+          { title: 'Sales partner (verified)', value: 'sales_partner' },
+          { title: 'Technology partner (verified)', value: 'technology_partner' },
+          { title: 'Sourcing available', value: 'sourcing_available' },
+          { title: 'Information only', value: 'information_only' },
+          { title: 'Under evaluation', value: 'under_evaluation' },
+          { title: 'Unknown (default)', value: 'unknown' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'unknown',
+    }),
+    localizedText('disclaimerOverride', 'Disclaimer override', {
+      group: 'status',
+      rows: 3,
+      description:
+        'Optional. Overrides the site-wide manufacturer disclaimer for pages that reference this brand. Leave blank to use the default trademark/affiliation notice.',
     }),
     defineField({
       name: 'seo',

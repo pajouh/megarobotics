@@ -15,6 +15,8 @@ import solution from './solution'
 import industry from './industry'
 import robotTechnology from './robotTechnology'
 import projectStudy from './projectStudy'
+import productFamily from './productFamily'
+import referenceEcosystem from './referenceEcosystem'
 
 export const schemaTypes = [
   // Document types
@@ -33,6 +35,8 @@ export const schemaTypes = [
   industry,
   robotTechnology,
   projectStudy,
+  productFamily,
+  referenceEcosystem,
   // Object types
   blockContent,
   richImage,

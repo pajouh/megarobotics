@@ -48,6 +48,23 @@ export default defineType({
       group: 'basic',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'productFamily',
+      title: 'Product family',
+      type: 'reference',
+      to: [{ type: 'productFamily' }],
+      group: 'basic',
+      description:
+        'Top-level family (e.g. Robot Platforms, End Effectors & Robot Tooling). Used by the new /products/categories/<slug> pages. Optional — leave blank to keep the product on the legacy category structure only.',
+    }),
+    defineField({
+      name: 'subcategory',
+      title: 'Subcategory',
+      type: 'string',
+      group: 'basic',
+      description:
+        'Free-form subcategory label (e.g. "Mechanical grippers", "Industrial 6-axis robots"). Should match one of the suggested subcategories on the chosen Product Family.',
+    }),
     localizedString('tagline', 'Tagline', {
       group: 'content',
       description: 'Short marketing tagline',
@@ -138,9 +155,10 @@ export default defineType({
     }),
     defineField({
       name: 'availability',
-      title: 'Availability',
+      title: 'Availability (legacy)',
       type: 'string',
       group: 'settings',
+      description: 'Legacy field kept for back-compat. New listings should use "Distributor availability status" below.',
       options: {
         list: [
           { title: 'Available', value: 'available' },
@@ -150,6 +168,54 @@ export default defineType({
         ],
       },
       initialValue: 'available',
+    }),
+    defineField({
+      name: 'availabilityStatus',
+      title: 'Distributor availability status',
+      type: 'string',
+      group: 'settings',
+      description:
+        'Replaces the legacy "Availability" field for new distributor listings. Used by the rebuilt /products catalog.',
+      options: {
+        list: [
+          { title: 'In stock', value: 'in_stock' },
+          { title: 'Available on request', value: 'available_on_request' },
+          { title: 'Sourcing on request', value: 'sourcing_on_request' },
+          { title: 'Lead time required', value: 'lead_time_required' },
+          { title: 'Information only', value: 'information_only' },
+          { title: 'Discontinued', value: 'discontinued' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'manufacturerRelationshipStatus',
+      title: 'Manufacturer relationship status (override)',
+      type: 'string',
+      group: 'settings',
+      description:
+        'Optional per-product override. Leave blank to inherit from the manufacturer document. Set only when status differs for this specific product. ONLY use verified values when status is legally confirmed.',
+      options: {
+        list: [
+          { title: '(inherit from manufacturer)', value: '' },
+          { title: 'Official distributor (verified)', value: 'official_distributor' },
+          { title: 'Authorized reseller (verified)', value: 'authorized_reseller' },
+          { title: 'Sales partner (verified)', value: 'sales_partner' },
+          { title: 'Technology partner (verified)', value: 'technology_partner' },
+          { title: 'Sourcing available', value: 'sourcing_available' },
+          { title: 'Information only', value: 'information_only' },
+          { title: 'Under evaluation', value: 'under_evaluation' },
+          { title: 'Unknown', value: 'unknown' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'inquiryOnly',
+      title: 'Inquiry-only product',
+      type: 'boolean',
+      group: 'settings',
+      description:
+        'When true, the product is displayed for inquiry coordination only — no pricing, no buy-flow, no availability promise. Shows "Request Price & Availability" CTA instead.',
+      initialValue: false,
     }),
     defineField({
       name: 'productUrl',
