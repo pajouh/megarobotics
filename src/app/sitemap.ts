@@ -27,11 +27,11 @@ function localizedEntries(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all content from Sanity
-  const [articles, categories, products, productCategories, manufacturers, buyersGuides, institutes, instituteCountries] = await Promise.all([
+  const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries] = await Promise.all([
     client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "product"]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "productCategory"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "productFamily" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "institute" && profileStatus in ["Ready", "Foundational"]]{ "slug": slug.current, _updatedAt }`) || [],
@@ -77,9 +77,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
-  const productCategoryPages: MetadataRoute.Sitemap = (productCategories || []).flatMap((cat: { slug: string; _updatedAt: string }) =>
-    localizedEntries(`/products/category/${cat.slug}`, {
-      lastModified: new Date(cat._updatedAt),
+  const productFamilyPages: MetadataRoute.Sitemap = (productFamilies || []).flatMap((fam: { slug: string; _updatedAt: string }) =>
+    localizedEntries(`/products/categories/${fam.slug}`, {
+      lastModified: new Date(fam._updatedAt),
       changeFrequency: 'daily',
       priority: 0.7,
     })
@@ -121,7 +121,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...articlePages,
     ...categoryPages,
     ...productPages,
-    ...productCategoryPages,
+    ...productFamilyPages,
     ...manufacturerPages,
     ...buyersGuidePages,
     ...institutePages,

@@ -1,6 +1,6 @@
 import { createClient, type SanityClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
-import { SanityImage, Article, Category, Author, Product, ProductCategory, Manufacturer, Institute } from '@/types'
+import { SanityImage, Article, Category, Author, Product, Manufacturer, Institute } from '@/types'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -276,19 +276,6 @@ function getManufacturerFields(locale: Locale = defaultLocale) {
   `
 }
 
-function getProductCategoryFields(locale: Locale = defaultLocale) {
-  return `
-    _id,
-    _type,
-    "name": ${localizedField('name', locale)},
-    slug,
-    "description": ${localizedField('description', locale)},
-    icon,
-    image,
-    order
-  `
-}
-
 function getProductFields(locale: Locale = defaultLocale) {
   return `
     _id,
@@ -312,9 +299,6 @@ function getProductFields(locale: Locale = defaultLocale) {
       ${getManufacturerFields(locale)},
       relationshipStatus,
       "disclaimerOverride": ${localizedField('disclaimerOverride', locale)}
-    },
-    category->{
-      ${getProductCategoryFields(locale)}
     },
     productFamily->{
       _id,
@@ -375,18 +359,6 @@ export async function getFeaturedProducts(limit: number = 6, locale: Locale = de
   )
 }
 
-// Get products by category
-export async function getProductsByCategory(categorySlug: string, limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
-  if (!client) return []
-  const limitQuery = limit ? `[0...${limit}]` : ''
-  return client.fetch(
-    `*[_type == "product" && isActive != false && category->slug.current == $categorySlug] | order(order asc, name asc)${limitQuery} {
-      ${getProductFields(locale)}
-    }`,
-    { categorySlug }
-  )
-}
-
 // Get products by manufacturer
 export async function getProductsByManufacturer(manufacturerSlug: string, limit?: number, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
@@ -399,14 +371,14 @@ export async function getProductsByManufacturer(manufacturerSlug: string, limit?
   )
 }
 
-// Get related products (same category, excluding current)
-export async function getRelatedProducts(productId: string, categorySlug: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
+// Get related products (same productFamily, excluding current)
+export async function getRelatedProducts(productId: string, familyId: string, limit: number = 4, locale: Locale = defaultLocale): Promise<Product[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "product" && isActive != false && _id != $productId && category->slug.current == $categorySlug] | order(order asc, name asc)[0...${limit}] {
+    `*[_type == "product" && isActive != false && _id != $productId && productFamily._ref == $familyId] | order(order asc, name asc)[0...${limit}] {
       ${getProductFields(locale)}
     }`,
-    { productId, categorySlug }
+    { productId, familyId }
   )
 }
 
@@ -449,34 +421,6 @@ export async function getManufacturer(slug: string, locale: Locale = defaultLoca
   return client.fetch(
     `*[_type == "manufacturer" && slug.current == $slug][0] {
       ${getManufacturerFields(locale)},
-      "productCount": count(*[_type == "product" && isActive != false && references(^._id)]),
-      seo {
-        "metaTitle": ${localizedField('metaTitle', locale)},
-        "metaDescription": ${localizedField('metaDescription', locale)},
-        keywords
-      }
-    }`,
-    { slug }
-  )
-}
-
-// Get all product categories
-export async function getProductCategories(locale: Locale = defaultLocale): Promise<ProductCategory[]> {
-  if (!client) return []
-  return client.fetch(
-    `*[_type == "productCategory"] | order(order asc, name.${locale} asc) {
-      ${getProductCategoryFields(locale)},
-      "productCount": count(*[_type == "product" && isActive != false && references(^._id)])
-    }`
-  )
-}
-
-// Get a single product category by slug
-export async function getProductCategory(slug: string, locale: Locale = defaultLocale): Promise<ProductCategory | null> {
-  if (!client) return null
-  return client.fetch(
-    `*[_type == "productCategory" && slug.current == $slug][0] {
-      ${getProductCategoryFields(locale)},
       "productCount": count(*[_type == "product" && isActive != false && references(^._id)]),
       seo {
         "metaTitle": ${localizedField('metaTitle', locale)},
@@ -552,14 +496,6 @@ export async function getAllManufacturerSlugs(): Promise<{ slug: string }[]> {
   if (!client) return []
   return client.fetch(
     `*[_type == "manufacturer" && defined(slug.current)][].slug.current`
-  ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
-}
-
-// Get all product category slugs (for static generation)
-export async function getAllProductCategorySlugs(): Promise<{ slug: string }[]> {
-  if (!client) return []
-  return client.fetch(
-    `*[_type == "productCategory" && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
 

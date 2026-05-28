@@ -8,7 +8,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { name, slug, tagline, mainImage, manufacturer, category, priceRange, isNew } = product
+  const { name, slug, tagline, mainImage, manufacturer, productFamily, priceRange, isNew } = product
 
   return (
     <Link href={`/products/${slug.current}`} className="group block">
@@ -55,10 +55,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Content */}
         <div className="flex-grow flex flex-col p-4">
-          {/* Category */}
-          {category && (
-            <span className="text-xs text-emerald-600 font-medium mb-1">
-              {category.icon} {category.name}
+          {/* Product family */}
+          {productFamily && (
+            <span className="text-xs text-blue-700 font-medium mb-1">
+              {productFamily.title}
             </span>
           )}
 

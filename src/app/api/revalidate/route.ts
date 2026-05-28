@@ -156,13 +156,13 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         }
         break
 
-      case 'productCategory':
+      case 'productFamily':
         revalidatePath('/products', 'layout')
         revalidated.push('/products (layout)')
 
         if (slug?.current) {
-          revalidatePath(`/products/category/${slug.current}`, 'page')
-          revalidated.push(`/products/category/${slug.current}`)
+          revalidatePath(`/products/categories/${slug.current}`, 'page')
+          revalidated.push(`/products/categories/${slug.current}`)
         }
         break
 
