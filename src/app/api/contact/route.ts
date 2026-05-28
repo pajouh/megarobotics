@@ -39,6 +39,10 @@ export async function POST(request: NextRequest) {
     const industry = (formData.get('industry') as string | null) || ''
     const applicationArea = (formData.get('applicationArea') as string | null) || ''
     const projectStage = (formData.get('projectStage') as string | null) || ''
+    const inquiryType = (formData.get('inquiryType') as string | null) || ''
+    const productFamily = (formData.get('productFamily') as string | null) || ''
+    const manufacturerOrProduct =
+      (formData.get('manufacturerOrProduct') as string | null) || ''
     const subject = formData.get('subject') as string | null
     const message = formData.get('message') as string | null
     const consent = formData.get('consent') as string | null
@@ -104,6 +108,9 @@ export async function POST(request: NextRequest) {
       { label: 'Phone', value: phone.trim() },
       { label: 'Country', value: country.trim() },
       { label: 'Industry', value: industry.trim() },
+      { label: 'Inquiry type', value: inquiryType.trim() },
+      { label: 'Product family', value: productFamily.trim() },
+      { label: 'Manufacturer / product', value: manufacturerOrProduct.trim() },
       { label: 'Application area', value: applicationArea.trim() },
       { label: 'Project stage', value: projectStage.trim() },
       { label: 'Subject', value: subject?.trim() || '' },

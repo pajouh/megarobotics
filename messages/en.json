@@ -1048,7 +1048,22 @@
           "manufacturerCooperation": "Manufacturer cooperation"
         },
         "consent": "I agree that MegaRobotics may process this inquiry to respond to me. See the privacy policy for details.",
-        "consentRequired": "Please confirm the privacy consent to send your inquiry."
+        "consentRequired": "Please confirm the privacy consent to send your inquiry.",
+        "inquiryType": "Inquiry type",
+        "inquiryTypeOptions": {
+          "robotSourcing": "Robot purchase / sourcing",
+          "componentSourcing": "Automation component sourcing",
+          "automationProject": "Industrial automation project",
+          "systemIntegration": "System integration cooperation",
+          "manufacturerCooperation": "Manufacturer cooperation",
+          "researchEducation": "Research / education robotics",
+          "serviceCleaning": "Service / cleaning robotics",
+          "other": "Other"
+        },
+        "productFamily": "Product family of interest",
+        "productFamilyNotSure": "Not sure / general inquiry",
+        "manufacturerOrProduct": "Manufacturer or product of interest",
+        "manufacturerOrProductPlaceholder": "e.g. Unitree Go2, Festo CPX-AP-I, Siemens S7-1500"
       },
       "sendButton": "Send Robotics Inquiry"
     },
@@ -1740,6 +1755,37 @@
             "description": "Robot joints, batteries, chargers, controllers, cables, mounting plates and end-effector accessories for ongoing robotic deployments."
           }
         }
+      }
+    },
+    "productDetail": {
+      "cta": {
+        "requestAvailability": "Request Price & Availability",
+        "discussApplication": "Discuss Application Fit",
+        "askForDatasheet": "Ask for Datasheet"
+      },
+      "distributorNotice": "Product availability, specifications, pricing and distributor status may vary by region and project. Please contact MegaRobotics for current sourcing and commercial information.",
+      "inquiryOnlyBadge": "Inquiry only",
+      "viewManufacturer": "View manufacturer",
+      "availability": {
+        "inStock": "In stock",
+        "availableOnRequest": "Available on request",
+        "sourcingOnRequest": "Sourcing on request",
+        "leadTimeRequired": "Lead time required",
+        "informationOnly": "Information only",
+        "discontinued": "Discontinued"
+      },
+      "relationship": {
+        "officialDistributor": "Official distributor",
+        "authorizedReseller": "Authorized reseller",
+        "salesPartner": "Sales partner",
+        "technologyPartner": "Technology partner"
+      },
+      "filter": {
+        "searchPlaceholder": "Search products…",
+        "allFamilies": "All product families",
+        "allAvailability": "Any availability",
+        "allManufacturers": "All manufacturers",
+        "allCategories": "All categories"
       }
     }
   }

@@ -128,6 +128,24 @@ export interface CodeBlock {
 }
 
 // Product system types
+export type RelationshipStatus =
+  | 'official_distributor'
+  | 'authorized_reseller'
+  | 'sales_partner'
+  | 'technology_partner'
+  | 'sourcing_available'
+  | 'information_only'
+  | 'under_evaluation'
+  | 'unknown'
+
+export type AvailabilityStatus =
+  | 'in_stock'
+  | 'available_on_request'
+  | 'sourcing_on_request'
+  | 'lead_time_required'
+  | 'information_only'
+  | 'discontinued'
+
 export interface Manufacturer {
   _id: string
   _type: 'manufacturer'
@@ -143,6 +161,8 @@ export interface Manufacturer {
   specialties?: string[]
   featured?: boolean
   productCount?: number
+  relationshipStatus?: RelationshipStatus
+  disclaimerOverride?: string
   seo?: SeoFields
 }
 
@@ -171,6 +191,12 @@ export interface ProductGalleryImage extends SanityImage {
   caption?: string
 }
 
+export interface ProductFamilyRef {
+  _id: string
+  title: string
+  slug: { current: string }
+}
+
 export interface Product {
   _id: string
   _type: 'product'
@@ -180,6 +206,8 @@ export interface Product {
   }
   manufacturer: Manufacturer
   category: ProductCategory
+  productFamily?: ProductFamilyRef
+  subcategory?: string
   tagline?: string
   description?: string
   fullDescription?: PortableTextBlock[]
@@ -191,6 +219,9 @@ export interface Product {
   applications?: string[]
   priceRange?: string
   availability?: 'available' | 'preorder' | 'coming_soon' | 'contact'
+  availabilityStatus?: AvailabilityStatus
+  manufacturerRelationshipStatus?: RelationshipStatus
+  inquiryOnly?: boolean
   productUrl?: string
   datasheetUrl?: string
   featured?: boolean
