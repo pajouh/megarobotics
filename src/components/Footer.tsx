@@ -36,6 +36,7 @@ export interface IndustrialFooterTranslations {
   tagline: string
   columns: {
     platform: string
+    catalog: string
     network: string
     company: string
     legal: string
@@ -52,6 +53,8 @@ export interface IndustrialFooterTranslations {
     company: string
     contact: string
     products: string
+    automationComponents: string
+    robotDistributor: string
     manufacturers: string
     institutes: string
     imprint: string
@@ -83,12 +86,17 @@ export default function Footer({
     { name: t.links.insights, href: '/articles' },
   ]
 
+  const catalogLinks = [
+    { name: t.links.products, href: '/products' },
+    { name: t.links.automationComponents, href: '/automation-components' },
+    { name: t.links.robotDistributor, href: '/robot-distributor' },
+    { name: t.links.manufacturers, href: '/manufacturers' },
+  ]
+
   const networkLinks = [
     { name: t.links.technologyNetwork, href: '/technology-network' },
     { name: t.links.forCustomers, href: '/for-customers' },
     { name: t.links.forManufacturers, href: '/for-manufacturers' },
-    { name: t.links.products, href: '/products' },
-    { name: t.links.manufacturers, href: '/manufacturers' },
     { name: t.links.institutes, href: '/institutes' },
   ]
 
@@ -131,9 +139,9 @@ export default function Footer({
   return (
     <footer className="bg-[color:var(--ind-graphite-950)] text-gray-300 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-10">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 group mb-4">
               {logoUrl ? (
                 <div className="relative overflow-hidden" style={{ width: logoWidth, height: logoHeight }}>
@@ -192,6 +200,7 @@ export default function Footer({
           ) : (
             <>
               <FooterColumn title={t.columns.platform} items={platformLinks} />
+              <FooterColumn title={t.columns.catalog} items={catalogLinks} />
               <FooterColumn title={t.columns.network} items={networkLinks} />
               <FooterColumn title={t.columns.company} items={[...companyLinks, ...legalLinks]} />
             </>
