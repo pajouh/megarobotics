@@ -178,25 +178,34 @@ export default function Footer({
           </div>
 
           {cmsColumns ? (
-            cmsColumns.map((column) => (
-              <div key={column._key}>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
-                  {column.title}
-                </h3>
-                <ul className="space-y-2">
-                  {column.links?.map((link) => (
-                    <li key={link._key}>
-                      <Link
-                        href={link.url}
-                        className="text-gray-300 hover:text-white transition-colors text-sm"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
+            <>
+              {cmsColumns.map((column) => (
+                <div key={column._key}>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
+                    {column.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {column.links?.map((link) => (
+                      <li key={link._key}>
+                        <Link
+                          href={link.url}
+                          className="text-gray-300 hover:text-white transition-colors text-sm"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {/* Always append the Catalog column so the new catalog pages
+                * stay reachable even when CMS-driven footerLinks exist
+                * (admin may not have it). De-duplicates if a CMS column
+                * already shares the Catalog title (case-insensitive match). */}
+              {!cmsColumns.some(
+                (c) => c.title?.toLowerCase() === t.columns.catalog.toLowerCase(),
+              ) && <FooterColumn title={t.columns.catalog} items={catalogLinks} />}
+            </>
           ) : (
             <>
               <FooterColumn title={t.columns.platform} items={platformLinks} />
