@@ -59,6 +59,7 @@ export interface IndustrialFooterTranslations {
     institutes: string
     imprint: string
     privacy: string
+    agb: string
   }
   trademarkDisclaimer?: string
 }
@@ -108,6 +109,7 @@ export default function Footer({
   const legalLinks = [
     { name: t.links.imprint, href: '/imprint' },
     { name: t.links.privacy, href: '/privacy' },
+    { name: t.links.agb, href: '/agb' },
   ]
 
   const siteName = settings?.siteName || 'MegaRobotics'
