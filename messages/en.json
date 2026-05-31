@@ -1093,7 +1093,8 @@
         "imprint": "Impressum",
         "privacy": "Datenschutz",
         "automationComponents": "Automation Components",
-        "robotDistributor": "Robot Distributor"
+        "robotDistributor": "Robot Distributor",
+        "agb": "AGB"
       }
     },
     "catalog": {
