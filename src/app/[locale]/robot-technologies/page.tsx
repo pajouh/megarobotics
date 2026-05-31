@@ -5,6 +5,7 @@ import TechnologyCard from '@/components/industrial/TechnologyCard'
 import CTASection from '@/components/industrial/CTASection'
 import { generateAlternates } from '@/lib/structured-data'
 import { robotTechnologyImages } from '@/lib/industrial-images'
+import { getRobotTechnologies, type Locale } from '@/lib/sanity'
 import type { RobotTechnologyItem } from '@/data/industrial-types'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -19,13 +20,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export const revalidate = 3600
+export const revalidate = 60
 
 export default async function RobotTechnologiesPage({ params }: Props) {
-  await params
+  const { locale } = await params
   const t = await getTranslations('industrial.robotTechnologies')
   const tCta = await getTranslations('industrial.home.finalCta')
-  const items = t.raw('items') as RobotTechnologyItem[]
+
+  const sanity = await getRobotTechnologies(locale as Locale)
+  const items: RobotTechnologyItem[] = sanity.length
+    ? sanity.map((s) => ({
+        id: s.id,
+        title: s.title,
+        description: s.shortDescription ?? '',
+        applications: s.applications,
+        criteria: s.selectionCriteria,
+      }))
+    : (t.raw('items') as RobotTechnologyItem[])
 
   return (
     <div className="min-h-screen">
