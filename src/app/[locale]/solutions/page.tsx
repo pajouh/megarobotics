@@ -5,6 +5,7 @@ import SolutionCard from '@/components/industrial/SolutionCard'
 import CTASection from '@/components/industrial/CTASection'
 import { generateAlternates } from '@/lib/structured-data'
 import { solutionImages } from '@/lib/industrial-images'
+import { getSolutions, type Locale } from '@/lib/sanity'
 import type { SolutionItem } from '@/data/industrial-types'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -19,13 +20,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export const revalidate = 3600
+export const revalidate = 60
 
 export default async function SolutionsPage({ params }: Props) {
-  await params
+  const { locale } = await params
   const t = await getTranslations('industrial.solutions')
   const tCta = await getTranslations('industrial.home.finalCta')
-  const items = t.raw('items') as SolutionItem[]
+
+  // Prefer Sanity content (editable in Studio). Fall back to messages
+  // JSON if no docs exist yet — keeps the page rendering during the
+  // transition.
+  const sanity = await getSolutions(locale as Locale)
+  const items: SolutionItem[] = sanity.length
+    ? sanity.map((s) => ({
+        id: s.id,
+        title: s.title,
+        description: s.shortDescription ?? '',
+        applications: s.applications,
+        robotTypes: s.robotTypes,
+      }))
+    : (t.raw('items') as SolutionItem[])
 
   return (
     <div className="min-h-screen">

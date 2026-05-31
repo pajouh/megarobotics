@@ -646,6 +646,103 @@ export async function getReferenceEcosystems(category: string | null = null, loc
 
 
 // ==========================================
+// CONTENT PAGE QUERIES (solution / industry / robotTechnology / projectStudy)
+// ==========================================
+
+export interface SolutionDoc {
+  _id: string
+  id: string
+  title: string
+  shortDescription?: string
+  applications: string[]
+  robotTypes: string[]
+}
+
+export interface IndustryDoc {
+  _id: string
+  id: string
+  title: string
+  applications: string[]
+}
+
+export interface RobotTechnologyDoc {
+  _id: string
+  id: string
+  title: string
+  shortDescription?: string
+  applications: string[]
+  selectionCriteria: string[]
+}
+
+export interface ProjectStudyDoc {
+  _id: string
+  id: string
+  title: string
+  subtitle?: string
+  body?: string
+  status?: string
+}
+
+export async function getSolutions(locale: Locale = defaultLocale): Promise<SolutionDoc[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "solution" && isActive != false] | order(order asc) {
+      _id,
+      "id": slug.current,
+      "title": ${localizedField('title', locale)},
+      "shortDescription": ${localizedField('excerpt', locale)},
+      "applications": coalesce(${localizedArrayField('applications', locale)}, []),
+      "robotTypes": coalesce(${localizedArrayField('robotTypes', locale)}, [])
+    }`,
+  )
+}
+
+export async function getIndustries(locale: Locale = defaultLocale): Promise<IndustryDoc[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "industry" && isActive != false] | order(order asc) {
+      _id,
+      "id": slug.current,
+      "title": ${localizedField('title', locale)},
+      "applications": coalesce(${localizedArrayField('applications', locale)}, [])
+    }`,
+  )
+}
+
+export async function getRobotTechnologies(
+  locale: Locale = defaultLocale,
+): Promise<RobotTechnologyDoc[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "robotTechnology" && isActive != false] | order(order asc) {
+      _id,
+      "id": slug.current,
+      "title": ${localizedField('title', locale)},
+      "shortDescription": ${localizedField('excerpt', locale)},
+      "applications": coalesce(${localizedArrayField('applications', locale)}, []),
+      "selectionCriteria": coalesce(${localizedArrayField('selectionCriteria', locale)}, [])
+    }`,
+  )
+}
+
+export async function getProjectStudies(
+  locale: Locale = defaultLocale,
+): Promise<ProjectStudyDoc[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "projectStudy" && isActive != false] | order(order asc) {
+      _id,
+      "id": slug.current,
+      "title": ${localizedField('title', locale)},
+      "subtitle": ${localizedField('subtitle', locale)},
+      "body": pt::text(${localizedField('body', locale)}),
+      status
+    }`,
+  )
+}
+
+
+// ==========================================
 // BUYERS GUIDE QUERIES
 // ==========================================
 

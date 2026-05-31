@@ -4,6 +4,7 @@ import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import ProjectCard from '@/components/industrial/ProjectCard'
 import CTASection from '@/components/industrial/CTASection'
 import { generateAlternates } from '@/lib/structured-data'
+import { getProjectStudies, type Locale } from '@/lib/sanity'
 import type { ProjectItem } from '@/data/industrial-types'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -18,13 +19,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export const revalidate = 3600
+export const revalidate = 60
 
 export default async function ProjectsPage({ params }: Props) {
-  await params
+  const { locale } = await params
   const t = await getTranslations('industrial.projects')
   const tCta = await getTranslations('industrial.home.finalCta')
-  const items = t.raw('items') as ProjectItem[]
+
+  const sanity = await getProjectStudies(locale as Locale)
+  const items: ProjectItem[] = sanity.length
+    ? sanity.map((s) => ({
+        id: s.id,
+        title: s.title,
+        subtitle: s.subtitle ?? '',
+        body: s.body ?? '',
+      }))
+    : (t.raw('items') as ProjectItem[])
 
   return (
     <div className="min-h-screen">
