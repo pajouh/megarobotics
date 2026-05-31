@@ -15,12 +15,18 @@ function createSanityClient(): SanityClient | null {
     console.warn('Missing NEXT_PUBLIC_SANITY_PROJECT_ID environment variable')
     return null
   }
+  // Server-side token (never reaches the browser) lets us read doc types
+  // that aren't in the publicly-exposed schema slice (e.g. productFamily).
+  // When the token is present, CDN must be disabled — Sanity CDN does not
+  // authenticate. When absent, fall back to anonymous CDN reads.
+  const token = process.env.SANITY_API_TOKEN
   return createClient({
     projectId,
     dataset,
     apiVersion: '2024-01-01',
-        // Use Sanity CDN for public pages - reduces bandwidth vs direct API calls
-    useCdn: true,
+    useCdn: !token,
+    token: token || undefined,
+    perspective: 'published',
   })
 }
 
