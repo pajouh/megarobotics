@@ -2,29 +2,14 @@ import { Metadata } from 'next'
 import { GraduationCap, Globe, CalendarDays } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { getInstitutes, getInstituteCountries } from '@/lib/sanity'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 import InstituteFilter from '@/components/InstituteFilter'
 
-const title = 'Robotics Research Institutes'
-const description = 'Verified directory of robotics labs, centers and institutes — DACH and worldwide. Browse leading research institutions in humanoids, autonomous systems, and AI-driven robotics.'
+const title = 'Robotics Research Institutes | MegaRobotics'
+const description =
+  'Verified directory of robotics research labs, centers and institutes across DACH and worldwide — humanoids, legged robotics, autonomous systems, embodied AI and applied automation research.'
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: generateAlternates('/institutes'),
-  openGraph: {
-    title,
-    description,
-    type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'MegaRobotics Research Institutes' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-    images: ['/og-image.png'],
-  },
-}
+export const metadata: Metadata = pageSeo({ title, description, path: '/institutes' })
 
 export const revalidate = 60
 

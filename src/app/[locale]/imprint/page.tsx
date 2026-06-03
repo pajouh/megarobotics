@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server'
 import { getPageByType, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import IntellectualPropertyNotice from '@/components/IntellectualPropertyNotice'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -15,26 +15,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const page = await getPageByType('imprint', locale as Locale)
 
-  const title = page?.seo?.metaTitle || (locale === 'de' ? 'Impressum - MegaRobotics' : 'Imprint - MegaRobotics')
-  const description = page?.seo?.metaDescription || (locale === 'de'
-    ? 'Rechtliche Informationen und Impressum für MegaRobotics'
-    : 'Legal information and imprint for MegaRobotics')
+  const title =
+    page?.seo?.metaTitle ||
+    (locale === 'de' ? 'Impressum | MegaRobotics' : 'Imprint | MegaRobotics')
+  const description =
+    page?.seo?.metaDescription ||
+    (locale === 'de'
+      ? 'Impressum und rechtliche Informationen der MEGAFORCE GmbH, Marke MegaRobotics, Wacholderweg 8, 41564 Kaarst.'
+      : 'Imprint and legal information for MEGAFORCE GmbH, brand MegaRobotics, Wacholderweg 8, 41564 Kaarst, Germany.')
 
-  return {
-    title,
-    description,
-    alternates: generateAlternates('/imprint'),
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary',
-      title,
-      description,
-    },
-  }
+  return pageSeo({ title, description, path: '/imprint' })
 }
 
 export const revalidate = 3600

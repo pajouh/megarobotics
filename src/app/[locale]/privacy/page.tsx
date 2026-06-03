@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { format } from 'date-fns'
 import { getPageByType, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -13,26 +13,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const page = await getPageByType('privacy', locale as Locale)
 
-  const title = page?.seo?.metaTitle || (locale === 'de' ? 'Datenschutz - MegaRobotics' : 'Privacy Policy - MegaRobotics')
-  const description = page?.seo?.metaDescription || (locale === 'de'
-    ? 'Datenschutzrichtlinie und Informationen zum Datenschutz für MegaRobotics'
-    : 'Privacy policy and data protection information for MegaRobotics')
+  const title =
+    page?.seo?.metaTitle ||
+    (locale === 'de' ? 'Datenschutz | MegaRobotics' : 'Privacy Policy | MegaRobotics')
+  const description =
+    page?.seo?.metaDescription ||
+    (locale === 'de'
+      ? 'Datenschutzerklärung der MEGAFORCE GmbH (Marke MegaRobotics) — wie wir personenbezogene Daten verarbeiten und schützen.'
+      : 'Privacy policy of MEGAFORCE GmbH (brand MegaRobotics) — how we collect, process and protect personal data.')
 
-  return {
-    title,
-    description,
-    alternates: generateAlternates('/privacy'),
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary',
-      title,
-      description,
-    },
-  }
+  return pageSeo({ title, description, path: '/privacy' })
 }
 
 export const revalidate = 3600

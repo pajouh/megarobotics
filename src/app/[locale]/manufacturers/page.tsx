@@ -4,28 +4,13 @@ import { getTranslations } from 'next-intl/server'
 import { getManufacturers, type Locale } from '@/lib/sanity'
 import ManufacturerCard from '@/components/ManufacturerCard'
 import Disclaimer from '@/components/Disclaimer'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
-const title = 'Manufacturers'
-const description = 'Browse robotics manufacturers from around the world. Leading companies in humanoid robots, industrial automation, and consumer robotics.'
+const title = 'Manufacturer Directory | MegaRobotics'
+const description =
+  'Directory of robotics and automation manufacturers MegaRobotics distributes, sources or evaluates for European industrial, research and service applications.'
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: generateAlternates('/manufacturers'),
-  openGraph: {
-    title,
-    description,
-    type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'MegaRobotics Manufacturers' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-    images: ['/og-image.png'],
-  },
-}
+export const metadata: Metadata = pageSeo({ title, description, path: '/manufacturers' })
 
 export const revalidate = 60
 

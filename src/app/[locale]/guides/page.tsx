@@ -5,28 +5,13 @@ import Image from 'next/image'
 import { format } from 'date-fns'
 import { BookOpen, Clock, RefreshCw } from 'lucide-react'
 import { getBuyersGuides, urlFor } from '@/lib/sanity'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
-const guidesTitle = "Buyers' Guides - Robotics Purchasing Decisions"
-const guidesDescription = 'Practical, evidence-based buyers guides to help you make informed robotics purchasing decisions. From robot dogs to humanoids, industrial to consumer.'
+const guidesTitle = "Buyers' Guides | MegaRobotics"
+const guidesDescription =
+  'Practical, evidence-based buyers guides for industrial robotics and automation purchasing decisions — robot platforms, end effectors, sensors, safety systems, and full robotic cells.'
 
-export const metadata: Metadata = {
-  title: guidesTitle,
-  description: guidesDescription,
-  alternates: generateAlternates('/guides'),
-  openGraph: {
-    title: guidesTitle,
-    description: guidesDescription,
-    type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: "MegaRobotics Buyers' Guides" }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: guidesTitle,
-    description: guidesDescription,
-    images: ['/og-image.png'],
-  },
-}
+export const metadata: Metadata = pageSeo({ title: guidesTitle, description: guidesDescription, path: '/guides' })
 
 export const revalidate = 3600
 
