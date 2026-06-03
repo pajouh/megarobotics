@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 import { AGB_SECTIONS, AGB_SUBTITLE, AGB_TITLE, AGB_VERSION } from '@/data/agb'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -11,9 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? 'Allgemeine Geschäftsbedingungen der MEGAFORCE GmbH (MegaRobotics) für den Verkauf von Produkten sowie die Erbringung von Werk- und Dienstleistungen.'
       : 'General Terms and Conditions (AGB) of MEGAFORCE GmbH (MegaRobotics) for the sale of products and provision of services. German text is authoritative.'
   return {
-    title: `${AGB_TITLE} | MegaRobotics`,
-    description,
-    alternates: generateAlternates('/agb'),
+    ...pageSeo({ title: `${AGB_TITLE} | MegaRobotics`, description, path: '/agb' }),
     robots: { index: true, follow: true },
   }
 }

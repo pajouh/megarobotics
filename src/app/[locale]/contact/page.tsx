@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/ContactForm'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import { getSiteSettings, type Locale } from '@/lib/sanity'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -16,23 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = settings?.contactMetaTitle || t('metaTitle')
   const description = settings?.contactMetaDescription || t('metaDescription')
 
-  return {
-    title,
-    description,
-    alternates: generateAlternates('/contact'),
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Contact MegaRobotics' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: ['/og-image.png'],
-    },
-  }
+  return pageSeo({ title, description, path: '/contact' })
 }
 
 export const revalidate = 3600
