@@ -12,7 +12,8 @@ import ProductCard from '@/components/ProductCard'
 import ArticleCard from '@/components/ArticleCard'
 import StructuredData from '@/components/StructuredData'
 import { getFeaturedProducts, getArticles, type Locale } from '@/lib/sanity'
-import { generateOrganizationSchema, generateWebSiteSchema, generateAlternates } from '@/lib/structured-data'
+import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 import { heroImage } from '@/lib/industrial-images'
 import type { WhatWeDoCard, HomeProjectItem } from '@/data/industrial-types'
 
@@ -21,11 +22,7 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.home.meta' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: generateAlternates(''),
-  }
+  return pageSeo({ title: t('title'), description: t('description'), path: '' })
 }
 
 export const revalidate = 60

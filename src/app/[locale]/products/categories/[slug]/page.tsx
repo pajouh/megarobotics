@@ -10,7 +10,7 @@ import SafeNotice from '@/components/industrial/SafeNotice'
 import ProductCard from '@/components/ProductCard'
 import { getProductFamily, getProductsByFamily, type Locale } from '@/lib/sanity'
 import { getFamilyFallback } from '@/data/product-families'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -33,11 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const families = tCatalog.raw('families') as Record<string, FamilyContent> | undefined
   const content = families?.[slug]
   if (!content) return {}
-  return {
-    title: content.meta?.title ?? `${content.title} | MegaRobotics`,
-    description: content.meta?.description,
-    alternates: generateAlternates(`/products/categories/${slug}`),
-  }
+  const title = content.meta?.title ?? `${content.title} | MegaRobotics`
+  const description = content.meta?.description ?? content.shortDescription ?? ''
+  return pageSeo({ title, description, path: `/products/categories/${slug}` })
 }
 
 export const revalidate = 3600

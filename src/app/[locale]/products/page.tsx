@@ -12,7 +12,7 @@ import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
 import Disclaimer from '@/components/Disclaimer'
 import SectionHeader from '@/components/industrial/SectionHeader'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 import { productFamilyFallbacks } from '@/data/product-families'
 
 interface FamilyContent {
@@ -27,23 +27,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.catalog.meta' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: generateAlternates('/products'),
-    openGraph: {
-      title: t('title'),
-      description: t('description'),
-      type: 'website',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'MegaRobotics Catalog' }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: t('title'),
-      description: t('description'),
-      images: ['/og-image.png'],
-    },
-  }
+  return pageSeo({ title: t('title'), description: t('description'), path: '/products' })
 }
 
 export const revalidate = 60

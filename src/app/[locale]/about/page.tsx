@@ -2,18 +2,14 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import CTASection from '@/components/industrial/CTASection'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.company.meta' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: generateAlternates('/about'),
-  }
+  return pageSeo({ title: t('title'), description: t('description'), path: '/about' })
 }
 
 export const revalidate = 3600

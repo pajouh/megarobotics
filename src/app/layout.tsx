@@ -25,35 +25,40 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings().catch(() => null);
   const twitterSite = extractTwitterHandle(settings?.socialLinks?.twitter) ?? "@megarobotics_de";
 
+  const SITE_TITLE = "MegaRobotics | Industrial Robotics & Automation Solutions";
+  const SITE_DESCRIPTION =
+    "Germany-based industrial robotics distributor and automation technology partner. We help European customers source, evaluate and develop robotic solutions across manufacturing, logistics, inspection, cleaning, research and service environments.";
+
   return {
   metadataBase: new URL("https://www.megarobotics.de"),
   title: {
-    default: "MegaRobotics - Robotics News, Reviews & Industry Insights",
+    default: SITE_TITLE,
     template: "%s | MegaRobotics",
   },
-  description:
-    "Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, quadrupeds, industrial automation, AI integration, and the future of intelligent machines.",
+  description: SITE_DESCRIPTION,
   keywords: [
-    "robotics news",
-    "robot reviews",
+    "industrial robotics",
+    "robot distributor",
+    "automation solutions",
+    "industrial automation",
+    "Industrieroboter",
+    "Robotik-Distributor",
+    "Automatisierungslösungen",
+    "PLC SPS",
+    "industrial servo drives",
+    "collaborative robots cobots",
+    "AMR AGV mobile robots",
     "humanoid robots",
-    "industrial robots",
-    "quadruped robots",
-    "AI robots",
-    "robotics industry",
-    "automation",
-    "Unitree",
-    "robot vacuum",
-    "cobots",
-    "robot dog",
-    "warehouse robots",
-    "service robots",
-    "Chinese robotics",
-    "robotik nachrichten",
+    "robot grippers end effectors",
+    "machine safety",
+    "industrial communication",
+    "system integrator Germany",
+    "MegaRobotics",
+    "MEGAFORCE GmbH",
   ],
   authors: [{ name: "MegaRobotics", url: "https://www.megarobotics.de" }],
   creator: "MegaRobotics",
-  publisher: "MegaRobotics",
+  publisher: "MEGAFORCE GmbH",
   formatDetection: {
     email: false,
     address: false,
@@ -65,23 +70,21 @@ export async function generateMetadata(): Promise<Metadata> {
     alternateLocale: ["de_DE"],
     url: "https://www.megarobotics.de",
     siteName: "MegaRobotics",
-    title: "MegaRobotics - Robotics News, Reviews & Industry Insights",
-    description:
-      "Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, industrial automation, and AI integration.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "MegaRobotics - Robotics News & Industry Insights",
+        alt: "MegaRobotics — Industrial Robotics & Automation Solutions",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "MegaRobotics - Robotics News & Industry Insights",
-    description:
-      "Your premier source for robotics news, product reviews, and industry analysis.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
     site: twitterSite,
     creator: twitterSite,
@@ -103,7 +106,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "application/rss+xml": "/feed.xml",
     },
   },
-  category: "technology",
+  category: "industrial automation",
   other: {
     "facebook-domain-verification": "f4d1i9dpm7pulx55nx1tuprhlkn36o",
   },

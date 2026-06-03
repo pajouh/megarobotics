@@ -4,7 +4,7 @@ import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
 import SafeNotice from '@/components/industrial/SafeNotice'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -16,11 +16,7 @@ interface Item {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.catalog.robotDistributor.meta' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: generateAlternates('/robot-distributor'),
-  }
+  return pageSeo({ title: t('title'), description: t('description'), path: '/robot-distributor' })
 }
 
 export const revalidate = 3600

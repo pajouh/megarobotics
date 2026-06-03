@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import SafeNotice from '@/components/industrial/SafeNotice'
 import CTASection from '@/components/industrial/CTASection'
-import { generateAlternates } from '@/lib/structured-data'
+import { pageSeo } from '@/lib/page-seo'
 import type { ForManufacturersService } from '@/data/industrial-types'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -11,11 +11,7 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.forManufacturers.meta' })
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: generateAlternates('/for-manufacturers'),
-  }
+  return pageSeo({ title: t('title'), description: t('description'), path: '/for-manufacturers' })
 }
 
 export const revalidate = 3600

@@ -5,9 +5,28 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'MegaRobotics',
+    legalName: 'MEGAFORCE GmbH',
     url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
-    description: 'Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, quadrupeds, industrial automation, AI integration, and the future of intelligent machines.',
+    logo: `${baseUrl}/og-image.png`,
+    image: `${baseUrl}/og-image.png`,
+    description:
+      'Germany-based industrial robotics distributor and automation technology partner. Supporting European customers with robot sourcing, evaluation, and the development of robotic solutions across manufacturing, logistics, inspection, cleaning, research and service environments.',
+    foundingLocation: {
+      '@type': 'Place',
+      address: { '@type': 'PostalAddress', addressLocality: 'Kaarst', addressCountry: 'DE' },
+    },
+    areaServed: ['DE', 'AT', 'CH', 'EU'],
+    knowsAbout: [
+      'Industrial robotics',
+      'Automation technology',
+      'Robot platforms',
+      'End effectors and grippers',
+      'PLC and industrial control',
+      'Industrial sensors and vision',
+      'Functional safety',
+      'Industrial communication',
+      'SCADA and HMI software',
+    ],
     sameAs: [
       'https://x.com/megarobotics_de',
       'https://linkedin.com/company/megarobotics',
@@ -15,12 +34,16 @@ export function generateOrganizationSchema() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      contactType: 'customer service',
+      contactType: 'sales',
       email: 'info@megarobotics.de',
       availableLanguage: ['English', 'German'],
+      areaServed: 'EU',
     },
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Wacholderweg 8',
+      postalCode: '41564',
+      addressLocality: 'Kaarst',
       addressCountry: 'DE',
     },
   }
@@ -32,13 +55,15 @@ export function generateWebSiteSchema() {
     '@type': 'WebSite',
     name: 'MegaRobotics',
     url: baseUrl,
-    description: 'Robotics News, Reviews & Industry Insights',
+    description:
+      'Industrial robotics and automation solutions — distribution, evaluation, sourcing and integration coordination for European customers.',
+    inLanguage: ['en', 'de'],
     publisher: {
       '@type': 'Organization',
       name: 'MegaRobotics',
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/og-image.png`,
       },
     },
     potentialAction: {
