@@ -52,7 +52,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center group" aria-label={siteName || 'MegaRobotics — home'}>
             {logoUrl ? (
               <div className="relative overflow-hidden" style={{ width: logoWidth, height: logoHeight }}>
                 <Image
@@ -69,9 +69,6 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                 <span className="text-white font-bold text-lg">M</span>
               </div>
             )}
-            <span className="hidden sm:block text-white font-semibold tracking-tight text-lg">
-              {siteName || 'MegaRobotics'}
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
