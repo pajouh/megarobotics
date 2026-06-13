@@ -25,20 +25,22 @@ export default async function CompanyPage({ params }: Props) {
 
       <section className="py-16 md:py-24 ind-section-light">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[color:var(--mr-line)] border border-[color:var(--mr-line)]">
+            <div className="bg-[color:var(--mr-paper)] p-8 md:p-10">
+              <span className="mr-index block mb-4">01</span>
               <div className="ind-eyebrow mb-3">
-                <span className="inline-block w-8 h-px bg-blue-600" aria-hidden="true" />
+                <span className="inline-block w-8 h-px bg-[color:var(--mr-accent-ink)]" aria-hidden="true" />
                 {t('positioningTitle')}
               </div>
-              <p className="text-base text-gray-700 leading-relaxed">{t('positioning')}</p>
+              <p className="text-base text-[color:var(--mr-ink-2)] leading-relaxed">{t('positioning')}</p>
             </div>
-            <div>
+            <div className="bg-[color:var(--mr-paper)] p-8 md:p-10">
+              <span className="mr-index block mb-4">02</span>
               <div className="ind-eyebrow mb-3">
-                <span className="inline-block w-8 h-px bg-blue-600" aria-hidden="true" />
+                <span className="inline-block w-8 h-px bg-[color:var(--mr-accent-ink)]" aria-hidden="true" />
                 {t('approachTitle')}
               </div>
-              <p className="text-base text-gray-700 leading-relaxed">{t('approach')}</p>
+              <p className="text-base text-[color:var(--mr-ink-2)] leading-relaxed">{t('approach')}</p>
             </div>
           </div>
         </div>

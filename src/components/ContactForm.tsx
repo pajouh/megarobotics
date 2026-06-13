@@ -20,12 +20,12 @@ function ContactFormSkeleton() {
   return (
     <div className="space-y-5 animate-pulse">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div className="h-12 bg-gray-100 rounded-md" />
-        <div className="h-12 bg-gray-100 rounded-md" />
+        <div className="h-12 bg-[color:var(--mr-paper-2)]" />
+        <div className="h-12 bg-[color:var(--mr-paper-2)]" />
       </div>
-      <div className="h-12 bg-gray-100 rounded-md" />
-      <div className="h-32 bg-gray-100 rounded-md" />
-      <div className="h-12 w-48 bg-gray-100 rounded-md" />
+      <div className="h-12 bg-[color:var(--mr-paper-2)]" />
+      <div className="h-32 bg-[color:var(--mr-paper-2)]" />
+      <div className="h-12 w-48 bg-[color:var(--mr-paper-2)]" />
     </div>
   )
 }
@@ -167,7 +167,7 @@ function ContactFormInner() {
   }
 
   const inputClass =
-    'w-full px-4 py-3 rounded-md bg-white border border-gray-300 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-blue-600 focus:ring-blue-100 transition-all'
+    'w-full px-4 py-3 bg-[color:var(--mr-white)] border border-[color:var(--mr-line-strong)]/30 text-[color:var(--mr-ink)] placeholder:text-[color:var(--mr-steel)] focus:outline-none focus:border-[color:var(--mr-accent-ink)] transition-colors'
 
   const stageOptions: { value: string; key: string }[] = [
     { value: 'exploring', key: 'exploring' },
@@ -386,10 +386,10 @@ function ContactFormInner() {
       </Field>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">{t('attachment')}</label>
+        <label className="block font-mono text-[0.7rem] uppercase tracking-[0.1em] font-medium text-[color:var(--mr-steel)] mb-1.5">{t('attachment')}</label>
         <div className="flex items-center gap-3">
           <label
-            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-gray-300 bg-white text-sm text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition-all cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-4 py-2.5 border border-[color:var(--mr-line-strong)]/30 bg-[color:var(--mr-white)] text-sm text-[color:var(--mr-ink-2)] hover:border-[color:var(--mr-line-strong)] transition-colors cursor-pointer ${
               status === 'loading' ? 'opacity-50 pointer-events-none' : ''
             }`}
           >
@@ -408,7 +408,7 @@ function ContactFormInner() {
             <button
               type="button"
               onClick={removeFile}
-              className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-rose-500 transition-colors"
+              className="inline-flex items-center gap-1 text-sm text-[color:var(--mr-steel)] hover:text-[color:var(--mr-accent-ink)] transition-colors"
             >
               <X className="w-4 h-4" />
               {t('removeFile')}
@@ -417,7 +417,7 @@ function ContactFormInner() {
         </div>
       </div>
 
-      <label className="flex items-start gap-2.5 cursor-pointer text-sm text-gray-700">
+      <label className="flex items-start gap-2.5 cursor-pointer text-sm text-[color:var(--mr-ink-2)]">
         <input
           type="checkbox"
           checked={consent}
@@ -425,7 +425,7 @@ function ContactFormInner() {
             setConsent(e.target.checked)
             if (status !== 'idle' && status !== 'loading') setStatus('idle')
           }}
-          className="mt-1 w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          className="mt-1 w-4 h-4 border-[color:var(--mr-line-strong)]/40 text-[color:var(--mr-accent-ink)] focus:ring-[color:var(--mr-accent-ink)]"
           disabled={status === 'loading'}
         />
         <span className="leading-relaxed">{tExtra('fields.consent')}</span>
@@ -434,7 +434,7 @@ function ContactFormInner() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full sm:w-auto ind-btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-[15px] hover:bg-[color:var(--mr-ink)] hover:text-[color:var(--mr-paper)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? (
           <>
@@ -476,7 +476,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1.5">
+      <label htmlFor={id} className="block font-mono text-[0.7rem] uppercase tracking-[0.1em] font-medium text-[color:var(--mr-steel)] mb-1.5">
         {label}
       </label>
       {children}
