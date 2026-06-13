@@ -24,7 +24,7 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
 
   if (allImages.length === 0) {
     return (
-      <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center">
+      <div className="aspect-square bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)] flex items-center justify-center">
         <span className="text-6xl opacity-30">🤖</span>
       </div>
     )
@@ -45,7 +45,7 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
       {/* Main Image */}
       <div className="space-y-4">
         <div
-          className="relative aspect-square bg-gray-50 rounded-2xl overflow-hidden cursor-zoom-in"
+          className="relative aspect-square bg-white border border-[color:var(--mr-line)] overflow-hidden cursor-zoom-in"
           onClick={() => setLightboxOpen(true)}
         >
           <Image
@@ -88,9 +88,9 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
               <button
                 key={index}
                 onClick={() => setSelectedIndex(index)}
-                className={`relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-colors ${
+                className={`relative w-20 h-20 flex-shrink-0 overflow-hidden border-2 transition-colors ${
                   index === selectedIndex
-                    ? 'border-emerald-500'
+                    ? 'border-[color:var(--mr-accent)]'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >

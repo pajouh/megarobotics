@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Your premier source for robotics news, product reviews, and industry analysis. Covering humanoid robots, industrial automation, and AI integration.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#059669',
+    background_color: '#fafaf7',
+    theme_color: '#16181d',
     orientation: 'portrait-primary',
     categories: ['news', 'technology', 'business'],
     icons: [

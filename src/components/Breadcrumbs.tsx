@@ -34,22 +34,22 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
               {index === 0 ? (
                 <Link
                   href={item.href}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)] transition-colors"
                   aria-label="Home"
                 >
                   <Home className="w-4 h-4" />
                 </Link>
               ) : (
                 <>
-                  <ChevronRight className="w-4 h-4 text-gray-300 mx-1" />
+                  <ChevronRight className="w-3.5 h-3.5 text-[color:var(--mr-steel)] mx-1" />
                   {index === allItems.length - 1 ? (
-                    <span className="text-gray-900 font-medium truncate max-w-[200px]">
+                    <span className="font-mono text-xs text-[color:var(--mr-ink)] font-medium truncate max-w-[200px]">
                       {item.name}
                     </span>
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-gray-500 hover:text-gray-900 transition-colors truncate max-w-[150px]"
+                      className="font-mono text-xs text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)] transition-colors truncate max-w-[150px]"
                     >
                       {item.name}
                     </Link>

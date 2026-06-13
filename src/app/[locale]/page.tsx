@@ -72,10 +72,11 @@ export default async function HomePage({ params }: Props) {
             subtitle={t('whatWeDo.body')}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whatWeDoCards.map((card) => (
+            {whatWeDoCards.map((card, idx) => (
               <article key={card.title} className="ind-card flex flex-col h-full">
-                <h3 className="ind-h3 text-gray-900 mb-3">{card.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{card.body}</p>
+                <span className="mr-index mb-4">{String(idx + 1).padStart(2, '0')}</span>
+                <h3 className="ind-h3 text-[color:var(--mr-ink)] mb-3">{card.title}</h3>
+                <p className="text-sm text-[color:var(--mr-ink-2)] leading-relaxed">{card.body}</p>
               </article>
             ))}
           </div>
@@ -83,22 +84,21 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* SECTION 3 — Robotics Technologies We Cover */}
-      <section className="py-16 md:py-24 ind-section-graphite relative overflow-hidden">
-        <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 ind-section-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            tone="dark"
             eyebrow={t('techCoverage.eyebrow')}
             title={t('techCoverage.title')}
             subtitle={t('techCoverage.subtitle')}
           />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 border-t border-[color:var(--mr-line)]">
             {techItems.map((item, idx) => (
-              <li key={item} className="ind-card-dark flex items-start gap-3">
-                <span className="font-mono text-xs text-blue-400 mt-1">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-                <span className="text-sm text-gray-200 leading-relaxed">{item}</span>
+              <li
+                key={item}
+                className="flex items-baseline gap-4 py-4 border-b border-[color:var(--mr-line)]"
+              >
+                <span className="mr-index shrink-0">{String(idx + 1).padStart(2, '0')}</span>
+                <span className="text-[15px] text-[color:var(--mr-ink)] leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
@@ -118,8 +118,8 @@ export default async function HomePage({ params }: Props) {
                 key={item}
                 className="ind-card flex items-start gap-3 p-4"
               >
-                <span className="text-blue-600 mt-0.5" aria-hidden="true">›</span>
-                <span className="text-sm text-gray-800">{item}</span>
+                <span className="font-mono text-xs text-[color:var(--mr-accent-ink)] mt-1" aria-hidden="true">—</span>
+                <span className="text-sm text-[color:var(--mr-ink-2)]">{item}</span>
               </li>
             ))}
           </ul>
@@ -138,30 +138,29 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* SECTION 6 — Technology Network */}
-      <section className="py-16 md:py-24 ind-section-dark relative overflow-hidden">
-        <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 ind-section-light border-t border-[color:var(--mr-line)]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div className="lg:col-span-7">
               <SectionHeader
-                tone="dark"
                 eyebrow={t('network.eyebrow')}
                 title={t('network.title')}
                 subtitle={t('network.body')}
               />
               <div className="mt-6">
-                <SafeNotice label={tNotice('label')} accent="blue" tone="dark">
+                <SafeNotice label={tNotice('label')} accent="orange">
                   {t('network.legalNote')}
                 </SafeNotice>
               </div>
             </div>
             <div className="lg:col-span-5">
-              <ul className="space-y-2">
-                {networkCategories.map((cat) => (
+              <ul className="border-t border-[color:var(--mr-line)]">
+                {networkCategories.map((cat, idx) => (
                   <li
                     key={cat}
-                    className="px-4 py-3 bg-[color:var(--ind-graphite-800)] border border-[color:var(--ind-graphite-700)] rounded text-sm text-gray-200"
+                    className="flex items-baseline gap-4 px-1 py-3.5 border-b border-[color:var(--mr-line)] text-sm text-[color:var(--mr-ink)]"
                   >
+                    <span className="mr-index shrink-0">{String(idx + 1).padStart(2, '0')}</span>
                     {cat}
                   </li>
                 ))}
@@ -203,7 +202,7 @@ export default async function HomePage({ params }: Props) {
               />
               <Link
                 href="/products"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] font-medium text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-ink)] transition-colors whitespace-nowrap"
               >
                 {tHomeLegacy('viewAllProducts')}
                 <ArrowRight className="w-4 h-4" />
@@ -230,7 +229,7 @@ export default async function HomePage({ params }: Props) {
               />
               <Link
                 href="/articles"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] font-medium text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-ink)] transition-colors whitespace-nowrap"
               >
                 {tHomeLegacy('viewAllNews')}
                 <ArrowRight className="w-4 h-4" />

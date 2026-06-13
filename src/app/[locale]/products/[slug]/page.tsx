@@ -127,6 +127,9 @@ export default async function ProductPage({ params }: Props) {
     specifications: product.specifications,
   })
 
+  const manufacturerProductIds = new Set(sameManufacturerProducts.map((p) => p._id))
+  const distinctRelatedProducts = relatedProducts.filter((p) => !manufacturerProductIds.has(p._id))
+
   const breadcrumbItems = [
     { name: 'Products', href: '/products' },
     ...(product.productFamily
@@ -158,7 +161,7 @@ export default async function ProductPage({ params }: Props) {
   const showRelationshipBadge = relStatus && VERIFIED_RELATIONSHIPS.includes(relStatus)
 
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-white">
+    <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
       <StructuredData data={productSchema} />
       <StructuredData data={breadcrumbSchema} />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -168,7 +171,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Back Link */}
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
+          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)] transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           {t('backToProducts')}
@@ -190,24 +193,24 @@ export default async function ProductPage({ params }: Props) {
               {product.productFamily && (
                 <Link
                   href={`/products/categories/${product.productFamily.slug.current}`}
-                  className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors"
+                  className="inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-medium text-[color:var(--mr-accent-ink)] border border-[color:var(--mr-accent-ink)]/40 hover:bg-[color:var(--mr-accent)]/10 transition-colors"
                 >
                   {product.productFamily.title}
                 </Link>
               )}
               {product.subcategory && (
-                <span className="inline-flex items-center px-2.5 py-1 rounded text-xs text-gray-700 bg-gray-100 border border-gray-200">
+                <span className="inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-[color:var(--mr-ink-2)] border border-[color:var(--mr-line)] bg-[color:var(--mr-paper-2)]">
                   {product.subcategory}
                 </span>
               )}
               {product.isNew && (
-                <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold uppercase tracking-wider bg-orange-500 text-white">
+                <span className="inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-semibold bg-[color:var(--mr-accent)] text-white">
                   New
                 </span>
               )}
               {availabilityLabel && (
                 <span
-                  className={`inline-flex items-center px-2.5 py-1 rounded text-xs font-medium ${availabilityChipClass(
+                  className={`inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-medium ${availabilityChipClass(
                     availStatus ?? product.availability,
                   )}`}
                 >
@@ -215,7 +218,7 @@ export default async function ProductPage({ params }: Props) {
                 </span>
               )}
               {product.inquiryOnly && (
-                <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-semibold text-orange-700 bg-orange-50 border border-orange-100">
+                <span className="inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-medium text-[color:var(--mr-accent-ink)] border border-[color:var(--mr-accent-ink)]/40">
                   {tDetail('inquiryOnlyBadge')}
                 </span>
               )}
@@ -229,7 +232,7 @@ export default async function ProductPage({ params }: Props) {
                   className="inline-flex items-center gap-3 group"
                 >
                   {product.manufacturer.logo && (
-                    <div className="w-10 h-10 rounded bg-gray-100 p-1.5">
+                    <div className="w-10 h-10 bg-white border border-[color:var(--mr-line)] p-1.5">
                       <Image
                         src={urlFor(product.manufacturer.logo).width(64).height(64).fit('max').url()}
                         alt={product.manufacturer.name}
@@ -239,12 +242,12 @@ export default async function ProductPage({ params }: Props) {
                       />
                     </div>
                   )}
-                  <span className="text-gray-700 group-hover:text-blue-700 transition-colors font-medium">
+                  <span className="text-[color:var(--mr-ink-2)] group-hover:text-[color:var(--mr-accent-ink)] transition-colors font-medium">
                     {product.manufacturer.name}
                   </span>
                 </Link>
                 {showRelationshipBadge && relStatus && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200">
                     <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
                     {tDetail(`relationship.${relStatusToKey(relStatus)}`)}
                   </span>
@@ -253,36 +256,36 @@ export default async function ProductPage({ params }: Props) {
             )}
 
             {/* Name */}
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+            <h1 className="ind-h2 !text-[2rem] md:!text-[2.6rem] text-[color:var(--mr-ink)] mb-3">
               {product.name}
             </h1>
 
             {/* Tagline */}
-            {product.tagline && <p className="text-lg text-gray-600 mb-4">{product.tagline}</p>}
+            {product.tagline && <p className="text-lg text-[color:var(--mr-ink-2)] mb-4">{product.tagline}</p>}
 
             {/* Price — hidden when inquiry-only */}
             {product.priceRange && !product.inquiryOnly && (
               <div className="mb-6">
-                <span className="text-2xl font-bold text-gray-900">{product.priceRange}</span>
+                <span className="font-mono text-xl font-semibold text-[color:var(--mr-ink)]">{product.priceRange}</span>
               </div>
             )}
 
             {/* Description */}
             {product.description && (
-              <p className="text-gray-600 mb-6">{product.description}</p>
+              <p className="text-[color:var(--mr-ink-2)] mb-6 leading-relaxed">{product.description}</p>
             )}
 
             {/* Key Features */}
             {product.features && product.features.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
+                <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-steel)] mb-3 pt-3 border-t border-[color:var(--mr-line)]">
                   {t('features')}
                 </h3>
                 <ul className="space-y-2">
                   {product.features.slice(0, 5).map((feature, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <Check className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">{feature}</span>
+                      <Check className="w-4 h-4 text-[color:var(--mr-accent-ink)] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                      <span className="text-[color:var(--mr-ink-2)] text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -308,7 +311,7 @@ export default async function ProductPage({ params }: Props) {
                   href={product.datasheetUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-700 font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] font-medium transition-colors"
                 >
                   <FileText className="w-4 h-4" />
                   {t('downloadDatasheet')}
@@ -316,7 +319,7 @@ export default async function ProductPage({ params }: Props) {
               ) : (
                 <Link
                   href={buildContactHref('datasheet', product)}
-                  className="inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-700 font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] font-medium transition-colors"
                 >
                   <FileText className="w-4 h-4" />
                   {tDetail('cta.askForDatasheet')}
@@ -327,7 +330,7 @@ export default async function ProductPage({ params }: Props) {
                   href={product.productUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-700 font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.08em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] font-medium transition-colors"
                 >
                   <ExternalLink className="w-4 h-4" />
                   {t('visitOfficialSite')}
@@ -347,7 +350,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Specifications */}
         {product.specifications && product.specifications.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('specifications')}
             </h2>
             <SpecificationsTable specifications={product.specifications} />
@@ -357,7 +360,7 @@ export default async function ProductPage({ params }: Props) {
         {/* Full Description */}
         {product.fullDescription && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('description')}
             </h2>
             <div className="prose-light max-w-none">
@@ -369,14 +372,14 @@ export default async function ProductPage({ params }: Props) {
         {/* Applications */}
         {product.applications && product.applications.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('applications')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {product.applications.map((application, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-white rounded border border-gray-200 text-sm text-gray-700"
+                  className="p-4 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] text-sm text-[color:var(--mr-ink-2)]"
                 >
                   {application}
                 </div>
@@ -388,10 +391,10 @@ export default async function ProductPage({ params }: Props) {
         {/* Video */}
         {product.videoUrl && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('video')}
             </h2>
-            <div className="aspect-video rounded-lg overflow-hidden bg-gray-100">
+            <div className="aspect-video overflow-hidden bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]">
               <iframe
                 src={product.videoUrl.replace('watch?v=', 'embed/')}
                 className="w-full h-full"
@@ -406,13 +409,13 @@ export default async function ProductPage({ params }: Props) {
         {sameManufacturerProducts.length > 0 && (
           <section className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+              <h2 className="ind-h2 text-[color:var(--mr-ink)]">
                 {t('moreFrom', { manufacturer: product.manufacturer?.name })}
               </h2>
               {product.manufacturer && (
                 <Link
                   href={`/manufacturers/${product.manufacturer.slug.current}`}
-                  className="text-blue-700 hover:text-blue-800 font-semibold text-sm transition-colors"
+                  className="font-mono text-xs uppercase tracking-[0.1em] font-medium text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-ink)] transition-colors"
                 >
                   {tDetail('viewManufacturer')}
                 </Link>
@@ -427,13 +430,13 @@ export default async function ProductPage({ params }: Props) {
         )}
 
         {/* Related Products */}
-        {relatedProducts.length > 0 && (
+        {distinctRelatedProducts.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('relatedProducts')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {relatedProducts.map((relatedProduct) => (
+              {distinctRelatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct._id} product={relatedProduct} />
               ))}
             </div>
@@ -444,7 +447,7 @@ export default async function ProductPage({ params }: Props) {
         <Disclaimer
           variant="product"
           manufacturerName={product.manufacturer?.name}
-          translations={{ product: tDisclaimers('product') }}
+          translations={{ product: tDisclaimers.raw('product') }}
         />
       </div>
     </div>
@@ -489,16 +492,16 @@ function availabilityChipClass(s?: string): string {
     case 'available_on_request':
     case 'sourcing_on_request':
     case 'preorder':
-      return 'text-blue-700 bg-blue-50 border border-blue-100'
+      return 'text-[color:var(--mr-accent-ink)] border border-[color:var(--mr-accent-ink)]/40'
     case 'lead_time_required':
     case 'coming_soon':
       return 'text-amber-700 bg-amber-50 border border-amber-100'
     case 'information_only':
     case 'contact':
-      return 'text-gray-700 bg-gray-100 border border-gray-200'
+      return 'text-[color:var(--mr-ink-2)] bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]'
     case 'discontinued':
       return 'text-rose-700 bg-rose-50 border border-rose-100'
     default:
-      return 'text-gray-700 bg-gray-100 border border-gray-200'
+      return 'text-[color:var(--mr-ink-2)] bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]'
   }
 }

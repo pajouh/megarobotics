@@ -44,8 +44,9 @@ export default async function SolutionsPage({ params }: Props) {
       <section className="py-16 md:py-24 ind-section-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map((item) => (
+            {items.map((item, idx) => (
               <SolutionCard
+                index={idx + 1}
                 key={item.id}
                 title={item.title}
                 description={item.description}
