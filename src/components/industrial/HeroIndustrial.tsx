@@ -33,14 +33,13 @@ export default function HeroIndustrial({
   return (
     <section className="relative ind-hero-gradient overflow-hidden">
       <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
-      <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/5 to-transparent" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 md:pt-36 pb-20 md:pb-24">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-16 md:pb-24">
         <div className={`grid gap-10 lg:gap-16 ${image ? 'lg:grid-cols-12' : ''}`}>
-          <div className={image ? 'lg:col-span-7' : 'max-w-4xl'}>
+          <div className={`mr-rise ${image ? 'lg:col-span-7' : 'max-w-4xl'}`}>
             {eyebrow && (
               <div className="ind-eyebrow ind-eyebrow-light mb-6">
-                <span className="inline-block w-8 h-px bg-blue-400" aria-hidden="true" />
+                <span className="inline-block w-8 h-px bg-[color:var(--mr-accent)]" aria-hidden="true" />
                 {eyebrow}
               </div>
             )}
@@ -48,7 +47,7 @@ export default function HeroIndustrial({
             <h1 className="ind-h1 text-white mb-6">{title}</h1>
 
             {subtitle && (
-              <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mb-10">
+              <p className="text-lg md:text-xl text-[color:var(--mr-steel-on-dark)] leading-relaxed max-w-3xl mb-10">
                 {subtitle}
               </p>
             )}
@@ -56,13 +55,16 @@ export default function HeroIndustrial({
             {(primaryCta || secondaryCta) && (
               <div className="flex flex-col sm:flex-row gap-3">
                 {primaryCta && (
-                  <Link href={primaryCta.href} className="ind-btn-primary">
+                  <Link
+                    href={primaryCta.href}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-[15px] hover:bg-white transition-colors"
+                  >
                     {primaryCta.label}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
                 {secondaryCta && (
-                  <Link href={secondaryCta.href} className="ind-btn-secondary-dark">
+                  <Link href={secondaryCta.href} className="ind-btn-secondary-dark justify-center">
                     {secondaryCta.label}
                   </Link>
                 )}
@@ -71,8 +73,8 @@ export default function HeroIndustrial({
           </div>
 
           {image && (
-            <div className="lg:col-span-5 flex items-center">
-              <div className="relative w-full aspect-[4/3] lg:aspect-square rounded-lg overflow-hidden border border-white/10 shadow-2xl">
+            <div className="lg:col-span-5 flex items-center mr-rise mr-rise-1">
+              <div className="relative w-full aspect-[4/3] lg:aspect-square overflow-hidden border border-[color:var(--mr-line-on-dark)]">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -81,8 +83,13 @@ export default function HeroIndustrial({
                   sizes="(min-width: 1024px) 40vw, (min-width: 640px) 80vw, 100vw"
                   className="object-cover"
                 />
-                <div
-                  className="absolute inset-0 bg-gradient-to-tr from-[color:var(--ind-graphite-950)]/40 via-transparent to-transparent pointer-events-none"
+                {/* Mono corner tick — datasheet frame detail */}
+                <span
+                  className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[color:var(--mr-accent)]"
+                  aria-hidden="true"
+                />
+                <span
+                  className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[color:var(--mr-accent)]"
                   aria-hidden="true"
                 />
               </div>
@@ -91,11 +98,8 @@ export default function HeroIndustrial({
         </div>
       </div>
 
-      {/* Subtle bottom edge */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
-        aria-hidden="true"
-      />
+      {/* Accent base rule */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[color:var(--mr-accent)]" aria-hidden="true" />
     </section>
   )
 }

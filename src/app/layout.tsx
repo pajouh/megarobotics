@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Archivo, Inter, JetBrains_Mono } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { getSiteSettings } from "@/lib/sanity";
 import "./globals.css";
@@ -14,6 +14,12 @@ function extractTwitterHandle(url?: string | null): string | undefined {
 const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const archivo = Archivo({
+  variable: "--font-display",
+  subsets: ["latin"],
+  axes: ["wdth"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -122,7 +128,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-white text-gray-900 min-h-screen flex flex-col`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${archivo.variable} antialiased bg-[color:var(--mr-paper)] text-[color:var(--mr-ink)] min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         {children}

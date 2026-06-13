@@ -9,13 +9,11 @@ export default function ProjectCard({ title, subtitle, body, label }: ProjectCar
   return (
     <article className="ind-card flex flex-col h-full">
       {label && (
-        <div className="inline-flex items-center self-start px-2 py-1 rounded text-[0.65rem] font-semibold uppercase tracking-wider text-orange-700 bg-orange-50 border border-orange-100 mb-4">
-          {label}
-        </div>
+        <div className="mr-label mb-4">{label}</div>
       )}
-      <h3 className="ind-h3 text-gray-900 mb-2">{title}</h3>
-      <p className="text-sm font-medium text-gray-700 mb-3">{subtitle}</p>
-      {body && <p className="text-sm text-gray-600 leading-relaxed">{body}</p>}
+      <h3 className="ind-h3 text-[color:var(--mr-ink)] mb-2">{title}</h3>
+      <p className="text-sm font-medium text-[color:var(--mr-ink-2)] mb-3">{subtitle}</p>
+      {body && <p className="text-sm text-[color:var(--mr-ink-2)] leading-relaxed">{body}</p>}
     </article>
   )
 }

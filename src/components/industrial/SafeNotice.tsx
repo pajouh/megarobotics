@@ -18,21 +18,21 @@ export default function SafeNotice({
   return (
     <aside
       className={`${accentClass} ${
-        isDark ? 'bg-[color:var(--ind-graphite-800)]/60' : 'bg-white'
+        isDark ? 'bg-[color:var(--mr-dark-2)]/70' : 'bg-[color:var(--mr-white)]'
       } py-3 pr-4`}
       role="note"
     >
       {label && (
         <div
-          className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-wider mb-1 ${
-            isDark ? 'text-blue-300' : 'text-blue-700'
+          className={`flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.12em] mb-1 ${
+            isDark ? 'text-[color:var(--mr-accent)]' : 'text-[color:var(--mr-accent-ink)]'
           }`}
         >
           <Info className="w-3.5 h-3.5" aria-hidden="true" />
           {label}
         </div>
       )}
-      <div className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+      <div className={`text-sm leading-relaxed ${isDark ? 'text-[color:var(--mr-steel-on-dark)]' : 'text-[color:var(--mr-ink-2)]'}`}>
         {children}
       </div>
     </aside>

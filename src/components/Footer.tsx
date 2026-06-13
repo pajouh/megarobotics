@@ -139,7 +139,7 @@ export default function Footer({
         ]
 
   return (
-    <footer className="bg-[color:var(--ind-graphite-950)] text-gray-300 border-t border-white/5">
+    <footer className="bg-[color:var(--mr-dark)] text-[color:var(--mr-steel-on-dark)] border-t-2 border-[color:var(--mr-accent)]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-10">
           {/* Brand */}
@@ -156,13 +156,13 @@ export default function Footer({
                   />
                 </div>
               ) : (
-                <div className="w-9 h-9 rounded bg-[color:var(--ind-blue)] flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">M</span>
+                <div className="w-9 h-9 bg-[color:var(--mr-accent)] flex items-center justify-center">
+                  <span className="text-[color:var(--mr-dark)] font-bold text-lg">M</span>
                 </div>
               )}
               <span className="text-white font-semibold tracking-tight text-lg">{siteName}</span>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">{footerTagline}</p>
+            <p className="text-[color:var(--mr-steel-on-dark)] text-sm leading-relaxed max-w-sm">{footerTagline}</p>
             <div className="flex gap-2 mt-5">
               {displaySocials.map((social) => (
                 <a
@@ -170,7 +170,7 @@ export default function Footer({
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
+                  className="p-2 text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors"
                 >
                   <span className="sr-only">{social.name}</span>
                   <social.icon className="w-4.5 h-4.5" />
@@ -183,7 +183,7 @@ export default function Footer({
             <>
               {cmsColumns.map((column) => (
                 <div key={column._key}>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">
+                  <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">
                     {column.title}
                   </h3>
                   <ul className="space-y-2">
@@ -191,7 +191,7 @@ export default function Footer({
                       <li key={link._key}>
                         <Link
                           href={link.url}
-                          className="text-gray-300 hover:text-white transition-colors text-sm"
+                          className="text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-sm"
                         >
                           {link.label}
                         </Link>
@@ -219,14 +219,14 @@ export default function Footer({
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-white/5">
+        <div className="mt-12 pt-6 border-t border-[color:var(--mr-line-on-dark)]">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="text-gray-500 text-xs">{copyrightText}</p>
+            <p className="font-mono text-[0.7rem] text-[color:var(--mr-steel-on-dark)]">{copyrightText}</p>
             <div className="flex gap-6 text-xs">
-              <Link href="/imprint" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/imprint" className="text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors">
                 {t.links.imprint}
               </Link>
-              <Link href="/privacy" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/privacy" className="text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors">
                 {t.links.privacy}
               </Link>
             </div>
@@ -249,13 +249,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-4">{title}</h3>
+      <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">{title}</h3>
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.name}>
             <Link
               href={item.href}
-              className="text-gray-300 hover:text-white transition-colors text-sm"
+              className="text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-sm"
             >
               {item.name}
             </Link>

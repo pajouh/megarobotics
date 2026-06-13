@@ -10,17 +10,17 @@ export default function ProcessSteps({ steps, tone = 'light' }: ProcessStepsProp
       {steps.map((step, idx) => (
         <li
           key={idx}
-          className={`flex gap-4 p-5 rounded-lg ${
+          className={`flex gap-4 p-5 ${
             isDark
-              ? 'bg-[color:var(--ind-graphite-800)] border border-[color:var(--ind-graphite-700)]'
-              : 'bg-white border border-[color:var(--ind-steel-200)]'
+              ? 'bg-[color:var(--mr-dark-2)] border border-[color:var(--ind-graphite-700)]'
+              : 'bg-[color:var(--mr-white)] border border-[color:var(--mr-line)]'
           }`}
         >
           <span className="ind-step-num">
             {String(idx + 1).padStart(2, '0')}
           </span>
           <span
-            className={`text-sm leading-relaxed pt-1 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}
+            className={`text-sm leading-relaxed pt-1.5 ${isDark ? 'text-[color:var(--mr-ink-on-dark)]' : 'text-[color:var(--mr-ink-2)]'}`}
           >
             {step}
           </span>
