@@ -26,7 +26,7 @@ function HtmlEmbedIframe({ html }: { html: string }) {
       <iframe
         ref={iframeRef}
         srcDoc={html}
-        className="w-full border-0 rounded-xl"
+        className="w-full border border-[color:var(--mr-line)]"
         style={{ height: `${height}px`, minHeight: '400px' }}
         sandbox="allow-scripts allow-same-origin"
         title="Embedded content"
@@ -56,7 +56,7 @@ const portableTextComponents: PortableTextComponents = {
       if (!value?.asset?._ref) return null
       return (
         <figure className="my-8">
-          <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100">
+          <div className="relative aspect-video overflow-hidden bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]">
             <Image
               src={urlFor(value).width(1200).height(675).url()}
               alt={value.alt || ''}
@@ -65,7 +65,7 @@ const portableTextComponents: PortableTextComponents = {
             />
           </div>
           {value.caption && (
-            <figcaption className="text-center text-sm text-gray-500 mt-3">
+            <figcaption className="text-center font-mono text-xs text-[color:var(--mr-steel)] mt-3">
               {value.caption}
             </figcaption>
           )}
@@ -207,13 +207,13 @@ const portableTextComponents: PortableTextComponents = {
     statsGrid: ({ value }) => {
       if (!value?.stats?.length) return null
       return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px my-8 bg-[color:var(--mr-line)] border border-[color:var(--mr-line)]">
           {value.stats.map((stat: StatItem, index: number) => (
-            <div key={index} className="text-center p-6 bg-gray-50 rounded-xl">
-              <span className="block text-2xl md:text-3xl font-bold text-emerald-600">
+            <div key={index} className="p-6 bg-[color:var(--mr-white)]">
+              <span className="block font-mono text-2xl md:text-3xl font-semibold text-[color:var(--mr-ink)] tracking-tight">
                 {stat.value}
               </span>
-              <span className="text-sm text-gray-600 mt-2 block">{stat.label}</span>
+              <span className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-[color:var(--mr-steel)] mt-2 block">{stat.label}</span>
             </div>
           ))}
         </div>
@@ -226,13 +226,13 @@ const portableTextComponents: PortableTextComponents = {
           {value.features.map((feature: FeatureItem, index: number) => (
             <div
               key={index}
-              className="p-6 bg-gray-50 rounded-xl border-l-4 border-emerald-500"
+              className="p-6 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] border-l-2 border-l-[color:var(--mr-accent)]"
             >
-              <h4 className="font-semibold text-gray-900 mb-2">
+              <h4 className="ind-h3 text-[color:var(--mr-ink)] mb-2">
                 {feature.icon && <span className="mr-2">{feature.icon}</span>}
                 {feature.title}
               </h4>
-              <p className="text-gray-600 text-sm">{feature.description}</p>
+              <p className="text-[color:var(--mr-ink-2)] text-sm leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -241,17 +241,17 @@ const portableTextComponents: PortableTextComponents = {
     highlightBox: ({ value }) => {
       if (!value?.items?.length) return null
       return (
-        <div className="my-8 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+        <div className="my-8 p-6 bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]">
           {value.title && (
-            <h4 className="font-bold text-gray-900 mb-4 text-lg">{value.title}</h4>
+            <h4 className="ind-h3 text-[color:var(--mr-ink)] mb-4">{value.title}</h4>
           )}
           <ul className="space-y-3">
             {value.items.map((item: string, index: number) => (
               <li
                 key={index}
-                className="flex items-start gap-3 text-gray-700 border-b border-gray-200 pb-3 last:border-0"
+                className="flex items-start gap-3 text-[color:var(--mr-ink-2)] border-b border-[color:var(--mr-line)] pb-3 last:border-0"
               >
-                <span className="text-emerald-500 font-bold">✓</span>
+                <span className="text-[color:var(--mr-accent-ink)] font-bold">✓</span>
                 <span>{item}</span>
               </li>
             ))}
@@ -262,13 +262,13 @@ const portableTextComponents: PortableTextComponents = {
     quoteBox: ({ value }) => {
       if (!value?.quote) return null
       return (
-        <div className="my-8 p-8 bg-gray-900 text-white rounded-xl relative">
-          <span className="absolute top-2 left-4 text-6xl text-gray-700 font-serif">
+        <div className="my-8 p-8 bg-[color:var(--mr-dark)] text-[color:var(--mr-ink-on-dark)] relative">
+          <span className="absolute top-2 left-4 text-6xl text-[color:var(--mr-accent)] font-serif">
             &ldquo;
           </span>
           <p className="text-lg italic mb-4 pl-8">{value.quote}</p>
           {value.author && (
-            <p className="text-gray-400 text-sm pl-8">— {value.author}</p>
+            <p className="font-mono text-xs text-[color:var(--mr-steel-on-dark)] pl-8">— {value.author}</p>
           )}
         </div>
       )
@@ -276,12 +276,12 @@ const portableTextComponents: PortableTextComponents = {
     infoTable: ({ value }) => {
       if (!value?.headers?.length || !value?.rows?.length) return null
       return (
-        <div className="my-8 overflow-x-auto rounded-xl shadow-lg">
+        <div className="my-8 overflow-x-auto border border-[color:var(--mr-line)]">
           <table className="w-full text-sm">
-            <thead className="bg-gray-900 text-white">
+            <thead className="bg-[color:var(--mr-ink)] text-[color:var(--mr-paper)]">
               <tr>
                 {value.headers.map((header: string, index: number) => (
-                  <th key={index} className="px-4 py-3 text-left font-semibold">
+                  <th key={index} className="px-4 py-3 text-left font-mono text-[0.7rem] uppercase tracking-[0.1em] font-medium">
                     {header}
                   </th>
                 ))}
@@ -291,12 +291,12 @@ const portableTextComponents: PortableTextComponents = {
               {value.rows.map((row: TableRow, rowIndex: number) => (
                 <tr
                   key={rowIndex}
-                  className={`border-b border-gray-200 ${
-                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                  } hover:bg-blue-50 transition-colors`}
+                  className={`border-b border-[color:var(--mr-line)] ${
+                    rowIndex % 2 === 0 ? 'bg-[color:var(--mr-white)]' : 'bg-[color:var(--mr-paper-2)]'
+                  } transition-colors`}
                 >
                   {row.cells?.map((cell: string, cellIndex: number) => (
-                    <td key={cellIndex} className="px-4 py-3 text-gray-700">
+                    <td key={cellIndex} className="px-4 py-3 text-sm text-[color:var(--mr-ink-2)]">
                       {cell}
                     </td>
                   ))}
@@ -310,17 +310,17 @@ const portableTextComponents: PortableTextComponents = {
     ctaBox: ({ value }) => {
       if (!value?.title) return null
       return (
-        <div className="my-10 p-8 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl text-center">
-          <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
+        <div className="my-10 p-8 bg-[color:var(--mr-dark)] text-white text-center border-l-2 border-[color:var(--mr-accent)]">
+          <h3 className="ind-h2 text-white mb-4">{value.title}</h3>
           {value.description && (
-            <p className="text-emerald-50 mb-6 max-w-xl mx-auto">
+            <p className="text-[color:var(--mr-steel-on-dark)] mb-6 max-w-xl mx-auto">
               {value.description}
             </p>
           )}
           {value.buttonText && value.buttonUrl && (
             <a
               href={value.buttonUrl}
-              className="inline-block px-6 py-3 bg-white text-emerald-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
+              className="inline-block px-6 py-3 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold hover:bg-white transition-colors"
             >
               {value.buttonText}
             </a>
@@ -331,36 +331,36 @@ const portableTextComponents: PortableTextComponents = {
   },
   block: {
     h2: ({ children }) => (
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-12 mb-4">
+      <h2 className="ind-h2 text-[color:var(--mr-ink)] mt-12 mb-4">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mt-8 mb-3">
+      <h3 className="ind-h3 !text-xl md:!text-2xl text-[color:var(--mr-ink)] mt-8 mb-3">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-lg font-semibold text-gray-900 mt-6 mb-2">
+      <h4 className="ind-h3 text-[color:var(--mr-ink)] mt-6 mb-2">
         {children}
       </h4>
     ),
     normal: ({ children }) => (
-      <p className="text-gray-600 leading-relaxed mb-4">{children}</p>
+      <p className="text-[color:var(--mr-ink-2)] leading-relaxed mb-4">{children}</p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-emerald-500 pl-4 my-6 italic text-gray-500">
+      <blockquote className="border-l-2 border-[color:var(--mr-accent)] pl-4 my-6 italic text-[color:var(--mr-ink-2)]">
         {children}
       </blockquote>
     ),
   },
   marks: {
     strong: ({ children }) => (
-      <strong className="font-semibold text-gray-900">{children}</strong>
+      <strong className="font-semibold text-[color:var(--mr-ink)]">{children}</strong>
     ),
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="bg-gray-100 px-1.5 py-0.5 rounded text-emerald-600 font-mono text-sm">
+      <code className="bg-[color:var(--mr-paper-2)] px-1.5 py-0.5 text-[color:var(--mr-accent-ink)] font-mono text-sm">
         {children}
       </code>
     ),
@@ -369,7 +369,7 @@ const portableTextComponents: PortableTextComponents = {
         href={value?.href}
         target={value?.blank ? '_blank' : undefined}
         rel={value?.blank ? 'noopener noreferrer' : undefined}
-        className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2"
+        className="text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-accent)] underline underline-offset-2"
       >
         {children}
       </a>
@@ -377,12 +377,12 @@ const portableTextComponents: PortableTextComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4 ml-4">
+      <ul className="list-disc list-inside space-y-2 text-[color:var(--mr-ink-2)] mb-4 ml-4">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal list-inside space-y-2 text-gray-600 mb-4 ml-4">
+      <ol className="list-decimal list-inside space-y-2 text-[color:var(--mr-ink-2)] mb-4 ml-4">
         {children}
       </ol>
     ),
