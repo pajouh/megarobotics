@@ -182,7 +182,7 @@ export default function Footer({
           {cmsColumns ? (
             <>
               {cmsColumns.map((column) => (
-                <div key={column._key}>
+                <div key={column._key} className="min-w-0">
                   <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">
                     {column.title}
                   </h3>
@@ -191,7 +191,7 @@ export default function Footer({
                       <li key={link._key}>
                         <Link
                           href={link.url}
-                          className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug break-words"
+                          className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
                         >
                           {link.label}
                         </Link>
@@ -248,14 +248,14 @@ function FooterColumn({
   items: { name: string; href: string }[]
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">{title}</h3>
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.name}>
             <Link
               href={item.href}
-              className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug break-words"
+              className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
             >
               {item.name}
             </Link>
