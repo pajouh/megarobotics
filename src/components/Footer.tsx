@@ -191,7 +191,7 @@ export default function Footer({
                       <li key={link._key}>
                         <Link
                           href={link.url}
-                          className="text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-sm"
+                          className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug break-words"
                         >
                           {link.label}
                         </Link>
@@ -255,7 +255,7 @@ function FooterColumn({
           <li key={item.name}>
             <Link
               href={item.href}
-              className="text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-sm"
+              className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug break-words"
             >
               {item.name}
             </Link>
