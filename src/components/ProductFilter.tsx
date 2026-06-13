@@ -55,13 +55,13 @@ export default function ProductFilter(_props: ProductFilterProps) {
   return (
     <div className="space-y-4">
       <form onSubmit={handleSearch} className="relative">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[color:var(--mr-steel)]" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={tFilter('searchPlaceholder')}
-          className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-200 transition-all"
+          className="w-full pl-12 pr-4 py-3 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] text-[color:var(--mr-ink)] placeholder:text-[color:var(--mr-steel)] focus:outline-none focus:border-[color:var(--mr-accent-ink)] transition-colors"
         />
       </form>
 
@@ -69,7 +69,7 @@ export default function ProductFilter(_props: ProductFilterProps) {
         <select
           value={activeFamily}
           onChange={(e) => updateParam('family', e.target.value)}
-          className="px-4 py-2 bg-white border border-gray-200 rounded text-gray-900 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-200 transition-all"
+          className="px-4 py-2.5 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] text-[color:var(--mr-ink)] text-sm focus:outline-none focus:border-[color:var(--mr-accent-ink)] transition-colors"
         >
           <option value="">{tFilter('allFamilies')}</option>
           {productFamilyFallbacks.map((f) => {
@@ -90,7 +90,7 @@ export default function ProductFilter(_props: ProductFilterProps) {
         <select
           value={activeAvailability}
           onChange={(e) => updateParam('availability', e.target.value)}
-          className="px-4 py-2 bg-white border border-gray-200 rounded text-gray-900 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-200 transition-all"
+          className="px-4 py-2.5 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] text-[color:var(--mr-ink)] text-sm focus:outline-none focus:border-[color:var(--mr-accent-ink)] transition-colors"
         >
           <option value="">{tFilter('allAvailability')}</option>
           {AVAILABILITY_OPTIONS.map((opt) => (

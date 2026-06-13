@@ -21,12 +21,12 @@ const defaultTranslations: DisclaimerTranslations = {
 
 export default function Disclaimer({ variant, manufacturerName, className = '', translations }: DisclaimerProps) {
   const t = { ...defaultTranslations, ...translations }
-  const baseStyles = 'text-xs text-gray-400 leading-relaxed'
+  const baseStyles = 'text-xs text-[color:var(--mr-steel)] leading-relaxed'
 
   if (variant === 'product') {
     const text = (t.product || defaultTranslations.product)!.replace('{manufacturer}', manufacturerName || 'the manufacturer')
     return (
-      <aside className={`mt-16 pt-8 border-t border-gray-100 ${className}`}>
+      <aside className={`mt-16 pt-8 border-t border-[color:var(--mr-line)] ${className}`}>
         <p className={baseStyles}>{text}</p>
       </aside>
     )
@@ -34,7 +34,7 @@ export default function Disclaimer({ variant, manufacturerName, className = '', 
 
   if (variant === 'productListing') {
     return (
-      <aside className={`mt-12 pt-8 border-t border-gray-100 ${className}`}>
+      <aside className={`mt-12 pt-8 border-t border-[color:var(--mr-line)] ${className}`}>
         <p className={baseStyles}>{t.productListing}</p>
       </aside>
     )
@@ -42,7 +42,7 @@ export default function Disclaimer({ variant, manufacturerName, className = '', 
 
   if (variant === 'manufacturer') {
     return (
-      <aside className={`mt-12 pt-8 border-t border-gray-100 ${className}`}>
+      <aside className={`mt-12 pt-8 border-t border-[color:var(--mr-line)] ${className}`}>
         <p className={baseStyles}>{t.manufacturer}</p>
       </aside>
     )
@@ -50,7 +50,7 @@ export default function Disclaimer({ variant, manufacturerName, className = '', 
 
   if (variant === 'footer') {
     return (
-      <p className={`text-xs text-gray-400 ${className}`}>{t.footer}</p>
+      <p className={`text-xs text-[color:var(--mr-steel-on-dark)] ${className}`}>{t.footer}</p>
     )
   }
 

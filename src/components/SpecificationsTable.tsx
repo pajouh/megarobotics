@@ -10,18 +10,15 @@ export default function SpecificationsTable({ specifications }: SpecificationsTa
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-200">
+    <div className="border-t-2 border-[color:var(--mr-ink)] bg-[color:var(--mr-white)]">
       <table className="w-full">
         <tbody>
           {specifications.map((spec, index) => (
-            <tr
-              key={index}
-              className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}
-            >
-              <td className="px-4 py-3 text-sm font-medium text-gray-700 w-2/5">
+            <tr key={index} className="border-b border-[color:var(--mr-line)]">
+              <td className="px-4 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-[color:var(--mr-steel)] w-2/5 align-top">
                 {spec.label}
               </td>
-              <td className="px-4 py-3 text-sm text-gray-900">
+              <td className="px-4 py-2.5 text-sm font-medium text-[color:var(--mr-ink)]">
                 {spec.value}
               </td>
             </tr>
