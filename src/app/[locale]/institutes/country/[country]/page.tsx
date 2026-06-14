@@ -45,7 +45,7 @@ function countryToSlug(country: string): string {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { country: countrySlug } = await params
+  const { country: countrySlug, locale } = await params
   const country = decodeCountry(countrySlug)
 
   const metaTitle = `Robotics Research Institutes in ${country} – Universities & Labs | MegaRobotics`
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: metaTitle,
     description: metaDescription,
-    alternates: generateAlternates(`/institutes/country/${countrySlug}`),
+    alternates: generateAlternates(`/institutes/country/${countrySlug}`, locale),
     openGraph: {
       title: metaTitle,
       description: metaDescription,

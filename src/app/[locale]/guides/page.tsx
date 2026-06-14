@@ -11,7 +11,14 @@ const guidesTitle = "Buyers' Guides | MegaRobotics"
 const guidesDescription =
   'Practical, evidence-based buyers guides for industrial robotics and automation purchasing decisions — robot platforms, end effectors, sensors, safety systems, and full robotic cells.'
 
-export const metadata: Metadata = pageSeo({ title: guidesTitle, description: guidesDescription, path: '/guides' })
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  return pageSeo({ title: guidesTitle, description: guidesDescription, path: '/guides', locale })
+}
 
 export const revalidate = 3600
 

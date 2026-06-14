@@ -37,7 +37,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
+  const { slug, locale } = await params
   const institute = await getInstitute(slug)
 
   if (!institute) {
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: metaTitle,
     description: metaDescription,
     keywords: institute.seo?.keywords || institute.focusAreas,
-    alternates: generateAlternates(`/institutes/${slug}`),
+    alternates: generateAlternates(`/institutes/${slug}`, locale),
     openGraph: {
       title: metaTitle,
       description: metaDescription,

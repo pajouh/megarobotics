@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? 'Datenschutzerklärung der MEGAFORCE GmbH (Marke MegaRobotics) — wie wir personenbezogene Daten verarbeiten und schützen.'
       : 'Privacy policy of MEGAFORCE GmbH (brand MegaRobotics) — how we collect, process and protect personal data.')
 
-  return pageSeo({ title, description, path: '/privacy' })
+  return pageSeo({ title, description, path: '/privacy', locale })
 }
 
 export const revalidate = 3600

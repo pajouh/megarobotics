@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Product Not Found' }
   }
 
-  const alternates = generateAlternates(`/products/${slug}`)
+  const alternates = generateAlternates(`/products/${slug}`, locale)
   const metaTitle =
     product.seo?.metaTitle || `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`
   const metaDescription = product.seo?.metaDescription || product.description || product.tagline

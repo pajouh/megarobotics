@@ -7,21 +7,28 @@ export const revalidate = 3600
 const baseUrl = 'https://www.megarobotics.de'
 const locales = ['en', 'de']
 
+// next-intl runs with localePrefix: 'as-needed', so the default locale (en) is
+// served WITHOUT a prefix and `/en/...` 307-redirects to the unprefixed path.
+// The sitemap must therefore list the canonical (unprefixed) EN URL — never the
+// redirecting `/en/...` form — and annotate hreflang with the same canonical URLs.
+function localeUrl(locale: string, path: string): string {
+  return locale === 'en' ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`
+}
+
 function localizedEntries(
   path: string,
   options: { lastModified?: Date; changeFrequency?: MetadataRoute.Sitemap[number]['changeFrequency']; priority?: number }
 ): MetadataRoute.Sitemap {
+  const languages = Object.fromEntries([
+    ...locales.map((l) => [l, localeUrl(l, path)]),
+    ['x-default', localeUrl('en', path)],
+  ])
   return locales.map((locale) => ({
-    url: `${baseUrl}/${locale}${path}`,
+    url: localeUrl(locale, path),
     lastModified: options.lastModified || new Date(),
     changeFrequency: options.changeFrequency,
     priority: options.priority,
-    alternates: {
-      languages: Object.fromEntries([
-        ...locales.map((l) => [l, `${baseUrl}/${l}${path}`]),
-        ['x-default', `${baseUrl}/en${path}`],
-      ]),
-    },
+    alternates: { languages },
   }))
 }
 

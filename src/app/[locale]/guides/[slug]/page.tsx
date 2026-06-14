@@ -12,11 +12,11 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import { generateGuideSchema, generateBreadcrumbSchema, generateAlternates } from '@/lib/structured-data'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
+  const { slug, locale } = await params
   const guide = await getBuyersGuide(slug)
 
   if (!guide) {
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? [urlFor(guide.mainImage.image).width(1200).height(630).url()]
         : undefined,
     },
-    alternates: generateAlternates(`/guides/${slug}`),
+    alternates: generateAlternates(`/guides/${slug}`, locale),
   }
 }
 

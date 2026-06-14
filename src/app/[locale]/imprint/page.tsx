@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? 'Impressum und rechtliche Informationen der MEGAFORCE GmbH, Marke MegaRobotics, Wacholderweg 8, 41564 Kaarst.'
       : 'Imprint and legal information for MEGAFORCE GmbH, brand MegaRobotics, Wacholderweg 8, 41564 Kaarst, Germany.')
 
-  return pageSeo({ title, description, path: '/imprint' })
+  return pageSeo({ title, description, path: '/imprint', locale })
 }
 
 export const revalidate = 3600

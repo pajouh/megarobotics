@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? 'Allgemeine Geschäftsbedingungen der MEGAFORCE GmbH (MegaRobotics) für den Verkauf von Produkten sowie die Erbringung von Werk- und Dienstleistungen.'
       : 'General Terms and Conditions (AGB) of MEGAFORCE GmbH (MegaRobotics) for the sale of products and provision of services. German text is authoritative.'
   return {
-    ...pageSeo({ title: `${AGB_TITLE} | MegaRobotics`, description, path: '/agb' }),
+    ...pageSeo({ title: `${AGB_TITLE} | MegaRobotics`, description, path: '/agb', locale }),
     robots: { index: true, follow: true },
   }
 }

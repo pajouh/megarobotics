@@ -16,7 +16,7 @@ interface Item {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.catalog.robotDistributor.meta' })
-  return pageSeo({ title: t('title'), description: t('description'), path: '/robot-distributor' })
+  return pageSeo({ title: t('title'), description: t('description'), path: '/robot-distributor', locale })
 }
 
 export const revalidate = 3600

@@ -6,11 +6,12 @@ import FeaturedArticle from '@/components/FeaturedArticle'
 import CategoryFilter from '@/components/CategoryFilter'
 import { pageSeo } from '@/lib/page-seo'
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
   const title = 'Insights | MegaRobotics'
   const description =
     'Industrial robotics and automation insights from MegaRobotics — robot platform evaluations, integration notes, application studies, and market analysis for European industrial customers.'
-  return pageSeo({ title, description, path: '/articles' })
+  return pageSeo({ title, description, path: '/articles', locale })
 }
 
 export const revalidate = 60

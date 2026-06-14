@@ -9,7 +9,7 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.company.meta' })
-  return pageSeo({ title: t('title'), description: t('description'), path: '/about' })
+  return pageSeo({ title: t('title'), description: t('description'), path: '/about', locale })
 }
 
 export const revalidate = 3600

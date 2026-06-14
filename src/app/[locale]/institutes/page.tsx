@@ -9,7 +9,14 @@ const title = 'Robotics Research Institutes | MegaRobotics'
 const description =
   'Verified directory of robotics research labs, centers and institutes across DACH and worldwide — humanoids, legged robotics, autonomous systems, embodied AI and applied automation research.'
 
-export const metadata: Metadata = pageSeo({ title, description, path: '/institutes' })
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  return pageSeo({ title, description, path: '/institutes', locale })
+}
 
 export const revalidate = 60
 

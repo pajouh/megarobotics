@@ -13,7 +13,7 @@ type Props = { params: Promise<{ locale: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.robotTechnologies.meta' })
-  return pageSeo({ title: t('title'), description: t('description'), path: '/robot-technologies' })
+  return pageSeo({ title: t('title'), description: t('description'), path: '/robot-technologies', locale })
 }
 
 export const revalidate = 60

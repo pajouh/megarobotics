@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = settings?.contactMetaTitle || t('metaTitle')
   const description = settings?.contactMetaDescription || t('metaDescription')
 
-  return pageSeo({ title, description, path: '/contact' })
+  return pageSeo({ title, description, path: '/contact', locale })
 }
 
 export const revalidate = 3600

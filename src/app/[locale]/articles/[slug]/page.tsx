@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: metaDescription,
       images: imageUrl ? [imageUrl] : undefined,
     },
-    alternates: generateAlternates(`/articles/${slug}`),
+    alternates: generateAlternates(`/articles/${slug}`, locale),
   }
 }
 

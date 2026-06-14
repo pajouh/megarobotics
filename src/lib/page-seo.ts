@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { generateAlternates } from './structured-data'
+import { generateAlternates, localizedUrl } from './structured-data'
 
 interface PageSeoArgs {
   /** Title used as-is (not run through the root layout's "%s | MegaRobotics" template). */
@@ -8,6 +8,12 @@ interface PageSeoArgs {
   description: string
   /** Site-relative path with no leading domain, no trailing slash. e.g. '/solutions' */
   path: string
+  /**
+   * Current page locale ('en' | 'de'). Drives the self-referencing canonical
+   * and og:locale. Defaults to 'en'. Always pass this from generateMetadata so
+   * German pages are self-canonical instead of pointing at the English URL.
+   */
+  locale?: string
   /** Optional override of the OG image. Default = '/og-image.png'. */
   ogImage?: string
   /** Optional explicit OG/twitter image dimensions when overriding. */
@@ -33,22 +39,25 @@ export function pageSeo(args: PageSeoArgs): Metadata {
     title,
     description,
     path,
+    locale = 'en',
     ogImage = '/og-image.png',
     ogImageWidth = 1200,
     ogImageHeight = 630,
     ogType = 'website',
   } = args
 
-  const url = `https://www.megarobotics.de${path}`
+  const url = localizedUrl(path, locale)
 
   return {
     title: { absolute: title },
     description,
-    alternates: generateAlternates(path),
+    alternates: generateAlternates(path, locale),
     openGraph: {
       type: ogType,
       url,
       siteName: 'MegaRobotics',
+      locale: locale === 'de' ? 'de_DE' : 'en_US',
+      alternateLocale: locale === 'de' ? ['en_US'] : ['de_DE'],
       title,
       description,
       images: [

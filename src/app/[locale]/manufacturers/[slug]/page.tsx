@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: metaTitle,
     description: metaDescription,
     keywords: manufacturer.seo?.keywords,
-    alternates: generateAlternates(`/manufacturers/${slug}`),
+    alternates: generateAlternates(`/manufacturers/${slug}`, locale),
     openGraph: {
       title: metaTitle,
       description: metaDescription,

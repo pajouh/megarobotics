@@ -209,16 +209,31 @@ export function generateBreadcrumbSchema(items: { name: string; href?: string; u
   }
 }
 
-// Helper to generate hreflang alternates for Next.js metadata
-export function generateAlternates(path: string, locales: string[] = ['en', 'de']) {
+// Helper to generate hreflang alternates for Next.js metadata.
+//
+// The site runs next-intl with `localePrefix: 'as-needed'`, so the default
+// locale (en) is served WITHOUT a prefix and `/en/...` 307-redirects to the
+// unprefixed path. Therefore:
+//  - the EN canonical/hreflang URL must be unprefixed (`/about`, not `/en/about`)
+//  - the canonical must reflect the CURRENT locale (a `/de/...` page must be
+//    self-canonical, not point at the English page)
+export function localizedUrl(path: string, locale: string): string {
+  return locale === 'en' ? `${baseUrl}${path}` : `${baseUrl}/${locale}${path}`
+}
+
+export function generateAlternates(
+  path: string,
+  locale: string = 'en',
+  locales: string[] = ['en', 'de'],
+) {
   const languages: Record<string, string> = {}
-  locales.forEach(locale => {
-    languages[locale] = `${baseUrl}/${locale}${path}`
+  locales.forEach((l) => {
+    languages[l] = localizedUrl(path, l)
   })
-  languages['x-default'] = `${baseUrl}/en${path}`
+  languages['x-default'] = localizedUrl(path, 'en')
 
   return {
-    canonical: `${baseUrl}${path}`,
+    canonical: localizedUrl(path, locale),
     languages,
   }
 }

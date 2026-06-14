@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!content) return {}
   const title = content.meta?.title ?? `${content.title} | MegaRobotics`
   const description = content.meta?.description ?? content.shortDescription ?? ''
-  return pageSeo({ title, description, path: `/products/categories/${slug}` })
+  return pageSeo({ title, description, path: `/products/categories/${slug}`, locale })
 }
 
 export const revalidate = 3600

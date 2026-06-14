@@ -10,7 +10,10 @@ const title = 'Manufacturer Directory | MegaRobotics'
 const description =
   'Directory of robotics and automation manufacturers MegaRobotics distributes, sources or evaluates for European industrial, research and service applications.'
 
-export const metadata: Metadata = pageSeo({ title, description, path: '/manufacturers' })
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params
+  return pageSeo({ title, description, path: '/manufacturers', locale })
+}
 
 export const revalidate = 60
 

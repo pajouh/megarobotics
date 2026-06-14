@@ -27,7 +27,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'industrial.catalog.meta' })
-  return pageSeo({ title: t('title'), description: t('description'), path: '/products' })
+  return pageSeo({ title: t('title'), description: t('description'), path: '/products', locale })
 }
 
 export const revalidate = 60
