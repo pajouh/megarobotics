@@ -34,6 +34,12 @@ export default async function RobotTechnologiesPage({ params }: Props) {
       }))
     : (t.raw('items') as RobotTechnologyItem[])
 
+  // Prefer the CMS image when set; otherwise fall back to the bundled local image.
+  const cmsImages: Record<string, { src: string; alt: string }> = {}
+  for (const s of sanity) {
+    if (s.imageUrl) cmsImages[s.id] = { src: s.imageUrl, alt: s.title }
+  }
+
   return (
     <div className="min-h-screen">
       <HeroIndustrial eyebrow={t('eyebrow')} title={t('title')} subtitle={t('intro')} />
@@ -51,7 +57,7 @@ export default async function RobotTechnologiesPage({ params }: Props) {
                 criteria={item.criteria}
                 applicationsLabel={t('labelApplications')}
                 criteriaLabel={t('labelCriteria')}
-                image={robotTechnologyImages[item.id]}
+                image={cmsImages[item.id] ?? robotTechnologyImages[item.id]}
               />
             ))}
           </div>

@@ -672,6 +672,7 @@ export interface RobotTechnologyDoc {
   shortDescription?: string
   applications: string[]
   selectionCriteria: string[]
+  imageUrl?: string
 }
 
 export interface ProjectStudyDoc {
@@ -720,7 +721,8 @@ export async function getRobotTechnologies(
       "title": ${localizedField('title', locale)},
       "shortDescription": ${localizedField('excerpt', locale)},
       "applications": coalesce(${localizedArrayField('applications', locale)}, []),
-      "selectionCriteria": coalesce(${localizedArrayField('selectionCriteria', locale)}, [])
+      "selectionCriteria": coalesce(${localizedArrayField('selectionCriteria', locale)}, []),
+      "imageUrl": image.asset->url
     }`,
   )
 }
