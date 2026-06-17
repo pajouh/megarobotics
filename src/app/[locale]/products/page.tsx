@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation'
 import {
   getProductsWithFilters,
   getFeaturedProducts,
+  getProductFamilies,
   type Locale,
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
@@ -19,6 +20,8 @@ interface FamilyContent {
   title: string
   shortDescription?: string
 }
+
+type FamilyCard = { slug: string; title: string; shortDescription?: string }
 
 export async function generateMetadata({
   params,
@@ -47,16 +50,31 @@ export default async function ProductsPage({ params, searchParams }: Props) {
   const tDisclaimers = await getTranslations('disclaimers')
   const tCatalog = await getTranslations('industrial.catalog')
 
-  const [products, featuredProducts] = await Promise.all([
+  const [products, featuredProducts, sanityFamilies] = await Promise.all([
     getProductsWithFilters(
       { search: searchQuery, familySlug, availabilityStatus },
       locale as Locale,
     ),
     getFeaturedProducts(4, locale as Locale),
+    getProductFamilies(locale as Locale),
   ])
 
   const showFeatured = !hasAnyFilter && featuredProducts.length > 0
   const families = tCatalog.raw('families') as Record<string, FamilyContent>
+
+  // Family grid is CMS-driven: when Sanity has productFamily docs, the list, order and
+  // text come from Studio (per-field), falling back to the bundled list + i18n JSON for
+  // any field an editor hasn't filled in. If Sanity returns nothing, use the static list.
+  const familyCards: FamilyCard[] = sanityFamilies.length
+    ? sanityFamilies.map((f) => ({
+        slug: f.slug.current,
+        title: f.title || families[f.slug.current]?.title || f.slug.current,
+        shortDescription: f.shortDescription || families[f.slug.current]?.shortDescription,
+      }))
+    : productFamilyFallbacks.flatMap((f) => {
+        const c = families[f.slug]
+        return c ? [{ slug: f.slug, title: c.title, shortDescription: c.shortDescription }] : []
+      })
 
   return (
     <div className="min-h-screen">
@@ -96,27 +114,23 @@ export default async function ProductsPage({ params, searchParams }: Props) {
             subtitle={tCatalog('familiesSection.subtitle')}
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {productFamilyFallbacks.map((f) => {
-              const c = families[f.slug]
-              if (!c) return null
-              return (
-                <Link
-                  key={f.slug}
-                  href={`/products/categories/${f.slug}`}
-                  className="ind-card group block h-full"
-                >
-                  <div className="ind-h3 text-[color:var(--mr-ink)] mb-2 group-hover:text-[color:var(--mr-accent-ink)] transition-colors">
-                    {c.title}
-                  </div>
-                  {c.shortDescription && (
-                    <p className="text-sm text-[color:var(--mr-ink-2)] leading-relaxed">{c.shortDescription}</p>
-                  )}
-                  <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-[0.7rem] uppercase tracking-[0.1em] font-medium text-[color:var(--mr-accent-ink)]">
-                    Explore <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </Link>
-              )
-            })}
+            {familyCards.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/products/categories/${c.slug}`}
+                className="ind-card group block h-full"
+              >
+                <div className="ind-h3 text-[color:var(--mr-ink)] mb-2 group-hover:text-[color:var(--mr-accent-ink)] transition-colors">
+                  {c.title}
+                </div>
+                {c.shortDescription && (
+                  <p className="text-sm text-[color:var(--mr-ink-2)] leading-relaxed">{c.shortDescription}</p>
+                )}
+                <div className="mt-4 inline-flex items-center gap-1.5 font-mono text-[0.7rem] uppercase tracking-[0.1em] font-medium text-[color:var(--mr-accent-ink)]">
+                  Explore <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

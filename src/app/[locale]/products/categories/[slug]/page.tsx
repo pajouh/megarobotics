@@ -11,6 +11,8 @@ import ProductCard from '@/components/ProductCard'
 import { getProductFamily, getProductsByFamily, type Locale } from '@/lib/sanity'
 import { getFamilyFallback } from '@/data/product-families'
 import { pageSeo } from '@/lib/page-seo'
+import PageBody from '@/components/PageBody'
+import { PortableTextBlock } from '@portabletext/types'
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>
@@ -51,25 +53,37 @@ export default async function ProductCategoryPage({ params }: Props) {
   const families = tCatalog.raw('families') as Record<string, FamilyContent> | undefined
   const content = families?.[slug]
 
-  // Unknown slug — neither hardcoded fallback nor JSON content
-  if (!fallback && !content) {
+  // Look up the Sanity family doc first — it drives the page content (per-field), the
+  // related products and the reference ecosystems.
+  const sanityFamily = await getProductFamily(slug, locale as Locale)
+
+  // Unknown slug — no Sanity doc, no hardcoded fallback, no JSON content
+  if (!fallback && !content && !sanityFamily) {
     notFound()
   }
 
-  // Look up Sanity family doc to fetch related products + ecosystems
-  const sanityFamily = await getProductFamily(slug, locale as Locale)
   const relatedProducts = sanityFamily
     ? await getProductsByFamily(sanityFamily._id, 8, locale as Locale)
     : []
 
   const ecosystems = sanityFamily?.referenceEcosystems ?? []
 
-  const title = content?.title ?? slug
-  const intro = content?.intro ?? content?.shortDescription ?? ''
-  const body = content?.body ?? []
-  const subcategories = content?.subcategories ?? []
-  const applications = content?.applications ?? []
-  const selectionCriteria = content?.selectionCriteria ?? []
+  // Per-field CMS preference: any field filled in Studio overrides the i18n JSON fallback,
+  // so the page is genuinely Studio-driven without losing the existing bundled content.
+  const title = sanityFamily?.title || content?.title || slug
+  const intro = sanityFamily?.shortDescription || content?.intro || content?.shortDescription || ''
+  const sanityBody =
+    sanityFamily && Array.isArray(sanityFamily.body) ? (sanityFamily.body as PortableTextBlock[]) : []
+  const jsonBody = content?.body ?? []
+  const subcategories = sanityFamily?.subcategories?.length
+    ? sanityFamily.subcategories
+    : content?.subcategories ?? []
+  const applications = sanityFamily?.applications?.length
+    ? sanityFamily.applications
+    : content?.applications ?? []
+  const selectionCriteria = sanityFamily?.selectionCriteria?.length
+    ? sanityFamily.selectionCriteria
+    : content?.selectionCriteria ?? []
 
   return (
     <div className="min-h-screen">
@@ -88,15 +102,19 @@ export default async function ProductCategoryPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Body */}
-      {body.length > 0 && (
+      {/* Body — Sanity rich text when present, otherwise the i18n JSON paragraphs */}
+      {(sanityBody.length > 0 || jsonBody.length > 0) && (
         <section className="ind-section-light pt-8 pb-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-4">
-            {body.map((p, idx) => (
-              <p key={idx} className="text-base md:text-lg text-gray-700 leading-relaxed">
-                {p}
-              </p>
-            ))}
+            {sanityBody.length > 0 ? (
+              <PageBody body={sanityBody} />
+            ) : (
+              jsonBody.map((p, idx) => (
+                <p key={idx} className="text-base md:text-lg text-gray-700 leading-relaxed">
+                  {p}
+                </p>
+              ))
+            )}
           </div>
         </section>
       )}

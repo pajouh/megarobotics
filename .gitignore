@@ -48,3 +48,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# one-off migration backup (content snapshot — do not commit)
+.sanity-backup-dotted-ids.json
+
+# local source images already uploaded to Sanity
+palletizer-images/
