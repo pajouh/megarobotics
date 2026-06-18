@@ -1,8 +1,16 @@
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
+import { getAllProductFamilySlugs } from '@/lib/sanity'
+import { locales, defaultLocale } from '@/i18n/config'
 
 // Secret token to protect the endpoint
 const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET || 'megarobotics-revalidate-2024'
+
+// Expand a default-locale path into the concrete URL for every locale.
+// localePrefix is 'as-needed': the default locale has no prefix, others get /<locale>.
+function localizedPaths(path: string): string[] {
+  return locales.map((locale) => (locale === defaultLocale ? path : `/${locale}${path}`))
+}
 
 // Sanity webhook payload types
 interface SanityWebhookPayload {
@@ -121,9 +129,27 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidated.push('/products (layout)')
 
         if (slug?.current) {
-          revalidatePath(`/products/${slug.current}`, 'page')
-          revalidatePath(`/products/${slug.current}`)
-          revalidated.push(`/products/${slug.current}`)
+          for (const p of localizedPaths(`/products/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidatePath(p)
+            revalidated.push(p)
+          }
+        }
+
+        // A product carries its productFamily reference, so changing/assigning a
+        // product affects the family category page (/products/categories/<slug>).
+        // The webhook payload does not include the family, and a product can be
+        // moved between families, so refresh every family category page in every
+        // locale. Without this, assigning a product to a family in Studio never
+        // updates the cached family page.
+        {
+          const familySlugs = await getAllProductFamilySlugs()
+          for (const { slug: familySlug } of familySlugs) {
+            for (const p of localizedPaths(`/products/categories/${familySlug}`)) {
+              revalidatePath(p, 'page')
+              revalidated.push(p)
+            }
+          }
         }
 
         // Also revalidate manufacturer pages as they show products
@@ -161,8 +187,10 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidated.push('/products (layout)')
 
         if (slug?.current) {
-          revalidatePath(`/products/categories/${slug.current}`, 'page')
-          revalidated.push(`/products/categories/${slug.current}`)
+          for (const p of localizedPaths(`/products/categories/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
         }
         break
 

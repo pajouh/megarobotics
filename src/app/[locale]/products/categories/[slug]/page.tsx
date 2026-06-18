@@ -40,7 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageSeo({ title, description, path: `/products/categories/${slug}`, locale })
 }
 
-export const revalidate = 3600
+// Short ISR window so newly assigned products surface quickly even if the Sanity
+// publish webhook isn't firing. On-publish revalidation (api/revalidate) makes it
+// instant when configured; this bounds worst-case staleness to ~1 min otherwise.
+export const revalidate = 60
 
 export default async function ProductCategoryPage({ params }: Props) {
   const { locale, slug } = await params
