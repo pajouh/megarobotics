@@ -854,6 +854,38 @@ export async function getSiteSettings(locale: Locale = defaultLocale) {
   )
 }
 
+// Get the homepage hero (singleton)
+export interface HomeHeroDoc {
+  eyebrow?: string
+  title?: string
+  subtitle?: string
+  primaryCtaLabel?: string
+  primaryCtaHref?: string
+  secondaryCtaLabel?: string
+  secondaryCtaHref?: string
+  imageUrl?: string
+  imageAlt?: string
+}
+
+export async function getHomeHero(
+  locale: Locale = defaultLocale,
+): Promise<HomeHeroDoc | null> {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "homeHero"][0] {
+      "eyebrow": ${localizedField('eyebrow', locale)},
+      "title": ${localizedField('title', locale)},
+      "subtitle": ${localizedField('subtitle', locale)},
+      "primaryCtaLabel": ${localizedField('primaryCtaLabel', locale)},
+      primaryCtaHref,
+      "secondaryCtaLabel": ${localizedField('secondaryCtaLabel', locale)},
+      secondaryCtaHref,
+      "imageUrl": image.asset->url,
+      "imageAlt": ${localizedField('imageAlt', locale)}
+    }`
+  )
+}
+
 // Get a page by slug
 export async function getPage(slug: string, locale: Locale = defaultLocale) {
   if (!client) return null

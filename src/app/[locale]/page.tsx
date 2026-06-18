@@ -11,7 +11,7 @@ import CTASection from '@/components/industrial/CTASection'
 import ProductCard from '@/components/ProductCard'
 import ArticleCard from '@/components/ArticleCard'
 import StructuredData from '@/components/StructuredData'
-import { getFeaturedProducts, getArticles, type Locale } from '@/lib/sanity'
+import { getFeaturedProducts, getArticles, getHomeHero, type Locale } from '@/lib/sanity'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/structured-data'
 import { pageSeo } from '@/lib/page-seo'
 import { heroImage } from '@/lib/industrial-images'
@@ -42,10 +42,27 @@ export default async function HomePage({ params }: Props) {
   const projectItems = t.raw('projects.items') as HomeProjectItem[]
 
   // CMS-driven content surfaced from Sanity (Studio edits land here)
-  const [featuredProducts, latestArticles] = await Promise.all([
+  const [featuredProducts, latestArticles, homeHero] = await Promise.all([
     getFeaturedProducts(4, locale as Locale),
     getArticles(3, locale as Locale),
+    getHomeHero(locale as Locale),
   ])
+
+  // Hero content: prefer Studio-managed values, fall back to bundled translations/image.
+  const heroEyebrow = homeHero?.eyebrow ?? t('hero.eyebrow')
+  const heroTitle = homeHero?.title ?? t('hero.title')
+  const heroSubtitle = homeHero?.subtitle ?? t('hero.subtitle')
+  const heroPrimaryCta = {
+    label: homeHero?.primaryCtaLabel ?? t('hero.primaryCta'),
+    href: homeHero?.primaryCtaHref || '/contact',
+  }
+  const heroSecondaryCta = {
+    label: homeHero?.secondaryCtaLabel ?? t('hero.secondaryCta'),
+    href: homeHero?.secondaryCtaHref || '/solutions',
+  }
+  const heroBannerImage = homeHero?.imageUrl
+    ? { src: homeHero.imageUrl, alt: homeHero.imageAlt ?? heroTitle }
+    : heroImage
 
   const structuredData = [generateOrganizationSchema(), generateWebSiteSchema()]
 
@@ -53,14 +70,14 @@ export default async function HomePage({ params }: Props) {
     <div className="min-h-screen">
       <StructuredData data={structuredData} />
 
-      {/* SECTION 1 — Hero */}
+      {/* SECTION 1 — Hero (Studio-managed via "homeHero", falls back to translations) */}
       <HeroIndustrial
-        eyebrow={t('hero.eyebrow')}
-        title={t('hero.title')}
-        subtitle={t('hero.subtitle')}
-        primaryCta={{ label: t('hero.primaryCta'), href: '/contact' }}
-        secondaryCta={{ label: t('hero.secondaryCta'), href: '/solutions' }}
-        image={{ ...heroImage, priority: true }}
+        eyebrow={heroEyebrow}
+        title={heroTitle}
+        subtitle={heroSubtitle}
+        primaryCta={heroPrimaryCta}
+        secondaryCta={heroSecondaryCta}
+        image={{ ...heroBannerImage, priority: true }}
       />
 
       {/* SECTION 2 — What MegaRobotics Does */}

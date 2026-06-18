@@ -9,6 +9,7 @@ import buyersGuide from './buyersGuide'
 import siteSettings from './siteSettings'
 import page from './page'
 import heroBanner from './heroBanner'
+import homeHero from './homeHero'
 import institute from './institute'
 import solution from './solution'
 import industry from './industry'
@@ -28,6 +29,7 @@ export const schemaTypes = [
   page,
   siteSettings,
   heroBanner,
+  homeHero,
   institute,
   solution,
   industry,
