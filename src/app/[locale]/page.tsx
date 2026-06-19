@@ -64,6 +64,18 @@ export default async function HomePage({ params }: Props) {
     ? { src: homeHero.imageUrl, alt: homeHero.imageAlt ?? heroTitle }
     : heroImage
 
+  // When the hero has carousel slides in Studio, render the carousel (image+video)
+  // instead of the single banner image; otherwise the single image is used.
+  const heroMedia = homeHero?.slides?.length
+    ? {
+        slides: homeHero.slides,
+        aspectRatio: homeHero.aspectRatio,
+        width: homeHero.width,
+        autoplay: homeHero.autoplay,
+        interval: homeHero.autoplayInterval,
+      }
+    : undefined
+
   const structuredData = [generateOrganizationSchema(), generateWebSiteSchema()]
 
   return (
@@ -78,6 +90,7 @@ export default async function HomePage({ params }: Props) {
         primaryCta={heroPrimaryCta}
         secondaryCta={heroSecondaryCta}
         image={{ ...heroBannerImage, priority: true }}
+        media={heroMedia}
       />
 
       {/* SECTION 2 — What MegaRobotics Does */}

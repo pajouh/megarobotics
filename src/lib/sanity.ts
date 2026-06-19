@@ -855,6 +855,14 @@ export async function getSiteSettings(locale: Locale = defaultLocale) {
 }
 
 // Get the homepage hero (singleton)
+export interface HeroSlide {
+  mediaType: 'image' | 'videoFile' | 'videoUrl'
+  imageUrl?: string
+  videoFileUrl?: string
+  externalUrl?: string
+  alt?: string
+}
+
 export interface HomeHeroDoc {
   eyebrow?: string
   title?: string
@@ -865,6 +873,11 @@ export interface HomeHeroDoc {
   secondaryCtaHref?: string
   imageUrl?: string
   imageAlt?: string
+  slides?: HeroSlide[]
+  aspectRatio?: 'square' | '4:3' | '16:9' | 'portrait'
+  width?: 'narrow' | 'medium' | 'wide'
+  autoplay?: boolean
+  autoplayInterval?: number
 }
 
 export async function getHomeHero(
@@ -881,7 +894,18 @@ export async function getHomeHero(
       "secondaryCtaLabel": ${localizedField('secondaryCtaLabel', locale)},
       secondaryCtaHref,
       "imageUrl": image.asset->url,
-      "imageAlt": ${localizedField('imageAlt', locale)}
+      "imageAlt": ${localizedField('imageAlt', locale)},
+      "slides": slides[]{
+        mediaType,
+        "imageUrl": image.asset->url,
+        "videoFileUrl": video.asset->url,
+        "externalUrl": videoUrl,
+        "alt": ${localizedField('alt', locale)}
+      },
+      "aspectRatio": mediaAspectRatio,
+      "width": mediaWidth,
+      autoplay,
+      autoplayInterval
     }`
   )
 }
