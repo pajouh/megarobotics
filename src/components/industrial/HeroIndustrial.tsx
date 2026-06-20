@@ -21,6 +21,7 @@ interface HeroMedia {
   width?: 'narrow' | 'medium' | 'wide'
   autoplay?: boolean
   interval?: number
+  learnMoreLabel?: string
 }
 
 interface HeroIndustrialProps {
@@ -102,6 +103,7 @@ export default function HeroIndustrial({
                 aspectRatio={media!.aspectRatio}
                 autoplay={media!.autoplay}
                 interval={media!.interval}
+                learnMoreLabel={media!.learnMoreLabel}
                 priority
               />
             </div>

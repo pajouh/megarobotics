@@ -123,6 +123,16 @@ export default defineType({
             localizedString('alt', 'Alt / description', {
               description: 'Accessible description of this slide.',
             }),
+            defineField({
+              name: 'link',
+              title: 'Link (optional)',
+              type: 'string',
+              description:
+                'Optional. Internal path (e.g. /products/cobot-palletizer-am-40-g) or full URL (https://…). Shows a "Learn more" button on the slide.',
+            }),
+            localizedString('linkLabel', 'Link button label (optional)', {
+              description: 'Optional override for the button text. Defaults to "Learn more".',
+            }),
           ],
           preview: {
             select: { mediaType: 'mediaType', alt: 'alt.en', media: 'image' },

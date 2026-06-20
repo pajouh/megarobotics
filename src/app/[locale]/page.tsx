@@ -66,6 +66,7 @@ export default async function HomePage({ params }: Props) {
 
   // When the hero has carousel slides in Studio, render the carousel (image+video)
   // instead of the single banner image; otherwise the single image is used.
+  const tCommon = await getTranslations('common')
   const heroMedia = homeHero?.slides?.length
     ? {
         slides: homeHero.slides,
@@ -73,6 +74,7 @@ export default async function HomePage({ params }: Props) {
         width: homeHero.width,
         autoplay: homeHero.autoplay,
         interval: homeHero.autoplayInterval,
+        learnMoreLabel: tCommon('learnMore'),
       }
     : undefined
 

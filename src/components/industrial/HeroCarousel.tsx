@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
+import { Link } from '@/i18n/navigation'
 import type { HeroSlide } from '@/lib/sanity'
 
 type AspectRatio = 'square' | '4:3' | '16:9' | 'portrait'
@@ -13,6 +14,7 @@ interface HeroCarouselProps {
   autoplay?: boolean
   interval?: number
   priority?: boolean
+  learnMoreLabel?: string
 }
 
 const ASPECT_CLASS: Record<AspectRatio, string> = {
@@ -22,18 +24,25 @@ const ASPECT_CLASS: Record<AspectRatio, string> = {
   portrait: 'aspect-[3/4]',
 }
 
-type Resolved =
-  | { kind: 'image'; src: string; alt: string }
-  | { kind: 'video'; src: string; alt: string }
-  | { kind: 'embed'; src: string; alt: string }
+type Resolved = {
+  kind: 'image' | 'video' | 'embed'
+  src: string
+  alt: string
+  link?: string
+  linkLabel?: string
+}
 
 // Turn a Sanity slide into a renderable shape. videoUrl is sniffed: YouTube/Vimeo
 // become embeds; a direct media file is played inline; anything else is iframed.
 function resolveSlide(slide: HeroSlide): Resolved | null {
-  const alt = slide.alt ?? ''
-  if (slide.mediaType === 'image' && slide.imageUrl) return { kind: 'image', src: slide.imageUrl, alt }
+  const base = {
+    alt: slide.alt ?? '',
+    link: slide.link?.trim() || undefined,
+    linkLabel: slide.linkLabel?.trim() || undefined,
+  }
+  if (slide.mediaType === 'image' && slide.imageUrl) return { kind: 'image', src: slide.imageUrl, ...base }
   if (slide.mediaType === 'videoFile' && slide.videoFileUrl)
-    return { kind: 'video', src: slide.videoFileUrl, alt }
+    return { kind: 'video', src: slide.videoFileUrl, ...base }
   if (slide.mediaType === 'videoUrl' && slide.externalUrl) {
     const url = slide.externalUrl
     const yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/)
@@ -42,7 +51,7 @@ function resolveSlide(slide: HeroSlide): Resolved | null {
       return {
         kind: 'embed',
         src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=1&modestbranding=1&rel=0&playsinline=1`,
-        alt,
+        ...base,
       }
     }
     const vimeo = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)
@@ -50,11 +59,11 @@ function resolveSlide(slide: HeroSlide): Resolved | null {
       return {
         kind: 'embed',
         src: `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1&muted=1&loop=1&playsinline=1`,
-        alt,
+        ...base,
       }
     }
-    if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(url)) return { kind: 'video', src: url, alt }
-    return { kind: 'embed', src: url, alt }
+    if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(url)) return { kind: 'video', src: url, ...base }
+    return { kind: 'embed', src: url, ...base }
   }
   return null
 }
@@ -65,6 +74,7 @@ export default function HeroCarousel({
   autoplay = true,
   interval = 6,
   priority,
+  learnMoreLabel = 'Learn more',
 }: HeroCarouselProps) {
   const resolved = useMemo(() => slides.map(resolveSlide).filter(Boolean) as Resolved[], [slides])
   const [index, setIndex] = useState(0)
@@ -172,6 +182,32 @@ export default function HeroCarousel({
               allow="autoplay; fullscreen; picture-in-picture"
               loading="lazy"
             />
+          )}
+
+          {slide.link && (
+            <div className="absolute bottom-3 left-3 z-20">
+              {slide.link.startsWith('/') ? (
+                <Link
+                  href={slide.link}
+                  tabIndex={i === index ? 0 : -1}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-sm hover:bg-white transition-colors"
+                >
+                  {slide.linkLabel || learnMoreLabel}
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              ) : (
+                <a
+                  href={slide.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  tabIndex={i === index ? 0 : -1}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-sm hover:bg-white transition-colors"
+                >
+                  {slide.linkLabel || learnMoreLabel}
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              )}
+            </div>
           )}
         </div>
       ))}

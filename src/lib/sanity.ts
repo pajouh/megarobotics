@@ -861,6 +861,8 @@ export interface HeroSlide {
   videoFileUrl?: string
   externalUrl?: string
   alt?: string
+  link?: string
+  linkLabel?: string
 }
 
 export interface HomeHeroDoc {
@@ -900,7 +902,9 @@ export async function getHomeHero(
         "imageUrl": image.asset->url,
         "videoFileUrl": video.asset->url,
         "externalUrl": videoUrl,
-        "alt": ${localizedField('alt', locale)}
+        "alt": ${localizedField('alt', locale)},
+        link,
+        "linkLabel": ${localizedField('linkLabel', locale)}
       },
       "aspectRatio": mediaAspectRatio,
       "width": mediaWidth,
