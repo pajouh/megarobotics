@@ -94,6 +94,22 @@ export default function HeroCarousel({
     return () => window.clearTimeout(id)
   }, [motionOn, current, index, interval, next])
 
+  // Play the active slide's <video>; pause/reset the others. Changing the `autoPlay`
+  // attribute on an already-mounted <video> does NOT start playback, so we drive it
+  // imperatively each time the active index changes (videos are muted → autoplay allowed).
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({})
+  useEffect(() => {
+    Object.entries(videoRefs.current).forEach(([i, el]) => {
+      if (!el) return
+      if (Number(i) === index && !reducedMotion) {
+        el.currentTime = 0
+        void el.play().catch(() => {})
+      } else {
+        el.pause()
+      }
+    })
+  }, [index, reducedMotion, resolved])
+
   if (count === 0) return null
 
   const single = count === 1
@@ -137,15 +153,15 @@ export default function HeroCarousel({
           )}
           {slide.kind === 'video' && (
             <video
+              ref={(el) => { videoRefs.current[i] = el }}
               src={slide.src}
               className="absolute inset-0 h-full w-full object-cover"
               muted
               playsInline
-              autoPlay={motionOn && i === index}
               loop={single}
               controls={reducedMotion}
               aria-label={slide.alt || undefined}
-              onEnded={() => { if (!single && i === index) next() }}
+              onEnded={() => { if (motionOn && i === index) next() }}
             />
           )}
           {slide.kind === 'embed' && (
