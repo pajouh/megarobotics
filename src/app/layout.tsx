@@ -113,6 +113,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   },
   category: "industrial automation",
+  verification: {
+    // Backup verification for Google Search Console. The domain is already
+    // verified via DNS; this HTML-tag method is a second, independent method
+    // so DNS changes can't drop Search Console access.
+    google: "_7GvNoRQjtf0p9H_6iqj_KL8IpxqzgM1bhH3FYVyBNc",
+  },
   other: {
     "facebook-domain-verification": "f4d1i9dpm7pulx55nx1tuprhlkn36o",
   },
