@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { ArrowRight } from 'lucide-react'
+import LucideIcon from './LucideIcon'
 
 interface SolutionCardProps {
   title: string
@@ -12,6 +13,7 @@ interface SolutionCardProps {
   applicationsLabel?: string
   robotTypesLabel?: string
   image?: { src: string; alt: string }
+  icon?: string
   index?: number
 }
 
@@ -25,6 +27,7 @@ export default function SolutionCard({
   applicationsLabel,
   robotTypesLabel,
   image,
+  icon,
   index,
 }: SolutionCardProps) {
   return (
@@ -49,7 +52,16 @@ export default function SolutionCard({
         {!image && typeof index === 'number' && (
           <span className="mr-index mb-3">{String(index).padStart(2, '0')}</span>
         )}
-        <h3 className="ind-h3 text-[color:var(--mr-ink)] mb-3">{title}</h3>
+        <div className="flex items-start gap-2.5 mb-3">
+          {icon && (
+            <LucideIcon
+              name={icon}
+              className="w-5 h-5 mt-0.5 shrink-0 text-[color:var(--mr-accent-ink)]"
+              aria-hidden="true"
+            />
+          )}
+          <h3 className="ind-h3 text-[color:var(--mr-ink)]">{title}</h3>
+        </div>
         <p className="text-sm text-[color:var(--mr-ink-2)] leading-relaxed mb-5">{description}</p>
 
         {applications && applications.length > 0 && (

@@ -1,5 +1,6 @@
 import { createClient, type SanityClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
+import type { PortableTextBlock } from '@portabletext/types'
 import { SanityImage, Article, Category, Author, Product, Manufacturer, Institute } from '@/types'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
@@ -656,6 +657,23 @@ export interface SolutionDoc {
   shortDescription?: string
   applications: string[]
   robotTypes: string[]
+  imageUrl?: string
+  icon?: string
+  featured?: boolean
+}
+
+export interface SolutionDetail {
+  _id: string
+  id: string
+  title: string
+  excerpt?: string
+  body?: PortableTextBlock[]
+  imageUrl?: string
+  applications: string[]
+  robotTypes: string[]
+  industries: { slug: string; title: string }[]
+  icon?: string
+  seo?: { metaTitle?: string; metaDescription?: string }
 }
 
 export interface IndustryDoc {
@@ -687,14 +705,50 @@ export interface ProjectStudyDoc {
 export async function getSolutions(locale: Locale = defaultLocale): Promise<SolutionDoc[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "solution" && isActive != false] | order(order asc) {
+    `*[_type == "solution" && isActive != false] | order(featured desc, order asc) {
       _id,
       "id": slug.current,
       "title": ${localizedField('title', locale)},
       "shortDescription": ${localizedField('excerpt', locale)},
       "applications": coalesce(${localizedArrayField('applications', locale)}, []),
-      "robotTypes": coalesce(${localizedArrayField('robotTypes', locale)}, [])
+      "robotTypes": coalesce(${localizedArrayField('robotTypes', locale)}, []),
+      "imageUrl": image.asset->url,
+      "icon": icon,
+      "featured": featured
     }`,
+  )
+}
+
+export async function getSolution(
+  slug: string,
+  locale: Locale = defaultLocale,
+): Promise<SolutionDetail | null> {
+  if (!client) return null
+  return client.fetch(
+    `*[_type == "solution" && slug.current == $slug && isActive != false][0]{
+      _id,
+      "id": slug.current,
+      "title": ${localizedField('title', locale)},
+      "excerpt": ${localizedField('excerpt', locale)},
+      "body": ${localizedField('body', locale)},
+      "imageUrl": image.asset->url,
+      "applications": coalesce(${localizedArrayField('applications', locale)}, []),
+      "robotTypes": coalesce(${localizedArrayField('robotTypes', locale)}, []),
+      "industries": industries[]->{ "slug": slug.current, "title": ${localizedField('title', locale)} },
+      "icon": icon,
+      "seo": {
+        "metaTitle": ${localizedField('seo.metaTitle', locale)},
+        "metaDescription": ${localizedField('seo.metaDescription', locale)}
+      }
+    }`,
+    { slug },
+  )
+}
+
+export async function getAllSolutionSlugs(): Promise<{ slug: string }[]> {
+  if (!client) return []
+  return client.fetch(
+    `*[_type == "solution" && isActive != false && defined(slug.current)]{ "slug": slug.current }`,
   )
 }
 

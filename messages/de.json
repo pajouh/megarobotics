@@ -554,7 +554,13 @@
             "Embodied-AI-Forschungs-Kits"
           ]
         }
-      ]
+      ],
+      "viewLabel": "Lösung ansehen",
+      "detail": {
+        "backToSolutions": "Alle Lösungen",
+        "industriesLabel": "Verwandte Branchen",
+        "overview": "Überblick"
+      }
     },
     "industries": {
       "meta": {

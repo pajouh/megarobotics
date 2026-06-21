@@ -554,7 +554,13 @@
             "Embodied AI research kits"
           ]
         }
-      ]
+      ],
+      "viewLabel": "View solution",
+      "detail": {
+        "backToSolutions": "All solutions",
+        "industriesLabel": "Related industries",
+        "overview": "Overview"
+      }
     },
     "industries": {
       "meta": {

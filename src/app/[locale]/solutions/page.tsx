@@ -27,6 +27,8 @@ export default async function SolutionsPage({ params }: Props) {
   // JSON if no docs exist yet — keeps the page rendering during the
   // transition.
   const sanity = await getSolutions(locale as Locale)
+  const sanityImages = new Map(sanity.map((s) => [s.id, s.imageUrl]))
+  const sanityIcons = new Map(sanity.map((s) => [s.id, s.icon]))
   const items: SolutionItem[] = sanity.length
     ? sanity.map((s) => ({
         id: s.id,
@@ -36,6 +38,14 @@ export default async function SolutionsPage({ params }: Props) {
         robotTypes: s.robotTypes,
       }))
     : (t.raw('items') as SolutionItem[])
+
+  // Prefer the image uploaded in Studio; fall back to the bundled static
+  // image keyed by slug so cards never render imageless during the transition.
+  const imageFor = (item: SolutionItem) => {
+    const sanityUrl = sanityImages.get(item.id)
+    if (sanityUrl) return { src: sanityUrl, alt: item.title }
+    return solutionImages[item.id]
+  }
 
   return (
     <div className="min-h-screen">
@@ -54,9 +64,10 @@ export default async function SolutionsPage({ params }: Props) {
                 robotTypes={item.robotTypes}
                 applicationsLabel={t('labelApplications')}
                 robotTypesLabel={t('labelRobotTypes')}
-                ctaHref="/contact"
-                ctaLabel={t('ctaLabel')}
-                image={solutionImages[item.id]}
+                ctaHref={`/solutions/${item.id}`}
+                ctaLabel={t('viewLabel')}
+                image={imageFor(item)}
+                icon={sanityIcons.get(item.id)}
               />
             ))}
           </div>
