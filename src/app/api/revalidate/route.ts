@@ -1,10 +1,18 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllProductFamilySlugs, getInstituteCountries } from '@/lib/sanity'
 import { locales, defaultLocale } from '@/i18n/config'
 
-// Secret token to protect the endpoint
-const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET || 'megarobotics-revalidate-2024'
+// Secret that guards the MANUAL revalidation endpoints (POST with a body secret
+// and GET ?secret=). The Sanity webhook path (body._type) does not use this.
+// Fail closed: there is deliberately no hardcoded fallback — if REVALIDATE_SECRET
+// is unset, every manual request is rejected rather than honoring a guessable
+// default baked into the repo.
+const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET
+
+function isAuthorized(secret: unknown): boolean {
+  return typeof REVALIDATE_SECRET === 'string' && REVALIDATE_SECRET.length > 0 && secret === REVALIDATE_SECRET
+}
 
 // Expand a default-locale path into the concrete URL for every locale.
 // localePrefix is 'as-needed': the default locale has no prefix, others get /<locale>.
@@ -38,7 +46,7 @@ export async function POST(request: NextRequest) {
     const { secret, paths, all, purgeAll } = body
 
     // Verify the secret token
-    if (secret !== REVALIDATE_SECRET) {
+    if (!isAuthorized(secret)) {
       return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
     }
 
@@ -326,7 +334,7 @@ export async function GET(request: NextRequest) {
   const path = searchParams.get('path')
   const purgeAll = searchParams.get('purgeAll') === 'true'
 
-  if (secret !== REVALIDATE_SECRET) {
+  if (!isAuthorized(secret)) {
     return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
   }
 
@@ -357,6 +365,7 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
+    console.error('Revalidation error (GET):', error)
     return NextResponse.json({ error: 'Failed to revalidate' }, { status: 500 })
   }
 }
