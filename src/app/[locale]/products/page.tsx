@@ -33,7 +33,9 @@ export async function generateMetadata({
   return pageSeo({ title: t('title'), description: t('description'), path: '/products', locale })
 }
 
-export const revalidate = 60
+// product/productFamily publishes revalidate /products via /api/revalidate;
+// this timer is just a fallback, so keep it long to cut background regeneration.
+export const revalidate = 3600
 
 interface Props {
   params: Promise<{ locale: string }>

@@ -71,7 +71,9 @@ export async function generateStaticParams() {
   return getAllProductSlugs()
 }
 
-export const revalidate = 60
+// product publishes revalidate this path via /api/revalidate; this timer is
+// just a fallback, so keep it long to cut background regeneration.
+export const revalidate = 3600
 
 const VERIFIED_RELATIONSHIPS: RelationshipStatus[] = [
   'official_distributor',

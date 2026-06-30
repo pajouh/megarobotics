@@ -25,7 +25,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageSeo({ title: t('title'), description: t('description'), path: '', locale })
 }
 
-export const revalidate = 60
+// On-publish revalidation (/api/revalidate) refreshes '/' on every Sanity
+// change, so this timer is only a fallback safety net — keep it long to avoid
+// needless background regeneration (and the CDN requests it costs).
+export const revalidate = 3600
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params

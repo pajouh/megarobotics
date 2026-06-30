@@ -61,7 +61,9 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export const revalidate = 60
+// manufacturer publishes revalidate this path via /api/revalidate; this timer
+// is just a fallback, so keep it long to cut background regeneration.
+export const revalidate = 3600
 
 export default async function ManufacturerPage({ params }: Props) {
   const { slug, locale } = await params
