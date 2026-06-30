@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageSeo({ title: t('title'), description: t('description'), path: '/projects', locale })
 }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function ProjectsPage({ params }: Props) {
   const { locale } = await params
