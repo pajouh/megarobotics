@@ -75,7 +75,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function CountryInstitutesPage({ params }: Props) {
   const { country: countrySlug } = await params

@@ -14,7 +14,7 @@ import { getSolution, getAllSolutionSlugs, type Locale } from '@/lib/sanity'
 
 type Props = { params: Promise<{ locale: string; slug: string }> }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   const slugs = await getAllSolutionSlugs()

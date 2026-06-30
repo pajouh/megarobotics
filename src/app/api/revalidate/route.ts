@@ -1,6 +1,6 @@
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
-import { getAllProductFamilySlugs } from '@/lib/sanity'
+import { getAllProductFamilySlugs, getInstituteCountries } from '@/lib/sanity'
 import { locales, defaultLocale } from '@/i18n/config'
 
 // Secret token to protect the endpoint
@@ -10,6 +10,12 @@ const REVALIDATE_SECRET = process.env.REVALIDATE_SECRET || 'megarobotics-revalid
 // localePrefix is 'as-needed': the default locale has no prefix, others get /<locale>.
 function localizedPaths(path: string): string[] {
   return locales.map((locale) => (locale === defaultLocale ? path : `/${locale}${path}`))
+}
+
+// Mirror of countryToSlug() in institutes/country/[country]/page.tsx so the
+// webhook can target each country index page that generateStaticParams builds.
+function countryToSlug(country: string): string {
+  return country.toLowerCase().replace(/\s+/g, '-')
 }
 
 // Sanity webhook payload types
@@ -202,6 +208,81 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         if (slug?.current) {
           revalidatePath(`/guides/${slug.current}`, 'page')
           revalidated.push(`/guides/${slug.current}`)
+        }
+        break
+
+      case 'solution':
+        for (const p of localizedPaths('/solutions')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+
+        if (slug?.current) {
+          for (const p of localizedPaths(`/solutions/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
+        }
+        break
+
+      case 'industry':
+        for (const p of localizedPaths('/industries')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+        break
+
+      case 'robotTechnology':
+        for (const p of localizedPaths('/robot-technologies')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+        break
+
+      case 'institute':
+        for (const p of localizedPaths('/institutes')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+
+        if (slug?.current) {
+          for (const p of localizedPaths(`/institutes/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
+        }
+
+        // The payload has no country, and an institute can move between
+        // countries, so refresh every country index page in every locale.
+        {
+          const countries = await getInstituteCountries()
+          for (const country of countries) {
+            for (const p of localizedPaths(`/institutes/country/${countryToSlug(country)}`)) {
+              revalidatePath(p, 'page')
+              revalidated.push(p)
+            }
+          }
+        }
+        break
+
+      case 'projectStudy':
+        for (const p of localizedPaths('/projects')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+        break
+
+      case 'category':
+        for (const p of localizedPaths('/articles')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
+
+        if (slug?.current) {
+          for (const p of localizedPaths(`/category/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
         }
         break
 

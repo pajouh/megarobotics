@@ -48,7 +48,7 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export default async function CategoryPage({ params }: Props) {
   const { slug, locale } = await params
