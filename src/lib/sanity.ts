@@ -16,17 +16,19 @@ function createSanityClient(): SanityClient | null {
     console.warn('Missing NEXT_PUBLIC_SANITY_PROJECT_ID environment variable')
     return null
   }
-  // Server-side token (never reaches the browser) lets us read doc types
-  // that aren't in the publicly-exposed schema slice (e.g. productFamily).
-  // When the token is present, CDN must be disabled — Sanity CDN does not
-  // authenticate. When absent, fall back to anonymous CDN reads.
-  const token = process.env.SANITY_API_TOKEN
+  // The `production` dataset is public (aclMode: public), so anonymous reads
+  // return every published document — including productFamily. We therefore
+  // read through the API CDN (apicdn.sanity.io), which is edge-cached and
+  // draws on a much larger request quota than the live API. We deliberately do
+  // NOT attach SANITY_API_TOKEN here: a token forces useCdn off (the CDN does
+  // not authenticate), routing all reads to the live API and burning through
+  // the small "API Requests" quota. This client is read-only — any write/
+  // mutation scripts create their own token-bearing client separately.
   return createClient({
     projectId,
     dataset,
     apiVersion: '2024-01-01',
-    useCdn: !token,
-    token: token || undefined,
+    useCdn: true,
     perspective: 'published',
   })
 }
