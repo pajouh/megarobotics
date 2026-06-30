@@ -80,7 +80,7 @@ export async function generateStaticParams() {
   return await getAllInstituteSlugs()
 }
 
-export const revalidate = 60
+export const revalidate = 3600
 
 const baseUrl = 'https://www.megarobotics.de'
 
