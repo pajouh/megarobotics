@@ -9,7 +9,8 @@ import { getBuyersGuide, getAllBuyersGuideSlugs, urlFor } from '@/lib/sanity'
 import BuyersGuideBody from '@/components/BuyersGuideBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { generateGuideSchema, generateBreadcrumbSchema, generateAlternates } from '@/lib/structured-data'
+import { generateGuideSchema, generateAlternates } from '@/lib/structured-data'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -26,15 +27,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metaTitle = guide.seo?.metaTitle || guide.title
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = guide.seo?.metaDescription || guide.shortDescription
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     keywords: guide.news?.tags || [],
     authors: [{ name: guide.author || 'MegaRobotics Editorial' }],
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'article',
       publishedTime: guide.publishedAt,
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: guide.mainImage?.image
         ? [urlFor(guide.mainImage.image).width(1200).height(630).url()]
@@ -98,12 +100,10 @@ export default async function BuyersGuidePage({ params }: Props) {
     { name: guide.title, href: `/guides/${slug}` },
   ]
 
-  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
-
   return (
     <article className="min-h-screen pt-24 pb-16 bg-white">
       <StructuredData data={guideSchema} />
-      <StructuredData data={breadcrumbSchema} />
+      {/* BreadcrumbList JSON-LD is emitted by <Breadcrumbs> below — don't duplicate it here. */}
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}

@@ -11,6 +11,7 @@ import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { generateArticleSchema, generateAlternates } from '@/lib/structured-data'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : undefined
 
   const metaTitle = article.seo?.metaTitle || article.title
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = article.seo?.metaDescription || article.excerpt
   const keywords = article.seo?.keywords?.length
     ? article.seo.keywords
@@ -42,12 +44,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ].filter((k): k is string => Boolean(k))
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     keywords,
     authors: article.author ? [{ name: article.author.name }] : undefined,
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'article',
       publishedTime: article.publishedAt,
@@ -65,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: imageUrl ? [imageUrl] : undefined,
     },

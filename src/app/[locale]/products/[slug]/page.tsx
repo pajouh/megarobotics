@@ -23,9 +23,9 @@ import Disclaimer from '@/components/Disclaimer'
 import SafeNotice from '@/components/industrial/SafeNotice'
 import {
   generateProductSchema,
-  generateBreadcrumbSchema,
   generateAlternates,
 } from '@/lib/structured-data'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -42,25 +42,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const alternates = generateAlternates(`/products/${slug}`, locale)
   const metaTitle =
     product.seo?.metaTitle || `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = product.seo?.metaDescription || product.description || product.tagline
   const imageUrl = product.mainImage
     ? urlFor(product.mainImage).width(1200).height(630).url()
     : undefined
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     keywords: product.seo?.keywords,
     alternates,
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
       images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: product.name }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: imageUrl ? [imageUrl] : undefined,
     },
@@ -145,8 +146,6 @@ export default async function ProductPage({ params }: Props) {
     { name: product.name, href: `/products/${slug}` },
   ]
 
-  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
-
   // Resolve availability label: prefer new vocab, fall back to legacy
   const availStatus: AvailabilityStatus | undefined = product.availabilityStatus
   const availabilityLabel = availStatus
@@ -165,7 +164,7 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
       <StructuredData data={productSchema} />
-      <StructuredData data={breadcrumbSchema} />
+      {/* BreadcrumbList JSON-LD is emitted by <Breadcrumbs> below — don't duplicate it here. */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />

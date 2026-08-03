@@ -9,6 +9,7 @@ import {
 } from '@/lib/sanity'
 import { generateAlternates } from '@/lib/structured-data'
 import InstituteCard from '@/components/InstituteCard'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ country: string; locale: string }>
@@ -49,20 +50,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const country = decodeCountry(countrySlug)
 
   const metaTitle = `Robotics Research Institutes in ${country} – Universities & Labs | MegaRobotics`
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = `Browse verified robotics research institutes, laboratories, and centers in ${country}. Discover leading university labs and research organizations.`
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     alternates: generateAlternates(`/institutes/country/${countrySlug}`, locale),
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
     },
     twitter: {
       card: 'summary',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
     },
   }

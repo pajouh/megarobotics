@@ -1,6 +1,37 @@
 import type { Metadata } from 'next'
 import { generateAlternates, localizedUrl } from './structured-data'
 
+const BRAND = 'MegaRobotics'
+
+/**
+ * Normalize a title so it carries exactly one " | MegaRobotics" suffix.
+ *
+ * Many Sanity `seo.metaTitle` values were authored (or bulk-generated) with the
+ * brand suffix baked in. Pages that return a bare `title` string get the root
+ * layout's "%s | MegaRobotics" template applied on top, so those shipped as
+ * "… | MegaRobotics | MegaRobotics". An older import also cut some titles at 60
+ * characters mid-suffix, leaving tails like "| MegaRob..." — matched here too.
+ *
+ * Returns a `{ absolute }` title, which bypasses the layout template, so the
+ * suffix this function adds is the only one the page can emit.
+ */
+export function brandedTitle(title: string): { absolute: string } {
+  const original = title.trim()
+  let base = original
+  let previous: string
+
+  do {
+    previous = base
+    // Trailing brand segment, including truncated forms ("MegaRob...", "MegaRobo…").
+    base = base.replace(/\s*[|–—-]\s*MegaRo\w*\s*(?:\.\.\.|…)?\s*$/i, '').trim()
+  } while (base !== previous && base.length > 0)
+
+  // A title that is nothing but the brand collapses to empty — keep it as-is.
+  if (!base) return { absolute: original }
+
+  return { absolute: `${base} | ${BRAND}` }
+}
+
 interface PageSeoArgs {
   /** Title used as-is (not run through the root layout's "%s | MegaRobotics" template). */
   title: string

@@ -11,9 +11,10 @@ import {
   type Locale
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
-import { generateAlternates, generateManufacturerSchema, generateBreadcrumbSchema } from '@/lib/structured-data'
+import { generateAlternates, generateManufacturerSchema } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -30,18 +31,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metaTitle = manufacturer.seo?.metaTitle || `${manufacturer.name} - Robotics Products`
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = manufacturer.seo?.metaDescription || manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
   const logoUrl = manufacturer.logo
     ? urlFor(manufacturer.logo).width(1200).height(630).url()
     : undefined
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     keywords: manufacturer.seo?.keywords,
     alternates: generateAlternates(`/manufacturers/${slug}`, locale),
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: logoUrl
         ? [{ url: logoUrl, width: 1200, height: 630, alt: manufacturer.name }]
@@ -49,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: logoUrl ? [logoUrl] : undefined,
     },
@@ -91,12 +93,10 @@ export default async function ManufacturerPage({ params }: Props) {
     { name: manufacturer.name, href: `/manufacturers/${slug}` },
   ]
 
-  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbItems)
-
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
       <StructuredData data={manufacturerSchema} />
-      <StructuredData data={breadcrumbSchema} />
+      {/* BreadcrumbList JSON-LD is emitted by <Breadcrumbs> below — don't duplicate it here. */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />

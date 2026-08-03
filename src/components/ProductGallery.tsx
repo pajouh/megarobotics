@@ -52,6 +52,8 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
             src={urlFor(currentImage).width(800).height(800).url()}
             alt={currentImage.alt || productName}
             fill
+            // Half-width column on desktop; the Sanity source is capped at 800px.
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-contain p-6"
             priority
           />
@@ -98,6 +100,8 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
                   src={urlFor(image).width(160).height(160).url()}
                   alt={image.alt || `${productName} ${index + 1}`}
                   fill
+                  // Fixed 80px (w-20) thumbnail — never needs more than 160px @2x.
+                  sizes="80px"
                   className="object-contain p-1 bg-gray-50"
                 />
               </button>
@@ -150,6 +154,8 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
               src={urlFor(currentImage).width(1200).height(1200).url()}
               alt={currentImage.alt || productName}
               fill
+              // Lightbox caps at max-w-4xl (896px).
+              sizes="(max-width: 896px) 100vw, 896px"
               className="object-contain"
             />
           </div>

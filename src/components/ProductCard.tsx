@@ -20,6 +20,9 @@ export default function ProductCard({ product }: ProductCardProps) {
               src={urlFor(mainImage).width(400).height(400).url()}
               alt={mainImage.alt || name}
               fill
+              // Without `sizes`, `fill` defaults to 100vw and Next emits a srcset up
+              // to w=3840 for what is a grid thumbnail off a 400px source.
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               className="object-contain p-5 group-hover:scale-[1.03] transition-transform duration-500"
             />
           ) : (

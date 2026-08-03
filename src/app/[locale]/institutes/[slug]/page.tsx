@@ -31,6 +31,7 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import InstituteCard from '@/components/InstituteCard'
 import ArticleBody from '@/components/ArticleBody'
+import { brandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -45,6 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metaTitle = institute.seo?.metaTitle || `${institute.name} – ${institute.parentInstitution} | MegaRobotics`
+  const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription =
     institute.seo?.metaDescription ||
     institute.summary ||
@@ -57,19 +59,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : undefined
 
   return {
-    title: metaTitle,
+    title: brandedMetaTitle,
     description: metaDescription,
     keywords: institute.seo?.keywords || institute.focusAreas,
     alternates: generateAlternates(`/institutes/${slug}`, locale),
     openGraph: {
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
       images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: metaTitle,
+      title: brandedMetaTitle.absolute,
       description: metaDescription,
       images: ogImage ? [ogImage] : undefined,
     },
