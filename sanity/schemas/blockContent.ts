@@ -142,6 +142,45 @@ export default defineType({
         },
       },
     }),
+    // Video Embed - YouTube/Vimeo, loaded only after the reader clicks.
+    // Prefer this over htmlEmbed for video: htmlEmbed renders an opaque iframe
+    // that search engines cannot read, and a raw YouTube <iframe> would contact
+    // Google before the visitor has given cookie consent.
+    defineArrayMember({
+      title: 'Video Embed',
+      name: 'videoEmbed',
+      type: 'object',
+      fields: [
+        {
+          title: 'Video URL',
+          name: 'url',
+          type: 'url',
+          description: 'YouTube or Vimeo watch/share URL.',
+          validation: (Rule) =>
+            Rule.required().uri({ scheme: ['http', 'https'] }),
+        },
+        {
+          title: 'Title',
+          name: 'title',
+          type: 'string',
+          description:
+            'Shown on the click-to-play placeholder and used as the iframe title for screen readers.',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          title: 'Caption',
+          name: 'caption',
+          type: 'string',
+          description: 'Optional line below the player, e.g. the source/channel.',
+        },
+      ],
+      preview: {
+        select: { title: 'title', url: 'url' },
+        prepare({ title, url }) {
+          return { title: title || 'Video Embed', subtitle: url }
+        },
+      },
+    }),
     // Stats Grid - for displaying key statistics
     defineArrayMember({
       title: 'Stats Grid',

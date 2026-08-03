@@ -1,0 +1,2314 @@
+{
+ "_id": "article-limx-luna-research-evaluation",
+ "_type": "article",
+ "title": {
+  "en": "LimX Luna for Research and Development: A Technical Evaluation",
+  "de": "LimX Luna für Forschung und Entwicklung: eine technische Bewertung"
+ },
+ "slug": {
+  "_type": "slug",
+  "current": "limx-luna-research-development-evaluation"
+ },
+ "excerpt": {
+  "en": "A 160 cm, 27-DoF humanoid marketed for live performance. We examine where the LimX Luna genuinely serves a research programme — field HRI, learning from demonstration, multi-agent coordination — and where a lab should buy the TRON 1 or OLI instead.",
+  "de": "Ein 160 cm großer Humanoid mit 27 Freiheitsgraden, vermarktet für Live-Performance. Wir untersuchen, wo der LimX Luna einem Forschungsprogramm wirklich dient — Feld-HRI, Lernen aus Demonstration, Mehrrobotersteuerung — und wann ein Labor besser TRON 1 oder OLI kauft."
+ },
+ "mainImage": {
+  "_type": "image",
+  "asset": {
+   "_type": "reference",
+   "_ref": "image-d72d813a01069e6bb1fbd169623e9cce5bfb23da-928x1914-png"
+  },
+  "alt": "LimX Luna full-size humanoid robot"
+ },
+ "body": {
+  "en": [
+   {
+    "_key": "b0002",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0001",
+      "_type": "span",
+      "marks": [],
+      "text": "Abstract"
+     }
+    ]
+   },
+   {
+    "_key": "b0004",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0003",
+      "_type": "span",
+      "marks": [],
+      "text": "Full-size humanoid robots are increasingly marketed to research groups, but the platforms differ far more than their similar silhouettes suggest. This evaluation examines the LimX Luna — a 160 cm, 27-degree-of-freedom humanoid released by LimX Dynamics — and asks a narrow question: where does it earn a place in a research and development programme, and where should a lab buy something else?"
+     }
+    ]
+   },
+   {
+    "_key": "b0006",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0005",
+      "_type": "span",
+      "marks": [],
+      "text": "Our conclusion is that Luna is a strong instrument for a specific band of work — human-robot interaction in public settings, learning from demonstration, multi-agent choreography, and education and outreach — and a poor choice for locomotion, reinforcement-learning or manipulation research, for which LimX sells more suitable hardware. We set out the evidence for both halves of that claim."
+     }
+    ]
+   },
+   {
+    "_key": "vid0007",
+    "_type": "videoEmbed",
+    "url": "https://www.youtube.com/watch?v=rCCOgsQCO14",
+    "title": "Introducing LimX Luna: Limitless Art, Fluid Motion",
+    "caption": "Source: LimX Dynamics official channel"
+   },
+   {
+    "_key": "b0009",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0008",
+      "_type": "span",
+      "marks": [],
+      "text": "1. What Luna is, and what it is not"
+     }
+    ]
+   },
+   {
+    "_key": "b0011",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0010",
+      "_type": "span",
+      "marks": [],
+      "text": "It is worth being blunt at the outset, because the marketing category and the research category do not coincide. LimX positions Luna around live performance and public engagement: its headline capabilities are dance, gymnastics and catwalk routines, a facial interaction screen, and synchronised control of large fleets. The manufacturer's own application list names shopping malls, museums, theme parks, live stages and brand events before it names research."
+     }
+    ]
+   },
+   {
+    "_key": "b0013",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0012",
+      "_type": "span",
+      "marks": [],
+      "text": "By contrast, LimX markets the TRON 1 explicitly as \"The Gateway to Humanoid RL Research\", and the OLI as a general-purpose humanoid for embodied-AI work. A lab that buys Luna expecting a reinforcement-learning testbed has bought the wrong machine from the right vendor."
+     }
+    ]
+   },
+   {
+    "_key": "b0015",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0014",
+      "_type": "span",
+      "marks": [],
+      "text": "That does not make Luna research-irrelevant. It makes it relevant to different research. The sections below separate the two."
+     }
+    ]
+   },
+   {
+    "_key": "sg0016",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0017",
+      "value": "160 cm",
+      "label": "Height"
+     },
+     {
+      "_key": "st0018",
+      "value": "27",
+      "label": "Active degrees of freedom"
+     },
+     {
+      "_key": "st0019",
+      "value": "56 kg",
+      "label": "Mass with battery"
+     },
+     {
+      "_key": "st0020",
+      "value": "≈4 h",
+      "label": "Battery endurance"
+     }
+    ]
+   },
+   {
+    "_key": "img0021",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-d37463cff016e7e753c9f3685f0d5fce18181c37-928x1280-png"
+    },
+    "alt": "LimX Luna head and shoulder design detail",
+    "caption": "Luna's head and shoulder assembly, showing the facial interaction screen and textile finish."
+   },
+   {
+    "_key": "b0023",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0022",
+      "_type": "span",
+      "marks": [],
+      "text": "2. Platform architecture"
+     }
+    ]
+   },
+   {
+    "_key": "b0025",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0024",
+      "_type": "span",
+      "marks": [],
+      "text": "The kinematic budget is where a humanoid's research value is decided, so it is worth reading closely. Luna distributes 27 active degrees of freedom as follows."
+     }
+    ]
+   },
+   {
+    "_key": "it0026",
+    "_type": "infoTable",
+    "headers": [
+     "Chain",
+     "Degrees of freedom",
+     "Range"
+    ],
+    "rows": [
+     {
+      "_key": "r0027",
+      "cells": [
+       "Leg (each)",
+       "6",
+       "Hip P −90°~175°, R −60°~90°, Y ±90°; knee P +5°~140°; ankle P −35°~58°, R ±25°"
+      ]
+     },
+     {
+      "_key": "r0028",
+      "cells": [
+       "Arm (each)",
+       "5",
+       "Shoulder P −60°~175°, R −5°~110°, Y −90°~145°; elbow P −30°~137°; wrist Y ±90°"
+      ]
+     },
+     {
+      "_key": "r0029",
+      "cells": [
+       "Waist",
+       "3",
+       "P −45°~30°, R ±30°, Y ±90°"
+      ]
+     },
+     {
+      "_key": "r0030",
+      "cells": [
+       "Neck",
+       "2",
+       "P ±30°, Y ±45°"
+      ]
+     },
+     {
+      "_key": "r0031",
+      "cells": [
+       "End effector",
+       "optional",
+       "Humanoid or fist-shaped hand; 5-finger hand (6 DoF) optional"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0033",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0032",
+      "_type": "span",
+      "marks": [],
+      "text": "Two observations follow directly. First, five degrees of freedom per arm with a single wrist axis is a performance-oriented arm, not a manipulation arm — there is no wrist pitch or roll, so end-effector orientation is heavily constrained. Combined with a 3 kg maximum arm payload, Luna is not a platform for grasping or dexterous manipulation research unless the optional 6-DoF five-finger hand is fitted, and even then the wrist remains the bottleneck."
+     }
+    ]
+   },
+   {
+    "_key": "b0035",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0034",
+      "_type": "span",
+      "marks": [],
+      "text": "Second, a three-degree-of-freedom waist and a two-degree-of-freedom neck are unusually generous for a robot in this class. Both are expressive rather than load-bearing features, and they are precisely what whole-body gesture, gaze and social-signalling research needs."
+     }
+    ]
+   },
+   {
+    "_key": "it0036",
+    "_type": "infoTable",
+    "headers": [
+     "Subsystem",
+     "Specification"
+    ],
+    "rows": [
+     {
+      "_key": "r0037",
+      "cells": [
+       "Motion control compute",
+       "RK3588 / 16 GB / 256 GB"
+      ]
+     },
+     {
+      "_key": "r0038",
+      "cells": [
+       "Perception compute",
+       "RK3588 / 8 GB / 32 GB"
+      ]
+     },
+     {
+      "_key": "r0039",
+      "cells": [
+       "IMU",
+       "6-axis, developed in-house"
+      ]
+     },
+     {
+      "_key": "r0040",
+      "cells": [
+       "Camera",
+       "RGB"
+      ]
+     },
+     {
+      "_key": "r0041",
+      "cells": [
+       "Interaction hardware",
+       "Facial screen, microphone, speaker, LED strip"
+      ]
+     },
+     {
+      "_key": "r0042",
+      "cells": [
+       "Communication",
+       "Wi-Fi 6, Bluetooth"
+      ]
+     },
+     {
+      "_key": "r0043",
+      "cells": [
+       "Peak motor torque",
+       "200 N·m (highest-torque joint)"
+      ]
+     },
+     {
+      "_key": "r0044",
+      "cells": [
+       "Max walking speed",
+       "5 km/h"
+      ]
+     },
+     {
+      "_key": "r0045",
+      "cells": [
+       "Cooling",
+       "Main control air cooling"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0047",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0046",
+      "_type": "span",
+      "marks": [],
+      "text": "The compute story deserves a caveat. Two RK3588 modules are a capable embedded arrangement for running a motion stack and an RGB perception pipeline, but this is not a discrete-GPU platform. Groups intending to run large vision-language-action models on board should confirm the current compute options with the manufacturer rather than assume headroom; the perception module in particular ships with 8 GB of RAM."
+     }
+    ]
+   },
+   {
+    "_key": "b0049",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0048",
+      "_type": "span",
+      "marks": [],
+      "text": "3. Where Luna earns its place in R&D"
+     }
+    ]
+   },
+   {
+    "_key": "b0051",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0050",
+      "_type": "span",
+      "marks": [],
+      "text": "3.1 Learning from demonstration"
+     }
+    ]
+   },
+   {
+    "_key": "b0053",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0052",
+      "_type": "span",
+      "marks": [],
+      "text": "Luna's most research-relevant feature set is its demonstration pipeline. Three distinct routes exist for getting motion into the robot without writing a controller."
+     }
+    ]
+   },
+   {
+    "_key": "fg0054",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0055",
+      "icon": "🎞️",
+      "title": "Video to Motion",
+      "description": "Import a video; the system analyses the movement and reproduces it on the robot. A direct route from human motion in the wild to whole-body robot motion."
+     },
+     {
+      "_key": "ft0056",
+      "icon": "🤲",
+      "title": "Kinesthetic teaching",
+      "description": "Physically guide the robot through a trajectory and record it — the classic lead-through method, applied to a full-size humanoid rather than an arm."
+     },
+     {
+      "_key": "ft0057",
+      "icon": "📚",
+      "title": "Preloaded library",
+      "description": "20 dance routines and 20 motion actions ship with the robot, usable as baselines or as starting points for modification."
+     },
+     {
+      "_key": "ft0058",
+      "icon": "☁️",
+      "title": "Cloud motion-capture training",
+      "description": "LimX Studio provides a hosted motion-capture training pipeline. Note this is a subscription service, not a perpetual entitlement."
+     }
+    ]
+   },
+   {
+    "_key": "img0059",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-e2ca33f459414dbd478ec895db306308df470c14-2880x1580-png"
+    },
+    "alt": "LimX Luna Video to Motion capability",
+    "caption": "Video-to-Motion: movement is extracted from ordinary video and retargeted onto the robot."
+   },
+   {
+    "_key": "b0061",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0060",
+      "_type": "span",
+      "marks": [],
+      "text": "For a group studying imitation learning, motion retargeting or the human-to-humanoid correspondence problem, this is the platform's real argument. The value is not that these methods are novel — lead-through teaching and video-based retargeting are both well-established — but that they arrive integrated and supported on a 27-DoF full-size body, which removes a great deal of undifferentiated engineering from the front of a project."
+     }
+    ]
+   },
+   {
+    "_key": "img0062",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-0db588b49e0ae67ecdee0c2711b793e4809f45c2-2880x1580-png"
+    },
+    "alt": "LimX Luna kinesthetic teaching",
+    "caption": "Kinesthetic teaching: an operator guides the limb directly and the trajectory is recorded."
+   },
+   {
+    "_key": "img0063",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-2013c8a700198cfb026c5a5a4b85641910c370ce-2880x1580-png"
+    },
+    "alt": "LimX Luna preloaded motion routines",
+    "caption": "Twenty dance routines and twenty motion actions ship with the robot and can serve as baselines."
+   },
+   {
+    "_key": "b0065",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0064",
+      "_type": "span",
+      "marks": [],
+      "text": "3.2 Human-robot interaction in public settings"
+     }
+    ]
+   },
+   {
+    "_key": "b0067",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0066",
+      "_type": "span",
+      "marks": [],
+      "text": "A great deal of HRI literature is produced in laboratory conditions with recruited participants who know they are in a study. Field HRI — unrecruited members of the public, uncontrolled lighting and acoustics, bystander effects, children — is harder to run precisely because most research humanoids are too fragile, too slow to set up, or too alarming to deploy in a public space."
+     }
+    ]
+   },
+   {
+    "_key": "b0069",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0068",
+      "_type": "span",
+      "marks": [],
+      "text": "Luna is engineered for exactly that environment, and the features that make it a good performance robot are the same ones that make it a viable field-HRI instrument: a facial interaction screen and LED strip for legible state signalling, multi-modal interaction with natural gesture responses during conversation, roughly four hours of endurance with hot-swappable batteries, and a transport case as a standard accessory."
+     }
+    ]
+   },
+   {
+    "_key": "img0070",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-c3d0f29b4a7745baf3bcabf258896a843cecc4a8-2500x1406-jpg"
+    },
+    "alt": "LimX Luna deployed in a museum setting",
+    "caption": "Museums and science centres are among LimX's named deployment environments — and a natural venue for field HRI studies."
+   },
+   {
+    "_key": "b0072",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0071",
+      "_type": "span",
+      "marks": [],
+      "text": "3.3 Safety architecture for human-subject work"
+     }
+    ]
+   },
+   {
+    "_key": "b0074",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0073",
+      "_type": "span",
+      "marks": [],
+      "text": "Any study placing a 56 kg humanoid near untrained people has to satisfy an ethics board. Luna ships four independent safety mechanisms, and their presence is a material part of the research case because it shortens the approval path."
+     }
+    ]
+   },
+   {
+    "_key": "fg0075",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0076",
+      "icon": "🛡️",
+      "title": "Active fall mitigation",
+      "description": "The robot attempts to control its own descent rather than toppling freely."
+     },
+     {
+      "_key": "ft0077",
+      "icon": "📡",
+      "title": "External force sensing",
+      "description": "Contact and applied force are detected, enabling reaction to unexpected human contact."
+     },
+     {
+      "_key": "ft0078",
+      "icon": "🛑",
+      "title": "Hardware E-stop",
+      "description": "A physical emergency stop independent of the software stack."
+     },
+     {
+      "_key": "ft0079",
+      "icon": "⚙️",
+      "title": "Safe action override",
+      "description": "Unsafe commanded actions can be intercepted before execution."
+     }
+    ]
+   },
+   {
+    "_key": "img0080",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-8ab8334bde2dcf2149dbcffac268d968c8740a8e-2880x1232-png"
+    },
+    "alt": "LimX Luna active fall mitigation",
+    "caption": "Active fall mitigation is one of four independent safety mechanisms."
+   },
+   {
+    "_key": "b0082",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0081",
+      "_type": "span",
+      "marks": [],
+      "text": "A hardware emergency stop that does not depend on the software stack is the item to note here: it is what most institutional review processes actually ask about, and its absence is a common reason for a deployment plan to be sent back."
+     }
+    ]
+   },
+   {
+    "_key": "b0084",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0083",
+      "_type": "span",
+      "marks": [],
+      "text": "3.4 Multi-agent coordination"
+     }
+    ]
+   },
+   {
+    "_key": "b0086",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0085",
+      "_type": "span",
+      "marks": [],
+      "text": "LimX states that Luna supports synchronised control of more than 200 units with millisecond precision. Taken at face value, this is an unusual research affordance. Multi-agent coordination research on legged platforms is normally constrained by fleet cost and by the absence of a supported synchronisation layer, so groups work in simulation and validate on two or three robots."
+     }
+    ]
+   },
+   {
+    "_key": "b0088",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0087",
+      "_type": "span",
+      "marks": [],
+      "text": "A supported 200-unit synchronisation capability is therefore interesting to anyone studying distributed control, formation behaviour or collective human-robot interaction at crowd scale. We would treat the specific figure as a manufacturer claim pending independent replication, and we would establish what network conditions it assumes before designing an experiment around it."
+     }
+    ]
+   },
+   {
+    "_key": "b0090",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0089",
+      "_type": "span",
+      "marks": [],
+      "text": "3.5 Education and public engagement"
+     }
+    ]
+   },
+   {
+    "_key": "b0092",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0091",
+      "_type": "span",
+      "marks": [],
+      "text": "The least glamorous case is the strongest one. Robotics departments have a persistent need for a machine that survives open days, recruitment events and school visits, runs unattended for hours, and does not require a doctoral student to operate. Luna's preloaded repertoire, app-based control and natural-language task editor address that need directly, and the same machine remains available for field-HRI data collection between events."
+     }
+    ]
+   },
+   {
+    "_key": "img0093",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-3a61f3ac0dd13b410f59ed3198dd17fe01f8e5ea-2560x1440-png"
+    },
+    "alt": "LimX Luna performing on a live stage",
+    "caption": "The performance repertoire that serves outreach also generates naturalistic interaction data."
+   },
+   {
+    "_key": "img0094",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-c142a544b8b8e596cf924e2dd0b69e80d65e1d90-4096x2304-png"
+    },
+    "alt": "LimX Luna in a shopping mall environment",
+    "caption": "Retail activations put the robot in front of an unrecruited public — the condition field HRI is hardest to obtain."
+   },
+   {
+    "_key": "b0096",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0095",
+      "_type": "span",
+      "marks": [],
+      "text": "4. Where Luna is the wrong instrument"
+     }
+    ]
+   },
+   {
+    "_key": "b0098",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0097",
+      "_type": "span",
+      "marks": [],
+      "text": "Stating this plainly is more useful than a balanced-sounding hedge. We would advise against Luna for the following work."
+     }
+    ]
+   },
+   {
+    "_key": "hb0099",
+    "_type": "highlightBox",
+    "title": "Choose a different platform for",
+    "items": [
+     "Reinforcement-learning and locomotion research — the TRON 1 is built and documented for this, and is substantially cheaper to risk.",
+     "Dexterous manipulation — five arm degrees of freedom with a single wrist axis and a 3 kg payload is a hard ceiling.",
+     "Sim-to-real transfer studies — these depend on a well-supported simulation model and low-level joint access, which is the TRON line's remit.",
+     "On-board large-model inference — dual RK3588 is an embedded arrangement, not a discrete-GPU compute platform.",
+     "Outdoor or rough-terrain work — no ingress protection rating is published for Luna, unlike LimX's industrial-oriented machines.",
+     "Payload-carrying or physically interactive tasks — the 3 kg arm limit rules out most physical human-robot collaboration studies."
+    ]
+   },
+   {
+    "_key": "b0101",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0100",
+      "_type": "span",
+      "marks": [],
+      "text": "5. Choosing within the LimX range"
+     }
+    ]
+   },
+   {
+    "_key": "b0103",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0102",
+      "_type": "span",
+      "marks": [],
+      "text": "Because all four machines come from one manufacturer, the selection question is unusually clean. The table below maps research intent onto product."
+     }
+    ]
+   },
+   {
+    "_key": "it0104",
+    "_type": "infoTable",
+    "headers": [
+     "If your work is…",
+     "Choose",
+     "Why"
+    ],
+    "rows": [
+     {
+      "_key": "r0105",
+      "cells": [
+       "Field HRI, social robotics, outreach",
+       "Luna",
+       "Expressive 27-DoF body, interaction hardware, four-hour endurance, public-space safety set"
+      ]
+     },
+     {
+      "_key": "r0106",
+      "cells": [
+       "Imitation learning, motion retargeting",
+       "Luna",
+       "Video-to-Motion, kinesthetic teaching and cloud mocap arrive integrated"
+      ]
+     },
+     {
+      "_key": "r0107",
+      "cells": [
+       "Multi-robot coordination at scale",
+       "Luna",
+       "Supported synchronisation of 200+ units"
+      ]
+     },
+     {
+      "_key": "r0108",
+      "cells": [
+       "Reinforcement learning, bipedal locomotion",
+       "TRON 1",
+       "Positioned by LimX as the RL research gateway; multi-modal foot-end configurations"
+      ]
+     },
+     {
+      "_key": "r0109",
+      "cells": [
+       "General embodied AI, VLA training",
+       "OLI",
+       "Full-size general-purpose humanoid aimed at academic labs"
+      ]
+     },
+     {
+      "_key": "r0110",
+      "cells": [
+       "Mobile manipulation, multi-form research",
+       "TRON 2",
+       "Dual-arm, wheeled-leg and sole configurations on one modular base"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0124",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0112",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/products/limx-luna",
+      "blank": true
+     },
+     {
+      "_key": "l0115",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/products/limx-tron1",
+      "blank": true
+     },
+     {
+      "_key": "l0118",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/products/limx-oli",
+      "blank": true
+     },
+     {
+      "_key": "l0121",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/products/limx-tron2",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0111",
+      "_type": "span",
+      "marks": [],
+      "text": "Full specifications and availability for each machine are on the individual product pages: "
+     },
+     {
+      "_key": "s0113",
+      "_type": "span",
+      "marks": [
+       "l0112"
+      ],
+      "text": "LimX Luna"
+     },
+     {
+      "_key": "s0114",
+      "_type": "span",
+      "marks": [],
+      "text": ", "
+     },
+     {
+      "_key": "s0116",
+      "_type": "span",
+      "marks": [
+       "l0115"
+      ],
+      "text": "LimX TRON 1"
+     },
+     {
+      "_key": "s0117",
+      "_type": "span",
+      "marks": [],
+      "text": ", "
+     },
+     {
+      "_key": "s0119",
+      "_type": "span",
+      "marks": [
+       "l0118"
+      ],
+      "text": "LimX OLI"
+     },
+     {
+      "_key": "s0120",
+      "_type": "span",
+      "marks": [],
+      "text": " and "
+     },
+     {
+      "_key": "s0122",
+      "_type": "span",
+      "marks": [
+       "l0121"
+      ],
+      "text": "LimX TRON 2"
+     },
+     {
+      "_key": "s0123",
+      "_type": "span",
+      "marks": [],
+      "text": "."
+     }
+    ]
+   },
+   {
+    "_key": "b0126",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0125",
+      "_type": "span",
+      "marks": [],
+      "text": "6. Practical considerations before purchase"
+     }
+    ]
+   },
+   {
+    "_key": "b0128",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0127",
+      "_type": "span",
+      "marks": [],
+      "text": "Four points recur in procurement conversations and are worth settling in advance."
+     }
+    ]
+   },
+   {
+    "_key": "it0129",
+    "_type": "infoTable",
+    "headers": [
+     "Consideration",
+     "Detail"
+    ],
+    "rows": [
+     {
+      "_key": "r0130",
+      "cells": [
+       "Endurance and duty cycle",
+       "≈4 h battery life, ≈1 h charge, two slide-out modules supporting hot swap and battery-swap operation"
+      ]
+     },
+     {
+      "_key": "r0131",
+      "cells": [
+       "Recurring cost",
+       "The cloud motion-capture training platform requires a subscription — budget it separately from the capital cost"
+      ]
+     },
+     {
+      "_key": "r0132",
+      "cells": [
+       "Warranty",
+       "12 months as standard"
+      ]
+     },
+     {
+      "_key": "r0133",
+      "cells": [
+       "Software update path",
+       "OTA update and COSA supported; LimX UP app provides account login, device connection and basic control"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0135",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0134",
+      "_type": "span",
+      "marks": [],
+      "text": "On availability: Luna is not a stock item in Europe. MegaRobotics lists it as sourcing on request, which means lead time and final configuration are quoted per project rather than published. Groups working to a grant deadline should open that conversation early, and should confirm which end-effector option and which LimX Studio tier are included in any quotation."
+     }
+    ]
+   },
+   {
+    "_key": "b0137",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0136",
+      "_type": "span",
+      "marks": [],
+      "text": "7. Sources and method"
+     }
+    ]
+   },
+   {
+    "_key": "b0139",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0138",
+      "_type": "span",
+      "marks": [],
+      "text": "Every quantitative figure in this article is taken from LimX Dynamics' published specification for the Luna, cross-checked against the product brochure. We have not independently benchmarked the robot, and readers should treat performance claims — particularly the 200-unit synchronisation figure and the battery endurance under load — as manufacturer statements rather than measured results."
+     }
+    ]
+   },
+   {
+    "_key": "b0141",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0140",
+      "_type": "span",
+      "marks": [],
+      "text": "Where we make an engineering judgement rather than report a figure — for example that a single wrist axis constrains manipulation research — that judgement follows from the published kinematics and is flagged as our assessment, not the manufacturer's."
+     }
+    ]
+   },
+   {
+    "_key": "b0143",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0142",
+      "_type": "span",
+      "marks": [],
+      "text": "This evaluation was prepared by MegaRobotics, which distributes LimX Dynamics equipment in Europe. We have tried to make the negative findings as specific as the positive ones, and we recommend competing products within the same range where they fit better."
+     }
+    ]
+   },
+   {
+    "_key": "b0145",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0144",
+      "_type": "span",
+      "marks": [],
+      "text": "References"
+     }
+    ]
+   },
+   {
+    "_key": "b0148",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0146",
+      "_type": "link",
+      "href": "https://www.limxdynamics.com/en/products/luna",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0147",
+      "_type": "span",
+      "marks": [
+       "l0146"
+      ],
+      "text": "LimX Dynamics — Luna product page and specifications"
+     }
+    ]
+   },
+   {
+    "_key": "b0151",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0149",
+      "_type": "link",
+      "href": "https://www.limxdynamics.com/pdf/LimX_Luna_Brochure_20260629.pdf",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0150",
+      "_type": "span",
+      "marks": [
+       "l0149"
+      ],
+      "text": "LimX Dynamics — Luna brochure (PDF)"
+     }
+    ]
+   },
+   {
+    "_key": "b0154",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0152",
+      "_type": "link",
+      "href": "https://www.youtube.com/watch?v=rCCOgsQCO14",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0153",
+      "_type": "span",
+      "marks": [
+       "l0152"
+      ],
+      "text": "LimX Dynamics — \"Introducing LimX Luna: Limitless Art, Fluid Motion\" (official video)"
+     }
+    ]
+   },
+   {
+    "_key": "cb0155",
+    "_type": "ctaBox",
+    "title": "Evaluating a humanoid for your research programme?",
+    "description": "Tell us what you intend to study and we will tell you which platform fits — including when the answer is not the most expensive one.",
+    "buttonText": "Discuss your requirements",
+    "buttonUrl": "https://www.megarobotics.de/contact?inquiry=project&product=LimX%20Luna&manufacturer=LimX%20Dynamics"
+   }
+  ],
+  "de": [
+   {
+    "_key": "b0157",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0156",
+      "_type": "span",
+      "marks": [],
+      "text": "Zusammenfassung"
+     }
+    ]
+   },
+   {
+    "_key": "b0159",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0158",
+      "_type": "span",
+      "marks": [],
+      "text": "Humanoide Roboter in Vollgröße werden zunehmend an Forschungsgruppen vermarktet, doch die Plattformen unterscheiden sich weit stärker, als ihre ähnliche Silhouette vermuten lässt. Diese Bewertung untersucht den LimX Luna — einen 160 cm großen Humanoiden mit 27 Freiheitsgraden von LimX Dynamics — und stellt eine eng gefasste Frage: Wo hat er seinen Platz in einem Forschungs- und Entwicklungsprogramm, und wann sollte ein Labor etwas anderes kaufen?"
+     }
+    ]
+   },
+   {
+    "_key": "b0161",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0160",
+      "_type": "span",
+      "marks": [],
+      "text": "Unser Fazit: Luna ist ein starkes Instrument für ein bestimmtes Arbeitsfeld — Mensch-Roboter-Interaktion im öffentlichen Raum, Lernen aus Demonstration, Mehrrobotersteuerung sowie Lehre und Öffentlichkeitsarbeit — und eine schlechte Wahl für Lokomotions-, Reinforcement-Learning- oder Manipulationsforschung, für die LimX geeignetere Hardware anbietet. Wir belegen beide Hälften dieser Aussage."
+     }
+    ]
+   },
+   {
+    "_key": "vid0162",
+    "_type": "videoEmbed",
+    "url": "https://www.youtube.com/watch?v=rCCOgsQCO14",
+    "title": "Introducing LimX Luna: Limitless Art, Fluid Motion",
+    "caption": "Quelle: offizieller Kanal von LimX Dynamics"
+   },
+   {
+    "_key": "b0164",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0163",
+      "_type": "span",
+      "marks": [],
+      "text": "1. Was Luna ist — und was nicht"
+     }
+    ]
+   },
+   {
+    "_key": "b0166",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0165",
+      "_type": "span",
+      "marks": [],
+      "text": "Das gehört an den Anfang, denn Marketingkategorie und Forschungskategorie decken sich hier nicht. LimX positioniert Luna über Live-Performance und Publikumsinteraktion: Die hervorgehobenen Fähigkeiten sind Tanz-, Gymnastik- und Catwalk-Routinen, ein Gesichtsdisplay und die synchronisierte Steuerung großer Flotten. Die Anwendungsliste des Herstellers nennt Einkaufszentren, Museen, Freizeitparks, Bühnen und Markenevents noch vor der Forschung."
+     }
+    ]
+   },
+   {
+    "_key": "b0168",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0167",
+      "_type": "span",
+      "marks": [],
+      "text": "Demgegenüber vermarktet LimX den TRON 1 ausdrücklich als „The Gateway to Humanoid RL Research\" und den OLI als Allzweck-Humanoiden für Embodied-AI-Arbeiten. Ein Labor, das Luna als Reinforcement-Learning-Testplattform kauft, hat beim richtigen Hersteller die falsche Maschine gewählt."
+     }
+    ]
+   },
+   {
+    "_key": "b0170",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0169",
+      "_type": "span",
+      "marks": [],
+      "text": "Das macht Luna nicht forschungsirrelevant. Es macht ihn für andere Forschung relevant. Die folgenden Abschnitte trennen beides."
+     }
+    ]
+   },
+   {
+    "_key": "sg0171",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0172",
+      "value": "160 cm",
+      "label": "Höhe"
+     },
+     {
+      "_key": "st0173",
+      "value": "27",
+      "label": "Aktive Freiheitsgrade"
+     },
+     {
+      "_key": "st0174",
+      "value": "56 kg",
+      "label": "Masse mit Akku"
+     },
+     {
+      "_key": "st0175",
+      "value": "≈4 h",
+      "label": "Akkulaufzeit"
+     }
+    ]
+   },
+   {
+    "_key": "img0176",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-d37463cff016e7e753c9f3685f0d5fce18181c37-928x1280-png"
+    },
+    "alt": "LimX Luna Kopf- und Schulterdetail",
+    "caption": "Kopf- und Schulterbaugruppe mit Gesichtsdisplay und Textiloberfläche."
+   },
+   {
+    "_key": "b0178",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0177",
+      "_type": "span",
+      "marks": [],
+      "text": "2. Plattformarchitektur"
+     }
+    ]
+   },
+   {
+    "_key": "b0180",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0179",
+      "_type": "span",
+      "marks": [],
+      "text": "Über den Forschungswert eines Humanoiden entscheidet die Kinematik — es lohnt sich, genau hinzusehen. Luna verteilt 27 aktive Freiheitsgrade wie folgt."
+     }
+    ]
+   },
+   {
+    "_key": "it0181",
+    "_type": "infoTable",
+    "headers": [
+     "Kette",
+     "Freiheitsgrade",
+     "Bereich"
+    ],
+    "rows": [
+     {
+      "_key": "r0182",
+      "cells": [
+       "Bein (je)",
+       "6",
+       "Hüfte P −90°~175°, R −60°~90°, Y ±90°; Knie P +5°~140°; Sprunggelenk P −35°~58°, R ±25°"
+      ]
+     },
+     {
+      "_key": "r0183",
+      "cells": [
+       "Arm (je)",
+       "5",
+       "Schulter P −60°~175°, R −5°~110°, Y −90°~145°; Ellbogen P −30°~137°; Handgelenk Y ±90°"
+      ]
+     },
+     {
+      "_key": "r0184",
+      "cells": [
+       "Taille",
+       "3",
+       "P −45°~30°, R ±30°, Y ±90°"
+      ]
+     },
+     {
+      "_key": "r0185",
+      "cells": [
+       "Hals",
+       "2",
+       "P ±30°, Y ±45°"
+      ]
+     },
+     {
+      "_key": "r0186",
+      "cells": [
+       "Endeffektor",
+       "optional",
+       "Humanoide oder faustförmige Hand; Fünffingerhand (6 DoF) optional"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0188",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0187",
+      "_type": "span",
+      "marks": [],
+      "text": "Daraus folgen unmittelbar zwei Beobachtungen. Erstens: Fünf Freiheitsgrade pro Arm mit nur einer Handgelenksachse sind ein Performance-Arm, kein Manipulationsarm — es gibt weder Handgelenks-Pitch noch -Roll, die Orientierung des Endeffektors ist also stark eingeschränkt. Zusammen mit 3 kg maximaler Armtraglast ist Luna keine Plattform für Greif- oder Geschicklichkeitsforschung, sofern nicht die optionale Fünffingerhand mit 6 DoF montiert wird — und selbst dann bleibt das Handgelenk der Engpass."
+     }
+    ]
+   },
+   {
+    "_key": "b0190",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0189",
+      "_type": "span",
+      "marks": [],
+      "text": "Zweitens: Eine Taille mit drei und ein Hals mit zwei Freiheitsgraden sind für diese Klasse ungewöhnlich großzügig. Beide sind ausdrucks- statt lasttragende Merkmale — und genau das braucht Forschung zu Ganzkörpergestik, Blickverhalten und sozialer Signalgebung."
+     }
+    ]
+   },
+   {
+    "_key": "it0191",
+    "_type": "infoTable",
+    "headers": [
+     "Teilsystem",
+     "Spezifikation"
+    ],
+    "rows": [
+     {
+      "_key": "r0192",
+      "cells": [
+       "Bewegungssteuerung",
+       "RK3588 / 16 GB / 256 GB"
+      ]
+     },
+     {
+      "_key": "r0193",
+      "cells": [
+       "Wahrnehmungsrechner",
+       "RK3588 / 8 GB / 32 GB"
+      ]
+     },
+     {
+      "_key": "r0194",
+      "cells": [
+       "IMU",
+       "6-achsig, Eigenentwicklung"
+      ]
+     },
+     {
+      "_key": "r0195",
+      "cells": [
+       "Kamera",
+       "RGB"
+      ]
+     },
+     {
+      "_key": "r0196",
+      "cells": [
+       "Interaktionshardware",
+       "Gesichtsdisplay, Mikrofon, Lautsprecher, LED-Leiste"
+      ]
+     },
+     {
+      "_key": "r0197",
+      "cells": [
+       "Kommunikation",
+       "Wi-Fi 6, Bluetooth"
+      ]
+     },
+     {
+      "_key": "r0198",
+      "cells": [
+       "Spitzendrehmoment",
+       "200 N·m (drehmomentstärkstes Gelenk)"
+      ]
+     },
+     {
+      "_key": "r0199",
+      "cells": [
+       "Max. Gehgeschwindigkeit",
+       "5 km/h"
+      ]
+     },
+     {
+      "_key": "r0200",
+      "cells": [
+       "Kühlung",
+       "Luftkühlung der Hauptsteuerung"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0202",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0201",
+      "_type": "span",
+      "marks": [],
+      "text": "Zur Rechenleistung ein Vorbehalt: Zwei RK3588-Module sind eine leistungsfähige Embedded-Anordnung für einen Bewegungsstack und eine RGB-Wahrnehmungspipeline, aber dies ist keine Plattform mit dedizierter GPU. Gruppen, die große Vision-Language-Action-Modelle an Bord betreiben wollen, sollten die aktuellen Rechenoptionen beim Hersteller erfragen statt Reserven anzunehmen — das Wahrnehmungsmodul kommt mit 8 GB RAM."
+     }
+    ]
+   },
+   {
+    "_key": "b0204",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0203",
+      "_type": "span",
+      "marks": [],
+      "text": "3. Wo Luna seinen Platz in F&E hat"
+     }
+    ]
+   },
+   {
+    "_key": "b0206",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0205",
+      "_type": "span",
+      "marks": [],
+      "text": "3.1 Lernen aus Demonstration"
+     }
+    ]
+   },
+   {
+    "_key": "b0208",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0207",
+      "_type": "span",
+      "marks": [],
+      "text": "Der forschungsrelevanteste Funktionsumfang ist Lunas Demonstrationspipeline. Es gibt drei getrennte Wege, Bewegung in den Roboter zu bringen, ohne einen Regler zu schreiben."
+     }
+    ]
+   },
+   {
+    "_key": "fg0209",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0210",
+      "icon": "🎞️",
+      "title": "Video zu Bewegung",
+      "description": "Video importieren; das System analysiert die Bewegung und überträgt sie auf den Roboter — ein direkter Weg von menschlicher Bewegung zu Ganzkörper-Roboterbewegung."
+     },
+     {
+      "_key": "ft0211",
+      "icon": "🤲",
+      "title": "Kinästhetisches Anlernen",
+      "description": "Den Roboter physisch durch eine Trajektorie führen und aufzeichnen — das klassische Lead-Through-Verfahren, angewandt auf einen Humanoiden statt auf einen Arm."
+     },
+     {
+      "_key": "ft0212",
+      "icon": "📚",
+      "title": "Vorinstallierte Bibliothek",
+      "description": "20 Tanzroutinen und 20 Bewegungsaktionen sind ab Werk enthalten — nutzbar als Baselines oder als Ausgangspunkt für Modifikationen."
+     },
+     {
+      "_key": "ft0213",
+      "icon": "☁️",
+      "title": "Cloud-Motion-Capture-Training",
+      "description": "LimX Studio bietet eine gehostete Motion-Capture-Trainingspipeline. Zu beachten: Abonnement erforderlich, keine dauerhafte Lizenz."
+     }
+    ]
+   },
+   {
+    "_key": "img0214",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-e2ca33f459414dbd478ec895db306308df470c14-2880x1580-png"
+    },
+    "alt": "LimX Luna Video-zu-Bewegung",
+    "caption": "Video zu Bewegung: Bewegung wird aus gewöhnlichem Video extrahiert und auf den Roboter übertragen."
+   },
+   {
+    "_key": "b0216",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0215",
+      "_type": "span",
+      "marks": [],
+      "text": "Für eine Gruppe, die Imitationslernen, Motion-Retargeting oder das Mensch-Humanoid-Korrespondenzproblem untersucht, liegt hier das eigentliche Argument der Plattform. Der Wert liegt nicht in der Neuheit der Verfahren — Lead-Through-Lehren und videobasiertes Retargeting sind beide etabliert — sondern darin, dass sie integriert und supportet auf einem 27-DoF-Körper in Vollgröße ankommen. Das nimmt einem Projekt sehr viel undifferenzierte Ingenieursarbeit am Anfang ab."
+     }
+    ]
+   },
+   {
+    "_key": "img0217",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-0db588b49e0ae67ecdee0c2711b793e4809f45c2-2880x1580-png"
+    },
+    "alt": "LimX Luna kinästhetisches Anlernen",
+    "caption": "Kinästhetisches Anlernen: Die Gliedmaße wird direkt geführt, die Trajektorie aufgezeichnet."
+   },
+   {
+    "_key": "img0218",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-2013c8a700198cfb026c5a5a4b85641910c370ce-2880x1580-png"
+    },
+    "alt": "LimX Luna vorinstallierte Bewegungsroutinen",
+    "caption": "Zwanzig Tanzroutinen und zwanzig Bewegungsaktionen sind ab Werk enthalten und dienen als Baselines."
+   },
+   {
+    "_key": "b0220",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0219",
+      "_type": "span",
+      "marks": [],
+      "text": "3.2 Mensch-Roboter-Interaktion im öffentlichen Raum"
+     }
+    ]
+   },
+   {
+    "_key": "b0222",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0221",
+      "_type": "span",
+      "marks": [],
+      "text": "Ein Großteil der HRI-Literatur entsteht unter Laborbedingungen mit rekrutierten Teilnehmenden, die wissen, dass sie an einer Studie teilnehmen. Feld-HRI — nicht rekrutiertes Publikum, unkontrollierte Licht- und Akustikverhältnisse, Umstehendeneffekte, Kinder — ist schwerer durchzuführen, gerade weil die meisten Forschungshumanoiden zu fragil, zu aufwendig im Aufbau oder für den öffentlichen Raum zu beunruhigend sind."
+     }
+    ]
+   },
+   {
+    "_key": "b0224",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0223",
+      "_type": "span",
+      "marks": [],
+      "text": "Luna ist genau für diese Umgebung konstruiert, und die Merkmale, die ihn zu einem guten Performance-Roboter machen, machen ihn auch zu einem brauchbaren Feld-HRI-Instrument: Gesichtsdisplay und LED-Leiste zur verständlichen Zustandssignalisierung, multimodale Interaktion mit natürlichen Gestenantworten im Gespräch, rund vier Stunden Laufzeit mit wechselbaren Akkus und ein Transportkoffer als Standardzubehör."
+     }
+    ]
+   },
+   {
+    "_key": "img0225",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-c3d0f29b4a7745baf3bcabf258896a843cecc4a8-2500x1406-jpg"
+    },
+    "alt": "LimX Luna im Museumseinsatz",
+    "caption": "Museen und Science Center gehören zu LimX' genannten Einsatzumgebungen — und sind ein natürlicher Ort für Feld-HRI-Studien."
+   },
+   {
+    "_key": "b0227",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0226",
+      "_type": "span",
+      "marks": [],
+      "text": "3.3 Sicherheitsarchitektur für Studien mit Menschen"
+     }
+    ]
+   },
+   {
+    "_key": "b0229",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0228",
+      "_type": "span",
+      "marks": [],
+      "text": "Jede Studie, die einen 56 kg schweren Humanoiden in die Nähe ungeschulter Personen bringt, muss eine Ethikkommission überzeugen. Luna bringt vier unabhängige Sicherheitsmechanismen mit — ein wesentlicher Teil der Forschungsargumentation, weil es den Genehmigungsweg verkürzt."
+     }
+    ]
+   },
+   {
+    "_key": "fg0230",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0231",
+      "icon": "🛡️",
+      "title": "Aktive Sturzminderung",
+      "description": "Der Roboter versucht, den eigenen Fall kontrolliert abzufangen, statt ungebremst zu stürzen."
+     },
+     {
+      "_key": "ft0232",
+      "icon": "📡",
+      "title": "Externe Krafterkennung",
+      "description": "Kontakt und einwirkende Kräfte werden erkannt — Reaktion auf unerwarteten Menschkontakt möglich."
+     },
+     {
+      "_key": "ft0233",
+      "icon": "🛑",
+      "title": "Hardware-Not-Halt",
+      "description": "Ein physischer Not-Halt, unabhängig vom Software-Stack."
+     },
+     {
+      "_key": "ft0234",
+      "icon": "⚙️",
+      "title": "Sichere Aktionsübersteuerung",
+      "description": "Unsichere kommandierte Aktionen können vor der Ausführung abgefangen werden."
+     }
+    ]
+   },
+   {
+    "_key": "img0235",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-8ab8334bde2dcf2149dbcffac268d968c8740a8e-2880x1232-png"
+    },
+    "alt": "LimX Luna aktive Sturzminderung",
+    "caption": "Die aktive Sturzminderung ist einer von vier unabhängigen Sicherheitsmechanismen."
+   },
+   {
+    "_key": "b0237",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0236",
+      "_type": "span",
+      "marks": [],
+      "text": "Bemerkenswert ist hier der Hardware-Not-Halt, der nicht vom Software-Stack abhängt: Genau danach fragen institutionelle Prüfverfahren in der Praxis, und sein Fehlen ist ein häufiger Grund für die Rückweisung eines Einsatzkonzepts."
+     }
+    ]
+   },
+   {
+    "_key": "b0239",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0238",
+      "_type": "span",
+      "marks": [],
+      "text": "3.4 Mehrrobotersteuerung"
+     }
+    ]
+   },
+   {
+    "_key": "b0241",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0240",
+      "_type": "span",
+      "marks": [],
+      "text": "LimX gibt an, dass Luna die synchronisierte Steuerung von mehr als 200 Einheiten mit Millisekundenpräzision unterstützt. Nimmt man das für bare Münze, ist das eine ungewöhnliche Forschungsmöglichkeit. Mehrroboterforschung auf beinbasierten Plattformen scheitert sonst an Flottenkosten und am Fehlen einer supporteten Synchronisationsschicht — Gruppen arbeiten in Simulation und validieren an zwei oder drei Robotern."
+     }
+    ]
+   },
+   {
+    "_key": "b0243",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0242",
+      "_type": "span",
+      "marks": [],
+      "text": "Eine supportete 200-Einheiten-Synchronisation ist daher interessant für alle, die verteilte Regelung, Formationsverhalten oder kollektive Mensch-Roboter-Interaktion in Menschenmengen untersuchen. Wir würden die konkrete Zahl bis zur unabhängigen Replikation als Herstellerangabe behandeln und vor dem Experimentdesign klären, welche Netzwerkbedingungen sie voraussetzt."
+     }
+    ]
+   },
+   {
+    "_key": "b0245",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0244",
+      "_type": "span",
+      "marks": [],
+      "text": "3.5 Lehre und Öffentlichkeitsarbeit"
+     }
+    ]
+   },
+   {
+    "_key": "b0247",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0246",
+      "_type": "span",
+      "marks": [],
+      "text": "Der unglamouröseste Anwendungsfall ist der stärkste. Robotikfachbereiche brauchen dauerhaft eine Maschine, die Tage der offenen Tür, Recruiting-Events und Schulbesuche übersteht, stundenlang unbeaufsichtigt läuft und keine Promovierenden zur Bedienung braucht. Lunas vorinstalliertes Repertoire, die App-Steuerung und der natürlichsprachliche Task-Editor decken das direkt ab — und dieselbe Maschine steht zwischen den Veranstaltungen für Feld-HRI-Datenerhebung zur Verfügung."
+     }
+    ]
+   },
+   {
+    "_key": "img0248",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-3a61f3ac0dd13b410f59ed3198dd17fe01f8e5ea-2560x1440-png"
+    },
+    "alt": "LimX Luna auf einer Bühne",
+    "caption": "Das Performance-Repertoire, das der Öffentlichkeitsarbeit dient, erzeugt zugleich naturalistische Interaktionsdaten."
+   },
+   {
+    "_key": "img0249",
+    "_type": "image",
+    "asset": {
+     "_type": "reference",
+     "_ref": "image-c142a544b8b8e596cf924e2dd0b69e80d65e1d90-4096x2304-png"
+    },
+    "alt": "LimX Luna im Einkaufszentrum",
+    "caption": "Retail-Aktivierungen bringen den Roboter vor ein nicht rekrutiertes Publikum — die am schwersten zu erreichende Feld-HRI-Bedingung."
+   },
+   {
+    "_key": "b0251",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0250",
+      "_type": "span",
+      "marks": [],
+      "text": "4. Wofür Luna das falsche Instrument ist"
+     }
+    ]
+   },
+   {
+    "_key": "b0253",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0252",
+      "_type": "span",
+      "marks": [],
+      "text": "Das klar zu sagen ist nützlicher als eine ausgewogen klingende Relativierung. Von Luna würden wir für folgende Arbeiten abraten."
+     }
+    ]
+   },
+   {
+    "_key": "hb0254",
+    "_type": "highlightBox",
+    "title": "Wählen Sie eine andere Plattform für",
+    "items": [
+     "Reinforcement-Learning und Lokomotionsforschung — der TRON 1 ist dafür gebaut und dokumentiert und im Schadensfall deutlich günstiger.",
+     "Geschicklichkeitsmanipulation — fünf Armfreiheitsgrade mit einer Handgelenksachse und 3 kg Traglast sind eine harte Grenze.",
+     "Sim-to-Real-Transferstudien — diese hängen an einem gut gepflegten Simulationsmodell und Low-Level-Gelenkzugriff; das ist die Domäne der TRON-Reihe.",
+     "Inferenz großer Modelle an Bord — zwei RK3588 sind eine Embedded-Anordnung, keine Plattform mit dedizierter GPU.",
+     "Außeneinsatz oder unwegsames Gelände — für Luna ist keine IP-Schutzart veröffentlicht, anders als bei LimX' industrieorientierten Maschinen.",
+     "Traglast- oder physisch interaktive Aufgaben — die 3-kg-Grenze schließt die meisten Studien zur physischen Mensch-Roboter-Kollaboration aus."
+    ]
+   },
+   {
+    "_key": "b0256",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0255",
+      "_type": "span",
+      "marks": [],
+      "text": "5. Auswahl innerhalb des LimX-Programms"
+     }
+    ]
+   },
+   {
+    "_key": "b0258",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0257",
+      "_type": "span",
+      "marks": [],
+      "text": "Da alle vier Maschinen von einem Hersteller stammen, ist die Auswahlfrage ungewöhnlich klar. Die Tabelle ordnet Forschungsabsicht und Produkt einander zu."
+     }
+    ]
+   },
+   {
+    "_key": "it0259",
+    "_type": "infoTable",
+    "headers": [
+     "Wenn Ihre Arbeit … ist",
+     "Wählen Sie",
+     "Warum"
+    ],
+    "rows": [
+     {
+      "_key": "r0260",
+      "cells": [
+       "Feld-HRI, Sozialrobotik, Outreach",
+       "Luna",
+       "Ausdrucksstarker 27-DoF-Körper, Interaktionshardware, vier Stunden Laufzeit, Sicherheitspaket für den öffentlichen Raum"
+      ]
+     },
+     {
+      "_key": "r0261",
+      "cells": [
+       "Imitationslernen, Motion-Retargeting",
+       "Luna",
+       "Video zu Bewegung, kinästhetisches Anlernen und Cloud-Mocap integriert"
+      ]
+     },
+     {
+      "_key": "r0262",
+      "cells": [
+       "Mehrrobotersteuerung im Maßstab",
+       "Luna",
+       "Supportete Synchronisation von über 200 Einheiten"
+      ]
+     },
+     {
+      "_key": "r0263",
+      "cells": [
+       "Reinforcement Learning, zweibeinige Lokomotion",
+       "TRON 1",
+       "Von LimX als RL-Forschungseinstieg positioniert; multimodale Fußenden"
+      ]
+     },
+     {
+      "_key": "r0264",
+      "cells": [
+       "Allgemeine Embodied AI, VLA-Training",
+       "OLI",
+       "Allzweck-Humanoid in Vollgröße für akademische Labore"
+      ]
+     },
+     {
+      "_key": "r0265",
+      "cells": [
+       "Mobile Manipulation, Multiform-Forschung",
+       "TRON 2",
+       "Doppelarm-, Radbein- und Sohlen-Konfiguration auf einer modularen Basis"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0279",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0267",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/de/products/limx-luna",
+      "blank": true
+     },
+     {
+      "_key": "l0270",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/de/products/limx-tron1",
+      "blank": true
+     },
+     {
+      "_key": "l0273",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/de/products/limx-oli",
+      "blank": true
+     },
+     {
+      "_key": "l0276",
+      "_type": "link",
+      "href": "https://www.megarobotics.de/de/products/limx-tron2",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0266",
+      "_type": "span",
+      "marks": [],
+      "text": "Vollständige Spezifikationen und Verfügbarkeit finden Sie auf den Produktseiten: "
+     },
+     {
+      "_key": "s0268",
+      "_type": "span",
+      "marks": [
+       "l0267"
+      ],
+      "text": "LimX Luna"
+     },
+     {
+      "_key": "s0269",
+      "_type": "span",
+      "marks": [],
+      "text": ", "
+     },
+     {
+      "_key": "s0271",
+      "_type": "span",
+      "marks": [
+       "l0270"
+      ],
+      "text": "LimX TRON 1"
+     },
+     {
+      "_key": "s0272",
+      "_type": "span",
+      "marks": [],
+      "text": ", "
+     },
+     {
+      "_key": "s0274",
+      "_type": "span",
+      "marks": [
+       "l0273"
+      ],
+      "text": "LimX OLI"
+     },
+     {
+      "_key": "s0275",
+      "_type": "span",
+      "marks": [],
+      "text": " und "
+     },
+     {
+      "_key": "s0277",
+      "_type": "span",
+      "marks": [
+       "l0276"
+      ],
+      "text": "LimX TRON 2"
+     },
+     {
+      "_key": "s0278",
+      "_type": "span",
+      "marks": [],
+      "text": "."
+     }
+    ]
+   },
+   {
+    "_key": "b0281",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0280",
+      "_type": "span",
+      "marks": [],
+      "text": "6. Praktische Überlegungen vor dem Kauf"
+     }
+    ]
+   },
+   {
+    "_key": "b0283",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0282",
+      "_type": "span",
+      "marks": [],
+      "text": "Vier Punkte tauchen in Beschaffungsgesprächen immer wieder auf und sollten vorab geklärt sein."
+     }
+    ]
+   },
+   {
+    "_key": "it0284",
+    "_type": "infoTable",
+    "headers": [
+     "Aspekt",
+     "Detail"
+    ],
+    "rows": [
+     {
+      "_key": "r0285",
+      "cells": [
+       "Laufzeit und Einsatzzyklus",
+       "≈4 h Akkulaufzeit, ≈1 h Ladezeit, zwei ausziehbare Module für Hot-Swap- und Wechselakkubetrieb"
+      ]
+     },
+     {
+      "_key": "r0286",
+      "cells": [
+       "Laufende Kosten",
+       "Die Cloud-Motion-Capture-Plattform erfordert ein Abonnement — getrennt von den Investitionskosten einplanen"
+      ]
+     },
+     {
+      "_key": "r0287",
+      "cells": [
+       "Garantie",
+       "12 Monate serienmäßig"
+      ]
+     },
+     {
+      "_key": "r0288",
+      "cells": [
+       "Software-Aktualisierung",
+       "OTA-Update und COSA unterstützt; die LimX-UP-App bietet Konto-Login, Geräteverbindung und Basissteuerung"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0290",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0289",
+      "_type": "span",
+      "marks": [],
+      "text": "Zur Verfügbarkeit: Luna ist in Europa kein Lagerartikel. MegaRobotics führt ihn als Beschaffung auf Anfrage — Lieferzeit und Endkonfiguration werden also projektbezogen angeboten statt veröffentlicht. Gruppen mit Fördermittelfristen sollten dieses Gespräch früh beginnen und klären, welche Endeffektor-Option und welche LimX-Studio-Stufe in einem Angebot enthalten sind."
+     }
+    ]
+   },
+   {
+    "_key": "b0292",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0291",
+      "_type": "span",
+      "marks": [],
+      "text": "7. Quellen und Methodik"
+     }
+    ]
+   },
+   {
+    "_key": "b0294",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0293",
+      "_type": "span",
+      "marks": [],
+      "text": "Jede quantitative Angabe in diesem Artikel stammt aus der veröffentlichten Spezifikation von LimX Dynamics zum Luna, abgeglichen mit der Produktbroschüre. Wir haben den Roboter nicht unabhängig vermessen; Leistungsangaben — insbesondere die 200-Einheiten-Synchronisation und die Akkulaufzeit unter Last — sind als Herstellerangaben zu behandeln, nicht als Messergebnisse."
+     }
+    ]
+   },
+   {
+    "_key": "b0296",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0295",
+      "_type": "span",
+      "marks": [],
+      "text": "Wo wir eine ingenieurtechnische Einschätzung abgeben statt eine Angabe zu referieren — etwa dass eine einzelne Handgelenksachse die Manipulationsforschung einschränkt — folgt diese aus der veröffentlichten Kinematik und ist als unsere Bewertung gekennzeichnet, nicht als die des Herstellers."
+     }
+    ]
+   },
+   {
+    "_key": "b0298",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0297",
+      "_type": "span",
+      "marks": [],
+      "text": "Diese Bewertung wurde von MegaRobotics erstellt, das LimX-Dynamics-Technik in Europa vertreibt. Wir haben versucht, die kritischen Befunde ebenso konkret zu fassen wie die positiven, und empfehlen konkurrierende Produkte aus demselben Programm, wo sie besser passen."
+     }
+    ]
+   },
+   {
+    "_key": "b0300",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0299",
+      "_type": "span",
+      "marks": [],
+      "text": "Quellen"
+     }
+    ]
+   },
+   {
+    "_key": "b0303",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0301",
+      "_type": "link",
+      "href": "https://www.limxdynamics.com/en/products/luna",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0302",
+      "_type": "span",
+      "marks": [
+       "l0301"
+      ],
+      "text": "LimX Dynamics — Luna Produktseite und Spezifikationen"
+     }
+    ]
+   },
+   {
+    "_key": "b0306",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0304",
+      "_type": "link",
+      "href": "https://www.limxdynamics.com/pdf/LimX_Luna_Brochure_20260629.pdf",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0305",
+      "_type": "span",
+      "marks": [
+       "l0304"
+      ],
+      "text": "LimX Dynamics — Luna Broschüre (PDF)"
+     }
+    ]
+   },
+   {
+    "_key": "b0309",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [
+     {
+      "_key": "l0307",
+      "_type": "link",
+      "href": "https://www.youtube.com/watch?v=rCCOgsQCO14",
+      "blank": true
+     }
+    ],
+    "children": [
+     {
+      "_key": "s0308",
+      "_type": "span",
+      "marks": [
+       "l0307"
+      ],
+      "text": "LimX Dynamics — „Introducing LimX Luna: Limitless Art, Fluid Motion\" (offizielles Video)"
+     }
+    ]
+   },
+   {
+    "_key": "cb0310",
+    "_type": "ctaBox",
+    "title": "Humanoiden für Ihr Forschungsprogramm evaluieren?",
+    "description": "Sagen Sie uns, was Sie untersuchen wollen — wir sagen Ihnen, welche Plattform passt. Auch dann, wenn die Antwort nicht die teuerste ist.",
+    "buttonText": "Anforderungen besprechen",
+    "buttonUrl": "https://www.megarobotics.de/de/contact?inquiry=project&product=LimX%20Luna&manufacturer=LimX%20Dynamics"
+   }
+  ]
+ },
+ "category": {
+  "_type": "reference",
+  "_ref": "8b239458-c99c-4207-8600-6ee4f1b72209"
+ },
+ "author": {
+  "_type": "reference",
+  "_ref": "6e037607-3f70-4edb-a520-d61d1622875c"
+ },
+ "publishedAt": "2026-08-03T09:00:00.000Z",
+ "readTime": 12,
+ "featured": true,
+ "seo": {
+  "metaTitle": {
+   "en": "LimX Luna for R&D: Technical Evaluation",
+   "de": "LimX Luna für F&E: technische Bewertung"
+  },
+  "metaDescription": {
+   "en": "Where the LimX Luna humanoid genuinely serves research — field HRI, imitation learning, multi-robot control — and where TRON 1 or OLI is the better buy.",
+   "de": "Wo der Humanoid LimX Luna der Forschung wirklich dient — Feld-HRI, Imitationslernen, Mehrrobotersteuerung — und wann TRON 1 oder OLI besser passt."
+  },
+  "keywords": [
+   "LimX Luna",
+   "humanoid robot research",
+   "human-robot interaction",
+   "learning from demonstration",
+   "imitation learning",
+   "field HRI",
+   "LimX Dynamics",
+   "research humanoid",
+   "multi-robot coordination",
+   "humanoider Roboter Forschung",
+   "Mensch-Roboter-Interaktion"
+  ]
+ }
+}

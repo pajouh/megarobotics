@@ -448,6 +448,40 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Dark panels inside prose (.mr-on-dark — quote boxes, CTA boxes).
+ *
+ * The .prose-light rules above select by element, so they carry specificity
+ * (0,1,1) and outrank Tailwind's single-class utilities (0,1,0). A heading
+ * written as `<h3 className="text-white">` inside prose therefore renders
+ * var(--mr-ink) instead — and because --mr-ink and --mr-dark are both #16181d,
+ * that is invisible text on an identically coloured panel rather than a subtle
+ * mismatch. These rules are (0,2,1)/(0,3,0) so they win, and they are the one
+ * place to change on-dark prose colours.
+ *
+ * Add .mr-on-dark to any dark container placed inside .prose-light. */
+.prose-light .mr-on-dark h2,
+.prose-light .mr-on-dark h3,
+.prose-light .mr-on-dark h4 {
+  color: var(--mr-ink-on-dark);
+}
+.prose-light .mr-on-dark p,
+.prose-light .mr-on-dark li,
+.prose-light .mr-on-dark ul,
+.prose-light .mr-on-dark ol {
+  color: var(--mr-steel-on-dark);
+}
+/* Lead line of a pull quote — brighter than the supporting text around it. */
+.prose-light .mr-on-dark .mr-on-dark-lead {
+  color: var(--mr-ink-on-dark);
+}
+.prose-light .mr-on-dark a {
+  color: var(--mr-ink-on-dark);
+}
+/* Solid accent button: dark label on the accent fill, and on the white hover. */
+.prose-light .mr-on-dark a.mr-on-dark-btn {
+  color: var(--mr-dark);
+}
+
 /* ------------------------------------------------------------
  * Motion — restrained, once, physical
  * ---------------------------------------------------------- */
