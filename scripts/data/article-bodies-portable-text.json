@@ -1,0 +1,3928 @@
+{
+ "pudu-d5-w": {
+  "en": [
+   {
+    "_key": "b0001",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0002",
+      "_type": "span",
+      "marks": [],
+      "text": "PUDU D5 (Legs)"
+     }
+    ]
+   },
+   {
+    "_key": "b0003",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0004",
+      "_type": "span",
+      "marks": [],
+      "text": "The full-leg configuration delivers maximum terrain adaptability. It handles stairs, steep slopes and uneven surfaces using advanced bionic gait algorithms and IMU-driven stabilisation for smooth continuous operation."
+     }
+    ]
+   },
+   {
+    "_key": "b0005",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0006",
+      "_type": "span",
+      "marks": [],
+      "text": "PUDU D5-W (Hybrid)"
+     }
+    ]
+   },
+   {
+    "_key": "b0007",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0008",
+      "_type": "span",
+      "marks": [],
+      "text": "The wheeled hybrid configuration optimises performance across mixed surfaces, switching seamlessly between efficient wheeled drive and dynamic legged mobility for maximum operational flexibility."
+     }
+    ]
+   },
+   {
+    "_key": "b0009",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0010",
+      "_type": "span",
+      "marks": [],
+      "text": "Engineered for real-world challenges"
+     }
+    ]
+   },
+   {
+    "_key": "sg0011",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0012",
+      "value": "275",
+      "label": "TOPS compute"
+     },
+     {
+      "_key": "st0013",
+      "value": "5 m/s",
+      "label": "Top speed"
+     },
+     {
+      "_key": "st0014",
+      "value": "30 kg",
+      "label": "Payload capacity"
+     },
+     {
+      "_key": "st0015",
+      "value": "14 km",
+      "label": "Range per charge"
+     }
+    ]
+   },
+   {
+    "_key": "sg0016",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0017",
+      "value": "30°",
+      "label": "Gradeability"
+     },
+     {
+      "_key": "st0018",
+      "value": "25 cm",
+      "label": "Step height"
+     },
+     {
+      "_key": "st0019",
+      "value": "IP67",
+      "label": "Weather protection"
+     },
+     {
+      "_key": "st0020",
+      "value": "1 million m²",
+      "label": "Navigable area"
+     }
+    ]
+   },
+   {
+    "_key": "b0021",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0022",
+      "_type": "span",
+      "marks": [],
+      "text": "Advanced autonomous intelligence"
+     }
+    ]
+   },
+   {
+    "_key": "fg0023",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0024",
+      "icon": "🧠",
+      "title": "Automotive-grade computing",
+      "description": "A dual-processor architecture pairing NVIDIA Orin with RK3588 delivers 275 TOPS for real-time SLAM, 3D reconstruction and autonomous path planning."
+     },
+     {
+      "_key": "ft0025",
+      "icon": "🏔️",
+      "title": "Terrain mobility",
+      "description": "Hybrid wheel-leg locomotion reaches 5 m/s while clearing 30° inclines and 25 cm obstacles under IMU stabilisation."
+     },
+     {
+      "_key": "ft0026",
+      "icon": "👁️",
+      "title": "360° perception",
+      "description": "Two 192-line spherical LiDARs and four fisheye cameras build dense 3D point clouds for centimetre-accurate localisation."
+     },
+     {
+      "_key": "ft0027",
+      "icon": "🎤",
+      "title": "Natural interaction",
+      "description": "Supports over 10 hand gestures and carries a 6-microphone array with AI noise suppression for reliable voice control in industrial settings."
+     },
+     {
+      "_key": "ft0028",
+      "icon": "🔋",
+      "title": "Long runtime",
+      "description": "A high-strength aluminium structure carries a steady 30 kg payload with over 2 hours of continuous operation and 14 km of range per charge."
+     },
+     {
+      "_key": "ft0029",
+      "icon": "❄️",
+      "title": "All-weather durability",
+      "description": "IP67 protection with cold start at −10 °C and dependable operation from −20 °C to 55 °C in all conditions."
+     }
+    ]
+   },
+   {
+    "_key": "b0030",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0031",
+      "_type": "span",
+      "marks": [],
+      "text": "Built for demanding environments"
+     }
+    ]
+   },
+   {
+    "_key": "b0032",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0033",
+      "_type": "span",
+      "marks": [],
+      "text": "The D5 series runs complete autonomous workflows — departure, patrol, obstacle negotiation and return to the charging dock — across a range of industrial scenarios."
+     }
+    ]
+   },
+   {
+    "_key": "hb0034",
+    "_type": "highlightBox",
+    "title": "Application areas",
+    "items": [
+     "Industrial inspection",
+     "Security patrol",
+     "Logistics support",
+     "Airport operations",
+     "Metro systems",
+     "Power plants",
+     "Emergency response",
+     "Research & development",
+     "Campus surveillance",
+     "Warehouse monitoring"
+    ]
+   },
+   {
+    "_key": "qb0035",
+    "_type": "quoteBox",
+    "quote": "The PUDU D5 series marks a significant step forward in our vision for robotics. The D5 successfully brings advanced autonomy, robust mobility and intelligent interaction to complex outdoor and industrial scenarios.",
+    "author": "Felix Zhang, Founder & CEO, Pudu Robotics"
+   },
+   {
+    "_key": "b0036",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0037",
+      "_type": "span",
+      "marks": [],
+      "text": "Full specifications"
+     }
+    ]
+   },
+   {
+    "_key": "it0038",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0039",
+      "cells": [
+       "Processing unit",
+       "NVIDIA Orin + RK3588 (275 TOPS)"
+      ]
+     },
+     {
+      "_key": "r0040",
+      "cells": [
+       "LiDAR system",
+       "Two 192-line spherical LiDARs"
+      ]
+     },
+     {
+      "_key": "r0041",
+      "cells": [
+       "Camera array",
+       "4× 120° fisheye cameras"
+      ]
+     },
+     {
+      "_key": "r0042",
+      "cells": [
+       "Audio system",
+       "6-microphone array with AI noise suppression"
+      ]
+     },
+     {
+      "_key": "r0043",
+      "cells": [
+       "Top speed",
+       "5 m/s"
+      ]
+     },
+     {
+      "_key": "r0044",
+      "cells": [
+       "Payload capacity",
+       "30 kg"
+      ]
+     },
+     {
+      "_key": "r0045",
+      "cells": [
+       "Navigation coverage",
+       "Up to 1,000,000 m²"
+      ]
+     },
+     {
+      "_key": "r0046",
+      "cells": [
+       "Range per charge",
+       "14 km"
+      ]
+     },
+     {
+      "_key": "r0047",
+      "cells": [
+       "Gradeability",
+       "Up to 30°"
+      ]
+     },
+     {
+      "_key": "r0048",
+      "cells": [
+       "Obstacle clearance",
+       "25 cm"
+      ]
+     },
+     {
+      "_key": "r0049",
+      "cells": [
+       "Runtime at full load",
+       "Over 2 hours"
+      ]
+     },
+     {
+      "_key": "r0050",
+      "cells": [
+       "Ingress protection",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0051",
+      "cells": [
+       "Operating temperature",
+       "−20 °C to +55 °C"
+      ]
+     },
+     {
+      "_key": "r0052",
+      "cells": [
+       "Cold-start capability",
+       "−10 °C"
+      ]
+     },
+     {
+      "_key": "r0053",
+      "cells": [
+       "Gesture control",
+       "10+ commands (start, stop, follow, recall, etc.)"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "cb0054",
+    "_type": "ctaBox",
+    "title": "Interested in the PUDU D5 series?",
+    "description": "Find out how autonomous quadruped robots can transform your industrial operations, security and logistics."
+   }
+  ],
+  "de": [
+   {
+    "_key": "b0001",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0002",
+      "_type": "span",
+      "marks": [],
+      "text": "PUDU D5 (Beine)"
+     }
+    ]
+   },
+   {
+    "_key": "b0003",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0004",
+      "_type": "span",
+      "marks": [],
+      "text": "Die vollständige Bein-Konfiguration bietet maximale Geländeanpassung. Bewältigt Treppen, steile Hänge und unebene Oberflächen mit fortschrittlichen bionischen Gangalgorithmen und IMU-gesteuerter Stabilisierung für reibungslosen Dauerbetrieb."
+     }
+    ]
+   },
+   {
+    "_key": "b0005",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0006",
+      "_type": "span",
+      "marks": [],
+      "text": "PUDU D5-W (Hybrid)"
+     }
+    ]
+   },
+   {
+    "_key": "b0007",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0008",
+      "_type": "span",
+      "marks": [],
+      "text": "Die Rad-Hybrid-Konfiguration optimiert die Leistung auf gemischten Oberflächen. Nahtloser Wechsel zwischen effizientem Radantrieb und dynamischer Beinmobilität für maximale Betriebsflexibilität."
+     }
+    ]
+   },
+   {
+    "_key": "b0009",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0010",
+      "_type": "span",
+      "marks": [],
+      "text": "Entwickelt für reale Herausforderungen"
+     }
+    ]
+   },
+   {
+    "_key": "sg0011",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0012",
+      "value": "275",
+      "label": "TOPS Rechenleistung"
+     },
+     {
+      "_key": "st0013",
+      "value": "5 m/s",
+      "label": "Höchstgeschwindigkeit"
+     },
+     {
+      "_key": "st0014",
+      "value": "30 kg",
+      "label": "Nutzlastkapazität"
+     },
+     {
+      "_key": "st0015",
+      "value": "14 km",
+      "label": "Reichweite pro Ladung"
+     }
+    ]
+   },
+   {
+    "_key": "sg0016",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0017",
+      "value": "30°",
+      "label": "Steigfähigkeit"
+     },
+     {
+      "_key": "st0018",
+      "value": "25 cm",
+      "label": "Treppenstufenhöhe"
+     },
+     {
+      "_key": "st0019",
+      "value": "IP67",
+      "label": "Wetterschutz"
+     },
+     {
+      "_key": "st0020",
+      "value": "1 Mio. m²",
+      "label": "Navigationsfläche"
+     }
+    ]
+   },
+   {
+    "_key": "b0021",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0022",
+      "_type": "span",
+      "marks": [],
+      "text": "Fortschrittliche autonome Intelligenz"
+     }
+    ]
+   },
+   {
+    "_key": "fg0023",
+    "_type": "featureGrid",
+    "features": [
+     {
+      "_key": "ft0024",
+      "icon": "🧠",
+      "title": "Automotive-Grade Computing",
+      "description": "Dual-Prozessor-Architektur mit NVIDIA Orin und RK3588 liefert 275 TOPS für Echtzeit-SLAM, 3D-Rekonstruktion und autonome Pfadplanung."
+     },
+     {
+      "_key": "ft0025",
+      "icon": "🏔️",
+      "title": "Geländemobilität",
+      "description": "Hybride Rad-Bein-Fortbewegung erreicht 5 m/s bei gleichzeitiger Bewältigung von 30°-Steigungen und 25 cm hohen Hindernissen mit IMU-Stabilisierung."
+     },
+     {
+      "_key": "ft0026",
+      "icon": "👁️",
+      "title": "360°-Wahrnehmung",
+      "description": "Zwei 192-Linien-sphärische LiDARs und vier Fischaugen-Kameras erzeugen dichte 3D-Punktwolken für zentimetergenaue Lokalisierung."
+     },
+     {
+      "_key": "ft0027",
+      "icon": "🎤",
+      "title": "Natürliche Interaktion",
+      "description": "Unterstützt über 10 Handgesten und verfügt über ein 6-Mikrofon-Array mit KI-Rauschunterdrückung für robuste Sprachsteuerung in Industrieumgebungen."
+     },
+     {
+      "_key": "ft0028",
+      "icon": "🔋",
+      "title": "Lange Laufzeit",
+      "description": "Hochfeste Aluminiumkonstruktion ermöglicht stabile 30 kg Nutzlast mit über 2 Stunden Dauerbetrieb und 14 km Reichweite pro Ladung."
+     },
+     {
+      "_key": "ft0029",
+      "icon": "❄️",
+      "title": "Allwetter-Beständigkeit",
+      "description": "IP67-Schutz mit Kaltstart bei -10°C und zuverlässigem Betrieb von -20°C bis 55°C unter allen Bedingungen."
+     }
+    ]
+   },
+   {
+    "_key": "b0030",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0031",
+      "_type": "span",
+      "marks": [],
+      "text": "Konzipiert für anspruchsvolle Umgebungen"
+     }
+    ]
+   },
+   {
+    "_key": "b0032",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0033",
+      "_type": "span",
+      "marks": [],
+      "text": "Die D5 Serie bewältigt vollständige autonome Arbeitsabläufe einschließlich Abfahrt, Patrouille, Hindernisbewältigung und Rückkehr zur Ladestation in verschiedenen industriellen Szenarien."
+     }
+    ]
+   },
+   {
+    "_key": "hb0034",
+    "_type": "highlightBox",
+    "title": "Einsatzbereiche",
+    "items": [
+     "Industrieinspektion",
+     "Sicherheitspatrouille",
+     "Logistikunterstützung",
+     "Flughafenbetrieb",
+     "U-Bahn-Systeme",
+     "Kraftwerke",
+     "Notfalleinsatz",
+     "Forschung & Entwicklung",
+     "Campus-Überwachung",
+     "Lagerüberwachung"
+    ]
+   },
+   {
+    "_key": "qb0035",
+    "_type": "quoteBox",
+    "quote": "Die PUDU D5 Serie stellt einen bedeutenden Fortschritt in unserer Vision für Robotik dar. Der D5 bringt erfolgreich fortschrittliche Autonomie, robuste Mobilität und intelligente Interaktion in komplexe Außen- und Industrieszenarien.",
+    "author": "Felix Zhang, Gründer & CEO, Pudu Robotics"
+   },
+   {
+    "_key": "b0036",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0037",
+      "_type": "span",
+      "marks": [],
+      "text": "Vollständige Spezifikationen"
+     }
+    ]
+   },
+   {
+    "_key": "it0038",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0039",
+      "cells": [
+       "Prozessoreinheit",
+       "NVIDIA Orin + RK3588 (275 TOPS)"
+      ]
+     },
+     {
+      "_key": "r0040",
+      "cells": [
+       "LiDAR-System",
+       "Zwei 192-Linien sphärische LiDARs"
+      ]
+     },
+     {
+      "_key": "r0041",
+      "cells": [
+       "Kamera-Array",
+       "4× 120° Fischaugen-Kameras"
+      ]
+     },
+     {
+      "_key": "r0042",
+      "cells": [
+       "Audiosystem",
+       "6-Mikrofon-Array mit KI-Rauschunterdrückung"
+      ]
+     },
+     {
+      "_key": "r0043",
+      "cells": [
+       "Höchstgeschwindigkeit",
+       "5 m/s"
+      ]
+     },
+     {
+      "_key": "r0044",
+      "cells": [
+       "Nutzlastkapazität",
+       "30 kg"
+      ]
+     },
+     {
+      "_key": "r0045",
+      "cells": [
+       "Navigationsabdeckung",
+       "Bis zu 1.000.000 m²"
+      ]
+     },
+     {
+      "_key": "r0046",
+      "cells": [
+       "Reichweite pro Ladung",
+       "14 km"
+      ]
+     },
+     {
+      "_key": "r0047",
+      "cells": [
+       "Steigfähigkeit",
+       "Bis zu 30°"
+      ]
+     },
+     {
+      "_key": "r0048",
+      "cells": [
+       "Hindernisüberwindung",
+       "25 cm"
+      ]
+     },
+     {
+      "_key": "r0049",
+      "cells": [
+       "Laufzeit bei Volllast",
+       "Über 2 Stunden"
+      ]
+     },
+     {
+      "_key": "r0050",
+      "cells": [
+       "Umweltschutz",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0051",
+      "cells": [
+       "Betriebstemperatur",
+       "-20°C bis +55°C"
+      ]
+     },
+     {
+      "_key": "r0052",
+      "cells": [
+       "Kaltstart-Fähigkeit",
+       "-10°C"
+      ]
+     },
+     {
+      "_key": "r0053",
+      "cells": [
+       "Gestensteuerung",
+       "10+ Befehle (Start, Stopp, Folgen, Rückruf, etc.)"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "cb0054",
+    "_type": "ctaBox",
+    "title": "Interesse an der PUDU D5 Serie?",
+    "description": "Entdecken Sie, wie autonome Vierbeinroboter Ihre industriellen Abläufe, Sicherheit und Logistik transformieren können."
+   }
+  ]
+ },
+ "quadruped-robots-applications": {
+  "en": [
+   {
+    "_key": "sg0055",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0056",
+      "value": "12+",
+      "label": "Industry Sectors"
+     },
+     {
+      "_key": "st0057",
+      "value": "65K",
+      "label": "Units Shipped (2025)"
+     },
+     {
+      "_key": "st0058",
+      "value": "70%",
+      "label": "China Market Share"
+     }
+    ]
+   },
+   {
+    "_key": "b0059",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0060",
+      "_type": "span",
+      "marks": [],
+      "text": "INDUSTRIAL APPLICATIONS"
+     }
+    ]
+   },
+   {
+    "_key": "b0061",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0062",
+      "_type": "span",
+      "marks": [],
+      "text": "From power substations to offshore oil platforms, quadruped robots are transforming how industries approach inspection, security, and automation."
+     }
+    ]
+   },
+   {
+    "_key": "b0063",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0064",
+      "_type": "span",
+      "marks": [],
+      "text": "Power Grid & Substations"
+     }
+    ]
+   },
+   {
+    "_key": "b0065",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0066",
+      "_type": "span",
+      "marks": [],
+      "text": "Autonomous inspection of 220kV-1100kV substations, transformer rooms, and power corridors. Robots navigate stairs, cable trays, and equipment rooms while monitoring asset conditions."
+     }
+    ]
+   },
+   {
+    "_key": "hb0067",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Thermal Imaging",
+     "Meter Reading",
+     "Gas Detection",
+     "Defect Detection",
+     "24/7 Patrol"
+    ]
+   },
+   {
+    "_key": "it0068",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0069",
+      "cells": [
+       "Unitree Robotics",
+       "B2 / B1"
+      ]
+     },
+     {
+      "_key": "r0070",
+      "cells": [
+       "DEEP Robotics",
+       "X30 / X20"
+      ]
+     },
+     {
+      "_key": "r0071",
+      "cells": [
+       "Boston Dynamics",
+       "Spot"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0072",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0073",
+      "_type": "span",
+      "marks": [],
+      "text": "Emergency Rescue & Firefighting"
+     }
+    ]
+   },
+   {
+    "_key": "b0074",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0075",
+      "_type": "span",
+      "marks": [],
+      "text": "First responder support in collapsed structures, fire scenes, and hazardous environments. Water cannons with 60m range and 40L/s flow rate for active firefighting."
+     }
+    ]
+   },
+   {
+    "_key": "hb0076",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Victim Search",
+     "Structure Survey",
+     "Gas Monitoring",
+     "Fire Suppression",
+     "Debris Navigation"
+    ]
+   },
+   {
+    "_key": "it0077",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0078",
+      "cells": [
+       "DEEP Robotics",
+       "X30 / Lynx M20"
+      ]
+     },
+     {
+      "_key": "r0079",
+      "cells": [
+       "Unitree Robotics",
+       "Fire Rescue B2"
+      ]
+     },
+     {
+      "_key": "r0080",
+      "cells": [
+       "Boston Dynamics",
+       "Spot + CAM IR"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0081",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0082",
+      "_type": "span",
+      "marks": [],
+      "text": "Oil & Gas / Offshore"
+     }
+    ]
+   },
+   {
+    "_key": "b0083",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0084",
+      "_type": "span",
+      "marks": [],
+      "text": "Remote inspection of refineries, offshore platforms, and pipelines. ATEX-certified robots operate in explosive atmospheres, detecting methane leaks and equipment anomalies."
+     }
+    ]
+   },
+   {
+    "_key": "hb0085",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Leak Detection",
+     "Valve Monitoring",
+     "Corrosion Check",
+     "3D Laser Scanning",
+     "Digital Twins"
+    ]
+   },
+   {
+    "_key": "it0086",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0087",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (BP, Chevron)"
+      ]
+     },
+     {
+      "_key": "r0088",
+      "cells": [
+       "ANYbotics",
+       "ANYmal X"
+      ]
+     },
+     {
+      "_key": "r0089",
+      "cells": [
+       "DEEP Robotics",
+       "X30 Pro"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0090",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0091",
+      "_type": "span",
+      "marks": [],
+      "text": "Mining & Underground"
+     }
+    ]
+   },
+   {
+    "_key": "b0092",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0093",
+      "_type": "span",
+      "marks": [],
+      "text": "Exploration of mine shafts, tailings, and unstable underground areas. Gas detection, geotechnical monitoring, and 3D mapping in complete darkness."
+     }
+    ]
+   },
+   {
+    "_key": "hb0094",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Tunnel Inspection",
+     "LiDAR Mapping",
+     "Hazard Detection",
+     "Conveyor Monitoring",
+     "Post-Blast Survey"
+    ]
+   },
+   {
+    "_key": "it0095",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0096",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (LKAB, Glencore)"
+      ]
+     },
+     {
+      "_key": "r0097",
+      "cells": [
+       "ANYbotics",
+       "ANYmal D"
+      ]
+     },
+     {
+      "_key": "r0098",
+      "cells": [
+       "DEEP Robotics",
+       "X30"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0099",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0100",
+      "_type": "span",
+      "marks": [],
+      "text": "Security & Surveillance"
+     }
+    ]
+   },
+   {
+    "_key": "b0101",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0102",
+      "_type": "span",
+      "marks": [],
+      "text": "Autonomous patrol of industrial parks, warehouses, borders, and public spaces. 24/7 operation with thermal imaging, anomaly detection, and real-time alerts."
+     }
+    ]
+   },
+   {
+    "_key": "hb0103",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Perimeter Patrol",
+     "Intrusion Detection",
+     "Video Streaming",
+     "Two-Way Audio",
+     "Night Vision"
+    ]
+   },
+   {
+    "_key": "it0104",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0105",
+      "cells": [
+       "Ghost Robotics",
+       "Vision 60"
+      ]
+     },
+     {
+      "_key": "r0106",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (NYPD, LAPD)"
+      ]
+     },
+     {
+      "_key": "r0107",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 ENT-PLUS"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0108",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0109",
+      "_type": "span",
+      "marks": [],
+      "text": "Agriculture & Livestock"
+     }
+    ]
+   },
+   {
+    "_key": "b0110",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0111",
+      "_type": "span",
+      "marks": [],
+      "text": "Precision agriculture on uneven terrain, vineyard pruning assistance, livestock monitoring, and crop health assessment across vast pastoral lands."
+     }
+    ]
+   },
+   {
+    "_key": "hb0112",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Crop Monitoring",
+     "Livestock Tracking",
+     "Soil Analysis",
+     "Vineyard Navigation",
+     "Herd Management"
+    ]
+   },
+   {
+    "_key": "it0113",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0114",
+      "cells": [
+       "IIT (Research)",
+       "HyQReal"
+      ]
+     },
+     {
+      "_key": "r0115",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 / B2"
+      ]
+     },
+     {
+      "_key": "r0116",
+      "cells": [
+       "Boston Dynamics",
+       "Spot"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0117",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0118",
+      "_type": "span",
+      "marks": [],
+      "text": "Construction & Infrastructure"
+     }
+    ]
+   },
+   {
+    "_key": "b0119",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0120",
+      "_type": "span",
+      "marks": [],
+      "text": "Job site monitoring, progress tracking, and structural inspection of buildings under construction. 3D scanning for BIM integration and safety compliance verification."
+     }
+    ]
+   },
+   {
+    "_key": "hb0121",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Progress Scanning",
+     "Safety Inspection",
+     "BIM Integration",
+     "Documentation",
+     "Site Survey"
+    ]
+   },
+   {
+    "_key": "it0122",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0123",
+      "cells": [
+       "Boston Dynamics",
+       "Spot + Arm"
+      ]
+     },
+     {
+      "_key": "r0124",
+      "cells": [
+       "DEEP Robotics",
+       "X20 / X30"
+      ]
+     },
+     {
+      "_key": "r0125",
+      "cells": [
+       "Unitree Robotics",
+       "B2"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0126",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0127",
+      "_type": "span",
+      "marks": [],
+      "text": "Research & Education"
+     }
+    ]
+   },
+   {
+    "_key": "b0128",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0129",
+      "_type": "span",
+      "marks": [],
+      "text": "Robotics research platforms for universities and R&D labs. Open-source development, reinforcement learning experiments, and STEM education programs."
+     }
+    ]
+   },
+   {
+    "_key": "hb0130",
+    "_type": "highlightBox",
+    "title": "Typical tasks",
+    "items": [
+     "Algorithm Testing",
+     "RL Training",
+     "SDK Development",
+     "STEM Teaching",
+     "Prototyping"
+    ]
+   },
+   {
+    "_key": "it0131",
+    "_type": "infoTable",
+    "headers": [
+     "Brand",
+     "Model"
+    ],
+    "rows": [
+     {
+      "_key": "r0132",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 EDU / A1"
+      ]
+     },
+     {
+      "_key": "r0133",
+      "cells": [
+       "DEEP Robotics",
+       "Lite3"
+      ]
+     },
+     {
+      "_key": "r0134",
+      "cells": [
+       "Xiaomi",
+       "CyberDog 2"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0135",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0136",
+      "_type": "span",
+      "marks": [],
+      "text": "LEADING BRANDS COMPARED"
+     }
+    ]
+   },
+   {
+    "_key": "b0137",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0138",
+      "_type": "span",
+      "marks": [],
+      "text": "Technical specifications and ideal use cases for the leading industrial quadruped robot manufacturers."
+     }
+    ]
+   },
+   {
+    "_key": "b0139",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0140",
+      "_type": "span",
+      "marks": [],
+      "text": "U Unitree Robotics Hangzhou, China • Est. 2016"
+     }
+    ]
+   },
+   {
+    "_key": "it0141",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0142",
+      "cells": [
+       "Flagship Model",
+       "B2 / B2-W"
+      ]
+     },
+     {
+      "_key": "r0143",
+      "cells": [
+       "Max Speed",
+       "6 m/s"
+      ]
+     },
+     {
+      "_key": "r0144",
+      "cells": [
+       "Payload",
+       "40kg (120kg standing)"
+      ]
+     },
+     {
+      "_key": "r0145",
+      "cells": [
+       "IP Rating",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0146",
+      "cells": [
+       "Price Range",
+       "$1,600 - $100,000"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0147",
+    "_type": "highlightBox",
+    "title": "Suited to",
+    "items": [
+     "Power Inspection",
+     "Fire Rescue",
+     "Research",
+     "Security"
+    ]
+   },
+   {
+    "_key": "b0148",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0149",
+      "_type": "span",
+      "marks": [],
+      "text": "D DEEP Robotics Hangzhou, China • Est. 2017"
+     }
+    ]
+   },
+   {
+    "_key": "it0150",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0151",
+      "cells": [
+       "Flagship Model",
+       "X30 / X30 Pro"
+      ]
+     },
+     {
+      "_key": "r0152",
+      "cells": [
+       "Max Speed",
+       "5 m/s"
+      ]
+     },
+     {
+      "_key": "r0153",
+      "cells": [
+       "Stair Climbing",
+       "45° angle"
+      ]
+     },
+     {
+      "_key": "r0154",
+      "cells": [
+       "IP Rating",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0155",
+      "cells": [
+       "Price Range",
+       "$2,800 - $75,000"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0156",
+    "_type": "highlightBox",
+    "title": "Suited to",
+    "items": [
+     "Substation",
+     "Emergency Rescue",
+     "Firefighting",
+     "Pipeline"
+    ]
+   },
+   {
+    "_key": "b0157",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0158",
+      "_type": "span",
+      "marks": [],
+      "text": "BD Boston Dynamics Massachusetts, USA • Est. 1992"
+     }
+    ]
+   },
+   {
+    "_key": "it0159",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0160",
+      "cells": [
+       "Flagship Model",
+       "Spot"
+      ]
+     },
+     {
+      "_key": "r0161",
+      "cells": [
+       "Max Speed",
+       "1.6 m/s"
+      ]
+     },
+     {
+      "_key": "r0162",
+      "cells": [
+       "Payload",
+       "14kg"
+      ]
+     },
+     {
+      "_key": "r0163",
+      "cells": [
+       "Runtime",
+       "90 min"
+      ]
+     },
+     {
+      "_key": "r0164",
+      "cells": [
+       "Price Range",
+       "$74,500+"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0165",
+    "_type": "highlightBox",
+    "title": "Suited to",
+    "items": [
+     "Oil & Gas",
+     "Mining",
+     "Construction",
+     "Public Safety"
+    ]
+   },
+   {
+    "_key": "b0166",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0167",
+      "_type": "span",
+      "marks": [],
+      "text": "A ANYbotics Zürich, Switzerland • Est. 2016"
+     }
+    ]
+   },
+   {
+    "_key": "it0168",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0169",
+      "cells": [
+       "Flagship Model",
+       "ANYmal X"
+      ]
+     },
+     {
+      "_key": "r0170",
+      "cells": [
+       "ATEX Certified",
+       "Zone 1"
+      ]
+     },
+     {
+      "_key": "r0171",
+      "cells": [
+       "Autonomy",
+       "Full"
+      ]
+     },
+     {
+      "_key": "r0172",
+      "cells": [
+       "IP Rating",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0173",
+      "cells": [
+       "Price Range",
+       "$120,000+"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0174",
+    "_type": "highlightBox",
+    "title": "Suited to",
+    "items": [
+     "Offshore",
+     "Petrochemical",
+     "Ex-Zones",
+     "Mining"
+    ]
+   },
+   {
+    "_key": "b0175",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0176",
+      "_type": "span",
+      "marks": [],
+      "text": "GR Ghost Robotics Philadelphia, USA • Est. 2015"
+     }
+    ]
+   },
+   {
+    "_key": "it0177",
+    "_type": "infoTable",
+    "headers": [
+     "Specification",
+     "Value"
+    ],
+    "rows": [
+     {
+      "_key": "r0178",
+      "cells": [
+       "Flagship Model",
+       "Vision 60"
+      ]
+     },
+     {
+      "_key": "r0179",
+      "cells": [
+       "Weight",
+       "45kg"
+      ]
+     },
+     {
+      "_key": "r0180",
+      "cells": [
+       "All-Weather",
+       "Amphibious"
+      ]
+     },
+     {
+      "_key": "r0181",
+      "cells": [
+       "Runtime",
+       "3+ hours"
+      ]
+     },
+     {
+      "_key": "r0182",
+      "cells": [
+       "Focus",
+       "Defense/Security"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0183",
+    "_type": "highlightBox",
+    "title": "Suited to",
+    "items": [
+     "Military",
+     "Border Patrol",
+     "Homeland Security",
+     "Defense"
+    ]
+   },
+   {
+    "_key": "b0184",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0185",
+      "_type": "span",
+      "marks": [],
+      "text": "REAL-WORLD DEPLOYMENTS"
+     }
+    ]
+   },
+   {
+    "_key": "b0186",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0187",
+      "_type": "span",
+      "marks": [],
+      "text": "Verified deployments demonstrating quadruped robot impact across industries."
+     }
+    ]
+   },
+   {
+    "_key": "b0188",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0189",
+      "_type": "span",
+      "marks": [],
+      "text": "220kV Substation Inspection"
+     }
+    ]
+   },
+   {
+    "_key": "b0190",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0191",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Inner Mongolia, China"
+     }
+    ]
+   },
+   {
+    "_key": "b0192",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0193",
+      "_type": "span",
+      "marks": [],
+      "text": "Unitree B1 robot deployed for comprehensive indoor/outdoor inspection including stair ramps, switch rooms, and relay protection chambers."
+     }
+    ]
+   },
+   {
+    "_key": "hb0194",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "Achieved full coverage with autonomous navigation and robotic arm operations"
+    ]
+   },
+   {
+    "_key": "b0195",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0196",
+      "_type": "span",
+      "marks": [],
+      "text": "Underground Power Corridor"
+     }
+    ]
+   },
+   {
+    "_key": "b0197",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0198",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Hangzhou, China"
+     }
+    ]
+   },
+   {
+    "_key": "b0199",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0200",
+      "_type": "span",
+      "marks": [],
+      "text": "DEEP Robotics quadruped operating 8 meters underground since the Asian Games, monitoring temperature, humidity, and cable conditions."
+     }
+    ]
+   },
+   {
+    "_key": "hb0201",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "6+ months continuous operation with real-time anomaly detection"
+    ]
+   },
+   {
+    "_key": "b0202",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0203",
+      "_type": "span",
+      "marks": [],
+      "text": "BP Mad Dog Platform"
+     }
+    ]
+   },
+   {
+    "_key": "b0204",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0205",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Gulf of Mexico, USA"
+     }
+    ]
+   },
+   {
+    "_key": "b0206",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0207",
+      "_type": "span",
+      "marks": [],
+      "text": "Boston Dynamics Spot deployed for offshore inspection featuring methane detection and acoustic sensors for equipment monitoring."
+     }
+    ]
+   },
+   {
+    "_key": "hb0208",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "Reduced equipment anomalies and flaring through predictive maintenance"
+    ]
+   },
+   {
+    "_key": "b0209",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0210",
+      "_type": "span",
+      "marks": [],
+      "text": "FDNY Garage Collapse Response"
+     }
+    ]
+   },
+   {
+    "_key": "b0211",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0212",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Manhattan, New York"
+     }
+    ]
+   },
+   {
+    "_key": "b0213",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0214",
+      "_type": "span",
+      "marks": [],
+      "text": "Spot robot \"Bergh\" deployed to search collapsed parking structure, using thermal imaging to confirm no victims trapped."
+     }
+    ]
+   },
+   {
+    "_key": "hb0215",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "Safe structural survey completed without risking firefighters"
+    ]
+   },
+   {
+    "_key": "b0216",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0217",
+      "_type": "span",
+      "marks": [],
+      "text": "Glencore Kidd Creek Mine"
+     }
+    ]
+   },
+   {
+    "_key": "b0218",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0219",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Ontario, Canada"
+     }
+    ]
+   },
+   {
+    "_key": "b0220",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0221",
+      "_type": "span",
+      "marks": [],
+      "text": "Spot assisting with hazardous underground inspections, reducing the need for human personnel in dangerous mining conditions."
+     }
+    ]
+   },
+   {
+    "_key": "hb0222",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "Significant reduction in human exposure to underground hazards"
+    ]
+   },
+   {
+    "_key": "b0223",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0224",
+      "_type": "span",
+      "marks": [],
+      "text": "Power Tunnel Inspection"
+     }
+    ]
+   },
+   {
+    "_key": "b0225",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0226",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Singapore"
+     }
+    ]
+   },
+   {
+    "_key": "b0227",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0228",
+      "_type": "span",
+      "marks": [],
+      "text": "First overseas deployment of DEEP Robotics quadruped for power utility applications, integrated with local detection systems."
+     }
+    ]
+   },
+   {
+    "_key": "hb0229",
+    "_type": "highlightBox",
+    "title": "Result",
+    "items": [
+     "Successful international deployment with early warning capabilities"
+    ]
+   },
+   {
+    "_key": "b0230",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0231",
+      "_type": "span",
+      "marks": [],
+      "text": "TECHNICAL COMPARISON"
+     }
+    ]
+   },
+   {
+    "_key": "b0232",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0233",
+      "_type": "span",
+      "marks": [],
+      "text": "Head-to-head comparison of leading industrial quadruped robots."
+     }
+    ]
+   },
+   {
+    "_key": "it0234",
+    "_type": "infoTable",
+    "headers": [
+     "Brand / Model",
+     "Speed",
+     "Payload",
+     "IP Rating",
+     "Runtime",
+     "Price",
+     "Best Application"
+    ],
+    "rows": [
+     {
+      "_key": "r0235",
+      "cells": [
+       "Unitree B2",
+       "6 m/s",
+       "40kg / 120kg",
+       "IP67",
+       "4-6 hrs",
+       "~$100,000",
+       "Power / Industrial"
+      ]
+     },
+     {
+      "_key": "r0236",
+      "cells": [
+       "DEEP Robotics X30 Pro",
+       "5 m/s",
+       "~20kg",
+       "IP67",
+       "2.5-4 hrs",
+       "~$65-75K",
+       "Fire / Emergency"
+      ]
+     },
+     {
+      "_key": "r0237",
+      "cells": [
+       "Boston Dynamics Spot",
+       "1.6 m/s",
+       "14kg",
+       "IP54",
+       "90 min",
+       "$74,500+",
+       "Oil & Gas / Mining"
+      ]
+     },
+     {
+      "_key": "r0238",
+      "cells": [
+       "ANYbotics ANYmal X",
+       "1.0 m/s",
+       "10kg",
+       "IP67 + ATEX",
+       "2+ hrs",
+       "$120,000+",
+       "Offshore / Ex-Zone"
+      ]
+     },
+     {
+      "_key": "r0239",
+      "cells": [
+       "Ghost Robotics Vision 60",
+       "3 m/s",
+       "~10kg",
+       "All-Weather",
+       "3+ hrs",
+       "N/A (Defense)",
+       "Military / Border"
+      ]
+     },
+     {
+      "_key": "r0240",
+      "cells": [
+       "Unitree Go2 Pro",
+       "3.5 m/s",
+       "3kg",
+       "IP54",
+       "1-2 hrs",
+       "~$1,600",
+       "Security / Research"
+      ]
+     },
+     {
+      "_key": "r0241",
+      "cells": [
+       "DEEP Robotics Lite3",
+       "3.5 m/s",
+       "5kg",
+       "IP54",
+       "1.5 hrs",
+       "~$2,800",
+       "Education / R&D"
+      ]
+     },
+     {
+      "_key": "r0242",
+      "cells": [
+       "Xiaomi CyberDog 2",
+       "3.2 m/s",
+       "~3kg",
+       "-",
+       "~1 hr",
+       "~$1,800",
+       "Consumer / Dev"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0243",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0244",
+      "_type": "span",
+      "marks": [],
+      "text": "CHOOSING THE RIGHT ROBOT"
+     }
+    ]
+   },
+   {
+    "_key": "b0245",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0246",
+      "_type": "span",
+      "marks": [],
+      "text": "Quick reference for matching applications to the best-suited quadruped robot brands."
+     }
+    ]
+   },
+   {
+    "_key": "it0247",
+    "_type": "infoTable",
+    "headers": [
+     "Application",
+     "Top Choice",
+     "Alternative",
+     "Budget Option",
+     "Key Requirements"
+    ],
+    "rows": [
+     {
+      "_key": "r0248",
+      "cells": [
+       "Substation",
+       "Unitree B2",
+       "DEEP X30",
+       "DEEP X20",
+       "IP67, Stair Climbing, Long Runtime"
+      ]
+     },
+     {
+      "_key": "r0249",
+      "cells": [
+       "Offshore Oil & Gas",
+       "ANYmal X",
+       "Boston Spot",
+       "-",
+       "ATEX Certified, Salt Resistance"
+      ]
+     },
+     {
+      "_key": "r0250",
+      "cells": [
+       "Fire & Rescue",
+       "DEEP X30",
+       "Unitree Fire B2",
+       "-",
+       "Heat Resistance, Gas Detection"
+      ]
+     },
+     {
+      "_key": "r0251",
+      "cells": [
+       "Mining Underground",
+       "Boston Spot",
+       "ANYmal D",
+       "DEEP X30",
+       "LiDAR, Low-Light Operation"
+      ]
+     },
+     {
+      "_key": "r0252",
+      "cells": [
+       "Security Patrol",
+       "Ghost Vision 60",
+       "Boston Spot",
+       "Unitree Go2",
+       "24/7 Operation, Thermal Camera"
+      ]
+     },
+     {
+      "_key": "r0253",
+      "cells": [
+       "Construction Site",
+       "Boston Spot",
+       "Unitree B2",
+       "DEEP X20",
+       "3D Scanning, BIM Integration"
+      ]
+     },
+     {
+      "_key": "r0254",
+      "cells": [
+       "Research / Education",
+       "Unitree Go2",
+       "DEEP Lite3",
+       "Xiaomi CyberDog",
+       "SDK Access, ROS Support"
+      ]
+     },
+     {
+      "_key": "r0255",
+      "cells": [
+       "Agriculture",
+       "Unitree B2",
+       "Boston Spot",
+       "Unitree Go2",
+       "Terrain Adaptability, Payload"
+      ]
+     },
+     {
+      "_key": "r0256",
+      "cells": [
+       "Military / Defense",
+       "Ghost Vision 60",
+       "-",
+       "-",
+       "Ruggedized, Modular Payload"
+      ]
+     }
+    ]
+   }
+  ],
+  "de": [
+   {
+    "_key": "sg0257",
+    "_type": "statsGrid",
+    "stats": [
+     {
+      "_key": "st0258",
+      "value": "12+",
+      "label": "Industriesektoren"
+     },
+     {
+      "_key": "st0259",
+      "value": "65K",
+      "label": "Ausgelieferte Einheiten (2025)"
+     },
+     {
+      "_key": "st0260",
+      "value": "70%",
+      "label": "China Marktanteil"
+     }
+    ]
+   },
+   {
+    "_key": "b0261",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0262",
+      "_type": "span",
+      "marks": [],
+      "text": "INDUSTRIELLE ANWENDUNGEN"
+     }
+    ]
+   },
+   {
+    "_key": "b0263",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0264",
+      "_type": "span",
+      "marks": [],
+      "text": "Von Umspannwerken bis zu Offshore-Ölplattformen – Vierbeinroboter transformieren die Art und Weise, wie Industrien Inspektion, Sicherheit und Automatisierung angehen."
+     }
+    ]
+   },
+   {
+    "_key": "b0265",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0266",
+      "_type": "span",
+      "marks": [],
+      "text": "Stromnetz & Umspannwerke"
+     }
+    ]
+   },
+   {
+    "_key": "b0267",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0268",
+      "_type": "span",
+      "marks": [],
+      "text": "Autonome Inspektion von 220kV-1100kV Umspannwerken, Transformatorräumen und Stromgalerien. Roboter navigieren über Treppen, Kabeltrassen und Betriebsräume bei gleichzeitiger Überwachung des Anlagenzustands."
+     }
+    ]
+   },
+   {
+    "_key": "hb0269",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Wärmebildgebung",
+     "Messgeräte-Ablesung",
+     "Gaserkennung",
+     "Defekterkennung",
+     "24/7 Patrouille"
+    ]
+   },
+   {
+    "_key": "it0270",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0271",
+      "cells": [
+       "Unitree Robotics",
+       "B2 / B1"
+      ]
+     },
+     {
+      "_key": "r0272",
+      "cells": [
+       "DEEP Robotics",
+       "X30 / X20"
+      ]
+     },
+     {
+      "_key": "r0273",
+      "cells": [
+       "Boston Dynamics",
+       "Spot"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0274",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0275",
+      "_type": "span",
+      "marks": [],
+      "text": "Notfallrettung & Brandbekämpfung"
+     }
+    ]
+   },
+   {
+    "_key": "b0276",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0277",
+      "_type": "span",
+      "marks": [],
+      "text": "Ersthelfer-Unterstützung bei eingestürzten Gebäuden, Brandorten und gefährlichen Umgebungen. Wasserwerfer mit 60m Reichweite und 40L/s Durchfluss für aktive Brandbekämpfung."
+     }
+    ]
+   },
+   {
+    "_key": "hb0278",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Opfersuche",
+     "Gebäudeuntersuchung",
+     "Gasüberwachung",
+     "Brandbekämpfung",
+     "Trümmernavigation"
+    ]
+   },
+   {
+    "_key": "it0279",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0280",
+      "cells": [
+       "DEEP Robotics",
+       "X30 / Lynx M20"
+      ]
+     },
+     {
+      "_key": "r0281",
+      "cells": [
+       "Unitree Robotics",
+       "Fire Rescue B2"
+      ]
+     },
+     {
+      "_key": "r0282",
+      "cells": [
+       "Boston Dynamics",
+       "Spot + CAM IR"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0283",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0284",
+      "_type": "span",
+      "marks": [],
+      "text": "Öl & Gas / Offshore"
+     }
+    ]
+   },
+   {
+    "_key": "b0285",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0286",
+      "_type": "span",
+      "marks": [],
+      "text": "Ferninspektion von Raffinerien, Offshore-Plattformen und Pipelines. ATEX-zertifizierte Roboter arbeiten in explosionsgefährdeten Atmosphären und erkennen Methanlecks sowie Anlagenanomalien."
+     }
+    ]
+   },
+   {
+    "_key": "hb0287",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Leckerkennung",
+     "Ventilüberwachung",
+     "Korrosionsprüfung",
+     "3D-Laserscanning",
+     "Digitale Zwillinge"
+    ]
+   },
+   {
+    "_key": "it0288",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0289",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (BP, Chevron)"
+      ]
+     },
+     {
+      "_key": "r0290",
+      "cells": [
+       "ANYbotics",
+       "ANYmal X"
+      ]
+     },
+     {
+      "_key": "r0291",
+      "cells": [
+       "DEEP Robotics",
+       "X30 Pro"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0292",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0293",
+      "_type": "span",
+      "marks": [],
+      "text": "Bergbau & Untertage"
+     }
+    ]
+   },
+   {
+    "_key": "b0294",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0295",
+      "_type": "span",
+      "marks": [],
+      "text": "Erkundung von Minenstollen, Abraumhalden und instabilen Untertage-Bereichen. Gaserkennung, geotechnische Überwachung und 3D-Kartierung in völliger Dunkelheit."
+     }
+    ]
+   },
+   {
+    "_key": "hb0296",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Stolleninspektion",
+     "LiDAR-Kartierung",
+     "Gefahrenerkennung",
+     "Förderband-Überwachung",
+     "Nachspreng-Untersuchung"
+    ]
+   },
+   {
+    "_key": "it0297",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0298",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (LKAB, Glencore)"
+      ]
+     },
+     {
+      "_key": "r0299",
+      "cells": [
+       "ANYbotics",
+       "ANYmal D"
+      ]
+     },
+     {
+      "_key": "r0300",
+      "cells": [
+       "DEEP Robotics",
+       "X30"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0301",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0302",
+      "_type": "span",
+      "marks": [],
+      "text": "Sicherheit & Überwachung"
+     }
+    ]
+   },
+   {
+    "_key": "b0303",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0304",
+      "_type": "span",
+      "marks": [],
+      "text": "Autonome Patrouille von Industrieparks, Lagerhäusern, Grenzen und öffentlichen Räumen. 24/7-Betrieb mit Wärmebildgebung, Anomalieerkennung und Echtzeitwarnungen."
+     }
+    ]
+   },
+   {
+    "_key": "hb0305",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Perimeter-Patrouille",
+     "Einbrucherkennung",
+     "Video-Streaming",
+     "Zwei-Wege-Audio",
+     "Nachtsicht"
+    ]
+   },
+   {
+    "_key": "it0306",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0307",
+      "cells": [
+       "Ghost Robotics",
+       "Vision 60"
+      ]
+     },
+     {
+      "_key": "r0308",
+      "cells": [
+       "Boston Dynamics",
+       "Spot (NYPD, LAPD)"
+      ]
+     },
+     {
+      "_key": "r0309",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 ENT-PLUS"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0310",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0311",
+      "_type": "span",
+      "marks": [],
+      "text": "Landwirtschaft & Viehzucht"
+     }
+    ]
+   },
+   {
+    "_key": "b0312",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0313",
+      "_type": "span",
+      "marks": [],
+      "text": "Präzisionslandwirtschaft auf unebenem Gelände, Unterstützung beim Rebschnitt, Viehüberwachung und Beurteilung der Pflanzengesundheit auf weitläufigen Weideflächen."
+     }
+    ]
+   },
+   {
+    "_key": "hb0314",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Pflanzenüberwachung",
+     "Viehverfolgung",
+     "Bodenanalyse",
+     "Weinberg-Navigation",
+     "Herdenmanagement"
+    ]
+   },
+   {
+    "_key": "it0315",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0316",
+      "cells": [
+       "IIT (Forschung)",
+       "HyQReal"
+      ]
+     },
+     {
+      "_key": "r0317",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 / B2"
+      ]
+     },
+     {
+      "_key": "r0318",
+      "cells": [
+       "Boston Dynamics",
+       "Spot"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0319",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0320",
+      "_type": "span",
+      "marks": [],
+      "text": "Bauwesen & Infrastruktur"
+     }
+    ]
+   },
+   {
+    "_key": "b0321",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0322",
+      "_type": "span",
+      "marks": [],
+      "text": "Baustellenüberwachung, Fortschrittsverfolgung und Strukturinspektion von Gebäuden im Bau. 3D-Scanning für BIM-Integration und Überprüfung der Sicherheitskonformität."
+     }
+    ]
+   },
+   {
+    "_key": "hb0323",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Fortschritts-Scanning",
+     "Sicherheitsinspektion",
+     "BIM-Integration",
+     "Dokumentation",
+     "Geländevermessung"
+    ]
+   },
+   {
+    "_key": "it0324",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0325",
+      "cells": [
+       "Boston Dynamics",
+       "Spot + Arm"
+      ]
+     },
+     {
+      "_key": "r0326",
+      "cells": [
+       "DEEP Robotics",
+       "X20 / X30"
+      ]
+     },
+     {
+      "_key": "r0327",
+      "cells": [
+       "Unitree Robotics",
+       "B2"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0328",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0329",
+      "_type": "span",
+      "marks": [],
+      "text": "Forschung & Bildung"
+     }
+    ]
+   },
+   {
+    "_key": "b0330",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0331",
+      "_type": "span",
+      "marks": [],
+      "text": "Robotik-Forschungsplattformen für Universitäten und F&E-Labore. Open-Source-Entwicklung, Reinforcement-Learning-Experimente und MINT-Bildungsprogramme."
+     }
+    ]
+   },
+   {
+    "_key": "hb0332",
+    "_type": "highlightBox",
+    "title": "Typische Aufgaben",
+    "items": [
+     "Algorithmus-Tests",
+     "RL-Training",
+     "SDK-Entwicklung",
+     "MINT-Unterricht",
+     "Prototyping"
+    ]
+   },
+   {
+    "_key": "it0333",
+    "_type": "infoTable",
+    "headers": [
+     "Marke",
+     "Modell"
+    ],
+    "rows": [
+     {
+      "_key": "r0334",
+      "cells": [
+       "Unitree Robotics",
+       "Go2 EDU / A1"
+      ]
+     },
+     {
+      "_key": "r0335",
+      "cells": [
+       "DEEP Robotics",
+       "Lite3"
+      ]
+     },
+     {
+      "_key": "r0336",
+      "cells": [
+       "Xiaomi",
+       "CyberDog 2"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0337",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0338",
+      "_type": "span",
+      "marks": [],
+      "text": "FÜHRENDE MARKEN IM VERGLEICH"
+     }
+    ]
+   },
+   {
+    "_key": "b0339",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0340",
+      "_type": "span",
+      "marks": [],
+      "text": "Technische Spezifikationen und ideale Einsatzgebiete der führenden Industriehersteller von Vierbeinrobotern."
+     }
+    ]
+   },
+   {
+    "_key": "b0341",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0342",
+      "_type": "span",
+      "marks": [],
+      "text": "U Unitree Robotics Hangzhou, China • Gegr. 2016"
+     }
+    ]
+   },
+   {
+    "_key": "it0343",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0344",
+      "cells": [
+       "Flaggschiff-Modell",
+       "B2 / B2-W"
+      ]
+     },
+     {
+      "_key": "r0345",
+      "cells": [
+       "Max. Geschwindigkeit",
+       "6 m/s"
+      ]
+     },
+     {
+      "_key": "r0346",
+      "cells": [
+       "Nutzlast",
+       "40kg (120kg stehend)"
+      ]
+     },
+     {
+      "_key": "r0347",
+      "cells": [
+       "IP-Schutzart",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0348",
+      "cells": [
+       "Preisbereich",
+       "1.600 - 100.000 $"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0349",
+    "_type": "highlightBox",
+    "title": "Geeignet für",
+    "items": [
+     "Strominspektion",
+     "Brandrettung",
+     "Forschung",
+     "Sicherheit"
+    ]
+   },
+   {
+    "_key": "b0350",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0351",
+      "_type": "span",
+      "marks": [],
+      "text": "D DEEP Robotics Hangzhou, China • Gegr. 2017"
+     }
+    ]
+   },
+   {
+    "_key": "it0352",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0353",
+      "cells": [
+       "Flaggschiff-Modell",
+       "X30 / X30 Pro"
+      ]
+     },
+     {
+      "_key": "r0354",
+      "cells": [
+       "Max. Geschwindigkeit",
+       "5 m/s"
+      ]
+     },
+     {
+      "_key": "r0355",
+      "cells": [
+       "Treppensteigen",
+       "45° Winkel"
+      ]
+     },
+     {
+      "_key": "r0356",
+      "cells": [
+       "IP-Schutzart",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0357",
+      "cells": [
+       "Preisbereich",
+       "2.800 - 75.000 $"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0358",
+    "_type": "highlightBox",
+    "title": "Geeignet für",
+    "items": [
+     "Umspannwerk",
+     "Notfallrettung",
+     "Feuerwehr",
+     "Pipeline"
+    ]
+   },
+   {
+    "_key": "b0359",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0360",
+      "_type": "span",
+      "marks": [],
+      "text": "BD Boston Dynamics Massachusetts, USA • Gegr. 1992"
+     }
+    ]
+   },
+   {
+    "_key": "it0361",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0362",
+      "cells": [
+       "Flaggschiff-Modell",
+       "Spot"
+      ]
+     },
+     {
+      "_key": "r0363",
+      "cells": [
+       "Max. Geschwindigkeit",
+       "1,6 m/s"
+      ]
+     },
+     {
+      "_key": "r0364",
+      "cells": [
+       "Nutzlast",
+       "14kg"
+      ]
+     },
+     {
+      "_key": "r0365",
+      "cells": [
+       "Laufzeit",
+       "90 Min."
+      ]
+     },
+     {
+      "_key": "r0366",
+      "cells": [
+       "Preisbereich",
+       "74.500 $+"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0367",
+    "_type": "highlightBox",
+    "title": "Geeignet für",
+    "items": [
+     "Öl & Gas",
+     "Bergbau",
+     "Bauwesen",
+     "Öffentliche Sicherheit"
+    ]
+   },
+   {
+    "_key": "b0368",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0369",
+      "_type": "span",
+      "marks": [],
+      "text": "A ANYbotics Zürich, Schweiz • Gegr. 2016"
+     }
+    ]
+   },
+   {
+    "_key": "it0370",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0371",
+      "cells": [
+       "Flaggschiff-Modell",
+       "ANYmal X"
+      ]
+     },
+     {
+      "_key": "r0372",
+      "cells": [
+       "ATEX-Zertifiziert",
+       "Zone 1"
+      ]
+     },
+     {
+      "_key": "r0373",
+      "cells": [
+       "Autonomie",
+       "Vollständig"
+      ]
+     },
+     {
+      "_key": "r0374",
+      "cells": [
+       "IP-Schutzart",
+       "IP67"
+      ]
+     },
+     {
+      "_key": "r0375",
+      "cells": [
+       "Preisbereich",
+       "120.000 $+"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0376",
+    "_type": "highlightBox",
+    "title": "Geeignet für",
+    "items": [
+     "Offshore",
+     "Petrochemie",
+     "Ex-Schutzzonen",
+     "Bergbau"
+    ]
+   },
+   {
+    "_key": "b0377",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0378",
+      "_type": "span",
+      "marks": [],
+      "text": "GR Ghost Robotics Philadelphia, USA • Gegr. 2015"
+     }
+    ]
+   },
+   {
+    "_key": "it0379",
+    "_type": "infoTable",
+    "headers": [
+     "Spezifikation",
+     "Wert"
+    ],
+    "rows": [
+     {
+      "_key": "r0380",
+      "cells": [
+       "Flaggschiff-Modell",
+       "Vision 60"
+      ]
+     },
+     {
+      "_key": "r0381",
+      "cells": [
+       "Gewicht",
+       "45kg"
+      ]
+     },
+     {
+      "_key": "r0382",
+      "cells": [
+       "Allwetter",
+       "Amphibisch"
+      ]
+     },
+     {
+      "_key": "r0383",
+      "cells": [
+       "Laufzeit",
+       "3+ Stunden"
+      ]
+     },
+     {
+      "_key": "r0384",
+      "cells": [
+       "Fokus",
+       "Verteidigung/Sicherheit"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "hb0385",
+    "_type": "highlightBox",
+    "title": "Geeignet für",
+    "items": [
+     "Militär",
+     "Grenzschutz",
+     "Heimatschutz",
+     "Verteidigung"
+    ]
+   },
+   {
+    "_key": "b0386",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0387",
+      "_type": "span",
+      "marks": [],
+      "text": "PRAXISEINSÄTZE"
+     }
+    ]
+   },
+   {
+    "_key": "b0388",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0389",
+      "_type": "span",
+      "marks": [],
+      "text": "Verifizierte Einsätze, die den Einfluss von Vierbeinrobotern in verschiedenen Branchen demonstrieren."
+     }
+    ]
+   },
+   {
+    "_key": "b0390",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0391",
+      "_type": "span",
+      "marks": [],
+      "text": "220kV Umspannwerk-Inspektion"
+     }
+    ]
+   },
+   {
+    "_key": "b0392",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0393",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Innere Mongolei, China"
+     }
+    ]
+   },
+   {
+    "_key": "b0394",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0395",
+      "_type": "span",
+      "marks": [],
+      "text": "Unitree B1 Roboter für umfassende Innen-/Außeninspektion eingesetzt, einschließlich Treppenrampen, Schalträumen und Schutztechnikräumen."
+     }
+    ]
+   },
+   {
+    "_key": "hb0396",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "Vollständige Abdeckung mit autonomer Navigation und Roboterarm-Operationen erreicht"
+    ]
+   },
+   {
+    "_key": "b0397",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0398",
+      "_type": "span",
+      "marks": [],
+      "text": "Unterirdische Stromgalerie"
+     }
+    ]
+   },
+   {
+    "_key": "b0399",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0400",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Hangzhou, China"
+     }
+    ]
+   },
+   {
+    "_key": "b0401",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0402",
+      "_type": "span",
+      "marks": [],
+      "text": "DEEP Robotics Vierbeiner seit den Asien-Spielen 8 Meter unter der Erde im Einsatz, überwachen Temperatur, Luftfeuchtigkeit und Kabelzustand."
+     }
+    ]
+   },
+   {
+    "_key": "hb0403",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "6+ Monate Dauerbetrieb mit Echtzeit-Anomalieerkennung"
+    ]
+   },
+   {
+    "_key": "b0404",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0405",
+      "_type": "span",
+      "marks": [],
+      "text": "BP Mad Dog Plattform"
+     }
+    ]
+   },
+   {
+    "_key": "b0406",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0407",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Golf von Mexiko, USA"
+     }
+    ]
+   },
+   {
+    "_key": "b0408",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0409",
+      "_type": "span",
+      "marks": [],
+      "text": "Boston Dynamics Spot für Offshore-Inspektion mit Methanerkennung und Akustiksensoren zur Anlagenüberwachung eingesetzt."
+     }
+    ]
+   },
+   {
+    "_key": "hb0410",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "Reduzierte Anlagenanomalien und Abfackeln durch vorausschauende Wartung"
+    ]
+   },
+   {
+    "_key": "b0411",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0412",
+      "_type": "span",
+      "marks": [],
+      "text": "FDNY Garageneinsturz-Einsatz"
+     }
+    ]
+   },
+   {
+    "_key": "b0413",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0414",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Manhattan, New York"
+     }
+    ]
+   },
+   {
+    "_key": "b0415",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0416",
+      "_type": "span",
+      "marks": [],
+      "text": "Spot-Roboter „Bergh\" zur Durchsuchung einer eingestürzten Parkstruktur eingesetzt, nutzte Wärmebildgebung zur Bestätigung, dass keine Opfer eingeschlossen waren."
+     }
+    ]
+   },
+   {
+    "_key": "hb0417",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "Sichere Strukturuntersuchung ohne Gefährdung von Feuerwehrleuten abgeschlossen"
+    ]
+   },
+   {
+    "_key": "b0418",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0419",
+      "_type": "span",
+      "marks": [],
+      "text": "Glencore Kidd Creek Mine"
+     }
+    ]
+   },
+   {
+    "_key": "b0420",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0421",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Ontario, Kanada"
+     }
+    ]
+   },
+   {
+    "_key": "b0422",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0423",
+      "_type": "span",
+      "marks": [],
+      "text": "Spot unterstützt bei gefährlichen Untertage-Inspektionen und reduziert den Bedarf an menschlichem Personal unter gefährlichen Bergbaubedingungen."
+     }
+    ]
+   },
+   {
+    "_key": "hb0424",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "Signifikante Reduzierung der menschlichen Exposition gegenüber Untertage-Gefahren"
+    ]
+   },
+   {
+    "_key": "b0425",
+    "_type": "block",
+    "style": "h3",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0426",
+      "_type": "span",
+      "marks": [],
+      "text": "Stromtunnel-Inspektion"
+     }
+    ]
+   },
+   {
+    "_key": "b0427",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0428",
+      "_type": "span",
+      "marks": [],
+      "text": "📍 Singapur"
+     }
+    ]
+   },
+   {
+    "_key": "b0429",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0430",
+      "_type": "span",
+      "marks": [],
+      "text": "Erster Auslandseinsatz von DEEP Robotics Vierbeinern für Stromversorgungsanwendungen, integriert mit lokalen Erkennungssystemen."
+     }
+    ]
+   },
+   {
+    "_key": "hb0431",
+    "_type": "highlightBox",
+    "title": "Ergebnis",
+    "items": [
+     "Erfolgreicher internationaler Einsatz mit Frühwarnfunktionen"
+    ]
+   },
+   {
+    "_key": "b0432",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0433",
+      "_type": "span",
+      "marks": [],
+      "text": "TECHNISCHER VERGLEICH"
+     }
+    ]
+   },
+   {
+    "_key": "b0434",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0435",
+      "_type": "span",
+      "marks": [],
+      "text": "Direkter Vergleich der führenden industriellen Vierbeinroboter."
+     }
+    ]
+   },
+   {
+    "_key": "it0436",
+    "_type": "infoTable",
+    "headers": [
+     "Marke / Modell",
+     "Geschwindigkeit",
+     "Nutzlast",
+     "IP-Schutzart",
+     "Laufzeit",
+     "Preis",
+     "Beste Anwendung"
+    ],
+    "rows": [
+     {
+      "_key": "r0437",
+      "cells": [
+       "Unitree B2",
+       "6 m/s",
+       "40kg / 120kg",
+       "IP67",
+       "4-6 Std.",
+       "~100.000 $",
+       "Strom / Industrie"
+      ]
+     },
+     {
+      "_key": "r0438",
+      "cells": [
+       "DEEP Robotics X30 Pro",
+       "5 m/s",
+       "~20kg",
+       "IP67",
+       "2,5-4 Std.",
+       "~65-75.000 $",
+       "Feuer / Notfall"
+      ]
+     },
+     {
+      "_key": "r0439",
+      "cells": [
+       "Boston Dynamics Spot",
+       "1,6 m/s",
+       "14kg",
+       "IP54",
+       "90 Min.",
+       "74.500 $+",
+       "Öl & Gas / Bergbau"
+      ]
+     },
+     {
+      "_key": "r0440",
+      "cells": [
+       "ANYbotics ANYmal X",
+       "1,0 m/s",
+       "10kg",
+       "IP67 + ATEX",
+       "2+ Std.",
+       "120.000 $+",
+       "Offshore / Ex-Zone"
+      ]
+     },
+     {
+      "_key": "r0441",
+      "cells": [
+       "Ghost Robotics Vision 60",
+       "3 m/s",
+       "~10kg",
+       "Allwetter",
+       "3+ Std.",
+       "k.A. (Verteidigung)",
+       "Militär / Grenze"
+      ]
+     },
+     {
+      "_key": "r0442",
+      "cells": [
+       "Unitree Go2 Pro",
+       "3,5 m/s",
+       "3kg",
+       "IP54",
+       "1-2 Std.",
+       "~1.600 $",
+       "Sicherheit / Forschung"
+      ]
+     },
+     {
+      "_key": "r0443",
+      "cells": [
+       "DEEP Robotics Lite3",
+       "3,5 m/s",
+       "5kg",
+       "IP54",
+       "1,5 Std.",
+       "~2.800 $",
+       "Bildung / F&E"
+      ]
+     },
+     {
+      "_key": "r0444",
+      "cells": [
+       "Xiaomi CyberDog 2",
+       "3,2 m/s",
+       "~3kg",
+       "-",
+       "~1 Std.",
+       "~1.800 $",
+       "Verbraucher / Entwicklung"
+      ]
+     }
+    ]
+   },
+   {
+    "_key": "b0445",
+    "_type": "block",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0446",
+      "_type": "span",
+      "marks": [],
+      "text": "DEN RICHTIGEN ROBOTER WÄHLEN"
+     }
+    ]
+   },
+   {
+    "_key": "b0447",
+    "_type": "block",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+     {
+      "_key": "s0448",
+      "_type": "span",
+      "marks": [],
+      "text": "Schnellreferenz zur Zuordnung von Anwendungen zu den am besten geeigneten Vierbeinroboter-Marken."
+     }
+    ]
+   },
+   {
+    "_key": "it0449",
+    "_type": "infoTable",
+    "headers": [
+     "Anwendung",
+     "Erste Wahl",
+     "Alternative",
+     "Budget-Option",
+     "Hauptanforderungen"
+    ],
+    "rows": [
+     {
+      "_key": "r0450",
+      "cells": [
+       "Umspannwerk",
+       "Unitree B2",
+       "DEEP X30",
+       "DEEP X20",
+       "IP67, Treppensteigen, Lange Laufzeit"
+      ]
+     },
+     {
+      "_key": "r0451",
+      "cells": [
+       "Offshore Öl & Gas",
+       "ANYmal X",
+       "Boston Spot",
+       "-",
+       "ATEX-zertifiziert, Salzbeständigkeit"
+      ]
+     },
+     {
+      "_key": "r0452",
+      "cells": [
+       "Feuer & Rettung",
+       "DEEP X30",
+       "Unitree Fire B2",
+       "-",
+       "Hitzebeständigkeit, Gaserkennung"
+      ]
+     },
+     {
+      "_key": "r0453",
+      "cells": [
+       "Bergbau Untertage",
+       "Boston Spot",
+       "ANYmal D",
+       "DEEP X30",
+       "LiDAR, Schwachlicht-Betrieb"
+      ]
+     },
+     {
+      "_key": "r0454",
+      "cells": [
+       "Sicherheitspatrouille",
+       "Ghost Vision 60",
+       "Boston Spot",
+       "Unitree Go2",
+       "24/7-Betrieb, Wärmebildkamera"
+      ]
+     },
+     {
+      "_key": "r0455",
+      "cells": [
+       "Baustelle",
+       "Boston Spot",
+       "Unitree B2",
+       "DEEP X20",
+       "3D-Scanning, BIM-Integration"
+      ]
+     },
+     {
+      "_key": "r0456",
+      "cells": [
+       "Forschung / Bildung",
+       "Unitree Go2",
+       "DEEP Lite3",
+       "Xiaomi CyberDog",
+       "SDK-Zugang, ROS-Unterstützung"
+      ]
+     },
+     {
+      "_key": "r0457",
+      "cells": [
+       "Landwirtschaft",
+       "Unitree B2",
+       "Boston Spot",
+       "Unitree Go2",
+       "Geländeanpassung, Nutzlast"
+      ]
+     },
+     {
+      "_key": "r0458",
+      "cells": [
+       "Militär / Verteidigung",
+       "Ghost Vision 60",
+       "-",
+       "-",
+       "Robust, Modulare Nutzlast"
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
