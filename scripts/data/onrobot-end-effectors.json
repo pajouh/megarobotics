@@ -1,0 +1,1318 @@
+{
+  "_comment": "OnRobot end-of-arm tooling catalogue. Content and specifications derived from onrobot.com product pages and the official OnRobot datasheets (version noted in datasheetUrl). Image basenames refer to entries in the accompanying images map in the import script.",
+  "manufacturer": {
+    "slug": "onrobot",
+    "name": "OnRobot",
+    "website": "https://onrobot.com",
+    "headquarters": "Odense, Denmark",
+    "founded": "2018",
+    "relationshipStatus": "official_distributor",
+    "description": {
+      "en": "OnRobot is a Danish manufacturer of plug-and-play end-of-arm tooling for collaborative and light industrial robots. Formed in 2018 from the merger of On Robot A/S, Perception Farm and OptoForce, the company supplies electric grippers, vacuum grippers, force/torque sensors, vision systems and tool changers that work across all leading robot brands through a single unified software interface.",
+      "de": "OnRobot ist ein dänischer Hersteller von Plug-and-Play-Endeffektoren für kollaborative und leichte Industrieroboter. Das 2018 aus dem Zusammenschluss von On Robot A/S, Perception Farm und OptoForce entstandene Unternehmen liefert elektrische Greifer, Vakuumgreifer, Kraft-/Drehmomentsensoren, Bildverarbeitungssysteme und Werkzeugwechsler, die über eine einheitliche Softwareoberfläche mit allen führenden Robotermarken zusammenarbeiten."
+    },
+    "specialties": {
+      "en": ["Electric grippers", "Vacuum grippers", "Force/torque sensors", "Robot vision", "Tool changers"],
+      "de": ["Elektrische Greifer", "Vakuumgreifer", "Kraft-/Drehmomentsensoren", "Robotervision", "Werkzeugwechsler"]
+    }
+  },
+  "products": [
+    {
+      "model": "RG2",
+      "name": "RG2 Finger Gripper",
+      "slug": "onrobot-rg2-finger-gripper",
+      "image": "rg2.png",
+      "subcategory": "Electric grippers",
+      "order": 10,
+      "productUrl": "https://onrobot.com/en/products/rg2-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/rg2/datasheet_rg2_v1.8_en.pdf",
+      "tagline": {
+        "en": "Flexible electric 2-finger gripper with a 110 mm adjustable stroke for a wide range of part sizes.",
+        "de": "Flexibler elektrischer 2-Finger-Greifer mit 110 mm einstellbarem Hub für ein breites Teilespektrum."
+      },
+      "description": {
+        "en": "The RG2 is a collaborative two-finger gripper with a wide, fully adjustable stroke that lets a single tool cover many part sizes and shapes. Automatic TCP and payload calculation, grip detection and customisable fingertips cut programming effort, and the integrated software installs on all leading robot brands. TÜV certified.",
+        "de": "Der RG2 ist ein kollaborativer Zwei-Finger-Greifer mit weitem, voll einstellbarem Hub, sodass ein einziges Werkzeug viele Teilegrößen und -formen abdeckt. Automatische TCP- und Traglastberechnung, Grifferkennung und anpassbare Fingerspitzen reduzieren den Programmieraufwand, und die integrierte Software läuft auf allen führenden Robotermarken. TÜV-zertifiziert."
+      },
+      "features": {
+        "en": [
+          "110 mm adjustable stroke, detected automatically at program start",
+          "Automatic tool centre point (TCP) and payload calculation",
+          "Grip detection, lost-grip detection and continuous grip monitoring",
+          "Customisable fingertips for part-specific gripping",
+          "Automatic depth compensation keeps fingers parallel to the work surface",
+          "Holds the workpiece if power is lost",
+          "TÜV certified for collaborative operation"
+        ],
+        "de": [
+          "110 mm einstellbarer Hub, beim Programmstart automatisch erkannt",
+          "Automatische Berechnung von Werkzeugmittelpunkt (TCP) und Traglast",
+          "Grifferkennung, Erkennung verlorener Griffe und kontinuierliche Griffüberwachung",
+          "Anpassbare Fingerspitzen für teilespezifisches Greifen",
+          "Automatische Tiefenkompensation hält die Finger parallel zur Arbeitsfläche",
+          "Hält das Werkstück bei Stromausfall",
+          "TÜV-zertifiziert für den kollaborativen Betrieb"
+        ]
+      },
+      "applications": {
+        "en": ["Material handling", "Machine tending", "Pick and place", "Packaging", "Palletizing"],
+        "de": ["Materialhandhabung", "Maschinenbeschickung", "Pick-and-Place", "Verpackung", "Palettierung"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit)", "value": "2 kg" },
+        { "label": "Payload (form fit)", "value": "5 kg" },
+        { "label": "Total stroke (adjustable)", "value": "0–110 mm" },
+        { "label": "Gripping force (adjustable)", "value": "3–40 N" },
+        { "label": "Gripping speed", "value": "38–127 mm/s" },
+        { "label": "Gripping time", "value": "0.06–0.21 s" },
+        { "label": "Repetition accuracy", "value": "0.1 mm typical" },
+        { "label": "Finger position resolution", "value": "0.1 mm" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "213 × 149 × 36 mm" },
+        { "label": "Weight", "value": "0.78 kg" },
+        { "label": "Power supply", "value": "20–25 V" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "RG6",
+      "name": "RG6 Finger Gripper",
+      "slug": "onrobot-rg6-finger-gripper",
+      "image": "rg6.png",
+      "subcategory": "Electric grippers",
+      "order": 20,
+      "productUrl": "https://onrobot.com/en/products/rg6-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/rg6/datasheet_rg6_v2.0_en.pdf",
+      "tagline": {
+        "en": "Large-stroke electric 2-finger gripper handling up to 10 kg with a 160 mm adjustable stroke.",
+        "de": "Elektrischer 2-Finger-Greifer mit großem Hub für bis zu 10 kg und 160 mm einstellbarem Hub."
+      },
+      "description": {
+        "en": "The RG6 extends the RG series with a larger reach and higher payload, broadening the range of applications a single gripper can automate. It shares the RG2's automatic TCP and payload calculation, grip detection and customisable fingertips, and includes a built-in OnRobot Quick Changer. TÜV certified.",
+        "de": "Der RG6 erweitert die RG-Serie um größere Reichweite und höhere Traglast und vergrößert so das Anwendungsspektrum eines einzelnen Greifers. Er bietet dieselbe automatische TCP- und Traglastberechnung, Grifferkennung und anpassbare Fingerspitzen wie der RG2 und enthält einen integrierten OnRobot Quick Changer. TÜV-zertifiziert."
+      },
+      "features": {
+        "en": [
+          "160 mm adjustable stroke for large and varied workpieces",
+          "Payload up to 10 kg in form fit",
+          "Built-in OnRobot Quick Changer",
+          "Automatic TCP and payload calculation",
+          "Grip detection and lost-grip detection",
+          "Customisable fingertips",
+          "TÜV certified for collaborative operation"
+        ],
+        "de": [
+          "160 mm einstellbarer Hub für große und unterschiedliche Werkstücke",
+          "Traglast bis 10 kg im Formschluss",
+          "Integrierter OnRobot Quick Changer",
+          "Automatische TCP- und Traglastberechnung",
+          "Grifferkennung und Erkennung verlorener Griffe",
+          "Anpassbare Fingerspitzen",
+          "TÜV-zertifiziert für den kollaborativen Betrieb"
+        ]
+      },
+      "applications": {
+        "en": ["Material handling", "Machine tending", "CNC tending", "Packaging", "Palletizing"],
+        "de": ["Materialhandhabung", "Maschinenbeschickung", "CNC-Beschickung", "Verpackung", "Palettierung"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit)", "value": "6 kg" },
+        { "label": "Payload (form fit)", "value": "10 kg" },
+        { "label": "Total stroke (adjustable)", "value": "0–160 mm" },
+        { "label": "Gripping force (adjustable)", "value": "25–120 N" },
+        { "label": "Gripping speed", "value": "51–140 mm/s" },
+        { "label": "Gripping time", "value": "0.05–0.15 s" },
+        { "label": "Repetition accuracy", "value": "0.1 mm typical" },
+        { "label": "Finger position resolution", "value": "0.1 mm" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "262 × 212 × 42 mm" },
+        { "label": "Weight", "value": "1.25 kg" },
+        { "label": "Power supply", "value": "20–25 V" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "RG2-FT",
+      "name": "RG2-FT Finger Gripper",
+      "slug": "onrobot-rg2-ft-finger-gripper",
+      "image": "rg2-ft.png",
+      "subcategory": "Electric grippers",
+      "order": 30,
+      "productUrl": "https://onrobot.com/en/products/rg2-ft-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/rg2-ft/datasheet_rg2-ft_v1.3_en.pdf",
+      "tagline": {
+        "en": "Smart gripper with built-in force/torque and proximity sensing in the fingertips.",
+        "de": "Intelligenter Greifer mit integrierter Kraft-/Drehmoment- und Näherungssensorik in den Fingerspitzen."
+      },
+      "description": {
+        "en": "The RG2-FT adds six-axis force/torque sensors and a proximity sensor at each fingertip, letting the robot detect object position, sense contact and react to slipping before it happens. That closed-loop feedback enables delicate pick-and-place and insertion tasks that cannot be programmed in advance, with human-like part hand-offs.",
+        "de": "Der RG2-FT ergänzt jede Fingerspitze um sechsachsige Kraft-/Drehmomentsensoren und einen Näherungssensor. So erkennt der Roboter die Objektposition, spürt den Kontakt und reagiert auf Abrutschen, bevor es eintritt. Diese Rückkopplung ermöglicht empfindliche Pick-and-Place- und Fügeaufgaben, die sich nicht im Voraus programmieren lassen, mit nahezu menschlicher Teileübergabe."
+      },
+      "features": {
+        "en": [
+          "Six-axis force/torque sensor in each fingertip",
+          "Proximity sensor with 0–100 mm sensing range",
+          "Detects the risk of slipping before it occurs",
+          "Accurate workpiece position detection",
+          "100 mm adjustable stroke",
+          "Ideal for fragile and delicate materials",
+          "Pre-integrated software for all leading robot brands"
+        ],
+        "de": [
+          "Sechsachsiger Kraft-/Drehmomentsensor in jeder Fingerspitze",
+          "Näherungssensor mit 0–100 mm Erfassungsbereich",
+          "Erkennt Abrutschgefahr, bevor sie eintritt",
+          "Präzise Erkennung der Werkstückposition",
+          "100 mm einstellbarer Hub",
+          "Ideal für zerbrechliche und empfindliche Materialien",
+          "Vorintegrierte Software für alle führenden Robotermarken"
+        ]
+      },
+      "applications": {
+        "en": ["Assembly", "Insertion", "Material handling", "Quality inspection", "Delicate pick and place"],
+        "de": ["Montage", "Fügeprozesse", "Materialhandhabung", "Qualitätsprüfung", "Empfindliches Pick-and-Place"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit)", "value": "2 kg" },
+        { "label": "Payload (form fit)", "value": "4 kg" },
+        { "label": "Total stroke (adjustable)", "value": "0–100 mm" },
+        { "label": "Gripping force (adjustable)", "value": "3–40 N" },
+        { "label": "Gripping speed", "value": "55–184 mm/s" },
+        { "label": "Gripping time", "value": "0.04–0.11 s" },
+        { "label": "F/T nominal capacity", "value": "Fxy 20 N, Fz 40 N, Txy 0.7 Nm, Tz 0.5 Nm" },
+        { "label": "F/T noise-free resolution", "value": "Fxy 0.1 N, Fz 0.4 N" },
+        { "label": "Proximity sensing range", "value": "0–100 mm (±2 mm precision)" },
+        { "label": "Sampling frequency", "value": "150 Hz" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "219 × 149 × 49 mm" },
+        { "label": "Weight", "value": "0.98 kg" },
+        { "label": "Power consumption", "value": "6.5–22 W at 24 V" }
+      ]
+    },
+    {
+      "model": "2FG7",
+      "name": "2FG7 Parallel Gripper",
+      "slug": "onrobot-2fg7-parallel-gripper",
+      "image": "2fg7.png",
+      "subcategory": "Electric grippers",
+      "order": 40,
+      "productUrl": "https://onrobot.com/en/products/2fg7-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/2fg7/datasheet_2fg7_v2.0_en.pdf",
+      "tagline": {
+        "en": "Compact IP67 parallel gripper with ISO Class 5 cleanroom certification and 11 kg payload.",
+        "de": "Kompakter IP67-Parallelgreifer mit ISO-Klasse-5-Reinraumzertifizierung und 11 kg Traglast."
+      },
+      "description": {
+        "en": "Smaller and more powerful than comparable two-finger grippers, the 2FG7 suits applications with limited manoeuvring space. It combines an 11 kg maximum payload with a 73 mm external grip range and 20–140 N gripping force. IP67 rating and ISO Class 5 cleanroom certification let it work in harsh machining environments and in pharmaceutical or electronics production alike — with no compressed air required.",
+        "de": "Kleiner und kräftiger als vergleichbare Zwei-Finger-Greifer eignet sich der 2FG7 für Anwendungen mit begrenztem Bewegungsraum. Er verbindet 11 kg maximale Traglast mit 73 mm externem Greifbereich und 20–140 N Greifkraft. IP67-Schutzart und ISO-Klasse-5-Reinraumzertifizierung ermöglichen den Einsatz in rauen Zerspanungsumgebungen ebenso wie in der Pharma- und Elektronikfertigung — ganz ohne Druckluft."
+      },
+      "features": {
+        "en": [
+          "IP67 rated for harsh manufacturing environments",
+          "ISO Class 5 cleanroom certified",
+          "ESD safe when the ESD-marked bellow is fitted",
+          "Precise adjustment of force, speed and stroke",
+          "Grip detection and lost-grip detection",
+          "Holds the workpiece if power is lost",
+          "NSF H1 gear grease for incidental food contact",
+          "Fully electric — no compressed air required"
+        ],
+        "de": [
+          "IP67 für raue Fertigungsumgebungen",
+          "ISO-Klasse-5-Reinraumzertifizierung",
+          "ESD-sicher bei montiertem ESD-gekennzeichnetem Faltenbalg",
+          "Präzise Einstellung von Kraft, Geschwindigkeit und Hub",
+          "Grifferkennung und Erkennung verlorener Griffe",
+          "Hält das Werkstück bei Stromausfall",
+          "NSF-H1-Getriebefett für gelegentlichen Lebensmittelkontakt",
+          "Vollelektrisch — keine Druckluft erforderlich"
+        ]
+      },
+      "applications": {
+        "en": ["Machine tending", "Material handling", "Assembly", "Pharmaceutical production", "Electronics production"],
+        "de": ["Maschinenbeschickung", "Materialhandhabung", "Montage", "Pharmaproduktion", "Elektronikfertigung"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit)", "value": "7 kg" },
+        { "label": "Payload (form fit)", "value": "11 kg" },
+        { "label": "Total stroke", "value": "38 mm" },
+        { "label": "Grip width range (external)", "value": "1–73 mm" },
+        { "label": "Grip width range (internal)", "value": "11–83 mm" },
+        { "label": "Gripping force", "value": "20–140 N (±5 N)" },
+        { "label": "Gripping speed", "value": "16–450 mm/s" },
+        { "label": "Gripping time", "value": "200 ms typical" },
+        { "label": "Gripping repeatability", "value": "±0.1 mm" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Cleanroom", "value": "ISO Class 5" },
+        { "label": "Dimensions", "value": "144 × 90 × 71 mm" },
+        { "label": "Weight", "value": "1.1 kg" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "2FG14",
+      "name": "2FG14 Parallel Gripper",
+      "slug": "onrobot-2fg14-parallel-gripper",
+      "image": "2fg14.png",
+      "subcategory": "Electric grippers",
+      "order": 50,
+      "productUrl": "https://onrobot.com/en/products/2fg14-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/2fg14/datasheet_2fg14_v1.3_en.pdf",
+      "tagline": {
+        "en": "High-force IP67 parallel gripper for heavy CNC workpieces, up to 20 kg payload.",
+        "de": "Kraftvoller IP67-Parallelgreifer für schwere CNC-Werkstücke mit bis zu 20 kg Traglast."
+      },
+      "description": {
+        "en": "The 2FG14 delivers high gripping power in a compact, fully electric package, handling workpieces up to 20 kg in form fit. A reinforced finger platform accepts a wide range of custom fingers, and IP67 protection lets it run reliably in machining workshops with coolant and chips in the air. Full gripping control makes deployment and redeployment fast compared with pneumatic alternatives.",
+        "de": "Der 2FG14 liefert hohe Greifkraft in kompakter, vollelektrischer Bauform und handhabt Werkstücke bis 20 kg im Formschluss. Eine verstärkte Fingerplattform nimmt vielfältige Sonderfinger auf, und die IP67-Schutzart erlaubt zuverlässigen Betrieb in Zerspanungsbetrieben mit Kühlmittel und Spänen in der Luft. Die vollständige Greifkontrolle macht Inbetriebnahme und Umrüstung schneller als bei pneumatischen Alternativen."
+      },
+      "features": {
+        "en": [
+          "Payload up to 20 kg in form fit, 14 kg in force fit",
+          "50 mm total stroke with 105 mm external grip range",
+          "Reinforced finger platform for extensive customisation",
+          "IP67 rated for coolant and chip exposure",
+          "Integrated force sensor in the connector-side finger",
+          "Holds the workpiece if power is lost",
+          "NSF H1 gear grease for incidental food contact"
+        ],
+        "de": [
+          "Traglast bis 20 kg im Formschluss, 14 kg im Kraftschluss",
+          "50 mm Gesamthub mit 105 mm externem Greifbereich",
+          "Verstärkte Fingerplattform für umfangreiche Anpassungen",
+          "IP67 gegen Kühlmittel und Spanflug",
+          "Integrierter Kraftsensor im steckerseitigen Finger",
+          "Hält das Werkstück bei Stromausfall",
+          "NSF-H1-Getriebefett für gelegentlichen Lebensmittelkontakt"
+        ]
+      },
+      "applications": {
+        "en": ["CNC machine tending", "Material handling", "Assembly", "Heavy part transfer"],
+        "de": ["CNC-Maschinenbeschickung", "Materialhandhabung", "Montage", "Transfer schwerer Teile"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit)", "value": "14 kg" },
+        { "label": "Payload (form fit)", "value": "20 kg" },
+        { "label": "Total stroke", "value": "50 mm" },
+        { "label": "Grip width range (external)", "value": "5–105 mm" },
+        { "label": "Grip width range (internal)", "value": "17.6–117.6 mm" },
+        { "label": "Gripping force", "value": "40–280 N (±10 N)" },
+        { "label": "Gripping speed", "value": "16–450 mm/s" },
+        { "label": "Gripping time", "value": "200 ms typical" },
+        { "label": "Gripping repeatability", "value": "±0.1 mm" },
+        { "label": "Allowed finger torque", "value": "30 Nm (X), 25 Nm (Y)" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Dimensions", "value": "155.2 × 115 × 70 mm" },
+        { "label": "Weight", "value": "1.5 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" }
+      ]
+    },
+    {
+      "model": "2FGP20",
+      "name": "2FGP20 Palletizing Gripper",
+      "slug": "onrobot-2fgp20-palletizing-gripper",
+      "image": "2fgp20.png",
+      "subcategory": "Palletizing grippers",
+      "order": 60,
+      "productUrl": "https://onrobot.com/en/products/2fgp20-palletizer-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/2fgp20/datasheet_2fgp20_v1.9_en.pdf",
+      "tagline": {
+        "en": "Electric palletizing gripper with 260 mm stroke and an integrated vacuum unit for slip sheets.",
+        "de": "Elektrischer Palettiergreifer mit 260 mm Hub und integrierter Vakuumeinheit für Zwischenlagen."
+      },
+      "description": {
+        "en": "The 2FGP20 combines a wide-stroke parallel gripper with an integrated vacuum gripper, so one tool can palletize heavy or open boxes, shelf-ready packaging and other containers that vacuum alone cannot hold — then pick the slip sheet between layers without a tool change. Parallel gripping is far less sensitive to box material and porosity than suction.",
+        "de": "Der 2FGP20 kombiniert einen Parallelgreifer mit großem Hub und eine integrierte Vakuumeinheit. So palettiert ein einziges Werkzeug schwere oder offene Kartons, regalfertige Verpackungen und andere Gebinde, die sich mit Vakuum allein nicht halten lassen — und greift anschließend die Zwischenlage ohne Werkzeugwechsel. Paralleles Greifen reagiert deutlich unempfindlicher auf Kartonmaterial und Porosität als Saugtechnik."
+      },
+      "features": {
+        "en": [
+          "20 kg payload with 260 mm total stroke",
+          "Integrated vacuum gripper for slip sheets and interlayers",
+          "Customisable arms for different box formats",
+          "Grips open boxes and containers vacuum cannot hold",
+          "Fully electric — no external air supply",
+          "Holds the workpiece if power is lost",
+          "KLT finger set available for small load carriers"
+        ],
+        "de": [
+          "20 kg Traglast bei 260 mm Gesamthub",
+          "Integrierte Vakuumeinheit für Zwischenlagen und Trennlagen",
+          "Anpassbare Arme für unterschiedliche Kartonformate",
+          "Greift offene Kartons und Gebinde, die Vakuum nicht halten kann",
+          "Vollelektrisch — keine externe Druckluftversorgung",
+          "Hält das Werkstück bei Stromausfall",
+          "KLT-Fingersatz für Kleinladungsträger verfügbar"
+        ]
+      },
+      "applications": {
+        "en": ["Palletizing", "Depalletizing", "Packaging", "Material handling", "Case handling"],
+        "de": ["Palettierung", "Depalettierung", "Verpackung", "Materialhandhabung", "Gebindehandhabung"]
+      },
+      "specifications": [
+        { "label": "Payload (finger grip)", "value": "20 kg" },
+        { "label": "Payload (vacuum grip)", "value": "2.5 kg" },
+        { "label": "Total stroke", "value": "260 mm" },
+        { "label": "Grip width range", "value": "170–430 mm (158–418 mm with pads)" },
+        { "label": "Gripping force", "value": "80–400 N (±30 N)" },
+        { "label": "Gripping speed", "value": "16–180 mm/s" },
+        { "label": "Gripping repeatability", "value": "±0.5 mm" },
+        { "label": "Vacuum", "value": "5–60 %" },
+        { "label": "Vacuum cups", "value": "1–4 pcs" },
+        { "label": "Noise level", "value": "58 dB(A) finger / 72 dB(A) vacuum" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "400 × 121.6 × 188 mm" },
+        { "label": "Weight", "value": "5.07 kg (base unit with standard fingers)" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "3FG15",
+      "name": "3FG15 Three-Finger Gripper",
+      "slug": "onrobot-3fg15-three-finger-gripper",
+      "image": "3fg15.png",
+      "subcategory": "Electric grippers",
+      "order": 70,
+      "productUrl": "https://onrobot.com/en/products/3fg15-finger-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/3fg15/datasheet_3fg15_v2.1_en.pdf",
+      "tagline": {
+        "en": "Centric three-finger gripper for cylindrical parts, ideal for CNC lathe tending.",
+        "de": "Zentrischer Drei-Finger-Greifer für zylindrische Teile, ideal für die CNC-Drehmaschinenbeschickung."
+      },
+      "description": {
+        "en": "The 3FG15 grips cylindrical workpieces from 4 mm to 152 mm in diameter with three contact points, automatically centring the part for precise placement in machine chucks. It supports both external friction-fit and internal form-fit gripping, with payloads up to 15 kg and gripping force from 10 N to 240 N — competing with far bulkier and less flexible finger grippers.",
+        "de": "Der 3FG15 greift zylindrische Werkstücke von 4 mm bis 152 mm Durchmesser über drei Kontaktpunkte und zentriert das Teil automatisch für die präzise Ablage im Maschinenfutter. Er beherrscht sowohl externes Kraftschluss- als auch internes Formschlussgreifen, mit Traglasten bis 15 kg und Greifkräften von 10 N bis 240 N — und tritt damit gegen deutlich sperrigere und unflexiblere Fingergreifer an."
+      },
+      "features": {
+        "en": [
+          "Three contact points for accurate centric positioning",
+          "External grip diameter 4–152 mm, internal 35–176 mm",
+          "Payload up to 15 kg in form fit",
+          "Fingers mountable in three positions for different force and diameter ranges",
+          "Four supplied fingertip types in steel and silicone",
+          "IP67 rated for machining environments",
+          "Holds the workpiece if power is lost"
+        ],
+        "de": [
+          "Drei Kontaktpunkte für präzise zentrische Positionierung",
+          "Externer Greifdurchmesser 4–152 mm, intern 35–176 mm",
+          "Traglast bis 15 kg im Formschluss",
+          "Finger in drei Positionen montierbar für unterschiedliche Kraft- und Durchmesserbereiche",
+          "Vier mitgelieferte Fingerspitzentypen aus Stahl und Silikon",
+          "IP67 für Zerspanungsumgebungen",
+          "Hält das Werkstück bei Stromausfall"
+        ]
+      },
+      "applications": {
+        "en": ["CNC lathe tending", "Machine tending", "Insertion", "Material handling", "Palletizing"],
+        "de": ["CNC-Drehmaschinenbeschickung", "Maschinenbeschickung", "Fügeprozesse", "Materialhandhabung", "Palettierung"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit, grip)", "value": "10 kg" },
+        { "label": "Payload (force fit, flexible grip)", "value": "8 kg" },
+        { "label": "Payload (form fit)", "value": "15 kg" },
+        { "label": "Grip diameter (external)", "value": "4–152 mm" },
+        { "label": "Grip diameter (internal)", "value": "35–176 mm" },
+        { "label": "Gripping force (grip)", "value": "10–240 N" },
+        { "label": "Gripping force (flexible grip)", "value": "10–140 N" },
+        { "label": "Gripping speed", "value": "Up to 125 mm/s" },
+        { "label": "Gripping time", "value": "500 ms typical" },
+        { "label": "Diameter repetition accuracy", "value": "0.1 mm typical" },
+        { "label": "Motor torque on finger platform", "value": "5.3 Nm" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Dimensions", "value": "156 × 158 × Ø180 mm" },
+        { "label": "Weight", "value": "1.15 kg" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "3FG25",
+      "name": "3FG25 Three-Finger Gripper",
+      "slug": "onrobot-3fg25-three-finger-gripper",
+      "image": "3fg25.png",
+      "subcategory": "Electric grippers",
+      "order": 80,
+      "productUrl": "https://onrobot.com/en/products/3fg25",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/3fg25/datasheet_3fg25_v1.3_en.pdf",
+      "tagline": {
+        "en": "Heavy-duty centric three-finger gripper for workpieces up to 25 kg and 450 N gripping force.",
+        "de": "Robuster zentrischer Drei-Finger-Greifer für Werkstücke bis 25 kg und 450 N Greifkraft."
+      },
+      "description": {
+        "en": "The 3FG25 scales the three-finger concept up for high-payload collaborative work: 25 kg in form fit, 155 mm external grip diameter and up to 450 N of gripping force. Automatic centring gives a strong, stable grip and precise placement in machine chucks, and IP67 protection keeps it reliable in machining workshops with fluids and chips.",
+        "de": "Der 3FG25 skaliert das Drei-Finger-Konzept für kollaborative Anwendungen mit hoher Traglast: 25 kg im Formschluss, 155 mm externer Greifdurchmesser und bis zu 450 N Greifkraft. Die automatische Zentrierung sorgt für sicheren, stabilen Griff und präzise Ablage im Maschinenfutter, und die IP67-Schutzart erhält die Zuverlässigkeit in Zerspanungsbetrieben mit Kühlmittel und Spänen."
+      },
+      "features": {
+        "en": [
+          "Payload up to 25 kg in form fit",
+          "External grip diameter 18–155 mm, internal 41–184 mm",
+          "Gripping force up to 450 N",
+          "Accurate centric positioning from three contact points",
+          "Fingers mountable in three positions",
+          "IP67 rated for harsh machining environments",
+          "Holds the workpiece if power is lost"
+        ],
+        "de": [
+          "Traglast bis 25 kg im Formschluss",
+          "Externer Greifdurchmesser 18–155 mm, intern 41–184 mm",
+          "Greifkraft bis 450 N",
+          "Präzise zentrische Positionierung durch drei Kontaktpunkte",
+          "Finger in drei Positionen montierbar",
+          "IP67 für raue Zerspanungsumgebungen",
+          "Hält das Werkstück bei Stromausfall"
+        ]
+      },
+      "applications": {
+        "en": ["CNC machine tending", "Material handling", "Assembly", "Transferring", "Sorting"],
+        "de": ["CNC-Maschinenbeschickung", "Materialhandhabung", "Montage", "Transfer", "Sortierung"]
+      },
+      "specifications": [
+        { "label": "Payload (force fit, grip)", "value": "15 kg" },
+        { "label": "Payload (force fit, flexible grip)", "value": "10 kg" },
+        { "label": "Payload (form fit)", "value": "25 kg" },
+        { "label": "Grip diameter (external)", "value": "18–155 mm" },
+        { "label": "Grip diameter (internal)", "value": "41–184 mm" },
+        { "label": "Gripping force (grip)", "value": "50–450 N" },
+        { "label": "Gripping force (flexible grip)", "value": "50–300 N" },
+        { "label": "Gripping speed", "value": "Up to 90 mm/s" },
+        { "label": "Gripping time", "value": "500 ms typical" },
+        { "label": "Diameter repetition accuracy", "value": "0.1 mm typical" },
+        { "label": "Motor torque on finger platform", "value": "7.4 Nm" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Dimensions", "value": "156 × 168 × Ø187 mm" },
+        { "label": "Weight", "value": "1.6 kg" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "VG10",
+      "name": "VG10 Vacuum Gripper",
+      "slug": "onrobot-vg10-vacuum-gripper",
+      "image": "vg10-cross.png",
+      "subcategory": "Vacuum grippers",
+      "order": 90,
+      "productUrl": "https://onrobot.com/en/products/vg10-vacuum-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/vg10/datasheet_vg10_v2.6_en.pdf",
+      "tagline": {
+        "en": "Electric dual-channel vacuum gripper with four hand-adjustable arms and 15 kg payload.",
+        "de": "Elektrischer Zweikanal-Vakuumgreifer mit vier handverstellbaren Armen und 15 kg Traglast."
+      },
+      "description": {
+        "en": "The VG10 has an integrated electric vacuum pump, so no external air supply is needed. Its four arms fold by hand through 270° and its suction cups are grouped into two independent channels, letting the left and right sides run different tasks in the same cycle. That dual gripping shortens cycle time and suits workpieces of many different sizes and shapes.",
+        "de": "Der VG10 besitzt eine integrierte elektrische Vakuumpumpe, sodass keine externe Druckluftversorgung nötig ist. Seine vier Arme lassen sich von Hand um 270° schwenken, und die Saugnäpfe sind in zwei unabhängige Kanäle gruppiert, sodass linke und rechte Seite im selben Zyklus unterschiedliche Aufgaben übernehmen. Dieses Doppelgreifen verkürzt die Taktzeit und passt zu Werkstücken sehr unterschiedlicher Größen und Formen."
+      },
+      "features": {
+        "en": [
+          "Integrated electric vacuum pump — no compressed air needed",
+          "Four arms, hand-adjustable through 270°",
+          "Two independent vacuum channels for dual gripping",
+          "Rated payload 10 kg, maximum 15 kg",
+          "Up to 16 vacuum cups in 15, 30 and 40 mm sizes",
+          "Field-replaceable integrated 50 µm dust filters",
+          "6 Nm arm holding torque keeps arms fixed under load"
+        ],
+        "de": [
+          "Integrierte elektrische Vakuumpumpe — keine Druckluft erforderlich",
+          "Vier Arme, von Hand um 270° verstellbar",
+          "Zwei unabhängige Vakuumkanäle für Doppelgreifen",
+          "Nenntraglast 10 kg, maximal 15 kg",
+          "Bis zu 16 Saugnäpfe in 15, 30 und 40 mm",
+          "Im Feld wechselbare integrierte 50-µm-Staubfilter",
+          "6 Nm Armhaltemoment fixiert die Arme unter Last"
+        ]
+      },
+      "applications": {
+        "en": ["Material handling", "Machine tending", "Box palletizing", "Pick and place", "Packaging"],
+        "de": ["Materialhandhabung", "Maschinenbeschickung", "Kartonpalettierung", "Pick-and-Place", "Verpackung"]
+      },
+      "specifications": [
+        { "label": "Rated payload", "value": "10 kg" },
+        { "label": "Maximum payload", "value": "15 kg" },
+        { "label": "Vacuum", "value": "5–80 %" },
+        { "label": "Air flow", "value": "0–12 L/min" },
+        { "label": "Vacuum cups", "value": "1–16 pcs" },
+        { "label": "Arms adjustment", "value": "0–270°" },
+        { "label": "Arm holding torque", "value": "6 Nm" },
+        { "label": "Gripping time", "value": "0.35 s" },
+        { "label": "Releasing time", "value": "0.20 s" },
+        { "label": "Vacuum pump", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions (folded)", "value": "105 × 146 × 146 mm" },
+        { "label": "Dimensions (unfolded)", "value": "105 × 390 × 390 mm" },
+        { "label": "Weight", "value": "1.62 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" }
+      ]
+    },
+    {
+      "model": "VGC10",
+      "name": "VGC10 Compact Vacuum Gripper",
+      "slug": "onrobot-vgc10-vacuum-gripper",
+      "image": "vgc10.png",
+      "subcategory": "Vacuum grippers",
+      "order": 100,
+      "productUrl": "https://onrobot.com/en/products/vgc10-vacuum-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/vgc10/datasheet_vgc10_v1.7_en.pdf",
+      "tagline": {
+        "en": "Compact electric vacuum gripper for tight spaces, lifting up to 15 kg at 0.81 kg tool weight.",
+        "de": "Kompakter elektrischer Vakuumgreifer für enge Räume, hebt bis zu 15 kg bei 0,81 kg Eigengewicht."
+      },
+      "description": {
+        "en": "Based on the award-winning VG10, the VGC10 is smaller and lighter without sacrificing payload. At 101 × 100 × 100 mm and 0.814 kg it fits constrained environments and smaller robot arms while still lifting up to 15 kg with customised attachments. A supplied adaptor plate with seven mounting holes allows the cup layout to be reconfigured for almost any part geometry.",
+        "de": "Der VGC10 basiert auf dem preisgekrönten VG10 und ist kleiner und leichter, ohne bei der Traglast Abstriche zu machen. Mit 101 × 100 × 100 mm und 0,814 kg passt er in beengte Umgebungen und an kleinere Roboterarme und hebt mit angepassten Aufsätzen dennoch bis zu 15 kg. Eine mitgelieferte Adapterplatte mit sieben Montagebohrungen erlaubt es, die Saugnapfanordnung für nahezu jede Teilegeometrie umzukonfigurieren."
+      },
+      "features": {
+        "en": [
+          "Compact 101 × 100 × 100 mm body at 0.814 kg",
+          "Payload 6 kg with default attachments, up to 15 kg customised",
+          "Two independent vacuum channels for dual gripping",
+          "Adaptor plate with seven holes for flexible cup layouts",
+          "Integrated electric vacuum pump — no compressed air",
+          "Field-replaceable integrated 50 µm dust filters",
+          "Suits smaller and lighter-payload robot arms"
+        ],
+        "de": [
+          "Kompakter Korpus mit 101 × 100 × 100 mm bei 0,814 kg",
+          "Traglast 6 kg mit Standardaufsätzen, bis 15 kg mit Anpassung",
+          "Zwei unabhängige Vakuumkanäle für Doppelgreifen",
+          "Adapterplatte mit sieben Bohrungen für flexible Saugnapfanordnungen",
+          "Integrierte elektrische Vakuumpumpe — keine Druckluft",
+          "Im Feld wechselbare integrierte 50-µm-Staubfilter",
+          "Passend für kleinere Roboterarme mit geringerer Traglast"
+        ]
+      },
+      "applications": {
+        "en": ["Machine tending", "Press brake tending", "Material handling", "Pick and place", "Packaging"],
+        "de": ["Maschinenbeschickung", "Abkantpressenbeschickung", "Materialhandhabung", "Pick-and-Place", "Verpackung"]
+      },
+      "specifications": [
+        { "label": "Payload (default attachments)", "value": "6 kg" },
+        { "label": "Payload (customised attachments)", "value": "Up to 15 kg" },
+        { "label": "Vacuum", "value": "5–80 %" },
+        { "label": "Air flow", "value": "0–12 L/min" },
+        { "label": "Vacuum cups", "value": "1–7 pcs" },
+        { "label": "Channels", "value": "2 independent" },
+        { "label": "Gripping time", "value": "0.35 s" },
+        { "label": "Releasing time", "value": "0.20 s" },
+        { "label": "Vacuum pump", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "101 × 100 × 100 mm" },
+        { "label": "Weight", "value": "0.814 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" }
+      ]
+    },
+    {
+      "model": "VGP20",
+      "name": "VGP20 Vacuum Gripper",
+      "slug": "onrobot-vgp20-vacuum-gripper",
+      "image": "vgp20.png",
+      "subcategory": "Vacuum grippers",
+      "order": 110,
+      "productUrl": "https://onrobot.com/en/products/vgp20-vacuum-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/vgp20/datasheet_vgp20_v1.7_en.pdf",
+      "tagline": {
+        "en": "High-payload electric vacuum gripper for palletizing, 20 kg with four vacuum channels.",
+        "de": "Elektrischer Vakuumgreifer mit hoher Traglast für die Palettierung, 20 kg und vier Vakuumkanäle."
+      },
+      "description": {
+        "en": "With payloads to 20 kg, the VGP20 is OnRobot's most powerful all-electric vacuum gripper. Four independent channels and 48 L/min of total air flow give it enough suction for porous materials — thin, recycled cardboard and lightweight shipping bags included — where weaker grippers fail. Running without compressed air can cut operating and maintenance costs by up to 90 % against pneumatic setups.",
+        "de": "Mit Traglasten bis 20 kg ist der VGP20 der leistungsstärkste vollelektrische Vakuumgreifer von OnRobot. Vier unabhängige Kanäle und 48 L/min Gesamtluftstrom liefern genug Saugleistung für poröse Materialien — auch dünne, recycelte Kartonagen und leichte Versandbeutel —, an denen schwächere Greifer scheitern. Der Betrieb ohne Druckluft kann Betriebs- und Wartungskosten gegenüber pneumatischen Lösungen um bis zu 90 % senken."
+      },
+      "features": {
+        "en": [
+          "Payload up to 20 kg — OnRobot's most powerful electric vacuum gripper",
+          "Four independent vacuum channels, 48 L/min total air flow",
+          "Handles porous materials including thin and recycled cardboard",
+          "Optional continuous air-flow monitoring halts the robot on vacuum loss",
+          "16 cup positions as standard, 24 with the high-payload bracket",
+          "Fully electric — up to 90 % lower operating cost than pneumatic",
+          "Field-replaceable integrated 50 µm dust filters"
+        ],
+        "de": [
+          "Traglast bis 20 kg — der leistungsstärkste elektrische Vakuumgreifer von OnRobot",
+          "Vier unabhängige Vakuumkanäle, 48 L/min Gesamtluftstrom",
+          "Handhabt poröse Materialien einschließlich dünner und recycelter Kartonagen",
+          "Optionale kontinuierliche Luftstromüberwachung stoppt den Roboter bei Vakuumverlust",
+          "16 Saugnapfpositionen serienmäßig, 24 mit dem High-Payload-Bracket",
+          "Vollelektrisch — bis zu 90 % geringere Betriebskosten als pneumatisch",
+          "Im Feld wechselbare integrierte 50-µm-Staubfilter"
+        ]
+      },
+      "applications": {
+        "en": ["Palletizing", "Packaging", "Material handling", "Machine tending", "Case handling"],
+        "de": ["Palettierung", "Verpackung", "Materialhandhabung", "Maschinenbeschickung", "Gebindehandhabung"]
+      },
+      "specifications": [
+        { "label": "Payload", "value": "10 kg typical, 20 kg maximum" },
+        { "label": "Vacuum", "value": "5–60 %" },
+        { "label": "Air flow (total)", "value": "0–48 L/min" },
+        { "label": "Air flow (per channel)", "value": "0–12 L/min" },
+        { "label": "Channels", "value": "4 independent" },
+        { "label": "Vacuum cups", "value": "1–16 pcs (24 with high-payload bracket)" },
+        { "label": "Gripping time", "value": "0.25 s at 40 % vacuum" },
+        { "label": "Releasing time", "value": "0.4 s" },
+        { "label": "Noise level", "value": "67 dB(A) typical" },
+        { "label": "Vacuum pump", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "264 × 184 × 92 mm" },
+        { "label": "Weight", "value": "2.55 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" }
+      ]
+    },
+    {
+      "model": "VGP30",
+      "name": "VGP30 Vacuum Gripper",
+      "slug": "onrobot-vgp30-vacuum-gripper",
+      "image": "vgp-30-1777014387-1.png",
+      "subcategory": "Vacuum grippers",
+      "order": 120,
+      "productUrl": "https://onrobot.com/en/products/vgp30-vacuum-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/vgp30/datasheet_vgp30_v1.5_en.pdf",
+      "tagline": {
+        "en": "Pneumatic vacuum gripper delivering 440 L/min air flow and 30 kg payload for high-mix palletizing.",
+        "de": "Pneumatischer Vakuumgreifer mit 440 L/min Luftstrom und 30 kg Traglast für variantenreiche Palettierung."
+      },
+      "description": {
+        "en": "The VGP30 uses an external compressed-air supply to reach 440 L/min of air flow and 30 kg of payload — the configuration for demanding palletizing where electric pumps run out of headroom. An intelligent vacuum control system adjusts flow automatically to each box or interlayer, minimising air consumption across mixed loads, and two independent channels can be driven together or separately.",
+        "de": "Der VGP30 nutzt eine externe Druckluftversorgung und erreicht damit 440 L/min Luftstrom und 30 kg Traglast — die Auslegung für anspruchsvolle Palettieraufgaben, bei denen elektrische Pumpen an ihre Grenzen stoßen. Eine intelligente Vakuumregelung passt den Luftstrom automatisch an jeden Karton oder jede Zwischenlage an und minimiert so den Luftverbrauch bei gemischten Ladungen; zwei unabhängige Kanäle lassen sich gemeinsam oder getrennt ansteuern."
+      },
+      "features": {
+        "en": [
+          "Payload up to 30 kg on cardboard boxes",
+          "440 L/min total air flow from external compressed air",
+          "Intelligent vacuum control adapts to each box and interlayer",
+          "Two independent vacuum channels",
+          "20 vacuum cups with 12 supplied blinding screws",
+          "Fast 150 ms gripping and 80 ms releasing times",
+          "Low 59 dB(A) noise level",
+          "Lightweight 3.1 kg despite the high payload"
+        ],
+        "de": [
+          "Traglast bis 30 kg bei Kartonagen",
+          "440 L/min Gesamtluftstrom über externe Druckluft",
+          "Intelligente Vakuumregelung passt sich an jeden Karton und jede Zwischenlage an",
+          "Zwei unabhängige Vakuumkanäle",
+          "20 Saugnäpfe mit 12 mitgelieferten Blindschrauben",
+          "Schnelle Greifzeit von 150 ms und Lösezeit von 80 ms",
+          "Niedriger Geräuschpegel von 59 dB(A)",
+          "Leichte 3,1 kg trotz hoher Traglast"
+        ]
+      },
+      "applications": {
+        "en": ["Palletizing", "Depalletizing", "Material handling", "Packaging", "High-mix case handling"],
+        "de": ["Palettierung", "Depalettierung", "Materialhandhabung", "Verpackung", "Variantenreiche Gebindehandhabung"]
+      },
+      "specifications": [
+        { "label": "Payload (cardboard boxes)", "value": "30 kg" },
+        { "label": "Vacuum", "value": "5–60 %" },
+        { "label": "Air flow (total)", "value": "0–440 L/min" },
+        { "label": "Air flow (per channel)", "value": "0–220 L/min" },
+        { "label": "Channels", "value": "2 independent" },
+        { "label": "Vacuum cups", "value": "20 pcs" },
+        { "label": "Gripping time", "value": "150 ms at 30 % vacuum" },
+        { "label": "Releasing time", "value": "80 ms" },
+        { "label": "Noise level", "value": "59 dB(A) typical" },
+        { "label": "Vacuum source", "value": "Compressed air input, 3–7 bar" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "Dimensions", "value": "390 × 240 × 62.1 mm" },
+        { "label": "Weight", "value": "3.1 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" }
+      ]
+    },
+    {
+      "model": "MG10",
+      "name": "MG10 Magnetic Gripper",
+      "slug": "onrobot-mg10-magnetic-gripper",
+      "image": "mg10.png",
+      "subcategory": "Electric grippers",
+      "order": 130,
+      "productUrl": "https://onrobot.com/en/products/mg10-magnetic-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/mg10/datasheet_mg10_v1.5_en.pdf",
+      "tagline": {
+        "en": "Electric magnetic gripper with adjustable force in 10 steps and built-in part detection.",
+        "de": "Elektrischer Magnetgreifer mit in 10 Stufen einstellbarer Kraft und integrierter Teileerkennung."
+      },
+      "description": {
+        "en": "The MG10 handles ferrous parts with magnetic force adjustable in ten steps — precise enough to destack thin metal sheets one at a time. A built-in proximity sensor confirms whether a part was actually picked, and the gripper keeps its hold through power loss or an emergency stop. Unlike vacuum, it leaves no marks and copes with perforated, abrasive or dusty workpieces.",
+        "de": "Der MG10 handhabt ferromagnetische Teile mit in zehn Stufen einstellbarer Magnetkraft — präzise genug, um dünne Bleche einzeln zu vereinzeln. Ein integrierter Näherungssensor bestätigt, ob ein Teil tatsächlich aufgenommen wurde, und der Greifer hält seinen Griff auch bei Stromausfall oder Not-Halt. Anders als Vakuum hinterlässt er keine Spuren und bewältigt perforierte, abrasive oder staubige Werkstücke."
+      },
+      "features": {
+        "en": [
+          "Magnetic force adjustable in 10 steps for sheet destacking",
+          "Built-in proximity sensor confirms part pick-up",
+          "Maintains grip through power loss or emergency stop",
+          "Payload up to 10 kg parallel to the ground",
+          "300 N pulling force",
+          "Leaves no marks — handles perforated, abrasive and dusty parts",
+          "IP67 rated, fully electric with no air supply or cabling",
+          "Manages a part through press-tending as its shape changes"
+        ],
+        "de": [
+          "Magnetkraft in 10 Stufen einstellbar für die Blechvereinzelung",
+          "Integrierter Näherungssensor bestätigt die Teileaufnahme",
+          "Hält den Griff bei Stromausfall oder Not-Halt",
+          "Traglast bis 10 kg parallel zum Boden",
+          "300 N Abzugskraft",
+          "Hinterlässt keine Spuren — handhabt perforierte, abrasive und staubige Teile",
+          "IP67, vollelektrisch ohne Druckluft oder Verkabelung",
+          "Führt ein Teil durch den gesamten Pressenprozess, auch bei Formänderung"
+        ]
+      },
+      "applications": {
+        "en": ["Press brake tending", "Machine tending", "Sheet metal destacking", "Material handling", "Assembly"],
+        "de": ["Abkantpressenbeschickung", "Maschinenbeschickung", "Blechvereinzelung", "Materialhandhabung", "Montage"]
+      },
+      "specifications": [
+        { "label": "Payload (no pads, parallel to ground)", "value": "10 kg" },
+        { "label": "Payload (no pads, perpendicular)", "value": "3.4 kg" },
+        { "label": "Payload (protective pads)", "value": "2.8 kg" },
+        { "label": "Payload (cylindrical, parallel)", "value": "4.1 kg" },
+        { "label": "Pulling force", "value": "300 N" },
+        { "label": "Magnetism resolution", "value": "10 steps" },
+        { "label": "Gripping time", "value": "300 ms typical" },
+        { "label": "Workpiece size for full force", "value": "65.4 × 65.4 mm" },
+        { "label": "Motor", "value": "Integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Dimensions", "value": "Ø71 × 80.2 mm" },
+        { "label": "Weight", "value": "0.8 kg" },
+        { "label": "Operating temperature", "value": "5–50 °C" }
+      ]
+    },
+    {
+      "model": "Gecko Gripper",
+      "name": "Gecko Gripper",
+      "slug": "onrobot-gecko-gripper",
+      "image": "gecko-gripper.png",
+      "subcategory": "Adaptive grippers",
+      "order": 140,
+      "productUrl": "https://onrobot.com/en/products/gecko-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/gecko/datasheet_gecko_gripper_v1.5_en.pdf",
+      "tagline": {
+        "en": "Adhesive gripper using van der Waals forces — no marks, no air, no electricity.",
+        "de": "Adhäsionsgreifer auf Basis von Van-der-Waals-Kräften — keine Spuren, keine Luft, kein Strom."
+      },
+      "description": {
+        "en": "Inspired by the gecko's foot, this gripper holds flat, smooth or perforated workpieces with micro-scale adhesive pads that rely on van der Waals forces. It needs no cables, electricity, air or programming, and leaves no marks even on high-shine surfaces — removing the cleaning step that suction grippers force downstream. Available in SP1, SP3 and SP5 variants named after their payload in kilograms.",
+        "de": "Inspiriert vom Gecko-Fuß hält dieser Greifer flache, glatte oder perforierte Werkstücke mit mikrostrukturierten Haftpads, die auf Van-der-Waals-Kräften beruhen. Er benötigt weder Kabel noch Strom, Luft oder Programmierung und hinterlässt selbst auf hochglänzenden Oberflächen keine Spuren — was den nachgelagerten Reinigungsschritt entfallen lässt, den Sauggreifer erzwingen. Erhältlich als SP1, SP3 und SP5, benannt nach ihrer Traglast in Kilogramm."
+      },
+      "features": {
+        "en": [
+          "Gecko-inspired adhesion — no electricity or air supply required",
+          "Three sizes: SP1 (1 kg), SP3 (3 kg) and SP5 (5 kg)",
+          "No-mark gripping, even on highly polished surfaces",
+          "Grips perforated parts such as PCBs, aluminium mesh and head gaskets",
+          "Compact single-pad design reaches into tight spaces",
+          "Holds the workpiece for days on power loss if well centred",
+          "Pads recover 100 %, cleaned with isopropyl alcohol",
+          "Pad change-out interval around 200,000 cycles"
+        ],
+        "de": [
+          "Gecko-inspirierte Adhäsion — weder Strom noch Druckluft erforderlich",
+          "Drei Größen: SP1 (1 kg), SP3 (3 kg) und SP5 (5 kg)",
+          "Spurenfreies Greifen, selbst auf hochpolierten Oberflächen",
+          "Greift perforierte Teile wie Leiterplatten, Aluminiumgeflecht und Zylinderkopfdichtungen",
+          "Kompakte Einzelpad-Bauform erreicht enge Stellen",
+          "Hält das Werkstück bei Stromausfall tagelang, sofern gut zentriert",
+          "Pads regenerieren zu 100 %, Reinigung mit Isopropylalkohol",
+          "Pad-Wechselintervall bei etwa 200.000 Zyklen"
+        ]
+      },
+      "applications": {
+        "en": ["Material handling", "Pick and place", "Glass and panel handling", "Electronics handling", "PCB handling"],
+        "de": ["Materialhandhabung", "Pick-and-Place", "Glas- und Plattenhandhabung", "Elektronikhandhabung", "Leiterplattenhandhabung"]
+      },
+      "specifications": [
+        { "label": "Maximum payload (SP1 / SP3 / SP5)", "value": "1 kg / 3 kg / 5 kg" },
+        { "label": "Preload minimum (SP1 / SP3 / SP5)", "value": "3 N / 8 N / 12 N" },
+        { "label": "Preload maximum (SP1 / SP3 / SP5)", "value": "11 N / 32 N / 46 N" },
+        { "label": "Detachment time", "value": "100–1000 ms, robot-speed dependent" },
+        { "label": "Pad material", "value": "Proprietary silicone blend" },
+        { "label": "Pad change-out interval", "value": "~200,000 cycles" },
+        { "label": "Pad recovery", "value": "100 %" },
+        { "label": "IP classification", "value": "IP42" },
+        { "label": "Dimensions (H × W)", "value": "69 × 71 mm" },
+        { "label": "Weight (SP1 / SP3 / SP5)", "value": "0.267 kg / 0.297 kg / 0.318 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" },
+        { "label": "Suitable surfaces", "value": "Matte to highly polished; smoother needs less preload" }
+      ]
+    },
+    {
+      "model": "Soft Gripper",
+      "name": "Soft Gripper",
+      "slug": "onrobot-soft-gripper",
+      "image": "sgbh_gripper.png",
+      "subcategory": "Adaptive grippers",
+      "order": 150,
+      "productUrl": "https://onrobot.com/en/products/soft-gripper",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/soft/datasheet_sg_base_part_and_sg_silicone_tools_v1.5_en.pdf",
+      "tagline": {
+        "en": "Food-grade silicone gripper with interchangeable cups for delicate, irregular objects.",
+        "de": "Lebensmittelechter Silikongreifer mit wechselbaren Aufsätzen für empfindliche, unregelmäßige Objekte."
+      },
+      "description": {
+        "en": "The Soft Gripper uses interchangeable silicone-moulded cups that conform to irregular shapes and delicate items, making it well suited to food and beverage, cosmetics and pharmaceutical handling. The cups are dishwasher safe and comply with FDA 21 CFR 177.2600 for non-fatty foods and EC 1935/2004. Three tool variants — SG-a-H, SG-a-S and SG-b-H — cover different sizes and stiffnesses.",
+        "de": "Der Soft Gripper arbeitet mit wechselbaren, silikongeformten Aufsätzen, die sich unregelmäßigen Formen und empfindlichen Objekten anpassen — ideal für Lebensmittel und Getränke, Kosmetik und Pharma. Die Aufsätze sind spülmaschinenfest und erfüllen FDA 21 CFR 177.2600 für nicht fetthaltige Lebensmittel sowie EG 1935/2004. Drei Werkzeugvarianten — SG-a-H, SG-a-S und SG-b-H — decken unterschiedliche Größen und Härten ab."
+      },
+      "features": {
+        "en": [
+          "Food-grade: FDA 21 CFR 177.2600 and EC 1935/2004 compliant",
+          "Three interchangeable silicone tools: SG-a-H, SG-a-S, SG-b-H",
+          "Dishwasher-safe silicone cups",
+          "Conforms to irregular shapes and delicate objects",
+          "Grip dimensions from 11 mm to 118 mm depending on cup",
+          "Quick-lock and Smart-lock tool attachment",
+          "Fully electric — no external air supply, no dust or noise",
+          "Silicone tools rated for 2,000,000 operating cycles"
+        ],
+        "de": [
+          "Lebensmittelecht: konform zu FDA 21 CFR 177.2600 und EG 1935/2004",
+          "Drei wechselbare Silikonwerkzeuge: SG-a-H, SG-a-S, SG-b-H",
+          "Spülmaschinenfeste Silikonaufsätze",
+          "Passt sich unregelmäßigen Formen und empfindlichen Objekten an",
+          "Greifmaße von 11 mm bis 118 mm je nach Aufsatz",
+          "Quick-Lock- und Smart-Lock-Werkzeugaufnahme",
+          "Vollelektrisch — keine externe Druckluft, kein Staub, kein Lärm",
+          "Silikonwerkzeuge ausgelegt für 2.000.000 Betriebszyklen"
+        ]
+      },
+      "applications": {
+        "en": ["Food and beverage handling", "Cosmetics production", "Pharmaceutical handling", "Packaging", "Pick and place"],
+        "de": ["Lebensmittel- und Getränkehandhabung", "Kosmetikproduktion", "Pharmahandhabung", "Verpackung", "Pick-and-Place"]
+      },
+      "specifications": [
+        { "label": "Maximum payload", "value": "2.2 kg (SG-a-H), shape and friction dependent" },
+        { "label": "Total spindle stroke", "value": "11–40 mm" },
+        { "label": "Spindle force", "value": "380 N" },
+        { "label": "Spindle speed", "value": "37 mm/s" },
+        { "label": "Spindle position resolution", "value": "0.1 mm" },
+        { "label": "Gripping rate", "value": "Up to 32 grips/min" },
+        { "label": "Grip dimensions", "value": "11–118 mm depending on cup" },
+        { "label": "Tool material", "value": "Two-component silicone rubber" },
+        { "label": "Food approval", "value": "FDA 21 CFR 177.2600, EC 1935/2004" },
+        { "label": "Tool operation cycles", "value": "2,000,000" },
+        { "label": "IP classification", "value": "IP67 (base part)" },
+        { "label": "Dimensions (base part)", "value": "84 × Ø98 mm" },
+        { "label": "Weight (base part)", "value": "0.77 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C (base), −20 to 80 °C (tools)" }
+      ]
+    },
+    {
+      "model": "Eyes",
+      "name": "OnRobot Eyes Vision System",
+      "slug": "onrobot-eyes-vision-system",
+      "image": "onrobot-eyes.png",
+      "subcategory": "Machine vision systems",
+      "order": 160,
+      "productUrl": "https://onrobot.com/en/products/onrobot-eyes",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/eyes/datasheet_eyes_v3.6_en.pdf",
+      "tagline": {
+        "en": "2.5D robot vision with depth perception and one-picture calibration.",
+        "de": "2,5D-Robotervision mit Tiefenwahrnehmung und Ein-Bild-Kalibrierung."
+      },
+      "description": {
+        "en": "OnRobot Eyes adds 2.5D vision — depth perception without full 3D complexity — to sorting, pick-and-place and inspection tasks. Calibration takes one picture of the work surface, and part recognition one picture per workpiece. The camera mounts on the robot wrist in twelve configurations or externally, and integrates with the gripper through the Quick Changer.",
+        "de": "OnRobot Eyes ergänzt Sortier-, Pick-and-Place- und Prüfaufgaben um 2,5D-Vision — Tiefenwahrnehmung ohne die Komplexität vollständiger 3D-Systeme. Die Kalibrierung erfordert ein Bild der Arbeitsfläche, die Teileerkennung ein Bild je Werkstück. Die Kamera lässt sich in zwölf Konfigurationen am Roboterhandgelenk oder extern montieren und wird über den Quick Changer mit dem Greifer integriert."
+      },
+      "features": {
+        "en": [
+          "2.5D vision with active IR stereo depth sensing",
+          "One-picture calibration and one-picture part recognition",
+          "Robot-wrist mounting in 12 configurations, or external mounting",
+          "One-shot detection of multiple objects minimises cycle time",
+          "Colour and contour inspection, with or without a robot",
+          "Automatic landmark support for mobile robot setups",
+          "0.5 s typical processing time",
+          "Optional Eyes Lighting Kit for consistent illumination"
+        ],
+        "de": [
+          "2,5D-Vision mit aktiver IR-Stereo-Tiefenerfassung",
+          "Ein-Bild-Kalibrierung und Ein-Bild-Teileerkennung",
+          "Handgelenkmontage in 12 Konfigurationen oder externe Montage",
+          "Erkennung mehrerer Objekte in einer Aufnahme minimiert die Taktzeit",
+          "Farb- und Konturprüfung, mit oder ohne Roboter",
+          "Automatische Landmark-Funktion für mobile Roboteraufbauten",
+          "0,5 s typische Verarbeitungszeit",
+          "Optionales Eyes Lighting Kit für gleichmäßige Ausleuchtung"
+        ]
+      },
+      "applications": {
+        "en": ["Sorting", "Pick and place", "Quality inspection", "Machine tending", "Mobile robot navigation"],
+        "de": ["Sortierung", "Pick-and-Place", "Qualitätsprüfung", "Maschinenbeschickung", "Navigation mobiler Roboter"]
+      },
+      "specifications": [
+        { "label": "Vision system type", "value": "2.5D" },
+        { "label": "Interface", "value": "USB-C 3.x" },
+        { "label": "RGB resolution", "value": "1280 × 720 (1920 × 1080 close-up)" },
+        { "label": "RGB field of view", "value": "69.4° × 42.5° × 77°" },
+        { "label": "Depth technology", "value": "Active IR stereo" },
+        { "label": "Depth output resolution", "value": "1280 × 720" },
+        { "label": "Working distance", "value": "400–1000 mm" },
+        { "label": "Minimum workpiece size", "value": "10 × 10 mm or Ø15 mm" },
+        { "label": "Detection repeatability", "value": "< 2 mm" },
+        { "label": "Detection accuracy at 500 mm", "value": "2 mm" },
+        { "label": "Minimum inspection defect size", "value": "5 mm standard, 3 mm close-up" },
+        { "label": "Processing time", "value": "0.5 s typical" },
+        { "label": "IP rating", "value": "IP54" },
+        { "label": "Weight", "value": "0.260 kg" },
+        { "label": "Operating temperature", "value": "0–35 °C" }
+      ]
+    },
+    {
+      "model": "Screwdriver",
+      "name": "OnRobot Screwdriver",
+      "slug": "onrobot-screwdriver",
+      "image": "onrobot-screwdriver.png",
+      "subcategory": "Screwdriving tools",
+      "order": 170,
+      "productUrl": "https://onrobot.com/en/products/onrobot-screwdriver",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/screwdriver/datasheet_screwdriver_v1.7_en.pdf",
+      "tagline": {
+        "en": "Robotic screwdriver with embedded axis, 0.15–5 Nm torque control and error detection.",
+        "de": "Roboter-Schraubwerkzeug mit integrierter Achse, 0,15–5 Nm Drehmomentregelung und Fehlererkennung."
+      },
+      "description": {
+        "en": "Mount the Screwdriver on any leading robot arm, fit the right bit and enter screw length and torque in the robot interface — no separate integration needed. An embedded axis drives the screw once the arm is in position, cutting robot motion and simplifying programming. The tool detects whether a screw was picked, is the correct length and was properly inserted, and covers M1.6 to M6 up to 50 mm long.",
+        "de": "Das Schraubwerkzeug wird an jeden führenden Roboterarm montiert; nach Einsetzen des passenden Bits werden Schraubenlänge und Drehmoment direkt in der Roboteroberfläche eingegeben — eine separate Integration entfällt. Eine integrierte Achse dreht die Schraube ein, sobald der Arm in Position ist, was Roboterbewegung reduziert und die Programmierung vereinfacht. Das Werkzeug erkennt, ob eine Schraube aufgenommen wurde, die richtige Länge hat und korrekt eingeschraubt ist, und deckt M1.6 bis M6 bis 50 mm Länge ab."
+      },
+      "features": {
+        "en": [
+          "Torque control from 0.15 Nm to 5 Nm with 3 % accuracy",
+          "Embedded axis drives screws without moving the robot arm",
+          "Handles M1.6 to M6 screws up to 50 mm long",
+          "Intelligent error detection for pick, length and insertion",
+          "Screws up to 35 mm retract into the tool while moving",
+          "Automatic safety stop on excessive axial force",
+          "Self-tapping functionality for pre-drilled holes",
+          "ESD certified for electronics assembly",
+          "Optional 50 mm and 100 mm bit extenders for tight spaces"
+        ],
+        "de": [
+          "Drehmomentregelung von 0,15 Nm bis 5 Nm mit 3 % Genauigkeit",
+          "Integrierte Achse dreht Schrauben ein, ohne den Roboterarm zu bewegen",
+          "Verarbeitet Schrauben von M1.6 bis M6 mit bis zu 50 mm Länge",
+          "Intelligente Fehlererkennung für Aufnahme, Länge und Einschraubvorgang",
+          "Schrauben bis 35 mm werden während der Bewegung ins Werkzeug eingezogen",
+          "Automatischer Sicherheitshalt bei überhöhter Axialkraft",
+          "Gewindefurchende Funktion für vorgebohrte Löcher",
+          "ESD-zertifiziert für die Elektronikmontage",
+          "Optionale Bitverlängerungen mit 50 mm und 100 mm für enge Stellen"
+        ]
+      },
+      "applications": {
+        "en": ["Assembly", "Electronics assembly", "Screwdriving", "Product finishing"],
+        "de": ["Montage", "Elektronikmontage", "Verschraubung", "Endmontage"]
+      },
+      "specifications": [
+        { "label": "Tightening torque range", "value": "0.15–5 Nm" },
+        { "label": "Torque accuracy", "value": "±0.04 Nm below 1.33 Nm, 3 % above" },
+        { "label": "Output speed", "value": "Up to 340 RPM" },
+        { "label": "Supported screws (metric)", "value": "M1.6–M6" },
+        { "label": "Screw length", "value": "Up to 50 mm (35 mm thread length)" },
+        { "label": "Screw length within full safety", "value": "35 mm" },
+        { "label": "Shank stroke", "value": "55 mm" },
+        { "label": "Shank preload (adjustable)", "value": "0–25 N" },
+        { "label": "Protective feature force", "value": "35–45 N" },
+        { "label": "Pre-mount accuracy error", "value": "0.5 mm" },
+        { "label": "Motors", "value": "2 × integrated electric BLDC" },
+        { "label": "IP classification", "value": "IP54" },
+        { "label": "ESD safe", "value": "Yes" },
+        { "label": "Dimensions", "value": "308 × 86 × 114 mm" },
+        { "label": "Weight", "value": "2.5 kg" }
+      ]
+    },
+    {
+      "model": "Sander",
+      "name": "OnRobot Sander",
+      "slug": "onrobot-sander",
+      "image": "sander_camera-copy.png",
+      "subcategory": "Sanding tools",
+      "order": 180,
+      "productUrl": "https://onrobot.com/en/products/onrobot-sander",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/sander/datasheet_sander_v1.5_en.pdf",
+      "tagline": {
+        "en": "200 W electric random orbital sander for sanding, buffing and polishing.",
+        "de": "200-W-Exzenterschleifer mit Elektroantrieb zum Schleifen, Schwabbeln und Polieren."
+      },
+      "description": {
+        "en": "A complete surface-finishing package: the electric sanding tool, a range of standard sanding and polishing discs, path-planning software and an optional automated Grit Changer. Running on electricity rather than compressed air removes the noise and cost of an air compressor. Standard 3M clean sanding discs cut workplace dust, and automating the task removes operators from hand-tool vibration exposure.",
+        "de": "Ein vollständiges Oberflächenbearbeitungspaket: das elektrische Schleifwerkzeug, ein Sortiment gängiger Schleif- und Polierscheiben, Software zur Bahnplanung und ein optionaler automatischer Grit Changer. Der Elektroantrieb statt Druckluft erspart Lärm und Kosten eines Kompressors. Standard-3M-Clean-Sanding-Scheiben reduzieren Staub am Arbeitsplatz, und die Automatisierung entzieht Mitarbeitende der Vibrationsbelastung von Handgeräten."
+      },
+      "features": {
+        "en": [
+          "200 W sanding power (v2), 1,000–10,000 RPM",
+          "127 mm pad with 5 mm orbit, standard 3M Hookit media",
+          "Path planning from handguide, shape or points",
+          "Optional automated Grit Changer switches discs unattended",
+          "Manual save-position button on the tool for waypoints",
+          "Pairs with the HEX force/torque sensor for constant contact force",
+          "Electric — no compressed air required",
+          "Reduces operator vibration and fine-dust exposure"
+        ],
+        "de": [
+          "200 W Schleifleistung (v2), 1.000–10.000 U/min",
+          "127-mm-Teller mit 5 mm Exzenterhub, Standard-3M-Hookit-Medien",
+          "Bahnplanung per Handführung, Form oder Punkten",
+          "Optionaler automatischer Grit Changer wechselt Scheiben ohne Bedienereingriff",
+          "Taste zum Speichern der Position direkt am Werkzeug für Wegpunkte",
+          "Kombinierbar mit dem HEX-Kraft-/Drehmomentsensor für konstante Anpresskraft",
+          "Elektrisch — keine Druckluft erforderlich",
+          "Reduziert Vibrations- und Feinstaubbelastung der Mitarbeitenden"
+        ]
+      },
+      "applications": {
+        "en": ["Sanding", "Polishing", "Buffing", "Deburring", "Surface finishing"],
+        "de": ["Schleifen", "Polieren", "Schwabbeln", "Entgraten", "Oberflächenbearbeitung"]
+      },
+      "specifications": [
+        { "label": "Sanding power", "value": "200 W (v2), 150 W (v1)" },
+        { "label": "Rotation speed", "value": "1,000–10,000 RPM" },
+        { "label": "Pad diameter", "value": "127 mm" },
+        { "label": "Pad height", "value": "9.5 mm" },
+        { "label": "Orbit size", "value": "5 mm" },
+        { "label": "Pad type", "value": "3M 20353 Clean Sanding Disc Pad" },
+        { "label": "Pad media type", "value": "Hookit" },
+        { "label": "External voltage", "value": "36 V (v2), 200 W" },
+        { "label": "Noise level", "value": "74 dB at 10,000 RPM (44 dB at 3,000 RPM)" },
+        { "label": "IP rating", "value": "IP54" },
+        { "label": "Dimensions", "value": "87 × 123 × 255 mm (v2)" },
+        { "label": "Weight (with pad)", "value": "1.2 kg" },
+        { "label": "Operating temperature", "value": "0–50 °C" },
+        { "label": "Calculated operation life", "value": "30,000 hours" }
+      ]
+    },
+    {
+      "model": "HEX",
+      "name": "HEX 6-Axis Force/Torque Sensor",
+      "slug": "onrobot-hex-force-torque-sensor",
+      "image": "hex-6-axis.png",
+      "subcategory": "Force/torque sensors",
+      "order": 190,
+      "productUrl": "https://onrobot.com/en/products/hex-6-axis-force-torque-sensor",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/hex/datasheet_hex-e_h_qc_v1.5_en.pdf",
+      "tagline": {
+        "en": "Optical six-axis force/torque sensor giving the robot a sense of touch.",
+        "de": "Optischer sechsachsiger Kraft-/Drehmomentsensor, der dem Roboter Tastsinn verleiht."
+      },
+      "description": {
+        "en": "The HEX measures force and torque on all six axes, giving precise control over the force a tool applies. Its optical sensing principle is markedly more robust against sudden shocks than strain-gauge alternatives. In surface finishing it holds constant speed and force so the tool follows workpiece contours; in assembly it searches for position, detects parts and stops on collision. Two variants: HEX-E QC and the higher-torque HEX-H QC.",
+        "de": "Der HEX misst Kraft und Drehmoment auf allen sechs Achsen und ermöglicht so die präzise Regelung der vom Werkzeug aufgebrachten Kraft. Sein optisches Messprinzip ist gegenüber plötzlichen Stößen deutlich robuster als Dehnungsmessstreifen. Bei der Oberflächenbearbeitung hält er Geschwindigkeit und Kraft konstant, sodass das Werkzeug den Werkstückkonturen folgt; in der Montage sucht er Positionen, erkennt Teile und stoppt bei Kollision. Zwei Varianten: HEX-E QC und der drehmomentstärkere HEX-H QC."
+      },
+      "features": {
+        "en": [
+          "Six-axis measurement (Fx, Fy, Fz, Tx, Ty, Tz)",
+          "Optical sensing technology resists sudden shocks",
+          "500 % single-axis overload capacity (HEX-E QC)",
+          "Constant force control for surface finishing",
+          "Hand guiding and path recording in minutes",
+          "Built-in collision detection",
+          "IP67 rated, 0.347 kg with built-in adapter plates",
+          "Two variants: HEX-E QC and higher-torque HEX-H QC"
+        ],
+        "de": [
+          "Sechsachsige Messung (Fx, Fy, Fz, Tx, Ty, Tz)",
+          "Optische Messtechnik widersteht plötzlichen Stößen",
+          "500 % Einachsen-Überlastfähigkeit (HEX-E QC)",
+          "Konstante Kraftregelung für die Oberflächenbearbeitung",
+          "Handführung und Bahnaufzeichnung in Minuten",
+          "Integrierte Kollisionserkennung",
+          "IP67, 0,347 kg inklusive integrierter Adapterplatten",
+          "Zwei Varianten: HEX-E QC und drehmomentstärkerer HEX-H QC"
+        ]
+      },
+      "applications": {
+        "en": ["Sanding and polishing", "Deburring", "Assembly and insertion", "Quality inspection", "Material handling"],
+        "de": ["Schleifen und Polieren", "Entgraten", "Montage und Fügen", "Qualitätsprüfung", "Materialhandhabung"]
+      },
+      "specifications": [
+        { "label": "Nominal capacity (HEX-E QC)", "value": "Fxy 200 N, Fz 200 N, Txy 10 Nm, Tz 6.5 Nm" },
+        { "label": "Nominal capacity (HEX-H QC)", "value": "Fxy 200 N, Fz 200 N, Txy 20 Nm, Tz 13 Nm" },
+        { "label": "Noise-free resolution (HEX-E QC)", "value": "Fxy 0.2 N, Fz 0.8 N, Txy 0.01 Nm" },
+        { "label": "Single axis overload (HEX-E QC)", "value": "500 %" },
+        { "label": "Full scale nonlinearity", "value": "< 2 %" },
+        { "label": "Hysteresis", "value": "< 2 %" },
+        { "label": "Crosstalk", "value": "< 5 %" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Dimensions", "value": "50 × 71 × 93 mm" },
+        { "label": "Weight", "value": "0.347 kg with adapter plates" },
+        { "label": "Power supply", "value": "7–24 V" },
+        { "label": "Power consumption", "value": "0.8 W maximum" },
+        { "label": "Operating temperature", "value": "0–55 °C" },
+        { "label": "Calculated operation life", "value": "30,000 hours" },
+        { "label": "Re-calibration period", "value": "15,000 energized hours" }
+      ]
+    },
+    {
+      "model": "Quick Changer",
+      "name": "Quick Changer",
+      "slug": "onrobot-quick-changer",
+      "image": "qc_newqc.png",
+      "subcategory": "Tool changers",
+      "order": 200,
+      "productUrl": "https://onrobot.com/en/products/quick-changer",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/quick-changers/datasheet_quick_changers_v2.0_en.pdf",
+      "tagline": {
+        "en": "Tool change in under five seconds with no screwing, rated for 25 kg payload.",
+        "de": "Werkzeugwechsel in unter fünf Sekunden ohne Verschraubung, ausgelegt für 25 kg Traglast."
+      },
+      "description": {
+        "en": "The Quick Changer is the smallest and lightest tool changer of its class, with a patented locking mechanism, extra safety locking structure and locking springs that let any operator swap end-of-arm tooling in a few seconds without screwing. Both input and output flanges comply with the ISO 9409-1 robot flange standard, and the changer is integrated into every OnRobot tool.",
+        "de": "Der Quick Changer ist der kleinste und leichteste Werkzeugwechsler seiner Klasse. Ein patentierter Verriegelungsmechanismus mit zusätzlicher Sicherheitsverriegelung und Verriegelungsfedern erlaubt jedem Bediener den Wechsel des Endeffektors in wenigen Sekunden ohne Verschraubung. Ein- und Ausgangsflansch entsprechen der Roboterflanschnorm ISO 9409-1, und der Wechsler ist in jedes OnRobot-Werkzeug integriert."
+      },
+      "features": {
+        "en": [
+          "Tool change in under five seconds without screwing",
+          "Patented redundant locking mechanism with safety structure",
+          "Rated payload 25 kg, permissible force 400 N",
+          "±0.02 mm repeatability",
+          "ISO 9409-1 compliant input and output flanges",
+          "Integrated into every OnRobot tool",
+          "Only 60 g for the robot-side unit — minimal payload impact",
+          "IP67 rated, no sharp edges for collaborative use"
+        ],
+        "de": [
+          "Werkzeugwechsel in unter fünf Sekunden ohne Verschraubung",
+          "Patentierter redundanter Verriegelungsmechanismus mit Sicherheitsstruktur",
+          "Nenntraglast 25 kg, zulässige Kraft 400 N",
+          "±0,02 mm Wiederholgenauigkeit",
+          "Ein- und Ausgangsflansch nach ISO 9409-1",
+          "In jedes OnRobot-Werkzeug integriert",
+          "Nur 60 g für die roboterseitige Einheit — minimaler Traglasteinfluss",
+          "IP67, ohne scharfe Kanten für den kollaborativen Einsatz"
+        ]
+      },
+      "applications": {
+        "en": ["Machine tending", "Material handling", "Assembly", "Material removal", "Quality inspection"],
+        "de": ["Maschinenbeschickung", "Materialhandhabung", "Montage", "Materialabtrag", "Qualitätsprüfung"]
+      },
+      "specifications": [
+        { "label": "Rated payload", "value": "25 kg" },
+        { "label": "Permissible force", "value": "400 N" },
+        { "label": "Permissible torque", "value": "40 Nm" },
+        { "label": "Repeatability", "value": "±0.02 mm" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Operating life (tool change)", "value": "5,000 cycles" },
+        { "label": "Weight (robot side)", "value": "0.06 kg" },
+        { "label": "Weight (robot side, I/O)", "value": "0.093 kg" },
+        { "label": "Weight (tool side)", "value": "0.14 kg" },
+        { "label": "Flange standard", "value": "ISO 9409-1" },
+        { "label": "Operating temperature", "value": "0–50 °C" },
+        { "label": "Current version", "value": "QC-R v3 (item 109498)" }
+      ]
+    },
+    {
+      "model": "Dual Quick Changer",
+      "name": "Dual Quick Changer",
+      "slug": "onrobot-dual-quick-changer",
+      "image": "dual-quick-changer.png",
+      "subcategory": "Tool changers",
+      "order": 210,
+      "productUrl": "https://onrobot.com/en/products/dual-quick-changer",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/quick-changers/datasheet_quick_changers_v2.0_en.pdf",
+      "tagline": {
+        "en": "Carries two end effectors at once for dual gripping, rated for 30 kg combined payload.",
+        "de": "Trägt zwei Endeffektoren gleichzeitig für Doppelgreifen, ausgelegt für 30 kg Gesamttraglast."
+      },
+      "description": {
+        "en": "The Dual Quick Changer equips a robot with two end-of-arm tools at the same time, so both can be used within a single cycle. In machine tending that means picking the finished part and loading the next blank without a tool change — typically improving productivity by 50 % or more. It keeps the regular Quick Changer's fast, screwless tool swapping and low built height.",
+        "de": "Der Dual Quick Changer rüstet einen Roboter mit zwei Endeffektoren gleichzeitig aus, sodass beide innerhalb eines Zyklus genutzt werden können. Bei der Maschinenbeschickung bedeutet das: Fertigteil entnehmen und nächsten Rohling einlegen ohne Werkzeugwechsel — was die Produktivität typischerweise um 50 % oder mehr steigert. Der schnelle, schraubenlose Werkzeugwechsel und die niedrige Bauhöhe des Quick Changers bleiben erhalten."
+      },
+      "features": {
+        "en": [
+          "Two end-of-arm tools mounted simultaneously",
+          "Improves productivity by 50 % or more in dual-gripping cycles",
+          "Combined payload up to 30 kg, permissible force 600 N",
+          "Low built-in height and weight",
+          "±0.02 mm repeatability",
+          "ISO 9409-1 compliant flange",
+          "Patented locking mechanism, tool change in under five seconds",
+          "Designed to fit all major robot brands"
+        ],
+        "de": [
+          "Zwei Endeffektoren gleichzeitig montiert",
+          "Steigert die Produktivität in Doppelgreifzyklen um 50 % oder mehr",
+          "Gesamttraglast bis 30 kg, zulässige Kraft 600 N",
+          "Geringe Bauhöhe und geringes Gewicht",
+          "±0,02 mm Wiederholgenauigkeit",
+          "Flansch nach ISO 9409-1",
+          "Patentierter Verriegelungsmechanismus, Werkzeugwechsel in unter fünf Sekunden",
+          "Passend für alle großen Robotermarken"
+        ]
+      },
+      "applications": {
+        "en": ["CNC machine tending", "Material handling", "Assembly", "Material removal", "Palletizing"],
+        "de": ["CNC-Maschinenbeschickung", "Materialhandhabung", "Montage", "Materialabtrag", "Palettierung"]
+      },
+      "specifications": [
+        { "label": "Rated payload", "value": "30 kg" },
+        { "label": "Permissible force", "value": "600 N" },
+        { "label": "Permissible torque", "value": "40 Nm" },
+        { "label": "Repeatability", "value": "±0.02 mm" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Operating life (tool change)", "value": "5,000 cycles" },
+        { "label": "Weight", "value": "0.41 kg" },
+        { "label": "Flange standard", "value": "ISO 9409-1" },
+        { "label": "Operating temperature", "value": "0–50 °C" },
+        { "label": "Current version", "value": "Dual QC v3 (item 109878)" }
+      ]
+    },
+    {
+      "model": "Dual Mounting Kit",
+      "name": "Dual Mounting Kit",
+      "slug": "onrobot-dual-mounting-kit",
+      "image": "dual_mounting_kit.png",
+      "subcategory": "Tool changers",
+      "order": 220,
+      "productUrl": "https://onrobot.com/en/products/dual-mounting-kit",
+      "datasheetUrl": "https://onrobot.com/storage/datasheets/quick-changers/datasheet_quick_changers_v2.0_en.pdf",
+      "tagline": {
+        "en": "Mounts two independent Quick Changers in any orientation your application needs.",
+        "de": "Montiert zwei unabhängige Quick Changer in jeder von der Anwendung geforderten Ausrichtung."
+      },
+      "description": {
+        "en": "Where the Dual Quick Changer fixes two tools in one housing, the Dual Mounting Kit uses two independent Quick Changers that can be positioned and oriented freely. That extra freedom helps when the two tools need different approach angles, and the kit also improves cable routing for cleaner installations and faster integration.",
+        "de": "Während der Dual Quick Changer zwei Werkzeuge in einem Gehäuse fixiert, nutzt das Dual Mounting Kit zwei unabhängige Quick Changer, die sich frei positionieren und ausrichten lassen. Diese zusätzliche Freiheit hilft, wenn beide Werkzeuge unterschiedliche Anstellwinkel benötigen; zudem verbessert das Kit die Kabelführung für sauberere Installationen und schnellere Integration."
+      },
+      "features": {
+        "en": [
+          "Two independent Quick Changers, freely positioned and oriented",
+          "Greater tool-placement flexibility than the Dual Quick Changer",
+          "Improved cable management for cleaner installations",
+          "Combined payload up to 25 kg",
+          "±0.02 mm repeatability",
+          "ISO 9409-1 compliant flange",
+          "Tool change in under five seconds",
+          "Supplied with two QC-R v3 units and a splitter"
+        ],
+        "de": [
+          "Zwei unabhängige Quick Changer, frei positionier- und ausrichtbar",
+          "Größere Flexibilität bei der Werkzeuganordnung als der Dual Quick Changer",
+          "Verbesserte Kabelführung für sauberere Installationen",
+          "Gesamttraglast bis 25 kg",
+          "±0,02 mm Wiederholgenauigkeit",
+          "Flansch nach ISO 9409-1",
+          "Werkzeugwechsel in unter fünf Sekunden",
+          "Lieferumfang: zwei QC-R-v3-Einheiten und ein Splitter"
+        ]
+      },
+      "applications": {
+        "en": ["CNC machine tending", "Material handling", "Assembly", "Material removal", "Quality inspection"],
+        "de": ["CNC-Maschinenbeschickung", "Materialhandhabung", "Montage", "Materialabtrag", "Qualitätsprüfung"]
+      },
+      "specifications": [
+        { "label": "Rated payload", "value": "25 kg" },
+        { "label": "Permissible force", "value": "400 N" },
+        { "label": "Permissible torque", "value": "40 Nm" },
+        { "label": "Repeatability", "value": "±0.02 mm" },
+        { "label": "IP classification", "value": "IP67" },
+        { "label": "Operating life (tool change)", "value": "5,000 cycles" },
+        { "label": "Weight (per Quick Changer)", "value": "0.06 kg" },
+        { "label": "Flange standard", "value": "ISO 9409-1" },
+        { "label": "Operating temperature", "value": "0–50 °C" },
+        { "label": "Components", "value": "Quick Changer A (114975), B (114972), splitter (114999)" }
+      ]
+    }
+  ]
+}
