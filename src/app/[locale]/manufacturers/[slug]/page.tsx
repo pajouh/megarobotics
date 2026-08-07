@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Globe, MapPin, Calendar, Package } from 'lucide-react'
+import { ArrowLeft, Globe, MapPin, Calendar, Package, ShieldCheck } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import {
   getManufacturer,
   getProductsByManufacturer,
@@ -15,6 +16,7 @@ import { generateAlternates, generateManufacturerSchema } from '@/lib/structured
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { brandedTitle } from '@/lib/page-seo'
+import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -69,14 +71,19 @@ export const revalidate = 3600
 
 export default async function ManufacturerPage({ params }: Props) {
   const { slug, locale } = await params
-  const [manufacturer, products] = await Promise.all([
+  const [manufacturer, products, tDetail] = await Promise.all([
     getManufacturer(slug, locale as Locale),
     getProductsByManufacturer(slug, undefined, locale as Locale),
+    getTranslations('industrial.productDetail'),
   ])
 
   if (!manufacturer) {
     notFound()
   }
+
+  // Same rule as the product pages: only the four verified statuses render as a
+  // badge, so an unset or non-committal relationshipStatus stays silent.
+  const showRelationshipBadge = isVerifiedRelationship(manufacturer.relationshipStatus)
 
   const manufacturerSchema = generateManufacturerSchema({
     name: manufacturer.name,
@@ -136,9 +143,17 @@ export default async function ManufacturerPage({ params }: Props) {
 
             {/* Info */}
             <div className="flex-grow">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                {manufacturer.name}
-              </h1>
+              <div className="flex flex-wrap items-center gap-3 mb-3">
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+                  {manufacturer.name}
+                </h1>
+                {showRelationshipBadge && manufacturer.relationshipStatus && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                    <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
+                    {tDetail(`relationship.${relStatusToKey(manufacturer.relationshipStatus)}`)}
+                  </span>
+                )}
+              </div>
 
               <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
                 {manufacturer.headquarters && (

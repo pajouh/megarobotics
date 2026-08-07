@@ -26,6 +26,7 @@ import {
   generateAlternates,
 } from '@/lib/structured-data'
 import { brandedTitle } from '@/lib/page-seo'
+import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -86,13 +87,6 @@ export async function generateStaticParams() {
 // product publishes revalidate this path via /api/revalidate; this timer is
 // just a fallback, so keep it long to cut background regeneration.
 export const revalidate = 3600
-
-const VERIFIED_RELATIONSHIPS: RelationshipStatus[] = [
-  'official_distributor',
-  'authorized_reseller',
-  'sales_partner',
-  'technology_partner',
-]
 
 function buildContactHref(
   inquiry: 'availability' | 'project' | 'datasheet',
@@ -176,7 +170,7 @@ export default async function ProductPage({ params }: Props) {
     (product.manufacturerRelationshipStatus as RelationshipStatus | undefined) ||
     product.manufacturer?.relationshipStatus
 
-  const showRelationshipBadge = relStatus && VERIFIED_RELATIONSHIPS.includes(relStatus)
+  const showRelationshipBadge = isVerifiedRelationship(relStatus)
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
@@ -489,18 +483,6 @@ function legacyAvailToKey(s: 'available' | 'preorder' | 'coming_soon' | 'contact
   return { available: 'available', preorder: 'preorder', coming_soon: 'comingSoon', contact: 'contact' }[s]
 }
 
-function relStatusToKey(s: RelationshipStatus): string {
-  return {
-    official_distributor: 'officialDistributor',
-    authorized_reseller: 'authorizedReseller',
-    sales_partner: 'salesPartner',
-    technology_partner: 'technologyPartner',
-    sourcing_available: 'sourcingAvailable',
-    information_only: 'informationOnly',
-    under_evaluation: 'underEvaluation',
-    unknown: 'unknown',
-  }[s]
-}
 
 function availabilityChipClass(s?: string): string {
   switch (s) {

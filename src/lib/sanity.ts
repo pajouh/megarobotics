@@ -281,7 +281,8 @@ function getManufacturerFields(locale: Locale = defaultLocale) {
     headquarters,
     founded,
     "specialties": ${localizedArrayField('specialties', locale)},
-    featured
+    featured,
+    relationshipStatus
   `
 }
 
@@ -306,7 +307,6 @@ function getProductFields(locale: Locale = defaultLocale) {
     order,
     manufacturer->{
       ${getManufacturerFields(locale)},
-      relationshipStatus,
       "disclaimerOverride": ${localizedField('disclaimerOverride', locale)}
     },
     productFamily->{
