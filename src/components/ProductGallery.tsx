@@ -49,10 +49,15 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
           onClick={() => setLightboxOpen(true)}
         >
           <Image
-            src={urlFor(currentImage).width(800).height(800).url()}
+            src={urlFor(currentImage).maxWidth(800).maxHeight(800).url()}
             alt={currentImage.alt || productName}
             fill
             // Half-width column on desktop; the Sanity source is capped at 800px.
+            // maxWidth/maxHeight, NOT width/height: passing both width and height
+            // makes the image-url builder emit a hotspot `rect=` that crops to the
+            // requested aspect before scaling, which beheaded tall product renders
+            // (a 268x680 gripper came through as its middle 268x268 band). fit('max')
+            // does not prevent that — only avoiding the fixed aspect does.
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-contain p-6"
             priority
@@ -97,7 +102,7 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
                 }`}
               >
                 <Image
-                  src={urlFor(image).width(160).height(160).url()}
+                  src={urlFor(image).maxWidth(160).maxHeight(160).url()}
                   alt={image.alt || `${productName} ${index + 1}`}
                   fill
                   // Fixed 80px (w-20) thumbnail — never needs more than 160px @2x.
@@ -151,7 +156,7 @@ export default function ProductGallery({ mainImage, gallery, productName }: Prod
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={urlFor(currentImage).width(1200).height(1200).url()}
+              src={urlFor(currentImage).maxWidth(1200).maxHeight(1200).url()}
               alt={currentImage.alt || productName}
               fill
               // Lightbox caps at max-w-4xl (896px).

@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogImage = institute.mainImage
     ? urlFor(institute.mainImage).width(1200).height(630).url()
     : institute.logo
-      ? urlFor(institute.logo).width(1200).height(630).url()
+      ? urlFor(institute.logo).ignoreImageParams().width(1200).height(630).fit('fill').bg('ffffff').url()
       : undefined
 
   return {
@@ -118,7 +118,7 @@ export default async function InstitutePage({ params }: Props) {
     name: institute.name,
     url: institute.website || `${baseUrl}/institutes/${slug}`,
     description: institute.summary || `${institute.name} at ${institute.parentInstitution}`,
-    logo: institute.logo ? urlFor(institute.logo).width(400).height(400).url() : undefined,
+    logo: institute.logo ? urlFor(institute.logo).maxWidth(400).maxHeight(400).url() : undefined,
     image: institute.mainImage ? urlFor(institute.mainImage).width(1200).height(630).url() : undefined,
     email: institute.email || undefined,
     telephone: institute.phone || undefined,
@@ -189,7 +189,7 @@ export default async function InstitutePage({ params }: Props) {
               <div className="flex-shrink-0">
                 <div className="w-28 h-28 bg-white rounded-2xl p-4 flex items-center justify-center border border-gray-200">
                   <Image
-                    src={urlFor(institute.logo).width(200).height(200).fit('max').url()}
+                    src={urlFor(institute.logo).maxWidth(200).maxHeight(200).url()}
                     alt={institute.name}
                     width={96}
                     height={96}

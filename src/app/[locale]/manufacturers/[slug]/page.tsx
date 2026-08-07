@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = manufacturer.seo?.metaDescription || manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
   const logoUrl = manufacturer.logo
-    ? urlFor(manufacturer.logo).width(1200).height(630).url()
+    ? urlFor(manufacturer.logo).ignoreImageParams().width(1200).height(630).fit('fill').bg('ffffff').url()
     : undefined
 
   return {
@@ -82,7 +82,7 @@ export default async function ManufacturerPage({ params }: Props) {
     name: manufacturer.name,
     description: manufacturer.description,
     slug: slug,
-    logo: manufacturer.logo ? urlFor(manufacturer.logo).width(400).height(400).url() : undefined,
+    logo: manufacturer.logo ? urlFor(manufacturer.logo).maxWidth(400).maxHeight(400).url() : undefined,
     website: manufacturer.website,
     headquarters: manufacturer.headquarters,
     founded: manufacturer.founded,
@@ -118,7 +118,7 @@ export default async function ManufacturerPage({ params }: Props) {
               {manufacturer.logo ? (
                 <div className="w-32 h-32 bg-white rounded-2xl p-4 flex items-center justify-center border border-gray-200">
                   <Image
-                    src={urlFor(manufacturer.logo).width(200).height(200).fit('max').url()}
+                    src={urlFor(manufacturer.logo).maxWidth(200).maxHeight(200).url()}
                     alt={manufacturer.name}
                     width={100}
                     height={100}

@@ -43,7 +43,7 @@ export default function InstituteCard({ institute, moreLabel }: InstituteCardPro
       {institute.logo && (
         <div className="flex items-center justify-center h-12 mb-3">
           <Image
-            src={urlFor(institute.logo).width(160).height(80).fit('max').url()}
+            src={urlFor(institute.logo).maxWidth(160).maxHeight(80).url()}
             alt={name}
             width={100}
             height={48}

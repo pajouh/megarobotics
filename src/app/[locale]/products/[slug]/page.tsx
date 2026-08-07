@@ -44,8 +44,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     product.seo?.metaTitle || `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`
   const brandedMetaTitle = brandedTitle(metaTitle)
   const metaDescription = product.seo?.metaDescription || product.description || product.tagline
+  // Social cards need the exact 1200x630 box, so width/height stay — but
+  // ignoreImageParams() suppresses the hotspot `rect=` the builder would
+  // otherwise add to crop down to that aspect, and fit('fill') + a white
+  // background letterboxes the whole render instead. Without this, tall
+  // grippers and wide robot arms were cropped to an unrecognisable band.
   const imageUrl = product.mainImage
-    ? urlFor(product.mainImage).width(1200).height(630).url()
+    ? urlFor(product.mainImage)
+        .ignoreImageParams()
+        .width(1200)
+        .height(630)
+        .fit('fill')
+        .bg('ffffff')
+        .url()
     : undefined
 
   return {
@@ -123,7 +134,13 @@ export default async function ProductPage({ params }: Props) {
     manufacturer: product.manufacturer?.name,
     category: product.productFamily?.title,
     mainImage: product.mainImage
-      ? urlFor(product.mainImage).width(800).height(600).url()
+      ? urlFor(product.mainImage)
+          .ignoreImageParams()
+          .width(800)
+          .height(600)
+          .fit('fill')
+          .bg('ffffff')
+          .url()
       : undefined,
     priceRange: product.priceRange,
     availability: product.availability,
@@ -235,7 +252,7 @@ export default async function ProductPage({ params }: Props) {
                   {product.manufacturer.logo && (
                     <div className="w-10 h-10 bg-white border border-[color:var(--mr-line)] p-1.5">
                       <Image
-                        src={urlFor(product.manufacturer.logo).width(64).height(64).fit('max').url()}
+                        src={urlFor(product.manufacturer.logo).maxWidth(64).maxHeight(64).url()}
                         alt={product.manufacturer.name}
                         width={32}
                         height={32}

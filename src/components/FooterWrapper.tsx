@@ -47,7 +47,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
   const logoHeight = settings?.logoHeight || 36
 
   const logoUrl = settings?.logo
-    ? urlFor(settings.logo).width(logoWidth * 2).height(logoHeight * 2).url()
+    ? urlFor(settings.logo).maxWidth(logoWidth * 2).maxHeight(logoHeight * 2).url()
     : null
 
   return (

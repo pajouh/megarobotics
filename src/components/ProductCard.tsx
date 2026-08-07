@@ -17,7 +17,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="relative aspect-square overflow-hidden bg-white border-b border-[color:var(--mr-line)]">
           {mainImage ? (
             <Image
-              src={urlFor(mainImage).width(400).height(400).url()}
+              src={urlFor(mainImage).maxWidth(400).maxHeight(400).url()}
               alt={mainImage.alt || name}
               fill
               // Without `sizes`, `fill` defaults to 100vw and Next emits a srcset up
@@ -45,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="absolute top-2.5 right-2.5">
               <div className="w-10 h-10 bg-white border border-[color:var(--mr-line)] p-1.5">
                 <Image
-                  src={urlFor(manufacturer.logo).width(64).height(64).fit('max').url()}
+                  src={urlFor(manufacturer.logo).maxWidth(64).maxHeight(64).url()}
                   alt={manufacturer.name}
                   width={28}
                   height={28}

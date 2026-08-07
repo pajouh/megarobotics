@@ -14,7 +14,7 @@ export default async function HeaderWrapper({ locale = 'en' }: HeaderWrapperProp
   // Process logo URL on server side for client component
   // Use 2x resolution for retina displays
   const logoUrl = settings?.logo
-    ? urlFor(settings.logo).width(logoWidth * 2).height(logoHeight * 2).url()
+    ? urlFor(settings.logo).maxWidth(logoWidth * 2).maxHeight(logoHeight * 2).url()
     : null
 
   return (

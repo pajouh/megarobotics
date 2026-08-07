@@ -17,7 +17,7 @@ export default function ManufacturerCard({ manufacturer }: ManufacturerCardProps
         <div className="relative h-16 mb-4 flex items-center justify-center">
           {logo ? (
             <Image
-              src={urlFor(logo).width(200).height(100).fit('max').url()}
+              src={urlFor(logo).maxWidth(200).maxHeight(100).url()}
               alt={name}
               width={120}
               height={60}
