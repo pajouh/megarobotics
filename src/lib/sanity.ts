@@ -77,6 +77,33 @@ export function urlFor(source: SanityImage) {
   return builder.image(source)
 }
 
+/**
+ * Bounding-box image URL for contexts that never reach the next/image loader —
+ * JSON-LD structured data and OpenGraph tags.
+ *
+ * `.maxWidth()/.maxHeight()` cannot be used here: Sanity's CDN ignores the
+ * max-w/max-h params they emit and serves the full-size original. Nor can
+ * `.width().height()`, which makes the builder derive a hotspot `rect=` that
+ * crops to the requested aspect ratio first. Raw `w`/`h` + `fit=max` is the
+ * only combination that fits within the box, preserves aspect and never crops.
+ *
+ * Format is deliberately left alone (no `auto=format`) — these URLs are
+ * consumed by crawlers and social-preview scrapers, not browsers, so there is
+ * nothing to gain from content negotiation and some consumers reject webp.
+ */
+export function imageBoxUrl(source: SanityImage, width: number, height: number = width): string {
+  const base = urlFor(source).url()
+  if (!base.startsWith('https://cdn.sanity.io/')) return base
+
+  const url = new URL(base)
+  // Any `rect=` already present is the editor's crop from Studio — keep it and
+  // bound the result, rather than replacing their framing.
+  url.searchParams.set('w', String(width))
+  url.searchParams.set('h', String(height))
+  url.searchParams.set('fit', 'max')
+  return url.toString()
+}
+
 // Helper to create localized field projections with fallback
 function localizedField(field: string, locale: Locale = defaultLocale): string {
   const fallback = locale === 'en' ? 'de' : 'en'

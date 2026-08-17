@@ -9,6 +9,7 @@ import {
   getProductsByManufacturer,
   getAllManufacturerSlugs,
   urlFor,
+  imageBoxUrl,
   type Locale
 } from '@/lib/sanity'
 import ProductCard from '@/components/ProductCard'
@@ -89,7 +90,7 @@ export default async function ManufacturerPage({ params }: Props) {
     name: manufacturer.name,
     description: manufacturer.description,
     slug: slug,
-    logo: manufacturer.logo ? urlFor(manufacturer.logo).maxWidth(400).maxHeight(400).url() : undefined,
+    logo: manufacturer.logo ? imageBoxUrl(manufacturer.logo, 400) : undefined,
     website: manufacturer.website,
     headquarters: manufacturer.headquarters,
     founded: manufacturer.founded,

@@ -25,6 +25,7 @@ import {
   getRelatedInstitutes,
   getAllInstituteSlugs,
   urlFor,
+  imageBoxUrl,
 } from '@/lib/sanity'
 import { generateAlternates } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
@@ -118,7 +119,7 @@ export default async function InstitutePage({ params }: Props) {
     name: institute.name,
     url: institute.website || `${baseUrl}/institutes/${slug}`,
     description: institute.summary || `${institute.name} at ${institute.parentInstitution}`,
-    logo: institute.logo ? urlFor(institute.logo).maxWidth(400).maxHeight(400).url() : undefined,
+    logo: institute.logo ? imageBoxUrl(institute.logo, 400) : undefined,
     image: institute.mainImage ? urlFor(institute.mainImage).width(1200).height(630).url() : undefined,
     email: institute.email || undefined,
     telephone: institute.phone || undefined,
