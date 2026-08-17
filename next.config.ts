@@ -5,6 +5,13 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   images: {
+    // Bypass Vercel's metered image optimizer entirely: every image already
+    // comes from cdn.sanity.io, which resizes and format-negotiates for free.
+    // See src/lib/sanity-image-loader.ts for the full rationale.
+    loader: 'custom',
+    loaderFile: './src/lib/sanity-image-loader.ts',
+    // Unused while the custom loader is active (Next only validates these for
+    // its built-in optimizer), kept so reverting `loader` above still works.
     remotePatterns: [
       {
         protocol: 'https',
@@ -12,12 +19,11 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
       },
     ],
-    formats: ['image/avif', 'image/webp'],
     // Next's default deviceSizes top out at 3840, so every srcset advertised a
-    // 4K candidate. We always ask Sanity for an explicit width (<=1200 for the
-    // largest product/article renders), so a 3840 candidate can only ever
-    // upscale the source — it costs bytes and CPU for no extra detail.
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    // 4K candidate that could only upscale our Sanity sources. The loader now
+    // also caps each candidate at the authored width, so the remaining large
+    // entries collapse to the authored URL rather than fetching anything wider.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   },
   reactStrictMode: true,
   async headers() {
