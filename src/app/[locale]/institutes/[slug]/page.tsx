@@ -27,6 +27,7 @@ import {
   urlFor,
   imageBoxUrl,
 } from '@/lib/sanity'
+import VideoEmbed from '@/components/VideoEmbed'
 import { generateAlternates } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
@@ -87,13 +88,6 @@ export const revalidate = 3600
 
 const baseUrl = 'https://www.megarobotics.de'
 
-function getYoutubeEmbedUrl(url: string): string | null {
-  const match = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-  )
-  return match ? `https://www.youtube.com/embed/${match[1]}` : null
-}
-
 export default async function InstitutePage({ params }: Props) {
   const { slug } = await params
   const institute = await getInstitute(slug)
@@ -146,7 +140,6 @@ export default async function InstitutePage({ params }: Props) {
   const hasContact = institute.email || institute.phone || institute.address || institute.website
   const hasSocials = institute.socialLinks && Object.values(institute.socialLinks).some(Boolean)
   const hasQuickFacts = institute.founded || institute.director || institute.staffCount || institute.centerType
-  const videoEmbedUrl = institute.videoUrl ? getYoutubeEmbedUrl(institute.videoUrl) : null
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
@@ -282,19 +275,11 @@ export default async function InstitutePage({ params }: Props) {
               </div>
             )}
 
-            {/* Video */}
-            {videoEmbedUrl && (
+            {/* Video — click-to-load, so nothing reaches YouTube before consent */}
+            {institute.videoUrl && (
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{t('video')}</h3>
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-100">
-                  <iframe
-                    src={videoEmbedUrl}
-                    title={`${institute.name} video`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  />
-                </div>
+                <VideoEmbed url={institute.videoUrl} title={`${institute.name} video`} className="" />
               </div>
             )}
 

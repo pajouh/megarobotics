@@ -15,6 +15,7 @@ import {
 import type { AvailabilityStatus, RelationshipStatus } from '@/types'
 import ProductCard from '@/components/ProductCard'
 import ProductGallery from '@/components/ProductGallery'
+import VideoEmbed from '@/components/VideoEmbed'
 import SpecificationsTable from '@/components/SpecificationsTable'
 import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
@@ -359,6 +360,16 @@ export default async function ProductPage({ params }: Props) {
           </SafeNotice>
         </div>
 
+        {/* Product video — click-to-load, so nothing reaches YouTube before consent */}
+        {product.videoUrl && (
+          <section className="mb-12">
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">{t('video')}</h2>
+            <div className="max-w-3xl">
+              <VideoEmbed url={product.videoUrl} title={product.name} className="" />
+            </div>
+          </section>
+        )}
+
         {/* Specifications */}
         {product.specifications && product.specifications.length > 0 && (
           <section className="mb-12">
@@ -396,23 +407,6 @@ export default async function ProductPage({ params }: Props) {
                   {application}
                 </div>
               ))}
-            </div>
-          </section>
-        )}
-
-        {/* Video */}
-        {product.videoUrl && (
-          <section className="mb-12">
-            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
-              {t('video')}
-            </h2>
-            <div className="aspect-video overflow-hidden bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)]">
-              <iframe
-                src={product.videoUrl.replace('watch?v=', 'embed/')}
-                className="w-full h-full"
-                allowFullScreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              />
             </div>
           </section>
         )}
