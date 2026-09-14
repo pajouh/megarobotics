@@ -47,13 +47,30 @@ export function brandedTitle(title: string): { absolute: string } {
  */
 export const TITLE_MAX_LENGTH = 70
 
+/**
+ * Length of a string as a search engine actually receives it.
+ *
+ * Titles are HTML-escaped on the way out, so a single "&" ships as "&amp;" and
+ * costs four extra characters. Measuring the raw string let titles like
+ * "MagicBot Z1 Auto Tour & Narration Robot | Guided Tours | MegaRobotics"
+ * (69 raw) through, which render at 73 and get flagged.
+ */
+function renderedLength(value: string): number {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;').length
+}
+
 export function fitBrandedTitle(...candidates: string[]): { absolute: string } {
   const usable = candidates.filter((c) => c && c.trim().length > 0)
   if (usable.length === 0) return brandedTitle(BRAND)
 
   for (const candidate of usable) {
     const fitted = brandedTitle(candidate)
-    if (fitted.absolute.length <= TITLE_MAX_LENGTH) return fitted
+    if (renderedLength(fitted.absolute) <= TITLE_MAX_LENGTH) return fitted
   }
   return brandedTitle(usable[usable.length - 1])
 }
