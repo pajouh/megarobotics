@@ -6,8 +6,13 @@ import { pageSeo } from '@/lib/page-seo'
 import InstituteFilter from '@/components/InstituteFilter'
 
 const title = 'Robotics Research Institutes | MegaRobotics'
-const description =
-  'Verified directory of robotics research labs, centers and institutes across DACH and worldwide — humanoids, legged robotics, autonomous systems, embodied AI and applied automation research.'
+
+// Keyed by locale: this string was a single English constant served on /de as
+// well, so the German page advertised itself in English.
+const descriptions: Record<string, string> = {
+  en: 'Verified directory of robotics research labs and institutes across DACH and worldwide: humanoids, legged robotics, autonomous systems and embodied AI.',
+  de: 'Geprüftes Verzeichnis von Robotik-Forschungslaboren und -instituten in der DACH-Region und weltweit: Humanoide, Laufroboter, autonome Systeme, KI.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -15,7 +20,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return pageSeo({ title, description, path: '/institutes', locale })
+  return pageSeo({ title, description: descriptions[locale] ?? descriptions.en, path: '/institutes', locale })
 }
 
 export const revalidate = 3600
