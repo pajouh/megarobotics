@@ -9,9 +9,12 @@ import { pageSeo } from '@/lib/page-seo'
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   const title = 'Insights | MegaRobotics'
-  const description =
-    'Industrial robotics and automation insights from MegaRobotics — robot platform evaluations, integration notes, application studies, and market analysis for European industrial customers.'
-  return pageSeo({ title, description, path: '/articles', locale })
+  // Keyed by locale: this was a single English constant served on /de too.
+  const descriptions: Record<string, string> = {
+    en: 'Robotics and automation insights: robot platform evaluations, integration notes, application studies and market analysis for European industry.',
+    de: 'Einblicke in Robotik und Automatisierung: Plattform-Evaluierungen, Integrationshinweise, Anwendungsstudien und Marktanalysen für die Industrie.',
+  }
+  return pageSeo({ title, description: descriptions[locale] ?? descriptions.en, path: '/articles', locale })
 }
 
 // article publishes revalidate /articles via /api/revalidate; this timer is

@@ -8,8 +8,12 @@ import { getBuyersGuides, urlFor } from '@/lib/sanity'
 import { pageSeo } from '@/lib/page-seo'
 
 const guidesTitle = "Buyers' Guides | MegaRobotics"
-const guidesDescription =
-  'Practical, evidence-based buyers guides for industrial robotics and automation purchasing decisions — robot platforms, end effectors, sensors, safety systems, and full robotic cells.'
+
+// Keyed by locale: this was a single English constant served on /de too.
+const guidesDescriptions: Record<string, string> = {
+  en: 'Evidence-based buyers guides for robotics purchasing decisions: robot platforms, end effectors, sensors, safety systems and complete robotic cells.',
+  de: 'Fundierte Kaufberatung für Robotik-Investitionen: Roboterplattformen, Endeffektoren, Sensorik, Sicherheitstechnik und komplette Roboterzellen.',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -17,7 +21,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return pageSeo({ title: guidesTitle, description: guidesDescription, path: '/guides', locale })
+  return pageSeo({
+    title: guidesTitle,
+    description: guidesDescriptions[locale] ?? guidesDescriptions.en,
+    path: '/guides',
+    locale,
+  })
 }
 
 export const revalidate = 3600
