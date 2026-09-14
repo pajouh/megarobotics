@@ -26,7 +26,7 @@ import {
   generateProductSchema,
   generateAlternates,
 } from '@/lib/structured-data'
-import { brandedTitle } from '@/lib/page-seo'
+import { fitBrandedTitle } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 
 interface Props {
@@ -42,9 +42,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const alternates = generateAlternates(`/products/${slug}`, locale)
-  const metaTitle =
-    product.seo?.metaTitle || `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`
-  const brandedMetaTitle = brandedTitle(metaTitle)
+  // 16 of the 98 active products generated titles over Bing's ~70-character
+  // limit, worst at 85 — the authored seo.metaTitle values carry extra
+  // segments on top of a name that is already long. Offer the candidates
+  // most-informative-first and take the first that fits, so an over-long CMS
+  // value degrades to "<name> | MegaRobotics" rather than being trusted.
+  const brandedMetaTitle = fitBrandedTitle(
+    ...[
+      product.seo?.metaTitle,
+      `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`,
+      product.name,
+    ].filter((candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0)
+  )
   const metaDescription = product.seo?.metaDescription || product.description || product.tagline
   // Social cards need the exact 1200x630 box, so width/height stay — but
   // ignoreImageParams() suppresses the hotspot `rect=` the builder would
