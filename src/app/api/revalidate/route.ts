@@ -140,9 +140,12 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
   const mark = (...paths: string[]) => paths.forEach((path) => changed.add(path))
 
   try {
-    // Always revalidate homepage
-    revalidatePath('/')
-    revalidated.push('/')
+    // Always revalidate the homepage — in every locale. '/' alone leaves the
+    // German homepage on its hourly timer.
+    for (const p of localizedPaths('/')) {
+      revalidatePath(p, 'page')
+      revalidated.push(p)
+    }
     mark(...localizedPaths('/'))
 
     switch (_type) {
@@ -191,12 +194,18 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/products', 'layout')
         revalidated.push('/manufacturers (layout)', '/products (layout)')
 
+        for (const p of localizedPaths('/manufacturers')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
         mark(...localizedPaths('/manufacturers'))
 
         if (slug?.current) {
-          revalidatePath(`/manufacturers/${slug.current}`, 'page')
-          revalidatePath(`/manufacturers/${slug.current}`)
-          revalidated.push(`/manufacturers/${slug.current}`)
+          for (const p of localizedPaths(`/manufacturers/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidatePath(p)
+            revalidated.push(p)
+          }
           mark(...localizedPaths(`/manufacturers/${slug.current}`))
         }
         break
@@ -206,11 +215,17 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/articles')
         revalidated.push('/articles (layout)')
 
+        for (const p of localizedPaths('/articles')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
         mark(...localizedPaths('/articles'))
 
         if (slug?.current) {
-          revalidatePath(`/articles/${slug.current}`, 'page')
-          revalidated.push(`/articles/${slug.current}`)
+          for (const p of localizedPaths(`/articles/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
           mark(...localizedPaths(`/articles/${slug.current}`))
         }
         break
@@ -234,11 +249,17 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/guides')
         revalidated.push('/guides (layout)')
 
+        for (const p of localizedPaths('/guides')) {
+          revalidatePath(p, 'page')
+          revalidated.push(p)
+        }
         mark(...localizedPaths('/guides'))
 
         if (slug?.current) {
-          revalidatePath(`/guides/${slug.current}`, 'page')
-          revalidated.push(`/guides/${slug.current}`)
+          for (const p of localizedPaths(`/guides/${slug.current}`)) {
+            revalidatePath(p, 'page')
+            revalidated.push(p)
+          }
           mark(...localizedPaths(`/guides/${slug.current}`))
         }
         break
