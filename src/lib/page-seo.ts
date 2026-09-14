@@ -32,6 +32,32 @@ export function brandedTitle(title: string): { absolute: string } {
   return { absolute: `${base} | ${BRAND}` }
 }
 
+/**
+ * Bing truncates result titles at roughly 70 characters and flags longer ones
+ * in Webmaster Tools. Titles here are composed from CMS values of unpredictable
+ * length (an institute name plus its parent institution routinely runs past
+ * 85), so rather than hand-trimming each document, callers pass candidates from
+ * most to least informative and the first one that fits is used.
+ *
+ *   fitBrandedTitle(`${name} – ${parent}`, name)
+ *
+ * If no candidate fits, the last one is returned branded anyway — a slightly
+ * long title beats an empty one, and the search engine will cut it where it
+ * would have cut it regardless.
+ */
+export const TITLE_MAX_LENGTH = 70
+
+export function fitBrandedTitle(...candidates: string[]): { absolute: string } {
+  const usable = candidates.filter((c) => c && c.trim().length > 0)
+  if (usable.length === 0) return brandedTitle(BRAND)
+
+  for (const candidate of usable) {
+    const fitted = brandedTitle(candidate)
+    if (fitted.absolute.length <= TITLE_MAX_LENGTH) return fitted
+  }
+  return brandedTitle(usable[usable.length - 1])
+}
+
 interface PageSeoArgs {
   /** Title used as-is (not run through the root layout's "%s | MegaRobotics" template). */
   title: string

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import { generateAlternates } from '@/lib/structured-data'
+import { brandedTitle } from '@/lib/page-seo'
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>
@@ -21,11 +22,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Page Not Found' }
   }
 
-  const title = page.seo?.metaTitle || page.title
+  // Returning a bare string let the root layout's "%s | MegaRobotics" template
+  // append the brand on top of Sanity metaTitle values that already ended with
+  // it, shipping "Terms of Service | MegaRobotics | MegaRobotics". brandedTitle
+  // normalises to exactly one suffix and returns { absolute }, which bypasses
+  // the template.
+  const rawTitle = page.seo?.metaTitle || page.title
+  const brandedMetaTitle = brandedTitle(rawTitle)
+  const title = brandedMetaTitle.absolute
   const description = page.seo?.metaDescription || page.subtitle
 
   return {
-    title,
+    title: brandedMetaTitle,
     description,
     alternates: generateAlternates(`/pages/${slug}`, locale),
     openGraph: {
