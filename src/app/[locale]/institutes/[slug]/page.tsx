@@ -33,7 +33,7 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import InstituteCard from '@/components/InstituteCard'
 import ArticleBody from '@/components/ArticleBody'
-import { brandedTitle } from '@/lib/page-seo'
+import { fitBrandedTitle } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -47,8 +47,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Institute Not Found' }
   }
 
-  const metaTitle = institute.seo?.metaTitle || `${institute.name} – ${institute.parentInstitution} | MegaRobotics`
-  const brandedMetaTitle = brandedTitle(metaTitle)
+  // 48 institute pages produced titles over 70 characters. Three sources feed
+  // this and all three can overflow: a bulk-authored seo.metaTitle carrying a
+  // "| Robotics Research" segment (some already truncated mid-word with "…" by
+  // an older import), the name + parent institution pair, and long lab names.
+  // Offer all three most-informative-first and take the first that fits, so a
+  // too-long CMS value degrades to the bare lab name instead of being trusted.
+  const brandedMetaTitle = fitBrandedTitle(
+    ...[institute.seo?.metaTitle, `${institute.name} – ${institute.parentInstitution}`, institute.name].filter(
+      (candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0
+    )
+  )
   const metaDescription =
     institute.seo?.metaDescription ||
     institute.summary ||

@@ -49,8 +49,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { country: countrySlug, locale } = await params
   const country = decodeCountry(countrySlug)
 
-  const metaTitle = `Robotics Research Institutes in ${country} – Universities & Labs | MegaRobotics`
-  const brandedMetaTitle = brandedTitle(metaTitle)
+  // "– Universities & Labs" pushed this past Bing's ~70-character limit for
+  // every country (Germany landed at 76). The phrase added no query coverage
+  // the rest of the title did not already have.
+  const brandedMetaTitle = brandedTitle(`Robotics Research Institutes in ${country}`)
   const metaDescription = `Browse verified robotics research institutes, laboratories, and centers in ${country}. Discover leading university labs and research organizations.`
 
   return {

@@ -284,7 +284,7 @@
     "home": {
       "meta": {
         "title": "MegaRobotics | Industrial Robotics & Automation Solutions",
-        "description": "MegaRobotics helps European industrial customers and research institutions identify, evaluate and develop advanced robotic technologies for manufacturing, logistics, inspection, cleaning, research and service robotics."
+        "description": "Robotics distributor in Germany for Franka, LimX, OnRobot and Agile Robots. Sourcing, evaluation and integration for industry and research."
       },
       "hero": {
         "eyebrow": "Industrial Robotics & Automation",
@@ -565,7 +565,7 @@
     "industries": {
       "meta": {
         "title": "Industries We Support | MegaRobotics",
-        "description": "Industrial robotics and automation across automotive, electronics, food & beverage, pharma, consumer goods, logistics, inspection, research and service environments."
+        "description": "Industrial robotics for automotive, electronics, food, pharma, logistics, inspection, research and service environments. Solutions by sector."
       },
       "title": "Industries",
       "eyebrow": "Industries",
@@ -684,7 +684,7 @@
     "robotTechnologies": {
       "meta": {
         "title": "Robot Technologies | MegaRobotics",
-        "description": "Industrial arms, collaborative robots, parallel robots, AMR/AGV, quadruped, humanoid platforms and components — selection criteria for European industrial automation."
+        "description": "Industrial arms, cobots, AMR/AGV, quadruped and humanoid platforms, and how to choose the right robot technology for European automation."
       },
       "title": "Robot Technologies",
       "eyebrow": "Technologies",
@@ -979,7 +979,7 @@
     "projects": {
       "meta": {
         "title": "Projects & Concept Studies | MegaRobotics",
-        "description": "Concept and feasibility studies for automotive aftermarket robotic cells, mobile inspection, intralogistics, research robotics platforms and industrial cleaning automation."
+        "description": "Concept and feasibility studies: automotive aftermarket robot cells, mobile inspection, intralogistics, research platforms and cleaning automation."
       },
       "title": "Projects & Concept Studies",
       "eyebrow": "Projects",
@@ -1021,7 +1021,7 @@
     "company": {
       "meta": {
         "title": "Company | MegaRobotics",
-        "description": "MegaRobotics is based in Germany and focuses on industrial robotics, automation technologies and advanced robotic platforms for European industrial, research and service applications."
+        "description": "Germany-based robotics and automation partner in Kaarst. We evaluate, source and integrate robot platforms for industrial, research and service use."
       },
       "title": "About MegaRobotics",
       "eyebrow": "Company",
@@ -1106,7 +1106,7 @@
     "catalog": {
       "meta": {
         "title": "Robotics & Automation Technologies | MegaRobotics",
-        "description": "MegaRobotics distributes, sources and evaluates robot platforms, PLCs, actuators, drives, sensors, grippers, safety systems and automation technologies for industrial applications."
+        "description": "Robot platforms, grippers, sensors, PLCs, drives and safety systems from vetted manufacturers, sourced and evaluated for industrial automation."
       },
       "page": {
         "eyebrow": "Catalog",
@@ -1196,7 +1196,7 @@
       "robotDistributor": {
         "meta": {
           "title": "Robot Distributor & Robotics Technology Reseller | MegaRobotics",
-          "description": "Germany-based robot distributor and robotics technology reseller supporting sourcing, evaluation and commercial coordination for industrial, service and research robotics."
+          "description": "Germany-based robot distributor for industrial, service and research robotics. Sourcing, evaluation and commercial coordination in one place."
         },
         "title": "Robot Distributor & Robotics Technology Reseller",
         "eyebrow": "Distributor",

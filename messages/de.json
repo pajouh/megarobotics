@@ -284,7 +284,7 @@
     "home": {
       "meta": {
         "title": "MegaRobotics | Industrielle Robotik & Automatisierungslösungen",
-        "description": "MegaRobotics unterstützt europäische Industriekunden und Forschungseinrichtungen bei der Identifikation, Evaluierung und Entwicklung fortschrittlicher Robotiktechnologien für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service-Robotik."
+        "description": "Robotik-Distributor aus Kaarst für Franka, LimX, OnRobot und Agile Robots. Beschaffung, Evaluierung und Integration für Industrie und Forschung."
       },
       "hero": {
         "eyebrow": "Industrielle Robotik & Automatisierung",
@@ -565,7 +565,7 @@
     "industries": {
       "meta": {
         "title": "Branchen, die wir unterstützen | MegaRobotics",
-        "description": "Industrielle Robotik und Automatisierung für Automotive, Elektronik, Lebensmittel & Getränke, Pharma, Konsumgüter, Logistik, Inspektion, Forschung und Service-Umgebungen."
+        "description": "Industrielle Robotik für Automotive, Elektronik, Lebensmittel, Pharma, Logistik, Inspektion, Forschung und Service. Lösungen je Branche."
       },
       "title": "Branchen",
       "eyebrow": "Branchen",
@@ -684,7 +684,7 @@
     "robotTechnologies": {
       "meta": {
         "title": "Robotertechnologien | MegaRobotics",
-        "description": "Industrielle Arme, kollaborative Roboter, Parallelroboter, AMR/AGV, vierbeinige und humanoide Plattformen sowie Komponenten — Auswahlkriterien für die europäische industrielle Automatisierung."
+        "description": "Industrielle Arme, Cobots, AMR/AGV, vierbeinige und humanoide Plattformen: Auswahlkriterien für die richtige Robotertechnologie in der Industrie."
       },
       "title": "Robotertechnologien",
       "eyebrow": "Technologien",
@@ -979,7 +979,7 @@
     "projects": {
       "meta": {
         "title": "Projekte & Konzeptstudien | MegaRobotics",
-        "description": "Konzept- und Machbarkeitsstudien für robotische Zellen im Automotive-Aftermarket, mobile Inspektion, Intralogistik, Forschungs-Robotik-Plattformen und industrielle Reinigungsautomatisierung."
+        "description": "Konzept- und Machbarkeitsstudien: Roboterzellen im Automotive-Aftermarket, mobile Inspektion, Intralogistik, Forschung und Reinigungsautomation."
       },
       "title": "Projekte & Konzeptstudien",
       "eyebrow": "Projekte",
@@ -1021,7 +1021,7 @@
     "company": {
       "meta": {
         "title": "Unternehmen | MegaRobotics",
-        "description": "MegaRobotics hat seinen Sitz in Deutschland und fokussiert sich auf industrielle Robotik, Automatisierungstechnologien und fortschrittliche Roboterplattformen für europäische industrielle, Forschungs- und Service-Anwendungen."
+        "description": "Robotik- und Automatisierungspartner aus Kaarst. Wir evaluieren, beschaffen und integrieren Roboterplattformen für Industrie, Forschung und Service."
       },
       "title": "Über MegaRobotics",
       "eyebrow": "Unternehmen",
@@ -1106,7 +1106,7 @@
     "catalog": {
       "meta": {
         "title": "Robotik & Automatisierungstechnologien | MegaRobotics",
-        "description": "MegaRobotics vertreibt, beschafft und evaluiert Roboterplattformen, SPS, Aktoren, Antriebe, Sensoren, Greifer, Sicherheitssysteme und Automatisierungstechnologien für industrielle Anwendungen."
+        "description": "Roboterplattformen, Greifer, Sensoren, SPS, Antriebe und Sicherheitstechnik von geprüften Herstellern, beschafft und evaluiert für die Industrie."
       },
       "page": {
         "eyebrow": "Katalog",
@@ -1196,7 +1196,7 @@
       "robotDistributor": {
         "meta": {
           "title": "Roboter-Distributor & Robotik-Technologie-Reseller | MegaRobotics",
-          "description": "Roboter-Distributor mit Sitz in Deutschland und Robotik-Technologie-Reseller, der Beschaffung, Evaluierung und kommerzielle Koordination für industrielle, Service- und Forschungsrobotik unterstützt."
+          "description": "Roboter-Distributor aus Deutschland für Industrie-, Service- und Forschungsrobotik. Beschaffung, Evaluierung und Koordination aus einer Hand."
         },
         "title": "Roboter-Distributor & Robotik-Technologie-Reseller",
         "eyebrow": "Distributor",
@@ -1338,7 +1338,7 @@
           ],
           "meta": {
             "title": "Endeffektoren & Roboterwerkzeuge | MegaRobotics",
-            "description": "Greifer, Vakuumwerkzeuge, Kraft-/Drehmomentsensoren, Dosier- und Bearbeitungswerkzeuge — die End-of-Arm-Technologie, die definiert, was eine robotische Zelle tatsächlich leisten kann."
+            "description": "Greifer, Vakuumwerkzeuge, Kraft-/Drehmomentsensoren und Bearbeitungswerkzeuge. Die End-of-Arm-Technologie entscheidet über die Roboterzelle."
           }
         },
         "motion-actuators-drives": {
