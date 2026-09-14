@@ -1,6 +1,7 @@
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { getAllProductFamilySlugs, getInstituteCountries } from '@/lib/sanity'
+import { submitToIndexNow } from '@/lib/indexnow'
 import { locales, defaultLocale } from '@/i18n/config'
 
 // Secret that guards the MANUAL revalidation endpoints (POST with a body secret
@@ -130,10 +131,19 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
   const revalidated: string[] = []
   const { _type, slug } = payload
 
+  // Real, document-specific URLs to announce via IndexNow. Deliberately much
+  // narrower than `revalidated`: cache invalidation fans out over every family
+  // and country index because that is cheap and local, but telling Bing that a
+  // dozen unchanged category pages changed is spam and gets a host throttled.
+  // Only pages whose content this publish actually altered belong here.
+  const changed = new Set<string>()
+  const mark = (...paths: string[]) => paths.forEach((path) => changed.add(path))
+
   try {
     // Always revalidate homepage
     revalidatePath('/')
     revalidated.push('/')
+    mark(...localizedPaths('/'))
 
     switch (_type) {
       case 'product':
@@ -142,12 +152,15 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/products')
         revalidated.push('/products (layout)')
 
+        mark(...localizedPaths('/products'))
+
         if (slug?.current) {
           for (const p of localizedPaths(`/products/${slug.current}`)) {
             revalidatePath(p, 'page')
             revalidatePath(p)
             revalidated.push(p)
           }
+          mark(...localizedPaths(`/products/${slug.current}`))
         }
 
         // A product carries its productFamily reference, so changing/assigning a
@@ -178,10 +191,13 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/products', 'layout')
         revalidated.push('/manufacturers (layout)', '/products (layout)')
 
+        mark(...localizedPaths('/manufacturers'))
+
         if (slug?.current) {
           revalidatePath(`/manufacturers/${slug.current}`, 'page')
           revalidatePath(`/manufacturers/${slug.current}`)
           revalidated.push(`/manufacturers/${slug.current}`)
+          mark(...localizedPaths(`/manufacturers/${slug.current}`))
         }
         break
 
@@ -190,21 +206,26 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/articles')
         revalidated.push('/articles (layout)')
 
+        mark(...localizedPaths('/articles'))
+
         if (slug?.current) {
           revalidatePath(`/articles/${slug.current}`, 'page')
           revalidated.push(`/articles/${slug.current}`)
+          mark(...localizedPaths(`/articles/${slug.current}`))
         }
         break
 
       case 'productFamily':
         revalidatePath('/products', 'layout')
         revalidated.push('/products (layout)')
+        mark(...localizedPaths('/products'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/products/categories/${slug.current}`)) {
             revalidatePath(p, 'page')
             revalidated.push(p)
           }
+          mark(...localizedPaths(`/products/categories/${slug.current}`))
         }
         break
 
@@ -213,9 +234,12 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         revalidatePath('/guides')
         revalidated.push('/guides (layout)')
 
+        mark(...localizedPaths('/guides'))
+
         if (slug?.current) {
           revalidatePath(`/guides/${slug.current}`, 'page')
           revalidated.push(`/guides/${slug.current}`)
+          mark(...localizedPaths(`/guides/${slug.current}`))
         }
         break
 
@@ -224,12 +248,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/solutions'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/solutions/${slug.current}`)) {
             revalidatePath(p, 'page')
             revalidated.push(p)
           }
+          mark(...localizedPaths(`/solutions/${slug.current}`))
         }
         break
 
@@ -238,6 +264,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/industries'))
         break
 
       case 'robotTechnology':
@@ -245,6 +272,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/robot-technologies'))
         break
 
       case 'institute':
@@ -252,12 +280,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/institutes'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/institutes/${slug.current}`)) {
             revalidatePath(p, 'page')
             revalidated.push(p)
           }
+          mark(...localizedPaths(`/institutes/${slug.current}`))
         }
 
         // The payload has no country, and an institute can move between
@@ -278,6 +308,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/projects'))
         break
 
       case 'category':
@@ -285,12 +316,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           revalidatePath(p, 'page')
           revalidated.push(p)
         }
+        mark(...localizedPaths('/articles'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/category/${slug.current}`)) {
             revalidatePath(p, 'page')
             revalidated.push(p)
           }
+          mark(...localizedPaths(`/category/${slug.current}`))
         }
         break
 
@@ -311,11 +344,18 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
     console.log(`[Sanity Webhook] Revalidated ${revalidated.length} paths for ${_type}:`, revalidated)
 
+    // Tell Bing the pages changed rather than waiting for its crawl schedule.
+    // Awaited, not fire-and-forget: this runs in a serverless function that may
+    // be frozen the moment the response is returned, which would drop a
+    // detached promise. submitToIndexNow never throws and self-limits to 5s.
+    const indexNow = await submitToIndexNow([...changed])
+
     return NextResponse.json({
       success: true,
       source: 'sanity-webhook',
       contentType: _type,
       revalidated,
+      indexNow,
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
