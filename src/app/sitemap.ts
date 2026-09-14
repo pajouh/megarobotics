@@ -34,7 +34,7 @@ function localizedEntries(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all content from Sanity
-  const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries] = await Promise.all([
+  const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries, solutions, cmsPages] = await Promise.all([
     client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "product"]{ "slug": slug.current, _updatedAt }`) || [],
@@ -43,6 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "institute" && profileStatus in ["Ready", "Foundational"]]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`array::unique(*[_type == "institute" && profileStatus in ["Ready", "Foundational"]].country)`) || [],
+    client?.fetch(`*[_type == "solution"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "page"]{ "slug": slug.current, _updatedAt }`) || [],
   ])
 
   // Static pages with locale variants
@@ -53,10 +55,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...localizedEntries('/guides', { changeFrequency: 'weekly', priority: 0.9 }),
     ...localizedEntries('/manufacturers', { changeFrequency: 'weekly', priority: 0.8 }),
     ...localizedEntries('/institutes', { changeFrequency: 'weekly', priority: 0.8 }),
+    ...localizedEntries('/solutions', { changeFrequency: 'weekly', priority: 0.9 }),
+    ...localizedEntries('/industries', { changeFrequency: 'weekly', priority: 0.8 }),
+    ...localizedEntries('/robot-technologies', { changeFrequency: 'weekly', priority: 0.8 }),
+    ...localizedEntries('/robot-distributor', { changeFrequency: 'monthly', priority: 0.8 }),
+    ...localizedEntries('/automation-components', { changeFrequency: 'monthly', priority: 0.8 }),
+    ...localizedEntries('/technology-network', { changeFrequency: 'monthly', priority: 0.7 }),
+    ...localizedEntries('/projects', { changeFrequency: 'monthly', priority: 0.7 }),
+    ...localizedEntries('/for-customers', { changeFrequency: 'monthly', priority: 0.6 }),
+    ...localizedEntries('/for-manufacturers', { changeFrequency: 'monthly', priority: 0.6 }),
     ...localizedEntries('/about', { changeFrequency: 'monthly', priority: 0.5 }),
     ...localizedEntries('/contact', { changeFrequency: 'monthly', priority: 0.5 }),
     ...localizedEntries('/privacy', { changeFrequency: 'monthly', priority: 0.3 }),
     ...localizedEntries('/imprint', { changeFrequency: 'monthly', priority: 0.3 }),
+    ...localizedEntries('/agb', { changeFrequency: 'monthly', priority: 0.3 }),
   ]
 
   // Dynamic pages with locale variants
@@ -116,6 +128,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
+  const solutionPages: MetadataRoute.Sitemap = (solutions || []).flatMap((solution: { slug: string; _updatedAt: string }) =>
+    localizedEntries(`/solutions/${solution.slug}`, {
+      lastModified: new Date(solution._updatedAt),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    })
+  )
+
+  // CMS-driven pages at /pages/<slug>. Three of the five page documents are
+  // also served by dedicated routes that are already listed above, and BOTH
+  // copies self-canonicalise — /pages/privacy and /privacy each declare
+  // themselves canonical, as do the imprint and about pairs. Listing both
+  // would ask search engines to index the same text twice. The dedicated
+  // route wins because it is the one linked from the site chrome; the
+  // /pages/ twin is excluded here until the duplication is resolved properly
+  // (by redirecting or cross-canonicalising it — tracked separately).
+  //
+  // data-deletion is withheld for a different reason: its H1 renders as the
+  // raw slug "data-deletion" because the document has no title, so it is not
+  // fit to be indexed yet. Remove it from this set once the title is set.
+  const EXCLUDED_PAGE_SLUGS = new Set(['privacy', 'imprint', 'about-megarobotics', 'data-deletion'])
+
+  const cmsPagePages: MetadataRoute.Sitemap = (cmsPages || [])
+    .filter((page: { slug: string }) => page.slug && !EXCLUDED_PAGE_SLUGS.has(page.slug))
+    .flatMap((page: { slug: string; _updatedAt: string }) =>
+      localizedEntries(`/pages/${page.slug}`, {
+        lastModified: new Date(page._updatedAt),
+        changeFrequency: 'monthly',
+        priority: 0.3,
+      })
+    )
+
   const instituteCountryPages: MetadataRoute.Sitemap = (instituteCountries || []).flatMap((country: string) =>
     localizedEntries(`/institutes/country/${country.toLowerCase().replace(/\s+/g, '-')}`, {
       changeFrequency: 'monthly',
@@ -133,5 +177,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...buyersGuidePages,
     ...institutePages,
     ...instituteCountryPages,
+    ...solutionPages,
+    ...cmsPagePages,
   ]
 }
