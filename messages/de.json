@@ -1821,7 +1821,11 @@
         "primary": "Sprechen Sie mit uns"
       },
       "watch": "Ansehen",
-      "masterLabel": "Original {format} · {size}"
+      "masterLabel": "Original {format} · {size}",
+      "products": {
+        "oli": "Oli",
+        "tron2": "TRON 2"
+      }
     }
   }
 }

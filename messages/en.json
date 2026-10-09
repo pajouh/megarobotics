@@ -1821,7 +1821,11 @@
         "primary": "Talk to our team"
       },
       "watch": "Watch",
-      "masterLabel": "Original {format} · {size}"
+      "masterLabel": "Original {format} · {size}",
+      "products": {
+        "oli": "Oli",
+        "tron2": "TRON 2"
+      }
     }
   }
 }
