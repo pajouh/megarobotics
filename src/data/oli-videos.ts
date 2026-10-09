@@ -24,8 +24,22 @@ export interface OliVideo {
   date: string
   /** Direct URL on LimX's CDN. Pre-encoded: several paths carry CJK characters and spaces. */
   url: string
+  /**
+   * Self-hosted 1080p H.264 copy used for in-page playback.
+   *
+   * The masters are 4K and nine of the twelve are unplayable in Chrome and
+   * Firefox: eight are QuickTime containers and the guidance film is HEVC.
+   * These copies are transcoded from those masters (1.8 GB -> 253 MB) and
+   * served from our own box, so every video plays inline while `url` keeps
+   * pointing at LimX's full-quality original for download.
+   */
+  webUrl: string
+  /** Size of the playback copy, for reference; `sizeBytes` is the master. */
+  webSizeBytes: number
   thumbnail: string
+  /** Size of the master behind `url`. */
   sizeBytes: number
+  /** MIME of the master. The playback copy is always video/mp4. */
   mime: string
 }
 
@@ -34,6 +48,8 @@ export const OLI_VIDEO_SECTIONS: VideoSection[] = ['intro', 'tutorial', 'story']
 export const oliVideos: OliVideo[] = [
   {
     id: 'oli-introduction-video',
+    webUrl: 'https://media.megarobotics.de/oli/oli-introduction-video.mp4',
+    webSizeBytes: 62916426,
     title: { en: "Oli Introduction Video", de: "Oli Vorstellungsvideo" },
     section: 'intro',
     date: '2025-07-30',
@@ -44,6 +60,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-device-charging-example',
+    webUrl: 'https://media.megarobotics.de/oli/oli-device-charging-example.mp4',
+    webSizeBytes: 11323779,
     title: { en: "Oli Device Charging Example", de: "Oli Gerät laden" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -54,6 +72,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-remote-control-upgrade',
+    webUrl: 'https://media.megarobotics.de/oli/oli-remote-control-upgrade.mp4',
+    webSizeBytes: 6343444,
     title: { en: "Oli Remote Control Upgrade", de: "Oli Fernsteuerung – Firmware-Update" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -64,6 +84,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-remote-control-pairing',
+    webUrl: 'https://media.megarobotics.de/oli/oli-remote-control-pairing.mp4',
+    webSizeBytes: 8301383,
     title: { en: "Oli Remote Control Pairing", de: "Oli Fernsteuerung koppeln" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -74,6 +96,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-remote-control-operation-example',
+    webUrl: 'https://media.megarobotics.de/oli/oli-remote-control-operation-example.mp4',
+    webSizeBytes: 16841727,
     title: { en: "Oli Remote Control Operation Example", de: "Oli Fernsteuerung – Bedienbeispiel" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -84,6 +108,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-zero-calibration',
+    webUrl: 'https://media.megarobotics.de/oli/oli-zero-calibration.mp4',
+    webSizeBytes: 8547142,
     title: { en: "Oli Zero Calibration", de: "Oli Nullpunkt-Kalibrierung" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -94,6 +120,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-software-upgrade',
+    webUrl: 'https://media.megarobotics.de/oli/oli-software-upgrade.mp4',
+    webSizeBytes: 5468609,
     title: { en: "Oli Software Upgrade", de: "Oli Software-Update" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -104,6 +132,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-log-download',
+    webUrl: 'https://media.megarobotics.de/oli/oli-log-download.mp4',
+    webSizeBytes: 4876661,
     title: { en: "Oli Log Download", de: "Oli Protokoll-Download" },
     section: 'tutorial',
     date: '2026-01-12',
@@ -114,6 +144,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-unboxing',
+    webUrl: 'https://media.megarobotics.de/oli/oli-unboxing.mp4',
+    webSizeBytes: 10271616,
     title: { en: "Oli Unboxing", de: "Oli Unboxing" },
     section: 'tutorial',
     date: '2025-11-26',
@@ -124,6 +156,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'limx-oli-redefines-smart-guidance',
+    webUrl: 'https://media.megarobotics.de/oli/limx-oli-redefines-smart-guidance.mp4',
+    webSizeBytes: 37604353,
     title: { en: "LimX Oli Redefines Smart Guidance", de: "LimX Oli definiert intelligente Besucherführung neu" },
     section: 'story',
     date: '2026-04-21',
@@ -134,6 +168,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-walks-over-construction-debris',
+    webUrl: 'https://media.megarobotics.de/oli/oli-walks-over-construction-debris.mp4',
+    webSizeBytes: 49182591,
     title: { en: "Oli Walks Over Construction Debris", de: "Oli läuft über Bauschutt" },
     section: 'story',
     date: '2025-11-28',
@@ -144,6 +180,8 @@ export const oliVideos: OliVideo[] = [
   },
   {
     id: 'oli-fully-autonomous-tennis-ball-picks-up-and-tosses',
+    webUrl: 'https://media.megarobotics.de/oli/oli-fully-autonomous-tennis-ball-picks-up-and-tosses.mp4',
+    webSizeBytes: 43147572,
     title: { en: "Oli : Fully Autonomous Tennis Ball Picks Up & Tosses", de: "Oli: Vollautonomes Aufheben und Werfen von Tennisbällen" },
     section: 'story',
     date: '2025-09-30',
@@ -161,7 +199,11 @@ export function formatSize(bytes: number): string {
   return mb >= 100 ? `${Math.round(mb)} MB` : `${mb.toFixed(1)} MB`
 }
 
-/** QuickTime files download fine but will not play inline in Chrome or Firefox. */
-export function isInlinePlayable(mime: string): boolean {
-  return mime === 'video/mp4'
+/**
+ * Every entry now ships a self-hosted mp4, so all twelve play inline. Kept as
+ * a named check so the reason is greppable if a future entry arrives without
+ * a transcoded copy.
+ */
+export function isInlinePlayable(video: Pick<OliVideo, 'webUrl'>): boolean {
+  return video.webUrl.length > 0
 }

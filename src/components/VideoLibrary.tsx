@@ -88,7 +88,7 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
           <ul className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((video) => {
               const title = video.title[lang]
-              const playable = isInlinePlayable(video.mime)
+              const playable = isInlinePlayable(video)
               return (
                 <li key={video.id} id={video.id} className="group flex flex-col">
                   <div className="relative aspect-video w-full overflow-hidden bg-[color:var(--mr-paper-2)]">
@@ -121,9 +121,10 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
                   <p className="mt-1 font-mono text-xs uppercase tracking-wider text-[color:var(--mr-steel)]">
                     <time dateTime={video.date}>{dateFormatter.format(new Date(video.date))}</time>
                     {' · '}
-                    {formatSize(video.sizeBytes)}
-                    {' · '}
-                    {video.mime === 'video/quicktime' ? 'MOV' : 'MP4'}
+                    {t('masterLabel', {
+                      size: formatSize(video.sizeBytes),
+                      format: video.mime === 'video/quicktime' ? 'MOV' : 'MP4',
+                    })}
                   </p>
 
                   <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -135,11 +136,13 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
                       <Download className="h-4 w-4" aria-hidden="true" />
                       {t('download')}
                     </a>
-                    {!playable && (
-                      <span className="text-xs text-[color:var(--mr-steel)]">
-                        {t('movNote')}
-                      </span>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => setPlaying(video)}
+                      className="text-sm text-[color:var(--mr-steel)] underline-offset-4 hover:text-[color:var(--mr-ink)] hover:underline"
+                    >
+                      {t('watch')}
+                    </button>
                   </div>
                 </li>
               )
@@ -167,7 +170,7 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
             <X className="h-5 w-5" aria-hidden="true" />
           </button>
           <video
-            src={playing.url}
+            src={playing.webUrl}
             poster={playing.thumbnail}
             controls
             autoPlay
