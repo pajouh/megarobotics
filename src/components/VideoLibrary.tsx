@@ -7,15 +7,16 @@ import { useTranslations, useLocale } from 'next-intl'
 import {
   formatSize,
   isInlinePlayable,
-  OLI_VIDEO_SECTIONS,
-  type OliVideo,
+  VIDEO_SECTIONS,
+  type LimxVideo,
+  type ProductKey,
   type VideoSection,
-} from '@/data/oli-videos'
+} from '@/data/limx-videos'
 
 interface VideoLibraryProps {
-  videos: OliVideo[]
-  /** Product filter chips. Only products with videos should be passed. */
-  products: string[]
+  videos: LimxVideo[]
+  /** Product filter chips, in display order. Only products with videos. */
+  products: ProductKey[]
 }
 
 /**
@@ -27,20 +28,28 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
   const locale = useLocale()
   const lang = locale === 'de' ? 'de' : 'en'
 
-  const [product, setProduct] = useState<string>('all')
-  const [playing, setPlaying] = useState<OliVideo | null>(null)
+  const [product, setProduct] = useState<ProductKey | 'all'>('all')
+  const [playing, setPlaying] = useState<LimxVideo | null>(null)
 
-  // Every video is an Oli video today. The filter is wired through the product
-  // field so adding Luna or TRON later needs no change here.
   const visible = useMemo(
-    () => (product === 'all' ? videos : videos.filter(() => product === 'oli')),
+    () => (product === 'all' ? videos : videos.filter((video) => video.product === product)),
     [videos, product]
   )
 
   const bySection = useMemo(() => {
-    const groups = new Map<VideoSection, OliVideo[]>()
-    for (const section of OLI_VIDEO_SECTIONS) {
-      const items = visible.filter((video) => video.section === section)
+    const groups = new Map<VideoSection, LimxVideo[]>()
+    for (const section of VIDEO_SECTIONS) {
+      // `order` carries LimX's own numbering for tutorials (1_unboxing,
+      // 2_dual_arm_installation, ...). That sequence is the order the steps
+      // are meant to be followed, which publish date does not give — several
+      // share a date. Non-tutorials fall back to newest first.
+      const items = visible
+        .filter((video) => video.section === section)
+        .sort((a, b) =>
+          section === 'tutorial'
+            ? a.product.localeCompare(b.product) || a.order - b.order
+            : b.date.localeCompare(a.date)
+        )
       if (items.length > 0) groups.set(section, items)
     }
     return groups
@@ -56,7 +65,7 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
     <div>
       {/* Product filter — mirrors the All / Luna / Oli / TRON row on the source site */}
       <div className="mb-10 flex flex-wrap gap-2 border-b border-[color:var(--mr-line)] pb-5">
-        {['all', ...products].map((key) => {
+        {(['all', ...products] as (ProductKey | 'all')[]).map((key) => {
           const active = product === key
           return (
             <button
@@ -70,7 +79,7 @@ export default function VideoLibrary({ videos, products }: VideoLibraryProps) {
                   : 'bg-[color:var(--mr-paper-2)] text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)]'
               }`}
             >
-              {key === 'all' ? t('filterAll') : key.toUpperCase()}
+              {key === 'all' ? t('filterAll') : t(`products.${key}`)}
             </button>
           )
         })}

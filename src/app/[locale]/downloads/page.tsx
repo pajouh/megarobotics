@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
 import VideoLibrary from '@/components/VideoLibrary'
-import { oliVideos } from '@/data/oli-videos'
+import { limxVideos, PRODUCTS } from '@/data/limx-videos'
 import { pageSeo } from '@/lib/page-seo'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -30,7 +30,7 @@ export default async function DownloadsPage({ params }: Props) {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
-        <VideoLibrary videos={oliVideos} products={['oli']} />
+        <VideoLibrary videos={limxVideos} products={PRODUCTS} />
 
         {/* Attribution is not decoration: these are LimX's films, served from
             LimX's CDN, and the page should say so plainly. */}
