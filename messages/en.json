@@ -1814,13 +1814,14 @@
       "download": "Download",
       "play": "Play {title}",
       "close": "Close",
-      "movNote": "QuickTime — download to view",
       "attribution": "These videos are produced and published by LimX Dynamics and remain their copyright. MegaRobotics makes them available as an official LimX Dynamics distributor; the files are served from LimX's own content delivery network. For press or commercial reuse, contact us and we will arrange permission with the manufacturer.",
       "cta": {
         "title": "Evaluating Oli for your application?",
         "body": "We support specification, procurement and commissioning of LimX Dynamics robots across Europe — including demo units and on-site evaluation.",
         "primary": "Talk to our team"
-      }
+      },
+      "watch": "Watch",
+      "masterLabel": "Original {format} · {size}"
     }
   }
 }
