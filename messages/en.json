@@ -1100,7 +1100,8 @@
         "privacy": "Datenschutz",
         "automationComponents": "Automation Components",
         "robotDistributor": "Robot Distributor",
-        "agb": "AGB"
+        "agb": "AGB",
+        "downloads": "Downloads"
       }
     },
     "catalog": {
@@ -1793,6 +1794,32 @@
         "allAvailability": "Any availability",
         "allManufacturers": "All manufacturers",
         "allCategories": "All categories"
+      }
+    },
+    "downloads": {
+      "meta": {
+        "title": "Downloads | MegaRobotics",
+        "description": "Download LimX Oli product videos: introduction film, field stories and the full operating tutorial set, free to use for evaluation and training."
+      },
+      "eyebrow": "Media library",
+      "title": "Downloads",
+      "lede": "Product films and operating tutorials for the robots we distribute. Stream the highlights or download the source file for offline presentations, training and evaluation.",
+      "filterAll": "All",
+      "sections": {
+        "intro": "Intro",
+        "tutorial": "Tutorial",
+        "story": "Story"
+      },
+      "count": "{count} videos",
+      "download": "Download",
+      "play": "Play {title}",
+      "close": "Close",
+      "movNote": "QuickTime — download to view",
+      "attribution": "These videos are produced and published by LimX Dynamics and remain their copyright. MegaRobotics makes them available as an official LimX Dynamics distributor; the files are served from LimX's own content delivery network. For press or commercial reuse, contact us and we will arrange permission with the manufacturer.",
+      "cta": {
+        "title": "Evaluating Oli for your application?",
+        "body": "We support specification, procurement and commissioning of LimX Dynamics robots across Europe — including demo units and on-site evaluation.",
+        "primary": "Talk to our team"
       }
     }
   }

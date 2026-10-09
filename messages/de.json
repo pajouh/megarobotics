@@ -1100,7 +1100,8 @@
         "privacy": "Datenschutz",
         "automationComponents": "Automatisierungskomponenten",
         "robotDistributor": "Roboter-Distributor",
-        "agb": "AGB"
+        "agb": "AGB",
+        "downloads": "Downloads"
       }
     },
     "catalog": {
@@ -1793,6 +1794,32 @@
         "allAvailability": "Beliebige Verfügbarkeit",
         "allManufacturers": "Alle Hersteller",
         "allCategories": "Alle Kategorien"
+      }
+    },
+    "downloads": {
+      "meta": {
+        "title": "Downloads | MegaRobotics",
+        "description": "LimX Oli Produktvideos herunterladen: Vorstellungsfilm, Praxisberichte und die komplette Bedienungsanleitung als Video – für Evaluierung und Schulung."
+      },
+      "eyebrow": "Mediathek",
+      "title": "Downloads",
+      "lede": "Produktfilme und Bedienungstutorials zu den Robotern, die wir vertreiben. Highlights direkt ansehen oder die Originaldatei für Präsentationen, Schulungen und Evaluierungen offline herunterladen.",
+      "filterAll": "Alle",
+      "sections": {
+        "intro": "Vorstellung",
+        "tutorial": "Tutorial",
+        "story": "Praxis"
+      },
+      "count": "{count} Videos",
+      "download": "Herunterladen",
+      "play": "{title} abspielen",
+      "close": "Schließen",
+      "movNote": "QuickTime – zum Ansehen herunterladen",
+      "attribution": "Diese Videos wurden von LimX Dynamics produziert und veröffentlicht; die Urheberrechte liegen bei LimX Dynamics. MegaRobotics stellt sie als offizieller LimX-Dynamics-Distributor bereit, die Dateien werden über das Content Delivery Network von LimX ausgeliefert. Für Presse- oder kommerzielle Nutzung sprechen Sie uns an – wir klären die Freigabe mit dem Hersteller.",
+      "cta": {
+        "title": "Sie evaluieren Oli für Ihre Anwendung?",
+        "body": "Wir begleiten Spezifikation, Beschaffung und Inbetriebnahme von LimX-Dynamics-Robotern in ganz Europa – inklusive Demogeräten und Evaluierung vor Ort.",
+        "primary": "Sprechen Sie mit uns"
       }
     }
   }
