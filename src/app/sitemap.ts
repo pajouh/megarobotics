@@ -61,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...localizedEntries('/robot-distributor', { changeFrequency: 'monthly', priority: 0.8 }),
     ...localizedEntries('/automation-components', { changeFrequency: 'monthly', priority: 0.8 }),
     ...localizedEntries('/technology-network', { changeFrequency: 'monthly', priority: 0.7 }),
+    ...localizedEntries('/downloads', { changeFrequency: 'monthly', priority: 0.6 }),
     ...localizedEntries('/projects', { changeFrequency: 'monthly', priority: 0.7 }),
     ...localizedEntries('/for-customers', { changeFrequency: 'monthly', priority: 0.6 }),
     ...localizedEntries('/for-manufacturers', { changeFrequency: 'monthly', priority: 0.6 }),

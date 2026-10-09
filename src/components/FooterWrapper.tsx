@@ -35,6 +35,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
       automationComponents: t('links.automationComponents'),
       robotDistributor: t('links.robotDistributor'),
       manufacturers: t('links.manufacturers'),
+      downloads: t('links.downloads'),
       institutes: t('links.institutes'),
       imprint: t('links.imprint'),
       privacy: t('links.privacy'),

@@ -56,6 +56,7 @@ export interface IndustrialFooterTranslations {
     automationComponents: string
     robotDistributor: string
     manufacturers: string
+    downloads: string
     institutes: string
     imprint: string
     privacy: string
@@ -92,6 +93,7 @@ export default function Footer({
     { name: t.links.automationComponents, href: '/automation-components' },
     { name: t.links.robotDistributor, href: '/robot-distributor' },
     { name: t.links.manufacturers, href: '/manufacturers' },
+    { name: t.links.downloads, href: '/downloads' },
   ]
 
   const networkLinks = [
