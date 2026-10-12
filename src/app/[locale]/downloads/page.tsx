@@ -3,7 +3,9 @@ import { getTranslations } from 'next-intl/server'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
 import VideoLibrary from '@/components/VideoLibrary'
+import DocumentLibrary from '@/components/DocumentLibrary'
 import { limxVideos, PRODUCTS } from '@/data/limx-videos'
+import { limxDocuments, documentProducts } from '@/data/limx-documents'
 import { pageSeo } from '@/lib/page-seo'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -31,12 +33,28 @@ export default async function DownloadsPage({ params }: Props) {
 
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
         <VideoLibrary videos={limxVideos} products={PRODUCTS} />
+      </section>
 
-        {/* Attribution is not decoration: these are LimX's films, served from
-            LimX's CDN, and the page should say so plainly. */}
-        <p className="mt-16 border-t border-[color:var(--mr-line)] pt-6 text-sm leading-relaxed text-[color:var(--mr-steel)]">
-          {t('attribution')}
-        </p>
+      {/* Documents sit below the videos: someone who has the robot in front of
+          them wants the manual, and someone evaluating it watches first. */}
+      <section
+        id="documents"
+        className="border-t border-[color:var(--mr-line)] bg-[color:var(--mr-paper-2)]"
+      >
+        <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
+          <SectionHeader
+            eyebrow={t('documentsEyebrow')}
+            title={t('documentsTitle')}
+            subtitle={t('documentsLede')}
+          />
+          <DocumentLibrary documents={limxDocuments} products={documentProducts()} />
+        </div>
+      </section>
+
+      {/* Attribution is not decoration: the films and documents on this page
+          are LimX's, and the page should say so plainly. */}
+      <section className="mx-auto max-w-7xl px-4 pb-14 pt-10 md:px-6">
+        <p className="text-sm leading-relaxed text-[color:var(--mr-steel)]">{t('attribution')}</p>
       </section>
 
       <CTASection

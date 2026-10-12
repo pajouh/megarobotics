@@ -1814,7 +1814,7 @@
       "download": "Download",
       "play": "Play {title}",
       "close": "Close",
-      "attribution": "These videos are produced and published by LimX Dynamics and remain their copyright. MegaRobotics makes them available as an official LimX Dynamics distributor; the files are served from LimX's own content delivery network. For press or commercial reuse, contact us and we will arrange permission with the manufacturer.",
+      "attribution": "These videos and documents are produced and published by LimX Dynamics and remain their copyright. MegaRobotics makes them available as an official LimX Dynamics distributor. Video playback copies and manuals supplied to us directly are hosted by MegaRobotics; brochures, firmware and software link to LimX's own servers. For press or commercial reuse, contact us and we will arrange permission with the manufacturer.",
       "cta": {
         "title": "Evaluating Oli for your application?",
         "body": "We support specification, procurement and commissioning of LimX Dynamics robots across Europe — including demo units and on-site evaluation.",
@@ -1825,6 +1825,21 @@
       "products": {
         "oli": "Oli",
         "tron2": "TRON 2"
+      },
+      "documentsEyebrow": "Documentation",
+      "documentsTitle": "Product documents",
+      "documentsLede": "Manuals, quick start guides, SDK documentation, firmware and software for the robots we distribute. Published by the manufacturer; we mirror the files supplied to us directly.",
+      "docCount": "{count} documents",
+      "view": "View",
+      "kinds": {
+        "manual": "User manual",
+        "guide": "SDK guide",
+        "quickstart": "Quick start",
+        "brochure": "Brochure",
+        "software": "Software",
+        "firmware": "Firmware",
+        "app": "Mobile app",
+        "reference": "Reference"
       }
     }
   }
