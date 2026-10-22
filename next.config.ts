@@ -87,6 +87,17 @@ const nextConfig: NextConfig = {
         destination: '/articles/:slug',
         permanent: true,
       },
+      // The page is /downloads; the singular is an easy typo and used to 404
+      {
+        source: '/download',
+        destination: '/downloads',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|de)/download',
+        destination: '/:locale/downloads',
+        permanent: true,
+      },
       // Legacy productCategory routes — redirect to the unified product family system
       {
         source: '/products/category/humanoid-legged-robots',
