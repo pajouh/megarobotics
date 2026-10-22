@@ -9,7 +9,7 @@
 //                behind them. Linked rather than omitted, and labelled so the
 //                difference is visible before the click.
 //
-// Oli and TRON 2 only for now.
+// Luna, Oli and TRON 2.
 //
 // Two of LimX's own hosts are unreliable: cms.limxdynamics.com and
 // cdn.limxdynamics.com both time out, and the Oli and TRON 2 brochure URLs
@@ -19,7 +19,7 @@
 // Copyright in these documents belongs to LimX Dynamics. MegaRobotics
 // publishes them as an official distributor.
 
-import type { ProductKey } from './limx-videos'
+import { PRODUCTS, type ProductKey } from './limx-videos'
 
 export type DocumentKind =
   | 'manual'
@@ -56,6 +56,43 @@ const LIMX_OSS = 'https://oss.limxdynamics.com/uploads'
 const LIMX_DOC = 'https://www.limxdynamics.com/en/documents'
 
 export const limxDocuments: ProductDocument[] = [
+  // ---- Luna ----------------------------------------------------------
+  {
+    id: 'luna-brochure',
+    product: 'luna',
+    title: { en: 'Luna Product Brochure', de: 'Luna Produktbroschüre' },
+    kind: 'brochure',
+    date: '2026-06-29',
+    url: `${LIMX_PDF}/LimX_Luna_Brochure_20260629.pdf`,
+    format: 'PDF',
+    sizeBytes: 9601166,
+    selfHosted: false,
+  },
+  {
+    id: 'luna-main-software',
+    product: 'luna',
+    title: { en: 'Luna Main Software', de: 'Luna Hauptsoftware' },
+    kind: 'software',
+    version: 'V1.3.13',
+    date: '2026-10-19',
+    // LimX lists this as 2.8 GB; the file itself is 2.2 GB.
+    url: `${LIMX_OSS}/download/2026/10/19/robot-luna-r-1.3.13.20261010141544.tar.gz`,
+    format: 'TAR.GZ',
+    sizeBytes: 2361812969,
+    selfHosted: false,
+  },
+  {
+    id: 'luna-limx-studio-tablet-app',
+    product: 'luna',
+    title: { en: 'LimX Studio tablet app (Android)', de: 'LimX Studio Tablet-App (Android)' },
+    kind: 'app',
+    version: '1.2.6',
+    date: '2026-08-31',
+    url: `${LIMX_OSS}/download/2026/08/31/LimxStudio-v1.2.6.apk`,
+    format: 'APK',
+    sizeBytes: 248787371,
+    selfHosted: false,
+  },
   // ---- Oli -----------------------------------------------------------
   {
     id: 'oli-edu-user-manual',
@@ -242,5 +279,5 @@ export const limxDocuments: ProductDocument[] = [
 /** Products that actually have documents, in the page's filter order. */
 export function documentProducts(): ProductKey[] {
   const present = new Set(limxDocuments.map((doc) => doc.product))
-  return (['oli', 'tron2'] as ProductKey[]).filter((key) => present.has(key))
+  return PRODUCTS.filter((key) => present.has(key))
 }
