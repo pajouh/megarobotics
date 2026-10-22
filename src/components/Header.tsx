@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import LanguageSwitcher from './LanguageSwitcher'
 
@@ -17,20 +17,26 @@ interface HeaderProps {
 export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight = 36 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('industrial.nav')
   const tLegacy = useTranslations('nav')
 
-  const navigation = [
+  const navLinkClass =
+    'text-[11px] tracking-[0.01em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-ink)] transition-colors font-medium whitespace-nowrap'
+
+  const navigation: { name: string; href: string; overflow?: boolean }[] = [
     { name: t('solutions'), href: '/solutions' },
     { name: t('industries'), href: '/industries' },
     { name: t('robotTechnologies'), href: '/robot-technologies' },
     { name: t('technologyNetwork'), href: '/technology-network' },
     { name: t('projects'), href: '/projects' },
     { name: tLegacy('products'), href: '/products' },
-    { name: tLegacy('manufacturers'), href: '/manufacturers' },
-    { name: tLegacy('institutes'), href: '/institutes' },
+    { name: tLegacy('manufacturers'), href: '/manufacturers', overflow: true },
+    { name: tLegacy('institutes'), href: '/institutes', overflow: true },
     { name: t('insights'), href: '/articles' },
-    { name: t('company'), href: '/about' },
+    { name: t('downloads'), href: '/downloads' },
+    { name: t('company'), href: '/about', overflow: true },
   ]
 
   useEffect(() => {
@@ -40,6 +46,22 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (!moreOpen) return
+    const onPointer = (e: PointerEvent) => {
+      if (!moreRef.current?.contains(e.target as Node)) setMoreOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMoreOpen(false)
+    }
+    document.addEventListener('pointerdown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [moreOpen])
 
   return (
     <header
@@ -69,17 +91,47 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
             )}
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden xl:flex xl:items-center xl:gap-3 min-w-0 overflow-x-auto mr-scroll-x">
+          {/* Desktop Navigation. Below 1480px the full row does not fit beside
+              the logo and CTA (the German labels alone are wider than the space
+              at 1280px), so the `overflow` items move into a More menu there. */}
+          <div className="hidden xl:flex xl:items-center xl:gap-2.5 min-[1480px]:gap-3 min-w-0">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[11px] tracking-[0.01em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-ink)] transition-colors font-medium whitespace-nowrap"
+                className={`${navLinkClass} ${item.overflow ? 'hidden min-[1480px]:inline' : ''}`}
               >
                 {item.name}
               </Link>
             ))}
+            <div ref={moreRef} className="relative flex min-[1480px]:hidden">
+              <button
+                type="button"
+                onClick={() => setMoreOpen((open) => !open)}
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                className={`${navLinkClass} inline-flex items-center gap-0.5`}
+              >
+                {t('more')}
+                <ChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {moreOpen && (
+                <div className="absolute right-0 top-full mt-5 min-w-44 border border-[color:var(--mr-line-strong)] bg-[color:var(--mr-paper)] py-1.5 shadow-lg">
+                  {navigation
+                    .filter((item) => item.overflow)
+                    .map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setMoreOpen(false)}
+                        className="block px-4 py-2 text-xs font-medium text-[color:var(--mr-ink-2)] hover:bg-[color:var(--mr-paper-2)] hover:text-[color:var(--mr-ink)] transition-colors whitespace-nowrap"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* CTA & Language Switcher */}

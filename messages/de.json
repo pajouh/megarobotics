@@ -272,11 +272,13 @@
       "technologyNetwork": "Technologienetzwerk",
       "projects": "Projekte",
       "insights": "Insights",
+      "downloads": "Downloads",
       "company": "Unternehmen",
       "contact": "Kontakt",
       "forCustomers": "Für Kunden",
       "forManufacturers": "Für Hersteller",
-      "discussProject": "Projekt besprechen"
+      "discussProject": "Projekt besprechen",
+      "more": "Mehr"
     },
     "safeNotice": {
       "label": "Hinweis"
