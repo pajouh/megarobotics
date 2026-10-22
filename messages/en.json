@@ -1799,7 +1799,7 @@
     "downloads": {
       "meta": {
         "title": "Downloads | MegaRobotics",
-        "description": "Download LimX Oli product videos: introduction film, field stories and the full operating tutorial set, free to use for evaluation and training."
+        "description": "Download LimX Luna, Oli and TRON 2 product videos, manuals, software and brochures: introduction films, field stories and the full operating tutorial sets, free to use for evaluation and training."
       },
       "eyebrow": "Media library",
       "title": "Downloads",
@@ -1823,7 +1823,8 @@
       "watch": "Watch",
       "masterLabel": "Original {format} · {size}",
       "products": {
-        "oli": "Oli",
+        "luna": "Luna",
+          "oli": "Oli",
         "tron2": "TRON 2"
       },
       "documentsEyebrow": "Documentation",
