@@ -167,7 +167,7 @@ function ContactFormInner() {
   }
 
   const inputClass =
-    'w-full px-4 py-3 bg-[color:var(--mr-white)] border border-[color:var(--mr-line-strong)]/30 text-[color:var(--mr-ink)] placeholder:text-[color:var(--mr-steel)] focus:outline-none focus:border-[color:var(--mr-accent-ink)] transition-colors'
+    'w-full px-4 py-3 rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] text-[color:var(--mr-ink)] placeholder:text-[color:var(--mr-steel)] shadow-[inset_0_1px_2px_rgba(13,27,32,0.04)] focus:outline-none focus:border-[color:var(--mr-accent)] focus:ring-4 focus:ring-[color:var(--mr-accent-soft)] transition-all'
 
   const stageOptions: { value: string; key: string }[] = [
     { value: 'exploring', key: 'exploring' },
@@ -434,7 +434,7 @@ function ContactFormInner() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-[15px] hover:bg-[color:var(--mr-ink)] hover:text-[color:var(--mr-paper)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mr-btn-accent w-full sm:w-auto justify-center disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === 'loading' ? (
           <>

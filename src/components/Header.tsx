@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { Link } from '@/i18n/navigation'
+import { Link, usePathname } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -22,8 +22,13 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
   const t = useTranslations('industrial.nav')
   const tLegacy = useTranslations('nav')
 
+  const pathname = usePathname()
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+
+  // Underline draws in from the left on hover and stays on the current section.
   const navLinkClass =
-    'text-[11px] tracking-[0.01em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-ink)] transition-colors font-medium whitespace-nowrap'
+    'relative py-1 text-[11px] tracking-[0.01em] text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-ink)] transition-colors font-medium whitespace-nowrap after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-[2px] after:rounded-full after:bg-[color:var(--mr-accent)] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300'
+  const activeClass = '!text-[color:var(--mr-ink)] after:!scale-x-100'
 
   const navigation: { name: string; href: string; overflow?: boolean }[] = [
     { name: t('solutions'), href: '/solutions' },
@@ -65,8 +70,10 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-[color:var(--mr-paper)] transition-shadow duration-300 border-b ${
-        scrolled ? 'border-[color:var(--mr-line-strong)]' : 'border-[color:var(--mr-line)]'
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl backdrop-saturate-150 transition-all duration-500 border-b ${
+        scrolled
+          ? 'bg-white/80 border-[color:var(--mr-line)] shadow-[0_8px_30px_-18px_rgba(13,27,32,0.35)]'
+          : 'bg-white/55 border-transparent'
       }`}
     >
       <nav className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8" aria-label="Top">
@@ -99,7 +106,8 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
               <Link
                 key={item.name}
                 href={item.href}
-                className={`${navLinkClass} ${item.overflow ? 'hidden min-[1480px]:inline' : ''}`}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={`${navLinkClass} ${isActive(item.href) ? activeClass : ''} ${item.overflow ? 'hidden min-[1480px]:inline' : ''}`}
               >
                 {item.name}
               </Link>
@@ -116,7 +124,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                 <ChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
               </button>
               {moreOpen && (
-                <div className="absolute right-0 top-full mt-5 min-w-44 border border-[color:var(--mr-line-strong)] bg-[color:var(--mr-paper)] py-1.5 shadow-lg">
+                <div className="absolute right-0 top-full mt-5 min-w-48 rounded-xl border border-[color:var(--mr-line)] bg-white/95 backdrop-blur-xl p-1.5 shadow-[var(--mr-shadow-lift)] animate-fade-in">
                   {navigation
                     .filter((item) => item.overflow)
                     .map((item) => (
@@ -124,7 +132,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
                         key={item.name}
                         href={item.href}
                         onClick={() => setMoreOpen(false)}
-                        className="block px-4 py-2 text-xs font-medium text-[color:var(--mr-ink-2)] hover:bg-[color:var(--mr-paper-2)] hover:text-[color:var(--mr-ink)] transition-colors whitespace-nowrap"
+                        className="block rounded-lg px-3.5 py-2 text-xs font-medium text-[color:var(--mr-ink-2)] hover:bg-[color:var(--mr-accent-soft)] hover:text-[color:var(--mr-accent-ink)] transition-colors whitespace-nowrap"
                       >
                         {item.name}
                       </Link>
@@ -139,7 +147,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
             <LanguageSwitcher />
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[color:var(--mr-ink)] text-[color:var(--mr-paper)] hover:bg-[color:var(--mr-accent-ink)] hover:text-white transition-colors text-xs font-semibold whitespace-nowrap"
+              className="mr-btn-accent !px-4 !py-2 !text-xs whitespace-nowrap"
             >
               {t('discussProject')}
               <ArrowRight className="w-3.5 h-3.5" />
@@ -161,13 +169,18 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
 
         {/* Mobile / tablet Navigation */}
         {mobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-[color:var(--mr-line)] bg-[color:var(--mr-paper)]">
+          <div className="xl:hidden mb-4 p-3 rounded-2xl border border-[color:var(--mr-line)] bg-white/95 backdrop-blur-xl shadow-[var(--mr-shadow-lift)] animate-fade-in">
             <div className="flex flex-col gap-1">
               {navigation.map((item, idx) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-baseline gap-3 text-[color:var(--mr-ink)] hover:bg-[color:var(--mr-paper-2)] transition-colors px-3 py-2 font-medium"
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={`flex items-baseline gap-3 rounded-lg transition-colors px-3 py-2 font-medium ${
+                    isActive(item.href)
+                      ? 'bg-[color:var(--mr-accent-soft)] text-[color:var(--mr-accent-ink)]'
+                      : 'text-[color:var(--mr-ink)] hover:bg-[color:var(--mr-paper-2)]'
+                  }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <span className="mr-index" aria-hidden="true">{String(idx + 1).padStart(2, '0')}</span>
@@ -179,7 +192,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
               </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[color:var(--mr-ink)] text-[color:var(--mr-paper)] text-sm font-semibold mt-3 mx-3"
+                className="mr-btn-accent justify-center !py-2.5 !text-sm mt-3 mx-3"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {t('discussProject')}

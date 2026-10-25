@@ -1826,7 +1826,7 @@
       "masterLabel": "Original {format} · {size}",
       "products": {
         "luna": "Luna",
-          "oli": "Oli",
+        "oli": "Oli",
         "tron2": "TRON 2"
       },
       "documentsEyebrow": "Documentation",
@@ -1843,6 +1843,32 @@
         "firmware": "Firmware",
         "app": "Mobile app",
         "reference": "Reference"
+      }
+    },
+    "partners": {
+      "eyebrow": "Authorized reseller",
+      "titleLead": "Authorized reseller for",
+      "titleHighlight": "leading robotics brands",
+      "subtitle": "MegaRobotics is an authorized reseller for seven robotics manufacturers. You get original products, manufacturer-backed support and one partner in Germany for sourcing, integration and service.",
+      "badge": "Authorized",
+      "products": "{count, plural, one {# product in our catalog} other {# products in our catalog}}",
+      "onRequest": "Products on request",
+      "ctaEyebrow": "Your project",
+      "ctaTitle": "Not sure which robot fits? We compare across all seven brands for you.",
+      "ctaButton": "Talk to an expert",
+      "marqueeLabel": "Authorized reseller",
+      "heroBadge": "Authorized reseller for 7 robotics brands",
+      "stats": {
+        "brands": "Authorized brands",
+        "products": "Robots and components",
+        "country": "Based in Germany"
+      },
+      "directory": {
+        "title": "Manufacturers",
+        "intro": "The robotics brands we work with: seven as an authorized reseller, plus further manufacturers we source from for European projects.",
+        "eyebrow": "Directory",
+        "others": "Further manufacturers",
+        "othersIntro": "Brands we source and support on a project basis."
       }
     }
   }

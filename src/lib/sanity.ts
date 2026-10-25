@@ -443,6 +443,19 @@ export async function getManufacturers(locale: Locale = defaultLocale): Promise<
   )
 }
 
+// Active-product counts for a set of manufacturer slugs (partner showcase)
+export async function getActiveProductCounts(slugs: string[]): Promise<Record<string, number>> {
+  if (!client || slugs.length === 0) return {}
+  const rows = await client.fetch<{ slug: string; n: number }[]>(
+    `*[_type == "manufacturer" && slug.current in $slugs]{
+      "slug": slug.current,
+      "n": count(*[_type == "product" && isActive != false && references(^._id)])
+    }`,
+    { slugs },
+  )
+  return Object.fromEntries(rows.map((r) => [r.slug, r.n]))
+}
+
 // Get featured manufacturers
 export async function getFeaturedManufacturers(limit: number = 8, locale: Locale = defaultLocale): Promise<Manufacturer[]> {
   if (!client) return []

@@ -17,7 +17,7 @@ export default function SectionHeader({
   const isCentered = align === 'center'
 
   return (
-    <div className={`max-w-3xl ${isCentered ? 'mx-auto text-center' : ''} mb-10 md:mb-14`}>
+    <div data-reveal className={`max-w-3xl ${isCentered ? 'mx-auto text-center' : ''} mb-10 md:mb-14`}>
       {eyebrow && (
         <div
           className={`ind-eyebrow mb-4 ${isDark ? 'ind-eyebrow-light' : ''} ${

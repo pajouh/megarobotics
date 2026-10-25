@@ -18,6 +18,7 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { brandedTitle } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
+import { authorizedPartners } from '@/data/authorized-partners'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -77,6 +78,8 @@ export default async function ManufacturerPage({ params }: Props) {
     getProductsByManufacturer(slug, undefined, locale as Locale),
     getTranslations('industrial.productDetail'),
   ])
+  const tPartners = await getTranslations('industrial.partners')
+  const partner = authorizedPartners.find((p) => p.slug === slug)
 
   if (!manufacturer) {
     notFound()
@@ -112,19 +115,42 @@ export default async function ManufacturerPage({ params }: Props) {
         {/* Back Link */}
         <Link
           href="/manufacturers"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-[color:var(--mr-steel)] hover:text-[color:var(--mr-accent-ink)] transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           All Manufacturers
         </Link>
 
         {/* Manufacturer Header */}
-        <div className="bg-gray-50 rounded-2xl p-8 mb-10">
-          <div className="flex flex-col md:flex-row md:items-center gap-6">
+        <div className="relative overflow-hidden rounded-3xl p-8 md:p-10 mb-12 border border-[color:var(--mr-line)] bg-[linear-gradient(140deg,#ffffff_0%,#f1f8f8_60%,#e2f2f1_100%)] shadow-[var(--mr-shadow)] mr-rise">
+          <div className="mr-aurora opacity-60" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
+          {partner && (
+            <p className="mr-chip relative mb-6">
+              <span className="mr-pulse-dot" aria-hidden="true" />
+              {tPartners('eyebrow')}
+            </p>
+          )}
+          <div className="relative flex flex-col md:flex-row md:items-center gap-8">
             {/* Logo */}
             <div className="flex-shrink-0">
-              {manufacturer.logo ? (
-                <div className="w-32 h-32 bg-white rounded-2xl p-4 flex items-center justify-center border border-gray-200">
+              {partner ? (
+                <div className="w-56 h-32 bg-white rounded-2xl px-6 flex items-center justify-center border border-[color:var(--mr-accent-line)] shadow-[var(--mr-shadow)]">
+                  <Image
+                    src={partner.logo}
+                    alt={manufacturer.name}
+                    width={partner.logoWidth}
+                    height={partner.logoHeight}
+                    unoptimized
+                    className="mr-logo !opacity-90 max-h-16 w-auto max-w-full"
+                  />
+                </div>
+              ) : manufacturer.logo ? (
+                <div className="w-32 h-32 bg-white rounded-2xl p-4 flex items-center justify-center border border-[color:var(--mr-line)] shadow-[var(--mr-shadow)]">
                   <Image
                     src={urlFor(manufacturer.logo).maxWidth(200).maxHeight(200).url()}
                     alt={manufacturer.name}
@@ -134,8 +160,8 @@ export default async function ManufacturerPage({ params }: Props) {
                   />
                 </div>
               ) : (
-                <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-white">
+                <div className="w-32 h-32 rounded-2xl bg-[linear-gradient(140deg,var(--mr-accent),var(--mr-accent-ink))] flex items-center justify-center shadow-[var(--mr-shadow)]">
+                  <span className="text-4xl font-semibold text-white font-[family-name:var(--font-display)]">
                     {manufacturer.name.charAt(0)}
                   </span>
                 </div>
@@ -145,18 +171,18 @@ export default async function ManufacturerPage({ params }: Props) {
             {/* Info */}
             <div className="flex-grow">
               <div className="flex flex-wrap items-center gap-3 mb-3">
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+                <h1 className="ind-h2 text-[color:var(--mr-ink)]">
                   {manufacturer.name}
                 </h1>
                 {showRelationshipBadge && manufacturer.relationshipStatus && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                  <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] font-semibold text-[color:var(--mr-accent-ink)] bg-white border border-[color:var(--mr-accent-line)]">
                     <ShieldCheck className="w-3.5 h-3.5" aria-hidden="true" />
                     {tDetail(`relationship.${relStatusToKey(manufacturer.relationshipStatus)}`)}
                   </span>
                 )}
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
+              <div className="flex flex-wrap items-center gap-4 text-[color:var(--mr-ink-2)] mb-4">
                 {manufacturer.headquarters && (
                   <span className="flex items-center gap-1.5">
                     <MapPin className="w-4 h-4" />
@@ -183,7 +209,7 @@ export default async function ManufacturerPage({ params }: Props) {
                   {manufacturer.specialties.map((specialty) => (
                     <span
                       key={specialty}
-                      className="px-3 py-1 bg-white text-gray-700 rounded-full text-sm font-medium border border-gray-200"
+                      className="px-3 py-1 bg-white/80 text-[color:var(--mr-ink-2)] rounded-full text-sm font-medium border border-[color:var(--mr-line)]"
                     >
                       {specialty}
                     </span>
@@ -197,7 +223,7 @@ export default async function ManufacturerPage({ params }: Props) {
                   href={manufacturer.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
+                  className="inline-flex items-center gap-2 text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-accent)] font-medium transition-colors"
                 >
                   <Globe className="w-4 h-4" />
                   Visit Website
@@ -216,7 +242,7 @@ export default async function ManufacturerPage({ params }: Props) {
 
         {/* Products */}
         <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-8">
             Products by {manufacturer.name}
           </h2>
 

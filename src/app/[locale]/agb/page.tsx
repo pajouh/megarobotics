@@ -29,14 +29,14 @@ export default async function AgbPage({ params }: Props) {
         <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-32 md:pt-36 pb-12 md:pb-16">
           <div className="ind-eyebrow ind-eyebrow-light mb-6">
-            <span className="inline-block w-8 h-px bg-blue-400" aria-hidden="true" />
+            <span className="inline-block w-8 h-px bg-[color:var(--mr-accent)]" aria-hidden="true" />
             {isDe ? 'Rechtliches' : 'Legal'}
           </div>
-          <h1 className="ind-h1 text-white mb-4">{AGB_TITLE}</h1>
-          <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+          <h1 className="ind-h1 text-[color:var(--mr-ink)] mb-4">{AGB_TITLE}</h1>
+          <p className="text-base md:text-lg text-[color:var(--mr-ink-2)] leading-relaxed">
             {AGB_SUBTITLE}
           </p>
-          <p className="mt-4 text-sm text-gray-400">Stand: {AGB_VERSION}</p>
+          <p className="mt-4 text-sm text-[color:var(--mr-steel)]">Stand: {AGB_VERSION}</p>
         </div>
       </section>
 

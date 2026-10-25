@@ -50,7 +50,7 @@ export default function Disclaimer({ variant, manufacturerName, className = '', 
 
   if (variant === 'footer') {
     return (
-      <p className={`text-xs text-[color:var(--mr-steel-on-dark)] ${className}`}>{t.footer}</p>
+      <p className={`text-xs text-[color:var(--mr-steel)] ${className}`}>{t.footer}</p>
     )
   }
 

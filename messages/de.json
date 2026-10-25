@@ -1826,7 +1826,7 @@
       "masterLabel": "Original {format} · {size}",
       "products": {
         "luna": "Luna",
-          "oli": "Oli",
+        "oli": "Oli",
         "tron2": "TRON 2"
       },
       "documentsEyebrow": "Dokumentation",
@@ -1843,6 +1843,32 @@
         "firmware": "Firmware",
         "app": "Mobile-App",
         "reference": "Referenz"
+      }
+    },
+    "partners": {
+      "eyebrow": "Autorisierter Wiederverkäufer",
+      "titleLead": "Autorisierter Wiederverkäufer für",
+      "titleHighlight": "führende Robotik-Marken",
+      "subtitle": "MegaRobotics ist autorisierter Wiederverkäufer für sieben Robotik-Hersteller. Sie erhalten Originalprodukte, Support mit Rückendeckung des Herstellers und einen Partner in Deutschland für Beschaffung, Integration und Service.",
+      "badge": "Autorisiert",
+      "products": "{count, plural, one {# Produkt in unserem Katalog} other {# Produkte in unserem Katalog}}",
+      "onRequest": "Produkte auf Anfrage",
+      "ctaEyebrow": "Ihr Projekt",
+      "ctaTitle": "Unsicher, welcher Roboter passt? Wir vergleichen für Sie über alle sieben Marken.",
+      "ctaButton": "Mit einem Experten sprechen",
+      "marqueeLabel": "Autorisierter Wiederverkäufer",
+      "heroBadge": "Autorisierter Wiederverkäufer für 7 Robotik-Marken",
+      "stats": {
+        "brands": "Autorisierte Marken",
+        "products": "Roboter und Komponenten",
+        "country": "Sitz in Deutschland"
+      },
+      "directory": {
+        "title": "Hersteller",
+        "intro": "Die Robotik-Marken, mit denen wir arbeiten: sieben als autorisierter Wiederverkäufer, dazu weitere Hersteller, die wir für europäische Projekte beschaffen.",
+        "eyebrow": "Verzeichnis",
+        "others": "Weitere Hersteller",
+        "othersIntro": "Marken, die wir projektbezogen beschaffen und betreuen."
       }
     }
   }
