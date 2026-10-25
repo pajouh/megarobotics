@@ -2,6 +2,7 @@ import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Twitter, Linkedin, Youtube, Github, Instagram } from 'lucide-react'
 import Disclaimer from '@/components/Disclaimer'
+import PartnerMarquee from '@/components/partners/PartnerMarquee'
 
 interface FooterLink {
   _key: string
@@ -63,6 +64,8 @@ export interface IndustrialFooterTranslations {
     agb: string
   }
   trademarkDisclaimer?: string
+  /** Label for the authorized-partner logo strip; omitted hides the strip. */
+  partnersLabel?: string
 }
 
 interface FooterProps {
@@ -141,8 +144,20 @@ export default function Footer({
         ]
 
   return (
-    <footer className="bg-[color:var(--mr-dark)] text-[color:var(--mr-steel-on-dark)] border-t-2 border-[color:var(--mr-accent)]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+    <footer className="relative bg-[color:var(--mr-white)] text-[color:var(--mr-ink-2)] border-t border-[color:var(--mr-line)] overflow-hidden">
+      <div
+        className="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,var(--mr-accent),transparent)]"
+        aria-hidden="true"
+      />
+      <div className="absolute inset-x-0 bottom-0 h-64 mr-dots opacity-50 pointer-events-none [mask-image:linear-gradient(0deg,#000,transparent)]" aria-hidden="true" />
+      {t.partnersLabel && (
+        <div className="relative border-b border-[color:var(--mr-line)] bg-[color:var(--mr-paper)]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5">
+            <PartnerMarquee label={t.partnersLabel} height={22} />
+          </div>
+        </div>
+      )}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
@@ -158,13 +173,13 @@ export default function Footer({
                   />
                 </div>
               ) : (
-                <div className="w-9 h-9 bg-[color:var(--mr-accent)] flex items-center justify-center">
-                  <span className="text-[color:var(--mr-dark)] font-bold text-lg">M</span>
+                <div className="w-9 h-9 rounded-lg bg-[color:var(--mr-accent)] flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">M</span>
                 </div>
               )}
-              <span className="text-white font-semibold tracking-tight text-lg">{siteName}</span>
+              <span className="text-[color:var(--mr-ink)] font-semibold tracking-tight text-lg font-[family-name:var(--font-display)]">{siteName}</span>
             </Link>
-            <p className="text-[color:var(--mr-steel-on-dark)] text-sm leading-relaxed max-w-sm">{footerTagline}</p>
+            <p className="text-[color:var(--mr-steel)] text-sm leading-relaxed max-w-sm">{footerTagline}</p>
             <div className="flex gap-2 mt-5">
               {displaySocials.map((social) => (
                 <a
@@ -172,7 +187,7 @@ export default function Footer({
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors"
+                  className="grid place-items-center w-9 h-9 rounded-full border border-[color:var(--mr-line)] bg-white text-[color:var(--mr-steel)] hover:text-[color:var(--mr-accent-ink)] hover:border-[color:var(--mr-accent-line)] transition-colors"
                 >
                   <span className="sr-only">{social.name}</span>
                   <social.icon className="w-4.5 h-4.5" />
@@ -185,7 +200,7 @@ export default function Footer({
             <>
               {cmsColumns.map((column) => (
                 <div key={column._key} className="min-w-0">
-                  <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">
+                  <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)] mb-4">
                     {column.title}
                   </h3>
                   <ul className="space-y-2">
@@ -193,7 +208,7 @@ export default function Footer({
                       <li key={link._key}>
                         <Link
                           href={link.url}
-                          className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
+                          className="inline-block text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
                         >
                           {link.label}
                         </Link>
@@ -221,14 +236,14 @@ export default function Footer({
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-[color:var(--mr-line-on-dark)]">
+        <div className="mt-12 pt-6 border-t border-[color:var(--mr-line)]">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <p className="font-mono text-[0.7rem] text-[color:var(--mr-steel-on-dark)]">{copyrightText}</p>
+            <p className="font-mono text-[0.7rem] text-[color:var(--mr-steel)]">{copyrightText}</p>
             <div className="flex gap-6 text-xs">
-              <Link href="/imprint" className="text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors">
+              <Link href="/imprint" className="text-[color:var(--mr-steel)] hover:text-[color:var(--mr-accent-ink)] transition-colors">
                 {t.links.imprint}
               </Link>
-              <Link href="/privacy" className="text-[color:var(--mr-steel-on-dark)] hover:text-white transition-colors">
+              <Link href="/privacy" className="text-[color:var(--mr-steel)] hover:text-[color:var(--mr-accent-ink)] transition-colors">
                 {t.links.privacy}
               </Link>
             </div>
@@ -251,13 +266,13 @@ function FooterColumn({
 }) {
   return (
     <div className="min-w-0">
-      <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent)] mb-4">{title}</h3>
+      <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)] mb-4">{title}</h3>
       <ul className="space-y-2">
         {items.map((item) => (
           <li key={item.name}>
             <Link
               href={item.href}
-              className="inline-block text-[color:var(--mr-ink-on-dark)] hover:text-[color:var(--mr-accent)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
+              className="inline-block text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] transition-colors text-[13px] leading-snug [overflow-wrap:anywhere]"
             >
               {item.name}
             </Link>

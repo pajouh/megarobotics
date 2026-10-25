@@ -129,7 +129,7 @@ export default function HeroCarousel({
       role="group"
       aria-roledescription="carousel"
       aria-label="Hero media"
-      className={`relative w-full ${ASPECT_CLASS[aspectRatio]} overflow-hidden border border-[color:var(--mr-line-on-dark)] bg-[color:var(--mr-dark)] group`}
+      className={`relative w-full ${ASPECT_CLASS[aspectRatio]} overflow-hidden rounded-[var(--mr-radius)] bg-[color:var(--mr-paper-2)] group`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -190,7 +190,7 @@ export default function HeroCarousel({
                 <Link
                   href={slide.link}
                   tabIndex={i === index ? 0 : -1}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-sm hover:bg-white transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white/90 backdrop-blur text-[color:var(--mr-ink)] font-semibold text-sm shadow-sm hover:bg-[color:var(--mr-accent)] hover:text-white transition-colors"
                 >
                   {slide.linkLabel || learnMoreLabel}
                   <ArrowRight className="w-4 h-4" />
@@ -201,7 +201,7 @@ export default function HeroCarousel({
                   target="_blank"
                   rel="noopener noreferrer"
                   tabIndex={i === index ? 0 : -1}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-sm hover:bg-white transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white/90 backdrop-blur text-[color:var(--mr-ink)] font-semibold text-sm shadow-sm hover:bg-[color:var(--mr-accent)] hover:text-white transition-colors"
                 >
                   {slide.linkLabel || learnMoreLabel}
                   <ArrowRight className="w-4 h-4" />
@@ -213,8 +213,6 @@ export default function HeroCarousel({
       ))}
 
       {/* Datasheet frame ticks */}
-      <span className="pointer-events-none absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[color:var(--mr-accent)] z-10" aria-hidden="true" />
-      <span className="pointer-events-none absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[color:var(--mr-accent)] z-10" aria-hidden="true" />
 
       {!single && (
         <>
@@ -222,7 +220,7 @@ export default function HeroCarousel({
             type="button"
             onClick={prev}
             aria-label="Previous slide"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 bg-[color:var(--mr-dark)]/60 text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[color:var(--mr-accent)] hover:text-[color:var(--mr-dark)] transition-opacity"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur text-[color:var(--mr-ink)] shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[color:var(--mr-accent)] hover:text-white transition-all"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -230,7 +228,7 @@ export default function HeroCarousel({
             type="button"
             onClick={next}
             aria-label="Next slide"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 bg-[color:var(--mr-dark)]/60 text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[color:var(--mr-accent)] hover:text-[color:var(--mr-dark)] transition-opacity"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-20 grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur text-[color:var(--mr-ink)] shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 hover:bg-[color:var(--mr-accent)] hover:text-white transition-all"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
@@ -243,7 +241,7 @@ export default function HeroCarousel({
                 onClick={() => go(i)}
                 aria-label={`Go to slide ${i + 1}`}
                 aria-current={i === index}
-                className={`h-1.5 transition-all ${
+                className={`h-1.5 rounded-full transition-all ${
                   i === index
                     ? 'w-6 bg-[color:var(--mr-accent)]'
                     : 'w-3 bg-white/50 hover:bg-white/80'

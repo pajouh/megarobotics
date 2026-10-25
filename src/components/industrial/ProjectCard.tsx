@@ -7,7 +7,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ title, subtitle, body, label }: ProjectCardProps) {
   return (
-    <article className="ind-card flex flex-col h-full">
+    <article data-reveal className="ind-card mr-glow-card flex flex-col h-full">
       {label && (
         <div className="mr-label mb-4">{label}</div>
       )}

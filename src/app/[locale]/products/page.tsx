@@ -88,14 +88,14 @@ export default async function ProductsPage({ params, searchParams }: Props) {
             <span className="inline-block w-8 h-px bg-[color:var(--mr-accent)]" aria-hidden="true" />
             {tCatalog('page.eyebrow')}
           </div>
-          <h1 className="ind-h1 text-white mb-5 max-w-4xl">{tCatalog('page.title')}</h1>
+          <h1 className="ind-h1 text-[color:var(--mr-ink)] mb-5 max-w-4xl">{tCatalog('page.title')}</h1>
           <p className="text-base md:text-lg text-[color:var(--mr-steel-on-dark)] leading-relaxed max-w-3xl mb-8">
             {tCatalog('page.intro')}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-[15px] hover:bg-white transition-colors"
+              className="mr-btn-accent justify-center"
             >
               {tCatalog('page.ctaInquiry')}
               <ArrowRight className="w-4 h-4" />
@@ -206,11 +206,11 @@ export default async function ProductsPage({ params, searchParams }: Props) {
               <span className="inline-block w-8 h-px bg-[color:var(--mr-accent)]" aria-hidden="true" />
               {tCatalog('componentsTeaser.eyebrow')}
             </div>
-            <h2 className="ind-h2 text-white mb-4">{tCatalog('componentsTeaser.title')}</h2>
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-4">{tCatalog('componentsTeaser.title')}</h2>
             <p className="text-[color:var(--mr-steel-on-dark)] leading-relaxed mb-6">
               {tCatalog('componentsTeaser.body')}
             </p>
-            <Link href="/automation-components" className="inline-flex items-center gap-2 px-6 py-3.5 bg-[color:var(--mr-accent)] text-[color:var(--mr-dark)] font-semibold text-[15px] hover:bg-white transition-colors">
+            <Link href="/automation-components" className="mr-btn-accent">
               {tCatalog('componentsTeaser.cta')}
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -220,7 +220,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
               <span className="inline-block w-8 h-px bg-[color:var(--mr-accent)]" aria-hidden="true" />
               {tCatalog('distributorTeaser.eyebrow')}
             </div>
-            <h2 className="ind-h2 text-white mb-4">{tCatalog('distributorTeaser.title')}</h2>
+            <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-4">{tCatalog('distributorTeaser.title')}</h2>
             <p className="text-[color:var(--mr-steel-on-dark)] leading-relaxed mb-6">
               {tCatalog('distributorTeaser.body')}
             </p>

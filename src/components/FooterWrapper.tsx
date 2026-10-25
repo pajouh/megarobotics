@@ -10,6 +10,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
   const settings = await getSiteSettings(locale)
   const t = await getTranslations({ locale, namespace: 'industrial.footerExtra' })
   const tDisclaimers = await getTranslations({ locale, namespace: 'disclaimers' })
+  const tPartners = await getTranslations({ locale, namespace: 'industrial.partners' })
 
   const translations: IndustrialFooterTranslations = {
     tagline: t('tagline'),
@@ -42,6 +43,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
       agb: t('links.agb'),
     },
     trademarkDisclaimer: tDisclaimers('footer'),
+    partnersLabel: tPartners('marqueeLabel'),
   }
 
   const logoWidth = settings?.logoWidth || 36

@@ -16,21 +16,21 @@ export default function LanguageSwitcher() {
 
   return (
     <div
-      className="inline-flex items-center font-mono text-xs tracking-[0.08em] border border-[color:var(--mr-line)]"
+      className="inline-flex items-center gap-0.5 p-0.5 font-mono text-[11px] tracking-[0.08em] rounded-full border border-[color:var(--mr-line)] bg-white/70"
       role="group"
       aria-label="Select language"
     >
-      {locales.map((loc, i) => (
+      {locales.map((loc) => (
         <button
           key={loc}
           onClick={() => switchLocale(loc)}
           aria-pressed={locale === loc}
           aria-label={localeNames[loc]}
-          className={`px-2.5 py-1.5 uppercase transition-colors ${
+          className={`px-2.5 py-1 rounded-full uppercase transition-colors ${
             locale === loc
-              ? 'bg-[color:var(--mr-ink)] text-[color:var(--mr-paper)] font-semibold'
+              ? 'bg-[color:var(--mr-accent-ink)] text-white font-semibold'
               : 'text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-ink)]'
-          } ${i > 0 ? 'border-l border-[color:var(--mr-line)]' : ''}`}
+          }`}
         >
           {loc}
         </button>

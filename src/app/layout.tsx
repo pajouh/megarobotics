@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Inter, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Sora } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { getSiteSettings } from "@/lib/sanity";
 import "./globals.css";
@@ -11,20 +11,23 @@ function extractTwitterHandle(url?: string | null): string | undefined {
   return `@${match[1]}`;
 }
 
-const inter = Inter({
+// Variable names predate the current fonts; every stylesheet and component
+// reads these three, so the names stay and only the families change.
+const plexSans = IBM_Plex_Sans({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const archivo = Archivo({
+const sora = Sora({
   variable: "--font-display",
   subsets: ["latin"],
-  axes: ["wdth"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const plexMono = IBM_Plex_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -134,9 +137,12 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${archivo.variable} antialiased bg-[color:var(--mr-paper)] text-[color:var(--mr-ink)] min-h-screen flex flex-col`}
+        className={`${plexSans.variable} ${plexMono.variable} ${sora.variable} antialiased bg-[color:var(--mr-paper)] text-[color:var(--mr-ink)] min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
+        {/* Scroll-reveal content starts hidden only once JS is known to run, so
+            pages stay fully visible without JS (see [data-reveal] in globals.css). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('mr-js')" }} />
         {children}
       </body>
     </html>

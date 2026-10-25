@@ -15,10 +15,10 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
   if (variant === 'compact') {
     return (
       <Link href={`/articles/${slug.current}`} className="group block">
-        <article className="flex gap-4 p-3 bg-[color:var(--mr-white)] border border-[color:var(--mr-line)] group-hover:border-[color:var(--mr-line-strong)] transition-colors">
+        <article className="flex gap-4 p-3 bg-[color:var(--mr-white)] rounded-[var(--mr-radius)] border border-[color:var(--mr-line)] shadow-[var(--mr-shadow)] group-hover:border-[color:var(--mr-accent-line)] transition-colors">
           {/* Image */}
           {mainImage && (
-            <div className="relative w-20 h-20 overflow-hidden flex-shrink-0">
+            <div className="relative w-20 h-20 overflow-hidden rounded-xl flex-shrink-0">
               <Image
                 src={urlFor(mainImage).width(160).height(160).url()}
                 alt={mainImage.alt || title}
@@ -50,16 +50,16 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
   }
 
   return (
-    <Link href={`/articles/${slug.current}`} className="group block h-full">
-      <article className="h-full flex flex-col bg-[color:var(--mr-white)] overflow-hidden border border-[color:var(--mr-line)] group-hover:border-[color:var(--mr-line-strong)] transition-colors">
+    <Link href={`/articles/${slug.current}`} className="group block h-full" data-reveal>
+      <article className="mr-glow-card h-full flex flex-col bg-[color:var(--mr-white)] rounded-[var(--mr-radius)] border border-[color:var(--mr-line)] shadow-[var(--mr-shadow)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:shadow-[var(--mr-shadow-lift)] group-hover:border-[color:var(--mr-accent-line)]">
         {/* Image */}
-        <div className="relative aspect-[16/10] overflow-hidden border-b border-[color:var(--mr-line)]">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-t-[var(--mr-radius)]">
           {mainImage ? (
             <Image
               src={urlFor(mainImage).width(600).height(375).url()}
               alt={mainImage.alt || title}
               fill
-              className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+              className="object-cover group-hover:scale-[1.05] transition-transform duration-700"
             />
           ) : (
             <div className="absolute inset-0 bg-[color:var(--mr-paper-2)] flex items-center justify-center">
@@ -71,8 +71,8 @@ export default function ArticleCard({ article, variant = 'default' }: ArticleCar
 
           {/* Category Badge */}
           {category && (
-            <div className="absolute top-0 left-0">
-              <span className="inline-flex items-center px-2.5 py-1 font-mono text-[0.65rem] font-medium uppercase tracking-[0.12em] bg-[color:var(--mr-ink)] text-[color:var(--mr-paper)]">
+            <div className="absolute top-3 left-3">
+              <span className="inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.12em] bg-white/90 backdrop-blur text-[color:var(--mr-accent-ink)] shadow-sm">
                 {category.title}
               </span>
             </div>

@@ -6,6 +6,7 @@ import { type Locale as SanityLocale } from '@/lib/sanity'
 import HeaderWrapper from '@/components/HeaderWrapper'
 import FooterWrapper from '@/components/FooterWrapper'
 import CookieConsent from '@/components/CookieConsent'
+import RevealObserver from '@/components/RevealObserver'
 
 type Props = {
   children: React.ReactNode
@@ -36,6 +37,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <main className="flex-grow">{children}</main>
       <FooterWrapper locale={locale as SanityLocale} />
       <CookieConsent />
+      <RevealObserver />
     </NextIntlClientProvider>
   )
 }
