@@ -21,6 +21,25 @@ function localizedPaths(path: string): string[] {
   return locales.map((locale) => (locale === defaultLocale ? path : `/${locale}${path}`))
 }
 
+// revalidatePath() matches the route Next actually rendered, not the public
+// URL. The middleware rewrites unprefixed English URLs to /en/..., so
+// revalidatePath('/products') matched nothing and English pages were never
+// invalidated, while /de/products worked by coincidence. Translate a public
+// path to its internal route before revalidating.
+function routePath(publicPath: string): string {
+  // localizedPaths('/') yields '/de/'; the rendered route is '/de'.
+  const path = publicPath.length > 1 ? publicPath.replace(/\/+$/, '') : publicPath
+  const prefixed = locales.some((l) => path === `/${l}` || path.startsWith(`/${l}/`))
+  if (prefixed) return path
+  return path === '/' ? `/${defaultLocale}` : `/${defaultLocale}${path}`
+}
+
+// Layout revalidation takes the route pattern, so one call covers every
+// locale. '/' stays as-is: the root layout already spans the whole app.
+function layoutPattern(publicPath: string): string {
+  return publicPath === '/' ? '/' : `/[locale]${publicPath}`
+}
+
 // Mirror of countryToSlug() in institutes/country/[country]/page.tsx so the
 // webhook can target each country index page that generateStaticParams builds.
 function countryToSlug(country: string): string {
@@ -71,8 +90,8 @@ export async function POST(request: NextRequest) {
         '/privacy',
       ]
       for (const path of allPaths) {
-        revalidatePath(path, 'page')
-        revalidatePath(path, 'layout')
+        revalidatePath(routePath(path), 'page')
+        revalidatePath(layoutPattern(path), 'layout')
         revalidated.push(path)
       }
     }
@@ -90,15 +109,15 @@ export async function POST(request: NextRequest) {
         '/guides',
       ]
       for (const path of allPaths) {
-        revalidatePath(path)
+        revalidatePath(routePath(path))
         revalidated.push(path)
       }
 
       // Revalidate using layout strategy for dynamic routes - this invalidates ALL child routes
-      revalidatePath('/products', 'layout')
-      revalidatePath('/manufacturers', 'layout')
-      revalidatePath('/articles', 'layout')
-      revalidatePath('/guides', 'layout')
+      revalidatePath(layoutPattern('/products'), 'layout')
+      revalidatePath(layoutPattern('/manufacturers'), 'layout')
+      revalidatePath(layoutPattern('/articles'), 'layout')
+      revalidatePath(layoutPattern('/guides'), 'layout')
       revalidated.push('/products (layout)', '/manufacturers (layout)', '/articles (layout)', '/guides (layout)')
     }
 
@@ -106,8 +125,8 @@ export async function POST(request: NextRequest) {
     if (paths && Array.isArray(paths)) {
       for (const path of paths) {
         // Revalidate both as page and layout to be thorough
-        revalidatePath(path, 'page')
-        revalidatePath(path)
+        revalidatePath(routePath(path), 'page')
+        revalidatePath(routePath(path))
         revalidated.push(path)
       }
     }
@@ -143,7 +162,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
     // Always revalidate the homepage — in every locale. '/' alone leaves the
     // German homepage on its hourly timer.
     for (const p of localizedPaths('/')) {
-      revalidatePath(p, 'page')
+      revalidatePath(routePath(p), 'page')
       revalidated.push(p)
     }
     mark(...localizedPaths('/'))
@@ -151,16 +170,16 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
     switch (_type) {
       case 'product':
         // Revalidate products layout to catch ALL product pages
-        revalidatePath('/products', 'layout')
-        revalidatePath('/products')
+        revalidatePath(layoutPattern('/products'), 'layout')
+        revalidatePath(routePath('/products'))
         revalidated.push('/products (layout)')
 
         mark(...localizedPaths('/products'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/products/${slug.current}`)) {
-            revalidatePath(p, 'page')
-            revalidatePath(p)
+            revalidatePath(routePath(p), 'page')
+            revalidatePath(routePath(p))
             revalidated.push(p)
           }
           mark(...localizedPaths(`/products/${slug.current}`))
@@ -176,34 +195,34 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           const familySlugs = await getAllProductFamilySlugs()
           for (const { slug: familySlug } of familySlugs) {
             for (const p of localizedPaths(`/products/categories/${familySlug}`)) {
-              revalidatePath(p, 'page')
+              revalidatePath(routePath(p), 'page')
               revalidated.push(p)
             }
           }
         }
 
         // Also revalidate manufacturer pages as they show products
-        revalidatePath('/manufacturers', 'layout')
+        revalidatePath(layoutPattern('/manufacturers'), 'layout')
         revalidated.push('/manufacturers (layout)')
         break
 
       case 'manufacturer':
         // Revalidate manufacturers layout to catch ALL manufacturer pages
-        revalidatePath('/manufacturers', 'layout')
-        revalidatePath('/manufacturers')
-        revalidatePath('/products', 'layout')
+        revalidatePath(layoutPattern('/manufacturers'), 'layout')
+        revalidatePath(routePath('/manufacturers'))
+        revalidatePath(layoutPattern('/products'), 'layout')
         revalidated.push('/manufacturers (layout)', '/products (layout)')
 
         for (const p of localizedPaths('/manufacturers')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/manufacturers'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/manufacturers/${slug.current}`)) {
-            revalidatePath(p, 'page')
-            revalidatePath(p)
+            revalidatePath(routePath(p), 'page')
+            revalidatePath(routePath(p))
             revalidated.push(p)
           }
           mark(...localizedPaths(`/manufacturers/${slug.current}`))
@@ -211,19 +230,19 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         break
 
       case 'article':
-        revalidatePath('/articles', 'layout')
-        revalidatePath('/articles')
+        revalidatePath(layoutPattern('/articles'), 'layout')
+        revalidatePath(routePath('/articles'))
         revalidated.push('/articles (layout)')
 
         for (const p of localizedPaths('/articles')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/articles'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/articles/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/articles/${slug.current}`))
@@ -231,13 +250,13 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         break
 
       case 'productFamily':
-        revalidatePath('/products', 'layout')
+        revalidatePath(layoutPattern('/products'), 'layout')
         revalidated.push('/products (layout)')
         mark(...localizedPaths('/products'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/products/categories/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/products/categories/${slug.current}`))
@@ -245,19 +264,19 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
         break
 
       case 'buyersGuide':
-        revalidatePath('/guides', 'layout')
-        revalidatePath('/guides')
+        revalidatePath(layoutPattern('/guides'), 'layout')
+        revalidatePath(routePath('/guides'))
         revalidated.push('/guides (layout)')
 
         for (const p of localizedPaths('/guides')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/guides'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/guides/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/guides/${slug.current}`))
@@ -266,14 +285,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'solution':
         for (const p of localizedPaths('/solutions')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/solutions'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/solutions/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/solutions/${slug.current}`))
@@ -282,7 +301,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'industry':
         for (const p of localizedPaths('/industries')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/industries'))
@@ -290,7 +309,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'robotTechnology':
         for (const p of localizedPaths('/robot-technologies')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/robot-technologies'))
@@ -298,14 +317,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'institute':
         for (const p of localizedPaths('/institutes')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/institutes'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/institutes/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/institutes/${slug.current}`))
@@ -317,7 +336,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
           const countries = await getInstituteCountries()
           for (const country of countries) {
             for (const p of localizedPaths(`/institutes/country/${countryToSlug(country)}`)) {
-              revalidatePath(p, 'page')
+              revalidatePath(routePath(p), 'page')
               revalidated.push(p)
             }
           }
@@ -326,7 +345,7 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'projectStudy':
         for (const p of localizedPaths('/projects')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/projects'))
@@ -334,14 +353,14 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       case 'category':
         for (const p of localizedPaths('/articles')) {
-          revalidatePath(p, 'page')
+          revalidatePath(routePath(p), 'page')
           revalidated.push(p)
         }
         mark(...localizedPaths('/articles'))
 
         if (slug?.current) {
           for (const p of localizedPaths(`/category/${slug.current}`)) {
-            revalidatePath(p, 'page')
+            revalidatePath(routePath(p), 'page')
             revalidated.push(p)
           }
           mark(...localizedPaths(`/category/${slug.current}`))
@@ -357,9 +376,9 @@ async function handleSanityWebhook(payload: SanityWebhookPayload) {
 
       default:
         // Unknown type - revalidate common paths
-        revalidatePath('/products', 'layout')
-        revalidatePath('/articles', 'layout')
-        revalidatePath('/manufacturers', 'layout')
+        revalidatePath(layoutPattern('/products'), 'layout')
+        revalidatePath(layoutPattern('/articles'), 'layout')
+        revalidatePath(layoutPattern('/manufacturers'), 'layout')
         revalidated.push('/products (layout)', '/articles (layout)', '/manufacturers (layout)')
     }
 
@@ -407,15 +426,15 @@ export async function GET(request: NextRequest) {
       revalidatePath('/', 'layout')
       revalidated.push('/ (layout - entire app)')
     } else if (path) {
-      revalidatePath(path, 'page')
-      revalidatePath(path)
+      revalidatePath(routePath(path), 'page')
+      revalidatePath(routePath(path))
       revalidated.push(path)
     } else {
       // Default: revalidate all main paths using layout strategy
       const paths = ['/', '/about', '/articles', '/products', '/manufacturers', '/imprint', '/privacy', '/guides']
       for (const p of paths) {
-        revalidatePath(p)
-        revalidatePath(p, 'layout')
+        revalidatePath(routePath(p))
+        revalidatePath(layoutPattern(p), 'layout')
       }
       revalidated.push(...paths)
     }
