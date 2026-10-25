@@ -66,7 +66,9 @@ export default async function ProductCategoryPage({ params }: Props) {
   }
 
   const relatedProducts = sanityFamily
-    ? await getProductsByFamily(sanityFamily._id, 8, locale as Locale)
+    ? // All of the family's products: a cap here hid every product sorted after the
+      // first few (e.g. all 11 OrionStar robots on the service-robot page).
+      await getProductsByFamily(sanityFamily._id, undefined, locale as Locale)
     : []
 
   const ecosystems = sanityFamily?.referenceEcosystems ?? []
