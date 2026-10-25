@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries, solutions, cmsPages] = await Promise.all([
     client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "product"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "product" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "productFamily" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],

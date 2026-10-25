@@ -433,7 +433,10 @@ export async function getProductsBySameManufacturer(productId: string, manufactu
 export async function getManufacturers(locale: Locale = defaultLocale): Promise<Manufacturer[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "manufacturer"] | order(name asc) {
+    // Only companies with at least one active product: deactivating a brand's
+    // products in Sanity should take the brand off the listing too, instead of
+    // leaving a card that reads "0 products".
+    `*[_type == "manufacturer" && count(*[_type == "product" && isActive != false && references(^._id)]) > 0] | order(name asc) {
       ${getManufacturerFields(locale)},
       "productCount": count(*[_type == "product" && isActive != false && references(^._id)])
     }`
