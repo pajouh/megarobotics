@@ -109,7 +109,8 @@ export default defineType({
       title: 'Video URL',
       type: 'url',
       group: 'media',
-      description: 'YouTube or video embed URL',
+      description:
+        'YouTube/Vimeo link, or an .mp4 on media.megarobotics.de (with a same-named .jpg poster next to it)',
     }),
     defineField({
       name: 'specifications',

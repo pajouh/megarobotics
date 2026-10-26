@@ -12,7 +12,24 @@ import { useState } from 'react'
  * server HTML either way, so the video is still described to crawlers.
  *
  * Shared by ArticleBody's `videoEmbed` block and the product detail page.
+ *
+ * MP4s on our own media host (media.megarobotics.de) play in a native
+ * <video> instead: no third party is involved, so no consent gate is needed.
+ * Their poster is the same path with .jpg — keep the two files side by side
+ * when adding a video there.
  */
+const SELF_HOSTED = 'media.megarobotics.de'
+
+function selfHostedVideo(url: string): { src: string; poster: string } | null {
+  try {
+    const u = new URL(url)
+    if (u.hostname !== SELF_HOSTED || !u.pathname.endsWith('.mp4')) return null
+    return { src: u.toString(), poster: u.toString().replace(/\.mp4$/, '.jpg') }
+  } catch {
+    return null
+  }
+}
+
 export default function VideoEmbed({
   url,
   title,
@@ -25,6 +42,7 @@ export default function VideoEmbed({
   className?: string
 }) {
   const [playing, setPlaying] = useState(false)
+  const own = selfHostedVideo(url)
 
   const embedUrl = (() => {
     try {
@@ -46,7 +64,17 @@ export default function VideoEmbed({
   return (
     <figure className={className}>
       <div className="relative aspect-video overflow-hidden border border-[color:var(--mr-line)] bg-[color:var(--mr-dark)]">
-        {playing && embedUrl ? (
+        {own ? (
+          <video
+            src={own.src}
+            poster={own.poster}
+            title={title}
+            controls
+            preload="none"
+            playsInline
+            className="absolute inset-0 w-full h-full object-contain"
+          />
+        ) : playing && embedUrl ? (
           <iframe
             src={embedUrl}
             title={title}
