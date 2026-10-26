@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(slug, locale as Locale)
 
   if (!product) {
-    return { title: 'Product Not Found' }
+    return { title: 'Product Not Found', robots: { index: false, follow: false } }
   }
 
   const alternates = generateAlternates(`/products/${slug}`, locale)

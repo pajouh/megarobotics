@@ -378,7 +378,9 @@ export async function getProducts(limit?: number, locale: Locale = defaultLocale
 export async function getProduct(slug: string, locale: Locale = defaultLocale): Promise<Product | null> {
   if (!client) return null
   return client.fetch(
-    `*[_type == "product" && slug.current == $slug][0] {
+    // Inactive products must 404 on their own page too, not just drop out of
+    // listings — otherwise old links and search results keep them alive.
+    `*[_type == "product" && slug.current == $slug && isActive != false][0] {
       ${getProductWithFullFields(locale)}
     }`,
     { slug }
