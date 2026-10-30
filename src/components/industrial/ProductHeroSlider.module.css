@@ -1,0 +1,354 @@
+/* Product video hero — Clean Room palette (globals.css --mr-* tokens).
+   The clip fills the band; it fades into paper on the right, where the copy sits. */
+
+.hero {
+  --hero-height: calc(100svh - 4rem); /* under the 4rem fixed header */
+  --hero-panel: rgba(245, 248, 249, 0.94); /* --mr-paper */
+
+  position: relative;
+  height: var(--hero-height);
+  min-height: 600px;
+  max-height: 960px;
+  overflow: hidden;
+  background: var(--mr-paper);
+  color: var(--mr-ink);
+  border-bottom: 1px solid var(--mr-line);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+}
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.9s ease;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--mr-paper-2);
+}
+.media video,
+.media img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* --crop pushes the clip's bottom edge out of view (burnt-in subtitles) */
+  height: calc(100% + var(--crop, 0%));
+  object-fit: cover;
+  object-position: center top;
+  transform: translateX(var(--shift, 0)) scale(1.08);
+  transition: transform 16s linear;
+}
+.slide.active .media video,
+.slide.active .media img {
+  transform: translateX(var(--shift, 0)) scale(1);
+}
+
+/* fade into paper toward the copy, and a little at the bottom for the tabs */
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(245, 248, 249, 0) 32%, rgba(245, 248, 249, 0.6) 50%, var(--hero-panel) 63%),
+    /* deep enough to sit over burnt-in subtitles in some manufacturer clips */
+    linear-gradient(0deg, var(--mr-paper) 0%, rgba(245, 248, 249, 0.9) 13%, rgba(245, 248, 249, 0) 30%);
+}
+
+/* ---------- copy ---------- */
+.copy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(40%, 600px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px clamp(24px, 4vw, 72px) 112px 0;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mr-accent-ink);
+}
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--mr-accent);
+}
+
+.title {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(2.5rem, 4.6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin: 14px 0 12px;
+  color: var(--mr-ink);
+}
+.tagline {
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.55;
+  color: var(--mr-ink-2);
+  max-width: 32em;
+  margin: 0;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 28px 0 26px;
+  background: var(--mr-line);
+  border: 1px solid var(--mr-line);
+  border-radius: var(--mr-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--mr-shadow);
+}
+.spec {
+  background: var(--mr-white);
+  padding: 14px 16px 12px;
+}
+.spec b {
+  display: block;
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+  font-size: clamp(1.25rem, 1.6vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--mr-ink);
+}
+.spec b small {
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--mr-steel);
+  margin-left: 3px;
+}
+.specLabel {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mr-steel);
+}
+
+.ucHead {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mr-steel);
+  margin-bottom: 10px;
+}
+.useCases {
+  list-style: none;
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+}
+.useCases li {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  line-height: 1.4;
+  color: var(--mr-ink);
+  font-weight: 500;
+}
+.useCases li::before {
+  content: '';
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mr-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 4px var(--mr-accent-soft);
+}
+.useCases li em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--mr-steel);
+}
+
+.cta {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------- reveal; delay comes from --i (ms) ---------- */
+.copy [data-a] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+}
+.slide.active .copy [data-a] {
+  animation: rise 0.8s var(--mr-ease) forwards;
+  animation-delay: calc(var(--i, 0) * 1ms);
+}
+.slide.active .spec[data-a] {
+  animation-name: pop;
+}
+@keyframes rise {
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.94); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.word > span {
+  display: inline-block;
+  transform: translateY(105%);
+}
+.slide.active .word > span {
+  animation: up 0.9s var(--mr-ease) forwards;
+  animation-delay: calc(var(--i) * 1ms);
+}
+@keyframes up {
+  to { transform: none; }
+}
+
+/* ---------- controls ---------- */
+.nav {
+  position: absolute;
+  left: clamp(20px, 4vw, 72px);
+  right: clamp(20px, 4vw, 72px);
+  bottom: 30px;
+  display: flex;
+  gap: 14px;
+  z-index: 5;
+}
+.tab {
+  flex: 1;
+  position: relative;
+  background: none;
+  border: 0;
+  padding: 12px 0 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mr-steel);
+  transition: color 0.2s;
+}
+.tab:hover { color: var(--mr-ink); }
+.tab::before,
+.tab i {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+}
+.tab::before {
+  right: 0;
+  background: var(--mr-line-strong);
+}
+.tab i {
+  width: 0;
+  background: var(--mr-accent);
+}
+.tabActive { color: var(--mr-ink); font-weight: 600; }
+
+.pause {
+  position: absolute;
+  top: 20px;
+  right: clamp(20px, 4vw, 72px);
+  z-index: 5;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--mr-line);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  color: var(--mr-ink);
+  cursor: pointer;
+  box-shadow: var(--mr-shadow);
+}
+.pause:hover { color: var(--mr-accent-ink); }
+
+.tab:focus-visible,
+.pause:focus-visible {
+  outline: 2px solid var(--mr-accent);
+  outline-offset: 3px;
+}
+
+/* ---------- mobile: video on top, copy underneath ---------- */
+@media (max-width: 900px) {
+  .hero {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+  .slide {
+    position: relative;
+    display: none;
+  }
+  .slide.active { display: block; }
+  .media {
+    position: relative;
+    height: 48svh;
+    min-height: 260px;
+  }
+  .media video,
+  .media img { transform: none !important; }
+  .media::after {
+    background: linear-gradient(0deg, var(--mr-paper) 0%, rgba(245, 248, 249, 0) 40%);
+  }
+  .copy {
+    position: relative;
+    width: auto;
+    padding: 0 16px 92px;
+    margin-top: -36px;
+  }
+  .specs { grid-template-columns: repeat(2, 1fr); }
+  .nav {
+    left: 16px;
+    right: 16px;
+    bottom: 22px;
+  }
+  .tabLabel { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy [data-a],
+  .word > span {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .media video,
+  .media img { transition: none; }
+}

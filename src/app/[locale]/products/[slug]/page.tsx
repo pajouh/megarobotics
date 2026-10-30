@@ -22,6 +22,8 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import Disclaimer from '@/components/Disclaimer'
 import SafeNotice from '@/components/industrial/SafeNotice'
+import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
+import { getProductHero } from '@/data/product-heroes'
 import {
   generateProductSchema,
   generateAlternates,
@@ -182,11 +184,42 @@ export default async function ProductPage({ params }: Props) {
 
   const showRelationshipBadge = isVerifiedRelationship(relStatus)
 
+  // Video hero for products that have one in src/data/product-heroes.ts
+  const hero = getProductHero(slug, locale as Locale)
+  const hasSpecs = !!product.specifications && product.specifications.length > 0
+
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
+    <div className={`min-h-screen ${hero ? 'pt-16' : 'pt-24'} pb-16 bg-[color:var(--mr-paper)]`}>
       <StructuredData data={productSchema} />
+      {hero && (
+        <ProductHeroSlider
+          hero={hero}
+          productName={product.name}
+          locale={locale}
+          labels={{
+            carousel: t('hero.carousel', { product: product.name }),
+            chooseSlide: t('hero.chooseSlide'),
+            useCases: t('hero.useCases'),
+            pause: t('hero.pause'),
+            play: t('hero.play'),
+          }}
+          actions={
+            <>
+              <Link href={buildContactHref('availability', product)} className="ind-btn-primary">
+                <Mail className="w-4 h-4" />
+                {tDetail('cta.requestAvailability')}
+              </Link>
+              {hasSpecs && (
+                <a href="#specifications" className="ind-btn-secondary">
+                  {t('hero.seeSpecs')}
+                </a>
+              )}
+            </>
+          }
+        />
+      )}
       {/* BreadcrumbList JSON-LD is emitted by <Breadcrumbs> below — don't duplicate it here. */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${hero ? 'pt-8' : ''}`}>
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 
@@ -381,7 +414,7 @@ export default async function ProductPage({ params }: Props) {
 
         {/* Specifications */}
         {product.specifications && product.specifications.length > 0 && (
-          <section className="mb-12">
+          <section id="specifications" className="mb-12 scroll-mt-24">
             <h2 className="ind-h2 text-[color:var(--mr-ink)] mb-6">
               {t('specifications')}
             </h2>
