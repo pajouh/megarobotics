@@ -87,7 +87,6 @@ export default function Footer({
     { name: t.links.solutions, href: '/solutions' },
     { name: t.links.industries, href: '/industries' },
     { name: t.links.robotTechnologies, href: '/robot-technologies' },
-    { name: t.links.projects, href: '/projects' },
     { name: t.links.insights, href: '/articles' },
   ]
 
@@ -95,15 +94,12 @@ export default function Footer({
     { name: t.links.products, href: '/products' },
     { name: t.links.automationComponents, href: '/automation-components' },
     { name: t.links.robotDistributor, href: '/robot-distributor' },
-    { name: t.links.manufacturers, href: '/manufacturers' },
     { name: t.links.downloads, href: '/downloads' },
   ]
 
   const networkLinks = [
-    { name: t.links.technologyNetwork, href: '/technology-network' },
     { name: t.links.forCustomers, href: '/for-customers' },
     { name: t.links.forManufacturers, href: '/for-manufacturers' },
-    { name: t.links.institutes, href: '/institutes' },
   ]
 
   const companyLinks = [
