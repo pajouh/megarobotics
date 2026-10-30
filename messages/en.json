@@ -79,7 +79,18 @@
     "description": "Description",
     "video": "Video",
     "moreFrom": "More from {manufacturer}",
-    "new": "New"
+    "new": "New",
+    "hero": {
+      "carousel": "{product} in action",
+      "chooseSlide": "Choose application",
+      "useCases": "Use cases",
+      "pause": "Pause video",
+      "play": "Play video",
+      "seeSpecs": "Full specifications",
+      "discover": "Discover {product}",
+      "homeCarousel": "Featured robots",
+      "chooseProduct": "Choose product"
+    }
   },
   "articles": {
     "title": "News & Articles",

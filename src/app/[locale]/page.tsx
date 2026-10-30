@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import { Fragment } from 'react'
 import { getTranslations } from 'next-intl/server'
 import {
   ArrowRight,
   Bot,
   Globe2,
+  Mail,
   Hand,
   Handshake,
   Network,
@@ -18,6 +20,8 @@ import {
 } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
+import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
+import { getHomeProductHero } from '@/data/product-heroes'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import ProcessSteps from '@/components/industrial/ProcessSteps'
 import ProjectCard from '@/components/industrial/ProjectCard'
@@ -113,25 +117,64 @@ export default async function HomePage({ params }: Props) {
       }
     : undefined
 
+  // Product video hero (src/data/product-heroes.ts) replaces the Studio hero
+  // while it has slides; HeroIndustrial stays as the fallback.
+  const productHero = getHomeProductHero(locale as Locale)
+  const tProducts = await getTranslations('products')
+  const tDetail = await getTranslations('industrial.productDetail')
+  const productHeroActions = productHero.slides.map((s) => {
+    const name = s.product?.name ?? ''
+    return (
+      <Fragment key={s.id}>
+        <Link href={`/products/${s.product?.slug}`} className="ind-btn-primary">
+          {tProducts('hero.discover', { product: name })}
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+        <Link href={`/contact?${new URLSearchParams({ inquiry: 'availability', product: name })}`} className="ind-btn-secondary">
+          <Mail className="w-4 h-4" />
+          {tDetail('cta.requestAvailability')}
+        </Link>
+      </Fragment>
+    )
+  })
+
   const structuredData = [generateOrganizationSchema(), generateWebSiteSchema()]
 
   return (
     <div className="min-h-screen">
       <StructuredData data={structuredData} />
 
-      {/* SECTION 1 — Hero (Studio-managed via "homeHero", falls back to translations) */}
-      <HeroIndustrial
-        eyebrow={heroEyebrow}
-        title={heroTitle}
-        subtitle={heroSubtitle}
-        primaryCta={heroPrimaryCta}
-        secondaryCta={heroSecondaryCta}
-        image={{ ...heroBannerImage, priority: true }}
-        media={heroMedia}
-        badge={tPartners('heroBadge')}
-        stats={heroStats}
-        partnerMarqueeLabel={tPartners('marqueeLabel')}
-      />
+      {/* SECTION 1 — Hero: product videos; else Studio-managed "homeHero", else translations */}
+      {productHero.slides.length ? (
+        <div className="pt-16">
+          <h1 className="sr-only">{heroTitle}</h1>
+          <ProductHeroSlider
+            hero={productHero}
+            locale={locale}
+            labels={{
+              carousel: tProducts('hero.homeCarousel'),
+              chooseSlide: tProducts('hero.chooseProduct'),
+              useCases: tProducts('hero.useCases'),
+              pause: tProducts('hero.pause'),
+              play: tProducts('hero.play'),
+            }}
+            slideActions={productHeroActions}
+          />
+        </div>
+      ) : (
+        <HeroIndustrial
+          eyebrow={heroEyebrow}
+          title={heroTitle}
+          subtitle={heroSubtitle}
+          primaryCta={heroPrimaryCta}
+          secondaryCta={heroSecondaryCta}
+          image={{ ...heroBannerImage, priority: true }}
+          media={heroMedia}
+          badge={tPartners('heroBadge')}
+          stats={heroStats}
+          partnerMarqueeLabel={tPartners('marqueeLabel')}
+        />
+      )}
 
       {/* SECTION 1b — Authorized reseller showcase */}
       <PartnerShowcase locale={locale as Locale} />

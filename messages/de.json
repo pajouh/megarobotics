@@ -79,7 +79,18 @@
     "description": "Beschreibung",
     "video": "Video",
     "moreFrom": "Mehr von {manufacturer}",
-    "new": "Neu"
+    "new": "Neu",
+    "hero": {
+      "carousel": "{product} im Einsatz",
+      "chooseSlide": "Anwendung wählen",
+      "useCases": "Einsatzbereiche",
+      "pause": "Video anhalten",
+      "play": "Video abspielen",
+      "seeSpecs": "Alle technischen Daten",
+      "discover": "{product} entdecken",
+      "homeCarousel": "Ausgewählte Roboter",
+      "chooseProduct": "Produkt wählen"
+    }
   },
   "articles": {
     "title": "Nachrichten & Artikel",
