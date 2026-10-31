@@ -247,6 +247,37 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // Clip cut from Agile Robots' Agile ONE SN video (partner footage, 720p);
+  // copyright stays with Agile Robots. Specs from the product's Sanity entry.
+  'agile-one-sn': {
+    name: 'Agile ONE SN',
+    specs: [
+      { value: 140, unit: 'cm', label: { en: 'Height', de: 'Größe' } },
+      { value: 43, unit: 'kg', label: { en: 'Weight', de: 'Gewicht' } },
+      { value: 31, label: { en: 'DoF (body)', de: 'Freiheitsgrade' } },
+      { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
+      { value: 2, label: { en: 'Tactile hands', de: 'Taktile Hände' } },
+      { value: 'GR00T 1.7', label: { en: 'Preinstalled', de: 'Vorinstalliert' } },
+    ],
+    slides: [
+      {
+        id: 'research-lab',
+        eyebrow: { en: 'Humanoid for physical AI', de: 'Humanoid für Physical AI' },
+        tagline: {
+          en: 'Agile ONE S with tactile Wuji hands and NVIDIA Isaac GR00T, ready from simulation to real-world tests.',
+          de: 'Agile ONE S mit taktilen Wuji-Händen und NVIDIA Isaac GR00T – startklar von der Simulation bis zur Realität.',
+        },
+        video: '/agile/hero/agile-one-sn/research-lab.mp4',
+        shift: '-14%',
+        useCases: [
+          [{ en: 'Physical AI', de: 'Physical AI' }, { en: 'GR00T 1.7 & whole-body control', de: 'GR00T 1.7 & Ganzkörpersteuerung' }],
+          [{ en: 'Simulation to real', de: 'Von der Simulation in die Realität' }, { en: 'Isaac Sim & Isaac Lab', de: 'Isaac Sim & Isaac Lab' }],
+          [{ en: 'Dexterous grasping', de: 'Geschicktes Greifen' }, { en: 'tactile five-finger hands', de: 'taktile Fünffingerhände' }],
+        ],
+      },
+    ],
+  },
+
   'agile-hand': {
     name: 'Agile Hand',
     specs: [
@@ -441,6 +472,7 @@ export function getProductHero(slug: string, locale: Locale): ResolvedProductHer
 const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'agile-one', slide: 'humanoid-robot' },
   { slug: 'agile-one-s', slide: 'research-platform' },
+  { slug: 'agile-one-sn', slide: 'research-lab' },
   { slug: 'diana-7', slide: 'precision-assembly' },
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
   { slug: 'limx-oli', slide: 'whole-body-motion' },
