@@ -342,6 +342,38 @@ const HEROES: Record<string, ProductHero> = {
       },
     ],
   },
+
+  // Clip cut from LimX Dynamics' "Oli-Clean.mp4" (partner footage);
+  // copyright stays with LimX Dynamics. Specs from the product's Sanity
+  // entry; "up to" figures are the Super version.
+  'limx-oli': {
+    name: 'LimX Oli',
+    specs: [
+      { value: 175, unit: 'cm', label: { en: 'Height, up to', de: 'Größe, bis zu' } },
+      { value: 43, label: { en: 'Active DoF, up to', de: 'Aktive Freiheitsgrade, bis zu' } },
+      { value: 7, label: { en: 'DoF per arm', de: 'Freiheitsgrade pro Arm' } },
+      { value: 5, unit: 'kg', label: { en: 'Payload per arm, up to', de: 'Traglast pro Arm, bis zu' } },
+      { value: 5, unit: 'km/h', label: { en: 'Walking speed', de: 'Gehgeschwindigkeit' } },
+      { value: 157, unit: 'TOPS', label: { en: 'Perception (Orin NX)', de: 'Wahrnehmung (Orin NX)' } },
+    ],
+    slides: [
+      {
+        id: 'whole-body-motion',
+        eyebrow: { en: 'Full-size humanoid', de: 'Humanoider in voller Größe' },
+        tagline: {
+          en: 'A general-purpose humanoid for embodied-AI research and development, with whole-body control and an open Python SDK.',
+          de: 'Ein universeller Humanoider für Forschung und Entwicklung in Embodied AI, mit Ganzkörpersteuerung und offenem Python-SDK.',
+        },
+        video: '/oli/hero/limx-oli/whole-body-motion.mp4',
+        shift: '-14%',
+        useCases: [
+          [{ en: 'Embodied AI', de: 'Embodied AI' }, { en: 'whole-body loco-manipulation', de: 'Ganzkörper-Lokomanipulation' }],
+          [{ en: 'Simulation to real', de: 'Von der Simulation in die Realität' }, { en: 'Isaac Sim, MuJoCo, Gazebo', de: 'Isaac Sim, MuJoCo, Gazebo' }],
+          [{ en: 'Teaching & labs', de: 'Lehre & Labore' }, { en: 'EDU version for universities', de: 'EDU-Version für Hochschulen' }],
+        ],
+      },
+    ],
+  },
 }
 
 export interface ResolvedHeroSpec {
@@ -411,6 +443,7 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'agile-one-s', slide: 'research-platform' },
   { slug: 'diana-7', slide: 'precision-assembly' },
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
+  { slug: 'limx-oli', slide: 'whole-body-motion' },
 ]
 
 /** Slides for the homepage hero, each carrying its product's name and specs. */
