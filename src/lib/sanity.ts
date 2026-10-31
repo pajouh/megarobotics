@@ -498,6 +498,20 @@ export async function searchProducts(searchTerm: string, locale: Locale = defaul
   )
 }
 
+// Catalogue order by manufacturer; a product's own `order` applies within its
+// manufacturer. Manufacturers not listed go before OnRobot, which stays last.
+const CATALOG_MANUFACTURER_ORDER = [
+  'franka-robotics',
+  'agile-robots',
+  'limx-dynamics',
+  'magiclab',
+  'orionstar',
+  'atom-robot',
+]
+const manufacturerRank = `select(${CATALOG_MANUFACTURER_ORDER.map(
+  (slug, i) => `manufacturer->slug.current == "${slug}" => ${i}`,
+).join(', ')}, manufacturer->slug.current == "onrobot" => 99, 50)`
+
 // Products with combined filters (search + family + availability)
 export interface ProductFilters {
   search?: string
@@ -530,7 +544,7 @@ export async function getProductsWithFilters(
   }
 
   return client.fetch<Product[]>(
-    `*[${clauses.join(' && ')}] | order(order asc, name asc) {
+    `*[${clauses.join(' && ')}] | order(${manufacturerRank} asc, order asc, name asc) {
       ${getProductFields(locale)}
     }`,
     params,
