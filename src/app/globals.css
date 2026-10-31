@@ -962,3 +962,33 @@ body {
   overflow-x: auto;
   display: block;
 }
+
+/* Products catalogue filtering runs inside a view transition: cards glide to
+   their new slots, new ones scale in, removed ones fade out. Only the
+   catalogue (components/catalog) starts one. */
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--mr-ease);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.18s;
+}
+::view-transition-new(*):only-child {
+  animation: mr-vt-in 0.45s var(--mr-ease) both;
+}
+::view-transition-old(*):only-child {
+  animation: mr-vt-out 0.25s ease both;
+}
+@keyframes mr-vt-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+@keyframes mr-vt-out {
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
