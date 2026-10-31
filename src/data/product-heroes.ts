@@ -342,6 +342,38 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // No footage yet, so the product's main Sanity render stands in. Specs from
+  // Franka's two-pager (February 2026), which match the Sanity entry. Franka
+  // still lists it as a prototype.
+  'mobile-fr3-duo': {
+    name: 'Mobile FR3 Duo',
+    specs: [
+      { value: 855, unit: 'mm', label: { en: 'Reach per arm', de: 'Reichweite pro Arm' } },
+      { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
+      { value: 100, unit: 'kg', label: { en: 'Base payload', de: 'Traglast Basis' } },
+      { value: 1.75, unit: 'm/s', decimals: 2, label: { en: 'Max. speed', de: 'Max. Geschwindigkeit' } },
+      { value: 7, label: { en: 'Cameras', de: 'Kameras' } },
+      { value: 1, unit: 'kHz', label: { en: 'Control (FCI)', de: 'Regelung (FCI)' } },
+    ],
+    slides: [
+      {
+        id: 'mobile-manipulation',
+        eyebrow: { en: 'Prototype · mobile dual-arm', de: 'Prototyp · mobil, zweiarmig' },
+        tagline: {
+          en: 'FR3 Duo on an omnidirectional base: teleoperation, data collection and policy execution beyond the fixed workcell.',
+          de: 'FR3 Duo auf einer omnidirektionalen Basis: Teleoperation, Datenerfassung und Policy-Ausführung jenseits der festen Arbeitszelle.',
+        },
+        image: 'https://cdn.sanity.io/images/wudur8e8/production/a5d9c63b7e561bcca2f1599580dba2541c26b33d-2000x1125.png',
+        duration: 10,
+        useCases: [
+          [{ en: 'Mobile manipulation', de: 'Mobile Manipulation' }, { en: 'whole-body coordination', de: 'Ganzkörperkoordination' }],
+          [{ en: 'Embodied AI', de: 'Embodied AI' }, { en: 'datasets & policy learning', de: 'Datensätze & Policy Learning' }],
+          [{ en: 'Pre-integrated', de: 'Vorintegriert' }, { en: 'base, arms & software', de: 'Basis, Arme & Software' }],
+        ],
+      },
+    ],
+  },
+
   // Clip cut from Franka Robotics' "Teleoperation with FR3 Duo" (YouTube,
   // XdNF77wBLfM); copyright stays with Franka Robotics. Specs from the
   // product's Sanity entry (franka.de/fr3-duo).
