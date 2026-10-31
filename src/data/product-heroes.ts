@@ -310,6 +310,38 @@ const HEROES: Record<string, ProductHero> = {
       },
     ],
   },
+
+  // Clip cut from Franka Robotics' "Teleoperation with FR3 Duo" (YouTube,
+  // XdNF77wBLfM); copyright stays with Franka Robotics. Specs from the
+  // product's Sanity entry (franka.de/fr3-duo).
+  'franka-research-3-duo': {
+    name: 'Franka Research 3 Duo',
+    specs: [
+      { value: 855, unit: 'mm', label: { en: 'Reach per arm', de: 'Reichweite pro Arm' } },
+      { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
+      { value: 7, label: { en: 'DoF per arm', de: 'Freiheitsgrade pro Arm' } },
+      { value: 14, label: { en: 'Torque sensors', de: 'Drehmomentsensoren' } },
+      { value: 1, unit: 'kHz', label: { en: 'Real-time control', de: 'Echtzeitsteuerung' } },
+      { value: 3, label: { en: 'Cameras', de: 'Kameras' } },
+    ],
+    slides: [
+      {
+        id: 'teleoperation',
+        eyebrow: { en: 'Physical AI research', de: 'Physical-AI-Forschung' },
+        tagline: {
+          en: 'A dual-arm reference platform for teleoperation, data collection and policy execution on one system.',
+          de: 'Eine zweiarmige Referenzplattform für Teleoperation, Datenerfassung und Policy-Ausführung in einem System.',
+        },
+        video: '/franka/hero/franka-research-3-duo/teleoperation.mp4',
+        shift: '-10%',
+        useCases: [
+          [{ en: 'Imitation learning', de: 'Imitation Learning' }, { en: 'teleoperated demonstrations', de: 'teleoperierte Demonstrationen' }],
+          [{ en: 'Bimanual skills', de: 'Zweihändige Fähigkeiten' }, { en: 'two arms, one shared workspace', de: 'zwei Arme, ein gemeinsamer Arbeitsraum' }],
+          [{ en: 'Datasets', de: 'Datensätze' }, { en: 'reproducible across institutions', de: 'reproduzierbar über Institute hinweg' }],
+        ],
+      },
+    ],
+  },
 }
 
 export interface ResolvedHeroSpec {
@@ -378,6 +410,7 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'agile-one', slide: 'humanoid-robot' },
   { slug: 'agile-one-s', slide: 'research-platform' },
   { slug: 'diana-7', slide: 'precision-assembly' },
+  { slug: 'franka-research-3-duo', slide: 'teleoperation' },
 ]
 
 /** Slides for the homepage hero, each carrying its product's name and specs. */
