@@ -343,15 +343,16 @@ const HEROES: Record<string, ProductHero> = {
   },
 
   // No footage yet, so the product's main Sanity render stands in. Specs from
-  // Franka's two-pager (February 2026), which match the Sanity entry. Franka
+  // Franka's two-pager (February 2026); base payload and max. speed updated to
+  // Franka's system version 0.2 data, which match the Sanity entry. Franka
   // still lists it as a prototype.
   'mobile-fr3-duo': {
     name: 'Mobile FR3 Duo',
     specs: [
       { value: 855, unit: 'mm', label: { en: 'Reach per arm', de: 'Reichweite pro Arm' } },
       { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
-      { value: 100, unit: 'kg', label: { en: 'Base payload', de: 'Traglast Basis' } },
-      { value: 1.75, unit: 'm/s', decimals: 2, label: { en: 'Max. speed', de: 'Max. Geschwindigkeit' } },
+      { value: 125, unit: 'kg', label: { en: 'Base payload', de: 'Traglast Basis' } },
+      { value: 1.5, unit: 'm/s', decimals: 1, label: { en: 'Max. speed', de: 'Max. Geschwindigkeit' } },
       { value: 7, label: { en: 'Cameras', de: 'Kameras' } },
       { value: 1, unit: 'kHz', label: { en: 'Control (FCI)', de: 'Regelung (FCI)' } },
     ],
