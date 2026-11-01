@@ -2,13 +2,13 @@ import { client } from '@/lib/sanity'
 
 export async function GET() {
   const articles = await client?.fetch(`
-    *[_type == "article" && isActive != false] | order(publishedAt desc) [0...50] {
-      title,
+    *[_type == "article" && isActive != false && defined(slug.current)] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
+      "title": coalesce(title.en, title.de, title),
       "slug": slug.current,
-      excerpt,
-      publishedAt,
+      "excerpt": coalesce(excerpt.en, excerpt.de, excerpt),
+      "publishedAt": coalesce(publishedAt, _createdAt),
       "author": author->name,
-      "category": category->title
+      "category": coalesce(category->title.en, category->title.de, category->title)
     }
   `) || []
 
