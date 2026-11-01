@@ -507,6 +507,7 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'agile-one-sn', slide: 'research-lab' },
   { slug: 'diana-7', slide: 'precision-assembly' },
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
+  { slug: 'mobile-fr3-duo', slide: 'mobile-manipulation' },
   { slug: 'limx-oli', slide: 'whole-body-motion' },
 ]
 
