@@ -72,9 +72,11 @@
   width: min(40%, 600px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* if even the tightest fit overflows, spill downwards, never squash */
+  justify-content: safe center;
   padding: 56px clamp(24px, 4vw, 72px) 112px 0;
 }
+.copy > * { flex-shrink: 0; }
 
 .eyebrow {
   display: flex;
@@ -196,6 +198,22 @@
   flex-wrap: wrap;
   gap: 10px;
 }
+
+/* ---------- fit levels, set per slide by fitCopy() on short screens ---------- */
+/* the slide tabs take the bottom 76px; keep 20px clear above them */
+.copy[data-fit] { padding-top: 28px; padding-bottom: 96px; }
+.copy[data-fit] .title { margin: 10px 0 8px; }
+.copy[data-fit] .specs { margin: 18px 0 16px; }
+.copy[data-fit] .spec { padding: 10px 14px 8px; }
+.copy[data-fit] .ucHead { margin-bottom: 8px; }
+.copy[data-fit] .useCases { gap: 6px; }
+.copy[data-fit] .cta { margin-top: 18px; }
+.copy[data-fit='2'] .ucHead,
+.copy[data-fit='2'] .useCases,
+.copy[data-fit='3'] .ucHead,
+.copy[data-fit='3'] .useCases,
+.copy[data-fit='3'] .tagline { display: none; }
+.copy[data-fit='3'] .title { font-size: clamp(2.25rem, 3.6vw, 3.5rem); }
 
 /* ---------- reveal; delay comes from --i (ms) ---------- */
 .copy [data-a] {

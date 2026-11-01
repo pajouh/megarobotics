@@ -50,6 +50,34 @@ const T_UC_STEP = 260
 
 const delay = (ms: number) => ({ '--i': ms }) as CSSProperties
 
+// Fit levels for the copy column: 1 tightens the spacing, 2 also drops the
+// use cases, 3 also drops the tagline. Specs and CTAs always stay.
+const MAX_FIT = 3
+
+/** Height the copy's children need, against the room inside its padding. */
+function overflows(copy: HTMLElement) {
+  const cs = getComputedStyle(copy)
+  const room = copy.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+  let need = 0
+  for (const el of copy.children) {
+    const s = getComputedStyle(el)
+    if (s.display === 'none') continue
+    need += (el as HTMLElement).offsetHeight + parseFloat(s.marginTop) + parseFloat(s.marginBottom)
+  }
+  return need > room + 0.5
+}
+
+/** Picks the lowest fit level at which each slide's copy fits the hero. */
+function fitCopy(copies: (HTMLElement | null)[]) {
+  for (const copy of copies) {
+    if (!copy) continue
+    delete copy.dataset.fit
+    // On phones the copy flows under the media and can grow freely.
+    if (getComputedStyle(copy).position !== 'absolute') continue
+    for (let level = 1; level <= MAX_FIT && overflows(copy); level++) copy.dataset.fit = String(level)
+  }
+}
+
 function formatSpec(spec: ResolvedHeroSpec, v: number, locale: string) {
   const d = spec.decimals ?? 0
   return (spec.prefix ?? '') + v.toLocaleString(locale, { minimumFractionDigits: d, maximumFractionDigits: d })
@@ -107,7 +135,20 @@ export default function ProductHeroSlider({
   const rootRef = useRef<HTMLElement>(null)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const barRefs = useRef<(HTMLElement | null)[]>([])
+  const copyRefs = useRef<(HTMLDivElement | null)[]>([])
   const elapsedRef = useRef(0)
+
+  // Slides carry different amounts of text, so each one is fitted on its own,
+  // again on resize and once the web fonts have loaded.
+  useEffect(() => {
+    const el = rootRef.current
+    if (!el) return
+    const fit = () => fitCopy(copyRefs.current)
+    const ro = new ResizeObserver(fit)
+    ro.observe(el)
+    document.fonts?.ready.then(fit)
+    return () => ro.disconnect()
+  }, [slides])
 
   // ms the slide stays up; `clock` means time-based rather than following the video
   const range = useCallback(
@@ -250,7 +291,12 @@ export default function ProductHeroSlider({
               ) : null}
             </div>
 
-            <div className={styles.copy}>
+            <div
+              className={styles.copy}
+              ref={(el) => {
+                copyRefs.current[i] = el
+              }}
+            >
               <div className={styles.eyebrow} data-a="" style={delay(100)}>
                 {s.eyebrow}
               </div>
