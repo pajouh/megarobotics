@@ -2,7 +2,7 @@ import { client } from '@/lib/sanity'
 
 export async function GET() {
   const articles = await client?.fetch(`
-    *[_type == "article"] | order(publishedAt desc) [0...50] {
+    *[_type == "article" && isActive != false] | order(publishedAt desc) [0...50] {
       title,
       "slug": slug.current,
       excerpt,

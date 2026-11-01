@@ -11,6 +11,14 @@ export default defineType({
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
+    defineField({
+      name: 'isActive',
+      title: 'Active',
+      type: 'boolean',
+      group: ['content', 'meta'],
+      description: 'Set to inactive to hide this article from the website without deleting it',
+      initialValue: true,
+    }),
     localizedString('title', 'Title', {
       group: 'content',
       required: true,
@@ -116,11 +124,13 @@ export default defineType({
       titleDe: 'title.de',
       author: 'author.name',
       media: 'mainImage',
+      isActive: 'isActive',
     },
     prepare(selection) {
-      const { title, titleDe, author, media } = selection
+      const { title, titleDe, author, media, isActive } = selection
+      const name = title || titleDe || 'Untitled'
       return {
-        title: title || titleDe || 'Untitled',
+        title: isActive === false ? `[INACTIVE] ${name}` : name,
         subtitle: author && `by ${author}`,
         media,
       }

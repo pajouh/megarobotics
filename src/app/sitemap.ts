@@ -35,7 +35,7 @@ function localizedEntries(
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all content from Sanity
   const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries, solutions, cmsPages] = await Promise.all([
-    client?.fetch(`*[_type == "article"]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "article" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "product" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "productFamily" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],

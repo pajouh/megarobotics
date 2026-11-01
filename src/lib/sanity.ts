@@ -166,7 +166,7 @@ export async function getArticles(limit?: number, locale: Locale = defaultLocale
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
-    `*[_type == "article"] | order(publishedAt desc)${limitQuery} {
+    `*[_type == "article" && isActive != false] | order(publishedAt desc)${limitQuery} {
       ${getArticleFields(locale)}
     }`
   )
@@ -176,7 +176,7 @@ export async function getArticles(limit?: number, locale: Locale = defaultLocale
 export async function getArticle(slug: string, locale: Locale = defaultLocale): Promise<Article | null> {
   if (!client) return null
   return client.fetch(
-    `*[_type == "article" && slug.current == $slug][0] {
+    `*[_type == "article" && isActive != false && slug.current == $slug][0] {
       ${getArticleWithBodyFields(locale)}
     }`,
     { slug }
@@ -187,7 +187,7 @@ export async function getArticle(slug: string, locale: Locale = defaultLocale): 
 export async function getFeaturedArticles(limit: number = 3, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "article" && featured == true] | order(publishedAt desc)[0...${limit}] {
+    `*[_type == "article" && isActive != false && featured == true] | order(publishedAt desc)[0...${limit}] {
       ${getArticleFields(locale)}
     }`
   )
@@ -198,7 +198,7 @@ export async function getArticlesByCategory(categorySlug: string, limit?: number
   if (!client) return []
   const limitQuery = limit ? `[0...${limit}]` : ''
   return client.fetch(
-    `*[_type == "article" && category->slug.current == $categorySlug] | order(publishedAt desc)${limitQuery} {
+    `*[_type == "article" && isActive != false && category->slug.current == $categorySlug] | order(publishedAt desc)${limitQuery} {
       ${getArticleFields(locale)}
     }`,
     { categorySlug }
@@ -256,7 +256,7 @@ export async function getAuthors(): Promise<Author[]> {
 export async function getRelatedArticles(articleId: string, categorySlug: string, limit: number = 3, locale: Locale = defaultLocale): Promise<Article[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "article" && _id != $articleId && category->slug.current == $categorySlug] | order(publishedAt desc)[0...${limit}] {
+    `*[_type == "article" && isActive != false && _id != $articleId && category->slug.current == $categorySlug] | order(publishedAt desc)[0...${limit}] {
       ${getArticleFields(locale)}
     }`,
     { articleId, categorySlug }
@@ -268,7 +268,7 @@ export async function searchArticles(searchTerm: string, locale: Locale = defaul
   if (!client) return []
   const searchQuery = `*${searchTerm}*`
   return client.fetch<Article[]>(
-    `*[_type == "article" && (title.${locale} match $searchQuery || title.en match $searchQuery || excerpt.${locale} match $searchQuery)] | order(publishedAt desc) {
+    `*[_type == "article" && isActive != false && (title.${locale} match $searchQuery || title.en match $searchQuery || excerpt.${locale} match $searchQuery)] | order(publishedAt desc) {
       ${getArticleFields(locale)}
     }`,
     { searchQuery }
@@ -279,7 +279,7 @@ export async function searchArticles(searchTerm: string, locale: Locale = defaul
 export async function getAllArticleSlugs(): Promise<{ slug: string }[]> {
   if (!client) return []
   return client.fetch(
-    `*[_type == "article" && defined(slug.current)][].slug.current`
+    `*[_type == "article" && isActive != false && defined(slug.current)][].slug.current`
   ).then((slugs: string[]) => slugs.map(slug => ({ slug })))
 }
 

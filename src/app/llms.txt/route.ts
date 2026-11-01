@@ -45,7 +45,7 @@ export async function GET() {
       }`
     ) || [],
     client?.fetch<Entry[]>(
-      `*[_type == "article"] | order(publishedAt desc)[0...40]{
+      `*[_type == "article" && isActive != false] | order(publishedAt desc)[0...40]{
         "slug": slug.current,
         "name": coalesce(title.en, title.de),
         "tagline": coalesce(excerpt.en, excerpt.de)
