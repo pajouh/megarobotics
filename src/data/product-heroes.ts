@@ -503,9 +503,9 @@ export function getProductHero(slug: string, locale: Locale): ResolvedProductHer
 // Homepage hero: one slide per product, in this order. Add a product by
 // adding its slug and the id of the slide to feature.
 const HOME_SLIDES: { slug: string; slide: string }[] = [
-  { slug: 'agile-one', slide: 'humanoid-robot' },
-  { slug: 'agile-one-s', slide: 'research-platform' },
   { slug: 'agile-one-sn', slide: 'research-lab' },
+  { slug: 'agile-one-s', slide: 'research-platform' },
+  { slug: 'agile-one', slide: 'humanoid-robot' },
   { slug: 'diana-7', slide: 'precision-assembly' },
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
   { slug: 'mobile-fr3-duo', slide: 'mobile-manipulation' },
