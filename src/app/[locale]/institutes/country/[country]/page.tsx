@@ -9,7 +9,7 @@ import {
 } from '@/lib/sanity'
 import { generateAlternates } from '@/lib/structured-data'
 import InstituteCard from '@/components/InstituteCard'
-import { brandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ country: string; locale: string }>
@@ -58,16 +58,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: brandedMetaTitle,
     description: metaDescription,
-    alternates: generateAlternates(`/institutes/country/${countrySlug}`, locale),
+    // Institute content is English only, so the /de URL repeats the English page.
+    alternates: generateAlternates(`/institutes/country/${countrySlug}`, locale, ['en']),
+    ...(locale === 'de' ? { robots: NOINDEX } : {}),
     openGraph: {
+      ...ogBase(`/institutes/country/${countrySlug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
+      images: [DEFAULT_OG_IMAGE.url],
     },
   }
 }

@@ -1,3 +1,4 @@
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { ChevronRight, Home } from 'lucide-react'
 import StructuredData from './StructuredData'
@@ -14,8 +15,10 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
+  const locale = useLocale()
+  const homeLabel = locale === 'de' ? 'Startseite' : 'Home'
   const allItems = [
-    { name: 'Home', href: '/' },
+    { name: homeLabel, href: '/' },
     ...items,
   ]
 
@@ -26,7 +29,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
 
   return (
     <>
-      <StructuredData data={generateBreadcrumbSchema(schemaItems)} />
+      <StructuredData data={generateBreadcrumbSchema(schemaItems, locale)} />
       <nav aria-label="Breadcrumb" className={`text-sm ${className}`}>
         <ol className="flex items-center flex-wrap gap-1">
           {allItems.map((item, index) => (
@@ -35,7 +38,7 @@ export default function Breadcrumbs({ items, className = '' }: BreadcrumbsProps)
                 <Link
                   href={item.href}
                   className="text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)] transition-colors"
-                  aria-label="Home"
+                  aria-label={homeLabel}
                 >
                   <Home className="w-4 h-4" />
                 </Link>

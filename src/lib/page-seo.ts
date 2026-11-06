@@ -75,6 +75,38 @@ export function fitBrandedTitle(...candidates: string[]): { absolute: string } {
   return brandedTitle(usable[usable.length - 1])
 }
 
+/**
+ * Fit a CMS text into a meta description. Search engines cut around 160
+ * characters, so end on a full sentence where one fits, else on a whole word.
+ */
+export function clampDescription(text: string | undefined, max = 160): string | undefined {
+  const clean = text?.replace(/\s+/g, ' ').trim()
+  if (!clean || clean.length <= max) return clean
+  const cut = clean.slice(0, max)
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '))
+  if (sentenceEnd >= 80) return cut.slice(0, sentenceEnd + 1)
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:–—-]+$/, '')}…`
+}
+
+/**
+ * The Open Graph fields every page shares. A page-level `openGraph` replaces the
+ * root layout's whole object, so pages that build their own need these spread in
+ * or they ship without og:url, og:site_name and og:locale.
+ */
+export function ogBase(path: string, locale: string) {
+  return {
+    url: localizedUrl(path, locale),
+    siteName: BRAND,
+    locale: locale === 'de' ? 'de_DE' : 'en_US',
+    alternateLocale: locale === 'de' ? ['en_US'] : ['de_DE'],
+  }
+}
+
+export const DEFAULT_OG_IMAGE = { url: '/og-image.png', width: 1200, height: 630, alt: BRAND }
+
+/** Keeps a page reachable for visitors and link-following, out of the index. */
+export const NOINDEX = { index: false, follow: true }
+
 interface PageSeoArgs {
   /** Title used as-is (not run through the root layout's "%s | MegaRobotics" template). */
   title: string
@@ -95,6 +127,8 @@ interface PageSeoArgs {
   ogImageHeight?: number
   /** 'article' for blog posts. Default 'website'. */
   ogType?: 'website' | 'article'
+  /** Keep the page out of search results, e.g. a listing with nothing on it yet. */
+  noindex?: boolean
 }
 
 /**
@@ -118,20 +152,17 @@ export function pageSeo(args: PageSeoArgs): Metadata {
     ogImageWidth = 1200,
     ogImageHeight = 630,
     ogType = 'website',
+    noindex = false,
   } = args
-
-  const url = localizedUrl(path, locale)
 
   return {
     title: { absolute: title },
     description,
     alternates: generateAlternates(path, locale),
+    ...(noindex ? { robots: NOINDEX } : {}),
     openGraph: {
+      ...ogBase(path, locale),
       type: ogType,
-      url,
-      siteName: 'MegaRobotics',
-      locale: locale === 'de' ? 'de_DE' : 'en_US',
-      alternateLocale: locale === 'de' ? ['en_US'] : ['de_DE'],
       title,
       description,
       images: [

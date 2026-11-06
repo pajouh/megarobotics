@@ -1,41 +1,60 @@
 const baseUrl = 'https://www.megarobotics.de'
 
-export function generateOrganizationSchema() {
+// Stable node ids so every schema on a page points at the same company entity.
+const ORGANIZATION_ID = `${baseUrl}/#organization`
+const WEBSITE_ID = `${baseUrl}/#website`
+const LOGO = { '@type': 'ImageObject', url: `${baseUrl}/icon-512.png`, width: 512, height: 512 }
+
+// Full enough to validate on pages that don't also emit the Organization node.
+const PUBLISHER = { '@type': 'Organization', '@id': ORGANIZATION_ID, name: 'MegaRobotics', logo: LOGO }
+
+const inLanguage = (locale: string) => (locale === 'de' ? 'de-DE' : 'en')
+
+// "MegaRobotics Editorial" is a team, not a Person: claiming otherwise fails
+// Google's author guidance.
+function authorNode(name: string) {
+  return /megarobotics/i.test(name) ? { '@type': 'Organization', '@id': ORGANIZATION_ID, name } : { '@type': 'Person', name }
+}
+
+const ORGANIZATION_DESCRIPTION: Record<string, string> = {
+  en: 'Germany-based robot distributor and automation technology partner. Supporting European customers with robot sourcing, evaluation and integration across manufacturing, logistics, inspection, cleaning, research and service environments.',
+  de: 'Roboter-Distributor und Automatisierungspartner aus Deutschland. Wir unterstützen Kunden in Europa bei Beschaffung, Evaluierung und Integration von Robotern für Fertigung, Logistik, Inspektion, Reinigung, Forschung und Service.',
+}
+
+export function generateOrganizationSchema(locale: string = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORGANIZATION_ID,
     name: 'MegaRobotics',
     legalName: 'MEGAFORCE GmbH',
     url: baseUrl,
-    logo: `${baseUrl}/og-image.png`,
+    logo: LOGO,
     image: `${baseUrl}/og-image.png`,
-    description:
-      'Germany-based industrial robotics distributor and automation technology partner. Supporting European customers with robot sourcing, evaluation, and the development of robotic solutions across manufacturing, logistics, inspection, cleaning, research and service environments.',
-    foundingLocation: {
-      '@type': 'Place',
-      address: { '@type': 'PostalAddress', addressLocality: 'Kaarst', addressCountry: 'DE' },
-    },
+    description: ORGANIZATION_DESCRIPTION[locale] ?? ORGANIZATION_DESCRIPTION.en,
+    vatID: 'DE813764801',
     areaServed: ['DE', 'AT', 'CH', 'EU'],
     knowsAbout: [
       'Industrial robotics',
+      'Humanoid robots',
+      'Collaborative robots',
       'Automation technology',
-      'Robot platforms',
       'End effectors and grippers',
-      'PLC and industrial control',
-      'Industrial sensors and vision',
-      'Functional safety',
-      'Industrial communication',
-      'SCADA and HMI software',
+      'Robotic palletizing',
+      'Service and cleaning robots',
+      'Research robotics',
     ],
     sameAs: [
       'https://x.com/megarobotics_de',
-      'https://linkedin.com/company/megarobotics',
-      'https://youtube.com/@megarobotics',
+      'https://www.linkedin.com/company/megarobotics',
+      'https://www.youtube.com/@megaroboticsDE',
+      'https://www.instagram.com/megarobotics.de/',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'info@megarobotics.de',
+      telephone: '+49-172-2008875',
       availableLanguage: ['English', 'German'],
       areaServed: 'EU',
     },
@@ -49,31 +68,43 @@ export function generateOrganizationSchema() {
   }
 }
 
-export function generateWebSiteSchema() {
+export function generateWebSiteSchema(locale: string = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': WEBSITE_ID,
     name: 'MegaRobotics',
     url: baseUrl,
-    description:
-      'Industrial robotics and automation solutions — distribution, evaluation, sourcing and integration coordination for European customers.',
-    inLanguage: ['en', 'de'],
-    publisher: {
-      '@type': 'Organization',
-      name: 'MegaRobotics',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseUrl}/og-image.png`,
-      },
-    },
+    inLanguage: ['en', 'de-DE'],
+    publisher: { '@id': ORGANIZATION_ID },
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${baseUrl}/products?q={search_term_string}`,
+        urlTemplate: `${localizedUrl('/products', locale)}?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
+  }
+}
+
+/** AboutPage / ContactPage wrapper for the company pages. */
+export function generateWebPageSchema(page: {
+  type: 'AboutPage' | 'ContactPage'
+  name: string
+  description: string
+  path: string
+  locale: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': page.type,
+    name: page.name,
+    description: page.description,
+    url: localizedUrl(page.path, page.locale),
+    inLanguage: inLanguage(page.locale),
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': ORGANIZATION_ID },
   }
 }
 
@@ -81,83 +112,60 @@ export function generateArticleSchema(article: {
   title: string
   excerpt: string
   slug: string
-  publishedAt: string
+  locale?: string
+  publishedAt?: string
   updatedAt?: string
   author: { name: string; image?: string }
   mainImage?: string
   category?: string
+  keywords?: string[]
 }) {
+  const url = localizedUrl(`/articles/${article.slug}`, article.locale ?? 'en')
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
     description: article.excerpt,
-    url: `${baseUrl}/articles/${article.slug}`,
+    url,
+    inLanguage: inLanguage(article.locale ?? 'en'),
     datePublished: article.publishedAt,
     dateModified: article.updatedAt || article.publishedAt,
-    author: {
-      '@type': 'Person',
-      name: article.author.name,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'MegaRobotics',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseUrl}/logo.png`,
-      },
-    },
+    author: authorNode(article.author.name),
+    publisher: PUBLISHER,
     image: article.mainImage || `${baseUrl}/og-image.png`,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${baseUrl}/articles/${article.slug}`,
-    },
-    articleSection: article.category || 'News',
-    keywords: ['robotics', 'robots', 'automation', 'AI', article.category].filter(Boolean).join(', '),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    articleSection: article.category,
+    keywords: article.keywords?.length ? article.keywords.join(', ') : undefined,
   }
 }
 
+// No `offers`: every product is priced on request, and Google requires a numeric
+// price on Offer / AggregateOffer. An offer without one is an error in Search
+// Console and can't earn a rich result, so the page simply makes no price claim.
 export function generateProductSchema(product: {
   name: string
   description: string
   slug: string
+  locale?: string
   image?: string
   mainImage?: string
-  priceRange?: string
   manufacturer?: string
   category?: string
-  availability?: string
   specifications?: { label: string; value: string }[]
 }) {
-  const imageUrl = product.mainImage || product.image || `${baseUrl}/og-image.png`
-
-  // Map availability values to schema.org values
-  const availabilityMap: Record<string, string> = {
-    available: 'https://schema.org/InStock',
-    preorder: 'https://schema.org/PreOrder',
-    coming_soon: 'https://schema.org/PreSale',
-    contact: 'https://schema.org/LimitedAvailability',
-  }
-
+  const url = localizedUrl(`/products/${product.slug}`, product.locale ?? 'en')
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${url}#product`,
     name: product.name,
     description: product.description,
-    url: `${baseUrl}/products/${product.slug}`,
-    image: imageUrl,
-    brand: product.manufacturer ? {
-      '@type': 'Brand',
-      name: product.manufacturer,
-    } : undefined,
+    url,
+    image: product.mainImage || product.image || `${baseUrl}/og-image.png`,
+    brand: product.manufacturer ? { '@type': 'Brand', name: product.manufacturer } : undefined,
+    manufacturer: product.manufacturer ? { '@type': 'Organization', name: product.manufacturer } : undefined,
     category: product.category,
-    offers: product.priceRange ? {
-      '@type': 'AggregateOffer',
-      priceCurrency: 'EUR',
-      availability: availabilityMap[product.availability || ''] || 'https://schema.org/LimitedAvailability',
-      description: product.priceRange,
-    } : undefined,
-    additionalProperty: product.specifications?.slice(0, 10).map(spec => ({
+    additionalProperty: product.specifications?.map((spec) => ({
       '@type': 'PropertyValue',
       name: spec.label,
       value: spec.value,
@@ -169,6 +177,7 @@ export function generateManufacturerSchema(manufacturer: {
   name: string
   description?: string
   slug: string
+  locale?: string
   logo?: string
   website?: string
   headquarters?: string
@@ -179,7 +188,7 @@ export function generateManufacturerSchema(manufacturer: {
     '@type': 'Organization',
     name: manufacturer.name,
     description: manufacturer.description,
-    url: `${baseUrl}/manufacturers/${manufacturer.slug}`,
+    url: localizedUrl(`/manufacturers/${manufacturer.slug}`, manufacturer.locale ?? 'en'),
     logo: manufacturer.logo,
     sameAs: manufacturer.website ? [manufacturer.website] : undefined,
     foundingDate: manufacturer.founded,
@@ -190,7 +199,7 @@ export function generateManufacturerSchema(manufacturer: {
   }
 }
 
-export function generateBreadcrumbSchema(items: { name: string; href?: string; url?: string }[]) {
+export function generateBreadcrumbSchema(items: { name: string; href?: string; url?: string }[], locale: string = 'en') {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -198,7 +207,7 @@ export function generateBreadcrumbSchema(items: { name: string; href?: string; u
       const path = item.href || item.url || ''
       const absolute = /^https?:\/\//i.test(path)
         ? path
-        : `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`
+        : localizedUrl(path === '/' ? '' : path.startsWith('/') ? path : `/${path}`, locale)
       return {
         '@type': 'ListItem',
         position: index + 1,
@@ -238,24 +247,51 @@ export function generateAlternates(
   }
 }
 
-export function generateCategorySchema(category: {
+/** A listing page (catalogue, product family) and the products it links to. */
+export function generateCollectionSchema(collection: {
   name: string
   description?: string
-  slug: string
-  productCount?: number
+  path: string
+  locale: string
+  items: { name: string; path: string }[]
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: category.name,
-    description: category.description || `Browse ${category.name} products`,
-    url: `${baseUrl}/products/category/${category.slug}`,
-    numberOfItems: category.productCount,
+    name: collection.name,
+    description: collection.description,
+    url: localizedUrl(collection.path, collection.locale),
+    inLanguage: inLanguage(collection.locale),
+    isPartOf: { '@id': WEBSITE_ID },
     mainEntity: {
       '@type': 'ItemList',
-      name: category.name,
-      numberOfItems: category.productCount,
+      numberOfItems: collection.items.length,
+      itemListElement: collection.items.map((item, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: item.name,
+        url: localizedUrl(item.path, collection.locale),
+      })),
     },
+  }
+}
+
+export function generateServiceSchema(service: {
+  name: string
+  description?: string
+  path: string
+  locale: string
+  image?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    description: service.description,
+    url: localizedUrl(service.path, service.locale),
+    image: service.image,
+    provider: PUBLISHER,
+    areaServed: ['DE', 'AT', 'CH', 'EU'],
   }
 }
 
@@ -274,39 +310,32 @@ export function generateFAQSchema(faqs: { question: string; answer: string }[]) 
   }
 }
 
+// Buyers' guides are articles. They were marked up as HowTo, which needs
+// step-by-step content they don't have, and Google has retired that rich result.
 export function generateGuideSchema(guide: {
   title: string
   description: string
   slug: string
-  publishedAt: string
+  publishedAt?: string
   updatedAt?: string
   author: string
   mainImage?: string
-  readTime?: number
   tags?: string[]
 }) {
+  const url = localizedUrl(`/guides/${guide.slug}`, 'en')
   return {
     '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: guide.title,
+    '@type': 'Article',
+    headline: guide.title,
     description: guide.description,
-    url: `${baseUrl}/guides/${guide.slug}`,
+    url,
+    inLanguage: 'en',
     datePublished: guide.publishedAt,
     dateModified: guide.updatedAt || guide.publishedAt,
-    author: {
-      '@type': 'Person',
-      name: guide.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'MegaRobotics',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseUrl}/logo.png`,
-      },
-    },
+    author: authorNode(guide.author),
+    publisher: PUBLISHER,
     image: guide.mainImage || `${baseUrl}/og-image.png`,
-    totalTime: guide.readTime ? `PT${guide.readTime}M` : undefined,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     keywords: guide.tags?.join(', '),
   }
 }

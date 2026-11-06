@@ -27,7 +27,7 @@ export default async function DownloadsPage({ params }: Props) {
     <>
       <section className="border-b border-[color:var(--mr-line)] bg-[color:var(--mr-paper-2)]">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
-          <SectionHeader eyebrow={t('eyebrow')} title={t('title')} subtitle={t('lede')} />
+          <SectionHeader as="h1" eyebrow={t('eyebrow')} title={t('title')} subtitle={t('lede')} />
         </div>
       </section>
 

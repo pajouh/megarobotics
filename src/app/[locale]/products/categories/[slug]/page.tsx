@@ -11,6 +11,9 @@ import ProductCard from '@/components/ProductCard'
 import { getProductFamily, getProductsByFamily, type Locale } from '@/lib/sanity'
 import { getFamilyFallback } from '@/data/product-families'
 import { pageSeo } from '@/lib/page-seo'
+import { generateCollectionSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
+import Breadcrumbs from '@/components/Breadcrumbs'
 import PageBody from '@/components/PageBody'
 import { PortableTextBlock } from '@portabletext/types'
 
@@ -37,7 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!content) return {}
   const title = content.meta?.title ?? `${content.title} | MegaRobotics`
   const description = content.meta?.description ?? content.shortDescription ?? ''
-  return pageSeo({ title, description, path: `/products/categories/${slug}`, locale })
+  // A family with no live products is a catalogue page with an empty shelf:
+  // out of the index until something is listed in it.
+  const family = await getProductFamily(slug, locale as Locale)
+  const products = family ? await getProductsByFamily(family._id, undefined, locale as Locale) : []
+  return pageSeo({ title, description, path: `/products/categories/${slug}`, locale, noindex: products.length === 0 })
 }
 
 // On-publish revalidation (api/revalidate) refreshes this family page instantly
@@ -92,11 +99,27 @@ export default async function ProductCategoryPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
+      <StructuredData
+        data={generateCollectionSchema({
+          name: title,
+          description: intro,
+          path: `/products/categories/${slug}`,
+          locale,
+          items: relatedProducts.map((p) => ({ name: p.name, path: `/products/${p.slug.current}` })),
+        })}
+      />
       <HeroIndustrial eyebrow={tCatalog('page.eyebrow')} title={title} subtitle={intro} />
 
       {/* Back-to-catalog */}
       <div className="ind-section-light pt-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            className="mb-4"
+            items={[
+              { name: locale === 'de' ? 'Produkte' : 'Products', href: '/products' },
+              { name: title, href: `/products/categories/${slug}` },
+            ]}
+          />
           <Link
             href="/products"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 transition-colors"

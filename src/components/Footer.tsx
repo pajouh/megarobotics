@@ -92,6 +92,7 @@ export default function Footer({
 
   const catalogLinks = [
     { name: t.links.products, href: '/products' },
+    { name: t.links.manufacturers, href: '/manufacturers' },
     { name: t.links.automationComponents, href: '/automation-components' },
     { name: t.links.robotDistributor, href: '/robot-distributor' },
     { name: t.links.downloads, href: '/downloads' },
@@ -100,6 +101,9 @@ export default function Footer({
   const networkLinks = [
     { name: t.links.forCustomers, href: '/for-customers' },
     { name: t.links.forManufacturers, href: '/for-manufacturers' },
+    { name: t.links.technologyNetwork, href: '/technology-network' },
+    { name: t.links.projects, href: '/projects' },
+    { name: t.links.institutes, href: '/institutes' },
   ]
 
   const companyLinks = [
@@ -135,8 +139,8 @@ export default function Footer({
       ? socials
       : [
           { name: 'Twitter', icon: Twitter, href: 'https://x.com/megarobotics_de' },
-          { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/megarobotics' },
-          { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@megarobotics' },
+          { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/megarobotics' },
+          { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@megaroboticsDE' },
         ]
 
   return (

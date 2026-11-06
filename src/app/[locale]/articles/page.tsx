@@ -8,13 +8,26 @@ import { pageSeo } from '@/lib/page-seo'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  const title = 'Insights | MegaRobotics'
+  const title = locale === 'de' ? 'Robotik-News & Einblicke | MegaRobotics' : 'Robotics News & Insights | MegaRobotics'
   // Keyed by locale: this was a single English constant served on /de too.
   const descriptions: Record<string, string> = {
     en: 'Robotics and automation insights: robot platform evaluations, integration notes, application studies and market analysis for European industry.',
     de: 'Einblicke in Robotik und Automatisierung: Plattform-Evaluierungen, Integrationshinweise, Anwendungsstudien und Marktanalysen für die Industrie.',
   }
   return pageSeo({ title, description: descriptions[locale] ?? descriptions.en, path: '/articles', locale })
+}
+
+const headerCopy: Record<string, { eyebrow: string; title: string; intro: string }> = {
+  en: {
+    eyebrow: 'Insights',
+    title: 'Robotics News & Insights',
+    intro: 'Robotics news, market analysis and research insights from the world of intelligent machines.',
+  },
+  de: {
+    eyebrow: 'Einblicke',
+    title: 'Robotik-News & Einblicke',
+    intro: 'Robotik-Nachrichten, Marktanalysen und Forschungseinblicke aus der Welt intelligenter Maschinen.',
+  },
 }
 
 // article publishes revalidate /articles via /api/revalidate; this timer is
@@ -33,6 +46,7 @@ export default async function ArticlesPage({ params }: Props) {
   ])
 
   const [featured, ...rest] = articles
+  const copy = headerCopy[locale] ?? headerCopy.en
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
@@ -41,13 +55,10 @@ export default async function ArticlesPage({ params }: Props) {
         <div className="mb-10 max-w-3xl">
           <div className="ind-eyebrow mb-4">
             <span className="inline-block w-8 h-px bg-[color:var(--mr-accent-ink)]" aria-hidden="true" />
-            Insights
+            {copy.eyebrow}
           </div>
-          <h1 className="ind-h1 text-[color:var(--mr-ink)] mb-4">All Articles</h1>
-          <p className="text-[color:var(--mr-ink-2)] text-lg">
-            Explore the latest robotics news, in-depth reviews, company profiles,
-            and research insights from the world of intelligent machines.
-          </p>
+          <h1 className="ind-h1 text-[color:var(--mr-ink)] mb-4">{copy.title}</h1>
+          <p className="text-[color:var(--mr-ink-2)] text-lg">{copy.intro}</p>
         </div>
 
         {/* Category Filter */}

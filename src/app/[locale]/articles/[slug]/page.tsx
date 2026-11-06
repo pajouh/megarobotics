@@ -10,8 +10,8 @@ import CopyLinkButton from '@/components/CopyLinkButton'
 import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { generateArticleSchema, generateAlternates } from '@/lib/structured-data'
-import { brandedTitle } from '@/lib/page-seo'
+import { generateArticleSchema, generateAlternates, localizedUrl } from '@/lib/structured-data'
+import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -33,43 +33,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const metaTitle = article.seo?.metaTitle || article.title
   const brandedMetaTitle = brandedTitle(metaTitle)
-  const metaDescription = article.seo?.metaDescription || article.excerpt
-  const keywords = article.seo?.keywords?.length
-    ? article.seo.keywords
-    : [
-        article.category?.title,
-        'robotics',
-        'robots',
-        ...article.title.split(' ').slice(0, 5),
-      ].filter((k): k is string => Boolean(k))
+  const metaDescription = clampDescription(article.seo?.metaDescription || article.excerpt)
 
   return {
     title: brandedMetaTitle,
     description: metaDescription,
-    keywords,
+    keywords: article.seo?.keywords?.length ? article.seo.keywords : undefined,
     authors: article.author ? [{ name: article.author.name }] : undefined,
     openGraph: {
+      ...ogBase(`/articles/${slug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'article',
       publishedTime: article.publishedAt,
       authors: article.author ? [article.author.name] : undefined,
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-              width: 1200,
-              height: 630,
-              alt: article.title,
-            },
-          ]
-        : undefined,
+      images: [imageUrl ? { url: imageUrl, width: 1200, height: 630, alt: article.title } : DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: [imageUrl ?? DEFAULT_OG_IMAGE.url],
     },
     alternates: generateAlternates(`/articles/${slug}`, locale),
   }
@@ -92,14 +76,16 @@ export default async function ArticlePage({ params }: Props) {
     ? await getRelatedArticles(article._id, article.category.slug.current, 3, locale as Locale)
     : []
 
-  const shareUrl = `https://www.megarobotics.de/articles/${slug}`
+  const shareUrl = localizedUrl(`/articles/${slug}`, locale)
 
   // Generate structured data for the article
   const articleSchema = generateArticleSchema({
     title: article.title,
     excerpt: article.excerpt || '',
     slug: slug,
-    publishedAt: article.publishedAt || new Date().toISOString(),
+    locale,
+    // An article with no date stays undated rather than claiming "published today".
+    publishedAt: article.publishedAt,
     author: {
       name: article.author?.name || 'MegaRobotics',
       image: article.author?.image ? urlFor(article.author.image).url() : undefined,
@@ -110,7 +96,7 @@ export default async function ArticlePage({ params }: Props) {
 
   // Build breadcrumb items
   const breadcrumbItems = [
-    { name: 'Articles', href: '/articles' },
+    { name: locale === 'de' ? 'Artikel' : 'Articles', href: '/articles' },
     ...(article.category
       ? [{ name: article.category.title, href: `/category/${article.category.slug.current}` }]
       : []),
@@ -130,7 +116,7 @@ export default async function ArticlePage({ params }: Props) {
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-[color:var(--mr-steel)] hover:text-[color:var(--mr-ink)] transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Articles
+          {locale === 'de' ? 'Zurück zu den Artikeln' : 'Back to Articles'}
         </Link>
 
         {/* Header */}

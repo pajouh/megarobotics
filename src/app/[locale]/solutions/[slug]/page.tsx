@@ -9,6 +9,8 @@ import SolutionBody from '@/components/industrial/SolutionBody'
 import CTASection from '@/components/industrial/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { pageSeo } from '@/lib/page-seo'
+import { generateServiceSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
 import { solutionImages } from '@/lib/industrial-images'
 import { getSolution, getAllSolutionSlugs, type Locale } from '@/lib/sanity'
 
@@ -46,6 +48,15 @@ export default async function SolutionDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
+      <StructuredData
+        data={generateServiceSchema({
+          name: solution.title,
+          description: solution.excerpt,
+          path: `/solutions/${slug}`,
+          locale,
+          image: solution.imageUrl,
+        })}
+      />
       <HeroIndustrial
         eyebrow={t('eyebrow')}
         title={solution.title}

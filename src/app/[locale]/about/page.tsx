@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import CTASection from '@/components/industrial/CTASection'
 import { pageSeo } from '@/lib/page-seo'
+import { generateOrganizationSchema, generateWebPageSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -15,12 +17,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const revalidate = 3600
 
 export default async function CompanyPage({ params }: Props) {
-  await params
+  const { locale } = await params
   const t = await getTranslations('industrial.company')
   const tCta = await getTranslations('industrial.home.finalCta')
 
   return (
     <div className="min-h-screen">
+      <StructuredData
+        data={[
+          generateWebPageSchema({
+            type: 'AboutPage',
+            name: t('meta.title'),
+            description: t('meta.description'),
+            path: '/about',
+            locale,
+          }),
+          generateOrganizationSchema(locale),
+        ]}
+      />
       <HeroIndustrial eyebrow={t('eyebrow')} title={t('title')} subtitle={t('body')} />
 
       <section className="py-16 md:py-24 ind-section-light">

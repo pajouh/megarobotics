@@ -4,6 +4,8 @@ interface SectionHeaderProps {
   subtitle?: string
   tone?: 'light' | 'dark'
   align?: 'left' | 'center'
+  /** Heading level. Use 'h1' when this header opens the page; the look doesn't change. */
+  as?: 'h1' | 'h2'
 }
 
 export default function SectionHeader({
@@ -12,6 +14,7 @@ export default function SectionHeader({
   subtitle,
   tone = 'light',
   align = 'left',
+  as: Heading = 'h2',
 }: SectionHeaderProps) {
   const isDark = tone === 'dark'
   const isCentered = align === 'center'
@@ -33,9 +36,9 @@ export default function SectionHeader({
           {eyebrow}
         </div>
       )}
-      <h2 className={`ind-h2 ${isDark ? 'text-[color:var(--mr-ink-on-dark)]' : 'text-[color:var(--mr-ink)]'}`}>
+      <Heading className={`ind-h2 ${isDark ? 'text-[color:var(--mr-ink-on-dark)]' : 'text-[color:var(--mr-ink)]'}`}>
         {title}
-      </h2>
+      </Heading>
       {subtitle && (
         <p
           className={`mt-4 text-base md:text-lg ${

@@ -16,7 +16,7 @@ import ProductCard from '@/components/ProductCard'
 import { generateAlternates, generateManufacturerSchema } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { brandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 import { authorizedPartners } from '@/data/authorized-partners'
 
@@ -26,7 +26,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params
-  const manufacturer = await getManufacturer(slug, locale as Locale)
+  const [manufacturer, products] = await Promise.all([
+    getManufacturer(slug, locale as Locale),
+    getProductsByManufacturer(slug, undefined, locale as Locale),
+  ])
 
   if (!manufacturer) {
     return {
@@ -34,9 +37,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const metaTitle = manufacturer.seo?.metaTitle || `${manufacturer.name} - Robotics Products`
+  // Brands we carry nothing from are short directory stubs. They stay reachable
+  // but out of the index; adding a product or partner entry brings them back.
+  const hasContent = products.length > 0 || authorizedPartners.some((p) => p.slug === slug)
+
+  const metaTitle =
+    manufacturer.seo?.metaTitle ||
+    (locale === 'de' ? `${manufacturer.name}: Robotik-Produkte` : `${manufacturer.name}: Robotics Products`)
   const brandedMetaTitle = brandedTitle(metaTitle)
-  const metaDescription = manufacturer.seo?.metaDescription || manufacturer.description || `Browse robotics products from ${manufacturer.name}.`
+  const metaDescription = clampDescription(
+    manufacturer.seo?.metaDescription ||
+      manufacturer.description ||
+      (locale === 'de' ? `Robotik-Produkte von ${manufacturer.name} bei MegaRobotics.` : `Browse robotics products from ${manufacturer.name}.`),
+  )
   const logoUrl = manufacturer.logo
     ? urlFor(manufacturer.logo).ignoreImageParams().width(1200).height(630).fit('fill').bg('ffffff').url()
     : undefined
@@ -46,18 +59,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: metaDescription,
     keywords: manufacturer.seo?.keywords,
     alternates: generateAlternates(`/manufacturers/${slug}`, locale),
+    ...(hasContent ? {} : { robots: NOINDEX }),
     openGraph: {
+      ...ogBase(`/manufacturers/${slug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: logoUrl
-        ? [{ url: logoUrl, width: 1200, height: 630, alt: manufacturer.name }]
-        : undefined,
+      images: [logoUrl ? { url: logoUrl, width: 1200, height: 630, alt: manufacturer.name } : DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: logoUrl ? [logoUrl] : undefined,
+      images: [logoUrl ?? DEFAULT_OG_IMAGE.url],
     },
   }
 }
@@ -93,6 +106,7 @@ export default async function ManufacturerPage({ params }: Props) {
     name: manufacturer.name,
     description: manufacturer.description,
     slug: slug,
+    locale,
     logo: manufacturer.logo ? imageBoxUrl(manufacturer.logo, 400) : undefined,
     website: manufacturer.website,
     headquarters: manufacturer.headquarters,
@@ -100,7 +114,7 @@ export default async function ManufacturerPage({ params }: Props) {
   })
 
   const breadcrumbItems = [
-    { name: 'Manufacturers', href: '/manufacturers' },
+    { name: locale === 'de' ? 'Hersteller' : 'Manufacturers', href: '/manufacturers' },
     { name: manufacturer.name, href: `/manufacturers/${slug}` },
   ]
 

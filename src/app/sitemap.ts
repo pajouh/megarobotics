@@ -1,11 +1,13 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity'
+import { authorizedPartners } from '@/data/authorized-partners'
 
 // Cache sitemap for 1 hour to prevent excessive Sanity API calls from crawlers
 export const revalidate = 3600
 
 const baseUrl = 'https://www.megarobotics.de'
-const locales = ['en', 'de']
+const allLocales = ['en', 'de']
+const englishOnly = ['en']
 
 // next-intl runs with localePrefix: 'as-needed', so the default locale (en) is
 // served WITHOUT a prefix and `/en/...` 307-redirects to the unprefixed path.
@@ -17,29 +19,48 @@ function localeUrl(locale: string, path: string): string {
 
 function localizedEntries(
   path: string,
-  options: { lastModified?: Date; changeFrequency?: MetadataRoute.Sitemap[number]['changeFrequency']; priority?: number }
+  options: {
+    lastModified?: Date
+    changeFrequency?: MetadataRoute.Sitemap[number]['changeFrequency']
+    priority?: number
+    images?: string[]
+    /** Content that only exists in English lists no German URL. */
+    locales?: string[]
+  }
 ): MetadataRoute.Sitemap {
+  const locales = options.locales ?? allLocales
   const languages = Object.fromEntries([
     ...locales.map((l) => [l, localeUrl(l, path)]),
     ['x-default', localeUrl('en', path)],
   ])
   return locales.map((locale) => ({
     url: localeUrl(locale, path),
-    lastModified: options.lastModified || new Date(),
+    // Only a real edit date. Stamping "now" on every crawl makes search engines
+    // stop trusting lastmod across the whole sitemap.
+    ...(options.lastModified ? { lastModified: options.lastModified } : {}),
     changeFrequency: options.changeFrequency,
     priority: options.priority,
     alternates: { languages },
+    ...(options.images?.length ? { images: options.images } : {}),
   }))
+}
+
+interface SanityEntry {
+  slug: string
+  _updatedAt: string
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all content from Sanity
   const [articles, categories, products, productFamilies, manufacturers, buyersGuides, institutes, instituteCountries, solutions, cmsPages] = await Promise.all([
     client?.fetch(`*[_type == "article" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "category"]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "product" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "productFamily" && isActive != false]{ "slug": slug.current, _updatedAt }`) || [],
-    client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt }`) || [],
+    // Listings with nothing on them are noindexed by their pages, so they stay out of here too.
+    client?.fetch(`*[_type == "category" && count(*[_type == "article" && isActive != false && category._ref == ^._id]) > 0]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "product" && isActive != false]{ "slug": slug.current, _updatedAt, "image": mainImage.asset->url }`) || [],
+    // Same rule as the family page: a switched-off family lists no products there,
+    // even when live products still point at it, so its page is noindexed.
+    client?.fetch(`*[_type == "productFamily" && isActive != false && count(*[_type == "product" && isActive != false && productFamily._ref == ^._id]) > 0]{ "slug": slug.current, _updatedAt }`) || [],
+    client?.fetch(`*[_type == "manufacturer"]{ "slug": slug.current, _updatedAt, "products": count(*[_type == "product" && isActive != false && manufacturer._ref == ^._id]) }`) || [],
     client?.fetch(`*[_type == "buyersGuide"]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`*[_type == "institute" && profileStatus in ["Ready", "Foundational"]]{ "slug": slug.current, _updatedAt }`) || [],
     client?.fetch(`array::unique(*[_type == "institute" && profileStatus in ["Ready", "Foundational"]].country)`) || [],
@@ -73,7 +94,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Dynamic pages with locale variants
-  const articlePages: MetadataRoute.Sitemap = (articles || []).flatMap((article: { slug: string; _updatedAt: string }) =>
+  const articlePages: MetadataRoute.Sitemap = (articles || []).flatMap((article: SanityEntry) =>
     localizedEntries(`/articles/${article.slug}`, {
       lastModified: new Date(article._updatedAt),
       changeFrequency: 'weekly',
@@ -81,7 +102,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
-  const categoryPages: MetadataRoute.Sitemap = (categories || []).flatMap((category: { slug: string; _updatedAt: string }) =>
+  const categoryPages: MetadataRoute.Sitemap = (categories || []).flatMap((category: SanityEntry) =>
     localizedEntries(`/category/${category.slug}`, {
       lastModified: new Date(category._updatedAt),
       changeFrequency: 'daily',
@@ -89,15 +110,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
-  const productPages: MetadataRoute.Sitemap = (products || []).flatMap((product: { slug: string; _updatedAt: string }) =>
+  const productPages: MetadataRoute.Sitemap = (products || []).flatMap((product: SanityEntry & { image?: string }) =>
     localizedEntries(`/products/${product.slug}`, {
       lastModified: new Date(product._updatedAt),
       changeFrequency: 'weekly',
       priority: 0.8,
+      images: product.image ? [product.image] : undefined,
     })
   )
 
-  const productFamilyPages: MetadataRoute.Sitemap = (productFamilies || []).flatMap((fam: { slug: string; _updatedAt: string }) =>
+  const productFamilyPages: MetadataRoute.Sitemap = (productFamilies || []).flatMap((fam: SanityEntry) =>
     localizedEntries(`/products/categories/${fam.slug}`, {
       lastModified: new Date(fam._updatedAt),
       changeFrequency: 'daily',
@@ -105,31 +127,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
-  const manufacturerPages: MetadataRoute.Sitemap = (manufacturers || []).flatMap((manufacturer: { slug: string; _updatedAt: string }) =>
-    localizedEntries(`/manufacturers/${manufacturer.slug}`, {
-      lastModified: new Date(manufacturer._updatedAt),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    })
-  )
+  // Same rule as the manufacturer page's noindex: a product or a partner entry.
+  const partnerSlugs = new Set(authorizedPartners.map((p) => p.slug))
+  const manufacturerPages: MetadataRoute.Sitemap = (manufacturers || [])
+    .filter((manufacturer: SanityEntry & { products: number }) => manufacturer.products > 0 || partnerSlugs.has(manufacturer.slug))
+    .flatMap((manufacturer: SanityEntry) =>
+      localizedEntries(`/manufacturers/${manufacturer.slug}`, {
+        lastModified: new Date(manufacturer._updatedAt),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      })
+    )
 
-  const buyersGuidePages: MetadataRoute.Sitemap = (buyersGuides || []).flatMap((guide: { slug: string; _updatedAt: string }) =>
+  const buyersGuidePages: MetadataRoute.Sitemap = (buyersGuides || []).flatMap((guide: SanityEntry) =>
     localizedEntries(`/guides/${guide.slug}`, {
       lastModified: new Date(guide._updatedAt),
       changeFrequency: 'weekly',
       priority: 0.9,
+      locales: englishOnly,
     })
   )
 
-  const institutePages: MetadataRoute.Sitemap = (institutes || []).flatMap((inst: { slug: string; _updatedAt: string }) =>
+  const institutePages: MetadataRoute.Sitemap = (institutes || []).flatMap((inst: SanityEntry) =>
     localizedEntries(`/institutes/${inst.slug}`, {
       lastModified: new Date(inst._updatedAt),
       changeFrequency: 'monthly',
       priority: 0.6,
+      locales: englishOnly,
     })
   )
 
-  const solutionPages: MetadataRoute.Sitemap = (solutions || []).flatMap((solution: { slug: string; _updatedAt: string }) =>
+  const solutionPages: MetadataRoute.Sitemap = (solutions || []).flatMap((solution: SanityEntry) =>
     localizedEntries(`/solutions/${solution.slug}`, {
       lastModified: new Date(solution._updatedAt),
       changeFrequency: 'monthly',
@@ -153,7 +181,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const cmsPagePages: MetadataRoute.Sitemap = (cmsPages || [])
     .filter((page: { slug: string }) => page.slug && !EXCLUDED_PAGE_SLUGS.has(page.slug))
-    .flatMap((page: { slug: string; _updatedAt: string }) =>
+    .flatMap((page: SanityEntry) =>
       localizedEntries(`/pages/${page.slug}`, {
         lastModified: new Date(page._updatedAt),
         changeFrequency: 'monthly',
@@ -165,6 +193,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     localizedEntries(`/institutes/country/${country.toLowerCase().replace(/\s+/g, '-')}`, {
       changeFrequency: 'monthly',
       priority: 0.7,
+      locales: englishOnly,
     })
   )
 

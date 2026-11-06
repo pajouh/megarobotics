@@ -175,8 +175,8 @@
     "emailLabel": "Email",
     "locationLabel": "Location",
     "businessLabel": "For Business",
-    "metaTitle": "Contact - MegaRobotics",
-    "metaDescription": "Get in touch with MegaRobotics. Send us your questions, partnership inquiries, or story tips."
+    "metaTitle": "Contact & Robot Quote Requests | MegaRobotics",
+    "metaDescription": "Ask MegaRobotics about robot pricing, availability and integration. Reach our team in Kaarst, Germany, by form, email or phone."
   },
   "errors": {
     "pageNotFound": "Page Not Found",
@@ -296,8 +296,8 @@
     },
     "home": {
       "meta": {
-        "title": "MegaRobotics | Industrial Robotics & Automation Solutions",
-        "description": "Robotics distributor in Germany for Franka, LimX, OnRobot and Agile Robots. Sourcing, evaluation and integration for industry and research."
+        "title": "Robot Distributor Germany: Humanoids, Cobots, Grippers | MegaRobotics",
+        "description": "Robot distributor in Germany for Agile Robots, Franka, LimX, OnRobot and more. Humanoids, cobots, grippers and cells: sourcing, evaluation and integration."
       },
       "hero": {
         "eyebrow": "Industrial Robotics & Automation",
@@ -1033,7 +1033,7 @@
     },
     "company": {
       "meta": {
-        "title": "Company | MegaRobotics",
+        "title": "About Us: Robot Distributor in Kaarst, Germany | MegaRobotics",
         "description": "Germany-based robotics and automation partner in Kaarst. We evaluate, source and integrate robot platforms for industrial, research and service use."
       },
       "title": "About MegaRobotics",
@@ -1119,8 +1119,8 @@
     },
     "catalog": {
       "meta": {
-        "title": "Robotics & Automation Technologies | MegaRobotics",
-        "description": "Robot platforms, grippers, sensors, PLCs, drives and safety systems from vetted manufacturers, sourced and evaluated for industrial automation."
+        "title": "Robot Catalog: Humanoids, Cobots, Grippers, Cells | MegaRobotics",
+        "description": "Humanoids, cobots, quadrupeds, grippers, service robots and palletizing cells from Agile Robots, Franka, LimX, OnRobot and more, sourced from Germany."
       },
       "page": {
         "eyebrow": "Catalog",
@@ -1301,8 +1301,8 @@
             "Software ecosystem"
           ],
           "meta": {
-            "title": "Robot Platforms | MegaRobotics",
-            "description": "Industrial arms, cobots, parallel robots, AMR/AGV, quadruped, humanoid and mobile manipulators — sourced and evaluated for European applications."
+            "title": "Buy Robots: Cobots, Humanoids, Quadrupeds | MegaRobotics",
+            "description": "Cobots, humanoid robots, robot dogs and mobile manipulators from Agile Robots, Franka, LimX and MagicLab, sourced and evaluated for European applications."
           }
         },
         "end-effectors-robot-tooling": {
@@ -1351,8 +1351,8 @@
             "Cleanroom / hygiene class"
           ],
           "meta": {
-            "title": "End Effectors & Robot Tooling | MegaRobotics",
-            "description": "Grippers, vacuum tools, force/torque sensors, dispensing and finishing tools — the end-of-arm technology that defines what a robotic cell can actually do."
+            "title": "Robot Grippers & End Effectors | MegaRobotics",
+            "description": "Robot grippers, vacuum tools, force/torque sensors and quick changers from OnRobot, Franka and Agile Robots: the tooling that defines what a cell can do."
           }
         },
         "motion-actuators-drives": {
@@ -1659,8 +1659,8 @@
             "Maintenance"
           ],
           "meta": {
-            "title": "Robotic Cells & Application Packages | MegaRobotics",
-            "description": "Pre-engineered robotic cells for palletizing, machine tending, picking, packaging, inspection and surface finishing."
+            "title": "Palletizing & Robotic Cells | MegaRobotics",
+            "description": "Cobot palletizers from Atom Robot, plus a mobile welding robot and flexible platform from Agile Robots: application packages for production and end of line."
           }
         },
         "service-cleaning-facility-robots": {
@@ -1696,8 +1696,8 @@
             "Customer experience"
           ],
           "meta": {
-            "title": "Service, Cleaning & Facility Robots | MegaRobotics",
-            "description": "Autonomous cleaning, delivery, security patrol and facility-service robots for commercial and industrial environments."
+            "title": "Cleaning & Service Robots | MegaRobotics",
+            "description": "Autonomous cleaning, delivery and greeting robots from OrionStar and Agile Robots for commercial and industrial environments, sourced from Germany."
           }
         },
         "research-education-embodied-ai": {
@@ -1733,8 +1733,8 @@
             "Long-term support"
           ],
           "meta": {
-            "title": "Research, Education & Embodied AI | MegaRobotics",
-            "description": "Humanoid, quadruped, mobile manipulation and teleoperation platforms for university research and embodied AI labs."
+            "title": "Research Robots for Universities & Embodied AI | MegaRobotics",
+            "description": "Humanoid, quadruped and teleoperation platforms from Agile Robots, MagicLab and Franka for university research, robotics education and embodied AI labs."
           }
         },
         "spare-parts-modules-accessories": {
@@ -1854,8 +1854,8 @@
     },
     "downloads": {
       "meta": {
-        "title": "Downloads | MegaRobotics",
-        "description": "Download LimX Luna, Oli and TRON 2 product videos, manuals, software and brochures: introduction films, field stories and the full operating tutorial sets, free to use for evaluation and training."
+        "title": "LimX Manuals, Videos & Software Downloads | MegaRobotics",
+        "description": "Download LimX Luna, Oli and TRON 2 manuals, software, brochures and videos, including the full operating tutorials, for evaluation and training."
       },
       "eyebrow": "Media library",
       "title": "Downloads",

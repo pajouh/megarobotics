@@ -10,13 +10,23 @@ import { authorizedPartners } from '@/data/authorized-partners'
 import Disclaimer from '@/components/Disclaimer'
 import { pageSeo } from '@/lib/page-seo'
 
-const title = 'Manufacturer Directory | MegaRobotics'
-const description =
-  'Directory of robotics and automation manufacturers MegaRobotics distributes, sources or evaluates for European industrial, research and service applications.'
+// Keyed by locale: these were English constants served on /de too.
+const meta: Record<string, { title: string; description: string }> = {
+  en: {
+    title: 'Robot Manufacturers & Brands | MegaRobotics',
+    description:
+      'Directory of robotics and automation manufacturers MegaRobotics distributes, sources or evaluates for European industrial, research and service applications.',
+  },
+  de: {
+    title: 'Roboterhersteller & Marken | MegaRobotics',
+    description:
+      'Verzeichnis der Robotik- und Automatisierungshersteller, die MegaRobotics für Industrie, Forschung und Service in Europa vertreibt, beschafft oder evaluiert.',
+  },
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return pageSeo({ title, description, path: '/manufacturers', locale })
+  return pageSeo({ ...(meta[locale] ?? meta.en), path: '/manufacturers', locale })
 }
 
 // manufacturer/product publishes revalidate /manufacturers via /api/revalidate;

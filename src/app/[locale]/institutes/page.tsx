@@ -5,7 +5,10 @@ import { getInstitutes, getInstituteCountries } from '@/lib/sanity'
 import { pageSeo } from '@/lib/page-seo'
 import InstituteFilter from '@/components/InstituteFilter'
 
-const title = 'Robotics Research Institutes | MegaRobotics'
+const titles: Record<string, string> = {
+  en: 'Robotics Research Institutes | MegaRobotics',
+  de: 'Robotik-Forschungsinstitute | MegaRobotics',
+}
 
 // Keyed by locale: this string was a single English constant served on /de as
 // well, so the German page advertised itself in English.
@@ -20,7 +23,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
-  return pageSeo({ title, description: descriptions[locale] ?? descriptions.en, path: '/institutes', locale })
+  return pageSeo({ title: titles[locale] ?? titles.en, description: descriptions[locale] ?? descriptions.en, path: '/institutes', locale })
 }
 
 export const revalidate = 3600

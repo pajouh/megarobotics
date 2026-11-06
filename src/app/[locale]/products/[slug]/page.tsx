@@ -28,7 +28,7 @@ import {
   generateProductSchema,
   generateAlternates,
 } from '@/lib/structured-data'
-import { fitBrandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, clampDescription, fitBrandedTitle, ogBase } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 
 interface Props {
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       product.name,
     ].filter((candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0)
   )
-  const metaDescription = product.seo?.metaDescription || product.description || product.tagline
+  const metaDescription = clampDescription(product.seo?.metaDescription || product.description || product.tagline)
   // Social cards need the exact 1200x630 box, so width/height stay — but
   // ignoreImageParams() suppresses the hotspot `rect=` the builder would
   // otherwise add to crop down to that aspect, and fit('fill') + a white
@@ -78,16 +78,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: product.seo?.keywords,
     alternates,
     openGraph: {
+      ...ogBase(`/products/${slug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
-      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: product.name }] : undefined,
+      images: [imageUrl ? { url: imageUrl, width: 1200, height: 630, alt: product.name } : DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: [imageUrl ?? DEFAULT_OG_IMAGE.url],
     },
   }
 }
@@ -137,6 +138,7 @@ export default async function ProductPage({ params }: Props) {
     name: product.name,
     description: product.description || product.tagline || '',
     slug,
+    locale,
     manufacturer: product.manufacturer?.name,
     category: product.productFamily?.title,
     mainImage: product.mainImage
@@ -148,8 +150,6 @@ export default async function ProductPage({ params }: Props) {
           .bg('ffffff')
           .url()
       : undefined,
-    priceRange: product.priceRange,
-    availability: product.availability,
     specifications: product.specifications,
   })
 
@@ -157,7 +157,7 @@ export default async function ProductPage({ params }: Props) {
   const distinctRelatedProducts = relatedProducts.filter((p) => !manufacturerProductIds.has(p._id))
 
   const breadcrumbItems = [
-    { name: 'Products', href: '/products' },
+    { name: locale === 'de' ? 'Produkte' : 'Products', href: '/products' },
     ...(product.productFamily
       ? [
           {

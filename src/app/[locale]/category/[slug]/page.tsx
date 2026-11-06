@@ -6,6 +6,7 @@ import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs,
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
 import { generateAlternates } from '@/lib/structured-data'
+import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -13,7 +14,10 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params
-  const category = await getCategory(slug, locale as Locale)
+  const [category, articles] = await Promise.all([
+    getCategory(slug, locale as Locale),
+    getArticlesByCategory(slug, undefined, locale as Locale),
+  ])
 
   if (!category) {
     return {
@@ -21,24 +25,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const title = `${category.title} News & Articles`
-  const description = category.description || `Browse all ${category.title.toLowerCase()} articles and news from MegaRobotics.`
+  const title = brandedTitle(locale === 'de' ? `Robotik: ${category.title}` : `Robotics ${category.title}`).absolute
+  const description = clampDescription(
+    category.description ||
+      (locale === 'de'
+        ? `Alle Artikel und Einblicke von MegaRobotics zum Thema ${category.title}.`
+        : `All MegaRobotics articles and insights on ${category.title.toLowerCase()}.`),
+  )
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: generateAlternates(`/category/${slug}`, locale),
+    // An empty category is a page with no content: out of the index until it has some.
+    ...(articles.length === 0 ? { robots: NOINDEX } : {}),
     openGraph: {
+      ...ogBase(`/category/${slug}`, locale),
       title,
       description,
       type: 'website',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${category.title} - MegaRobotics` }],
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/og-image.png'],
+      images: [DEFAULT_OG_IMAGE.url],
     },
   }
 }
@@ -71,7 +83,7 @@ export default async function CategoryPage({ params }: Props) {
           className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          All Articles
+          {locale === 'de' ? 'Alle Artikel' : 'All Articles'}
         </Link>
 
         {/* Header */}

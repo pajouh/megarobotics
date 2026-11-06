@@ -10,7 +10,7 @@ import BuyersGuideBody from '@/components/BuyersGuideBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { generateGuideSchema, generateAlternates } from '@/lib/structured-data'
-import { brandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -28,40 +28,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const metaTitle = guide.seo?.metaTitle || guide.title
   const brandedMetaTitle = brandedTitle(metaTitle)
-  const metaDescription = guide.seo?.metaDescription || guide.shortDescription
+  const metaDescription = clampDescription(guide.seo?.metaDescription || guide.shortDescription)
+  const ogImage = guide.mainImage?.image ? urlFor(guide.mainImage.image).width(1200).height(630).url() : undefined
 
   return {
     title: brandedMetaTitle,
     description: metaDescription,
     keywords: guide.news?.tags || [],
     authors: [{ name: guide.author || 'MegaRobotics Editorial' }],
+    // Guides are written in English only, so the /de URL repeats the English page.
+    ...(locale === 'de' ? { robots: NOINDEX } : {}),
     openGraph: {
+      ...ogBase(`/guides/${slug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'article',
       publishedTime: guide.publishedAt,
       modifiedTime: guide.updatedAt,
       authors: [guide.author || 'MegaRobotics Editorial'],
-      images: guide.mainImage?.image
-        ? [
-            {
-              url: urlFor(guide.mainImage.image).width(1200).height(630).url(),
-              width: 1200,
-              height: 630,
-              alt: guide.mainImage.alt || guide.title,
-            },
-          ]
-        : undefined,
+      images: [ogImage ? { url: ogImage, width: 1200, height: 630, alt: guide.mainImage?.alt || guide.title } : DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: guide.mainImage?.image
-        ? [urlFor(guide.mainImage.image).width(1200).height(630).url()]
-        : undefined,
+      images: [ogImage ?? DEFAULT_OG_IMAGE.url],
     },
-    alternates: generateAlternates(`/guides/${slug}`, locale),
+    alternates: generateAlternates(`/guides/${slug}`, locale, ['en']),
   }
 }
 
@@ -73,7 +66,7 @@ export async function generateStaticParams() {
 export const revalidate = 3600 // Revalidate every hour
 
 export default async function BuyersGuidePage({ params }: Props) {
-  const { slug } = await params
+  const { slug, locale } = await params
   const guide = await getBuyersGuide(slug)
 
   if (!guide) {
@@ -85,18 +78,17 @@ export default async function BuyersGuidePage({ params }: Props) {
     title: guide.title,
     description: guide.shortDescription || '',
     slug: slug,
-    publishedAt: guide.publishedAt || new Date().toISOString(),
+    publishedAt: guide.publishedAt,
     updatedAt: guide.updatedAt,
     author: guide.author || 'MegaRobotics Editorial',
     mainImage: guide.mainImage?.image
       ? urlFor(guide.mainImage.image).width(1200).height(630).url()
       : undefined,
-    readTime: guide.readTime,
     tags: guide.news?.tags,
   })
 
   const breadcrumbItems = [
-    { name: 'Guides', href: '/guides' },
+    { name: locale === 'de' ? 'Kaufberater' : 'Guides', href: '/guides' },
     { name: guide.title, href: `/guides/${slug}` },
   ]
 

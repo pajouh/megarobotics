@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import { generateAlternates } from '@/lib/structured-data'
-import { brandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>
@@ -30,23 +30,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const rawTitle = page.seo?.metaTitle || page.title
   const brandedMetaTitle = brandedTitle(rawTitle)
   const title = brandedMetaTitle.absolute
-  const description = page.seo?.metaDescription || page.subtitle
+  const description = clampDescription(page.seo?.metaDescription || page.subtitle)
 
   return {
     title: brandedMetaTitle,
     description,
     alternates: generateAlternates(`/pages/${slug}`, locale),
     openGraph: {
+      ...ogBase(`/pages/${slug}`, locale),
       title,
       description,
       type: 'website',
-      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: `${page.title} - MegaRobotics` }],
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/og-image.png'],
+      images: [DEFAULT_OG_IMAGE.url],
     },
   }
 }

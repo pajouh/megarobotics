@@ -7,7 +7,23 @@ import { BookOpen, Clock, RefreshCw } from 'lucide-react'
 import { getBuyersGuides, urlFor } from '@/lib/sanity'
 import { pageSeo } from '@/lib/page-seo'
 
-const guidesTitle = "Buyers' Guides | MegaRobotics"
+const guidesTitles: Record<string, string> = {
+  en: "Robot Buyer's Guides | MegaRobotics",
+  de: 'Roboter-Kaufberater | MegaRobotics',
+}
+
+const headerCopy: Record<string, { eyebrow: string; title: string; intro: string }> = {
+  en: {
+    eyebrow: 'Make informed decisions',
+    title: "Robot Buyer's Guides",
+    intro: 'Practical, evidence-based guides to help you navigate the robotics market. No hype, just facts and real-world considerations.',
+  },
+  de: {
+    eyebrow: 'Fundiert entscheiden',
+    title: 'Roboter-Kaufberater',
+    intro: 'Praxisnahe, faktenbasierte Leitfäden für den Robotik-Markt, ohne Hype und mit Blick auf den echten Einsatz. Die Leitfäden erscheinen derzeit auf Englisch.',
+  },
+}
 
 // Keyed by locale: this was a single English constant served on /de too.
 const guidesDescriptions: Record<string, string> = {
@@ -22,7 +38,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   return pageSeo({
-    title: guidesTitle,
+    title: guidesTitles[locale] ?? guidesTitles.en,
     description: guidesDescriptions[locale] ?? guidesDescriptions.en,
     path: '/guides',
     locale,
@@ -31,8 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 3600
 
-export default async function GuidesPage() {
+export default async function GuidesPage({ params }: Props) {
+  const { locale } = await params
   const guides = await getBuyersGuides()
+  const copy = headerCopy[locale] ?? headerCopy.en
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
@@ -41,15 +59,12 @@ export default async function GuidesPage() {
         <div className="mb-12 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium mb-4">
             <BookOpen className="w-4 h-4" />
-            Buyers&apos; Guides
+            {copy.eyebrow}
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Make Informed Decisions
+            {copy.title}
           </h1>
-          <p className="text-lg text-gray-600">
-            Practical, evidence-based guides to help you navigate the robotics market.
-            No hype, just facts and real-world considerations.
-          </p>
+          <p className="text-lg text-gray-600">{copy.intro}</p>
         </div>
 
         {/* Guides Grid */}

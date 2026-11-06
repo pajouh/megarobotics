@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import { Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import ContactForm from '@/components/ContactForm'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import { getSiteSettings, type Locale } from '@/lib/sanity'
 import { pageSeo } from '@/lib/page-seo'
+import { generateOrganizationSchema, generateWebPageSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -26,12 +28,27 @@ export default async function ContactPage({ params }: Props) {
   const settings = await getSiteSettings(locale as Locale)
   const tExtra = await getTranslations('industrial.contactExtra')
   const tNav = await getTranslations('industrial.nav')
+  const tContact = await getTranslations('contact')
+  const isDe = locale === 'de'
 
   const contactEmail = settings?.contactEmail || 'info@megarobotics.de'
-  const address = settings?.address || (locale === 'de' ? 'Berlin, Deutschland' : 'Berlin, Germany')
+  const contactPhone = settings?.contactPhone || '+49 172 2008875'
+  const address = settings?.address || (isDe ? 'Wacholderweg 8\n41564 Kaarst\nDeutschland' : 'Wacholderweg 8\n41564 Kaarst\nGermany')
 
   return (
     <div className="min-h-screen">
+      <StructuredData
+        data={[
+          generateWebPageSchema({
+            type: 'ContactPage',
+            name: tContact('metaTitle'),
+            description: tContact('metaDescription'),
+            path: '/contact',
+            locale,
+          }),
+          generateOrganizationSchema(locale),
+        ]}
+      />
       <HeroIndustrial
         eyebrow={tNav('contact')}
         title={tExtra('intro')}
@@ -50,7 +67,7 @@ export default async function ContactPage({ params }: Props) {
                   </div>
                   <div>
                     <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] font-medium text-[color:var(--mr-steel)] mb-1">
-                      Email
+                      {isDe ? 'E-Mail' : 'Email'}
                     </p>
                     <a
                       href={`mailto:${contactEmail}`}
@@ -63,13 +80,31 @@ export default async function ContactPage({ params }: Props) {
 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)] flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-4 h-4 text-[color:var(--mr-accent-ink)]" />
+                  </div>
+                  <div>
+                    <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] font-medium text-[color:var(--mr-steel)] mb-1">
+                      {isDe ? 'Telefon' : 'Phone'}
+                    </p>
+                    <a
+                      href={`tel:${contactPhone.replace(/[^+\d]/g, '')}`}
+                      className="text-[color:var(--mr-ink)] hover:text-[color:var(--mr-accent-ink)] transition-colors font-medium"
+                    >
+                      {contactPhone}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-[color:var(--mr-paper-2)] border border-[color:var(--mr-line)] flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-4 h-4 text-[color:var(--mr-accent-ink)]" />
                   </div>
                   <div>
                     <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] font-medium text-[color:var(--mr-steel)] mb-1">
-                      Location
+                      {isDe ? 'Standort' : 'Location'}
                     </p>
-                    <p className="text-[color:var(--mr-ink)] font-medium">{address}</p>
+                    <p className="text-[color:var(--mr-ink)] font-medium">MEGAFORCE GmbH</p>
+                    <p className="text-[color:var(--mr-ink)] font-medium whitespace-pre-line">{address}</p>
                   </div>
                 </div>
               </div>

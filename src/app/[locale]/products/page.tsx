@@ -7,6 +7,8 @@ import Disclaimer from '@/components/Disclaimer'
 import CatalogExplorer from '@/components/catalog/CatalogExplorer'
 import type { CatalogBrand, CatalogFamily, CatalogItem, CatalogQuery, FlagshipItem } from '@/components/catalog/types'
 import { pageSeo } from '@/lib/page-seo'
+import { generateCollectionSchema } from '@/lib/structured-data'
+import StructuredData from '@/components/StructuredData'
 import { productFamilyFallbacks } from '@/data/product-families'
 import { authorizedPartners } from '@/data/authorized-partners'
 import { getHomeProductHero, getProductHero } from '@/data/product-heroes'
@@ -129,6 +131,15 @@ export default async function ProductsPage({ params, searchParams }: Props) {
 
   return (
     <div className="min-h-screen ind-section-light">
+      <StructuredData
+        data={generateCollectionSchema({
+          name: tCatalog('meta.title').replace(/\s*\|\s*MegaRobotics$/, ''),
+          description: tCatalog('meta.description'),
+          path: '/products',
+          locale,
+          items: items.map((item) => ({ name: item.name, path: `/products/${item.slug}` })),
+        })}
+      />
       <CatalogExplorer items={items} flagships={flagships} families={families} initial={initial} />
 
       {/* Components and distributor teasers */}

@@ -175,8 +175,8 @@
     "emailLabel": "E-Mail",
     "locationLabel": "Standort",
     "businessLabel": "Geschäftlich",
-    "metaTitle": "Kontakt - MegaRobotics",
-    "metaDescription": "Nehmen Sie Kontakt mit MegaRobotics auf. Senden Sie uns Ihre Fragen, Partnerschaftsanfragen oder Nachrichtentipps."
+    "metaTitle": "Kontakt & Roboter-Anfrage | MegaRobotics",
+    "metaDescription": "Fragen Sie MegaRobotics nach Preisen, Verfügbarkeit und Integration von Robotern. Erreichen Sie unser Team in Kaarst per Formular, E-Mail oder Telefon."
   },
   "errors": {
     "pageNotFound": "Seite nicht gefunden",
@@ -296,8 +296,8 @@
     },
     "home": {
       "meta": {
-        "title": "MegaRobotics | Industrielle Robotik & Automatisierungslösungen",
-        "description": "Robotik-Distributor aus Kaarst für Franka, LimX, OnRobot und Agile Robots. Beschaffung, Evaluierung und Integration für Industrie und Forschung."
+        "title": "Roboter kaufen: Humanoide, Cobots, Greifer & Zellen | MegaRobotics",
+        "description": "Roboter-Distributor in Kaarst für Agile Robots, Franka, LimX, OnRobot u. a.: Humanoide, Cobots, Greifer und Zellen mit Beschaffung, Evaluierung und Integration."
       },
       "hero": {
         "eyebrow": "Industrielle Robotik & Automatisierung",
@@ -1033,7 +1033,7 @@
     },
     "company": {
       "meta": {
-        "title": "Unternehmen | MegaRobotics",
+        "title": "Über uns: Roboter-Distributor aus Kaarst | MegaRobotics",
         "description": "Robotik- und Automatisierungspartner aus Kaarst. Wir evaluieren, beschaffen und integrieren Roboterplattformen für Industrie, Forschung und Service."
       },
       "title": "Über MegaRobotics",
@@ -1119,8 +1119,8 @@
     },
     "catalog": {
       "meta": {
-        "title": "Robotik & Automatisierungstechnologien | MegaRobotics",
-        "description": "Roboterplattformen, Greifer, Sensoren, SPS, Antriebe und Sicherheitstechnik von geprüften Herstellern, beschafft und evaluiert für die Industrie."
+        "title": "Roboter-Katalog: Humanoide, Cobots, Greifer, Zellen | MegaRobotics",
+        "description": "Humanoide, Cobots, Vierbeiner, Greifer, Serviceroboter und Palettierzellen von Agile Robots, Franka, LimX, OnRobot u. a., beschafft aus Deutschland."
       },
       "page": {
         "eyebrow": "Katalog",
@@ -1301,8 +1301,8 @@
             "Software-Ökosystem"
           ],
           "meta": {
-            "title": "Roboterplattformen | MegaRobotics",
-            "description": "Industrielle Arme, Cobots, Parallelroboter, AMR/AGV, vierbeinige, humanoide und mobile Manipulatoren — beschafft und evaluiert für europäische Anwendungen."
+            "title": "Roboter kaufen: Cobots, Humanoide, Vierbeiner | MegaRobotics",
+            "description": "Cobots, humanoide Roboter, Roboterhunde und mobile Manipulatoren von Agile Robots, Franka, LimX und MagicLab, beschafft und evaluiert für Europa."
           }
         },
         "end-effectors-robot-tooling": {
@@ -1351,8 +1351,8 @@
             "Reinraum- / Hygieneklasse"
           ],
           "meta": {
-            "title": "Endeffektoren & Roboterwerkzeuge | MegaRobotics",
-            "description": "Greifer, Vakuumwerkzeuge, Kraft-/Drehmomentsensoren und Bearbeitungswerkzeuge. Die End-of-Arm-Technologie entscheidet über die Roboterzelle."
+            "title": "Robotergreifer & Endeffektoren | MegaRobotics",
+            "description": "Robotergreifer, Vakuumgreifer, Kraft-Momenten-Sensoren und Schnellwechsler von OnRobot, Franka und Agile Robots: das Werkzeug, das die Zelle ausmacht."
           }
         },
         "motion-actuators-drives": {
@@ -1659,8 +1659,8 @@
             "Wartung"
           ],
           "meta": {
-            "title": "Robotische Zellen & Anwendungspakete | MegaRobotics",
-            "description": "Vorkonfigurierte robotische Zellen für Palettieren, Maschinenbeschickung, Picken, Verpacken, Inspektion und Oberflächenbearbeitung."
+            "title": "Palettierroboter & Roboterzellen | MegaRobotics",
+            "description": "Cobot-Palettierer von Atom Robot sowie mobiler Schweißroboter und flexible Plattform von Agile Robots: Anwendungspakete für Produktion und Endverpackung."
           }
         },
         "service-cleaning-facility-robots": {
@@ -1696,8 +1696,8 @@
             "Kundenerlebnis"
           ],
           "meta": {
-            "title": "Service-, Reinigungs- & Facility-Roboter | MegaRobotics",
-            "description": "Autonome Reinigungs-, Liefer-, Sicherheitspatrouille- und Facility-Service-Roboter für gewerbliche und industrielle Umgebungen."
+            "title": "Reinigungsroboter & Serviceroboter | MegaRobotics",
+            "description": "Autonome Reinigungs-, Liefer- und Empfangsroboter von OrionStar und Agile Robots für gewerbliche und industrielle Umgebungen, beschafft aus Deutschland."
           }
         },
         "research-education-embodied-ai": {
@@ -1733,8 +1733,8 @@
             "Langfristiger Support"
           ],
           "meta": {
-            "title": "Forschung, Bildung & Embodied AI | MegaRobotics",
-            "description": "Humanoide, vierbeinige, mobile Manipulations- und Teleoperations-Plattformen für Universitätsforschung und Embodied-AI-Labore."
+            "title": "Forschungsroboter für Hochschulen & Embodied AI | MegaRobotics",
+            "description": "Humanoide, vierbeinige und Teleoperations-Plattformen von Agile Robots, MagicLab und Franka für Hochschulforschung, Robotik-Lehre und Embodied-AI-Labore."
           }
         },
         "spare-parts-modules-accessories": {
@@ -1854,8 +1854,8 @@
     },
     "downloads": {
       "meta": {
-        "title": "Downloads | MegaRobotics",
-        "description": "LimX Luna, Oli und TRON 2 herunterladen: Produktvideos, Handbücher, Software und Broschüren – Vorstellungsfilme, Praxisberichte und die kompletten Video-Anleitungen für Evaluierung und Schulung."
+        "title": "LimX Handbücher, Videos & Software: Downloads | MegaRobotics",
+        "description": "LimX Luna, Oli und TRON 2: Handbücher, Software, Broschüren und Videos mit den kompletten Anleitungen für Evaluierung und Schulung herunterladen."
       },
       "eyebrow": "Mediathek",
       "title": "Downloads",

@@ -33,7 +33,7 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import InstituteCard from '@/components/InstituteCard'
 import ArticleBody from '@/components/ArticleBody'
-import { fitBrandedTitle } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, NOINDEX, clampDescription, fitBrandedTitle, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -58,10 +58,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       (candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0
     )
   )
-  const metaDescription =
+  const metaDescription = clampDescription(
     institute.seo?.metaDescription ||
-    institute.summary ||
-    `${institute.name} at ${institute.parentInstitution}. Research institute focused on ${institute.focusAreas?.slice(0, 3).join(', ') || 'robotics'}.`
+      institute.summary ||
+      `${institute.name} at ${institute.parentInstitution}. Research institute focused on ${institute.focusAreas?.slice(0, 3).join(', ') || 'robotics'}.`,
+  )
 
   const ogImage = institute.mainImage
     ? urlFor(institute.mainImage).width(1200).height(630).url()
@@ -73,18 +74,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: brandedMetaTitle,
     description: metaDescription,
     keywords: institute.seo?.keywords || institute.focusAreas,
-    alternates: generateAlternates(`/institutes/${slug}`, locale),
+    // Institute profiles are written in English only, so the /de URL repeats the
+    // English page word for word. It stays usable but out of the index.
+    alternates: generateAlternates(`/institutes/${slug}`, locale, ['en']),
+    ...(locale === 'de' ? { robots: NOINDEX } : {}),
     openGraph: {
+      ...ogBase(`/institutes/${slug}`, locale),
       title: brandedMetaTitle.absolute,
       description: metaDescription,
       type: 'website',
-      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
+      images: [ogImage ? { url: ogImage, width: 1200, height: 630, alt: institute.name } : DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: brandedMetaTitle.absolute,
       description: metaDescription,
-      images: ogImage ? [ogImage] : undefined,
+      images: [ogImage ?? DEFAULT_OG_IMAGE.url],
     },
   }
 }
@@ -112,7 +117,7 @@ export default async function InstitutePage({ params }: Props) {
 
   const breadcrumbItems = [
     { name: t('title'), href: '/institutes' },
-    { name: institute.country, href: `/institutes/country/${encodeURIComponent(institute.country.toLowerCase())}` },
+    { name: institute.country, href: `/institutes/country/${institute.country.toLowerCase().replace(/\s+/g, '-')}` },
     { name: institute.name, href: `/institutes/${slug}` },
   ]
 

@@ -138,7 +138,7 @@ export default async function HomePage({ params }: Props) {
     )
   })
 
-  const structuredData = [generateOrganizationSchema(), generateWebSiteSchema()]
+  const structuredData = [generateOrganizationSchema(locale), generateWebSiteSchema(locale)]
 
   return (
     <div className="min-h-screen">
