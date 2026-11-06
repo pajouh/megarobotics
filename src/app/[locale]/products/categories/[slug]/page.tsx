@@ -15,6 +15,8 @@ import { generateCollectionSchema } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import PageBody from '@/components/PageBody'
+import LandingPageLinks from '@/components/LandingPageLinks'
+import { landingPagesForFamily } from '@/data/landing-pages'
 import { PortableTextBlock } from '@portabletext/types'
 
 type Props = {
@@ -127,6 +129,7 @@ export default async function ProductCategoryPage({ params }: Props) {
             <ArrowLeft className="w-4 h-4" />
             {tFamily('backToCatalog')}
           </Link>
+          <LandingPageLinks slugs={landingPagesForFamily(slug)} className="mt-6" />
         </div>
       </div>
 

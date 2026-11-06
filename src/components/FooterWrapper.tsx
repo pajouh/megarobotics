@@ -1,6 +1,7 @@
 import { getSiteSettings, urlFor, type Locale } from '@/lib/sanity'
 import { getTranslations } from 'next-intl/server'
 import Footer, { type IndustrialFooterTranslations } from './Footer'
+import { LANDING_PAGE_SLUGS, landingPagePath } from '@/data/landing-pages'
 
 interface FooterWrapperProps {
   locale?: Locale
@@ -11,6 +12,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
   const t = await getTranslations({ locale, namespace: 'industrial.footerExtra' })
   const tDisclaimers = await getTranslations({ locale, namespace: 'disclaimers' })
   const tPartners = await getTranslations({ locale, namespace: 'industrial.partners' })
+  const tLanding = await getTranslations({ locale, namespace: 'industrial.landingPages' })
 
   const translations: IndustrialFooterTranslations = {
     tagline: t('tagline'),
@@ -44,6 +46,13 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
     },
     trademarkDisclaimer: tDisclaimers('footer'),
     partnersLabel: tPartners('marqueeLabel'),
+    buyingAdvice: {
+      label: tLanding('label'),
+      items: LANDING_PAGE_SLUGS.map((slug) => ({
+        name: tLanding(`names.${slug}`),
+        href: landingPagePath(slug),
+      })),
+    },
   }
 
   const logoWidth = settings?.logoWidth || 36

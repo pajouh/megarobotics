@@ -66,6 +66,11 @@ export interface IndustrialFooterTranslations {
   trademarkDisclaimer?: string
   /** Label for the authorized-partner logo strip; omitted hides the strip. */
   partnersLabel?: string
+  /** The buying pages, linked from every page whether or not CMS columns are set. */
+  buyingAdvice: {
+    label: string
+    items: { name: string; href: string }[]
+  }
 }
 
 interface FooterProps {
@@ -235,8 +240,29 @@ export default function Footer({
           )}
         </div>
 
+        <nav
+          aria-label={t.buyingAdvice.label}
+          className="mt-12 pt-6 border-t border-[color:var(--mr-line)] flex flex-col md:flex-row md:items-baseline gap-x-8 gap-y-3"
+        >
+          <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
+            {t.buyingAdvice.label}
+          </h3>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {t.buyingAdvice.items.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="inline-block text-[color:var(--mr-ink-2)] hover:text-[color:var(--mr-accent-ink)] transition-colors text-[13px] leading-snug"
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-[color:var(--mr-line)]">
+        <div className="mt-6 pt-6 border-t border-[color:var(--mr-line)]">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <p className="font-mono text-[0.7rem] text-[color:var(--mr-steel)]">{copyrightText}</p>
             <div className="flex gap-6 text-xs">

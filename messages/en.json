@@ -1117,6 +1117,23 @@
         "downloads": "Downloads"
       }
     },
+    "landingPages": {
+      "label": "Buying advice",
+      "names": {
+        "humanoid-robots": "Humanoid robots",
+        "cobots": "Cobots",
+        "robot-grippers": "Robot grippers",
+        "palletizing-robots": "Palletizing robots",
+        "cleaning-robots": "Cleaning robots"
+      },
+      "buy": {
+        "humanoid-robots": "Buy humanoid robots",
+        "cobots": "Buy cobots",
+        "robot-grippers": "Buy robot grippers",
+        "palletizing-robots": "Buy palletizing robots",
+        "cleaning-robots": "Buy cleaning robots"
+      }
+    },
     "catalog": {
       "meta": {
         "title": "Robot Catalog: Humanoids, Cobots, Grippers, Cells | MegaRobotics",

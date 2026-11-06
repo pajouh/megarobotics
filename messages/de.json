@@ -1117,6 +1117,23 @@
         "downloads": "Downloads"
       }
     },
+    "landingPages": {
+      "label": "Kaufberatung",
+      "names": {
+        "humanoid-robots": "Humanoide Roboter",
+        "cobots": "Cobots",
+        "robot-grippers": "Robotergreifer",
+        "palletizing-robots": "Palettierroboter",
+        "cleaning-robots": "Reinigungsroboter"
+      },
+      "buy": {
+        "humanoid-robots": "Humanoide Roboter kaufen",
+        "cobots": "Cobots kaufen",
+        "robot-grippers": "Robotergreifer kaufen",
+        "palletizing-robots": "Palettierroboter kaufen",
+        "cleaning-robots": "Reinigungsroboter kaufen"
+      }
+    },
     "catalog": {
       "meta": {
         "title": "Roboter-Katalog: Humanoide, Cobots, Greifer, Zellen | MegaRobotics",

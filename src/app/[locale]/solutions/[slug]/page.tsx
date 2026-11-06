@@ -8,6 +8,8 @@ import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import SolutionBody from '@/components/industrial/SolutionBody'
 import CTASection from '@/components/industrial/CTASection'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import LandingPageLinks from '@/components/LandingPageLinks'
+import { landingPagesForSolution } from '@/data/landing-pages'
 import { pageSeo } from '@/lib/page-seo'
 import { generateServiceSchema } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
@@ -137,6 +139,11 @@ export default async function SolutionDetailPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          <LandingPageLinks
+            slugs={landingPagesForSolution(slug)}
+            className="mt-10 pt-4 border-t border-[color:var(--mr-line)]"
+          />
 
           <div className="mt-12">
             <Link
