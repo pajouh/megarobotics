@@ -43,7 +43,7 @@
   /* --crop pushes the clip's bottom edge out of view (burnt-in subtitles) */
   height: calc(100% + var(--crop, 0%));
   object-fit: cover;
-  object-position: center top;
+  object-position: var(--focus, center top);
   transform: translateX(var(--shift, 0)) scale(1.08);
   transition: transform 16s linear;
 }
@@ -61,6 +61,25 @@
     linear-gradient(90deg, rgba(245, 248, 249, 0) 32%, rgba(245, 248, 249, 0.6) 50%, var(--hero-panel) 63%),
     /* deep enough to sit over burnt-in subtitles in some manufacturer clips */
     linear-gradient(0deg, var(--mr-paper) 0%, rgba(245, 248, 249, 0.9) 13%, rgba(245, 248, 249, 0) 30%);
+}
+
+/* caption over the media, e.g. to mark footage as AI-generated */
+.note {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: clamp(20px, 4vw, 72px);
+  max-width: min(46%, 440px);
+  margin: 0;
+  padding: 6px 10px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  line-height: 1.4;
+  color: var(--mr-ink-2);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--mr-line);
+  border-radius: var(--mr-radius-sm);
 }
 
 /* ---------- copy ---------- */
@@ -341,6 +360,12 @@
   }
   .media video,
   .media img { transform: none !important; }
+  /* the pause button sits top right */
+  .note {
+    top: 12px;
+    left: 12px;
+    max-width: calc(100% - 84px);
+  }
   .media::after {
     background: linear-gradient(0deg, var(--mr-paper) 0%, rgba(245, 248, 249, 0) 40%);
   }

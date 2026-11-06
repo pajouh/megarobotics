@@ -10,6 +10,8 @@ interface DisclaimerProps {
   manufacturerName?: string
   className?: string
   translations?: DisclaimerTranslations
+  /** Replaces the product text, e.g. the manufacturer's disclaimerOverride for own-brand products. */
+  override?: string
 }
 
 const defaultTranslations: DisclaimerTranslations = {
@@ -19,12 +21,12 @@ const defaultTranslations: DisclaimerTranslations = {
   footer: 'All trademarks are property of their respective owners.',
 }
 
-export default function Disclaimer({ variant, manufacturerName, className = '', translations }: DisclaimerProps) {
+export default function Disclaimer({ variant, manufacturerName, className = '', translations, override }: DisclaimerProps) {
   const t = { ...defaultTranslations, ...translations }
   const baseStyles = 'text-xs text-[color:var(--mr-steel)] leading-relaxed'
 
   if (variant === 'product') {
-    const text = (t.product || defaultTranslations.product)!.replace('{manufacturer}', manufacturerName || 'the manufacturer')
+    const text = override || (t.product || defaultTranslations.product)!.replace('{manufacturer}', manufacturerName || 'the manufacturer')
     return (
       <aside className={`mt-16 pt-8 border-t border-[color:var(--mr-line)] ${className}`}>
         <p className={baseStyles}>{text}</p>

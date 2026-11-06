@@ -270,7 +270,7 @@ export default function ProductHeroSlider({
           >
             <div
               className={styles.media}
-              style={{ '--shift': s.shift ?? '0%', '--crop': `${s.cropBottom ?? 0}%` } as CSSProperties}
+              style={{ '--shift': s.shift ?? '0%', '--crop': `${s.cropBottom ?? 0}%`, '--focus': s.focus } as CSSProperties}
             >
               {s.video ? (
                 <video
@@ -289,6 +289,7 @@ export default function ProductHeroSlider({
               ) : s.image ? (
                 <Image src={s.image} alt="" fill sizes="100vw" priority={i === 0} />
               ) : null}
+              {s.note && <p className={styles.note}>{s.note}</p>}
             </div>
 
             <div

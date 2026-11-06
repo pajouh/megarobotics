@@ -496,6 +496,7 @@ export default async function ProductPage({ params }: Props) {
           variant="product"
           manufacturerName={product.manufacturer?.name}
           translations={{ product: tDisclaimers.raw('product') }}
+          override={product.manufacturer?.disclaimerOverride}
         />
       </div>
     </div>

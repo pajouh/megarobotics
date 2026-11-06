@@ -39,6 +39,10 @@ interface HeroSlide {
   shift?: string
   /** Percent of the frame height to push below the fold, for burnt-in subtitles. */
   cropBottom?: number
+  /** Which part of the clip stays in view when cropped (object-position); default "center top". */
+  focus?: string
+  /** Small caption over the media, e.g. to mark footage as AI-generated. */
+  note?: L
   useCases: [L, L][]
 }
 
@@ -438,6 +442,45 @@ const HEROES: Record<string, ProductHero> = {
       },
     ],
   },
+
+  // Specs and wording from the MegaRobotics M100WS catalogue 2026 (values as of
+  // 11/2026, base configuration). Design values only: the 200 kg short-term peak
+  // stays off the hero. The clip is an AI-generated film, not footage of a real
+  // unit, and it plays in a plant setting while the robot has no explosion
+  // protection, so the note and the first use case say what applies.
+  m100ws: {
+    name: 'M100WS',
+    specs: [
+      { value: 100, unit: 'kg', label: { en: 'Continuous payload', de: 'Dauernutzlast' } },
+      { value: 79, unit: 'kg', label: { en: 'Weight', de: 'Gewicht' } },
+      { value: 3, unit: 'm/s', label: { en: 'Top speed', de: 'Höchstgeschwindigkeit' } },
+      { value: 7.5, unit: 'h', decimals: 1, label: { en: 'Runtime, unloaded', de: 'Laufzeit ohne Last' } },
+      { value: 30, unit: 'cm', label: { en: 'Step height', de: 'Stufenhöhe' } },
+      { value: 'IP67', label: { en: 'Protection', de: 'Schutzart' } },
+    ],
+    slides: [
+      {
+        id: 'plant-patrol',
+        eyebrow: { en: 'Wheel-legged carrier', de: 'Rad-Bein-Träger' },
+        tagline: {
+          en: 'Wheels where the ground allows, legs where it does not. Built for heavy payloads, long routes and rough ground.',
+          de: 'Räder, wo der Boden es erlaubt. Beine, wo nicht. Gebaut für schwere Nutzlasten, lange Strecken und unwegsames Gelände.',
+        },
+        video: '/megarobotics/hero/m100ws/plant-patrol.mp4',
+        shift: '-10%',
+        focus: '28% bottom', // the robot rolls along the lower left of the frame
+        note: {
+          en: 'AI-generated visualisation. Payloads not included.',
+          de: 'KI-generierte Visualisierung. Nutzlasten nicht im Lieferumfang.',
+        },
+        useCases: [
+          [{ en: 'Plant patrol', de: 'Anlagenrundgang' }, { en: 'outside classified Ex zones', de: 'außerhalb eingestufter Ex-Zonen' }],
+          [{ en: 'Power utilities', de: 'Energieversorgung' }, { en: 'substations, cable tunnels, switchgear', de: 'Umspannwerke, Kabeltunnel, Schaltanlagen' }],
+          [{ en: 'Fire and rescue', de: 'Feuerwehr und Rettung' }, { en: 'lighting and equipment in smoke', de: 'Licht und Ausrüstung im Rauch' }],
+        ],
+      },
+    ],
+  },
 }
 
 export interface ResolvedHeroSpec {
@@ -459,6 +502,8 @@ export interface ResolvedHeroSlide {
   duration?: number
   shift?: string
   cropBottom?: number
+  focus?: string
+  note?: string
   useCases: [string, string][]
   /** Set when slides of several products share one slider (homepage). */
   product?: { slug: string; name: string; specs: ResolvedHeroSpec[] }
@@ -486,6 +531,8 @@ function resolveSlide(s: HeroSlide, locale: Locale): ResolvedHeroSlide {
     duration: s.duration,
     shift: s.shift,
     cropBottom: s.cropBottom,
+    focus: s.focus,
+    note: s.note?.[locale],
     useCases: s.useCases.map(([what, detail]) => [what[locale], detail[locale]] as [string, string]),
   }
 }
@@ -510,6 +557,7 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
   { slug: 'mobile-fr3-duo', slide: 'mobile-manipulation' },
   { slug: 'limx-oli', slide: 'whole-body-motion' },
+  { slug: 'm100ws', slide: 'plant-patrol' },
 ]
 
 /** Slides for the homepage hero, each carrying its product's name and specs. */
