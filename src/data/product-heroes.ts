@@ -443,6 +443,102 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // Clips cut from MagicLab's "MagicBot-Z1 Stunt Actions" and "MagicBot-Z1"
+  // films (partner footage, companies/MagicLab/06_Media/Z1); only shots without
+  // burnt-in captions are used. Copyright stays with MagicLab. Specs from the
+  // product's Sanity entry (MagicBot Z1 Standard).
+  'magicbot-z1-standard': {
+    name: 'MagicBot Z1',
+    specs: [
+      { value: 1369, unit: 'mm', label: { en: 'Height', de: 'Größe' } },
+      { value: '40+', unit: 'kg', label: { en: 'Weight, with battery', de: 'Gewicht mit Akku' } },
+      { value: '24–50', label: { en: 'Joint motors (DoF)', de: 'Gelenkmotoren (DoF)' } },
+      { value: 130, unit: 'N·m', label: { en: 'Knee torque, max.', de: 'Knie-Drehmoment, max.' } },
+      { value: 3, unit: 'kg', label: { en: 'Arm payload, max.', de: 'Armtraglast, max.' } },
+      { value: 2.5, unit: 'm/s', prefix: '≥', decimals: 1, label: { en: 'Trotting speed', de: 'Laufgeschwindigkeit' } },
+    ],
+    slides: [
+      {
+        id: 'whole-body-control',
+        eyebrow: { en: 'Half-size humanoid', de: 'Humanoid in halber Baugröße' },
+        tagline: {
+          en: 'A developer humanoid with up to 50 joint motors and 130 N·m at the knee, built for fast, dynamic whole-body motion.',
+          de: 'Ein Entwickler-Humanoid mit bis zu 50 Gelenkmotoren und 130 N·m am Knie, gebaut für schnelle, dynamische Ganzkörperbewegung.',
+        },
+        video: '/magiclab/hero/magicbot-z1/whole-body-control.mp4',
+        shift: '-16%',
+        useCases: [
+          [{ en: 'Embodied AI', de: 'Embodied AI' }, { en: 'research & development', de: 'Forschung & Entwicklung' }],
+          [{ en: 'Locomotion research', de: 'Fortbewegungsforschung' }, { en: 'walking, running, balance', de: 'Gehen, Laufen, Balance' }],
+          [{ en: 'Teaching & labs', de: 'Lehre & Labore' }, { en: 'universities and institutes', de: 'Hochschulen und Institute' }],
+        ],
+      },
+      {
+        id: 'outdoor-terrain',
+        eyebrow: { en: 'Indoors and out', de: 'Drinnen wie draußen' },
+        tagline: {
+          en: 'Walks and runs on grass, gravel and slopes, and gets back on its feet by itself after a fall.',
+          de: 'Geht und läuft auf Rasen, Schotter und Hängen und steht nach einem Sturz von selbst wieder auf.',
+        },
+        video: '/magiclab/hero/magicbot-z1/outdoor-terrain.mp4',
+        shift: '-12%',
+        useCases: [
+          [{ en: '360° perception', de: '360°-Wahrnehmung' }, { en: '3D lidar, depth & fisheye cameras', de: '3D-Lidar, Tiefen- & Fisheye-Kameras' }],
+          [{ en: 'Swappable battery', de: 'Wechselakku' }, { en: '10000 mAh quick-release', de: '10000 mAh, schnell tauschbar' }],
+          [{ en: 'Developer kit', de: 'Entwicklungskit' }, { en: 'secondary development & OTA', de: 'Zweitentwicklung & OTA' }],
+        ],
+      },
+    ],
+  },
+
+  // Clips are OrionStar's own 3D product renders from en.orionstar.com/autodoor.html
+  // (downloaded 2026-11-08, originals in companies/Orionstar/06_Media); copyright
+  // stays with OrionStar. Their storage clip says "138L" against 69 L on the
+  // product sheet, so it is not used. Specs from the product's Sanity entry.
+  'orionstar-luckibot-pro-autodoor': {
+    name: 'LuckiBot Pro Autodoor',
+    specs: [
+      { value: 69, unit: 'L', label: { en: 'Sealed compartment', de: 'Geschlossenes Fach' } },
+      { value: 20, unit: 'kg', label: { en: 'Payload per tray, max.', de: 'Traglast pro Ebene, max.' } },
+      { value: 1.2, unit: 'm/s', decimals: 1, label: { en: 'Speed, max.', de: 'Geschwindigkeit, max.' } },
+      { value: 12, unit: 'h', label: { en: 'Runtime', de: 'Laufzeit' } },
+      { value: 4.5, unit: 'h', decimals: 1, label: { en: 'Charging time', de: 'Ladezeit' } },
+      { value: 14, unit: 'in', label: { en: 'Touchscreen, 1080p', de: 'Touchscreen, 1080p' } },
+    ],
+    slides: [
+      {
+        id: 'falcon-wing-door',
+        eyebrow: { en: 'Enclosed delivery', de: 'Geschlossene Lieferung' },
+        tagline: {
+          en: 'A four-part falcon-wing door closes off the 69 L compartment, so orders arrive out of sight and untouched.',
+          de: 'Eine vierteilige Falcon-Wing-Tür verschließt das 69-L-Fach. Bestellungen kommen diskret und unberührt an.',
+        },
+        video: '/orionstar/hero/luckibot-pro-autodoor/falcon-wing-door.mp4',
+        shift: '-22%',
+        useCases: [
+          [{ en: 'Hotels', de: 'Hotels' }, { en: 'room service to the door', de: 'Zimmerservice bis an die Tür' }],
+          [{ en: 'Hospitals', de: 'Krankenhäuser' }, { en: 'discreet, hygienic transport', de: 'diskreter, hygienischer Transport' }],
+          [{ en: 'Restaurants & venues', de: 'Restaurants & Lokale' }, { en: 'private-room service', de: 'Service in Separees' }],
+        ],
+      },
+      {
+        id: 'passcode-lock',
+        eyebrow: { en: 'Passcode lock', de: 'Passwortschloss' },
+        tagline: {
+          en: 'The compartment opens only with the right code, entered on the 14-inch screen.',
+          de: 'Das Fach öffnet sich nur mit dem richtigen Code, eingegeben am 14-Zoll-Bildschirm.',
+        },
+        video: '/orionstar/hero/luckibot-pro-autodoor/passcode-lock.mp4',
+        shift: '-22%',
+        useCases: [
+          [{ en: 'Navigation', de: 'Navigation' }, { en: 'three RGBD cameras + lidar', de: 'drei RGBD-Kameras + Lidar' }],
+          [{ en: 'Long shifts', de: 'Lange Schichten' }, { en: '12 h runtime, 4.5 h to charge', de: '12 h Laufzeit, 4,5 h Ladezeit' }],
+          [{ en: 'Factories', de: 'Fabriken' }, { en: 'parts and documents between areas', de: 'Teile und Dokumente zwischen Bereichen' }],
+        ],
+      },
+    ],
+  },
+
   // Specs and wording from the MegaRobotics M100WS catalogue 2026 (values as of
   // 11/2026, base configuration). Design values only: the 200 kg short-term peak
   // stays off the hero. The clip is an AI-generated film, not footage of a real
@@ -557,7 +653,9 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'franka-research-3-duo', slide: 'teleoperation' },
   { slug: 'mobile-fr3-duo', slide: 'mobile-manipulation' },
   { slug: 'limx-oli', slide: 'whole-body-motion' },
+  { slug: 'magicbot-z1-standard', slide: 'whole-body-control' },
   { slug: 'm100ws', slide: 'plant-patrol' },
+  { slug: 'orionstar-luckibot-pro-autodoor', slide: 'falcon-wing-door' },
 ]
 
 /** Slides for the homepage hero, each carrying its product's name and specs. */
