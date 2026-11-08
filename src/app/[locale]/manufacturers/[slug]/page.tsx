@@ -1,8 +1,9 @@
+import { Fragment } from 'react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Globe, MapPin, Calendar, Package, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Globe, MapPin, Calendar, Mail, Package, ShieldCheck } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import {
   getManufacturer,
@@ -19,6 +20,8 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 import { authorizedPartners } from '@/data/authorized-partners'
+import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
+import { getManufacturerHero } from '@/data/product-heroes'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -118,11 +121,47 @@ export default async function ManufacturerPage({ params }: Props) {
     { name: manufacturer.name, href: `/manufacturers/${slug}` },
   ]
 
+  // Video hero from src/data/product-heroes.ts when any of the brand's products has one
+  const hero = getManufacturerHero(products.map((p) => p.slug.current), locale as Locale)
+  const tProducts = hero ? await getTranslations('products') : null
+  const heroActions = (product: { slug: string; name: string }) => (
+    <>
+      <Link href={`/products/${product.slug}`} className="ind-btn-primary">
+        {tProducts!('hero.discover', { product: product.name })}
+        <ArrowRight className="w-4 h-4" />
+      </Link>
+      <Link href={`/contact?${new URLSearchParams({ inquiry: 'availability', product: product.name })}`} className="ind-btn-secondary">
+        <Mail className="w-4 h-4" />
+        {tDetail('cta.requestAvailability')}
+      </Link>
+    </>
+  )
+
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-white">
+    <div className={`min-h-screen ${hero ? 'pt-16' : 'pt-24'} pb-16 bg-white`}>
       <StructuredData data={manufacturerSchema} />
+      {hero && tProducts && (
+        <ProductHeroSlider
+          hero={hero}
+          productName={hero.product?.name}
+          locale={locale}
+          labels={{
+            carousel: tProducts('hero.carousel', { product: manufacturer.name }),
+            chooseSlide: hero.product ? tProducts('hero.chooseSlide') : tProducts('hero.chooseProduct'),
+            useCases: tProducts('hero.useCases'),
+            pause: tProducts('hero.pause'),
+            play: tProducts('hero.play'),
+          }}
+          actions={hero.product ? heroActions(hero.product) : undefined}
+          slideActions={
+            hero.product
+              ? undefined
+              : hero.slides.map((s) => <Fragment key={s.id}>{s.product && heroActions(s.product)}</Fragment>)
+          }
+        />
+      )}
       {/* BreadcrumbList JSON-LD is emitted by <Breadcrumbs> below — don't duplicate it here. */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${hero ? 'pt-8' : ''}`}>
         {/* Breadcrumbs */}
         <Breadcrumbs items={breadcrumbItems} className="mb-6" />
 

@@ -658,6 +658,31 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'orionstar-luckibot-pro-autodoor', slide: 'falcon-wing-door' },
 ]
 
+/**
+ * Hero for a manufacturer page, built from that brand's products in the order
+ * given. With one product that has a hero, its full slide set runs (`product`
+ * names it); with several, each gets one slide (its homepage clip, else its
+ * first) carrying its own name and specs. Null when none of them has a hero.
+ */
+export function getManufacturerHero(
+  productSlugs: string[],
+  locale: Locale,
+): (ResolvedProductHero & { product?: { slug: string; name: string } }) | null {
+  const slugs = productSlugs.filter((s) => HEROES[s])
+  if (!slugs.length) return null
+  if (slugs.length === 1) {
+    const [slug] = slugs
+    return { ...getProductHero(slug, locale)!, product: { slug, name: HEROES[slug].name } }
+  }
+  const homeSlide = new Map(HOME_SLIDES.map((h) => [h.slug, h.slide]))
+  const slides = slugs.map((slug) => {
+    const hero = HEROES[slug]
+    const s = hero.slides.find((x) => x.id === homeSlide.get(slug)) ?? hero.slides[0]
+    return { ...resolveSlide(s, locale), id: slug, product: { slug, name: hero.name, specs: resolveSpecs(hero, locale) } }
+  })
+  return { specs: [], slides }
+}
+
 /** Slides for the homepage hero, each carrying its product's name and specs. */
 export function getHomeProductHero(locale: Locale): ResolvedProductHero {
   const slides = HOME_SLIDES.flatMap(({ slug, slide }) => {
