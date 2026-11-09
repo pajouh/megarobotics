@@ -577,6 +577,123 @@ const HEROES: Record<string, ProductHero> = {
       },
     ],
   },
+
+  // MegaRobotics' own development, shown only on the unlisted /centaur page
+  // (src/data/centaur.ts). There is no Sanity product with this slug, so the
+  // hero never reaches a product or manufacturer page; keep it out of
+  // HOME_SLIDES. Clips are renderings from patent/usecase; specs are design
+  // values from the IP filing.
+  centaur: {
+    name: 'CENTAUR-1',
+    specs: [
+      { value: 360, unit: '°', label: { en: 'Torso rotation, endless', de: 'Torso-Rotation, endlos' } },
+      { value: 45, unit: '°', prefix: '±', label: { en: 'Active tilt compensation', de: 'Aktiver Neigungsausgleich' } },
+      { value: 5, unit: 'mm', prefix: '±', label: { en: 'Docking accuracy', de: 'Andockgenauigkeit' } },
+      { value: 10, unit: 'ms', prefix: '<', label: { en: 'Compensation loop', de: 'Regelschleife' } },
+      { value: 4, label: { en: 'Operating modes', de: 'Betriebsmodi' } },
+      { value: 2, label: { en: 'Autonomous robots, one system', de: 'Autonome Roboter, ein System' } },
+    ],
+    slides: [
+      {
+        id: 'night-shift-logistics',
+        eyebrow: { en: 'Two robots. One system.', de: 'Zwei Roboter. Ein System.' },
+        tagline: {
+          en: 'A humanoid upper body and a quadruped, coupled into one hybrid and separated again on command. Neither loses its autonomy.',
+          de: 'Ein humanoider Oberkörper und ein Vierbeiner, gekoppelt zu einem Hybrid und auf Befehl wieder getrennt. Keiner verliert seine Autonomie.',
+        },
+        video: '/megarobotics/centaur/night-shift-logistics.mp4',
+        shift: '-14%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Night-shift supply runs', de: 'Versorgung in der Nachtschicht' }, { en: 'medication, samples, linen', de: 'Medikamente, Proben, Wäsche' }],
+          [{ en: 'Doors and lifts', de: 'Türen und Aufzüge' }, { en: 'operated by the robot itself', de: 'vom Roboter selbst bedient' }],
+          [{ en: 'Handover', de: 'Übergabe' }, { en: 'to a person, not a drop-off point', de: 'an einen Menschen, nicht an eine Ablage' }],
+        ],
+      },
+      {
+        id: 'substation-inspection',
+        eyebrow: { en: 'Substation inspection', de: 'Inspektion im Umspannwerk' },
+        tagline: {
+          en: 'The chassis crosses gravel and cable trenches; both hands do the checks and switching while clearances are kept.',
+          de: 'Das Fahrwerk bewältigt Schotter und Kabelkanäle, beide Hände übernehmen Kontrollen und Schalthandlungen – mit Schutzabstand.',
+        },
+        video: '/megarobotics/centaur/substation-inspection.mp4',
+        shift: '-10%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Switchgear & transformers', de: 'Schaltanlagen & Trafos' }, { en: 'checks and switching operations', de: 'Kontrollen und Schalthandlungen' }],
+          [{ en: 'Two-handed work', de: 'Beidhändig' }, { en: 'tool in one hand, counter-hold in the other', de: 'Werkzeug in der einen, Gegenhalt in der anderen Hand' }],
+          [{ en: 'Chassis solo', de: 'Fahrwerk solo' }, { en: 'continuous patrol without the torso', de: 'kontinuierliche Streife ohne Torso' }],
+        ],
+      },
+      {
+        id: 'lab-sample-transport',
+        eyebrow: { en: 'Laboratory logistics', de: 'Laborlogistik' },
+        tagline: {
+          en: 'Samples go from the ward to the lab and are handed to a person. The tilt axis keeps the tray level the whole way.',
+          de: 'Proben gehen von der Station ins Labor und werden an einen Menschen übergeben. Die Neigeachse hält das Tablett den ganzen Weg waagerecht.',
+        },
+        video: '/megarobotics/centaur/lab-sample-transport.mp4',
+        shift: '-14%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Sample transport', de: 'Probentransport' }, { en: 'ward to laboratory', de: 'Station zum Labor' }],
+          [{ en: 'Level carrying', de: 'Waagerecht tragen' }, { en: '±45° active compensation', de: '±45° aktiver Ausgleich' }],
+          [{ en: 'Torso stationary', de: 'Torso stationär' }, { en: 'as a lab workstation when decoupled', de: 'als Laborarbeitsplatz, wenn entkoppelt' }],
+        ],
+      },
+      {
+        id: 'medication-transport',
+        eyebrow: { en: 'Cold store & medication', de: 'Kühllager & Medikamente' },
+        tagline: {
+          en: 'Retrieves supplies from refrigerated cabinets and carries medication across the ward.',
+          de: 'Entnimmt Material aus Kühlschränken und bringt Medikamente über die Station.',
+        },
+        video: '/megarobotics/centaur/medication-transport.mp4',
+        shift: '-14%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Refrigerated cabinets', de: 'Kühlschränke' }, { en: 'opened and emptied with two hands', de: 'beidhändig geöffnet und entnommen' }],
+          [{ en: 'Medication runs', de: 'Medikamentenfahrten' }, { en: 'pharmacy to ward', de: 'Apotheke zur Station' }],
+          [{ en: 'Thresholds & lift gaps', de: 'Schwellen & Aufzugsspalte' }, { en: 'where wheeled carts stop', de: 'wo Rollwagen stehen bleiben' }],
+        ],
+      },
+      {
+        id: 'wheelchair-assist',
+        eyebrow: { en: 'Care & patient mobility', de: 'Pflege & Patientenmobilität' },
+        tagline: {
+          en: 'Supports moving patients in a wheelchair and keeps them company along ward corridors.',
+          de: 'Unterstützt beim Transport im Rollstuhl und begleitet Patienten auf Stationsfluren.',
+        },
+        video: '/megarobotics/centaur/wheelchair-assist.mp4',
+        shift: '-12%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Wheelchair transport', de: 'Rollstuhltransport' }, { en: 'on the ward', de: 'auf der Station' }],
+          [{ en: 'Bed transport', de: 'Bettentransport' }, { en: 'corridors and lifts', de: 'Flure und Aufzüge' }],
+          [{ en: 'Assisted living', de: 'Betreutes Wohnen' }, { en: 'fetching and carrying at home', de: 'Bringdienste im Wohnumfeld' }],
+        ],
+      },
+      {
+        id: 'linen-supply',
+        eyebrow: { en: 'Linen & consumables', de: 'Wäsche & Verbrauchsmaterial' },
+        tagline: {
+          en: 'Distributes linen, towels and consumables to every floor, lift rides included.',
+          de: 'Verteilt Wäsche, Handtücher und Verbrauchsmaterial auf die Etagen – per Aufzug.',
+        },
+        video: '/megarobotics/centaur/linen-supply.mp4',
+        loop: true,
+        duration: 9,
+        shift: '-12%',
+        note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
+        useCases: [
+          [{ en: 'Hospitals', de: 'Kliniken' }, { en: 'linen and consumables', de: 'Wäsche und Verbrauchsmaterial' }],
+          [{ en: 'Hotels & facility', de: 'Hotellerie & Facility' }, { en: 'towels to the floors', de: 'Handtücher auf die Etagen' }],
+          [{ en: 'Shelf picking', de: 'Regalentnahme' }, { en: 'with both hands', de: 'mit beiden Händen' }],
+        ],
+      },
+    ],
+  },
 }
 
 export interface ResolvedHeroSpec {
