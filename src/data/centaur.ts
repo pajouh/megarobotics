@@ -154,6 +154,19 @@ const content = {
     ],
   },
 
+  band: {
+    eyebrow: { en: 'One coupling system', de: 'Ein Kopplungssystem' },
+    title: {
+      en: 'Opens the door. Holds the load. Hands it over.',
+      de: 'Tür öffnen. Last halten. Übergeben.',
+    },
+    body: {
+      en: 'Two autonomous robots, four operating modes, twelve fields of use.',
+      de: 'Zwei autonome Roboter, vier Betriebsmodi, zwölf Anwendungsfelder.',
+    },
+    video: 'medication-transport',
+  },
+
   fields: {
     eyebrow: { en: 'Fields of use', de: 'Anwendungsfelder' },
     title: { en: 'Where terrain and two hands come together.', de: 'Wo Gelände und zwei Hände zusammenkommen.' },

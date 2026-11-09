@@ -6,6 +6,7 @@ import type { Locale } from '@/i18n/config'
 import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
+import Parallax from '@/components/Parallax'
 import { getProductHero, HERO_MEDIA_BASE } from '@/data/product-heroes'
 import { CENTAUR_MEDIA, getCentaurContent } from '@/data/centaur'
 import { pageSeo } from '@/lib/page-seo'
@@ -86,19 +87,24 @@ export default async function CentaurPage({ params }: Props) {
             </p>
           </div>
           <div data-reveal className="relative mx-auto w-full max-w-md">
-            <div
-              className="absolute inset-x-6 bottom-4 top-16 rounded-[var(--mr-radius)] bg-[radial-gradient(120%_90%_at_50%_10%,#ffffff_0%,var(--mr-paper-2)_70%)]"
-              aria-hidden="true"
-            />
-            <Image
-              src={c.intro.image}
-              alt={c.intro.imageAlt}
-              width={1024}
-              height={1536}
-              sizes="(min-width: 1024px) 28rem, 90vw"
-              className="relative h-auto w-full mix-blend-multiply"
-              priority
-            />
+            {/* back layer drifts against the scroll, the robot rides ahead of it */}
+            <Parallax range={-28} className="absolute inset-x-6 bottom-4 top-16" innerClassName="h-full">
+              <div
+                className="h-full rounded-[var(--mr-radius)] bg-[radial-gradient(120%_90%_at_50%_10%,#ffffff_0%,var(--mr-paper-2)_70%)] shadow-[var(--mr-shadow)]"
+                aria-hidden="true"
+              />
+            </Parallax>
+            <Parallax range={36} className="relative">
+              <Image
+                src={c.intro.image}
+                alt={c.intro.imageAlt}
+                width={1024}
+                height={1536}
+                sizes="(min-width: 1024px) 28rem, 90vw"
+                className="h-auto w-full mix-blend-multiply"
+                priority
+              />
+            </Parallax>
           </div>
         </div>
       </section>
@@ -141,6 +147,39 @@ export default async function CentaurPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Parallax video band */}
+      <section className="relative isolate h-[72vh] min-h-[420px] max-h-[760px] overflow-hidden bg-[color:var(--mr-dark)]">
+        <Parallax fill overscan={18} range={12} unit="%" scale={1.08} className="absolute inset-0">
+          <video
+            className="h-full w-full object-cover"
+            src={media(c.band.video, 'mp4')}
+            poster={media(c.band.video, 'jpg')}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          />
+        </Parallax>
+        <div
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,27,32,0.86)_0%,rgba(13,27,32,0.55)_45%,rgba(13,27,32,0.1)_100%)]"
+          aria-hidden="true"
+        />
+        <Parallax range={-48} className="relative h-full" innerClassName="h-full">
+          <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
+            <div className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--mr-accent-glow)]">
+              <span className="inline-block w-8 h-px bg-[color:var(--mr-accent-glow)]" aria-hidden="true" />
+              {c.band.eyebrow}
+            </div>
+            <p className="max-w-3xl font-[family-name:var(--font-display)] text-4xl md:text-6xl font-semibold leading-[1.05] tracking-[-0.03em] text-balance text-white">
+              {c.band.title}
+            </p>
+            <p className="mt-5 max-w-xl text-base md:text-lg text-white/80">{c.band.body}</p>
+          </div>
+        </Parallax>
+      </section>
+
       {/* Fields of use */}
       <section id="fields" className="scroll-mt-20 py-16 md:py-24 bg-[color:var(--mr-white)] border-y border-[color:var(--mr-line)]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -166,13 +205,15 @@ export default async function CentaurPage({ params }: Props) {
                       g.images.length > 2 ? 'aspect-[4/5]' : 'aspect-[16/10]'
                     }`}
                   >
-                    <Image
-                      src={im.src}
-                      alt={im.alt}
-                      fill
-                      sizes={g.images.length > 2 ? '(min-width: 1024px) 20vw, 45vw' : '(min-width: 640px) 45vw, 90vw'}
-                      className="object-cover"
-                    />
+                    <Parallax fill overscan={12} range={8} unit="%" scale={1.06} className="absolute inset-0">
+                      <Image
+                        src={im.src}
+                        alt={im.alt}
+                        fill
+                        sizes={g.images.length > 2 ? '(min-width: 1024px) 20vw, 45vw' : '(min-width: 640px) 45vw, 90vw'}
+                        className="object-cover"
+                      />
+                    </Parallax>
                     <figcaption className="absolute left-2 bottom-2 rounded-full bg-[color:var(--mr-dark)]/75 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white">
                       {im.caption}
                     </figcaption>
