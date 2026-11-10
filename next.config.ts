@@ -49,6 +49,15 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Unlisted presentation: reachable only by typing the URL, kept out of search
+      {
+        source: '/mitsubishi1',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
+        source: '/mitsubishi1.html',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       {
         source: '/feed.xml',
         headers: [
@@ -63,6 +72,16 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+  async rewrites() {
+    return {
+      // Standalone HTML presentation (public/mitsubishi1.html), served at a clean
+      // URL. Unlisted: no link on the site, not in the sitemap, noindexed. The
+      // middleware matcher skips this path so next-intl doesn't localise it.
+      beforeFiles: [{ source: '/mitsubishi1', destination: '/mitsubishi1.html' }],
+      afterFiles: [],
+      fallback: [],
+    };
   },
   async redirects() {
     return [
