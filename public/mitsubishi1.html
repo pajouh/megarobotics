@@ -213,6 +213,24 @@ p{line-height:1.55}
 .rm-detail ul{list-style:none;font-size:15px;color:var(--body);line-height:1.6}
 .rm-detail li:before{content:"→ ";color:var(--orange)}
 @media (max-width:1000px){.rm-grid{grid-template-columns:1fr}.track{grid-template-columns:1fr 1fr}.track .rail2{display:none}.rm-detail{grid-template-columns:1fr}}
+
+/* phones: header and comparison table fit a 360-390px screen */
+@media (max-width:600px){
+ .bar{padding:0 14px}
+ .logo{font-size:16px;gap:8px}
+ .mark{width:28px;height:28px;font-size:18px}
+ .ctrl{gap:6px}
+ .btn{padding:7px 10px;font-size:11px;letter-spacing:.05em}
+ .ctrl .btn:last-child{display:none} /* fullscreen presenting is a desktop feature */
+ .hint{display:none} /* keyboard hint; overlapped the hero caption */
+ .two>*{min-width:0}
+ .stage{height:auto;width:100%;max-width:340px} /* was sized by viewport height, wider than the screen */
+ .opts{grid-template-columns:1fr} /* long words like Projektfinanzierung need the full width */
+ .cmp{font-size:12px;margin-top:30px}
+ .cmp th{font-size:13px}
+ .cmp th,.cmp td{padding:10px 4px}
+ .cmp td:first-child,.cmp th:first-child{padding-left:0}
+}
 </style>
 </head>
 <body>
