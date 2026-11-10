@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Inspection &amp; Security Robots · MegaRobotics</title>
+<meta name="description" content="The MegaRobotics M series for inspection and security: nine quadruped and wheel-legged robots in three series, plus CENTAUR.">
+<link rel="icon" href="/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<!--
+  Unlisted presentation: MegaRobotics M series for inspection and security,
+  closing with CENTAUR. Served at /security (see next.config.ts), noindexed,
+  not linked from the site, not in the sitemap.
+
+  Facts come from the published Sanity products (M1, M1 Pro, M1 Ultra, M40,
+  M40W, M40WS, M100, M100W, M100WS; values as of 11/2026) and from
+  src/data/centaur.ts. Supplier names stay out. The M100WS film is the
+  AI-generated clip already used on the site; CENTAUR media are renderings.
+-->
+<style>
+:root{
+  --ink:#0d1b1e;--ink-2:#3a4b50;--steel:#6b7f85;--line:#dbe5e6;--paper:#f4f8f8;--white:#fff;
+  --teal:#04756f;--teal-d:#0a565c;--teal-l:#06938c;--accent:#2fe0d0;--accent-soft:#e3f7f5;
+  --night:#071417;--night-2:#0c2226;--night-line:rgba(255,255,255,.12);
+  --r:18px;--shadow:0 1px 2px rgba(13,27,30,.05),0 8px 28px rgba(13,27,30,.07);
+  --display:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (min-width:1024px) and (min-height:700px){html{scroll-snap-type:y proximity}}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+section{position:relative;scroll-snap-align:start;padding:104px 0 88px}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;line-height:1.08;margin:0}
+h2{font-size:clamp(30px,4.2vw,50px)}
+h3{font-size:21px;letter-spacing:-.01em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 11.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(47,224,208,.18)}
+.lead{font-size:clamp(17px,1.6vw,20px);color:var(--ink-2);max-width:760px;margin:18px 0 0}
+.muted{color:var(--steel)}
+.dark{background:var(--night);color:#e8f1f2}
+.dark .lead{color:#b9cccf}.dark .eyebrow{color:var(--accent)}
+.grad{background:linear-gradient(100deg,var(--teal-l),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .25s,background .25s,border-color .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--teal);color:#fff}.btn-p:hover{background:var(--teal-d)}
+.btn-g{border-color:rgba(255,255,255,.35);color:#fff}.btn-g:hover{border-color:#fff}
+.btn-o{border-color:var(--line);background:#fff}.btn-o:hover{border-color:var(--teal)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* top bar */
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;transition:background .3s,box-shadow .3s}
+.bar.solid{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.bar .brand{display:flex;align-items:center;background:#fff;border-radius:10px;padding:6px 10px}
+.bar .logo{height:22px;width:auto}
+.bar.scrolled{background:rgba(7,20,23,.82);backdrop-filter:blur(10px)}
+.bar-r{display:flex;align-items:center;gap:10px}
+.lang{display:flex;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:3px}
+.bar.solid .lang{border-color:var(--line)}
+.lang button{background:none;border:0;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;color:#fff}
+.bar.solid .lang button{color:var(--ink-2)}
+.lang button[aria-pressed=true]{background:var(--accent);color:var(--night)!important}
+.bar .cta{padding:9px 16px;font-size:13.5px}
+@media (max-width:520px){.bar .cta{display:none}}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:60;width:0}
+
+/* side dots */
+.dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
+.dots a{position:relative;display:block;width:10px;height:10px;border-radius:50%;background:rgba(120,140,145,.45);transition:transform .25s,background .25s}
+.dots a.on{background:var(--accent);transform:scale(1.45)}
+.dots a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:12px;font-weight:600;background:var(--ink);color:#fff;padding:4px 9px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s}
+.dots a:hover span,.dots a:focus-visible span{opacity:1}
+@media (max-width:900px){.dots{display:none}}
+
+/* cover */
+#cover{min-height:100svh;display:flex;align-items:flex-end;padding:0;overflow:hidden;background:var(--night)}
+#cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 70%}
+#cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,20,23,.55) 0%,rgba(7,20,23,.15) 35%,rgba(7,20,23,.85) 78%,var(--night) 100%),linear-gradient(90deg,rgba(7,20,23,.75),transparent 70%)}
+#cover .wrap{position:relative;z-index:2;padding-bottom:64px;padding-top:120px;width:100%}
+#cover h1{font-size:clamp(42px,7vw,92px);color:#fff;max-width:900px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:44px;background:var(--night-line);border:1px solid var(--night-line);border-radius:var(--r);overflow:hidden;max-width:880px}
+.stats div{background:rgba(7,20,23,.6);backdrop-filter:blur(6px);padding:18px 20px}
+.stats b{display:block;font:600 clamp(26px,3vw,36px)/1 var(--display);color:#fff}
+.stats div>span{font-size:12.5px;color:#9fb5b9}
+.note{position:absolute;z-index:3;right:20px;bottom:18px;font-size:11px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.35);padding:4px 9px;border-radius:6px}
+.cover-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* cards */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:48px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px}
+@media (max-width:1000px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:1fr}}
+@media (max-width:600px){.grid4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
+.card .n{font:600 13px/1 var(--display);color:var(--teal);letter-spacing:.06em}
+.card h3{margin:14px 0 8px}
+.card p{margin:0;color:var(--ink-2);font-size:15px}
+
+/* series overview */
+.series{display:flex;flex-direction:column;overflow:hidden;padding:0;text-decoration:none;transition:transform .35s,box-shadow .35s}
+.series:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(13,27,30,.12)}
+.series .well{height:220px;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(120% 90% at 50% 0%,#fff,#eef5f6 70%,#e4eef0)}
+.series .well img{max-height:100%;width:auto;object-fit:contain}
+.series .body{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
+.series .kick{font:600 12px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--steel)}
+.series h3{font-size:26px;margin:8px 0 8px}
+.series ul{margin:14px 0 0;padding:0;list-style:none;font-size:14px;color:var(--ink-2)}
+.series li{padding:6px 0;border-top:1px solid #eef3f4}
+.series .go{margin-top:auto;padding-top:16px;font-weight:600;color:var(--teal);font-size:14px}
+
+/* finder */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.chip::before{content:"";width:14px;height:14px;border-radius:4px;border:1.5px solid #9fb1b5;transition:all .2s}
+.chip[aria-pressed=true]{border-color:var(--teal);background:var(--accent-soft);color:var(--teal-d)}
+.chip[aria-pressed=true]::before{background:var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;border-color:var(--teal)}
+.finder-out{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.finder-out p{margin:0;font-weight:600}
+.reset{background:none;border:0;color:var(--teal);font-weight:600;cursor:pointer;padding:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:10px;margin-top:18px}
+@media (max-width:1100px){.tiles{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (max-width:600px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 8px 12px;text-align:center;cursor:pointer;transition:opacity .3s,transform .3s,border-color .3s,box-shadow .3s}
+.tile img{height:70px;width:100%;object-fit:contain;margin-bottom:8px}
+.tile b{font:600 15px/1.1 var(--display)}
+.tile small{display:block;font-size:11px;color:var(--steel);margin-top:3px}
+.tile.hit{border-color:var(--teal);box-shadow:0 0 0 3px rgba(47,224,208,.25)}
+.tile.miss{opacity:.28;transform:scale(.97)}
+.empty{margin-top:14px;font-size:14px;color:var(--ink-2);display:none}
+
+/* series detail */
+.detail{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;margin-top:40px}
+@media (max-width:950px){.detail{grid-template-columns:1fr;gap:28px}}
+.stage{position:relative;border-radius:24px;background:radial-gradient(110% 90% at 50% 10%,#fff,#eaf3f4 65%,#dde9eb);min-height:420px;display:flex;align-items:center;justify-content:center;padding:28px;overflow:hidden;border:1px solid var(--line)}
+.stage img{max-height:380px;width:auto;object-fit:contain;transition:opacity .35s,transform .5s}
+.stage img.swap{opacity:0;transform:translateY(8px) scale(.98)}
+.stage .badge{position:absolute;left:18px;top:18px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 11px;color:var(--steel)}
+.tabs{display:inline-flex;background:#e7eff0;border-radius:999px;padding:4px;gap:2px;flex-wrap:wrap}
+.tabs button{border:0;background:none;padding:9px 18px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink-2)}
+.tabs button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(13,27,30,.12)}
+.vtag{font-size:18px;color:var(--teal-d);font-weight:600;margin:22px 0 6px;font-family:var(--display);letter-spacing:-.01em}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:20px 0}
+.figs div{background:#fff;padding:14px 16px}
+.figs b{display:block;font:600 26px/1.05 var(--display)}
+.figs b small{font-size:14px;font-weight:600;color:var(--steel);margin-left:3px}
+.figs div>span{font-size:12px;color:var(--steel)}
+@media (max-width:480px){.figs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bul{list-style:none;margin:0;padding:0}
+.bul li{position:relative;padding:7px 0 7px 26px;color:var(--ink-2);font-size:15px}
+.bul li::before{content:"";position:absolute;left:2px;top:14px;width:12px;height:2px;background:var(--accent)}
+.more{display:inline-flex;margin-top:18px;font-weight:600;color:var(--teal);text-decoration:none;font-size:14.5px}
+.more:hover{text-decoration:underline}
+.matrix{width:100%;border-collapse:collapse;margin-top:30px;font-size:14px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.matrix th,.matrix td{padding:11px 14px;text-align:center;border-bottom:1px solid #edf2f3}
+.matrix th:first-child,.matrix td:first-child{text-align:left}
+.matrix thead th{background:#f7fafa;font-weight:600}
+.matrix .y{color:var(--teal);font-weight:700}.matrix .o{color:var(--steel)}
+.film{position:relative;margin-top:56px;border-radius:24px;overflow:hidden;background:#000;aspect-ratio:16/9;box-shadow:0 30px 60px rgba(13,27,30,.25)}
+.film video{width:100%;height:100%;object-fit:cover}
+.film .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 26px 22px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;pointer-events:none}
+.film .cap b{font:600 22px/1.2 var(--display)}
+.film .cap span{font-size:12px;opacity:.8}
+.film .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;border:0;background:rgba(255,255,255,.92);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s,opacity .25s}
+.film .play:hover{transform:translate(-50%,-50%) scale(1.07)}
+.film.playing .play{opacity:0;pointer-events:none}
+
+/* compare */
+.tablewrap{overflow-x:auto;margin-top:40px;border-radius:16px;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+table.cmp{border-collapse:collapse;width:100%;min-width:860px;font-size:14.5px}
+.cmp th,.cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid #edf2f3;white-space:nowrap}
+.cmp thead th{position:sticky;top:0;background:#f7fafa;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);cursor:pointer;user-select:none}
+.cmp thead th[aria-sort]::after{content:" ↕";opacity:.4}
+.cmp thead th[aria-sort=ascending]::after{content:" ↑";opacity:1;color:var(--teal)}
+.cmp thead th[aria-sort=descending]::after{content:" ↓";opacity:1;color:var(--teal)}
+.cmp tbody tr{cursor:pointer;transition:background .15s}
+.cmp tbody tr:hover{background:#f3faf9}
+.cmp td:first-child{font:600 15px var(--display)}
+.cmp .pill{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:#eef3f4;color:var(--ink-2)}
+.cmp .pill.wl{background:var(--accent-soft);color:var(--teal-d)}
+.foot{font-size:12.5px;color:var(--steel);margin-top:14px}
+
+/* scenarios */
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:48px}
+@media (max-width:1000px){.scen{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.scen{grid-template-columns:1fr}}
+.scen .card{display:flex;flex-direction:column}
+.scen .icon{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--teal)}
+.picks{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px}
+.picks button{border:1px solid var(--line);background:#f7fafa;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.picks button:hover{border-color:var(--teal);color:var(--teal)}
+.payload{margin-top:34px;padding:22px 26px;border-radius:var(--r);background:var(--night-2);color:#d8e6e8;display:flex;gap:18px;align-items:flex-start}
+.payload b{color:#fff}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:52px;counter-reset:s}
+@media (max-width:1000px){.steps{grid-template-columns:1fr}}
+.steps div{position:relative;padding:0 22px 0 0}
+@media (max-width:1000px){.steps div{padding:0 0 26px 0}}
+.steps div::before{counter-increment:s;content:"0" counter(s);display:block;font:600 14px/1 var(--display);color:var(--accent);margin-bottom:14px}
+.steps div::after{content:"";position:absolute;left:34px;right:22px;top:7px;height:1px;background:var(--night-line)}
+@media (max-width:1000px){.steps div::after{display:none}}
+.steps div:last-child::after{display:none}
+.steps h3{color:#fff;font-size:19px;margin-bottom:8px}
+.steps p{margin:0;color:#a9bfc2;font-size:14.5px}
+
+/* centaur */
+#centaur .lead{color:#b9cccf}
+#centaur{background:linear-gradient(180deg,var(--night) 0%,var(--night-2) 100%);color:#e8f1f2;overflow:hidden}
+.c-top{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media (max-width:950px){.c-top{grid-template-columns:1fr}}
+.c-figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--night-line);border:1px solid var(--night-line);border-radius:16px;overflow:hidden;margin-top:30px}
+.c-figs div{background:rgba(255,255,255,.03);padding:16px}
+.c-figs b{display:block;font:600 26px/1 var(--display);color:#fff}
+.c-figs div>span{font-size:12px;color:#93aaae}
+@media (max-width:600px){.c-figs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.c-img{border-radius:22px;overflow:hidden;aspect-ratio:4/5;position:relative;border:1px solid var(--night-line)}
+.c-img img{width:100%;height:100%;object-fit:cover;transition:opacity .5s}
+.c-img .cap{position:absolute;left:14px;bottom:14px;font-size:12px;background:rgba(0,0,0,.5);color:#fff;padding:5px 10px;border-radius:999px}
+.c-switch{display:flex;gap:8px;margin-top:12px}
+.c-switch button{flex:1;border:1px solid var(--night-line);background:transparent;color:#cfe0e2;border-radius:10px;padding:8px;font-size:12.5px;cursor:pointer}
+.c-switch button[aria-pressed=true]{border-color:var(--accent);color:#fff}
+.modes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:56px}
+@media (max-width:1000px){.modes{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.modes{grid-template-columns:1fr}}
+.mode{border:1px solid var(--night-line);border-radius:16px;padding:20px;background:rgba(255,255,255,.03);cursor:pointer;transition:border-color .25s,background .25s;text-align:left;color:inherit}
+.mode h3{color:#fff;font-size:17px;margin-bottom:6px}
+.mode p{margin:0;font-size:14px;color:#a9bfc2}
+.mode[aria-pressed=true]{border-color:var(--accent);background:rgba(47,224,208,.08)}
+.c-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+@media (max-width:1000px){.c-fields{grid-template-columns:1fr}}
+.c-field{border-radius:16px;padding:22px;background:#fff;color:var(--ink)}
+.c-field .n{font:600 13px var(--display);color:var(--teal)}
+.c-field h3{margin:10px 0 8px;font-size:19px}
+.c-field p{margin:0;font-size:14.5px;color:var(--ink-2)}
+.c-field .sep{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:13.5px;color:var(--steel)}
+.c-field .sep b{color:var(--teal-d)}
+.c-field.lit{box-shadow:0 0 0 3px var(--accent)}
+.c-film{margin-top:56px}
+.c-note{font-size:12.5px;color:#86a0a4;margin-top:16px;max-width:820px}
+
+/* fine print + contact */
+.fine{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 40px;margin-top:30px}
+@media (max-width:800px){.fine{grid-template-columns:1fr}}
+.fine p{margin:0;font-size:14px;color:var(--ink-2);padding-left:18px;position:relative}
+.fine p::before{content:"•";position:absolute;left:2px;color:var(--teal)}
+#contact{background:linear-gradient(140deg,#0a565c,#04756f 55%,#06938c);color:#fff;text-align:center;padding:110px 0}
+#contact h2{font-size:clamp(34px,5vw,60px)}
+#contact .lead{color:#d6f0ee;margin:18px auto 0}
+#contact .btn-p{background:#fff;color:var(--teal-d)}
+.foot-line{margin-top:46px;font-size:13px;color:#bfe3e0}
+.foot-line a{color:#fff}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.stage img{transition:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="bar" id="bar">
+  <a class="brand" href="/" aria-label="MegaRobotics"><img class="logo" src="/logo.png" alt="megarobotics.de" width="160" height="26"></a>
+  <div class="bar-r">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </div>
+    <a class="btn btn-p cta" data-href="contact" data-t="navCta">Talk to us</a>
+  </div>
+</header>
+<nav class="dots" id="dots" aria-label="Sections"></nav>
+
+<main>
+<!-- 1 · cover -->
+<section id="cover" class="dark" data-nav="nCover">
+  <video id="coverVideo" muted playsinline loop preload="metadata" poster="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.jpg" aria-hidden="true">
+    <source src="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.mp4" type="video/mp4">
+  </video>
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="coverEyebrow"></p>
+    <h1 class="rv" data-t="coverTitle"></h1>
+    <p class="lead rv" data-t="coverLead"></p>
+    <div class="cover-ctas rv">
+      <a class="btn btn-p" href="#range" data-t="coverCta1"></a>
+      <a class="btn btn-g" href="#centaur" data-t="coverCta2"></a>
+    </div>
+    <div class="stats rv">
+      <div><b data-count="9">9</b><span data-t="st1"></span></div>
+      <div><b data-count="3">3</b><span data-t="st2"></span></div>
+      <div><b>IP67</b><span data-t="st3"></span></div>
+      <div><b><span data-count="7.5" data-dec="1">7.5</span> h</b><span data-t="st4"></span></div>
+    </div>
+  </div>
+  <p class="note" data-t="aiNote"></p>
+</section>
+
+<!-- 2 · why -->
+<section id="why" data-nav="nWhy">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="whyEyebrow"></p>
+    <h2 class="rv" data-t="whyTitle"></h2>
+    <div class="grid4" id="whyCards"></div>
+  </div>
+</section>
+
+<!-- 3 · range -->
+<section id="range" data-nav="nRange" style="background:#fff">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="rangeEyebrow"></p>
+    <h2 class="rv" data-t="rangeTitle"></h2>
+    <p class="lead rv" data-t="rangeLead"></p>
+    <div class="grid3" id="seriesCards"></div>
+  </div>
+</section>
+
+<!-- 4 · finder -->
+<section id="finder" data-nav="nFinder">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="findEyebrow"></p>
+    <h2 class="rv" data-t="findTitle"></h2>
+    <p class="lead rv" data-t="findLead"></p>
+    <div class="chips rv" id="chips"></div>
+    <div class="finder-out"><p id="findCount" aria-live="polite"></p><button class="reset" id="findReset" type="button" data-t="findReset"></button></div>
+    <div class="tiles" id="tiles"></div>
+    <p class="empty" id="findEmpty" data-t="findEmpty"></p>
+  </div>
+</section>
+
+<!-- 5-7 · series -->
+<section id="s-m1" data-nav="nM1" style="background:#fff"><div class="wrap" data-series="m1"></div></section>
+<section id="s-m40" data-nav="nM40"><div class="wrap" data-series="m40"></div></section>
+<section id="s-m100" data-nav="nM100" style="background:#fff"><div class="wrap" data-series="m100"></div></section>
+
+<!-- 8 · compare -->
+<section id="compare" data-nav="nCompare">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="cmpEyebrow"></p>
+    <h2 class="rv" data-t="cmpTitle"></h2>
+    <p class="lead rv" data-t="cmpLead"></p>
+    <div class="tablewrap rv"><table class="cmp" id="cmp"><thead><tr id="cmpHead"></tr></thead><tbody id="cmpBody"></tbody></table></div>
+    <p class="foot" data-t="cmpFoot"></p>
+  </div>
+</section>
+
+<!-- 9 · scenarios -->
+<section id="scenarios" data-nav="nScen" style="background:#fff">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="scEyebrow"></p>
+    <h2 class="rv" data-t="scTitle"></h2>
+    <p class="lead rv" data-t="scLead"></p>
+    <div class="scen" id="scen"></div>
+    <div class="payload rv">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2fe0d0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3.2"/><path d="M8 7l1.5-3h5L16 7"/></svg>
+      <p style="margin:0" data-t="payloadNote"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · delivery -->
+<section id="delivery" class="dark" data-nav="nDel">
+  <div class="wrap">
+    <p class="eyebrow rv" data-t="delEyebrow"></p>
+    <h2 class="rv" data-t="delTitle"></h2>
+    <p class="lead rv" data-t="delLead"></p>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<!-- 11 · centaur -->
+<section id="centaur" data-nav="nCentaur">
+  <div class="wrap">
+    <div class="c-top">
+      <div>
+        <p class="eyebrow rv" data-t="cEyebrow"></p>
+        <h2 class="rv" style="color:#fff" data-t="cTitle"></h2>
+        <p class="lead rv" data-t="cLead"></p>
+        <p class="lead rv" style="font-size:16px" data-t="cBody"></p>
+        <div class="c-figs rv">
+          <div><b>360°</b><span data-t="cf1"></span></div>
+          <div><b>±45°</b><span data-t="cf2"></span></div>
+          <div><b>±5 mm</b><span data-t="cf3"></span></div>
+          <div><b>4</b><span data-t="cf4"></span></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="c-img"><img id="cImg" src="/images/centaur/centaur-substation-thermal.jpg" alt=""><span class="cap" id="cImgCap"></span></div>
+        <div class="c-switch" id="cSwitch"></div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="color:#fff;margin-top:64px;font-size:26px" data-t="cModesTitle"></h3>
+    <p class="muted rv" style="color:#93aaae;margin:8px 0 0" data-t="cModesLead"></p>
+    <div class="modes" id="modes"></div>
+    <div class="c-fields" id="cFields"></div>
+
+    <div class="film c-film rv" id="cFilm">
+      <video preload="none" playsinline controls poster="https://media.megarobotics.de/megarobotics/centaur/substation-inspection.jpg">
+        <source src="https://media.megarobotics.de/megarobotics/centaur/substation-inspection.mp4" type="video/mp4">
+      </video>
+      <button class="play" type="button" aria-label="Play"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#0a565c"/></svg></button>
+      <div class="cap"><b data-t="cFilmTitle"></b><span data-t="cFilmNote"></span></div>
+    </div>
+    <p class="c-note" data-t="cDisclaimer"></p>
+    <a class="btn btn-g" style="margin-top:22px" data-href="centaur" data-t="cMore"></a>
+  </div>
+</section>
+
+<!-- 12 · fine print -->
+<section id="fine" data-nav="nFine" style="padding:80px 0">
+  <div class="wrap">
+    <p class="eyebrow" data-t="fineEyebrow"></p>
+    <h2 style="font-size:clamp(26px,3vw,36px)" data-t="fineTitle"></h2>
+    <div class="fine" id="fineList"></div>
+  </div>
+</section>
+
+<!-- 13 · contact -->
+<section id="contact" data-nav="nContact">
+  <div class="wrap">
+    <h2 data-t="ctTitle"></h2>
+    <p class="lead" data-t="ctLead"></p>
+    <div class="cover-ctas" style="justify-content:center">
+      <a class="btn btn-p" data-href="contact" data-t="ctBtn"></a>
+      <a class="btn btn-g" data-href="products" data-t="ctBtn2"></a>
+    </div>
+    <p class="foot-line" data-t="ctFoot"></p>
+  </div>
+</section>
+</main>
+
+<script>
+(() => {
+'use strict';
+const IMG = (h) => `https://cdn.sanity.io/images/wudur8e8/production/${h}.png?w=900&auto=format`;
+const I = {
+  m1: IMG('b77f658571e745f6460eb161405484f78e9720a4-652x545'),
+  m1x: IMG('d28948390f9d22967e998fbdde44a58267ce4128-579x471'),
+  m40: IMG('be06eb98e716cdfc9df4e99fbe6802fbc79e0acd-1048x862'),
+  m40w: IMG('0a58d94c196edd7f27e9e47b257450d852775f19-1008x962'),
+  m40ws: IMG('513e3bc6f7edf7d82e95c2b9b9b5752a72c66f90-1083x920'),
+  m100: IMG('ac9dd07d42712e2c0eb2f97bae7676a3bc281ef2-1162x1051'),
+  m100w: IMG('3599ad8632cba34cba26ac8d29033ffea2d7f107-1138x1048'),
+  m100ws: IMG('b1e3d4ff745bedcf98522d7ce4538c89732be01e-1640x1500'),
+};
+
+/* ---------- copy ---------- */
+const T = {
+en: {
+  navCta: 'Talk to us',
+  nCover: 'Start', nWhy: 'Why robots', nRange: 'The range', nFinder: 'Find your robot', nM1: 'M1 series', nM40: 'M40 series', nM100: 'M100 series', nCompare: 'Compare', nScen: 'Use cases', nDel: 'How we deliver', nCentaur: 'CENTAUR', nFine: 'Good to know', nContact: 'Contact',
+  coverEyebrow: 'MegaRobotics · Inspection & security',
+  coverTitle: 'Robots that walk the <span class="grad">round</span> for you.',
+  coverLead: 'Nine quadruped and wheel-legged robots in three series, supplied, integrated and serviced by MegaRobotics in the DACH region. At the end: CENTAUR, our own development for patrols that need hands.',
+  coverCta1: 'See the M series', coverCta2: 'Jump to CENTAUR',
+  st1: 'models', st2: 'series: M1, M40, M100', st3: 'on the M1 and M100 series', st4: 'endurance, unloaded (M100WS)',
+  aiNote: 'M100WS · AI-generated visualisation, payloads not included',
+  whyEyebrow: 'Why robots on the round',
+  whyTitle: 'The round has to happen every night. It doesn’t have to be a person every time.',
+  why: [
+    ['01', 'Same route, every shift', 'With navigation, the robot follows the same route and stops at the same checkpoints each time. What changed since yesterday stands out, because the baseline doesn’t move.'],
+    ['02', 'Where nobody wants to be at 3 a.m.', 'Rain, cold, dust, cable tunnels and roofs. IP66 or IP67 sealing and a −20 to +55 °C operating range on every model.'],
+    ['03', 'Stairs, grating, gravel', 'Legs climb stairs and cross grating, kerbs and rubble that stop wheeled robots. The wheel-legged models add speed on the flat stretches.'],
+    ['04', 'People where they matter', 'Guards and technicians react to what the robot finds instead of walking the route themselves. The robot reports, people decide.'],
+  ],
+  rangeEyebrow: 'The M series', rangeTitle: 'Three series. One idea: go where wheels can’t.',
+  rangeLead: 'Each series comes as a walking robot or with wheels on its feet. Pick by weight class and payload, then by how much autonomy you want built in.',
+  series: {
+    m1: ['Fast wheel-legged patrol', 'M1 series', ['M1 · M1 Pro · M1 Ultra', '41 kg, 6 m/s, IP67', 'Up to 29 km on hot-swap batteries', 'Navigation, follow mode and voice from the M1 Pro']],
+    m40: ['Compact and light', 'M40 series', ['M40 · M40W · M40WS', '36 to 43 kg, up to 5 m/s, IP66', 'Stairs, grating, narrow service corridors', 'Pro package for SLAM and navigation']],
+    m100: ['Heavy duty', 'M100 series', ['M100 · M100W · M100WS', '50 to 100 kg continuous payload, IP67', '2,081 Wh battery, up to 7.5 h', 'Carrier for heavy sensor kits']],
+  },
+  seriesGo: 'Explore the series →',
+  findEyebrow: 'Interactive', findTitle: 'Which robot fits your round?',
+  findLead: 'Tick what your site needs. The models that meet every point stay lit. Click a model to jump to its details.',
+  findReset: 'Reset',
+  findCount: (n) => n === 9 ? 'All 9 models shown. Pick your requirements.' : `${n} of 9 models meet every requirement`,
+  findEmpty: 'No single model covers all of these. That is common, and often two robots share the job. Talk to us and we’ll work it out with you.',
+  needs: {
+    stairs: 'Climbs stairs', ip67: 'IP67 sealing', fast: 'Fast: 5 m/s or more', long: 'Long routes: 25 km or more', heavy: 'Payload of 50 kg or more', light: 'Light: under 45 kg', auto: 'Navigation built in', voice: 'Talks to people on site', surround: '720° surround view',
+  },
+  drive: { walk: 'Walking', wl: 'Wheel-legged' },
+  sKick: { m1: 'Series 1 of 3', m40: 'Series 2 of 3', m100: 'Series 3 of 3' },
+  sTitle: { m1: 'M1 series: patrol at speed', m40: 'M40 series: compact and stair-ready', m100: 'M100 series: built to carry' },
+  sLead: {
+    m1: 'Twelve joint motors for walking and four hub motors in the feet. The M1 rolls fast on flat ground and switches to walking for steps, kerbs and rough terrain. Three variants, one platform: choose how much autonomy comes built in.',
+    m40: 'The lightest robots in the range. They walk where wheeled robots get stuck: stairs, grating, rubble and tight service corridors. A top deck takes the inspection sensors your site needs.',
+    m100: 'For long shifts outdoors and heavy equipment. IP67, a 2,081 Wh battery that swaps quickly, and up to 100 kg of continuous payload on the M100WS.',
+  },
+  datasheet: 'Full data sheet →',
+  rendering: 'Rendering',
+  matrixHead: ['', 'M1', 'M1 Pro', 'M1 Ultra'],
+  matrix: [
+    ['Navigation and mapping', 'Option', 'Standard', 'Standard'],
+    ['Follow mode (UWB, LiDAR, vision)', '–', '✓', '✓'],
+    ['Voice intercom and broadcast', '–', '✓', '✓'],
+    ['Ultrasonic sensors', '–', '✓', '✓'],
+    ['720° surround perception', '–', '–', '✓'],
+    ['Cameras', '2 × 8 MP', '2 × 8 MP', '4 × fisheye + 2 × stereo'],
+    ['Compute', '100 TOPS', '100 TOPS', '128 TOPS'],
+  ],
+  filmTitle: 'M100WS on a plant patrol', filmNote: 'AI-generated visualisation · payloads not included',
+  cmpEyebrow: 'Side by side', cmpTitle: 'All nine models at a glance',
+  cmpLead: 'Click a column to sort, click a row to open the model.',
+  cmpCols: ['Model', 'Drive', 'Weight', 'Payload', 'Speed', 'Endurance, unloaded', 'Obstacle', 'Protection'],
+  cmpFoot: 'Maximum values, base configuration, as of 11/2026. Speeds are not stated under load. M100 and M100W: 0–3 m/s, 5 m/s sprint in the lab, unloaded. M1 endurance measured at 1 m/s. M100WS obstacle = step height. M40W dimensions and battery capacity on request.',
+  scEyebrow: 'Inspection & security', scTitle: 'Where the M series works',
+  scLead: 'Typical jobs and the models we would start with. Click a model to see it.',
+  scen: [
+    ['Night patrol on industrial sites', 'Fixed routes after hours, along buildings, gates and fence lines. Navigation built in, a voice channel to speak to people on site, and on the M1 Ultra a 720° view.', ['m1-pro', 'm1-ultra', 'm40w'], 'shield'],
+    ['Substations and power utilities', 'Rounds through switch rooms, cable tunnels and gravel yards, with thermal checks on transformers and switchgear.', ['m40', 'm100w', 'm100ws'], 'bolt'],
+    ['Plants, pipe racks and tank farms', 'Stairs, grating and multi-level walkways in process areas outside classified Ex zones.', ['m40', 'm40ws', 'm1-pro'], 'pipe'],
+    ['Perimeter and large sites', 'Long distances on mixed ground: logistics yards, campuses, solar parks.', ['m100ws', 'm1', 'm40ws'], 'route'],
+    ['Tunnels and underground infrastructure', 'Wet, dusty and dark. IP67 and wading through 30 cm of water.', ['m100', 'm100w'], 'tunnel'],
+    ['Carrying heavy sensor kit', 'Masts, PTZ heads, extra batteries or measurement gear: 100 kg continuous payload, 12 × M8 mounting points and 12/24/48 V on the deck.', ['m100ws', 'm100'], 'box'],
+  ],
+  payloadNote: '<b>Sensors are chosen per project.</b> Thermal and acoustic cameras, gas detectors and other inspection payloads are selected for your site and integrated by us. They are not part of the standard scope of supply, so the quotation lists exactly what you get.',
+  delEyebrow: 'How we deliver', delTitle: 'From your site plan to a robot on the round',
+  delLead: 'MegaRobotics supplies, integrates and services the M series in Germany, Austria and Switzerland. One contact from the first walk-through to service.',
+  steps: [
+    ['Site walk-through', 'We look at the route, the ground, the checkpoints and what the robot has to detect.'],
+    ['Robot and payload', 'We pick the model and the sensors, and tell you plainly if a simpler solution does the job.'],
+    ['Integration', 'Sensors, software and the link to your systems via SDK and ROS 2, scope fixed in the quotation.'],
+    ['Commissioning', 'Mapping the route, setting checkpoints, training your team on site.'],
+    ['Service', 'Support, maintenance and repairs handled from Germany, with one contact for your team.'],
+  ],
+  cEyebrow: 'Outlook · MegaRobotics in-house development',
+  cTitle: 'CENTAUR: for the patrol that needs hands',
+  cLead: 'A quadruped can find the open door. It can’t close it. CENTAUR couples a self-operating humanoid upper body to a self-operating quadruped, and separates them again on command.',
+  cBody: 'On the nightly round the chassis runs alone as an inspection and patrol robot. Where an intervention is needed, the torso joins: opening a gate, moving an obstacle, operating a keypad or a valve. One fleet, two configurations.',
+  cf1: 'Torso rotation, endless', cf2: 'Active tilt compensation', cf3: 'Docking accuracy', cf4: 'Operating modes',
+  cImgs: [['/images/centaur/centaur-substation-thermal.jpg', 'Substation · inspection'], ['/images/centaur/centaur-substation.jpg', 'Gravel and cable trenches'], ['/images/centaur/centaur-studio.jpg', 'CENTAUR-1']],
+  cModesTitle: 'Four operating modes, one purchase', cModesLead: 'Click a mode to see which inspection and security fields it serves.',
+  modes: [
+    ['CENTAUR compound', 'Terrain mobility and two-handed work at the same time.', ['02', '03', '07']],
+    ['Chassis solo', 'The quadruped carries on alone as an inspection or patrol robot with a sensor payload.', ['02', '03', '07']],
+    ['Torso stationary', 'The upper body works on a stand or platform, for example at the gatehouse.', ['07']],
+    ['Hand locomotion', 'The decoupled torso moves short distances on its grippers, through gaps the compound can’t pass.', ['02']],
+  ],
+  separated: 'Separated:',
+  fields: [
+    ['02', 'Plant inspection & maintenance', 'Reading gauges, taking samples, operating valves and flaps. One hand holds the tool, the other the counter-hold, with a free working direction at the cabinet.', 'the quadruped alone on the daily sensor round.'],
+    ['03', 'Energy & grid infrastructure', 'Switchgear and transformer checks, switching operations. Two-handed work on gravel and around tower bases while clearance distances are kept.', 'continuous substation patrol, no torso.'],
+    ['07', 'Security & site protection', 'Patrols that can intervene, not only report: opening doors and gates, moving an obstacle, operating a keypad, at night, on stairs and along fence lines.', 'night patrol as chassis, torso at the gatehouse.'],
+  ],
+  cFilmTitle: 'CENTAUR-1 · substation inspection', cFilmNote: 'Visualisation · prototype phase',
+  cDisclaimer: 'Development status: prototype phase. Rotation, tilt, docking accuracy and the four modes are design values from the IP filing, not measurements on a series machine. Images and videos are renderings of the registered design.',
+  cMore: 'Full CENTAUR presentation →',
+  fineEyebrow: 'Good to know', fineTitle: 'The details that matter before you order',
+  fine: [
+    'All values are for the base configuration, as of 11/2026, and subject to change. The quotation confirms the exact scope.',
+    'CE conformity for the M series is in preparation.',
+    'No M-series model has explosion protection. They are meant for areas outside classified Ex zones.',
+    'M100 and M100W: autonomous navigation in the Pro package is currently at demo stage. SLAM mapping, obstacle avoidance and point-cloud view are available.',
+    'The M series is built for MegaRobotics by OEM manufacturing partners. Product images are renderings and may differ from the delivered unit.',
+    'The M100WS film is an AI-generated visualisation, not footage of a real unit. Payloads shown are not included.',
+  ],
+  ctTitle: 'Let’s walk your route together.',
+  ctLead: 'Send us a site plan or a few photos of the route. We’ll come back with a model, a sensor set and an honest view of what a robot can take over.',
+  ctBtn: 'Discuss your project', ctBtn2: 'All products',
+  ctFoot: 'MegaRobotics is a brand of MegaForce GmbH, Kaarst, Germany · <a href="/">www.megarobotics.de</a>',
+},
+de: {
+  navCta: 'Kontakt',
+  nCover: 'Start', nWhy: 'Warum Roboter', nRange: 'Das Programm', nFinder: 'Roboter finden', nM1: 'M1-Serie', nM40: 'M40-Serie', nM100: 'M100-Serie', nCompare: 'Vergleich', nScen: 'Einsatzfälle', nDel: 'So liefern wir', nCentaur: 'CENTAUR', nFine: 'Gut zu wissen', nContact: 'Kontakt',
+  coverEyebrow: 'MegaRobotics · Inspektion & Sicherheit',
+  coverTitle: 'Roboter, die den <span class="grad">Rundgang</span> übernehmen.',
+  coverLead: 'Neun Lauf- und Rad-Bein-Roboter in drei Serien – geliefert, integriert und betreut von MegaRobotics in der DACH-Region. Zum Schluss: CENTAUR, unsere Eigenentwicklung für Streifen, bei denen Hände gebraucht werden.',
+  coverCta1: 'Zur M-Serie', coverCta2: 'Direkt zu CENTAUR',
+  st1: 'Modelle', st2: 'Serien: M1, M40, M100', st3: 'bei M1- und M100-Serie', st4: 'Laufzeit ohne Last (M100WS)',
+  aiNote: 'M100WS · KI-generierte Visualisierung, Nutzlasten nicht im Lieferumfang',
+  whyEyebrow: 'Warum Roboter auf den Rundgang',
+  whyTitle: 'Der Rundgang muss jede Nacht stattfinden. Er muss nicht jedes Mal ein Mensch sein.',
+  why: [
+    ['01', 'Gleiche Route, jede Schicht', 'Mit Navigation folgt der Roboter jedes Mal derselben Route und hält an denselben Kontrollpunkten. Was sich seit gestern verändert hat, fällt auf, weil die Basis gleich bleibt.'],
+    ['02', 'Wo um 3 Uhr niemand sein will', 'Regen, Kälte, Staub, Kabeltunnel und Dächer. Schutzart IP66 oder IP67 und ein Betriebsbereich von −20 bis +55 °C bei jedem Modell.'],
+    ['03', 'Treppen, Gitterroste, Schotter', 'Beine steigen Treppen und überwinden Gitterroste, Bordsteine und Schutt, an denen Radroboter scheitern. Die Rad-Bein-Modelle sind auf ebenen Abschnitten zusätzlich schnell.'],
+    ['04', 'Menschen dort, wo sie zählen', 'Sicherheitskräfte und Techniker reagieren auf das, was der Roboter findet, statt die Route selbst abzulaufen. Der Roboter meldet, Menschen entscheiden.'],
+  ],
+  rangeEyebrow: 'Die M-Serie', rangeTitle: 'Drei Serien. Eine Idee: dorthin, wo Räder nicht hinkommen.',
+  rangeLead: 'Jede Serie gibt es als Laufroboter oder mit Rädern an den Füßen. Wählen Sie nach Gewichtsklasse und Nutzlast, dann nach dem Grad an Autonomie ab Werk.',
+  series: {
+    m1: ['Schnelle Rad-Bein-Streife', 'M1-Serie', ['M1 · M1 Pro · M1 Ultra', '41 kg, 6 m/s, IP67', 'Bis zu 29 km mit Wechselakkus', 'Navigation, Folgemodus und Sprechanlage ab M1 Pro']],
+    m40: ['Kompakt und leicht', 'M40-Serie', ['M40 · M40W · M40WS', '36 bis 43 kg, bis 5 m/s, IP66', 'Treppen, Gitterroste, enge Versorgungsgänge', 'Pro-Paket für SLAM und Navigation']],
+    m100: ['Schwerlast', 'M100-Serie', ['M100 · M100W · M100WS', '50 bis 100 kg Dauernutzlast, IP67', '2.081-Wh-Akku, bis zu 7,5 h', 'Träger für schwere Sensorik']],
+  },
+  seriesGo: 'Serie ansehen →',
+  findEyebrow: 'Interaktiv', findTitle: 'Welcher Roboter passt zu Ihrem Rundgang?',
+  findLead: 'Wählen Sie, was Ihr Standort braucht. Die Modelle, die alle Punkte erfüllen, bleiben hervorgehoben. Ein Klick auf ein Modell führt zu den Details.',
+  findReset: 'Zurücksetzen',
+  findCount: (n) => n === 9 ? 'Alle 9 Modelle. Wählen Sie Ihre Anforderungen.' : `${n} von 9 Modellen erfüllen alle Anforderungen`,
+  findEmpty: 'Kein einzelnes Modell deckt alles ab. Das ist häufig so, oft teilen sich zwei Roboter die Aufgabe. Sprechen Sie uns an, wir finden die Lösung gemeinsam.',
+  needs: {
+    stairs: 'Steigt Treppen', ip67: 'Schutzart IP67', fast: 'Schnell: 5 m/s oder mehr', long: 'Lange Routen: 25 km oder mehr', heavy: 'Nutzlast ab 50 kg', light: 'Leicht: unter 45 kg', auto: 'Navigation ab Werk', voice: 'Spricht mit Personen vor Ort', surround: '720°-Rundumsicht',
+  },
+  drive: { walk: 'Laufend', wl: 'Rad-Bein' },
+  sKick: { m1: 'Serie 1 von 3', m40: 'Serie 2 von 3', m100: 'Serie 3 von 3' },
+  sTitle: { m1: 'M1-Serie: Streife mit Tempo', m40: 'M40-Serie: kompakt und treppentauglich', m100: 'M100-Serie: gebaut zum Tragen' },
+  sLead: {
+    m1: 'Zwölf Gelenkmotoren zum Laufen und vier Nabenmotoren in den Füßen. Der M1 rollt zügig auf ebenem Boden und wechselt bei Stufen, Bordsteinen und unwegsamem Gelände ins Laufen. Drei Varianten, eine Plattform: Sie wählen, wie viel Autonomie ab Werk dabei ist.',
+    m40: 'Die leichtesten Roboter im Programm. Sie laufen dort, wo Radroboter hängen bleiben: auf Treppen, Gitterrosten, Schutt und in engen Versorgungsgängen. Das Oberdeck trägt die Inspektionssensorik, die Ihr Standort braucht.',
+    m100: 'Für lange Einsätze im Freien und schwere Ausrüstung. IP67, ein schnell wechselbarer 2.081-Wh-Akku und beim M100WS bis zu 100 kg Dauernutzlast.',
+  },
+  datasheet: 'Vollständiges Datenblatt →',
+  rendering: 'Rendering',
+  matrixHead: ['', 'M1', 'M1 Pro', 'M1 Ultra'],
+  matrix: [
+    ['Navigation und Kartierung', 'Option', 'Serie', 'Serie'],
+    ['Folgemodus (UWB, LiDAR, Kamera)', '–', '✓', '✓'],
+    ['Sprechanlage und Durchsage', '–', '✓', '✓'],
+    ['Ultraschallsensoren', '–', '✓', '✓'],
+    ['720°-Rundumwahrnehmung', '–', '–', '✓'],
+    ['Kameras', '2 × 8 MP', '2 × 8 MP', '4 × Fischauge + 2 × Stereo'],
+    ['Rechenleistung', '100 TOPS', '100 TOPS', '128 TOPS'],
+  ],
+  filmTitle: 'M100WS auf Anlagenrundgang', filmNote: 'KI-generierte Visualisierung · Nutzlasten nicht im Lieferumfang',
+  cmpEyebrow: 'Im Vergleich', cmpTitle: 'Alle neun Modelle auf einen Blick',
+  cmpLead: 'Klick auf eine Spalte sortiert, Klick auf eine Zeile öffnet das Modell.',
+  cmpCols: ['Modell', 'Antrieb', 'Gewicht', 'Nutzlast', 'Tempo', 'Laufzeit ohne Last', 'Hindernis', 'Schutzart'],
+  cmpFoot: 'Maximalwerte, Grundkonfiguration, Stand 11/2026. Geschwindigkeiten ohne Angabe unter Last. M100 und M100W: 0–3 m/s, 5 m/s Sprint im Labor ohne Last. M1-Laufzeit gemessen bei 1 m/s. M100WS-Hindernis = Stufenhöhe. M40W: Abmessungen und Akkukapazität auf Anfrage.',
+  scEyebrow: 'Inspektion & Sicherheit', scTitle: 'Wo die M-Serie arbeitet',
+  scLead: 'Typische Aufgaben und die Modelle, mit denen wir anfangen würden. Ein Klick auf ein Modell zeigt es.',
+  scen: [
+    ['Nachtstreife auf Industriegeländen', 'Feste Routen nach Feierabend, entlang von Gebäuden, Toren und Zäunen. Navigation ab Werk, ein Sprechkanal zu Personen vor Ort und beim M1 Ultra 720° Rundumsicht.', ['m1-pro', 'm1-ultra', 'm40w'], 'shield'],
+    ['Umspannwerke und Energieversorgung', 'Rundgänge durch Schalträume, Kabeltunnel und Schotterflächen, mit Wärmebildkontrolle an Trafos und Schaltanlagen.', ['m40', 'm100w', 'm100ws'], 'bolt'],
+    ['Anlagen, Rohrbrücken und Tanklager', 'Treppen, Gitterroste und mehrstöckige Laufwege in Prozessbereichen außerhalb eingestufter Ex-Zonen.', ['m40', 'm40ws', 'm1-pro'], 'pipe'],
+    ['Perimeter und große Gelände', 'Lange Strecken auf wechselndem Untergrund: Logistikhöfe, Campus, Solarparks.', ['m100ws', 'm1', 'm40ws'], 'route'],
+    ['Tunnel und unterirdische Infrastruktur', 'Nass, staubig und dunkel. IP67 und 30 cm Wattiefe.', ['m100', 'm100w'], 'tunnel'],
+    ['Schwere Sensorik tragen', 'Masten, PTZ-Köpfe, Zusatzakkus oder Messtechnik: 100 kg Dauernutzlast, 12 × M8-Befestigungspunkte und 12/24/48 V auf dem Deck.', ['m100ws', 'm100'], 'box'],
+  ],
+  payloadNote: '<b>Sensorik wird je Projekt gewählt.</b> Wärmebild- und Akustikkameras, Gasdetektoren und andere Inspektionsnutzlasten wählen wir für Ihren Standort aus und integrieren sie. Sie gehören nicht zum Standard-Lieferumfang – das Angebot nennt genau, was Sie bekommen.',
+  delEyebrow: 'So liefern wir', delTitle: 'Vom Lageplan zum Roboter auf dem Rundgang',
+  delLead: 'MegaRobotics liefert, integriert und betreut die M-Serie in Deutschland, Österreich und der Schweiz. Ein Ansprechpartner von der ersten Begehung bis zum Service.',
+  steps: [
+    ['Begehung', 'Wir sehen uns Route, Untergrund, Kontrollpunkte an und klären, was der Roboter erkennen muss.'],
+    ['Roboter und Sensorik', 'Wir wählen Modell und Sensoren – und sagen offen, wenn eine einfachere Lösung reicht.'],
+    ['Integration', 'Sensorik, Software und Anbindung an Ihre Systeme über SDK und ROS 2, Umfang im Angebot festgelegt.'],
+    ['Inbetriebnahme', 'Route kartieren, Kontrollpunkte festlegen, Ihr Team vor Ort schulen.'],
+    ['Service', 'Betreuung, Wartung und Reparatur aus Deutschland, mit einem festen Ansprechpartner für Ihr Team.'],
+  ],
+  cEyebrow: 'Ausblick · Eigenentwicklung von MegaRobotics',
+  cTitle: 'CENTAUR: für die Streife, die Hände braucht',
+  cLead: 'Ein Vierbeiner findet die offene Tür. Schließen kann er sie nicht. CENTAUR koppelt ein autonomes humanoides Oberkörpermodul mit einem autonomen Vierbeiner – und trennt beide auf Befehl wieder.',
+  cBody: 'Auf dem nächtlichen Rundgang läuft das Fahrwerk allein als Inspektions- und Streifenroboter. Wo ein Eingriff nötig ist, kommt der Torso hinzu: ein Tor öffnen, ein Hindernis bewegen, ein Tastenfeld oder ein Ventil bedienen. Eine Flotte, zwei Konfigurationen.',
+  cf1: 'Torso-Rotation, endlos', cf2: 'Aktiver Neigungsausgleich', cf3: 'Andockgenauigkeit', cf4: 'Betriebsmodi',
+  cImgs: [['/images/centaur/centaur-substation-thermal.jpg', 'Umspannwerk · Inspektion'], ['/images/centaur/centaur-substation.jpg', 'Schotter und Kabelkanäle'], ['/images/centaur/centaur-studio.jpg', 'CENTAUR-1']],
+  cModesTitle: 'Vier Betriebsmodi, eine Beschaffung', cModesLead: 'Klicken Sie auf einen Modus, um zu sehen, welche Inspektions- und Sicherheitsfelder er abdeckt.',
+  modes: [
+    ['CENTAUR-Verbund', 'Geländegängig und beidhändig zugleich.', ['02', '03', '07']],
+    ['Fahrwerk solo', 'Der Vierbeiner arbeitet allein als Inspektions- oder Streifenroboter mit Sensorik.', ['02', '03', '07']],
+    ['Torso stationär', 'Der Oberkörper arbeitet auf Ständer oder Plattform, etwa an der Pforte.', ['07']],
+    ['Handfortbewegung', 'Der entkoppelte Torso bewegt sich auf seinen Greifern durch enge Lücken, die der Verbund nicht passiert.', ['02']],
+  ],
+  separated: 'Getrennt:',
+  fields: [
+    ['02', 'Inspektion & Instandhaltung', 'Anzeigen ablesen, Proben nehmen, Ventile und Klappen betätigen – Werkzeug in der einen, Gegenhalt in der anderen Hand.', 'Vierbeiner allein auf dem täglichen Sensorrundgang.'],
+    ['03', 'Energie- & Netzinfrastruktur', 'Schaltanlagen- und Trafokontrollen, Schalthandlungen auf Schotter unter Einhaltung der Schutzabstände.', 'kontinuierliche Umspannwerk-Streife ohne Torso.'],
+    ['07', 'Sicherheit & Objektschutz', 'Streife mit Eingriffsmöglichkeit: Türen und Tore öffnen, Hindernisse bewegen, Tastenfelder bedienen – nachts, auf Treppen und entlang von Zäunen.', 'Nachtstreife als Fahrwerk, Torso an der Pforte.'],
+  ],
+  cFilmTitle: 'CENTAUR-1 · Inspektion im Umspannwerk', cFilmNote: 'Visualisierung · Prototypphase',
+  cDisclaimer: 'Entwicklungsstand: Prototypphase. Rotation, Neigung, Andockgenauigkeit und die vier Modi sind Auslegungswerte aus der Schutzrechtsanmeldung, keine Messwerte einer Serienmaschine. Abbildungen und Videos sind Renderings des eingetragenen Designs.',
+  cMore: 'Vollständige CENTAUR-Präsentation →',
+  fineEyebrow: 'Gut zu wissen', fineTitle: 'Was Sie vor der Bestellung wissen sollten',
+  fine: [
+    'Alle Werte gelten für die Grundkonfiguration, Stand 11/2026, Änderungen vorbehalten. Das Angebot bestätigt den genauen Umfang.',
+    'Die CE-Konformität der M-Serie ist in Vorbereitung.',
+    'Kein Modell der M-Serie hat Explosionsschutz. Sie sind für Bereiche außerhalb eingestufter Ex-Zonen vorgesehen.',
+    'M100 und M100W: Die autonome Navigation im Pro-Paket befindet sich derzeit im Demo-Stadium. SLAM-Kartierung, Hinderniserkennung und Punktwolkenansicht sind verfügbar.',
+    'Die M-Serie wird für MegaRobotics von OEM-Fertigungspartnern hergestellt. Produktbilder sind Renderings und können vom gelieferten Gerät abweichen.',
+    'Der M100WS-Film ist eine KI-generierte Visualisierung, keine Aufnahme eines realen Geräts. Gezeigte Nutzlasten sind nicht enthalten.',
+  ],
+  ctTitle: 'Lassen Sie uns Ihre Route gemeinsam ablaufen.',
+  ctLead: 'Schicken Sie uns einen Lageplan oder ein paar Fotos der Route. Wir melden uns mit Modell, Sensorik und einer ehrlichen Einschätzung, was ein Roboter übernehmen kann.',
+  ctBtn: 'Projekt besprechen', ctBtn2: 'Alle Produkte',
+  ctFoot: 'MegaRobotics ist eine Marke der MegaForce GmbH, Kaarst · <a href="/de">www.megarobotics.de</a>',
+},
+};
+
+/* ---------- models ---------- */
+// fig: [value, unit, label key]; finder tags must stay true to the published specs.
+const L = {
+  en: { weight: 'Weight', payload: 'Continuous payload', payloadWalk: 'Payload while walking', payloadMove: 'Payload while moving', speed: 'Top speed', speedWheel: 'Speed, wheel mode', range: 'Range, unloaded', endurance: 'Endurance, unloaded', obstacle: 'Max. obstacle', steps: 'Stair steps', stepH: 'Step height', wading: 'Wading depth', ip: 'Protection', tops: 'Compute' },
+  de: { weight: 'Gewicht', payload: 'Dauernutzlast', payloadWalk: 'Nutzlast beim Laufen', payloadMove: 'Nutzlast in Fahrt', speed: 'Höchsttempo', speedWheel: 'Tempo im Radmodus', range: 'Reichweite ohne Last', endurance: 'Laufzeit ohne Last', obstacle: 'Max. Hindernis', steps: 'Stufenhöhe Treppe', stepH: 'Stufenhöhe', wading: 'Wattiefe', ip: 'Schutzart', tops: 'Rechenleistung' },
+};
+const M = [
+  { id: 'm1', s: 'm1', name: 'M1', img: I.m1, drive: 'wl',
+    tag: { en: 'A wheel-legged quadruped that rolls fast on the flat and walks where wheels give up.', de: 'Rad-Bein-Vierbeiner: schnell auf ebener Fläche und trittsicher dort, wo Räder aufgeben.' },
+    figs: [[41, 'kg', 'weight'], [30, 'kg', 'payloadWalk'], [6, 'm/s', 'speed'], [29, 'km', 'range'], [80, 'cm', 'obstacle'], ['IP67', '', 'ip']],
+    bul: { en: ['Two 3D LiDARs, depth camera, RTK, IMU and four fill lights as standard', 'Two hot-swap batteries, 1,010 Wh, charged in under 2 hours', 'Crawl mode for narrow passages, stairs, high platforms', 'Navigation package available as an option'],
+           de: ['Zwei 3D-LiDAR, Tiefenkamera, RTK, IMU und vier Zusatzleuchten serienmäßig', 'Zwei Wechselakkus, 1.010 Wh, in unter 2 Stunden geladen', 'Kriechmodus für enge Durchgänge, Treppen, hohe Plattformen', 'Navigationspaket als Option'] },
+    c: [41, 30, 6, 5, '5 h / 29 km', 80, 'IP67'], need: ['stairs', 'ip67', 'fast', 'long', 'light'] },
+  { id: 'm1-pro', s: 'm1', name: 'M1 Pro', img: I.m1x, drive: 'wl',
+    tag: { en: 'The M1 with navigation, mapping, follow mode and two-way voice built in.', de: 'Der M1 mit Navigation, Kartierung, Folgemodus und Sprechfunktion ab Werk.' },
+    figs: [[41, 'kg', 'weight'], [30, 'kg', 'payloadWalk'], [6, 'm/s', 'speed'], [29, 'km', 'range'], [80, 'cm', 'obstacle'], ['IP67', '', 'ip']],
+    bul: { en: ['Navigation and mapping as standard: it runs planned routes on its own', 'Follow mode using UWB, LiDAR and vision', 'Voice intercom and broadcast to speak to people on site', 'Ultrasonic sensors for close-range obstacles'],
+           de: ['Navigation und Kartierung serienmäßig: fährt geplante Routen selbstständig ab', 'Folgemodus per UWB, LiDAR und Kamera', 'Sprechanlage mit Durchsage, um Personen vor Ort anzusprechen', 'Ultraschallsensoren für Hindernisse im Nahbereich'] },
+    c: [41, 30, 6, 5, '5 h / 29 km', 80, 'IP67'], need: ['stairs', 'ip67', 'fast', 'long', 'light', 'auto', 'voice'] },
+  { id: 'm1-ultra', s: 'm1', name: 'M1 Ultra', img: I.m1x, drive: 'wl',
+    tag: { en: '720° surround perception and 128 TOPS of onboard compute on the M1 platform.', de: '720°-Rundumwahrnehmung und 128 TOPS Rechenleistung auf der M1-Plattform.' },
+    figs: [[41, 'kg', 'weight'], [30, 'kg', 'payloadWalk'], [6, 'm/s', 'speed'], [29, 'km', 'range'], [128, 'TOPS', 'tops'], ['IP67', '', 'ip']],
+    bul: { en: ['720° surround perception as standard', 'Four 3 MP fisheye and two 2 MP stereo cameras', '6-core CPU with 128 TOPS for perception and autonomy on board', 'Everything from the M1 Pro: navigation, follow mode, voice'],
+           de: ['720°-Rundumwahrnehmung serienmäßig', 'Vier 3-MP-Fischaugen- und zwei 2-MP-Stereokameras', '6-Kern-CPU mit 128 TOPS für Wahrnehmung und Autonomie an Bord', 'Alles aus dem M1 Pro: Navigation, Folgemodus, Sprechanlage'] },
+    c: [41, 30, 6, 5, '5 h / 29 km', 80, 'IP67'], need: ['stairs', 'ip67', 'fast', 'long', 'light', 'auto', 'voice', 'surround'] },
+  { id: 'm40', s: 'm40', name: 'M40', img: I.m40, drive: 'walk',
+    tag: { en: 'The compact walking robot for stairs, pipe racks and tight inspection routes.', de: 'Der kompakte Laufroboter für Treppen, Rohrbrücken und enge Inspektionswege.' },
+    figs: [[36, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speed'], [5, 'h', 'endurance'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
+    bul: { en: ['Walks stairs, grating, rubble and narrow service corridors', 'Base: two ultrasonic sensors and a wide-angle camera', 'Pro package: Jetson Orin NX, two LiDARs, second camera for SLAM and autonomous navigation', 'Swappable 936 Wh battery, wades through 30 cm of water'],
+           de: ['Läuft auf Treppen, Gitterrosten, Schutt und in engen Versorgungsgängen', 'Grundversion: zwei Ultraschallsensoren und eine Weitwinkelkamera', 'Pro-Paket: Jetson Orin NX, zwei LiDAR, zweite Kamera für SLAM und autonome Navigation', 'Wechselbarer 936-Wh-Akku, 30 cm Wattiefe'] },
+    c: [36, 30, 5, 5, '5 h', 30, 'IP66'], need: ['stairs', 'fast', 'light'] },
+  { id: 'm40w', s: 'm40', name: 'M40W', img: I.m40w, drive: 'wl',
+    tag: { en: 'Wheels for speed, legs for obstacles: the fast patrol robot of the M40 series.', de: 'Räder für Tempo, Beine für Hindernisse: der schnelle Streifenroboter der M40-Serie.' },
+    figs: [[42, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speedWheel'], [5, 'h', 'endurance'], [30, 'cm', 'obstacle'], ['IP66', '', 'ip']],
+    bul: { en: ['Rolls on long, flat patrol routes, steps over kerbs and obstacles up to 30 cm', 'Radio range up to 500 m', '130° wide-angle camera', 'Computer, interfaces and Pro package as the M40 series, confirmed per quotation'],
+           de: ['Rollt auf langen, ebenen Streifenrouten, steigt über Bordsteine und Hindernisse bis 30 cm', 'Funkreichweite bis 500 m', '130°-Weitwinkelkamera', 'Rechner, Schnittstellen und Pro-Paket wie M40-Serie, je Angebot bestätigt'] },
+    c: [42, 30, 5, 5, '5 h', 30, 'IP66'], need: ['fast', 'light'] },
+  { id: 'm40ws', s: 'm40', name: 'M40WS', img: I.m40ws, drive: 'wl',
+    tag: { en: 'The wheel-legged M40 for narrow spaces, stairs and multi-level sites.', de: 'Der Rad-Bein-M40 für enge Räume, Treppen und mehrstöckige Anlagen.' },
+    figs: [[43, 'kg', 'weight'], [40, 'kg', 'payload'], [5, 'm/s', 'speed'], [25, 'km', 'range'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
+    bul: { en: ['190 mm wheels plus legs for stairs and multi-level walkways', '40 kg payload on flat ground, the most in the M40 series', 'Up to 6 h or about 25 km unloaded on a 936 Wh battery', 'Pro package for SLAM and autonomous navigation'],
+           de: ['190-mm-Räder plus Beine für Treppen und mehrstöckige Laufwege', '40 kg Nutzlast auf ebenem Boden, am meisten in der M40-Serie', 'Bis zu 6 h oder rund 25 km ohne Last mit 936-Wh-Akku', 'Pro-Paket für SLAM und autonome Navigation'] },
+    c: [43, 40, 5, 6, '6 h / ~25 km', 30, 'IP66'], need: ['stairs', 'fast', 'long', 'light'] },
+  { id: 'm100', s: 'm100', name: 'M100', img: I.m100, drive: 'walk',
+    tag: { en: 'The heavy-duty walking robot for 50 kg payloads, IP67 and long outdoor shifts.', de: 'Der Schwerlast-Laufroboter für 50 kg Nutzlast, IP67 und lange Einsätze im Freien.' },
+    figs: [[68, 'kg', 'weight'], [50, 'kg', 'payload'], [3, 'm/s', 'speed'], [5.5, 'h', 'endurance'], [30, 'cm', 'wading'], ['IP67', '', 'ip']],
+    bul: { en: ['2,081 Wh battery with quick swap; 2.5 h / 10 km with 50 kg', 'LiDAR and two wide-angle cameras as standard', 'Pro package: Jetson Orin NX, 4G, SLAM, obstacle avoidance, point-cloud view', 'Stairs with 20 cm steps, 45° slopes, wades through 30 cm of water'],
+           de: ['2.081-Wh-Akku mit Schnellwechsel; 2,5 h / 10 km mit 50 kg', 'LiDAR und zwei Weitwinkelkameras serienmäßig', 'Pro-Paket: Jetson Orin NX, 4G, SLAM, Hinderniserkennung, Punktwolkenansicht', 'Treppen mit 20 cm Stufen, 45° Steigung, 30 cm Wattiefe'] },
+    c: [68, 50, 3, 5.5, '5.5 h / ~20 km', 30, 'IP67'], need: ['stairs', 'ip67', 'heavy'] },
+  { id: 'm100w', s: 'm100', name: 'M100W', img: I.m100w, drive: 'wl',
+    tag: { en: 'Heavy-duty wheel-legged platform: 50 kg payload, up to 6 hours, 40 cm obstacles.', de: 'Schwerlast-Plattform auf Rädern und Beinen: 50 kg Nutzlast, bis zu 6 Stunden, 40 cm Hindernisse.' },
+    figs: [[79, 'kg', 'weight'], [50, 'kg', 'payload'], [3, 'm/s', 'speed'], [6, 'h', 'endurance'], [40, 'cm', 'obstacle'], ['IP67', '', 'ip']],
+    bul: { en: ['200 mm wheels: more distance from the same 2,081 Wh battery', '3.5 h / 15 km with 50 kg', 'Single obstacles up to 40 cm, stairs with 20 cm steps', 'Same sensors and Pro package as the M100'],
+           de: ['200-mm-Räder: mehr Strecke aus demselben 2.081-Wh-Akku', '3,5 h / 15 km mit 50 kg', 'Einzelne Hindernisse bis 40 cm, Treppen mit 20 cm Stufen', 'Gleiche Sensorik und gleiches Pro-Paket wie der M100'] },
+    c: [79, 50, 3, 6, '6 h / ~25 km', 40, 'IP67'], need: ['stairs', 'ip67', 'heavy', 'long'] },
+  { id: 'm100ws', s: 'm100', name: 'M100WS', img: I.m100ws, drive: 'wl',
+    tag: { en: 'The wheel-legged carrier for heavy payloads, long routes and rough ground.', de: 'Der Rad-Bein-Träger für schwere Nutzlasten, lange Strecken und unwegsames Gelände.' },
+    figs: [[79, 'kg', 'weight'], [100, 'kg', 'payloadMove'], [3, 'm/s', 'speed'], [7.5, 'h', 'endurance'], [30, 'cm', 'stepH'], ['IP67', '', 'ip']],
+    bul: { en: ['100 kg continuous payload while moving: a carrier for masts and heavy kit', '12 × M8 mounting points on the deck, 12/24/48 V power outputs', 'Longest endurance in the range: 7.5 h / 35 km unloaded, 5.5 h / 20 km with 50 kg', 'Prepared for LiDAR and HD camera'],
+           de: ['100 kg Dauernutzlast in Fahrt: Träger für Masten und schwere Ausrüstung', '12 × M8-Befestigungspunkte auf dem Deck, Ausgänge 12/24/48 V', 'Längste Laufzeit im Programm: 7,5 h / 35 km ohne Last, 5,5 h / 20 km mit 50 kg', 'Vorbereitet für LiDAR und HD-Kamera'] },
+    c: [79, 100, 3, 7.5, '7.5 h / 35 km', 30, 'IP67'], need: ['ip67', 'heavy', 'long'] },
+];
+const NEEDS = ['stairs', 'ip67', 'fast', 'long', 'heavy', 'light', 'auto', 'voice', 'surround'];
+const SERIES = ['m1', 'm40', 'm100'];
+
+/* ---------- state + helpers ---------- */
+let lang = 'en';
+try { const q = new URLSearchParams(location.search).get('lang'); const s = localStorage.getItem('mr-sec-lang');
+  lang = q === 'de' || q === 'en' ? q : s === 'de' || s === 'en' ? s : (navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en'; } catch { }
+const picked = new Set();
+const variant = { m1: 'm1', m40: 'm40', m100: 'm100' };
+let sort = { col: -1, dir: 1 };
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const t = (k) => T[lang][k];
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const pre = () => (lang === 'de' ? '/de' : '');
+const fmt = (v) => typeof v === 'number' ? (lang === 'de' ? String(v).replace('.', ',') : String(v)) : v;
+const href = { contact: () => pre() + '/contact', centaur: () => pre() + '/centaur', products: () => pre() + '/products/categories/robot-platforms' };
+const prod = (m) => `${pre()}/products/${m.id}`;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ICONS = {
+  shield: '<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+  pipe: '<path d="M2 9h7a3 3 0 013 3v0a3 3 0 003 3h7"/><path d="M2 6v6M22 12v6"/>',
+  route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 000-6H9a3 3 0 010-6h7"/>',
+  tunnel: '<path d="M3 20V11a9 9 0 0118 0v9"/><path d="M8 20v-6a4 4 0 018 0v6"/>',
+  box: '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
+};
+const svg = (k) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+
+/* ---------- renderers ---------- */
+function renderStatic() {
+  document.documentElement.lang = lang;
+  document.title = lang === 'de' ? 'Inspektions- & Sicherheitsroboter · MegaRobotics' : 'Inspection & Security Robots · MegaRobotics';
+  $$('[data-t]').forEach((el) => { const v = t(el.dataset.t); if (typeof v === 'string') el.innerHTML = v; });
+  $$('[data-href]').forEach((el) => { el.href = href[el.dataset.href](); });
+  $$('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  $('#whyCards').innerHTML = t('why').map(([n, h, p]) => `<div class="card rv"><span class="n">${n}</span><h3>${h}</h3><p>${p}</p></div>`).join('');
+  $('#seriesCards').innerHTML = SERIES.map((s) => { const [k, h, li] = t('series')[s]; const img = M.find((m) => m.id === s).img;
+    return `<a class="card series rv" href="#s-${s}"><div class="well"><img src="${img}" alt="${h}" loading="lazy"></div><div class="body"><span class="kick">${k}</span><h3>${h}</h3><ul>${li.map((x) => `<li>${x}</li>`).join('')}</ul><span class="go">${t('seriesGo')}</span></div></a>`; }).join('');
+  $('#chips').innerHTML = NEEDS.map((n) => `<button class="chip" type="button" data-need="${n}" aria-pressed="${picked.has(n)}">${t('needs')[n]}</button>`).join('');
+  $('#tiles').innerHTML = M.map((m) => `<button class="tile" type="button" data-go="${m.id}"><img src="${m.img}" alt="" loading="lazy"><b>${m.name}</b><small>${t('drive')[m.drive]}</small></button>`).join('');
+  SERIES.forEach(renderSeries);
+  renderTable();
+  $('#scen').innerHTML = t('scen').map(([h, p, ids, ic]) => `<div class="card rv"><div class="icon">${svg(ic)}</div><h3>${h}</h3><p>${p}</p><div class="picks">${ids.map((id) => `<button type="button" data-go="${id}">${M.find((m) => m.id === id).name}</button>`).join('')}</div></div>`).join('');
+  $('#steps').innerHTML = t('steps').map(([h, p]) => `<div class="rv"><h3>${h}</h3><p>${p}</p></div>`).join('');
+  $('#cSwitch').innerHTML = t('cImgs').map(([, cap], i) => `<button type="button" data-ci="${i}" aria-pressed="${i === cIdx}">${cap}</button>`).join('');
+  setCImg(cIdx, true);
+  $('#modes').innerHTML = t('modes').map(([h, p], i) => `<button class="mode" type="button" data-mode="${i}" aria-pressed="${i === mode}"><h3>${h}</h3><p>${p}</p></button>`).join('');
+  $('#cFields').innerHTML = t('fields').map(([n, h, p, s]) => `<div class="c-field" data-field="${n}"><span class="n">${n}</span><h3>${h}</h3><p>${p}</p><p class="sep"><b>${t('separated')}</b> ${s}</p></div>`).join('');
+  setMode(mode);
+  $('#fineList').innerHTML = t('fine').map((p) => `<p>${p}</p>`).join('');
+  $('#cFilm .play').setAttribute('aria-label', lang === 'de' ? 'Video abspielen' : 'Play video');
+  renderDots();
+  updateFinder();
+  observeReveal();
+}
+
+function renderSeries(s) {
+  const box = $(`[data-series="${s}"]`);
+  const list = M.filter((m) => m.s === s);
+  const m = M.find((x) => x.id === variant[s]);
+  const film = s === 'm100' ? `<div class="film rv" id="mFilm"><video preload="none" playsinline controls poster="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.jpg"><source src="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.mp4" type="video/mp4"></video><button class="play" type="button" aria-label="${lang === 'de' ? 'Video abspielen' : 'Play video'}"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#0a565c"/></svg></button><div class="cap"><b>${t('filmTitle')}</b><span>${t('filmNote')}</span></div></div>` : '';
+  const matrix = s === 'm1' ? `<table class="matrix rv"><thead><tr>${t('matrixHead').map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${t('matrix').map((r) => `<tr>${r.map((c, i) => `<td class="${c === '✓' ? 'y' : c === '–' ? 'o' : ''}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>` : '';
+  box.innerHTML = `<p class="eyebrow rv">${t('sKick')[s]}</p><h2 class="rv">${t('sTitle')[s]}</h2><p class="lead rv">${t('sLead')[s]}</p>
+  <div class="detail"><div class="stage rv"><span class="badge">${t('rendering')}</span><img data-stage src="${m.img}" alt="${m.name}"></div>
+  <div class="rv"><div class="tabs" role="tablist">${list.map((x) => `<button role="tab" type="button" data-variant="${x.id}" aria-selected="${x.id === m.id}">${x.name}</button>`).join('')}</div>
+  <div data-vbody>${variantBody(m)}</div></div></div>${matrix}${film}`;
+}
+
+function variantBody(m) {
+  const lab = L[lang];
+  return `<p class="vtag">${m.tag[lang]}</p><div class="figs">${m.figs.map(([v, u, k]) => `<div><b>${typeof v === 'number' ? `<span data-count="${v}" data-dec="${String(v).includes('.') ? 1 : 0}">${fmt(v)}</span>` : v}${u ? `<small>${u}</small>` : ''}</b><span>${lab[k]}</span></div>`).join('')}</div>
+  <ul class="bul">${m.bul[lang].map((b) => `<li>${b}</li>`).join('')}</ul><a class="more" href="${prod(m)}">${t('datasheet')}</a>`;
+}
+
+function setVariant(s, id, animate = true) {
+  variant[s] = id;
+  const box = $(`[data-series="${s}"]`);
+  const m = M.find((x) => x.id === id);
+  $$('[data-variant]', box).forEach((b) => b.setAttribute('aria-selected', String(b.dataset.variant === id)));
+  const img = $('[data-stage]', box);
+  if (img.getAttribute('src') !== m.img) {
+    img.classList.add('swap');
+    setTimeout(() => { img.src = m.img; img.alt = m.name; img.onload = () => img.classList.remove('swap'); if (img.complete) img.classList.remove('swap'); }, reduce ? 0 : 180);
+  }
+  $('[data-vbody]', box).innerHTML = variantBody(m);
+  if (animate) countUp($('[data-vbody]', box));
+}
+
+function renderTable() {
+  const cols = t('cmpCols');
+  $('#cmpHead').innerHTML = cols.map((c, i) => `<th scope="col" data-col="${i}" aria-sort="${sort.col === i ? (sort.dir > 0 ? 'ascending' : 'descending') : 'none'}">${c}</th>`).join('');
+  const rows = M.map((m, idx) => ({ m, idx, v: [m.name, t('drive')[m.drive], ...m.c] }));
+  if (sort.col >= 0) {
+    const k = sort.col; const key = (r) => k === 0 ? r.idx : k === 1 ? r.v[1] : k <= 4 ? r.v[k] : k === 5 ? r.m.c[3] : k === 6 ? r.m.c[5] : r.m.c[6];
+    rows.sort((a, b) => { const x = key(a), y = key(b); return (x > y ? 1 : x < y ? -1 : 0) * sort.dir; });
+  }
+  $('#cmpBody').innerHTML = rows.map(({ m }) => `<tr data-go="${m.id}" tabindex="0"><td>${m.name}</td><td><span class="pill ${m.drive}">${t('drive')[m.drive]}</span></td><td>${m.c[0]} kg</td><td>${m.c[1]} kg</td><td>${fmt(m.c[2])} m/s</td><td>${lang === 'de' ? m.c[4].replace('.', ',') : m.c[4]}</td><td>${m.c[5]} cm</td><td>${m.c[6]}</td></tr>`).join('');
+}
+
+function updateFinder() {
+  const hits = M.filter((m) => [...picked].every((n) => m.need.includes(n)));
+  $$('.tile').forEach((el) => { const hit = hits.some((m) => m.id === el.dataset.go); el.classList.toggle('hit', picked.size > 0 && hit); el.classList.toggle('miss', !hit); });
+  $('#findCount').textContent = picked.size ? t('findCount')(hits.length) : t('findCount')(9);
+  $('#findEmpty').style.display = picked.size && !hits.length ? 'block' : 'none';
+  $('#findReset').style.visibility = picked.size ? 'visible' : 'hidden';
+}
+
+/* centaur */
+let cIdx = 0, mode = 0;
+function setCImg(i, instant) {
+  cIdx = i; const [src, cap] = t('cImgs')[i]; const img = $('#cImg');
+  $$('#cSwitch button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.ci === i)));
+  $('#cImgCap').textContent = cap; img.alt = cap;
+  if (instant || reduce) { img.src = src; return; }
+  img.style.opacity = 0; setTimeout(() => { img.src = src; img.onload = () => (img.style.opacity = 1); }, 250);
+}
+function setMode(i) {
+  mode = i; const lit = t('modes')[i][2];
+  $$('.mode').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.mode === i)));
+  $$('.c-field').forEach((f) => f.classList.toggle('lit', lit.includes(f.dataset.field)));
+}
+
+/* go to a model: scroll to its series and select it */
+function goModel(id) {
+  const m = M.find((x) => x.id === id); if (!m) return;
+  setVariant(m.s, id);
+  $(`#s-${m.s}`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+}
+
+/* ---------- section nav ---------- */
+const sections = $$('main > section');
+function renderDots() {
+  $('#dots').innerHTML = sections.map((s) => `<a href="#${s.id}" data-dot="${s.id}"><span>${t(s.dataset.nav)}</span></a>`).join('');
+  markDot();
+}
+let current = 0;
+function markDot() { $$('#dots a').forEach((a, i) => a.classList.toggle('on', i === current)); }
+function onScroll() {
+  const y = scrollY + innerHeight * 0.4;
+  let idx = 0; sections.forEach((s, i) => { if (s.offsetTop <= y) idx = i; });
+  if (idx !== current) { current = idx; markDot(); }
+  const light = !sections[idx].classList.contains('dark') && sections[idx].id !== 'centaur' && sections[idx].id !== 'contact';
+  $('#bar').classList.toggle('solid', scrollY > innerHeight * 0.7 && light);
+  $('#bar').classList.toggle('scrolled', scrollY > 40 && !(scrollY > innerHeight * 0.7 && light));
+  const max = document.documentElement.scrollHeight - innerHeight;
+  $('#progress').style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+}
+addEventListener('scroll', () => requestAnimationFrame(onScroll), { passive: true });
+addEventListener('keydown', (e) => {
+  if (e.target.closest('input,textarea,select,video') || e.altKey || e.ctrlKey || e.metaKey) return;
+  const next = ['PageDown', 'ArrowRight'].includes(e.key), prev = ['PageUp', 'ArrowLeft'].includes(e.key);
+  if (!next && !prev) return;
+  if (e.target.closest('[role=tablist]')) return;
+  e.preventDefault();
+  const i = Math.max(0, Math.min(sections.length - 1, current + (next ? 1 : -1)));
+  sections[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+});
+
+/* ---------- reveal + counters ---------- */
+let io;
+function observeReveal() {
+  if (io) io.disconnect();
+  if (reduce || !('IntersectionObserver' in window)) { $$('.rv').forEach((e) => e.classList.add('in')); return; }
+  io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); countUp(en.target); io.unobserve(en.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  $$('.rv:not(.in)').forEach((e) => io.observe(e));
+}
+function countUp(root) {
+  if (reduce || !root) return;
+  $$('[data-count]', root).forEach((el) => {
+    const end = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0, t0 = performance.now(), dur = 900;
+    const step = (now) => { const p = Math.min(1, (now - t0) / dur), v = end * (1 - Math.pow(1 - p, 3)); el.textContent = fmt(+v.toFixed(dec)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ---------- videos ---------- */
+const cover = $('#coverVideo');
+if (!reduce) {
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) cover.play().catch(() => {}); else cover.pause(); }, { threshold: 0.2 }).observe(cover);
+}
+document.addEventListener('click', (e) => {
+  const play = e.target.closest('.film .play');
+  if (play) { const f = play.closest('.film'); const v = $('video', f); f.classList.add('playing'); v.play().catch(() => {}); v.onpause = () => {}; return; }
+  const lb = e.target.closest('.lang button'); if (lb) { lang = lb.dataset.lang; try { localStorage.setItem('mr-sec-lang', lang); } catch { } renderStatic(); onScroll(); return; }
+  const chip = e.target.closest('[data-need]'); if (chip) { const n = chip.dataset.need; picked.has(n) ? picked.delete(n) : picked.add(n); chip.setAttribute('aria-pressed', String(picked.has(n))); updateFinder(); return; }
+  if (e.target.closest('#findReset')) { picked.clear(); $$('[data-need]').forEach((c) => c.setAttribute('aria-pressed', 'false')); updateFinder(); return; }
+  const v = e.target.closest('[data-variant]'); if (v) { setVariant(v.closest('[data-series]').dataset.series, v.dataset.variant); return; }
+  const th = e.target.closest('#cmpHead th'); if (th) { const c = +th.dataset.col; sort = { col: c, dir: sort.col === c ? -sort.dir : 1 }; renderTable(); return; }
+  const go = e.target.closest('[data-go]'); if (go) { goModel(go.dataset.go); return; }
+  const ci = e.target.closest('[data-ci]'); if (ci) { setCImg(+ci.dataset.ci); return; }
+  const md = e.target.closest('[data-mode]'); if (md) { setMode(+md.dataset.mode); return; }
+});
+document.addEventListener('keydown', (e) => {
+  const row = e.target.closest && e.target.closest('#cmpBody tr');
+  if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goModel(row.dataset.go); }
+  const tab = e.target.closest && e.target.closest('[role=tab]');
+  if (tab && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+    const tabs = $$('[role=tab]', tab.parentNode); const i = tabs.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : -1);
+    const nx = tabs[(i + tabs.length) % tabs.length]; nx.focus(); nx.click();
+  }
+});
+
+renderStatic();
+onScroll();
+})();
+</script>
+</body>
+</html>
