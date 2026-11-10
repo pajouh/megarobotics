@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { ArrowUpRight, ShieldCheck } from 'lucide-react'
+import { ArrowUpRight, Award, ShieldCheck } from 'lucide-react'
 import { Product } from '@/types'
 import { urlFor } from '@/lib/sanity'
 import { authorizedPartners } from '@/data/authorized-partners'
@@ -10,12 +10,14 @@ interface ProductCardProps {
   product: Product
 }
 
-const AUTHORIZED = new Set(authorizedPartners.map((p) => p.slug))
+const AUTHORIZED = new Set(authorizedPartners.filter((p) => !p.ownBrand).map((p) => p.slug))
+const OWN_BRAND = new Set(authorizedPartners.filter((p) => p.ownBrand).map((p) => p.slug))
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { name, slug, tagline, mainImage, manufacturer, productFamily, priceRange, isNew } = product
   const t = useTranslations('industrial.partners')
   const authorized = !!manufacturer?.slug?.current && AUTHORIZED.has(manufacturer.slug.current)
+  const ownBrand = !!manufacturer?.slug?.current && OWN_BRAND.has(manufacturer.slug.current)
 
   return (
     <Link href={`/products/${slug.current}`} className="group block h-full" data-reveal>
@@ -61,10 +63,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
 
-          {authorized && (
+          {(authorized || ownBrand) && (
             <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-white/90 backdrop-blur border border-[color:var(--mr-accent-line)] px-2 py-0.5 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
-              <ShieldCheck className="w-3 h-3" aria-hidden="true" />
-              {t('badge')}
+              {ownBrand ? <Award className="w-3 h-3" aria-hidden="true" /> : <ShieldCheck className="w-3 h-3" aria-hidden="true" />}
+              {ownBrand ? t('ownBrandBadge') : t('badge')}
             </span>
           )}
         </div>

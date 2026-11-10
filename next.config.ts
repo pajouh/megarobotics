@@ -117,6 +117,17 @@ const nextConfig: NextConfig = {
         destination: '/:locale/downloads',
         permanent: true,
       },
+      // The own-brand manufacturer was renamed from "OEM (via MegaRobotics)"
+      {
+        source: '/manufacturers/oem-via-megarobotics',
+        destination: '/manufacturers/megarobotics',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|de)/manufacturers/oem-via-megarobotics',
+        destination: '/:locale/manufacturers/megarobotics',
+        permanent: true,
+      },
       // Legacy productCategory routes — redirect to the unified product family system
       {
         source: '/products/category/humanoid-legged-robots',

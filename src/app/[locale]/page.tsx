@@ -28,7 +28,7 @@ import ProjectCard from '@/components/industrial/ProjectCard'
 import SafeNotice from '@/components/industrial/SafeNotice'
 import CTASection from '@/components/industrial/CTASection'
 import PartnerShowcase from '@/components/partners/PartnerShowcase'
-import { authorizedPartners } from '@/data/authorized-partners'
+import { authorizedPartners, resellerPartners } from '@/data/authorized-partners'
 import ProductCard from '@/components/ProductCard'
 import ArticleCard from '@/components/ArticleCard'
 import StructuredData from '@/components/StructuredData'
@@ -79,7 +79,7 @@ export default async function HomePage({ params }: Props) {
   ])
   const partnerProductTotal = Object.values(partnerCounts).reduce((a, b) => a + b, 0)
   const heroStats = [
-    { value: String(authorizedPartners.length), label: tPartners('stats.brands') },
+    { value: String(resellerPartners.length), label: tPartners('stats.brands') },
     // Rounded down to a tens figure so the hero doesn't change with every edit.
     ...(partnerProductTotal >= 10
       ? [{ value: `${Math.floor(partnerProductTotal / 10) * 10}+`, label: tPartners('stats.products') }]

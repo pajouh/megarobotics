@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
-import { ArrowRight, ArrowUpRight, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Award, ShieldCheck } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { authorizedPartners } from '@/data/authorized-partners'
 import { getActiveProductCounts, type Locale } from '@/lib/sanity'
@@ -19,6 +19,7 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
     () => ({}) as Record<string, number>,
   )
   const lang = locale === 'de' ? 'de' : 'en'
+  const ctaWide = authorizedPartners.length % 4 === 0
 
   return (
     <section className="relative overflow-hidden py-20 md:py-28 bg-[color:var(--mr-white)]">
@@ -67,8 +68,12 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
                       style={{ height: logoH, width: 'auto' }}
                     />
                     <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-white/90 border border-[color:var(--mr-accent-line)] px-2 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
-                      <ShieldCheck className="w-3 h-3" aria-hidden="true" />
-                      {t('badge')}
+                      {p.ownBrand ? (
+                        <Award className="w-3 h-3" aria-hidden="true" />
+                      ) : (
+                        <ShieldCheck className="w-3 h-3" aria-hidden="true" />
+                      )}
+                      {p.ownBrand ? t('ownBrandBadge') : t('badge')}
                     </span>
                   </div>
                   <div className="flex flex-col flex-1 p-5">
@@ -92,10 +97,16 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
             )
           })}
 
-          <li data-reveal style={{ ['--d' as string]: `${authorizedPartners.length * 70}ms` }}>
+          {/* When the brand cards fill whole rows, the enquiry card would sit alone on
+              the last one, so it stretches across that row as a banner instead. */}
+          <li
+            data-reveal
+            style={{ ['--d' as string]: `${authorizedPartners.length * 70}ms` }}
+            className={ctaWide ? 'sm:col-span-2 lg:col-span-4' : undefined}
+          >
             <Link
               href="/contact"
-              className="group relative h-full min-h-64 flex flex-col justify-between overflow-hidden rounded-[var(--mr-radius)] p-6 text-white bg-[linear-gradient(150deg,#0a565c_0%,#04756f_50%,#06938c_100%)] shadow-[var(--mr-shadow-lift)] transition-transform duration-500 hover:-translate-y-1"
+              className={`group relative h-full ${ctaWide ? 'min-h-64 sm:min-h-0 sm:flex-row sm:items-center sm:gap-8' : 'min-h-64'} flex flex-col justify-between overflow-hidden rounded-[var(--mr-radius)] p-6 text-white bg-[linear-gradient(150deg,#0a565c_0%,#04756f_50%,#06938c_100%)] shadow-[var(--mr-shadow-lift)] transition-transform duration-500 hover:-translate-y-1`}
             >
               <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(rgba(255,255,255,.35)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.35)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(circle_at_80%_10%,#000,transparent_70%)]" aria-hidden="true" />
               <div className="relative">
@@ -104,7 +115,7 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
                   {t('ctaTitle')}
                 </p>
               </div>
-              <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-semibold">
+              <span className={`relative mt-6 inline-flex items-center gap-2 text-sm font-semibold ${ctaWide ? 'sm:mt-0 shrink-0' : ''}`}>
                 {t('ctaButton')}
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </span>

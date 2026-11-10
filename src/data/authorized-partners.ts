@@ -12,6 +12,12 @@ export interface AuthorizedPartner {
   logoHeight: number
   country: { en: string; de: string }
   focus: { en: string; de: string }
+  /**
+   * Our own brand rather than a brand we resell. It shows in the showcase with
+   * an "Own brand" badge, but stays out of the reseller marquee, the
+   * "authorized brands" count and the "Authorized" product badge.
+   */
+  ownBrand?: boolean
 }
 
 export const authorizedPartners: AuthorizedPartner[] = [
@@ -26,6 +32,19 @@ export const authorizedPartners: AuthorizedPartner[] = [
       en: 'Force-controlled cobots, humanoids and dexterous hands',
       de: 'Kraftgeregelte Cobots, Humanoide und Roboterhände',
     },
+  },
+  {
+    slug: 'megarobotics',
+    name: 'MegaRobotics',
+    logo: '/partners/megarobotics.png',
+    logoWidth: 796,
+    logoHeight: 134,
+    country: { en: 'Germany', de: 'Deutschland' },
+    focus: {
+      en: 'Our own quadruped and wheel-legged robots: the M1, M40 and M100 series',
+      de: 'Eigene Lauf- und Rad-Bein-Roboter: die Serien M1, M40 und M100',
+    },
+    ownBrand: true,
   },
   {
     slug: 'limx-dynamics',
@@ -100,3 +119,6 @@ export const authorizedPartners: AuthorizedPartner[] = [
     },
   },
 ]
+
+/** The brands we resell, i.e. the list without our own brand. */
+export const resellerPartners = authorizedPartners.filter((p) => !p.ownBrand)
