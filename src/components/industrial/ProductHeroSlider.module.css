@@ -45,6 +45,7 @@
   object-fit: cover;
   object-position: var(--focus, center top);
   transform: translateX(var(--shift, 0)) scale(1.08);
+  transform-origin: var(--zoom-from, center);
   transition: transform 16s linear;
 }
 .slide.active .media video,

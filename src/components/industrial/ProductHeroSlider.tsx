@@ -270,7 +270,7 @@ export default function ProductHeroSlider({
           >
             <div
               className={styles.media}
-              style={{ '--shift': s.shift ?? '0%', '--crop': `${s.cropBottom ?? 0}%`, '--focus': s.focus } as CSSProperties}
+              style={{ '--shift': s.shift ?? '0%', '--crop': `${s.cropBottom ?? 0}%`, '--focus': s.focus, '--zoom-from': s.zoomFrom } as CSSProperties}
             >
               {s.video ? (
                 <video

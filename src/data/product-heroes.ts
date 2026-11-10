@@ -41,6 +41,8 @@ interface HeroSlide {
   cropBottom?: number
   /** Which part of the clip stays in view when cropped (object-position); default "center top". */
   focus?: string
+  /** Anchor of the slow zoom-out (transform-origin); default "center". "center top" keeps heads near the top edge in frame. */
+  zoomFrom?: string
   /** Small caption over the media, e.g. to mark footage as AI-generated. */
   note?: L
   useCases: [L, L][]
@@ -601,7 +603,8 @@ const HEROES: Record<string, ProductHero> = {
           en: 'A humanoid upper body and a quadruped, coupled into one hybrid and separated again on command. Neither loses its autonomy.',
           de: 'Ein humanoider Oberkörper und ein Vierbeiner, gekoppelt zu einem Hybrid und auf Befehl wieder getrennt. Keiner verliert seine Autonomie.',
         },
-        video: '/megarobotics/centaur/night-shift-logistics.mp4',
+        video: '/megarobotics/centaur/night-shift-logistics-v2.mp4',
+        zoomFrom: 'center top',
         shift: '-14%',
         note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
         useCases: [
@@ -618,7 +621,8 @@ const HEROES: Record<string, ProductHero> = {
           de: 'Das Fahrwerk bewältigt Schotter und Kabelkanäle, beide Hände übernehmen Kontrollen und Schalthandlungen – mit Schutzabstand.',
         },
         video: '/megarobotics/centaur/substation-inspection.mp4',
-        shift: '-10%',
+        zoomFrom: 'center top',
+        shift: '-22%',
         note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
         useCases: [
           [{ en: 'Switchgear & transformers', de: 'Schaltanlagen & Trafos' }, { en: 'checks and switching operations', de: 'Kontrollen und Schalthandlungen' }],
@@ -633,7 +637,8 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Samples go from the ward to the lab and are handed to a person. The tilt axis keeps the tray level the whole way.',
           de: 'Proben gehen von der Station ins Labor und werden an einen Menschen übergeben. Die Neigeachse hält das Tablett den ganzen Weg waagerecht.',
         },
-        video: '/megarobotics/centaur/lab-sample-transport.mp4',
+        video: '/megarobotics/centaur/lab-sample-transport-v2.mp4',
+        zoomFrom: 'center top',
         shift: '-14%',
         note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
         useCases: [
@@ -649,7 +654,8 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Retrieves supplies from refrigerated cabinets and carries medication across the ward.',
           de: 'Entnimmt Material aus Kühlschränken und bringt Medikamente über die Station.',
         },
-        video: '/megarobotics/centaur/medication-transport.mp4',
+        video: '/megarobotics/centaur/medication-transport-v2.mp4',
+        zoomFrom: 'center top',
         shift: '-14%',
         note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
         useCases: [
@@ -665,7 +671,8 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Supports moving patients in a wheelchair and keeps them company along ward corridors.',
           de: 'Unterstützt beim Transport im Rollstuhl und begleitet Patienten auf Stationsfluren.',
         },
-        video: '/megarobotics/centaur/wheelchair-assist.mp4',
+        video: '/megarobotics/centaur/wheelchair-assist-v2.mp4',
+        zoomFrom: 'center top',
         shift: '-12%',
         note: { en: 'Visualisation · prototype phase', de: 'Visualisierung · Prototypphase' },
         useCases: [
@@ -681,7 +688,8 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Distributes linen, towels and consumables to every floor, lift rides included.',
           de: 'Verteilt Wäsche, Handtücher und Verbrauchsmaterial auf die Etagen – per Aufzug.',
         },
-        video: '/megarobotics/centaur/linen-supply.mp4',
+        video: '/megarobotics/centaur/linen-supply-v2.mp4',
+        zoomFrom: 'center top',
         loop: true,
         duration: 9,
         shift: '-12%',
@@ -716,6 +724,7 @@ export interface ResolvedHeroSlide {
   shift?: string
   cropBottom?: number
   focus?: string
+  zoomFrom?: string
   note?: string
   useCases: [string, string][]
   /** Set when slides of several products share one slider (homepage). */
@@ -745,6 +754,7 @@ function resolveSlide(s: HeroSlide, locale: Locale): ResolvedHeroSlide {
     shift: s.shift,
     cropBottom: s.cropBottom,
     focus: s.focus,
+    zoomFrom: s.zoomFrom,
     note: s.note?.[locale],
     useCases: s.useCases.map(([what, detail]) => [what[locale], detail[locale]] as [string, string]),
   }

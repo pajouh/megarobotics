@@ -164,7 +164,7 @@ const content = {
       en: 'Two autonomous robots, four operating modes, twelve fields of use.',
       de: 'Zwei autonome Roboter, vier Betriebsmodi, zwölf Anwendungsfelder.',
     },
-    video: 'medication-transport',
+    video: 'centaur-band',
   },
 
   fields: {
@@ -340,13 +340,13 @@ const content = {
       de: 'Gerenderte Szenen aus Klinik, Pflege und Energie. Sie zeigen den vorgesehenen Ablauf, keine Aufnahmen einer Serienmaschine.',
     },
     items: [
-      { id: 'night-shift-logistics', title: { en: 'Night-shift supply run', de: 'Versorgung in der Nachtschicht' } },
-      { id: 'lab-sample-transport', title: { en: 'Lab sample transport', de: 'Probentransport ins Labor' } },
-      { id: 'medication-transport', title: { en: 'Medication from the cold store', de: 'Medikamente aus dem Kühllager' } },
+      { id: 'night-shift-logistics-v2', title: { en: 'Night-shift supply run', de: 'Versorgung in der Nachtschicht' } },
+      { id: 'lab-sample-transport-v2', title: { en: 'Lab sample transport', de: 'Probentransport ins Labor' } },
+      { id: 'medication-transport-v2', title: { en: 'Medication from the cold store', de: 'Medikamente aus dem Kühllager' } },
       { id: 'substation-inspection', title: { en: 'Substation inspection', de: 'Inspektion im Umspannwerk' } },
-      { id: 'wheelchair-assist', title: { en: 'Wheelchair transport', de: 'Transport im Rollstuhl' } },
-      { id: 'bed-transport', title: { en: 'Bed transport', de: 'Bettentransport' } },
-      { id: 'linen-supply', title: { en: 'Linen and towels', de: 'Wäsche und Handtücher' } },
+      { id: 'wheelchair-assist-v2', title: { en: 'Wheelchair transport', de: 'Transport im Rollstuhl' } },
+      { id: 'bed-transport-v2', title: { en: 'Bed transport', de: 'Bettentransport' } },
+      { id: 'linen-supply-v2', title: { en: 'Linen and towels', de: 'Wäsche und Handtücher' } },
     ],
   },
 
