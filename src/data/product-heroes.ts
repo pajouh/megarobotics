@@ -222,7 +222,8 @@ const HEROES: Record<string, ProductHero> = {
   },
 
   // No official footage yet (2026-10-30), so a still from the product's Sanity
-  // gallery stands in. Specs match the Sanity product and NVIDIA's launch release.
+  // gallery stands in. Specs from Agile Robots' Agile One S datasheet
+  // (companies/Agile/04_Products/Agile_One_S.pdf), which matches NVIDIA's launch release.
   'agile-one-s': {
     name: 'Agile ONE S',
     specs: [
@@ -230,7 +231,7 @@ const HEROES: Record<string, ProductHero> = {
       { value: 40, unit: 'kg', label: { en: 'Weight', de: 'Gewicht' } },
       { value: 31, label: { en: 'DoF (body)', de: 'Freiheitsgrade (Körper)' } },
       { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
-      { value: 13, label: { en: 'DoF per hand', de: 'Freiheitsgrade pro Hand' } },
+      { value: 140, unit: 'N·m', label: { en: 'Peak joint torque', de: 'Max. Gelenkmoment' } },
       { value: 'Jetson Thor', label: { en: 'Onboard AI', de: 'KI an Bord' } },
     ],
     slides: [
@@ -238,8 +239,8 @@ const HEROES: Record<string, ProductHero> = {
         id: 'research-platform',
         eyebrow: { en: 'Research humanoid', de: 'Forschungs-Humanoid' },
         tagline: {
-          en: 'A compact humanoid with an open software stack, so labs and developers can run their own models and frameworks.',
-          de: 'Ein kompakter Humanoid mit offenem Software-Stack – Labore und Entwickler bringen eigene Modelle und Frameworks mit.',
+          en: 'A compact humanoid with an open software stack, so labs and developers can run their own models. Swappable battery, about two hours per charge.',
+          de: 'Ein kompakter Humanoid mit offenem Software-Stack für eigene Modelle. Wechselakku mit rund zwei Stunden Laufzeit.',
         },
         image: 'https://cdn.sanity.io/images/wudur8e8/production/44ab7fc6ae3a186c295cb450acd729790667d346-4000x2500.jpg',
         duration: 10,
@@ -253,8 +254,12 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
-  // Clip cut from Agile Robots' Agile ONE SN video (partner footage, 720p);
-  // copyright stays with Agile Robots. Specs from the product's Sanity entry.
+  // research-lab: cut from Agile Robots' Agile ONE SN video (partner footage, 720p).
+  // anatomy, physical-ai-stack: cut from the vertical reel "Agile Robots is bringing
+  // another humanoid into the Physical AI race" (companies/Agile/media), cropped
+  // above its burnt-in captions and set on a 16:9 frame filled from the studio
+  // background. Footage copyright stays with its owners. Specs from the product's
+  // Sanity entry; torque and sensors from the Agile One S datasheet.
   'agile-one-sn': {
     name: 'Agile ONE SN',
     specs: [
@@ -266,6 +271,21 @@ const HEROES: Record<string, ProductHero> = {
       { value: 'GR00T 1.7', label: { en: 'Preinstalled', de: 'Vorinstalliert' } },
     ],
     slides: [
+      {
+        id: 'anatomy',
+        eyebrow: { en: 'Built for the lab', de: 'Gebaut fürs Labor' },
+        tagline: {
+          en: '1.4 m and 43 kg, with 31 joints in the body and two tactile five-finger hands that sense contact.',
+          de: '1,4 m und 43 kg, 31 Gelenke im Körper und zwei taktile Fünffingerhände, die Berührung spüren.',
+        },
+        video: '/agile/hero/agile-one-sn/anatomy.mp4',
+        focus: '25% top',
+        useCases: [
+          [{ en: 'Whole-body motion', de: 'Ganzkörperbewegung' }, { en: '31 DoF, up to 140 N·m per joint', de: '31 Freiheitsgrade, bis 140 N·m pro Gelenk' }],
+          [{ en: 'Tactile hands', de: 'Taktile Hände' }, { en: 'fingertips that register contact', de: 'Fingerkuppen, die Kontakt erfassen' }],
+          [{ en: 'Perception', de: 'Wahrnehmung' }, { en: '3D LiDAR & RGB-D cameras', de: '3D-LiDAR & RGB-D-Kameras' }],
+        ],
+      },
       {
         id: 'research-lab',
         eyebrow: { en: 'Humanoid for physical AI', de: 'Humanoid für Physical AI' },
@@ -279,6 +299,21 @@ const HEROES: Record<string, ProductHero> = {
           [{ en: 'Physical AI', de: 'Physical AI' }, { en: 'GR00T 1.7 & whole-body control', de: 'GR00T 1.7 & Ganzkörpersteuerung' }],
           [{ en: 'Simulation to real', de: 'Von der Simulation in die Realität' }, { en: 'Isaac Sim & Isaac Lab', de: 'Isaac Sim & Isaac Lab' }],
           [{ en: 'Dexterous grasping', de: 'Geschicktes Greifen' }, { en: 'tactile five-finger hands', de: 'taktile Fünffingerhände' }],
+        ],
+      },
+      {
+        id: 'physical-ai-stack',
+        eyebrow: { en: 'Software included', de: 'Software inklusive' },
+        tagline: {
+          en: 'Ships with NVIDIA Isaac GR00T 1.7, a vision-language-action model, plus whole-body control, running on Jetson Thor.',
+          de: 'Ab Werk mit NVIDIA Isaac GR00T 1.7, einem Vision-Language-Action-Modell, und Ganzkörpersteuerung auf Jetson Thor.',
+        },
+        video: '/agile/hero/agile-one-sn/physical-ai-stack.mp4',
+        focus: '25% top',
+        useCases: [
+          [{ en: 'Vision-language-action', de: 'Vision-Language-Action' }, { en: 'GR00T 1.7 preinstalled', de: 'GR00T 1.7 vorinstalliert' }],
+          [{ en: 'Onboard AI', de: 'KI an Bord' }, { en: 'NVIDIA Jetson Thor T5000', de: 'NVIDIA Jetson Thor T5000' }],
+          [{ en: 'Open interfaces', de: 'Offene Schnittstellen' }, { en: 'USB 3.2, Gigabit Ethernet, RS485, GMSL2', de: 'USB 3.2, Gigabit-Ethernet, RS485, GMSL2' }],
         ],
       },
     ],
