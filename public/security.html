@@ -472,7 +472,7 @@ en: {
   rangeLead: 'Each series comes as a walking robot or with wheels on its feet. Pick by weight class and payload, then by how much autonomy you want built in.',
   series: {
     m1: ['Fast wheel-legged patrol', 'M1 series', ['M1 · M1 Pro · M1 Ultra', '41 kg, 6 m/s, IP67', 'Up to 29 km on hot-swap batteries', 'Navigation, follow mode and voice from the M1 Pro']],
-    m40: ['Compact and light', 'M40 series', ['M40 · M40W · M40WS', '36 to 43 kg, up to 5 m/s, IP66', 'Stairs, grating, narrow service corridors', 'Pro package for SLAM and navigation']],
+    m40: ['Compact and light', 'M40 series', ['M40 · M40W · M40WS', '36 to 43.5 kg, up to 5 m/s, IP66', 'Stairs, grating, narrow service corridors', 'Pro package for SLAM and navigation']],
     m100: ['Heavy duty', 'M100 series', ['M100 · M100W · M100WS', '50 to 100 kg continuous payload, IP67', '2,081 Wh battery, up to 7.5 h', 'Carrier for heavy sensor kits']],
   },
   seriesGo: 'Explore the series →',
@@ -508,7 +508,7 @@ en: {
   cmpEyebrow: 'Side by side', cmpTitle: 'All nine models at a glance',
   cmpLead: 'Click a column to sort, click a row to open the model.',
   cmpCols: ['Model', 'Drive', 'Weight', 'Payload', 'Speed', 'Endurance, unloaded', 'Obstacle', 'Protection'],
-  cmpFoot: 'Maximum values, base configuration, as of 11/2026. Speeds are not stated under load. M100 and M100W: 0–3 m/s, 5 m/s sprint in the lab, unloaded. M1 endurance measured at 1 m/s. M100WS obstacle = step height. M40W dimensions and battery capacity on request.',
+  cmpFoot: 'Maximum values, base configuration, as of 11/2026. Speeds are not stated under load. M100 and M100W: 0–3 m/s, 5 m/s sprint in the lab, unloaded. M1 endurance measured at 1 m/s. M100WS obstacle = step height. M40W dimensions on request. *M40: specification table value; the manufacturer’s model summary states up to 5 h, to be confirmed.',
   scEyebrow: 'Inspection & security', scTitle: 'Where the M series works',
   scLead: 'Typical jobs and the models we would start with. Click a model to see it.',
   scen: [
@@ -586,7 +586,7 @@ de: {
   rangeLead: 'Jede Serie gibt es als Laufroboter oder mit Rädern an den Füßen. Wählen Sie nach Gewichtsklasse und Nutzlast, dann nach dem Grad an Autonomie ab Werk.',
   series: {
     m1: ['Schnelle Rad-Bein-Streife', 'M1-Serie', ['M1 · M1 Pro · M1 Ultra', '41 kg, 6 m/s, IP67', 'Bis zu 29 km mit Wechselakkus', 'Navigation, Folgemodus und Sprechanlage ab M1 Pro']],
-    m40: ['Kompakt und leicht', 'M40-Serie', ['M40 · M40W · M40WS', '36 bis 43 kg, bis 5 m/s, IP66', 'Treppen, Gitterroste, enge Versorgungsgänge', 'Pro-Paket für SLAM und Navigation']],
+    m40: ['Kompakt und leicht', 'M40-Serie', ['M40 · M40W · M40WS', '36 bis 43,5 kg, bis 5 m/s, IP66', 'Treppen, Gitterroste, enge Versorgungsgänge', 'Pro-Paket für SLAM und Navigation']],
     m100: ['Schwerlast', 'M100-Serie', ['M100 · M100W · M100WS', '50 bis 100 kg Dauernutzlast, IP67', '2.081-Wh-Akku, bis zu 7,5 h', 'Träger für schwere Sensorik']],
   },
   seriesGo: 'Serie ansehen →',
@@ -622,7 +622,7 @@ de: {
   cmpEyebrow: 'Im Vergleich', cmpTitle: 'Alle neun Modelle auf einen Blick',
   cmpLead: 'Klick auf eine Spalte sortiert, Klick auf eine Zeile öffnet das Modell.',
   cmpCols: ['Modell', 'Antrieb', 'Gewicht', 'Nutzlast', 'Tempo', 'Laufzeit ohne Last', 'Hindernis', 'Schutzart'],
-  cmpFoot: 'Maximalwerte, Grundkonfiguration, Stand 11/2026. Geschwindigkeiten ohne Angabe unter Last. M100 und M100W: 0–3 m/s, 5 m/s Sprint im Labor ohne Last. M1-Laufzeit gemessen bei 1 m/s. M100WS-Hindernis = Stufenhöhe. M40W: Abmessungen und Akkukapazität auf Anfrage.',
+  cmpFoot: 'Maximalwerte, Grundkonfiguration, Stand 11/2026. Geschwindigkeiten ohne Angabe unter Last. M100 und M100W: 0–3 m/s, 5 m/s Sprint im Labor ohne Last. M1-Laufzeit gemessen bei 1 m/s. M100WS-Hindernis = Stufenhöhe. M40W: Abmessungen auf Anfrage. *M40: Wert laut Spezifikationstabelle; die Modellübersicht des Herstellers nennt bis zu 5 h, noch zu bestätigen.',
   scEyebrow: 'Inspektion & Sicherheit', scTitle: 'Wo die M-Serie arbeitet',
   scLead: 'Typische Aufgaben und die Modelle, mit denen wir anfangen würden. Ein Klick auf ein Modell zeigt es.',
   scen: [
@@ -708,22 +708,22 @@ const M = [
     c: [41, 30, 6, 5, '5 h / 29 km', 80, 'IP67'], need: ['stairs', 'ip67', 'fast', 'long', 'light', 'auto', 'voice', 'surround'] },
   { id: 'm40', s: 'm40', name: 'M40', img: I.m40, drive: 'walk',
     tag: { en: 'The compact walking robot for stairs, pipe racks and tight inspection routes.', de: 'Der kompakte Laufroboter für Treppen, Rohrbrücken und enge Inspektionswege.' },
-    figs: [[36, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speed'], [5, 'h', 'endurance'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
+    figs: [[36, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speed'], [5.5, 'h', 'endurance'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
     bul: { en: ['Walks stairs, grating, rubble and narrow service corridors', 'Base: two ultrasonic sensors and a wide-angle camera', 'Pro package: Jetson Orin NX, two LiDARs, second camera for SLAM and autonomous navigation', 'Swappable 936 Wh battery, wades through 30 cm of water'],
            de: ['Läuft auf Treppen, Gitterrosten, Schutt und in engen Versorgungsgängen', 'Grundversion: zwei Ultraschallsensoren und eine Weitwinkelkamera', 'Pro-Paket: Jetson Orin NX, zwei LiDAR, zweite Kamera für SLAM und autonome Navigation', 'Wechselbarer 936-Wh-Akku, 30 cm Wattiefe'] },
-    c: [36, 30, 5, 5, '5 h', 30, 'IP66'], need: ['stairs', 'fast', 'light'] },
+    c: [36, 30, 5, 5.5, '5.5 h / ~20 km*', 30, 'IP66'], need: ['stairs', 'fast', 'light'] },
   { id: 'm40w', s: 'm40', name: 'M40W', img: I.m40w, drive: 'wl',
     tag: { en: 'Wheels for speed, legs for obstacles: the fast patrol robot of the M40 series.', de: 'Räder für Tempo, Beine für Hindernisse: der schnelle Streifenroboter der M40-Serie.' },
-    figs: [[42, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speedWheel'], [5, 'h', 'endurance'], [30, 'cm', 'obstacle'], ['IP66', '', 'ip']],
+    figs: [[43.5, 'kg', 'weight'], [30, 'kg', 'payload'], [5, 'm/s', 'speedWheel'], [6, 'h', 'endurance'], [30, 'cm', 'obstacle'], ['IP66', '', 'ip']],
     bul: { en: ['Rolls on long, flat patrol routes, steps over kerbs and obstacles up to 30 cm', 'Radio range up to 500 m', '130° wide-angle camera', 'Computer, interfaces and Pro package as the M40 series, confirmed per quotation'],
            de: ['Rollt auf langen, ebenen Streifenrouten, steigt über Bordsteine und Hindernisse bis 30 cm', 'Funkreichweite bis 500 m', '130°-Weitwinkelkamera', 'Rechner, Schnittstellen und Pro-Paket wie M40-Serie, je Angebot bestätigt'] },
-    c: [42, 30, 5, 5, '5 h', 30, 'IP66'], need: ['fast', 'light'] },
+    c: [43.5, 30, 5, 6, '6 h / ~25.5 km', 30, 'IP66'], need: ['fast', 'light'] },
   { id: 'm40ws', s: 'm40', name: 'M40WS', img: I.m40ws, drive: 'wl',
     tag: { en: 'The wheel-legged M40 for narrow spaces, stairs and multi-level sites.', de: 'Der Rad-Bein-M40 für enge Räume, Treppen und mehrstöckige Anlagen.' },
-    figs: [[43, 'kg', 'weight'], [40, 'kg', 'payload'], [5, 'm/s', 'speed'], [25, 'km', 'range'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
+    figs: [[42, 'kg', 'weight'], [40, 'kg', 'payload'], [5, 'm/s', 'speed'], [25, 'km', 'range'], [20, 'cm', 'steps'], ['IP66', '', 'ip']],
     bul: { en: ['190 mm wheels plus legs for stairs and multi-level walkways', '40 kg payload on flat ground, the most in the M40 series', 'Up to 6 h or about 25 km unloaded on a 936 Wh battery', 'Pro package for SLAM and autonomous navigation'],
            de: ['190-mm-Räder plus Beine für Treppen und mehrstöckige Laufwege', '40 kg Nutzlast auf ebenem Boden, am meisten in der M40-Serie', 'Bis zu 6 h oder rund 25 km ohne Last mit 936-Wh-Akku', 'Pro-Paket für SLAM und autonome Navigation'] },
-    c: [43, 40, 5, 6, '6 h / ~25 km', 30, 'IP66'], need: ['stairs', 'fast', 'long', 'light'] },
+    c: [42, 40, 5, 6, '6 h / ~25 km', 30, 'IP66'], need: ['stairs', 'fast', 'long', 'light'] },
   { id: 'm100', s: 'm100', name: 'M100', img: I.m100, drive: 'walk',
     tag: { en: 'The heavy-duty walking robot for 50 kg payloads, IP67 and long outdoor shifts.', de: 'Der Schwerlast-Laufroboter für 50 kg Nutzlast, IP67 und lange Einsätze im Freien.' },
     figs: [[68, 'kg', 'weight'], [50, 'kg', 'payload'], [3, 'm/s', 'speed'], [5.5, 'h', 'endurance'], [30, 'cm', 'wading'], ['IP67', '', 'ip']],
@@ -840,7 +840,7 @@ function renderTable() {
     const k = sort.col; const key = (r) => k === 0 ? r.idx : k === 1 ? r.v[1] : k <= 4 ? r.v[k] : k === 5 ? r.m.c[3] : k === 6 ? r.m.c[5] : r.m.c[6];
     rows.sort((a, b) => { const x = key(a), y = key(b); return (x > y ? 1 : x < y ? -1 : 0) * sort.dir; });
   }
-  $('#cmpBody').innerHTML = rows.map(({ m }) => `<tr data-go="${m.id}" tabindex="0"><td>${m.name}</td><td><span class="pill ${m.drive}">${t('drive')[m.drive]}</span></td><td>${m.c[0]} kg</td><td>${m.c[1]} kg</td><td>${fmt(m.c[2])} m/s</td><td>${lang === 'de' ? m.c[4].replace('.', ',') : m.c[4]}</td><td>${m.c[5]} cm</td><td>${m.c[6]}</td></tr>`).join('');
+  $('#cmpBody').innerHTML = rows.map(({ m }) => `<tr data-go="${m.id}" tabindex="0"><td>${m.name}</td><td><span class="pill ${m.drive}">${t('drive')[m.drive]}</span></td><td>${fmt(m.c[0])} kg</td><td>${m.c[1]} kg</td><td>${fmt(m.c[2])} m/s</td><td>${lang === 'de' ? m.c[4].replace('.', ',') : m.c[4]}</td><td>${m.c[5]} cm</td><td>${m.c[6]}</td></tr>`).join('');
 }
 
 function updateFinder() {

@@ -19,9 +19,9 @@ export const config = {
   // - API routes
   // - Static files
   // - Studio routes
-  // - /mitsubishi1 and /security, standalone presentations served from public/
-  //   (see next.config.ts)
+  // - /mitsubishi1, /security and /lhoist1, standalone presentations served
+  //   from public/ (see next.config.ts)
   matcher: [
-    '/((?!api|_next|_vercel|studio|mitsubishi1|security|.*\\..*).*)',
+    '/((?!api|_next|_vercel|studio|mitsubishi1|security|lhoist1|.*\\..*).*)',
   ],
 }
