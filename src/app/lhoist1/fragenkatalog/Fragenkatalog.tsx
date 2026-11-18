@@ -1,9 +1,10 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { upload } from '@vercel/blob/client'
 import {
+  MAX_TEXT,
   MEDIA_PREFIX,
   NOTE_SUFFIX,
   PROCESS_STEPS,
@@ -362,11 +363,13 @@ export default function Fragenkatalog() {
         <div className="fk-wrap">
           <div className="fk-intro">
             <p className="fk-eyebrow">Rheinkalk · Kalkwerk Wülfrath</p>
-            <h1>Fragenkatalog Inspektionsroboter</h1>
+            <h1>
+              Fragenkatalog <em>Inspektionsroboter</em>
+            </h1>
             <p className="fk-lead">
-              Mit Ihren Antworten legen wir Plattform, Sensorik und Routen fest. Beantworten Sie, was Sie wissen, und
-              überspringen Sie den Rest. Alles wird automatisch gespeichert und ist für alle Beteiligten sichtbar. Sie
-              können jederzeit wiederkommen und ergänzen.
+              Jede Frage hier entscheidet etwas an Ihrem Roboter: das Modell, den Antrieb oder einen Sensor. Beantworten
+              Sie, was Sie wissen, und überspringen Sie den Rest. Alles wird automatisch gespeichert und ist für alle
+              Beteiligten sichtbar. Sie können jederzeit wiederkommen und ergänzen.
             </p>
             <div className="fk-chain" aria-label="Prozesskette">
               {PROCESS_STEPS.map((step, i) => (
@@ -601,6 +604,10 @@ function SectionView(props: {
         {String(index + 1).padStart(2, '0')} von {String(SECTIONS.length).padStart(2, '0')}
       </p>
       <h2>{section.title}</h2>
+      <p className="fk-decides">
+        <span>Entscheidet über</span>
+        {section.decides}
+      </p>
       <p className="fk-lead">{section.intro}</p>
 
       <div className="fk-qs">
@@ -678,23 +685,14 @@ function QuestionCard({
       )}
       {q.hint && <p className="fk-hint">{q.hint}</p>}
 
-      {q.type === 'text' && (
-        <input
+      {(q.type === 'text' || q.type === 'long') && (
+        <GrowingText
           id={inputId}
           className="fk-in"
-          type="text"
+          minRows={q.type === 'long' ? 3 : 1}
           value={text}
           placeholder={q.placeholder ?? 'Ihre Antwort'}
-          onChange={(e) => onChange(q.id, e.target.value)}
-        />
-      )}
-      {q.type === 'long' && (
-        <textarea
-          id={inputId}
-          className="fk-in"
-          value={text}
-          placeholder={q.placeholder ?? 'Ihre Antwort'}
-          onChange={(e) => onChange(q.id, e.target.value)}
+          onChange={(v) => onChange(q.id, v)}
         />
       )}
       {q.type === 'single' && (
@@ -751,13 +749,13 @@ function QuestionCard({
         </div>
       )}
       {isChoice && (
-        <input
+        <GrowingText
           className="fk-note"
-          type="text"
+          minRows={1}
           value={note}
           placeholder={q.type === 'multi' ? 'Sonstiges oder Anmerkung (optional)' : 'Anmerkung (optional)'}
-          aria-label={`Anmerkung zu: ${q.label}`}
-          onChange={(e) => onChange(q.id + NOTE_SUFFIX, e.target.value)}
+          ariaLabel={`Anmerkung zu: ${q.label}`}
+          onChange={(v) => onChange(q.id + NOTE_SUFFIX, v)}
         />
       )}
 
@@ -782,14 +780,91 @@ function OtherAnswers({ q, people }: { q: Question; people: Person[] }) {
           <span className="fk-avatar" title={p.name}>
             {initials(p.name)}
           </span>
-          <p>
-            <b>{p.name}:</b> {value}
-            {value && note.trim() ? ' ' : ''}
-            {note.trim() && <em>({note.trim()})</em>}
-          </p>
+          <LongText name={p.name} value={value} note={note.trim()} />
         </div>
       ))}
     </div>
+  )
+}
+
+const CLAMP_AT = 420
+
+/** A colleague's answer. Long answers are shortened until someone asks for the rest. */
+function LongText({ name, value, note }: { name: string; value: string; note: string }) {
+  const [open, setOpen] = useState(false)
+  const long = value.length > CLAMP_AT
+  const shown = long && !open ? value.slice(0, CLAMP_AT).trimEnd() + ' …' : value
+  return (
+    <p>
+      <b>{name}:</b> {shown}
+      {long && (
+        <>
+          {' '}
+          <button type="button" className="fk-link" onClick={() => setOpen(!open)}>
+            {open ? 'weniger anzeigen' : 'ganz anzeigen'}
+          </button>
+        </>
+      )}
+      {value && note ? ' ' : ''}
+      {note && <em>({note})</em>}
+    </p>
+  )
+}
+
+// =============================================================== text fields
+
+/**
+ * Text field that grows with its content, so a long answer stays fully
+ * visible while typing. Past roughly half the screen it scrolls instead, and
+ * a counter appears near the length limit.
+ */
+function GrowingText({
+  id,
+  className,
+  value,
+  onChange,
+  placeholder,
+  ariaLabel,
+  minRows,
+  disabled,
+}: {
+  id?: string
+  className?: string
+  value: string
+  onChange: (value: string) => void
+  placeholder?: string
+  ariaLabel?: string
+  minRows: number
+  disabled?: boolean
+}) {
+  const ref = useRef<HTMLTextAreaElement>(null)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight + 2}px`
+  }, [value])
+  const left = MAX_TEXT - value.length
+  return (
+    <>
+      <textarea
+        ref={ref}
+        id={id}
+        className={`fk-grow ${className ?? ''}`}
+        rows={minRows}
+        value={value}
+        maxLength={MAX_TEXT}
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        disabled={disabled}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      {left <= 500 && (
+        <p className="fk-count" data-full={left === 0}>
+          {left === 0 ? 'Maximale Länge erreicht. Für mehr Text bitte einen Eintrag unten anlegen.' : `Noch ${left} Zeichen`}
+        </p>
+      )}
+    </>
   )
 }
 
@@ -899,11 +974,12 @@ function Composer({
         maxLength={160}
         disabled={busy}
       />
-      <textarea
+      <GrowingText
+        minRows={3}
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={setText}
         placeholder="Anmerkung, Anforderung oder Beschreibung zu den Dateien"
-        aria-label="Anmerkung"
+        ariaLabel="Anmerkung"
         disabled={busy}
       />
       <div
