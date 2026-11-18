@@ -54,3 +54,4 @@ next-env.d.ts
 
 # local source images already uploaded to Sanity
 palletizer-images/
+/.data/

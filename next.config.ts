@@ -76,6 +76,15 @@ const nextConfig: NextConfig = {
         source: '/lhoist1.html',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
+      // Fragenkatalog for the same customer, and its API
+      {
+        source: '/lhoist1/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
+        source: '/api/lhoist1/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       {
         source: '/feed.xml',
         headers: [

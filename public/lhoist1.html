@@ -67,6 +67,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 @keyframes cue{0%,100%{transform:scaleY(.3);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
 @media(max-width:760px){.scrollcue{display:none}}
 
+/* link to the online Fragenkatalog */
+.fkcta{margin-top:40px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 32px}
+.fkcta p{color:var(--soft);margin-top:8px;max-width:56ch}
+.fkcta a{flex:none;background:var(--teal);color:#fff;text-decoration:none;font-weight:600;padding:14px 24px;border-radius:10px;transition:background .2s,transform .3s var(--ease)}
+.fkcta a:hover{background:#00a3a3;transform:translateY(-2px)}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.in{opacity:1;transform:none}
@@ -220,7 +226,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
   <div class="wrap">
     <a class="brand" href="#hero"><div class="mark">m</div><span>megarobotics</span></a>
     <div class="links">
-      <a href="#wir">Wir</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#werk">Ihr Werk</a><a href="#videos">Videos</a><a href="#nutzlast">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#schritte">Schritte</a>
+      <a href="#wir">Wir</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#werk">Ihr Werk</a><a href="#videos">Videos</a><a href="#nutzlast">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
     </div>
   </div>
 </nav>
@@ -398,6 +404,10 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
       <div class="q"><div class="box"></div><span>Wie stark sind Staub, Nässe und Hitze an den Messpunkten?</span></div>
       <div class="q"><div class="box"></div><span>Gibt es WLAN oder Mobilfunk auf der Strecke?</span></div>
       <div class="q"><div class="box"></div><span>Wohin sollen Messwerte und Meldungen fließen?</span></div>
+    </div>
+    <div class="fkcta rv">
+      <div><h3>Der ausführliche Fragenkatalog</h3><p>Online ausfüllen, Fotos und Videos hochladen, die Antworten der Kollegen sehen. Der Zugangscode steht in unserer E-Mail.</p></div>
+      <a href="/lhoist1/fragenkatalog">Zum Fragenkatalog →</a>
     </div>
   </div>
 </section>
