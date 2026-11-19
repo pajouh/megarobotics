@@ -85,6 +85,10 @@ const nextConfig: NextConfig = {
         source: '/ham_flug.html',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
+      {
+        source: '/ham_flug/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       // Fragenkatalog for the Rheinkalk / Lhoist presentation, and its API
       {
         source: '/lhoist1/:path*',

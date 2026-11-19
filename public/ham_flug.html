@@ -194,6 +194,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .acc details[open] summary::after{transform:rotate(45deg)}
 .acc details p{padding:0 4px 24px 58px;color:var(--soft);max-width:70ch}
 
+/* photo gallery */
+document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{const i=$('boxImg');i.src=b.dataset.img;i.alt=b.querySelector('img').alt;box.classList.add('pic');box.classList.add('on');}));
+
 /* questions */
 #fragen{background:var(--ink2)}
 .qs{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-top:44px}
@@ -265,6 +268,19 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 .pin i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--orange);animation:ping 2s ease-out infinite}
 .pin i:nth-child(2){animation-delay:1s}
 @media(prefers-reduced-motion:reduce){.sweep,.pin i,.fence .route{animation:none}.sweep{display:none}}
+
+.galh{margin-top:72px;font-size:26px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:28px}
+.shot{position:relative;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;aspect-ratio:1/1;display:block;text-align:left;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.shot img{width:100%;height:100%;object-fit:contain;padding:18px 18px 64px;display:block;transition:transform .5s var(--ease)}
+.shot span{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;background:#0F1114;color:var(--text);display:flex;flex-direction:column;gap:2px}
+.shot small{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-l)}
+.shot b{font-family:var(--display);font-size:16px;font-weight:500}
+.shot:hover{transform:translateY(-4px);border-color:var(--teal-l);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.shot:hover img{transform:scale(1.06)}
+.shot:focus-visible{outline:3px solid var(--teal-l);outline-offset:2px}
+#box img{max-width:92vw;max-height:86vh;background:#fff;border-radius:12px;padding:24px;display:none}
+#box.pic img{display:block}#box.pic video{display:none}
 </style>
 </head>
 <body>
@@ -460,6 +476,17 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
       <div class="pay rv d2"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="16" height="9" rx="2"/><path d="M21 11v3M10 10l-2 3h4l-2 3"/></svg><h3>Ladestation</h3><p>Automatisches Andocken und Laden als Option</p></div>
       <div class="pay rv d3"><svg viewBox="0 0 24 24"><path d="M5 19a10 10 0 0114 0M8 16a6 6 0 018 0"/><circle cx="12" cy="13" r="1.4"/><path d="M12 3v6"/></svg><h3>Funk und Positionierung</h3><p>4G und RTK für die Navigation im Freien, je nach Modell ab Werk oder als Option</p></div>
     </div>
+    <h3 class="galh rv">Beispielaufbauten: so trägt die Plattform ihre Sensorik</h3>
+    <div class="gal">
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-01.webp" aria-label="Rad-Bein-Plattform, Kameraaufbau auf dem Oberdeck: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-01.webp" alt="Rad-Bein-Plattform, Kameraaufbau auf dem Oberdeck"><span><small>Beispiel · Rad-Bein-Plattform</small><b>Kameraaufbau auf dem Oberdeck</b></span></button>
+      <button class="shot rv d2" data-img="/ham_flug/aufbau-02.webp" aria-label="Rad-Bein-Plattform, Kamerakopf im Schutzbügel: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-02.webp" alt="Rad-Bein-Plattform, Kamerakopf im Schutzbügel"><span><small>Beispiel · Rad-Bein-Plattform</small><b>Kamerakopf im Schutzbügel</b></span></button>
+      <button class="shot rv d3" data-img="/ham_flug/aufbau-03.webp" aria-label="Laufplattform, Sensoraufbau mit Schutzkorb: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-03.webp" alt="Laufplattform, Sensoraufbau mit Schutzkorb"><span><small>Beispiel · Laufplattform</small><b>Sensoraufbau mit Schutzkorb</b></span></button>
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-04.webp" aria-label="Laufplattform, Sensoraufbau, Seitenansicht: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-04.webp" alt="Laufplattform, Sensoraufbau, Seitenansicht"><span><small>Beispiel · Laufplattform</small><b>Sensoraufbau, Seitenansicht</b></span></button>
+      <button class="shot rv d2" data-img="/ham_flug/aufbau-05.webp" aria-label="Laufplattform, Mehrere Sensoren auf einem Träger: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-05.webp" alt="Laufplattform, Mehrere Sensoren auf einem Träger"><span><small>Beispiel · Laufplattform</small><b>Mehrere Sensoren auf einem Träger</b></span></button>
+      <button class="shot rv d3" data-img="/ham_flug/aufbau-06.webp" aria-label="Laufplattform, Sensoraufbau mit Funkantennen: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-06.webp" alt="Laufplattform, Sensoraufbau mit Funkantennen"><span><small>Beispiel · Laufplattform</small><b>Sensoraufbau mit Funkantennen</b></span></button>
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-07.webp" aria-label="Laufplattform, Sensorkopf und Manipulatorarm: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-07.webp" alt="Laufplattform, Sensorkopf und Manipulatorarm"><span><small>Beispiel · Laufplattform</small><b>Sensorkopf und Manipulatorarm</b></span></button>
+    </div>
+    <p class="note rv">Beispielkonfigurationen der Plattformfamilie, überwiegend Renderings. Sie zeigen nicht die Konfiguration für Ihr Projekt; Kamera und Sensorik legen wir nach der Standortbewertung aus. Klick vergrößert das Bild.</p>
     <p class="note rv">Sensorik ist Projektumfang, nicht Serienlieferumfang. Auswahl, Montage und Datenanbindung übernehmen wir; die Verfügbarkeit je Modell bestätigen wir mit dem Angebot.</p>
   </div>
 </section>
@@ -519,7 +546,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <footer><div class="wrap">MegaRobotics ist eine Marke der MEGAFORCE GmbH, Wacholderweg 8, 41564 Kaarst. Alle technischen Angaben sind Herstellerangaben unter Laborbedingungen und können sich ändern. Dieses Dokument ist kein verbindliches Angebot; Verfügbarkeit, Lieferumfang und Konditionen werden projektbezogen bestätigt.</div></footer>
 
-<div id="box"><button id="boxClose">SCHLIESSEN · ESC</button><video controls playsinline></video></div>
+<div id="box"><button id="boxClose">SCHLIESSEN · ESC</button><video controls playsinline></video><img id="boxImg" alt=""></div>
 
 <script>
 const IMGBASE='https://cdn.sanity.io/images/wudur8e8/production/';
@@ -595,7 +622,7 @@ document.querySelectorAll('.vid').forEach(v=>{const el=v.querySelector('video');
   v.addEventListener('mouseenter',()=>{el.play().catch(()=>{});});
   v.addEventListener('mouseleave',()=>{el.pause();});
   v.addEventListener('click',()=>{bv.src=v.dataset.src;box.classList.add('on');bv.play().catch(()=>{});});});
-function closeBox(){box.classList.remove('on');bv.pause();bv.removeAttribute('src');bv.load();}
+function closeBox(){box.classList.remove('on');box.classList.remove('pic');bv.pause();bv.removeAttribute('src');bv.load();}
 $('boxClose').onclick=closeBox;box.addEventListener('click',e=>{if(e.target===box)closeBox();});
 
 /* questions */
