@@ -615,6 +615,75 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // Hero of /solutions/inspection-security, the full M-series page. No product
+  // has this slug. Same clips as the security hero, inspection wording.
+  inspection: {
+    name: 'M series',
+    specs: [
+      { value: 9, label: { en: 'Models in three series', de: 'Modelle in drei Serien' } },
+      { value: 7.5, unit: 'h', decimals: 1, label: { en: 'Runtime, unloaded (M100WS)', de: 'Laufzeit ohne Last (M100WS)' } },
+      { value: 35, unit: 'km', label: { en: 'Range, unloaded (M100WS)', de: 'Reichweite ohne Last (M100WS)' } },
+      { value: 100, unit: 'kg', label: { en: 'Payload (M100WS)', de: 'Nutzlast (M100WS)' } },
+      { value: 'IP66/67', label: { en: 'Protection', de: 'Schutzart' } },
+      { value: '−20…55', unit: '°C', label: { en: 'Operating range', de: 'Betriebstemperatur' } },
+    ],
+    slides: [
+      {
+        id: 'terrain-stairs',
+        eyebrow: { en: 'Inspection round', de: 'Inspektionsrundgang' },
+        tagline: {
+          en: 'Gravel, a 45° slope, then the stairs. The M series walks the route your technicians walk and brings the readings back.',
+          de: 'Schotter, 45° Steigung, dann die Treppe. Die M-Serie geht die Route Ihrer Techniker und bringt die Messwerte mit.',
+        },
+        video: '/megarobotics/security/terrain-stairs.mp4',
+        focus: 'center',
+        note: { en: 'M40 series · real footage', de: 'M40-Serie · Realaufnahmen' },
+        useCases: [
+          [{ en: 'Process plants', de: 'Prozessanlagen' }, { en: 'pipe racks and tank farms, outside Ex zones', de: 'Rohrbrücken und Tanklager, außerhalb von Ex-Zonen' }],
+          [{ en: 'Power utilities', de: 'Energieversorgung' }, { en: 'substations and cable tunnels', de: 'Umspannwerke und Kabeltunnel' }],
+          [{ en: 'Tunnels', de: 'Tunnel' }, { en: 'pipe galleries and utility tunnels', de: 'Rohrkanäle und Versorgungstunnel' }],
+        ],
+      },
+      {
+        id: 'plant-patrol',
+        eyebrow: { en: 'Heavy carrier', de: 'Schwerlastträger' },
+        tagline: {
+          en: 'The M100WS carries up to 100 kg of sensors and equipment across the plant and runs up to 7.5 hours unloaded.',
+          de: 'Der M100WS trägt bis zu 100 kg Sensorik und Ausrüstung durch die Anlage und läuft ohne Last bis zu 7,5 Stunden.',
+        },
+        video: '/megarobotics/security/plant-patrol.mp4',
+        shift: '-10%',
+        focus: '28% bottom',
+        note: {
+          en: 'M100WS · AI-generated visualisation. Payloads not included.',
+          de: 'M100WS · KI-generierte Visualisierung. Nutzlasten nicht im Lieferumfang.',
+        },
+        useCases: [
+          [{ en: 'Thermal checks', de: 'Wärmebildkontrolle' }, { en: 'transformers, switchgear, bearings', de: 'Trafos, Schaltanlagen, Lager' }],
+          [{ en: 'Gas and leaks', de: 'Gas und Leckagen' }, { en: 'sensors chosen per project', de: 'Sensorik je Projekt' }],
+          [{ en: 'Security patrol', de: 'Sicherheitsstreife' }, { en: 'sites, fence lines, perimeters', de: 'Gelände, Zäune, Perimeter' }],
+        ],
+      },
+      {
+        id: 'all-weather',
+        eyebrow: { en: 'Any weather', de: 'Bei jedem Wetter' },
+        tagline: {
+          en: 'IP66 or IP67 on every model and an operating range of −20 to +55 °C. Rain doesn’t cancel the round.',
+          de: 'IP66 oder IP67 bei jedem Modell und −20 bis +55 °C Betriebstemperatur. Regen sagt den Rundgang nicht ab.',
+        },
+        image: '/images/security/m1-water.jpg',
+        duration: 9,
+        focus: 'center',
+        note: { en: 'M1 · manufacturer photo', de: 'M1 · Herstellerfoto' },
+        useCases: [
+          [{ en: 'Outdoor routes', de: 'Außenrouten' }, { en: 'yards, campuses, solar parks', de: 'Höfe, Campus, Solarparks' }],
+          [{ en: 'Night rounds', de: 'Nachtrunden' }, { en: 'four fill lights on every M1', de: 'vier Zusatzleuchten bei jedem M1' }],
+          [{ en: 'Around the clock', de: 'Rund um die Uhr' }, { en: 'swappable batteries, charging station option', de: 'Wechselakkus, Ladestation als Option' }],
+        ],
+      },
+    ],
+  },
+
   // Hero of the security solution page (/solutions/security). There is no
   // product with this slug, so it never reaches a product page. Figures are
   // range maxima from the M1 and M40/M100 catalogues 2026 (base configuration,
