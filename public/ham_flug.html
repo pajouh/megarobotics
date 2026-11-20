@@ -311,6 +311,18 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 .onprem{margin-top:20px;display:flex;gap:20px;align-items:center;border:1px solid var(--teal);border-radius:14px;padding:24px 28px;background:linear-gradient(90deg,rgba(0,144,144,.16),rgba(232,83,26,.06))}
 .onprem svg{width:40px;height:40px;flex:0 0 auto;fill:none;stroke:var(--teal-l);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .onprem p{color:var(--soft);margin-top:6px}
+
+.rstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;margin-top:28px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--line)}
+.rstats div{background:#14171C;padding:22px 24px}
+.rstats b{display:block;font-family:var(--display);font-size:34px;font-weight:700;letter-spacing:-.02em}
+.rstats small{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rtable{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow-x:auto;background:#14171C}
+.rtable table{width:100%;border-collapse:collapse;min-width:640px}
+.rtable th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px 20px;border-bottom:1px solid var(--line);font-weight:500}
+.rtable td{padding:14px 20px;border-bottom:1px solid var(--line);font-size:15.5px}
+.rtable tr:last-child td{border-bottom:0}
+.rtable td:first-child{font-family:var(--display);font-weight:500}
+.rtable .ok{color:var(--teal-l);font-weight:600}.rtable .mid{color:var(--orange-l);font-weight:600}
 </style>
 </head>
 <body>
@@ -423,6 +435,25 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
       <div class="maptag"><b>HAM · EDDH</b><span>53,6304° N · 9,9882° O</span></div>
     </div>
     <p class="note rv">Kartendaten © OpenStreetMap-Mitwirkende. Es ist keine Streifenroute eingezeichnet.</p>
+    <h3 class="galh rv">Streckenrechnung: eine Runde am Perimeter</h3>
+    <div class="rstats rv d1">
+      <div><b data-count="22" data-suffix=" km">0</b><small>Zaunlänge</small></div>
+      <div><b data-count="18" data-suffix=" km">0</b><small>Umfahrungsstraße</small></div>
+      <div><b data-count="570" data-suffix=" ha">0</b><small>Betriebsfläche</small></div>
+      <div><b>ca. 4 bis 6 h</b><small>je Runde am Zaun bei 1,5 bis 1 m/s</small></div>
+    </div>
+    <div class="rtable rv d2">
+      <table>
+        <thead><tr><th>Plattform</th><th>Reichweite ohne Last</th><th>Reichweite mit Last</th><th>Runde 22 km mit einer Akkuladung</th></tr></thead>
+        <tbody>
+          <tr><td>M100WS</td><td>35 km</td><td>20 km (mit 50 kg)</td><td><span class="ok">ja</span> ohne Last, knapp darunter mit 50 kg</td></tr>
+          <tr><td>M1, M1 Pro, M1 Ultra</td><td>29 km</td><td>18 km (Volllast)</td><td><span class="ok">ja</span> ohne Last, darunter bei Volllast</td></tr>
+          <tr><td>M100W</td><td>ca. 25 km</td><td>15 km (mit 50 kg)</td><td><span class="mid">knapp</span> ohne Last</td></tr>
+          <tr><td>M40WS</td><td>ca. 25 km</td><td>ca. 12 km (mit 30 kg)</td><td><span class="mid">knapp</span> ohne Last</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note rv">Zaunlänge, Umfahrungsstraße und Fläche nach Angaben von Hamburg Airport. Rundenzeiten sind gerechnet, ohne Halte für Kontrollen und Aufnahmen; die Streifengeschwindigkeit legen wir mit Ihnen fest. Ein Kameraaufbau wiegt deutlich weniger als die genannten Lasten, die tatsächliche Reichweite liegt daher zwischen beiden Werten. Für mehrere Runden am Tag planen wir Akkuwechsel, eine Ladestation an der Strecke oder zwei Roboter mit geteilter Strecke.</p>
   </div>
 </section>
 
