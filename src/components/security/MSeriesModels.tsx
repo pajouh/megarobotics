@@ -118,7 +118,7 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
                 onClick={() => pick(m.slug)}
                 className={`inline-flex min-h-[44px] items-center rounded-full border px-5 text-sm font-semibold transition-colors ${
                   on
-                    ? 'border-[color:var(--mr-ink)] bg-[color:var(--mr-ink)] text-white'
+                    ? 'border-[color:var(--mr-orange-ink)] bg-[color:var(--mr-orange-ink)] text-white'
                     : 'border-[color:var(--mr-line)] bg-[color:var(--mr-white)] text-[color:var(--mr-ink)] hover:border-[color:var(--mr-accent-line)]'
                 }`}
               >
@@ -183,7 +183,7 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
         <div className="grid grid-cols-1 gap-8 border-t border-[color:var(--mr-line)] p-6 sm:p-8 lg:grid-cols-[1.4fr_1fr]">
           {model.features.length > 0 && (
             <div>
-              <h4 className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-accent-ink)]">{labels.features}</h4>
+              <h4 className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-orange-ink)]">{labels.features}</h4>
               <ul className="mt-4 grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
                 {model.features.map((f) => (
                   <li key={f} className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--mr-ink)]">
@@ -196,11 +196,11 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
           )}
           {model.applications.length > 0 && (
             <div>
-              <h4 className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-accent-ink)]">{labels.applications}</h4>
+              <h4 className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-orange-ink)]">{labels.applications}</h4>
               <ul className="mt-4 space-y-2.5">
                 {model.applications.map((a) => (
                   <li key={a} className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">
-                    <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-accent)]" aria-hidden="true" />
+                    <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-orange)]" aria-hidden="true" />
                     {a}
                   </li>
                 ))}

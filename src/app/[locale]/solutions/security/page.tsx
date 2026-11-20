@@ -11,6 +11,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import StructuredData from '@/components/StructuredData'
 import Parallax, { HeroParallax } from '@/components/Parallax'
 import MSeriesExplorer from '@/components/security/MSeriesExplorer'
+import ImageGallery from '@/components/security/ImageGallery'
 import { getProductHero, HERO_MEDIA_BASE } from '@/data/product-heroes'
 import {
   getSecurityContent,
@@ -120,9 +121,9 @@ export default async function SecuritySolutionPage({ params }: Props) {
               </p>
               <p
                 data-reveal
-                className="mt-8 inline-flex items-center gap-2 rounded-full border border-[color:var(--mr-accent-line)] bg-[color:var(--mr-accent-soft)] px-4 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]"
+                className="mt-8 inline-flex items-center gap-2 rounded-full border border-[color:var(--mr-orange-line)] bg-[color:var(--mr-orange-soft)] px-4 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-[color:var(--mr-orange-ink)]"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--mr-accent)]" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--mr-orange)]" aria-hidden="true" />
                 {c.intro.status}
               </p>
             </div>
@@ -161,9 +162,9 @@ export default async function SecuritySolutionPage({ params }: Props) {
               <article
                 key={w.n}
                 data-reveal
-                className="rounded-[var(--mr-radius)] border border-[color:var(--mr-line-on-dark)] bg-white/[0.04] p-6"
+                className="rounded-[var(--mr-radius)] border border-[color:var(--mr-line)] border-t-[3px] border-t-[color:var(--mr-orange)] bg-[color:var(--mr-white)] p-6 shadow-[var(--mr-shadow)]"
               >
-                <div className="font-mono text-sm text-[color:var(--mr-accent-ink)]">{w.n}</div>
+                <div className="font-mono text-sm font-semibold text-[color:var(--mr-orange-ink)]">{w.n}</div>
                 <h3 className="ind-h3 mt-3 text-[color:var(--mr-ink-on-dark)]">{w.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[color:var(--mr-steel-on-dark)]">{w.body}</p>
               </article>
@@ -179,13 +180,13 @@ export default async function SecuritySolutionPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {c.round.items.map((r) => (
               <article key={r.title} data-reveal className="ind-card flex flex-col">
-                <span className="flex h-11 w-11 items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-accent-soft)] text-[color:var(--mr-accent-ink)]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-orange-soft)] text-[color:var(--mr-orange-ink)]">
                   <LucideIcon name={r.icon} className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="ind-h3 mt-4 text-[color:var(--mr-ink)]">{r.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{r.body}</p>
                 <p className="mt-auto pt-4 text-xs leading-relaxed text-[color:var(--mr-steel)]">
-                  <span className="font-mono uppercase tracking-[0.1em] text-[color:var(--mr-accent-ink)]">
+                  <span className="font-mono uppercase tracking-[0.1em] text-[color:var(--mr-orange-ink)]">
                     {c.round.availableLabel}:
                   </span>{' '}
                   {r.available}
@@ -217,8 +218,8 @@ export default async function SecuritySolutionPage({ params }: Props) {
         />
         <Parallax range={-110} className="relative h-full" innerClassName="h-full">
           <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
-            <div className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--mr-accent-glow)]">
-              <span className="inline-block w-8 h-px bg-[color:var(--mr-accent-glow)]" aria-hidden="true" />
+            <div className="mb-4 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-[#fdba74]">
+              <span className="inline-block w-8 h-px bg-[#fdba74]" aria-hidden="true" />
               {c.band.eyebrow}
             </div>
             <p className="max-w-3xl font-[family-name:var(--font-display)] text-4xl md:text-6xl font-semibold leading-[1.05] tracking-[-0.03em] text-balance text-white">
@@ -298,12 +299,12 @@ export default async function SecuritySolutionPage({ params }: Props) {
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <div className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-accent-ink)]">{s.kicker}</div>
+                  <div className="font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-orange-ink)]">{s.kicker}</div>
                   <h3 className="ind-h3 mt-2 text-[color:var(--mr-ink-on-dark)]">{s.name}</h3>
                   <ul className="mt-3 space-y-1.5 text-sm text-[color:var(--mr-steel-on-dark)]">
                     {s.points.map((p) => (
                       <li key={p} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-accent-ink)]" aria-hidden="true" />
+                        <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-orange)]" aria-hidden="true" />
                         {p}
                       </li>
                     ))}
@@ -349,43 +350,21 @@ export default async function SecuritySolutionPage({ params }: Props) {
       <section className="py-16 md:py-24 ind-section-dark">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader tone="dark" eyebrow={c.payloads.eyebrow} title={c.payloads.title} subtitle={c.payloads.subtitle} />
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 items-start">
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-              {c.payloads.items.map((p) => (
-                <li key={p.title} data-reveal className="border-t border-[color:var(--mr-line-on-dark)] pt-4">
-                  <h3 className="text-base font-semibold text-[color:var(--mr-ink-on-dark)]">{p.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-steel-on-dark)]">{p.body}</p>
-                </li>
-              ))}
-            </ul>
-            <div>
-              <div className="grid grid-cols-2 gap-3">
-                {c.payloads.gallery.map((g, i) => (
-                  <Parallax key={g.src} range={i % 2 ? 40 : -10} className={i % 2 ? 'mt-8' : ''}>
-                    <figure
-                      data-reveal
-                      className={`relative aspect-[4/3] overflow-hidden rounded-[var(--mr-radius-sm)] ${
-                        g.fit === 'contain'
-                          ? 'bg-white border border-[color:var(--mr-line)]'
-                          : 'bg-[color:var(--mr-paper-2)]'
-                      }`}
-                    >
-                      <Image
-                        src={g.src}
-                        alt={g.alt}
-                        fill
-                        sizes="(min-width: 1024px) 22rem, 45vw"
-                        className={g.fit === 'contain' ? 'object-contain p-3' : 'object-cover'}
-                      />
-                      <figcaption className="absolute left-2 bottom-2 rounded-full bg-[color:var(--mr-dark)]/75 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white">
-                        {g.caption}
-                      </figcaption>
-                    </figure>
-                  </Parallax>
-                ))}
-              </div>
-              <p className="mt-6 text-xs leading-relaxed text-[color:var(--mr-steel-on-dark)]">{c.payloads.galleryNote}</p>
-            </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
+            {c.payloads.items.map((p) => (
+              <li key={p.title} data-reveal className="border-t-2 border-[color:var(--mr-orange-line)] pt-4">
+                <h3 className="text-base font-semibold text-[color:var(--mr-ink-on-dark)]">{p.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-steel-on-dark)]">{p.body}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-12 md:mt-16">
+            <ImageGallery
+              columns={3}
+              items={c.payloads.gallery.map((g) => ({ src: g.src, alt: g.alt, caption: g.caption, bg: g.bg }))}
+              labels={c.payloads.galleryLabels}
+            />
+            <p className="mt-5 text-xs leading-relaxed text-[color:var(--mr-steel-on-dark)]">{c.payloads.galleryNote}</p>
           </div>
         </div>
       </section>
@@ -415,7 +394,7 @@ export default async function SecuritySolutionPage({ params }: Props) {
           <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
             {c.before.items.map((b, i) => (
               <li key={b.title} data-reveal className="flex gap-4">
-                <span className="font-mono text-sm text-[color:var(--mr-accent-ink)]">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-mono text-sm font-semibold text-[color:var(--mr-orange-ink)]">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 className="text-base font-semibold text-[color:var(--mr-ink)]">{b.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{b.body}</p>
@@ -438,7 +417,7 @@ export default async function SecuritySolutionPage({ params }: Props) {
                 style={{ ['--d' as string]: `${i * 60}ms` }}
                 className="ind-card !p-5 flex flex-col"
               >
-                <span className="ind-step-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="ind-step-num !border-[color:var(--mr-orange-line)] !bg-[color:var(--mr-orange-soft)] !text-[color:var(--mr-orange-ink)]">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="mt-4 text-base font-semibold text-[color:var(--mr-ink)]">{s.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{s.body}</p>
               </li>
@@ -457,7 +436,7 @@ export default async function SecuritySolutionPage({ params }: Props) {
                 <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 py-3 text-base font-semibold text-[color:var(--mr-ink)] [&::-webkit-details-marker]:hidden">
                   {f.q}
                   <Plus
-                    className="h-5 w-5 flex-none text-[color:var(--mr-accent-ink)] transition-transform group-open:rotate-45"
+                    className="h-5 w-5 flex-none text-[color:var(--mr-orange-ink)] transition-transform group-open:rotate-45"
                     aria-hidden="true"
                   />
                 </summary>

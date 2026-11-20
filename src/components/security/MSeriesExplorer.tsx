@@ -130,7 +130,7 @@ export default function MSeriesExplorer({ models, needKeys, labels, locale }: Pr
         )}
       </div>
 
-      <p aria-live="polite" className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
+      <p aria-live="polite" className="mt-5 font-mono text-xs uppercase tracking-[0.12em] text-[color:var(--mr-orange-ink)]">
         {status}
       </p>
       {picked.length > 0 && hits === 0 && (

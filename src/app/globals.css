@@ -34,6 +34,11 @@
   --mr-accent-glow: #2fe0d0;
   --mr-accent-soft: rgba(6, 147, 140, 0.09);
   --mr-accent-line: rgba(6, 147, 140, 0.32);
+  /* Secondary highlight: numbers, icons, labels. Orange-ink is the text-safe shade (5.2:1 on white). */
+  --mr-orange: #f97316;
+  --mr-orange-ink: #c2410c;
+  --mr-orange-soft: rgba(249, 115, 22, 0.1);
+  --mr-orange-line: rgba(249, 115, 22, 0.42);
 
   /* Rules */
   --mr-line: rgba(13, 27, 32, 0.1);

@@ -145,7 +145,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
               </p>
               <dl data-reveal className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-[var(--mr-radius-sm)] border border-[color:var(--mr-line)] bg-[color:var(--mr-line)] sm:grid-cols-4 max-w-2xl">
                 {c.intro.facts.map((f) => (
-                  <div key={f.label} className="bg-[color:var(--mr-white)] p-4">
+                  <div key={f.label} className="border-t-2 border-[color:var(--mr-orange)] bg-[color:var(--mr-white)] p-4">
                     <dd className="text-xl font-semibold tracking-tight text-[color:var(--mr-ink)]">{f.value}</dd>
                     <dt className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-[color:var(--mr-steel)]">{f.label}</dt>
                   </div>
@@ -185,13 +185,13 @@ export default async function InspectionSecurityPage({ params }: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {c.jobs.items.map((j) => (
               <article key={j.title} data-reveal className="ind-card flex flex-col">
-                <span className="flex h-11 w-11 items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-accent-soft)] text-[color:var(--mr-accent-ink)]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-orange-soft)] text-[color:var(--mr-orange-ink)]">
                   <LucideIcon name={j.icon} className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="ind-h3 mt-4 text-[color:var(--mr-ink)]">{j.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{j.body}</p>
                 <p className="mt-auto pt-4 text-xs leading-relaxed text-[color:var(--mr-steel)]">
-                  <span className="font-mono uppercase tracking-[0.1em] text-[color:var(--mr-accent-ink)]">{c.jobs.withLabel}:</span>{' '}
+                  <span className="font-mono uppercase tracking-[0.1em] text-[color:var(--mr-orange-ink)]">{c.jobs.withLabel}:</span>{' '}
                   {j.with}
                 </p>
                 {'href' in j && j.href && (
@@ -325,7 +325,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
                 </figure>
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-accent-soft)] text-[color:var(--mr-accent-ink)]">
+                    <span className="flex h-9 w-9 flex-none items-center justify-center rounded-[var(--mr-radius-sm)] bg-[color:var(--mr-orange-soft)] text-[color:var(--mr-orange-ink)]">
                       <LucideIcon name={k.icon} className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <h3 className="ind-h3 text-[color:var(--mr-ink)]">{k.title}</h3>
@@ -358,11 +358,11 @@ export default async function InspectionSecurityPage({ params }: Props) {
             {c.equip.series.map((s) => (
               <article key={s.name} data-reveal className="ind-card flex flex-col">
                 <h3 className="ind-h3 text-[color:var(--mr-ink)]">{s.name}</h3>
-                <h4 className="mt-5 font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-accent-ink)]">{c.equip.standardLabel}</h4>
+                <h4 className="mt-5 font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--mr-orange-ink)]">{c.equip.standardLabel}</h4>
                 <ul className="mt-3 space-y-2">
                   {s.standard.map((x) => (
                     <li key={x} className="flex gap-2.5 text-sm leading-relaxed text-[color:var(--mr-ink)]">
-                      <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-accent)]" aria-hidden="true" />
+                      <span className="mt-2 h-1 w-1 flex-none rounded-full bg-[color:var(--mr-orange)]" aria-hidden="true" />
                       {x}
                     </li>
                   ))}
@@ -387,7 +387,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
             </div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
               {sec.payloads.items.map((p) => (
-                <li key={p.title} data-reveal className="border-t border-[color:var(--mr-line)] pt-4">
+                <li key={p.title} data-reveal className="border-t-2 border-[color:var(--mr-orange-line)] pt-4">
                   <h4 className="text-base font-semibold text-[color:var(--mr-ink)]">{p.title}</h4>
                   <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{p.body}</p>
                 </li>
@@ -402,6 +402,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow={c.gallery.eyebrow} title={c.gallery.title} subtitle={c.gallery.subtitle} />
           <ImageGallery
+            feature
             items={c.gallery.items.map((g) => ({ src: g.src, alt: g.alt, caption: g.caption, bg: g.bg }))}
             labels={c.gallery.labels}
           />
@@ -465,7 +466,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
                 style={{ ['--d' as string]: `${i * 60}ms` }}
                 className="ind-card !p-5 flex flex-col"
               >
-                <span className="ind-step-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="ind-step-num !border-[color:var(--mr-orange-line)] !bg-[color:var(--mr-orange-soft)] !text-[color:var(--mr-orange-ink)]">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="mt-4 text-base font-semibold text-[color:var(--mr-ink)]">{s.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{s.body}</p>
               </li>
@@ -481,7 +482,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
           <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8">
             {c.limits.items.map((b, i) => (
               <li key={b.title} data-reveal className="flex gap-4">
-                <span className="font-mono text-sm text-[color:var(--mr-accent-ink)]">{String(i + 1).padStart(2, '0')}</span>
+                <span className="font-mono text-sm font-semibold text-[color:var(--mr-orange-ink)]">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 className="text-base font-semibold text-[color:var(--mr-ink)]">{b.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-[color:var(--mr-ink-2)]">{b.body}</p>
@@ -503,7 +504,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
                 <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 py-3 text-base font-semibold text-[color:var(--mr-ink)] [&::-webkit-details-marker]:hidden">
                   {f.q}
                   <Plus
-                    className="h-5 w-5 flex-none text-[color:var(--mr-accent-ink)] transition-transform group-open:rotate-45"
+                    className="h-5 w-5 flex-none text-[color:var(--mr-orange-ink)] transition-transform group-open:rotate-45"
                     aria-hidden="true"
                   />
                 </summary>

@@ -4,26 +4,37 @@ import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 
-// Thumbnail grid with a keyboard-friendly lightbox (Esc, ← →), used on
-// /solutions/inspection-security.
+// Even tile grid with a keyboard-friendly lightbox (Esc, ← →), used on the
+// security and inspection solution pages. Every tile is the same shape and the
+// caption sits under the picture, so nothing covers the robot.
 
 export interface GalleryItem {
   src: string
   alt: string
   caption: string
-  /** Panel behind the image: photos fill the tile, cutouts sit on a plain panel. */
+  /** 'photo' fills the tile; 'white' | 'light' | 'dark' are cutouts shown whole on a plain panel. */
   bg: string
 }
 
 interface Props {
   items: GalleryItem[]
   labels: { open: string; close: string; prev: string; next: string }
+  /** Tiles per row on desktop. */
+  columns?: 3 | 4
+  /** Show the first image as a large 2 × 2 tile. */
+  feature?: boolean
 }
 
 const panel = (bg: string) =>
-  bg === 'dark' ? 'bg-black' : bg === 'white' ? 'bg-white' : bg === 'light' ? 'bg-[radial-gradient(120%_90%_at_50%_15%,#ffffff_0%,#e7eef0_80%)]' : 'bg-[color:var(--mr-paper-2)]'
+  bg === 'dark'
+    ? 'bg-black'
+    : bg === 'white'
+      ? 'bg-white'
+      : bg === 'light'
+        ? 'bg-[radial-gradient(120%_90%_at_50%_15%,#ffffff_0%,#e7eef0_80%)]'
+        : 'bg-[color:var(--mr-paper-2)]'
 
-export default function ImageGallery({ items, labels }: Props) {
+export default function ImageGallery({ items, labels, columns = 4, feature = false }: Props) {
   const [open, setOpen] = useState<number | null>(null)
   const step = useCallback(
     (d: number) => setOpen((i) => (i === null ? i : (i + d + items.length) % items.length)),
@@ -47,33 +58,40 @@ export default function ImageGallery({ items, labels }: Props) {
   }, [open, step])
 
   const current = open === null ? null : items[open]
+  const grid = columns === 3 ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
 
   return (
     <>
-      <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
-        {items.map((g, i) => (
-          <li key={g.src} data-reveal className={i === 0 ? 'col-span-2 row-span-2' : ''}>
-            <button
-              type="button"
-              onClick={() => setOpen(i)}
-              aria-label={`${labels.open}: ${g.caption}`}
-              className={`group relative block h-full w-full overflow-hidden rounded-[var(--mr-radius-sm)] border border-[color:var(--mr-line)] ${panel(g.bg)} ${
-                i === 0 ? 'aspect-square' : 'aspect-[4/3]'
-              }`}
-            >
-              <Image
-                src={g.src}
-                alt={g.alt}
-                fill
-                sizes={i === 0 ? '(min-width: 1024px) 38rem, 92vw' : '(min-width: 1024px) 19rem, (min-width: 768px) 30vw, 45vw'}
-                className={`transition-transform duration-500 group-hover:scale-[1.04] ${g.bg === 'photo' ? 'object-cover' : 'object-contain p-3'}`}
-              />
-              <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(13,27,32,0.82),rgba(13,27,32,0))] px-3 pb-2 pt-8 text-left font-mono text-[10px] uppercase leading-snug tracking-[0.1em] text-white">
-                {g.caption}
-              </span>
-            </button>
-          </li>
-        ))}
+      <ul className={`grid gap-3 sm:gap-4 ${grid}`}>
+        {items.map((g, i) => {
+          const big = feature && i === 0
+          return (
+            <li key={g.src} data-reveal className={big ? 'col-span-2 row-span-2' : ''}>
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                aria-label={`${labels.open}: ${g.caption}`}
+                className="group flex h-full w-full flex-col overflow-hidden rounded-[var(--mr-radius-sm)] border border-[color:var(--mr-line)] bg-[color:var(--mr-white)] text-left shadow-[var(--mr-shadow)] transition-[border-color,box-shadow] hover:border-[color:var(--mr-orange-line)] hover:shadow-[var(--mr-shadow-lift)]"
+              >
+                <span className={`relative block w-full overflow-hidden ${panel(g.bg)} ${big ? 'min-h-[16rem] flex-1' : 'aspect-[4/3]'}`}>
+                  <Image
+                    src={g.src}
+                    alt={g.alt}
+                    fill
+                    sizes={big ? '(min-width: 1024px) 38rem, 92vw' : '(min-width: 1024px) 24rem, (min-width: 768px) 30vw, 45vw'}
+                    className={`transition-transform duration-500 group-hover:scale-[1.04] ${g.bg === 'photo' ? 'object-cover' : 'object-contain p-3 sm:p-4'}`}
+                  />
+                </span>
+                <span className="flex min-h-[3.75rem] items-center gap-2 sm:min-h-[3.25rem] border-t border-[color:var(--mr-line)] px-3 py-2">
+                  <span className="h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--mr-orange)]" aria-hidden="true" />
+                  <span className="line-clamp-3 sm:line-clamp-2 font-mono text-[10px] uppercase leading-snug tracking-[0.08em] text-[color:var(--mr-ink-2)] sm:text-[11px]">
+                    {g.caption}
+                  </span>
+                </span>
+              </button>
+            </li>
+          )
+        })}
       </ul>
 
       {current && (
