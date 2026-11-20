@@ -17,6 +17,7 @@
     "@sanity/vision": "^5.1.0",
     "@vercel/blob": "^2.9.0",
     "@vitalets/google-translate-api": "^9.2.1",
+    "client-zip": "^2.5.1",
     "date-fns": "^4.1.0",
     "googleapis": "^171.4.0",
     "lucide-react": "^0.562.0",

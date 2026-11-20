@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { upload } from '@vercel/blob/client'
+import { downloadZip } from 'client-zip'
 import {
   MAX_TEXT,
   MEDIA_PREFIX,
@@ -1131,7 +1132,7 @@ function csvCell(value: string): string {
   return `"${value.replace(/"/g, '""')}"`
 }
 
-function downloadCsv(people: Person[]) {
+function answersCsv(people: Person[]): string {
   const head = ['Abschnitt', 'Frage', ...people.map((p) => p.name)]
   const rows = SECTIONS.flatMap((s) =>
     s.questions.map((q) => [
@@ -1143,13 +1144,142 @@ function downloadCsv(people: Person[]) {
       }),
     ]),
   )
-  const csv = [head, ...rows].map((r) => r.map(csvCell).join(';')).join('\r\n')
-  const url = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' }))
+  return '\ufeff' + [head, ...rows].map((r) => r.map(csvCell).join(';')).join('\r\n')
+}
+
+function sectionTitle(id: string): string {
+  return SECTIONS.find((s) => s.id === id)?.title ?? id
+}
+
+/** Path of an uploaded file inside the ZIP: Dateien/<Abschnitt>/<Datum>_<Autor>_<Name>. */
+function zipPath(entry: Entry, m: Media, used: Set<string>): string {
+  const n = SECTIONS.findIndex((s) => s.id === entry.sectionId) + 1
+  const folder = `${String(n).padStart(2, '0')}-${sectionTitle(entry.sectionId).replace(/[^\p{L}\p{N}]+/gu, '-')}`
+  const base = `Dateien/${folder}/${entry.createdAt.slice(0, 10)}_${entry.authorSlug}_${safeFileName(m.name)}`
+  let path = base
+  for (let i = 2; used.has(path); i++) {
+    const dot = base.lastIndexOf('.')
+    path = `${base.slice(0, dot)}-${i}${base.slice(dot)}`
+  }
+  used.add(path)
+  return path
+}
+
+function entriesCsv(rows: { entry: Entry; files: string[] }[]): string {
+  const head = ['Datum', 'Autor', 'Abschnitt', 'Titel', 'Text', 'Dateien']
+  const body = rows.map(({ entry, files }) => [
+    formatTime(entry.createdAt),
+    entry.author,
+    sectionTitle(entry.sectionId),
+    entry.title,
+    entry.text,
+    files.join(' | '),
+  ])
+  return '\ufeff' + [head, ...body].map((r) => r.map(csvCell).join(';')).join('\r\n')
+}
+
+function saveBlob(blob: Blob, name: string) {
+  const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `Fragenkatalog-Rheinkalk-${new Date().toISOString().slice(0, 10)}.csv`
+  a.download = name
   a.click()
-  URL.revokeObjectURL(url)
+  setTimeout(() => URL.revokeObjectURL(url), 60_000)
+}
+
+function downloadCsv(people: Person[]) {
+  saveBlob(
+    new Blob([answersCsv(people)], { type: 'text/csv;charset=utf-8' }),
+    `Fragenkatalog-Rheinkalk-${new Date().toISOString().slice(0, 10)}.csv`,
+  )
+}
+
+type SavePicker = (options: {
+  suggestedName: string
+  types: { description: string; accept: Record<string, string[]> }[]
+}) => Promise<{ createWritable: () => Promise<WritableStream<Uint8Array>> }>
+
+/**
+ * Everything in one ZIP: both CSV files plus every uploaded file. The files are
+ * streamed one after the other, so in Chrome and Edge (which can write straight
+ * to disk) even several gigabytes of video do not have to fit in memory.
+ */
+async function downloadAll(people: Person[], entries: Entry[], onProgress: (text: string) => void): Promise<string[]> {
+  const name = `Fragenkatalog-Rheinkalk-${new Date().toISOString().slice(0, 10)}.zip`
+  const picker = (window as unknown as { showSaveFilePicker?: SavePicker }).showSaveFilePicker
+  // Must be asked for while the click is still "fresh", before any download starts.
+  const target = picker
+    ? await picker({ suggestedName: name, types: [{ description: 'ZIP-Archiv', accept: { 'application/zip': ['.zip'] } }] })
+    : null
+
+  const used = new Set<string>()
+  const rows = entries.map((entry) => ({ entry, files: entry.media.map((m) => zipPath(entry, m, used)) }))
+  const total = rows.reduce((n, r) => n + r.files.length, 0)
+  const failed: string[] = []
+
+  async function* contents() {
+    yield { name: 'Antworten.csv', input: answersCsv(people) }
+    yield { name: 'Eintraege.csv', input: entriesCsv(rows) }
+    let done = 0
+    for (const { entry, files } of rows) {
+      for (let i = 0; i < files.length; i++) {
+        onProgress(`Datei ${++done} von ${total} …`)
+        try {
+          const res = await fetch(entry.media[i].url)
+          if (!res.ok) throw new Error(String(res.status))
+          yield { name: files[i], input: res, lastModified: new Date(entry.createdAt) }
+        } catch {
+          failed.push(files[i])
+        }
+      }
+    }
+    if (failed.length) yield { name: 'NICHT-GELADEN.txt', input: failed.join('\r\n') }
+  }
+
+  const zip = downloadZip(contents())
+  if (target) await zip.body!.pipeTo(await target.createWritable())
+  else saveBlob(await zip.blob(), name)
+  return failed
+}
+
+function ExportButtons({ people, entries }: { people: Person[]; entries: Entry[] }) {
+  const [status, setStatus] = useState('')
+  const [busy, setBusy] = useState(false)
+  const fileCount = entries.reduce((n, e) => n + e.media.length, 0)
+
+  const all = async () => {
+    setBusy(true)
+    setStatus('Wird vorbereitet …')
+    try {
+      const failed = await downloadAll(people, entries, setStatus)
+      setStatus(
+        failed.length
+          ? `Fertig, aber ${failed.length} Datei(en) konnten nicht geladen werden. Die Liste liegt im ZIP.`
+          : 'Fertig.',
+      )
+    } catch (err) {
+      // Closing the save dialog is not an error.
+      setStatus(err instanceof DOMException && err.name === 'AbortError' ? '' : 'Der Download ist fehlgeschlagen.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <div className="fk-row" style={{ marginTop: 22 }}>
+      <button type="button" className="fk-btn" disabled={busy} onClick={all}>
+        Alles herunterladen (ZIP{fileCount ? `, ${fileCount} Dateien` : ''})
+      </button>
+      <button type="button" className="fk-btn ghost" onClick={() => downloadCsv(people)}>
+        Nur Antworten als CSV
+      </button>
+      {status && (
+        <span className="fk-mono" aria-live="polite">
+          {status}
+        </span>
+      )}
+    </div>
+  )
 }
 
 function Overview({
@@ -1173,11 +1303,7 @@ function Overview({
           ? 'Noch hat niemand geantwortet.'
           : `Antworten von ${active.map((p) => `${p.name} (${countAnswered(p.answers)})`).join(', ')}.`}
       </p>
-      <div className="fk-row" style={{ marginTop: 22 }}>
-        <button type="button" className="fk-btn ghost" onClick={() => downloadCsv(people)}>
-          Als CSV für Excel herunterladen
-        </button>
-      </div>
+      <ExportButtons people={people} entries={entries} />
 
       {SECTIONS.map((s) => {
         const sectionEntries = entries.filter((e) => e.sectionId === s.id)
