@@ -194,6 +194,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .acc details[open] summary::after{transform:rotate(45deg)}
 .acc details p{padding:0 4px 24px 58px;color:var(--soft);max-width:70ch}
 
+/* photo gallery */
+document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{const i=$('boxImg');i.src=b.dataset.img;i.alt=b.querySelector('img').alt;box.classList.add('pic');box.classList.add('on');}));
+
 /* questions */
 #fragen{background:var(--ink2)}
 .qs{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin-top:44px}
@@ -265,6 +268,49 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 .pin i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--orange);animation:ping 2s ease-out infinite}
 .pin i:nth-child(2){animation-delay:1s}
 @media(prefers-reduced-motion:reduce){.sweep,.pin i,.fence .route{animation:none}.sweep{display:none}}
+
+.galh{margin-top:72px;font-size:26px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:28px}
+.shot{position:relative;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;aspect-ratio:1/1;display:block;text-align:left;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.shot img{width:100%;height:100%;object-fit:contain;padding:18px 18px 64px;display:block;transition:transform .5s var(--ease)}
+.shot span{position:absolute;left:0;right:0;bottom:0;padding:12px 16px;background:#0F1114;color:var(--text);display:flex;flex-direction:column;gap:2px}
+.shot small{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-l)}
+.shot b{font-family:var(--display);font-size:16px;font-weight:500}
+.shot:hover{transform:translateY(-4px);border-color:var(--teal-l);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.shot:hover img{transform:scale(1.06)}
+.shot:focus-visible{outline:3px solid var(--teal-l);outline-offset:2px}
+#box img{max-width:92vw;max-height:86vh;background:#fff;border-radius:12px;padding:24px;display:none}
+#box.pic img{display:block}#box.pic video{display:none}
+
+.links a{padding:8px 9px}
+.appdemo{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(280px,1fr);gap:0;margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#14171C}
+@media(max-width:900px){.appdemo{grid-template-columns:1fr}}
+.appmap{position:relative;min-height:520px}
+#map2{position:absolute;inset:0;background:#14171C;cursor:crosshair}
+#map2 .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9) saturate(.55)}
+#map2 .leaflet-control-attribution{background:rgba(15,17,20,.8);color:var(--muted)}#map2 .leaflet-control-attribution a{color:var(--teal-l)}
+#map2 .leaflet-bar a{background:#1B1F25;color:var(--text);border-color:var(--line)}
+.apphint{position:absolute;left:50%;top:16px;transform:translateX(-50%);z-index:500;background:rgba(15,17,20,.86);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;white-space:nowrap;pointer-events:none;transition:opacity .3s}
+.apppanel{padding:24px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:18px;background:#101317}
+.apppanel .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.aprow b{font-family:var(--display);font-size:22px}
+.apchips{display:flex;flex-wrap:wrap;gap:8px}
+#apList{margin:0;padding:0;list-style:none;max-height:170px;overflow:auto;display:flex;flex-direction:column;gap:6px}
+#apList li{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:#161A20}
+#apList li span{font-family:var(--mono);font-size:12.5px;color:var(--teal-l)}
+#apList li.empty{color:var(--muted);border-style:dashed;justify-content:flex-start}
+#apList li.cur{border-color:var(--orange);background:rgba(232,83,26,.12)}
+.apact{display:flex;flex-wrap:wrap;gap:8px}
+.apbtn{min-height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--teal);background:var(--teal);color:#fff;font-weight:600;font-size:15px}
+.apbtn.ghost{background:transparent;border-color:var(--line);color:var(--soft)}
+.apbtn:disabled{opacity:.4;cursor:not-allowed}
+.aplog{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;color:var(--soft);border-top:1px solid var(--line);padding-top:14px;min-height:38px}
+.aplog.al{color:var(--orange-l)}
+.wp{width:26px;height:26px;border-radius:50%;background:#0F1114;border:2px solid var(--teal-l);color:#fff;display:grid;place-items:center;font:600 12px var(--mono)}
+.rb{width:22px;height:22px;border-radius:6px;background:var(--orange);box-shadow:0 0 0 3px rgba(232,83,26,.3),0 0 18px rgba(232,83,26,.7)}
+.onprem{margin-top:20px;display:flex;gap:20px;align-items:center;border:1px solid var(--teal);border-radius:14px;padding:24px 28px;background:linear-gradient(90deg,rgba(0,144,144,.16),rgba(232,83,26,.06))}
+.onprem svg{width:40px;height:40px;flex:0 0 auto;fill:none;stroke:var(--teal-l);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.onprem p{color:var(--soft);margin-top:6px}
 </style>
 </head>
 <body>
@@ -274,7 +320,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
   <div class="wrap">
     <a class="brand" href="#hero"><div class="mark">m</div><span>megarobotics</span></a>
     <div class="links">
-      <a href="#aufgabe">Aufgabe</a><a href="#wir">Konzept</a><a href="#karte">Standort</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#videos">Videos</a><a href="#nutzlast">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
+      <a href="#aufgabe">Aufgabe</a><a href="#wir">Konzept</a><a href="#karte">Standort</a><a href="#app">App</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#videos">Videos</a><a href="#nutzlast">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
     </div>
     <a class="navcta" href="#fragen">Gesprächspunkte →</a>
   </div>
@@ -380,9 +426,46 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
   </div>
 </section>
 
+<section id="app">
+  <div class="wrap">
+    <p class="eyebrow rv">04 · Verwaltungsanwendung</p>
+    <h2 class="rv d1">Wege zeichnen, Aufträge planen, Alarme steuern</h2>
+    <p class="lead rv d2">So ist die Verwaltungsanwendung für Ihr Projekt vorgesehen: Sie legen Streifenwege direkt auf der Karte fest, weisen jedem Auftrag Aufgaben zu und planen wiederkehrende Aufträge. Probieren Sie es aus.</p>
+    <div class="appdemo rv d2">
+      <div class="appmap">
+        <div id="map2" role="application" aria-label="Demo: Streifenweg auf der Karte zeichnen"></div>
+        <div class="apphint" id="appHint">Auf die Karte klicken, um Wegpunkte zu setzen</div>
+      </div>
+      <div class="apppanel">
+        <div class="aprow"><span class="k">Auftrag</span><b id="apName">Streife 01</b></div>
+        <div class="apgrp"><span class="k">Aufgabe am nächsten Wegpunkt</span>
+          <div class="apchips" id="apTask"><button class="chip on" data-t="Kontrolle">Kontrolle</button><button class="chip" data-t="Foto">Foto</button><button class="chip" data-t="Video">Video</button></div></div>
+        <div class="apgrp"><span class="k">Zeitplan</span>
+          <div class="apchips" id="apPlan"><button class="chip on" data-p="Einmalig">Einmalig</button><button class="chip" data-p="Täglich 22:00">Täglich 22:00</button><button class="chip" data-p="Alle 2 Stunden">Alle 2 Stunden</button></div></div>
+        <div class="apgrp"><span class="k">Wegpunkte</span><ol id="apList"><li class="empty">Noch kein Weg gezeichnet</li></ol></div>
+        <div class="apact"><button id="apRun" class="apbtn" disabled>Auftrag simulieren</button><button id="apUndo" class="apbtn ghost" disabled>Letzten Punkt entfernen</button><button id="apClr" class="apbtn ghost" disabled>Zurücksetzen</button></div>
+        <div class="aplog" id="apLog" aria-live="polite">Bereit</div>
+      </div>
+    </div>
+    <p class="note rv">Konzeptdarstellung. Die Demo speichert und überträgt nichts; gezeichnete Wege bleiben in Ihrem Browser und verschwinden beim Neuladen.</p>
+    <div class="grid3" style="margin-top:56px">
+      <div class="pay rv d1"><svg viewBox="0 0 24 24"><path d="M4 18c4-10 6 4 10-6s4-6 6-6"/><circle cx="4" cy="18" r="1.6"/><circle cx="20" cy="6" r="1.6"/></svg><h3>Streifenwege zeichnen</h3><p>Wege werden direkt auf der Karte eingezeichnet und lassen sich jederzeit ändern</p></div>
+      <div class="pay rv d2"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><h3>Aufgaben je Auftrag</h3><p>Jeder Auftrag erhält seine Aufgaben: Kontrolle, Fotos, Videos</p></div>
+      <div class="pay rv d3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Geplante Aufträge</h3><p>Wiederkehrende Aufträge mit festen Aufgaben laufen nach Zeitplan</p></div>
+      <div class="pay rv d1"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10l4-2v8l-4-2"/><circle cx="10" cy="12" r="2"/></svg><h3>Automatische KI-Erkennung</h3><p>Für unterschiedliche Szenarien einstellbar</p></div>
+      <div class="pay rv d2"><svg viewBox="0 0 24 24"><path d="M4 4v16M20 4v16M4 8h6l2 3-2 3 3 2h7M4 16h5"/></svg><h3>Änderungen am Zaun</h3><p>Veränderungen an der Zaunanlage und unerwartete Ereignisse werden erkannt</p></div>
+      <div class="pay rv d3"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0112 0v6l2 2H4z"/><path d="M10 21h4"/></svg><h3>Alarmarten je Einsatz</h3><p>Unterschiedliche Alarmarten, abgestimmt auf den jeweiligen Einsatz</p></div>
+    </div>
+    <div class="onprem rv">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg>
+      <div><h3>Betrieb auf Ihren eigenen Servern</h3><p>Die gesamte Anwendung wird auf Ihren Servern betrieben und nach Ihren Sicherheitsstandards eingerichtet.</p></div>
+    </div>
+  </div>
+</section>
+
 <section id="modelle">
   <div class="wrap">
-    <p class="eyebrow rv">04 · Die M-Familie</p>
+    <p class="eyebrow rv">05 · Die M-Familie</p>
     <h2 class="rv d1">Drei Serien, drei Nutzlastklassen</h2>
     <p class="lead rv d2">Die Serie wählt man nach Nutzlast, den Antrieb nach Strecke. Wählen Sie ein Modell – oder blättern Sie mit den Pfeiltasten.</p>
     <div class="tabs rv d2" id="tabs"></div>
@@ -411,7 +494,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <section id="vergleich">
   <div class="wrap">
-    <p class="eyebrow rv">05 · Alle Modelle im Vergleich</p>
+    <p class="eyebrow rv">06 · Alle Modelle im Vergleich</p>
     <h2 class="rv d1">Sieben Plattformen auf einen Blick</h2>
     <div class="metric rv d2" id="metric">
       <button class="chip on" data-k="nutzlast">Dauernutzlast</button>
@@ -430,7 +513,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <section id="videos">
   <div class="wrap">
-    <p class="eyebrow rv">06 · In Bewegung</p>
+    <p class="eyebrow rv">07 · In Bewegung</p>
     <h2 class="rv d1">Räder für die Strecke, Beine für Stufen</h2>
     <div class="videos">
       <div class="vid rv d1" data-src="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.mp4">
@@ -450,7 +533,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <section id="nutzlast">
   <div class="wrap">
-    <p class="eyebrow rv">07 · Sensorik und Integration</p>
+    <p class="eyebrow rv">08 · Sensorik und Integration</p>
     <h2 class="rv d1">Der Roboter ist der Träger, die Erkennung ist die Aufgabe</h2>
     <div class="grid3">
       <div class="pay rv d1"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10l4-2v8l-4-2"/></svg><h3>Kamera mit KI-Erkennung</h3><p>Personen, Gegenstände und Zaunbeschädigungen; Kamera und Software projektbezogen ausgelegt</p></div>
@@ -460,13 +543,26 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
       <div class="pay rv d2"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="16" height="9" rx="2"/><path d="M21 11v3M10 10l-2 3h4l-2 3"/></svg><h3>Ladestation</h3><p>Automatisches Andocken und Laden als Option</p></div>
       <div class="pay rv d3"><svg viewBox="0 0 24 24"><path d="M5 19a10 10 0 0114 0M8 16a6 6 0 018 0"/><circle cx="12" cy="13" r="1.4"/><path d="M12 3v6"/></svg><h3>Funk und Positionierung</h3><p>4G und RTK für die Navigation im Freien, je nach Modell ab Werk oder als Option</p></div>
     </div>
+    <h3 class="galh rv">Konfigurationen und Einsatzfälle</h3>
+    <p class="lead rv" style="margin-top:12px">Dieselbe Plattformfamilie, unterschiedlich aufgebaut: Die Sensorik richtet sich nach der Aufgabe.</p>
+    <div class="gal">
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-08.webp" aria-label="Arealstreife, Laufplattform mit Mehrfach-Kamerakopf: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-08.webp" alt="Arealstreife: Laufplattform mit Mehrfach-Kamerakopf"><span><small>Arealstreife</small><b>Laufplattform mit Mehrfach-Kamerakopf</b></span></button>
+      <button class="shot rv d2" data-img="/ham_flug/aufbau-01.webp" aria-label="Streife auf langen Wegen, Rad-Bein-Plattform mit Kameraaufbau: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-01.webp" alt="Streife auf langen Wegen: Rad-Bein-Plattform mit Kameraaufbau"><span><small>Streife auf langen Wegen</small><b>Rad-Bein-Plattform mit Kameraaufbau</b></span></button>
+      <button class="shot rv d3" data-img="/ham_flug/aufbau-02.webp" aria-label="Streife und Sichtprüfung, Rad-Bein-Plattform mit Kamerakopf im Schutzbügel: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-02.webp" alt="Streife und Sichtprüfung: Rad-Bein-Plattform mit Kamerakopf im Schutzbügel"><span><small>Streife und Sichtprüfung</small><b>Rad-Bein-Plattform mit Kamerakopf im Schutzbügel</b></span></button>
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-05.webp" aria-label="Energieversorgung, Inspektion, Laufplattform mit mehreren Sensoren: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-05.webp" alt="Energieversorgung, Inspektion: Laufplattform mit mehreren Sensoren"><span><small>Energieversorgung, Inspektion</small><b>Laufplattform mit mehreren Sensoren</b></span></button>
+      <button class="shot rv d2" data-img="/ham_flug/aufbau-03.webp" aria-label="Anlageninspektion, Laufplattform mit Sensoraufbau im Schutzkorb: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-03.webp" alt="Anlageninspektion: Laufplattform mit Sensoraufbau im Schutzkorb"><span><small>Anlageninspektion</small><b>Laufplattform mit Sensoraufbau im Schutzkorb</b></span></button>
+      <button class="shot rv d3" data-img="/ham_flug/aufbau-04.webp" aria-label="Anlageninspektion, Flacher Aufbau mit Sensor und Rechnereinheit: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-04.webp" alt="Anlageninspektion: Flacher Aufbau mit Sensor und Rechnereinheit"><span><small>Anlageninspektion</small><b>Flacher Aufbau mit Sensor und Rechnereinheit</b></span></button>
+      <button class="shot rv d1" data-img="/ham_flug/aufbau-06.webp" aria-label="Einsatz mit Funkanbindung, Laufplattform mit Sensoraufbau und Antennen: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-06.webp" alt="Einsatz mit Funkanbindung: Laufplattform mit Sensoraufbau und Antennen"><span><small>Einsatz mit Funkanbindung</small><b>Laufplattform mit Sensoraufbau und Antennen</b></span></button>
+      <button class="shot rv d2" data-img="/ham_flug/aufbau-07.webp" aria-label="Inspektion mit Eingriff, Laufplattform mit Sensorkopf und Manipulatorarm: vergrößern"><img loading="lazy" src="/ham_flug/aufbau-07.webp" alt="Inspektion mit Eingriff: Laufplattform mit Sensorkopf und Manipulatorarm"><span><small>Inspektion mit Eingriff</small><b>Laufplattform mit Sensorkopf und Manipulatorarm</b></span></button>
+    </div>
+    <p class="note rv">Beispielkonfigurationen der Plattformfamilie, überwiegend Renderings. Sie zeigen nicht die Konfiguration für Ihr Projekt; Kamera und Sensorik legen wir nach der Standortbewertung aus. Klick vergrößert das Bild.</p>
     <p class="note rv">Sensorik ist Projektumfang, nicht Serienlieferumfang. Auswahl, Montage und Datenanbindung übernehmen wir; die Verfügbarkeit je Modell bestätigen wir mit dem Angebot.</p>
   </div>
 </section>
 
 <section id="grenzen">
   <div class="wrap">
-    <p class="eyebrow rv">08 · Grenzen und offene Punkte</p>
+    <p class="eyebrow rv">09 · Grenzen und offene Punkte</p>
     <h2 class="rv d1">Was wir vor einem Angebot gemeinsam klären</h2>
     <div class="acc rv d2">
       <details open><summary><span class="idx">01</span>Erkennungstechnik</summary><p>Kamera, Erkennungssoftware und Alarmweg legen wir nach der Standortbewertung fest. Aussagen zur Erkennungsleistung treffen wir erst nach einem Test auf Ihrer Strecke.</p></details>
@@ -482,7 +578,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <section id="fragen">
   <div class="wrap">
-    <p class="eyebrow rv">09 · Unsere Fragen an Sie</p>
+    <p class="eyebrow rv">10 · Unsere Fragen an Sie</p>
     <h2 class="rv d1">Neun Antworten, die das Konzept festlegen</h2>
     <p class="lead rv d2">Im Gespräch abhaken, was geklärt ist.</p>
     <div class="qs rv d2" id="qs">
@@ -501,7 +597,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <section id="schritte">
   <div class="wrap">
-    <p class="eyebrow rv">10 · Nächste Schritte</p>
+    <p class="eyebrow rv">11 · Nächste Schritte</p>
     <h2 class="rv d1">Vom Erstgespräch zum Test auf Ihrer Strecke</h2>
     <div class="tl rv" id="tl">
       <div class="ln"></div>
@@ -519,7 +615,7 @@ footer{padding:40px 0 56px;border-top:1px solid var(--line);font-family:var(--mo
 
 <footer><div class="wrap">MegaRobotics ist eine Marke der MEGAFORCE GmbH, Wacholderweg 8, 41564 Kaarst. Alle technischen Angaben sind Herstellerangaben unter Laborbedingungen und können sich ändern. Dieses Dokument ist kein verbindliches Angebot; Verfügbarkeit, Lieferumfang und Konditionen werden projektbezogen bestätigt.</div></footer>
 
-<div id="box"><button id="boxClose">SCHLIESSEN · ESC</button><video controls playsinline></video></div>
+<div id="box"><button id="boxClose">SCHLIESSEN · ESC</button><video controls playsinline></video><img id="boxImg" alt=""></div>
 
 <script>
 const IMGBASE='https://cdn.sanity.io/images/wudur8e8/production/';
@@ -595,7 +691,7 @@ document.querySelectorAll('.vid').forEach(v=>{const el=v.querySelector('video');
   v.addEventListener('mouseenter',()=>{el.play().catch(()=>{});});
   v.addEventListener('mouseleave',()=>{el.pause();});
   v.addEventListener('click',()=>{bv.src=v.dataset.src;box.classList.add('on');bv.play().catch(()=>{});});});
-function closeBox(){box.classList.remove('on');bv.pause();bv.removeAttribute('src');bv.load();}
+function closeBox(){box.classList.remove('on');box.classList.remove('pic');bv.pause();bv.removeAttribute('src');bv.load();}
 $('boxClose').onclick=closeBox;box.addEventListener('click',e=>{if(e.target===box)closeBox();});
 
 /* questions */
@@ -651,6 +747,37 @@ document.querySelectorAll('.step,.pay,.area,.vid').forEach(el=>{el.classList.add
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
     L.marker(HAM,{icon:L.divIcon({className:'',html:'<div class="pin"><i></i><i></i><b></b></div>',iconSize:[24,24],iconAnchor:[12,12]}),keyboard:false}).addTo(map);
     document.querySelectorAll('.mapui .chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mapui .chip').forEach(x=>x.classList.toggle('on',x===b));map.flyTo(HAM,+b.dataset.z,{duration:1.6});}));}
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){init();o.disconnect();}},{rootMargin:'300px'}).observe(el);
+  addEventListener('load',()=>{if(el.getBoundingClientRect().top<innerHeight+300)init();});})();
+
+/* admin application demo: draw a patrol route, assign tasks, simulate */
+(function(){const el=$('map2');if(!el)return;let map,line,rob,pts=[],task='Kontrolle',plan='Einmalig',timer=null,done=false;
+  const list=$('apList'),log=$('apLog'),run=$('apRun'),undo=$('apUndo'),clr=$('apClr'),hint=$('appHint');
+  function say(t,al){log.textContent=t;log.classList.toggle('al',!!al);}
+  function render(){list.innerHTML=pts.length?'':'<li class="empty">Noch kein Weg gezeichnet</li>';
+    pts.forEach((p,i)=>{const li=document.createElement('li');li.innerHTML='Wegpunkt '+(i+1)+'<span>'+p.task+'</span>';list.appendChild(li);});
+    line.setLatLngs(pts.map(p=>p.ll));run.disabled=pts.length<2;undo.disabled=clr.disabled=!pts.length;hint.style.opacity=pts.length?0:1;}
+  function stop(){if(timer){cancelAnimationFrame(timer);timer=null;}if(rob){map.removeLayer(rob);rob=null;}[...list.children].forEach(l=>l.classList.remove('cur'));}
+  function init(){if(done||!window.L)return;done=true;
+    map=L.map(el,{center:[53.6304,9.9882],zoom:14,scrollWheelZoom:false,doubleClickZoom:false});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+    line=L.polyline([],{color:'#35BDB8',weight:4,dashArray:'8 8'}).addTo(map);
+    map.on('click',e=>{stop();const n=pts.length+1;const mk=L.marker(e.latlng,{icon:L.divIcon({className:'',html:'<div class="wp">'+n+'</div>',iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false}).addTo(map);
+      pts.push({ll:e.latlng,task:task,mk:mk});render();say('Wegpunkt '+n+' gesetzt · Aufgabe: '+task);});
+    render();}
+  $('apTask').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;task=b.dataset.t;[...$('apTask').children].forEach(x=>x.classList.toggle('on',x===b));});
+  $('apPlan').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;plan=b.dataset.p;[...$('apPlan').children].forEach(x=>x.classList.toggle('on',x===b));say('Zeitplan: '+plan);});
+  undo.onclick=()=>{stop();const p=pts.pop();if(p)map.removeLayer(p.mk);render();say('Letzter Wegpunkt entfernt');};
+  clr.onclick=()=>{stop();pts.forEach(p=>map.removeLayer(p.mk));pts=[];render();say('Bereit');};
+  run.onclick=()=>{stop();if(pts.length<2)return;const seg=[];let tot=0;
+    for(let i=1;i<pts.length;i++){const d=map.distance(pts[i-1].ll,pts[i].ll);seg.push(d);tot+=d;}
+    rob=L.marker(pts[0].ll,{icon:L.divIcon({className:'',html:'<div class="rb"></div>',iconSize:[22,22],iconAnchor:[11,11]}),keyboard:false,zIndexOffset:1000}).addTo(map);
+    const dur=Math.min(16000,Math.max(5000,pts.length*1800)),t0=performance.now();let last=-1;
+    say('Auftrag „Streife 01“ gestartet · '+plan);
+    (function f(t){const p=Math.min((t-t0)/dur,1);let d=p*tot,i=0;while(i<seg.length-1&&d>seg[i]){d-=seg[i];i++;}
+      const a=pts[i].ll,b=pts[i+1].ll,k=seg[i]?Math.min(d/seg[i],1):1;rob.setLatLng([a.lat+(b.lat-a.lat)*k,a.lng+(b.lng-a.lng)*k]);
+      const reached=p>=1?pts.length-1:i;if(reached!==last){last=reached;[...list.children].forEach((l,j)=>l.classList.toggle('cur',j===reached));say('Wegpunkt '+(reached+1)+' · '+pts[reached].task+' ausgeführt',pts[reached].task!=='Kontrolle');}
+      if(p<1)timer=requestAnimationFrame(f);else{timer=null;setTimeout(()=>say('Auftrag abgeschlossen · '+pts.length+' Wegpunkte · Zeitplan: '+plan),900);}})(t0);};
   new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){init();o.disconnect();}},{rootMargin:'300px'}).observe(el);
   addEventListener('load',()=>{if(el.getBoundingClientRect().top<innerHeight+300)init();});})();
 </script>
