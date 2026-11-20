@@ -351,6 +351,20 @@
           "Greifer, Kraftsensoren, Steuerungen und Robotermodule"
         ]
       },
+      "securityFeature": {
+        "eyebrow": "Lösung · Sicherheit & Objektschutz",
+        "title": "Sicherheitsroboter für den Nachtrundgang",
+        "body": "Neun Lauf- und Rad-Bein-Roboter der M-Serie gehen Streife auf Industriegeländen, in Umspannwerken und am Perimeter. Sie übernehmen den Routinerundgang, Ihre Leute treffen die Entscheidungen. Wir wählen Modell und Sensorik, integrieren und betreuen sie in Deutschland, Österreich und der Schweiz.",
+        "points": [
+          "Wegpunkt-Streife mit Kontrollpunkten, Tag und Nacht",
+          "Treppen, Schotter und Gitterroste, wo Räder aufgeben",
+          "Wärmebild, Sprechfunktion und Live-Video für Ihre Leitstelle"
+        ],
+        "cta": "Sicherheitslösungen ansehen",
+        "finder": "Roboter finden",
+        "imageAlt": "Rad-Bein-Roboter M1 auf einer Streifenroute im Freien",
+        "caption": "M1 · Herstellerfoto"
+      },
       "industriesSection": {
         "eyebrow": "Branchen",
         "title": "Branchen, die wir unterstützen",

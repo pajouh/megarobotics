@@ -615,6 +615,77 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // Hero of the security solution page (/solutions/security). There is no
+  // product with this slug, so it never reaches a product page. Figures are
+  // range maxima from the M1 and M40/M100 catalogues 2026 (base configuration,
+  // unloaded). The M40 clip is real footage; the M100WS film is AI-generated.
+  security: {
+    name: 'M series',
+    specs: [
+      { value: 9, label: { en: 'Models in three series', de: 'Modelle in drei Serien' } },
+      { value: 7.5, unit: 'h', decimals: 1, label: { en: 'Runtime, unloaded (M100WS)', de: 'Laufzeit ohne Last (M100WS)' } },
+      { value: 35, unit: 'km', label: { en: 'Range, unloaded (M100WS)', de: 'Reichweite ohne Last (M100WS)' } },
+      { value: 100, unit: 'kg', label: { en: 'Payload (M100WS)', de: 'Nutzlast (M100WS)' } },
+      { value: 'IP66/67', label: { en: 'Protection', de: 'Schutzart' } },
+      { value: '−20…55', unit: '°C', label: { en: 'Operating range', de: 'Betriebstemperatur' } },
+    ],
+    slides: [
+      {
+        id: 'plant-patrol',
+        eyebrow: { en: 'Night patrol', de: 'Nachtstreife' },
+        tagline: {
+          en: 'The round still happens at 3 a.m., in the rain, past the fence and through the plant. It just doesn’t have to be a person every time.',
+          de: 'Der Rundgang findet auch um 3 Uhr nachts statt, im Regen, am Zaun entlang und durch die Anlage. Nur muss nicht jedes Mal ein Mensch gehen.',
+        },
+        video: '/megarobotics/security/plant-patrol.mp4',
+        shift: '-10%',
+        focus: '28% bottom',
+        note: {
+          en: 'M100WS · AI-generated visualisation. Payloads not included.',
+          de: 'M100WS · KI-generierte Visualisierung. Nutzlasten nicht im Lieferumfang.',
+        },
+        useCases: [
+          [{ en: 'Site patrol', de: 'Objektstreife' }, { en: 'industrial parks, yards, warehouses', de: 'Industrieparks, Höfe, Lager' }],
+          [{ en: 'Critical infrastructure', de: 'Kritische Infrastruktur' }, { en: 'substations, utilities, tunnels', de: 'Umspannwerke, Versorger, Tunnel' }],
+          [{ en: 'Perimeter', de: 'Perimeter' }, { en: 'fence lines and large outdoor sites', de: 'Zaunlinien und große Freiflächen' }],
+        ],
+      },
+      {
+        id: 'terrain-stairs',
+        eyebrow: { en: 'Where wheels give up', de: 'Wo Räder aufgeben' },
+        tagline: {
+          en: 'Legs take the stairs, the embankment and the gravel that stop wheeled robots. Wheels on the feet add speed on the flat.',
+          de: 'Beine nehmen Treppe, Böschung und Schotter, an denen Radroboter scheitern. Räder an den Füßen bringen Tempo auf ebener Strecke.',
+        },
+        video: '/megarobotics/security/terrain-stairs.mp4',
+        focus: 'center',
+        note: { en: 'M40 series · real footage', de: 'M40-Serie · Realaufnahmen' },
+        useCases: [
+          [{ en: 'Stairs and grating', de: 'Treppen und Gitterroste' }, { en: 'steps up to 20 cm', de: 'Stufen bis 20 cm' }],
+          [{ en: 'Rough ground', de: 'Unwegsames Gelände' }, { en: 'gravel, kerbs, 45° slopes', de: 'Schotter, Kanten, 45° Steigung' }],
+          [{ en: 'Tight spaces', de: 'Enge Räume' }, { en: 'service corridors and plant rooms', de: 'Versorgungsgänge und Technikräume' }],
+        ],
+      },
+      {
+        id: 'site-round',
+        eyebrow: { en: 'Patrol at speed', de: 'Streife mit Tempo' },
+        tagline: {
+          en: 'The M1 Pro rolls its route at up to 6 m/s, stops at each checkpoint and lets the control room talk to people it meets.',
+          de: 'Der M1 Pro fährt seine Route mit bis zu 6 m/s ab, hält an jedem Kontrollpunkt und lässt die Leitstelle mit Personen vor Ort sprechen.',
+        },
+        image: '/images/security/m1-patrol.jpg',
+        duration: 9,
+        focus: '55% center',
+        note: { en: 'M1 platform · manufacturer photo', de: 'M1-Plattform · Herstellerfoto' },
+        useCases: [
+          [{ en: 'Waypoint patrol', de: 'Wegpunkt-Streife' }, { en: 'navigation standard on M1 Pro', de: 'Navigation serienmäßig beim M1 Pro' }],
+          [{ en: 'Two-way voice', de: 'Sprechverbindung' }, { en: 'intercom and broadcast', de: 'Gegensprechen und Durchsagen' }],
+          [{ en: 'Around the clock', de: 'Rund um die Uhr' }, { en: 'hot-swap batteries, charging station', de: 'Wechselakkus, Ladestation' }],
+        ],
+      },
+    ],
+  },
+
   // MegaRobotics' own development, shown only on the unlisted /centaur page
   // (src/data/centaur.ts). There is no Sanity product with this slug, so the
   // hero never reaches a product or manufacturer page; keep it out of

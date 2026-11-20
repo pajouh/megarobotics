@@ -351,6 +351,20 @@
           "Grippers, force sensors, controllers and robot modules"
         ]
       },
+      "securityFeature": {
+        "eyebrow": "Solution · Security & site protection",
+        "title": "Security robots for the night round",
+        "body": "Nine quadruped and wheel-legged robots of the M series patrol industrial sites, substations and perimeters. They take the routine round, your people take the decisions. We pick the model and sensors, integrate them and service them in Germany, Austria and Switzerland.",
+        "points": [
+          "Waypoint patrol with checkpoints, day and night",
+          "Stairs, gravel and grating where wheels give up",
+          "Thermal, voice and live video to your control room"
+        ],
+        "cta": "Explore security solutions",
+        "finder": "Find your robot",
+        "imageAlt": "Wheel-legged M1 robot on a patrol route outdoors",
+        "caption": "M1 · manufacturer photo"
+      },
       "industriesSection": {
         "eyebrow": "Industries",
         "title": "Industries we support",

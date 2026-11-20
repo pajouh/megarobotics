@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { Fragment } from 'react'
+import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import {
   ArrowRight,
   Bot,
+  Check,
   Globe2,
   Mail,
   Hand,
@@ -14,6 +16,7 @@ import {
   Rocket,
   Scale,
   ScanSearch,
+  ShieldCheck,
   Sparkles,
   Truck,
   Zap,
@@ -256,6 +259,51 @@ export default async function HomePage({ params }: Props) {
               )
             })}
           </ul>
+        </div>
+      </section>
+
+      {/* SECTION 3b — Security solution (links to /solutions/security) */}
+      <section className="py-16 md:py-24 ind-section-dark">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-10 lg:gap-14 items-center">
+          <figure data-reveal className="relative overflow-hidden rounded-[var(--mr-radius)] border border-[color:var(--mr-line-on-dark)]">
+            <Image
+              src="/images/security/m1-patrol.jpg"
+              alt={t('securityFeature.imageAlt')}
+              width={1447}
+              height={766}
+              sizes="(min-width: 1024px) 40rem, 92vw"
+              className="h-auto w-full"
+            />
+            <figcaption className="absolute left-2 bottom-2 rounded-full bg-[color:var(--mr-dark)]/75 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white">
+              {t('securityFeature.caption')}
+            </figcaption>
+          </figure>
+          <div>
+            <SectionHeader
+              tone="dark"
+              eyebrow={t('securityFeature.eyebrow')}
+              title={t('securityFeature.title')}
+              subtitle={t('securityFeature.body')}
+            />
+            <ul data-reveal className="-mt-4 space-y-2.5">
+              {(t.raw('securityFeature.points') as string[]).map((p) => (
+                <li key={p} className="flex gap-3 text-sm md:text-base text-[color:var(--mr-ink-on-dark)]">
+                  <Check className="mt-0.5 h-5 w-5 flex-none text-[color:var(--mr-accent-ink)]" aria-hidden="true" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+            <div data-reveal className="mt-8 flex flex-wrap gap-3">
+              <Link href="/solutions/security" className="ind-btn-primary">
+                <ShieldCheck className="w-4 h-4" />
+                {t('securityFeature.cta')}
+              </Link>
+              <Link href="/solutions/security#finder" className="ind-btn-secondary">
+                {t('securityFeature.finder')}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

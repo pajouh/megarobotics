@@ -22,7 +22,8 @@ export const revalidate = 3600
 
 export async function generateStaticParams() {
   const slugs = await getAllSolutionSlugs()
-  return slugs.map(({ slug }) => ({ slug }))
+  // /solutions/security is its own static route (solutions/security/page.tsx).
+  return slugs.filter(({ slug }) => slug !== 'security').map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
