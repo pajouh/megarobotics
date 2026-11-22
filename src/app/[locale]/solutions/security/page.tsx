@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { ArrowRight, Mail, Plus } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import IpRatingText from '@/components/ip/IpRatingText'
 import type { Locale } from '@/i18n/config'
 import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
 import SectionHeader from '@/components/industrial/SectionHeader'
@@ -166,7 +167,7 @@ export default async function SecuritySolutionPage({ params }: Props) {
               >
                 <div className="font-mono text-sm font-semibold text-[color:var(--mr-orange-ink)]">{w.n}</div>
                 <h3 className="ind-h3 mt-3 text-[color:var(--mr-ink-on-dark)]">{w.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[color:var(--mr-steel-on-dark)]">{w.body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-[color:var(--mr-steel-on-dark)]"><IpRatingText text={w.body} /></p>
               </article>
             ))}
           </div>

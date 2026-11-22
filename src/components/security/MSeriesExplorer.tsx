@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { ArrowRight, ArrowUpDown, Check, RotateCcw } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import IpRatingText, { IpGuideLink } from '@/components/ip/IpRatingText'
 
 // Robot finder + sortable comparison for the nine M-series models on
 // /solutions/security. All copy and model data arrive already localized from
@@ -254,14 +255,16 @@ export default function MSeriesExplorer({ models, needKeys, labels, locale }: Pr
                     <td className="px-3 py-2.5 text-right tabular-nums">{nf.format(m.speed)} m/s</td>
                     <td className="px-3 py-2.5 text-right tabular-nums whitespace-nowrap">{m.enduranceLabel}</td>
                     <td className="px-3 py-2.5 text-right tabular-nums">{nf.format(m.obstacle)} cm</td>
-                    <td className="px-3 py-2.5">{m.ip}</td>
+                    <td className="px-3 py-2.5"><IpRatingText text={m.ip} /></td>
                   </tr>
                 )
               })}
             </tbody>
           </table>
         </div>
-        <p className="mt-4 max-w-4xl text-xs leading-relaxed text-[color:var(--mr-steel)]">{labels.foot}</p>
+        <p className="mt-4 max-w-4xl text-xs leading-relaxed text-[color:var(--mr-steel)]">
+          {labels.foot} <IpGuideLink />
+        </p>
       </div>
     </div>
   )

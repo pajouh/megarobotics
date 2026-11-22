@@ -1133,6 +1133,7 @@
     },
     "landingPages": {
       "label": "Kaufberatung",
+      "ipRatings": "IP-Schutzarten erklärt",
       "names": {
         "humanoid-robots": "Humanoide Roboter",
         "cobots": "Cobots",

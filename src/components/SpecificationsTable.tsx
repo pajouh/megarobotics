@@ -1,4 +1,5 @@
 import { ProductSpecification } from '@/types'
+import IpRatingText from '@/components/ip/IpRatingText'
 
 interface SpecificationsTableProps {
   specifications: ProductSpecification[]
@@ -19,7 +20,7 @@ export default function SpecificationsTable({ specifications }: SpecificationsTa
                 {spec.label}
               </td>
               <td className="px-4 py-2.5 text-sm font-medium text-[color:var(--mr-ink)]">
-                {spec.value}
+                <IpRatingText text={spec.value} />
               </td>
             </tr>
           ))}

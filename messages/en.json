@@ -1133,6 +1133,7 @@
     },
     "landingPages": {
       "label": "Buying advice",
+      "ipRatings": "IP ratings explained",
       "names": {
         "humanoid-robots": "Humanoid robots",
         "cobots": "Cobots",

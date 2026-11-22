@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ArrowRight, Check, ChevronDown, Mail } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
+import IpRatingText from '@/components/ip/IpRatingText'
 
 // Series tabs → model tabs → one detail panel per model, for
 // /solutions/inspection-security. Features, applications and the spec table
@@ -101,7 +102,7 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
         })}
       </div>
 
-      <p className="mt-6 max-w-3xl text-base leading-relaxed text-[color:var(--mr-ink-2)]">{active.lead}</p>
+      <p className="mt-6 max-w-3xl text-base leading-relaxed text-[color:var(--mr-ink-2)]"><IpRatingText text={active.lead} /></p>
 
       {/* Models of the series */}
       <div role="tablist" aria-label={labels.chooseModel} className="mt-6 flex flex-wrap gap-2">
@@ -162,7 +163,7 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
               {model.figs.map((f) => (
                 <div key={f.label} className="bg-[color:var(--mr-white)] p-3">
                   <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-[color:var(--mr-steel)]">{f.label}</dt>
-                  <dd className="mt-1 text-lg font-semibold text-[color:var(--mr-ink)]">{f.value}</dd>
+                  <dd className="mt-1 text-lg font-semibold text-[color:var(--mr-ink)]"><IpRatingText text={f.value} /></dd>
                 </div>
               ))}
             </dl>
@@ -228,7 +229,7 @@ export default function MSeriesModels({ series, models, labels, sectionId }: Pro
                 {model.specs.map((s) => (
                   <div key={s.label} className="flex gap-4 border-t border-[color:var(--mr-line)] py-2.5">
                     <dt className="w-2/5 flex-none font-mono text-[0.68rem] uppercase tracking-[0.08em] text-[color:var(--mr-steel)]">{s.label}</dt>
-                    <dd className="text-sm font-medium text-[color:var(--mr-ink)]">{s.value}</dd>
+                    <dd className="text-sm font-medium text-[color:var(--mr-ink)]"><IpRatingText text={s.value} /></dd>
                   </div>
                 ))}
               </dl>

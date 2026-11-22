@@ -48,10 +48,13 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
     partnersLabel: tPartners('marqueeLabel'),
     buyingAdvice: {
       label: tLanding('label'),
-      items: LANDING_PAGE_SLUGS.map((slug) => ({
-        name: tLanding(`names.${slug}`),
-        href: landingPagePath(slug),
-      })),
+      items: [
+        ...LANDING_PAGE_SLUGS.map((slug) => ({
+          name: tLanding(`names.${slug}`),
+          href: landingPagePath(slug),
+        })),
+        { name: tLanding('ipRatings'), href: '/ip-ratings' },
+      ],
     },
   }
 
