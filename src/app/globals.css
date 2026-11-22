@@ -997,3 +997,47 @@ body {
     transform: scale(0.94);
   }
 }
+
+/* ---------------------------------------------------------------
+   IP ratings page (/ip-ratings): digit flip, panel fade, hero scan
+   beam and pulse rings. All of it stops under reduced motion.
+   --------------------------------------------------------------- */
+@keyframes ipx-flip {
+  from { transform: translateY(45%) rotateX(-75deg); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes ipx-fade {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes ipx-scan {
+  from { transform: translateY(-120%); }
+  to { transform: translateY(520%); }
+}
+@keyframes ipx-ring {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.035); opacity: 0.35; }
+}
+@keyframes ipx-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 44px 44px, 44px 44px; }
+}
+@keyframes ipx-rain {
+  from { transform: translateY(-30%); }
+  to { transform: translateY(130%); }
+}
+.ipx-flip { animation: ipx-flip 0.5s var(--mr-ease) both; transform-origin: 50% 85%; }
+.ipx-fade { animation: ipx-fade 0.45s var(--mr-ease) both; }
+.ipx-scan { animation: ipx-scan 4.2s linear infinite; }
+.ipx-ring { animation: ipx-ring 4.8s ease-in-out infinite; }
+.ipx-grid {
+  background-image:
+    linear-gradient(rgba(47, 224, 208, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 224, 208, 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: ipx-drift 9s linear infinite;
+}
+.ipx-rain { animation: ipx-rain 2.8s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .ipx-flip, .ipx-fade, .ipx-scan, .ipx-ring, .ipx-grid, .ipx-rain { animation: none; }
+}
