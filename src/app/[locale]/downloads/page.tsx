@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import HubSchema from '@/components/HubSchema'
 import { getTranslations } from 'next-intl/server'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
@@ -25,6 +26,7 @@ export default async function DownloadsPage({ params }: Props) {
 
   return (
     <>
+      <HubSchema name={t('title')} description={t('meta.description')} path="/downloads" />
       <section className="border-b border-[color:var(--mr-line)] bg-[color:var(--mr-paper-2)]">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-24">
           <SectionHeader as="h1" eyebrow={t('eyebrow')} title={t('title')} subtitle={t('lede')} />

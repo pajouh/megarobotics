@@ -27,8 +27,8 @@ const content = {
       de: 'Inspektions- und Sicherheitsroboter: die M-Serie | MegaRobotics',
     },
     description: {
-      en: 'Nine quadruped and wheel-legged robots for inspection rounds and security patrols: all models, features, specifications, payloads and use cases. Supply and integration in DACH.',
-      de: 'Neun Lauf- und Rad-Bein-Roboter für Inspektionsrundgänge und Sicherheitsstreifen: alle Modelle, Funktionen, technische Daten, Nutzlasten und Einsatzfälle. Lieferung und Integration in DACH.',
+      en: 'Nine quadruped and wheel-legged robots for inspection rounds and security patrols: models, specifications, payloads and use cases. Supplied in DACH.',
+      de: 'Neun Lauf- und Rad-Bein-Roboter für Inspektion und Sicherheitsstreifen: Modelle, technische Daten, Nutzlasten und Einsatzfälle. Lieferung in DACH.',
     },
     serviceName: { en: 'Inspection and security robotics with the M series', de: 'Inspektions- und Sicherheitsrobotik mit der M-Serie' },
     crumbSolutions: { en: 'Solutions', de: 'Lösungen' },

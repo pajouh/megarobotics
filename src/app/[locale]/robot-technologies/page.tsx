@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import HubSchema from '@/components/HubSchema'
 import { getTranslations } from 'next-intl/server'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import TechnologyCard from '@/components/industrial/TechnologyCard'
@@ -42,6 +43,7 @@ export default async function RobotTechnologiesPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
+      <HubSchema name={t('title')} description={t('meta.description')} path="/robot-technologies" />
       <HeroIndustrial eyebrow={t('eyebrow')} title={t('title')} subtitle={t('intro')} />
 
       <section className="py-16 md:py-24 ind-section-light">

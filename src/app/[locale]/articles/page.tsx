@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import HubSchema from '@/components/HubSchema'
 import { Bot } from 'lucide-react'
 import { getArticles, getCategories, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
@@ -50,6 +51,7 @@ export default async function ArticlesPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-[color:var(--mr-paper)]">
+      <HubSchema name={copy.title} description={copy.intro} path="/articles" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10 max-w-3xl">

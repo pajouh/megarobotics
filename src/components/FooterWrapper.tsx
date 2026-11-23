@@ -32,6 +32,7 @@ export default async function FooterWrapper({ locale = 'en' }: FooterWrapperProp
       forManufacturers: t('links.forManufacturers'),
       projects: t('links.projects'),
       insights: t('links.insights'),
+      guides: t('links.guides'),
       company: t('links.company'),
       contact: t('links.contact'),
       products: t('links.products'),

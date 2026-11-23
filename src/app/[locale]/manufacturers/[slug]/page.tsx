@@ -47,7 +47,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metaTitle =
     manufacturer.seo?.metaTitle ||
     (locale === 'de' ? `${manufacturer.name}: Robotik-Produkte` : `${manufacturer.name}: Robotics Products`)
-  const brandedMetaTitle = brandedTitle(metaTitle)
+  // Our own brand page already leads with the name; a second "| MegaRobotics" adds nothing.
+  const brandedMetaTitle = /^megarobotics\b/i.test(metaTitle.trim()) ? { absolute: metaTitle.trim() } : brandedTitle(metaTitle)
   const metaDescription = clampDescription(
     manufacturer.seo?.metaDescription ||
       manufacturer.description ||

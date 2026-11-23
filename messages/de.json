@@ -911,7 +911,7 @@
     "forCustomers": {
       "meta": {
         "title": "Den richtigen Roboter für Ihre Anwendung finden | MegaRobotics",
-        "description": "Anwendungsdiskussion, technische Anforderungsprüfung, Plattformvergleich, Lieferanten-Koordination, Machbarkeitsplanung und Vermittlung von Integrationspartnern."
+        "description": "Anwendungsberatung, technische Anforderungsprüfung, Plattformvergleich, Lieferantenkoordination, Machbarkeitsplanung und Vermittlung von Integrationspartnern."
       },
       "title": "Den richtigen Roboter für Ihre Anwendung finden",
       "eyebrow": "Für Kunden",
@@ -1119,6 +1119,7 @@
         "forManufacturers": "Für Hersteller",
         "projects": "Projekte",
         "insights": "Insights",
+        "guides": "Kaufberater",
         "company": "Unternehmen",
         "contact": "Kontakt",
         "products": "Produktkatalog",
@@ -1203,7 +1204,7 @@
       "automationComponents": {
         "meta": {
           "title": "Automatisierungskomponenten für robotische Systeme | MegaRobotics",
-          "description": "SPS-Systeme, Aktoren, Antriebe, Sensoren, Vision, Greifer, Sicherheitssysteme und industrielle Kommunikationstechnologien für robotische Automatisierungsprojekte."
+          "description": "SPS-Systeme, Aktoren, Antriebe, Sensoren, Vision, Greifer, Sicherheitssysteme und industrielle Kommunikation für robotische Automatisierungsprojekte."
         },
         "title": "Automatisierungskomponenten für robotische Systeme",
         "eyebrow": "Komponenten",

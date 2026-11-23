@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import HubSchema from '@/components/HubSchema'
 import { GraduationCap, Globe, CalendarDays } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { getInstitutes, getInstituteCountries } from '@/lib/sanity'
@@ -37,6 +38,7 @@ export default async function InstitutesPage() {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <HubSchema name={t('title')} description={t('subtitle')} path="/institutes" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10">

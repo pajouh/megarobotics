@@ -16,8 +16,17 @@ const BRAND = 'MegaRobotics'
  * suffix this function adds is the only one the page can emit.
  */
 export function brandedTitle(title: string): { absolute: string } {
-  const original = title.trim()
-  let base = original
+  const base = stripBrand(title)
+
+  // A title that is nothing but the brand collapses to empty — keep it as-is.
+  if (!base) return { absolute: title.trim() }
+
+  return { absolute: `${base} | ${BRAND}` }
+}
+
+/** A title with every trailing " | MegaRobotics" segment removed. */
+function stripBrand(title: string): string {
+  let base = title.trim()
   let previous: string
 
   do {
@@ -26,10 +35,7 @@ export function brandedTitle(title: string): { absolute: string } {
     base = base.replace(/\s*[|–—-]\s*MegaRo\w*\s*(?:\.\.\.|…)?\s*$/i, '').trim()
   } while (base !== previous && base.length > 0)
 
-  // A title that is nothing but the brand collapses to empty — keep it as-is.
-  if (!base) return { absolute: original }
-
-  return { absolute: `${base} | ${BRAND}` }
+  return base
 }
 
 /**
@@ -73,6 +79,33 @@ export function fitBrandedTitle(...candidates: string[]): { absolute: string } {
     if (renderedLength(fitted.absolute) <= TITLE_MAX_LENGTH) return fitted
   }
   return brandedTitle(usable[usable.length - 1])
+}
+
+/** A title candidate: a string gets the brand suffix, `{ brand: false }` ships as written. */
+export type TitleCandidate = string | { text: string; brand: false } | null | undefined
+
+/**
+ * Like fitBrandedTitle, but a candidate may be offered without the brand suffix.
+ *
+ * Authored product titles such as "Agile Robots Agile ONE | Full-size industrial
+ * humanoid for Physical AI" are 69 characters, so the suffix pushed them over
+ * the limit and the page fell back to "Agile ONE | Agile Robots | MegaRobotics",
+ * which says nothing about what the product is. A title that describes the
+ * product is worth more than the brand suffix, which search engines show next
+ * to the result anyway.
+ */
+export function fitTitle(...candidates: TitleCandidate[]): { absolute: string } {
+  const usable = candidates
+    .map((c) => (typeof c === 'string' ? { text: c, brand: true } : c))
+    .filter((c): c is { text: string; brand: boolean } => Boolean(c && c.text && c.text.trim().length > 0))
+  if (usable.length === 0) return brandedTitle(BRAND)
+
+  const render = (c: { text: string; brand: boolean }) => (c.brand ? brandedTitle(c.text) : { absolute: stripBrand(c.text) || c.text.trim() })
+  for (const candidate of usable) {
+    const fitted = render(candidate)
+    if (renderedLength(fitted.absolute) <= TITLE_MAX_LENGTH) return fitted
+  }
+  return render(usable[usable.length - 1])
 }
 
 /**

@@ -30,7 +30,7 @@ import {
   generateProductSchema,
   generateAlternates,
 } from '@/lib/structured-data'
-import { DEFAULT_OG_IMAGE, clampDescription, fitBrandedTitle, ogBase } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, clampDescription, fitTitle, ogBase } from '@/lib/page-seo'
 import { isVerifiedRelationship, relStatusToKey } from '@/lib/relationship'
 
 interface Props {
@@ -51,12 +51,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // segments on top of a name that is already long. Offer the candidates
   // most-informative-first and take the first that fits, so an over-long CMS
   // value degrades to "<name> | MegaRobotics" rather than being trusted.
-  const brandedMetaTitle = fitBrandedTitle(
-    ...[
-      product.seo?.metaTitle,
-      `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`,
-      product.name,
-    ].filter((candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0)
+  //
+  // Before giving up on the authored title, try the name with its tagline, then
+  // both without the brand suffix: "what it is" matters more than the suffix.
+  const nameWithTagline = product.tagline ? `${product.name}: ${product.tagline}` : undefined
+  const brandedMetaTitle = fitTitle(
+    product.seo?.metaTitle,
+    nameWithTagline,
+    product.seo?.metaTitle ? { text: product.seo.metaTitle, brand: false } : undefined,
+    nameWithTagline ? { text: nameWithTagline, brand: false } : undefined,
+    `${product.name} | ${product.manufacturer?.name || 'MegaRobotics'}`,
+    product.name,
   )
   const metaDescription = clampDescription(product.seo?.metaDescription || product.description || product.tagline)
   // Social cards need the exact 1200x630 box, so width/height stay — but
@@ -334,9 +339,10 @@ export default async function ProductPage({ params }: Props) {
             {/* Key Features */}
             {product.features && product.features.length > 0 && (
               <div className="mb-6">
-                <h3 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-steel)] mb-3 pt-3 border-t border-[color:var(--mr-line)]">
+                {/* h2, not h3: it follows the h1 directly, and a skipped level breaks the outline. */}
+                <h2 className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-[color:var(--mr-steel)] mb-3 pt-3 border-t border-[color:var(--mr-line)]">
                   {t('features')}
-                </h3>
+                </h2>
                 <ul className="space-y-2">
                   {product.features.slice(0, 5).map((feature, index) => (
                     <li key={index} className="flex items-start gap-2">

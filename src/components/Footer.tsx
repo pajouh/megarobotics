@@ -51,6 +51,7 @@ export interface IndustrialFooterTranslations {
     forManufacturers: string
     projects: string
     insights: string
+    guides: string
     company: string
     contact: string
     products: string
@@ -93,6 +94,7 @@ export default function Footer({
     { name: t.links.industries, href: '/industries' },
     { name: t.links.robotTechnologies, href: '/robot-technologies' },
     { name: t.links.insights, href: '/articles' },
+    { name: t.links.guides, href: '/guides' },
   ]
 
   const catalogLinks = [

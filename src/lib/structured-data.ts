@@ -247,6 +247,26 @@ export function generateAlternates(
   }
 }
 
+/** A top-level hub page (Solutions, Manufacturers, …) tied to the site and organisation. */
+export function generateHubPageSchema(page: {
+  type: 'CollectionPage' | 'WebPage'
+  name: string
+  description?: string
+  path: string
+  locale: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': page.type,
+    name: page.name,
+    description: page.description,
+    url: localizedUrl(page.path, page.locale),
+    inLanguage: inLanguage(page.locale),
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+  }
+}
+
 /** A listing page (catalogue, product family) and the products it links to. */
 export function generateCollectionSchema(collection: {
   name: string

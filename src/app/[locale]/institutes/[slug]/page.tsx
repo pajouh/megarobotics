@@ -33,7 +33,7 @@ import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import InstituteCard from '@/components/InstituteCard'
 import ArticleBody from '@/components/ArticleBody'
-import { DEFAULT_OG_IMAGE, NOINDEX, clampDescription, fitBrandedTitle, ogBase } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, NOINDEX, clampDescription, fitTitle, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
@@ -53,10 +53,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // an older import), the name + parent institution pair, and long lab names.
   // Offer all three most-informative-first and take the first that fits, so a
   // too-long CMS value degrades to the bare lab name instead of being trusted.
-  const brandedMetaTitle = fitBrandedTitle(
-    ...[institute.seo?.metaTitle, `${institute.name} – ${institute.parentInstitution}`, institute.name].filter(
-      (candidate): candidate is string => typeof candidate === 'string' && candidate.trim().length > 0
-    )
+  // A long lab name that only misses the limit because of the brand suffix ships without it.
+  const brandedMetaTitle = fitTitle(
+    institute.seo?.metaTitle,
+    institute.parentInstitution ? `${institute.name} – ${institute.parentInstitution}` : undefined,
+    institute.name,
+    { text: institute.name, brand: false },
   )
   const metaDescription = clampDescription(
     institute.seo?.metaDescription ||

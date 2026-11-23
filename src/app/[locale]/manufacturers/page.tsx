@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import HubSchema from '@/components/HubSchema'
 import { Building2 } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { getManufacturers, type Locale } from '@/lib/sanity'
@@ -49,6 +50,7 @@ export default async function ManufacturersPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
+      <HubSchema name={t('title')} description={t('intro')} path="/manufacturers" />
       <PageHeader eyebrow={t('eyebrow')} title={t('title')} subtitle={t('intro')} />
 
       <PartnerShowcase locale={locale as Locale} />

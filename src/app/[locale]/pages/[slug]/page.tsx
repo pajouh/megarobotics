@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
+import HubSchema from '@/components/HubSchema'
 import { generateAlternates } from '@/lib/structured-data'
 import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
@@ -64,6 +65,7 @@ export default async function DynamicPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <HubSchema name={page.title} description={page.subtitle || undefined} path={`/pages/${slug}`} type="WebPage" />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-12">

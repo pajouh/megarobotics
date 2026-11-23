@@ -65,9 +65,9 @@ export async function GET() {
 The site is bilingual. English pages are served at ${baseUrl}/... and German pages
 at ${baseUrl}/de/... . Every page declares hreflang alternates for both languages.
 
-Pricing is not published: robots are quoted per project. Product pages state an
-availability status (in stock, available on request, sourcing on request, lead time
-required, information only, or discontinued) rather than a price.
+Pricing is not published: robots are quoted per project. Some product pages state an
+availability status (in stock, available on request, lead time required, information
+only, or discontinued) rather than a price.
 
 ## Key pages
 

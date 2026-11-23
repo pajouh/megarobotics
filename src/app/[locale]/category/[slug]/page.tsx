@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = clampDescription(
     category.description ||
       (locale === 'de'
-        ? `Alle Artikel und Einblicke von MegaRobotics zum Thema ${category.title}.`
-        : `All MegaRobotics articles and insights on ${category.title.toLowerCase()}.`),
+        ? `Robotik-${category.title}: alle Artikel von MegaRobotics in dieser Kategorie zu Robotern, Automatisierungstechnik und den Unternehmen dahinter.`
+        : `Robotics ${category.title.toLowerCase()} from MegaRobotics: every article in this category on robots, automation technology and the companies behind them.`),
   )
 
   return {
