@@ -231,36 +231,98 @@
   color: var(--mr-white);
 }
 
-/* Brand + category lane: one horizontally scrolling row of chips. */
+/* Brand and category lanes: one labelled row of chips each. A row that is
+   wider than the page scrolls sideways, with an arrow button and a fade on
+   each side that has more. */
+.lanes {
+  padding: 8px 0 10px;
+}
 .lane {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 12px 0;
-  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
-  mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent);
-}
-.lane::-webkit-scrollbar {
-  display: none;
+  align-items: flex-start;
+  gap: 12px;
 }
 .laneLabel {
   flex: none;
+  width: 5.75rem;
+  line-height: 46px; /* centres on the first chip row */
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.6rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--mr-steel);
-  margin-right: 2px;
 }
-.laneDivider {
-  flex: none;
-  width: 1px;
-  height: 24px;
-  margin: 0 6px;
-  background: var(--mr-line-strong);
-  opacity: 0.5;
+.laneBody {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.laneTrack {
+  /* Containing block for the chips' visually hidden brand names; without it
+     they escape this scroller and widen the whole page. */
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 5px 2px; /* room for the chips' hover lift and focus ring */
+  overscroll-behavior-x: contain;
+}
+.laneTrack::-webkit-scrollbar {
+  display: none;
+}
+.laneBody[data-more-right] .laneTrack {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 72px), transparent calc(100% - 18px));
+  mask-image: linear-gradient(90deg, #000 calc(100% - 72px), transparent calc(100% - 18px));
+}
+.laneBody[data-more-left] .laneTrack {
+  -webkit-mask-image: linear-gradient(90deg, transparent 18px, #000 72px);
+  mask-image: linear-gradient(90deg, transparent 18px, #000 72px);
+}
+.laneBody[data-more-left][data-more-right] .laneTrack {
+  -webkit-mask-image: linear-gradient(90deg, transparent 18px, #000 72px, #000 calc(100% - 72px), transparent calc(100% - 18px));
+  mask-image: linear-gradient(90deg, transparent 18px, #000 72px, #000 calc(100% - 72px), transparent calc(100% - 18px));
+}
+.laneNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--mr-line-strong);
+  border-radius: 999px;
+  background: var(--mr-white);
+  color: var(--mr-ink);
+  box-shadow: 0 6px 16px -8px rgba(13, 27, 32, 0.35);
+  transition:
+    border-color 0.25s,
+    color 0.25s;
+}
+.laneNav:hover {
+  border-color: var(--mr-accent);
+  color: var(--mr-accent-ink);
+}
+.laneNavPrev {
+  left: 0;
+}
+.laneNavNext {
+  right: 0;
+}
+@media (max-width: 639px) {
+  /* Logos read as brands and names as categories; drop the labels to keep
+     the full width for chips. The track keeps its accessible name. */
+  .laneLabel {
+    display: none;
+  }
+}
+@media (hover: none) {
+  /* Touch screens scroll the row by swiping. */
+  .laneNav {
+    display: none;
+  }
 }
 .chip {
   flex: none;

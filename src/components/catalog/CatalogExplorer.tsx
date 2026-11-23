@@ -4,7 +4,7 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } f
 import { flushSync } from 'react-dom'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { ArrowRight, ArrowUpRight, LayoutGrid, List, PackageSearch, Search, ShieldCheck, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, LayoutGrid, List, PackageSearch, Search, ShieldCheck, X } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import type { CatalogBrand, CatalogFamily, CatalogItem, CatalogQuery, FlagshipItem } from './types'
 import FlagshipRail from './FlagshipRail'
@@ -57,6 +57,70 @@ function BrandLogo({ brand, className }: { brand: CatalogBrand; className?: stri
 function Availability({ status, label }: { status?: string; label?: string }) {
   if (!status || !label) return null
   return <span className={`${s.avail} ${READY.has(status) ? s.availReady : ''}`}>{label}</span>
+}
+
+/**
+ * One labelled row of filter chips. A row that is wider than the page scrolls
+ * sideways and shows an arrow button and a fade on each side that has more.
+ */
+function ChipLane({ label, prev, next, children }: { label: string; prev: string; next: string; children: React.ReactNode }) {
+  const track = useRef<HTMLDivElement>(null)
+  const [more, setMore] = useState({ left: false, right: false })
+
+  const measure = useCallback(() => {
+    const el = track.current
+    if (!el) return
+    const max = el.scrollWidth - el.clientWidth
+    const left = el.scrollLeft > 4
+    const right = el.scrollLeft < max - 4
+    setMore((m) => (m.left === left && m.right === right ? m : { left, right }))
+  }, [])
+
+  useEffect(() => {
+    const el = track.current
+    if (!el) return
+    measure()
+    el.addEventListener('scroll', measure, { passive: true })
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => {
+      el.removeEventListener('scroll', measure)
+      ro.disconnect()
+    }
+  }, [measure])
+
+  // Chip counts change with the filters, which can change the row's width.
+  useEffect(measure)
+
+  const page = (dir: 1 | -1) => {
+    const el = track.current
+    if (!el) return
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollBy({ left: dir * Math.max(220, el.clientWidth * 0.7), behavior: reduce ? 'auto' : 'smooth' })
+  }
+
+  return (
+    <div className={s.lane}>
+      <span className={s.laneLabel} aria-hidden="true">
+        {label}
+      </span>
+      <div className={s.laneBody} data-more-left={more.left || undefined} data-more-right={more.right || undefined}>
+        <div ref={track} className={s.laneTrack} role="group" aria-label={label}>
+          {children}
+        </div>
+        {more.left && (
+          <button type="button" className={`${s.laneNav} ${s.laneNavPrev}`} onClick={() => page(-1)} aria-label={`${label}: ${prev}`}>
+            <ChevronLeft className="w-4 h-4" aria-hidden="true" />
+          </button>
+        )}
+        {more.right && (
+          <button type="button" className={`${s.laneNav} ${s.laneNavNext}`} onClick={() => page(1)} aria-label={`${label}: ${next}`}>
+            <ChevronRight className="w-4 h-4" aria-hidden="true" />
+          </button>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default function CatalogExplorer({ items, flagships, families, initial }: Props) {
@@ -337,8 +401,8 @@ export default function CatalogExplorer({ items, flagships, families, initial }:
             </div>
           </div>
 
-          <div className={s.lane}>
-            <span className={s.laneLabel}>{t('brands')}</span>
+          <div className={s.lanes}>
+          <ChipLane label={t('brands')} prev={t('prev')} next={t('next')}>
             {brands.map((b) => {
               const n = brandCounts.get(b.slug) || 0
               const on = query.brand === b.slug
@@ -358,8 +422,8 @@ export default function CatalogExplorer({ items, flagships, families, initial }:
                 </button>
               )
             })}
-            <span className={s.laneDivider} aria-hidden="true" />
-            <span className={s.laneLabel}>{t('categories')}</span>
+          </ChipLane>
+          <ChipLane label={t('categories')} prev={t('prev')} next={t('next')}>
             {visibleFamilies.map((f) => {
               const n = familyCounts.get(f.slug) || 0
               const on = query.family === f.slug
@@ -377,6 +441,7 @@ export default function CatalogExplorer({ items, flagships, families, initial }:
                 </button>
               )
             })}
+          </ChipLane>
           </div>
         </div>
       </div>
