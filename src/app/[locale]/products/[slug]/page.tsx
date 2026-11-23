@@ -278,11 +278,6 @@ export default async function ProductPage({ params }: Props) {
                   {availabilityLabel}
                 </span>
               )}
-              {product.inquiryOnly && (
-                <span className="inline-flex items-center px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] font-medium text-[color:var(--mr-accent-ink)] border border-[color:var(--mr-accent-ink)]/40">
-                  {tDetail('inquiryOnlyBadge')}
-                </span>
-              )}
             </div>
 
             {/* Manufacturer + optional verified-relationship badge */}
