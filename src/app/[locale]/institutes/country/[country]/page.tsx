@@ -9,6 +9,7 @@ import {
 } from '@/lib/sanity'
 import { generateAlternates } from '@/lib/structured-data'
 import InstituteCard from '@/components/InstituteCard'
+import HubSchema from '@/components/HubSchema'
 import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, ogBase } from '@/lib/page-seo'
 
 interface Props {
@@ -109,6 +110,12 @@ export default async function CountryInstitutesPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <HubSchema
+        name={t('countryTitle', { country })}
+        description={intro}
+        path={`/institutes/country/${countrySlug}`}
+        trail={[{ name: t('title'), href: '/institutes' }]}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <Link

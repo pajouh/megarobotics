@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import { getPageByType, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import { pageSeo } from '@/lib/page-seo'
+import HubSchema from '@/components/HubSchema'
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -61,6 +62,7 @@ export default async function PrivacyPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <HubSchema name={page.title} description={page.subtitle || undefined} path="/privacy" type="WebPage" />
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
           {page.title}

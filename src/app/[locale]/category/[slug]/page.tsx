@@ -5,11 +5,22 @@ import { ArrowLeft, Bot } from 'lucide-react'
 import { getCategory, getArticlesByCategory, getCategories, getAllCategorySlugs, type Locale } from '@/lib/sanity'
 import ArticleCard from '@/components/ArticleCard'
 import CategoryFilter from '@/components/CategoryFilter'
+import HubSchema from '@/components/HubSchema'
 import { generateAlternates } from '@/lib/structured-data'
 import { DEFAULT_OG_IMAGE, NOINDEX, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
+}
+
+/** The category's own description, or a sentence that says what the listing holds. */
+function categoryDescription(category: { title: string; description?: string | null }, locale: string): string | undefined {
+  return clampDescription(
+    category.description ||
+      (locale === 'de'
+        ? `Robotik-${category.title}: alle Artikel von MegaRobotics in dieser Kategorie zu Robotern, Automatisierungstechnik und den Unternehmen dahinter.`
+        : `Robotics ${category.title.toLowerCase()} from MegaRobotics: every article in this category on robots, automation technology and the companies behind them.`),
+  )
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -26,12 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = brandedTitle(locale === 'de' ? `Robotik: ${category.title}` : `Robotics ${category.title}`).absolute
-  const description = clampDescription(
-    category.description ||
-      (locale === 'de'
-        ? `Robotik-${category.title}: alle Artikel von MegaRobotics in dieser Kategorie zu Robotern, Automatisierungstechnik und den Unternehmen dahinter.`
-        : `Robotics ${category.title.toLowerCase()} from MegaRobotics: every article in this category on robots, automation technology and the companies behind them.`),
-  )
+  const description = categoryDescription(category, locale)
 
   return {
     title: { absolute: title },
@@ -76,6 +82,12 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
+      <HubSchema
+        name={category.title}
+        description={categoryDescription(category, locale)}
+        path={`/category/${slug}`}
+        trail={[{ name: locale === 'de' ? 'Artikel' : 'Articles', href: '/articles' }]}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <Link

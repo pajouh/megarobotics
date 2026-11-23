@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { pageSeo } from '@/lib/page-seo'
+import HubSchema from '@/components/HubSchema'
 import { AGB_SECTIONS, AGB_SUBTITLE, AGB_TITLE, AGB_VERSION } from '@/data/agb'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -24,6 +25,7 @@ export default async function AgbPage({ params }: Props) {
 
   return (
     <div className="min-h-screen">
+      <HubSchema name={AGB_TITLE} description={AGB_SUBTITLE} path="/agb" type="WebPage" />
       {/* Header */}
       <section className="ind-section-dark relative overflow-hidden">
         <div className="absolute inset-0 ind-grid-bg pointer-events-none" aria-hidden="true" />
