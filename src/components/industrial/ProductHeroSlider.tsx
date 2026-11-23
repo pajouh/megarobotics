@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { preload } from 'react-dom'
 import type { CSSProperties, KeyboardEvent, ReactNode } from 'react'
 import Image from 'next/image'
 import type { ResolvedHeroSpec, ResolvedProductHero } from '@/data/product-heroes'
@@ -14,6 +15,11 @@ import styles from './ProductHeroSlider.module.css'
  * (capped at maxSlideMs), or after `duration` for looping slides. Only the
  * current and next clip are fetched, and playback pauses while the hero is
  * off-screen or the tab is hidden. Content comes from src/data/product-heroes.ts.
+ *
+ * Loading order: the first slide's poster is the page's largest paint, so it
+ * is preloaded at high priority and nothing else in the hero is requested
+ * until the page has loaded. The clips (several MB each) and the other
+ * slides' posters start after that.
  *
  * On the homepage the slides belong to different products: each then carries
  * its own name and specs (slide.product), and slideActions[i] its own CTAs.
@@ -131,6 +137,11 @@ export default function ProductHeroSlider({
   const [cur, setCur] = useState(0)
   const [paused, setPaused] = useState(false)
   const [visible, setVisible] = useState(true)
+  // false until the page has finished loading: see "Loading order" above
+  const [ready, setReady] = useState(false)
+
+  const firstPoster = slides[0]?.video ? slides[0].poster : undefined
+  if (firstPoster) preload(firstPoster, { as: 'image', fetchPriority: 'high' })
 
   const rootRef = useRef<HTMLElement>(null)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
@@ -169,6 +180,16 @@ export default function ProductHeroSlider({
     [slides.length],
   )
 
+  useEffect(() => {
+    const start = () => setReady(true)
+    if (document.readyState === 'complete') {
+      const t = window.setTimeout(start, 0)
+      return () => window.clearTimeout(t)
+    }
+    window.addEventListener('load', start, { once: true })
+    return () => window.removeEventListener('load', start)
+  }, [])
+
   // pause when the hero scrolls out of view or the tab is hidden
   useEffect(() => {
     const el = rootRef.current
@@ -188,6 +209,7 @@ export default function ProductHeroSlider({
 
   // warm up the current and next clip; rewind the others after the cross-fade
   useEffect(() => {
+    if (!ready) return
     const next = (cur + 1) % slides.length
     for (const i of [cur, next]) {
       const v = videoRefs.current[i]
@@ -201,16 +223,16 @@ export default function ProductHeroSlider({
       })
     }, FADE_MS)
     return () => window.clearTimeout(t)
-  }, [cur, slides.length])
+  }, [cur, slides.length, ready])
 
   useEffect(() => {
     const v = videoRefs.current[cur]
-    if (!v) return
+    if (!v || !ready) return
     if (paused || !visible) v.pause()
     else v.play().catch(() => {
       /* autoplay blocked: the clock below still advances */
     })
-  }, [cur, paused, visible])
+  }, [cur, paused, visible, ready])
 
   // progress bar + auto-advance; follows the video, falls back to a slower clock if it stalls
   useEffect(() => {
@@ -280,8 +302,8 @@ export default function ProductHeroSlider({
                   muted
                   playsInline
                   loop={!!s.loop}
-                  preload={i === 0 ? 'auto' : 'none'}
-                  poster={s.poster}
+                  preload="none"
+                  poster={i === 0 || active || ready ? s.poster : undefined}
                   aria-hidden="true"
                 >
                   <source src={s.video} type="video/mp4" />

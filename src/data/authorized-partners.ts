@@ -36,7 +36,7 @@ export const authorizedPartners: AuthorizedPartner[] = [
   {
     slug: 'megarobotics',
     name: 'MegaRobotics',
-    logo: '/partners/megarobotics.png',
+    logo: '/partners/megarobotics.webp',
     logoWidth: 796,
     logoHeight: 134,
     country: { en: 'Germany', de: 'Deutschland' },
@@ -49,9 +49,9 @@ export const authorizedPartners: AuthorizedPartner[] = [
   {
     slug: 'limx-dynamics',
     name: 'LimX Dynamics',
-    logo: '/partners/limx-dynamics.png',
-    logoWidth: 1200,
-    logoHeight: 377,
+    logo: '/partners/limx-dynamics.webp',
+    logoWidth: 573,
+    logoHeight: 180,
     country: { en: 'China', de: 'China' },
     focus: {
       en: 'Humanoid and wheel-legged robots for embodied AI',
@@ -61,9 +61,9 @@ export const authorizedPartners: AuthorizedPartner[] = [
   {
     slug: 'magiclab',
     name: 'MagicLab',
-    logo: '/partners/magiclab.png',
-    logoWidth: 1000,
-    logoHeight: 219,
+    logo: '/partners/magiclab.webp',
+    logoWidth: 822,
+    logoHeight: 180,
     country: { en: 'China', de: 'China' },
     focus: {
       en: 'General-purpose humanoid and quadruped robots',
@@ -97,7 +97,7 @@ export const authorizedPartners: AuthorizedPartner[] = [
   {
     slug: 'atom-robot',
     name: 'Atom Robot',
-    logo: '/partners/atom-robot.png',
+    logo: '/partners/atom-robot.webp',
     logoWidth: 900,
     logoHeight: 171,
     country: { en: 'China', de: 'China' },
