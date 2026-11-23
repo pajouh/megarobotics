@@ -15,7 +15,6 @@ interface ProductFilterProps {
 const AVAILABILITY_OPTIONS = [
   'in_stock',
   'available_on_request',
-  'sourcing_on_request',
   'lead_time_required',
   'information_only',
   'discontinued',

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { visibleAvailability } from '@/lib/availability'
 import { ArrowRight } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
@@ -61,7 +62,7 @@ function toItem(p: Product, rank: number): CatalogItem {
       ? { slug: p.productFamily.slug.current, title: p.productFamily.title }
       : undefined,
     subcategory: p.subcategory,
-    availability: p.availabilityStatus,
+    availability: visibleAvailability(p.availabilityStatus),
     isNew: Boolean(p.isNew),
     featured: Boolean(p.featured),
     rank,
@@ -124,7 +125,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
     q: sp.q?.slice(0, 80) ?? '',
     brand: sp.brand ?? '',
     family: sp.family ?? '',
-    availability: sp.availability ?? '',
+    availability: visibleAvailability(sp.availability) ?? '',
     sort: pick(sp.sort, ['recommended', 'name', 'new'] as const, 'recommended'),
     view: pick(sp.view, ['grid', 'list'] as const, 'grid'),
   }

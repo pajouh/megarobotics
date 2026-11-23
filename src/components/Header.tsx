@@ -37,6 +37,7 @@ export default function Header({ siteName, logoUrl, logoWidth = 36, logoHeight =
     { name: tLegacy('products'), href: '/products' },
     { name: t('insights'), href: '/articles' },
     { name: t('downloads'), href: '/downloads' },
+    { name: t('ipRatings'), href: '/ip-ratings' },
     { name: t('company'), href: '/about', overflow: true },
   ]
 

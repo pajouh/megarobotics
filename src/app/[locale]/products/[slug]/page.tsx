@@ -17,6 +17,8 @@ import ProductCard from '@/components/ProductCard'
 import ProductGallery from '@/components/ProductGallery'
 import VideoEmbed from '@/components/VideoEmbed'
 import SpecificationsTable from '@/components/SpecificationsTable'
+import IpRatingNote from '@/components/ip/IpRatingNote'
+import { visibleAvailability } from '@/lib/availability'
 import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
 import Breadcrumbs from '@/components/Breadcrumbs'
@@ -170,8 +172,12 @@ export default async function ProductPage({ params }: Props) {
   ]
 
   // Resolve availability label: prefer new vocab, fall back to legacy
-  const availStatus: AvailabilityStatus | undefined = product.availabilityStatus
-  const availabilityLabel = availStatus
+  // "Sourcing on request" is never shown, and does not fall back to the legacy label.
+  const availHidden = product.availabilityStatus === 'sourcing_on_request'
+  const availStatus: AvailabilityStatus | undefined = visibleAvailability(product.availabilityStatus)
+  const availabilityLabel = availHidden
+    ? null
+    : availStatus
     ? tDetail(`availability.${availStatusToKey(availStatus)}`)
     : product.availability
       ? t(`availability.${legacyAvailToKey(product.availability)}`)
@@ -452,6 +458,13 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* What the product's IP rating means, when its data names one */}
+        <IpRatingNote
+          texts={[...(product.specifications ?? []).map((spec) => spec.value), ...(product.features ?? [])]}
+          productName={product.name}
+          locale={locale as Locale}
+        />
 
         {/* More from Manufacturer */}
         {sameManufacturerProducts.length > 0 && (
