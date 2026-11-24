@@ -112,7 +112,7 @@ nav .wrap{display:flex;align-items:center;height:60px;gap:18px}
 /* planner */
 .planner{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;margin-top:44px}
 @media(max-width:960px){.planner{grid-template-columns:1fr}}
-.map{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;position:relative}
+.map{align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;position:relative}
 .map svg{width:100%;height:auto;display:block;cursor:crosshair;border-radius:10px}
 .maptag{position:absolute;top:22px;right:24px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;background:rgba(15,17,20,.7);padding:4px 8px;border-radius:6px}
 .ctrl{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px}
@@ -251,7 +251,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
 #ovx{position:absolute;top:18px;right:22px;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--soft)}
 :focus-visible{outline:2px solid var(--teal-l);outline-offset:3px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#hero h1 i{transform:none}.js .rv{opacity:1;transform:none}}
-@media(max-width:600px){.maptag{position:static;display:inline-block;margin-bottom:8px}.wrap{padding:0 18px}section{padding:76px 0}body{font-size:17px}.chart{gap:6px}.names{gap:6px;font-size:11px}.col .v{font-size:10.5px}}
+@media(max-width:600px){#plist{columns:1!important}.maptag{position:static;display:inline-block;margin-bottom:8px}.wrap{padding:0 18px}section{padding:76px 0}body{font-size:17px}.chart{gap:6px}.names{gap:6px;font-size:11px}.col .v{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -332,11 +332,13 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
   <div class="wrap rv">
     <div class="eyebrow">04 · Rundgang planen</div>
     <h2>Einen Kontrollgang skizzieren – und sehen, was er für die Plattform bedeutet</h2>
-    <p class="lead">Messaufgabe wählen, dann auf das Schema klicken, um Prüfpunkte zu setzen. Der Rundgang startet und endet an der Ladestation. Die Rechnung zeigt Streckenlänge, Rundenzeit und wie viele Runden eine Akkuladung höchstens trägt.</p>
+    <p class="lead">Messaufgabe wählen, dann auf das Schema klicken, um Prüfpunkte zu setzen. Der Roboter fährt nur auf Laufwegen: um Kessel, Trockner, Förderer und Bunker herum, durch die Tore und zwischen den Ebenen über die Treppen. Der Rundgang startet und endet an der Ladestation.</p>
     <div class="planner">
       <div class="map">
         <span class="maptag">Schema · keine echte Anlage</span>
         <svg id="svg" viewBox="0 0 1000 540" role="img" aria-label="Anlagenschema mit Kesselhaus und Klärschlammtrocknungshalle"></svg>
+        <p class="note" id="pmsg" role="status" style="padding:0 6px"></p>
+        <ol class="plist" id="plist" style="margin-top:10px;columns:2;column-gap:28px;max-height:none"></ol>
       </div>
       <div class="ctrl">
         <div><div class="lbl">Messaufgabe am nächsten Punkt</div><div class="tasks" id="tasks"></div></div>
@@ -350,10 +352,10 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
         </div>
         <div><div class="lbl">Runden je Akkuladung (Obergrenze, ohne Last)</div><div class="runs" id="runs"></div></div>
         <div class="btns"><button class="btn" id="undo">Letzten Punkt entfernen</button><button class="btn" id="clr">Zurücksetzen</button><button class="btn pri" id="ex">Beispielrunde</button></div>
-        <ol class="plist" id="plist"></ol>
+        
       </div>
     </div>
-    <p class="foot">Angenommener Maßstab: Trocknungshalle ca. 75 m lang. Ein Ebenenwechsel im Kesselhaus zählt als 12 m Treppenweg. Runden je Akku = Laufzeit ohne Last ÷ Rundenzeit – mit Sensorik und Treppen liegt der Wert darunter. Die Demo speichert nichts. Mit Ihren Plänen ersetzen wir das Schema durch die echte Strecke.</p>
+    <p class="foot">Schraffierte Flächen sind Sperrbereiche; der Roboter hält rund 1,4 m Abstand. Ein Punkt in einem Sperrbereich wird auf den nächsten Laufweg davor gesetzt. Angenommener Maßstab: Trocknungshalle ca. 75 m lang; jeder Ebenenwechsel zählt zusätzlich 12 m Treppenweg. Runden je Akku = Laufzeit ohne Last ÷ Rundenzeit – mit Sensorik und Treppen liegt der Wert darunter. Die Demo speichert nichts. Mit Ihren Plänen ersetzen wir das Schema durch die echte Strecke.</p>
   </div>
 </section>
 
@@ -550,56 +552,100 @@ $('#metric').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b
 $('#chart').addEventListener('click',e=>{const b=e.target.closest('.col');if(b)openModel(b.dataset.m)});
 drawChart();
 
-/* planner */
+/* planner: routes follow walkways only — around equipment, through doors, stairs between levels */
 const T=[{k:'w',n:'Wärmebild',c:'#FF8A5B'},{k:'a',n:'Akustik',c:'#35BDB8'},{k:'g',n:'Gas',c:'#E3C14A'},{k:'z',n:'Anzeige',c:'#B6A3F0'}];
-let task='w',P=[];
-const S=.15, HOME={x:470,y:500}, KH={x:30,y:40,w:390,h:470};
+let task='w',P=[],msg='';
+const S=.15,HOME={x:470,y:505};
+const KH={x:30,y:40,w:390,h:470},HA={x:470,y:120,w:500,h:340};
+const L1=KH.y+KH.h/3,L2=KH.y+KH.h*2/3;
+const OBS=[{x:120,y:80,w:150,h:340,n:'Kessel'},{x:520,y:190,w:180,h:90,n:'Trockner 1'},{x:740,y:190,w:180,h:90,n:'Trockner 2'},{x:520,y:340,w:400,h:26,n:'Förderer'},{x:880,y:390,w:70,h:50,n:'Bunker'}];
+const STAIRS=[{x:340,y:L1-28,w:60,h:56},{x:340,y:L2-28,w:60,h:56},{x:45,y:L1-28,w:60,h:56},{x:45,y:L2-28,w:60,h:56}];
+const CL=9,WT=5,CS=5,GW=200,GH=108,B=new Uint8Array(GW*GH);
+const ctr=i=>i*CS+CS/2,cell=(x,y)=>Math.min(GH-1,Math.max(0,Math.floor(y/CS)))*GW+Math.min(GW-1,Math.max(0,Math.floor(x/CS)));
+const inR=(r,x,y)=>x>r.x&&x<r.x+r.w&&y>r.y&&y<r.y+r.h;
+const onEdge=(r,x,y,t)=>((Math.abs(x-r.x)<t||Math.abs(x-r.x-r.w)<t)&&y>r.y-t&&y<r.y+r.h+t)||((Math.abs(y-r.y)<t||Math.abs(y-r.y-r.h)<t)&&x>r.x-t&&x<r.x+r.w+t);
+for(let gy=0;gy<GH;gy++)for(let gx=0;gx<GW;gx++){const x=ctr(gx),y=ctr(gy);let b=0;
+ if(onEdge(KH,x,y,WT)||onEdge(HA,x,y,WT))b=1;
+ if(x>413&&x<427&&y>467&&y<503)b=0;            /* Tor Kesselhaus */
+ if(y>453&&y<467&&x>487&&x<543)b=0;            /* Tor Halle */
+ if(x>KH.x&&x<KH.x+KH.w&&(Math.abs(y-L1)<WT||Math.abs(y-L2)<WT)&&!STAIRS.some(s=>x>s.x+4&&x<s.x+s.w-4))b=1; /* Geschossdecken */
+ if(OBS.some(o=>x>o.x-CL&&x<o.x+o.w+CL&&y>o.y-CL&&y<o.y+o.h+CL))b=1;
+ B[gy*GW+gx]=b}
+const band=y=>y>L2?0:y>L1?1:2;
+const zone=p=>inR(KH,p.x,p.y)?'KH':inR(HA,p.x,p.y)?'HA':null;
+function snap(p){const ar=zone(p);let c=cell(p.x,p.y);if(!B[c])return{x:ctr(c%GW),y:ctr(c/GW|0),moved:false};
+ const seen=new Uint8Array(GW*GH),q=[c];seen[c]=1;
+ for(let h=0;h<q.length;h++){const i=q[h],x=i%GW,y=i/GW|0;
+  for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=GW||ny>=GH)continue;const j=ny*GW+nx;if(seen[j])continue;seen[j]=1;
+   const pt={x:ctr(nx),y:ctr(ny)};if(!B[j]&&zone(pt)===ar)return{...pt,moved:true};q.push(j)}}
+ return null}
+function astar(s,t){const N=GW*GH,g=new Float32Array(N).fill(1e9),from=new Int32Array(N).fill(-1),done=new Uint8Array(N),H=[];
+ const h=i=>{const dx=Math.abs(i%GW-t%GW),dy=Math.abs((i/GW|0)-(t/GW|0));return Math.max(dx,dy)+.414*Math.min(dx,dy)};
+ const push=(i,f)=>{H.push([f,i]);let k=H.length-1;while(k){const p=(k-1)>>1;if(H[p][0]<=H[k][0])break;[H[p],H[k]]=[H[k],H[p]];k=p}};
+ const pop=()=>{const top=H[0],last=H.pop();if(H.length){H[0]=last;let k=0;for(;;){const l=2*k+1,r=l+1;let m=k;if(l<H.length&&H[l][0]<H[m][0])m=l;if(r<H.length&&H[r][0]<H[m][0])m=r;if(m===k)break;[H[m],H[k]]=[H[k],H[m]];k=m}}return top};
+ g[s]=0;push(s,h(s));
+ while(H.length){const[,i]=pop();if(done[i])continue;done[i]=1;if(i===t)break;const x=i%GW,y=i/GW|0;
+  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=GW||ny>=GH)continue;const j=ny*GW+nx;if(B[j]||done[j])continue;
+   if(dx&&dy&&(B[y*GW+nx]||B[ny*GW+x]))continue;const ng=g[i]+(dx&&dy?1.414:1);if(ng<g[j]){g[j]=ng;from[j]=i;push(j,ng+h(j))}}}
+ if(s!==t&&from[t]<0)return null;const out=[];for(let i=t;i!==-1;i=from[i])out.push(i);return out.reverse()}
+function los(a,b){const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.ceil(d/2);for(let k=1;k<n;k++){const x=a.x+(b.x-a.x)*k/n,y=a.y+(b.y-a.y)*k/n;if(B[cell(x,y)])return false}return true}
+function route(a,b){const raw=astar(cell(a.x,a.y),cell(b.x,b.y));if(!raw)return null;
+ const pts=raw.map(i=>({x:ctr(i%GW),y:ctr(i/GW|0)}));pts[0]={x:a.x,y:a.y};pts[pts.length-1]={x:b.x,y:b.y};
+ let lc=0;for(let k=1;k<pts.length;k++){const p=pts[k-1],q=pts[k];if(inR(KH,p.x,p.y)&&inR(KH,q.x,q.y)&&band(p.y)!==band(q.y))lc++}
+ const sm=[pts[0]];let i=0;while(i<pts.length-1){let j=pts.length-1;while(j>i+1&&!los(pts[i],pts[j]))j--;sm.push(pts[j]);i=j}
+ let len=0;for(let k=1;k<sm.length;k++)len+=Math.hypot(sm[k].x-sm[k-1].x,sm[k].y-sm[k-1].y);
+ return{pts:sm,len:len*S,lc}}
 $('#tasks').innerHTML=T.map(t=>`<button class="task" data-t="${t.k}"><i style="background:${t.c}"></i>${t.n}</button>`).join('');
-function lvl(p){return p.x<KH.x+KH.w?(p.y>KH.y+KH.h*2/3?0:p.y>KH.y+KH.h/3?1:2):0}
+function stairSvg(s){let l='';for(let i=1;i<6;i++)l+=`<line x1="${s.x}" x2="${s.x+s.w}" y1="${s.y+i*s.h/6}" y2="${s.y+i*s.h/6}"/>`;
+ return `<rect x="${s.x}" y="${s.y}" width="${s.w}" height="${s.h}" rx="3" fill="#20262E" stroke="#5E6866"/><g stroke="#5E6866">${l}</g>`}
 function base(){
- let s=`<defs><pattern id="gr" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#232830" stroke-width="1"/></pattern></defs>
- <rect width="1000" height="540" fill="#14171C"/><rect width="1000" height="540" fill="url(#gr)"/>
- <rect x="${KH.x}" y="${KH.y}" width="${KH.w}" height="${KH.h}" rx="6" fill="#1D2229" stroke="#3A424C" stroke-width="2"/>
- <line x1="${KH.x}" x2="${KH.x+KH.w}" y1="${KH.y+KH.h/3}" y2="${KH.y+KH.h/3}" stroke="#3A424C" stroke-dasharray="6 6"/>
- <line x1="${KH.x}" x2="${KH.x+KH.w}" y1="${KH.y+KH.h*2/3}" y2="${KH.y+KH.h*2/3}" stroke="#3A424C" stroke-dasharray="6 6"/>
- <rect x="120" y="80" width="150" height="340" rx="10" fill="#262C34" stroke="#4A535E"/>
- <text x="195" y="255" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="15">Kessel</text>
- <g stroke="#4A535E" stroke-width="2">${[0,1,2,3,4,5].map(i=>`<line x1="${330+i*10}" y1="${200-i*14}" x2="${350+i*10}" y2="${200-i*14}"/>`).join('')}${[0,1,2,3,4,5].map(i=>`<line x1="${330+i*10}" y1="${357-i*14}" x2="${350+i*10}" y2="${357-i*14}"/>`).join('')}</g>
- <text x="40" y="66" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="20">Kesselhaus</text>
- ${['Ebene 2','Ebene 1','Ebene 0'].map((t,i)=>`<text x="40" y="${KH.y+KH.h/3*(i+1)-10}" fill="#6F7B79" font-family="IBM Plex Mono" font-size="12">${t}</text>`).join('')}
- <rect x="470" y="120" width="500" height="340" rx="6" fill="#1D2229" stroke="#3A424C" stroke-width="2"/>
- <text x="484" y="148" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="20">Klärschlammtrocknungshalle</text>
- ${[0,1].map(i=>`<rect x="${520+i*220}" y="190" width="180" height="90" rx="8" fill="#262C34" stroke="#4A535E"/><text x="${610+i*220}" y="240" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="14">Trockner ${i+1}</text>`).join('')}
- <rect x="520" y="340" width="400" height="26" rx="4" fill="#262C34" stroke="#4A535E"/><text x="720" y="358" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="12">Förderer</text>
- <rect x="880" y="390" width="70" height="50" rx="4" fill="#262C34" stroke="#4A535E"/><text x="915" y="420" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="12">Bunker</text>
- <rect x="${HOME.x-34}" y="${HOME.y-16}" width="68" height="32" rx="6" fill="#0d3b3b" stroke="#35BDB8"/><text x="${HOME.x}" y="${HOME.y+5}" text-anchor="middle" fill="#35BDB8" font-family="IBM Plex Mono" font-size="12">Laden</text>`;
- return s;
-}
+ return `<defs><pattern id="gr" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#1E232A" stroke-width="1"/></pattern>
+ <pattern id="hz" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#2A2528"/><line x1="0" y1="0" x2="0" y2="10" stroke="#5A3A2E" stroke-width="4"/></pattern></defs>
+ <rect width="1000" height="540" fill="#101317"/><rect width="1000" height="540" fill="url(#gr)"/>
+ <text x="540" y="522" fill="#56605F" font-family="IBM Plex Mono" font-size="12">Außenbereich / Verbindungsweg</text><rect x="790" y="508" width="20" height="16" rx="3" fill="url(#hz)" stroke="#8A4B33"/><text x="818" y="521" fill="#A3AEAC" font-family="IBM Plex Mono" font-size="12">Sperrbereich</text>
+ <rect x="${KH.x}" y="${KH.y}" width="${KH.w}" height="${KH.h}" fill="#1B2027" stroke="#56606B" stroke-width="6"/>
+ <rect x="${HA.x}" y="${HA.y}" width="${HA.w}" height="${HA.h}" fill="#1B2027" stroke="#56606B" stroke-width="6"/>
+ <rect x="415" y="467" width="12" height="36" fill="#1B2027"/><rect x="487" y="455" width="56" height="12" fill="#1B2027"/>
+ <text x="433" y="474" fill="#8FA09D" font-family="IBM Plex Mono" font-size="11">Tor</text><text x="515" y="450" text-anchor="middle" fill="#8FA09D" font-family="IBM Plex Mono" font-size="11">Tor</text>
+ ${[L1,L2].map(y=>`<line x1="${KH.x}" x2="${KH.x+KH.w}" y1="${y}" y2="${y}" stroke="#56606B" stroke-width="5"/>`).join('')}
+ ${STAIRS.map(stairSvg).join('')}
+ ${STAIRS.filter((s,i)=>i%2===0).map(s=>`<text x="${s.x+s.w/2}" y="${s.y-6}" text-anchor="middle" fill="#8FA09D" font-family="IBM Plex Mono" font-size="11">Treppe</text>`).join('')}
+ ${OBS.map(o=>`<rect x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" rx="5" fill="url(#hz)" stroke="#8A4B33"/><text x="${o.x+o.w/2}" y="${o.y+o.h/2+5}" text-anchor="middle" fill="#E7C9BC" font-family="IBM Plex Mono" font-size="13" paint-order="stroke" stroke="#2A2528" stroke-width="4">${o.n}</text>`).join('')}
+ <text x="40" y="64" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="19">Kesselhaus</text>
+ ${['Ebene 2','Ebene 1','Ebene 0'].map((t,i)=>`<text x="305" y="${KH.y+KH.h/3*i+20}" text-anchor="middle" fill="#6F7B79" font-family="IBM Plex Mono" font-size="12">${t}</text>`).join('')}
+ <text x="484" y="146" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="19">Klärschlammtrocknungshalle</text>
+ <rect x="${HOME.x-30}" y="${HOME.y-14}" width="60" height="28" rx="6" fill="#0d3b3b" stroke="#35BDB8"/><text x="${HOME.x}" y="${HOME.y+4}" text-anchor="middle" fill="#35BDB8" font-family="IBM Plex Mono" font-size="12">Laden</text>`}
 function plan(){
- const pts=[HOME,...P,HOME];let d=0,lc=0;
- for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];d+=Math.hypot(b.x-a.x,b.y-a.y)*S;const l=Math.abs(lvl(b)-lvl(a));lc+=l;d+=l*12}
+ const stops=[HOME,...P,HOME];let d=0,lc=0,line=[],bad=false;
+ for(let i=1;i<stops.length;i++){const r=route(stops[i-1],stops[i]);if(!r){bad=true;continue}d+=r.len;lc+=r.lc;line=line.concat(i>1?r.pts.slice(1):r.pts)}
+ d+=lc*12;
  const sp=+$('#spd').value,dw=+$('#dwl').value,t=d/sp+P.length*dw;
  let s=base();
- if(P.length){s+=`<polyline points="${pts.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="#35BDB8" stroke-width="3" stroke-dasharray="10 7" stroke-linejoin="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1s" repeatCount="indefinite"/></polyline>`;
-  s+=P.map((p,i)=>{const c=T.find(x=>x.k===p.t).c;return `<circle cx="${p.x}" cy="${p.y}" r="14" fill="${c}" stroke="#0F1114" stroke-width="3"/><text x="${p.x}" y="${p.y+4.5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#0F1114">${i+1}</text>`}).join('')}
+ if(P.length&&line.length){s+=`<polyline points="${line.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="#35BDB8" stroke-width="3" stroke-dasharray="10 7" stroke-linejoin="round" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1s" repeatCount="indefinite"/></polyline>`;
+  s+=P.map((p,i)=>{const c=T.find(x=>x.k===p.t).c;return `<circle cx="${p.x}" cy="${p.y}" r="13" fill="${c}" stroke="#0F1114" stroke-width="3"/><text x="${p.x}" y="${p.y+4.5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#0F1114">${i+1}</text>`}).join('')}
  $('#svg').innerHTML=s;
  $('#kLen').textContent=P.length?de(d)+' m':'–';
  $('#kTime').textContent=P.length?de(t/60,1)+' min':'–';
  $('#kPts').textContent=P.length;$('#kLvl').textContent=P.length?lc:'–';
  const runs=M.map(m=>({id:m.id,r:P.length?Math.floor(m.laufzeit*3600/t):0})),top=Math.max(1,...runs.map(r=>r.r));
  $('#runs').innerHTML=runs.map(r=>`<div class="run"><span>${r.id}</span><div class="t"><div style="width:${r.r/top*100}%"></div></div><span>${P.length?r.r+'×':'–'}</span></div>`).join('');
- $('#plist').innerHTML=P.map(p=>`<li>${T.find(x=>x.k===p.t).n} · ${p.x<KH.x+KH.w?'Kesselhaus, Ebene '+lvl(p):'Trocknungshalle'}</li>`).join('');
+ $('#plist').innerHTML=P.map(p=>`<li>${T.find(x=>x.k===p.t).n} · ${zone(p)==='KH'?'Kesselhaus, Ebene '+band(p.y):'Trocknungshalle'}</li>`).join('');
+ $('#pmsg').textContent=bad?'Ein Punkt ist über die Wege nicht erreichbar.':msg;
  document.querySelectorAll('.task').forEach(b=>b.classList.toggle('on',b.dataset.t===task));
  $('#spdo').textContent=de(sp,1)+' m/s';$('#dwlo').textContent=dw+' s';
 }
 $('#svg').addEventListener('click',e=>{const pt=$('#svg').createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform($('#svg').getScreenCTM().inverse());
- const inKH=p.x>KH.x&&p.x<KH.x+KH.w&&p.y>KH.y&&p.y<KH.y+KH.h,inTH=p.x>470&&p.x<970&&p.y>120&&p.y<460;if(!inKH&&!inTH)return;P.push({x:Math.round(p.x),y:Math.round(p.y),t:task});plan()});
+ if(!zone(p)){msg='Prüfpunkte bitte innerhalb von Kesselhaus oder Trocknungshalle setzen.';plan();return}
+ const q=snap(p);if(!q){msg='Hier ist kein begehbarer Platz.';plan();return}
+ msg=q.moved?'Punkt liegt in einem Sperrbereich – vor das Bauteil auf den Laufweg gesetzt.':'';
+ P.push({x:q.x,y:q.y,t:task});plan()});
 $('#tasks').addEventListener('click',e=>{const b=e.target.closest('.task');if(b){task=b.dataset.t;plan()}});
 $('#spd').addEventListener('input',plan);$('#dwl').addEventListener('input',plan);
-$('#undo').addEventListener('click',()=>{P.pop();plan()});$('#clr').addEventListener('click',()=>{P=[];plan()});
-const EX=[{x:560,y:420,t:'g'},{x:740,y:300,t:'w'},{x:900,y:300,t:'a'},{x:930,y:440,t:'g'},{x:380,y:470,t:'z'},{x:380,y:300,t:'w'},{x:380,y:120,t:'a'},{x:80,y:110,t:'w'},{x:80,y:270,t:'z'},{x:80,y:470,t:'g'}];
-$('#ex').addEventListener('click',()=>{P=EX.map(p=>({...p}));plan()});
-P=EX.map(p=>({...p}));plan();
+$('#undo').addEventListener('click',()=>{P.pop();msg='';plan()});$('#clr').addEventListener('click',()=>{P=[];msg='';plan()});
+const EX=[{x:600,y:410,t:'g'},{x:610,y:310,t:'w'},{x:830,y:310,t:'a'},{x:860,y:410,t:'g'},{x:380,y:470,t:'z'},{x:380,y:280,t:'w'},{x:380,y:110,t:'a'},{x:70,y:110,t:'w'},{x:70,y:270,t:'z'},{x:70,y:470,t:'g'}];
+const loadEx=()=>{P=EX.map(p=>{const q=snap(p);return{x:q.x,y:q.y,t:p.t}});msg=''};
+$('#ex').addEventListener('click',()=>{loadEx();plan()});
+loadEx();plan();
 
 /* sensors + gallery */
 const SE=[['Wärmebild und PTZ-Kamera','Hotspots an Isolierung, Lagern und Antrieben, Sichtprüfung mit Zoom','<circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>'],
