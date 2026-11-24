@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
-import { ArrowRight, ArrowUpRight, Award, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Award, PackageCheck, ShieldCheck } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { authorizedPartners } from '@/data/authorized-partners'
 import { getActiveProductCounts, type Locale } from '@/lib/sanity'
@@ -19,7 +19,13 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
     () => ({}) as Record<string, number>,
   )
   const lang = locale === 'de' ? 'de' : 'en'
-  const ctaWide = authorizedPartners.length % 4 === 0
+  // The enquiry card fills whatever the brand cards leave free in the last row:
+  // of two columns on tablets, of four on desktop.
+  const count = authorizedPartners.length
+  const ctaWide = count % 4 === 0
+  const ctaSpan = `${count % 2 === 0 ? 'sm:col-span-2' : 'sm:col-span-1'} ${
+    ['lg:col-span-4', 'lg:col-span-3', 'lg:col-span-2', 'lg:col-span-1'][count % 4]
+  }`
 
   return (
     <section className="relative overflow-hidden py-20 md:py-28 bg-[color:var(--mr-white)]">
@@ -49,7 +55,7 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
           {authorizedPartners.map((p, i) => {
             const n = counts[p.slug] ?? 0
             const ratio = p.logoWidth / p.logoHeight
-            const logoH = ratio < 2 ? 56 : ratio < 3.5 ? 40 : 30
+            const logoH = ratio < 2 ? 56 : ratio < 3.5 ? 40 : ratio < 8 ? 30 : 22
             return (
               <li key={p.slug} data-reveal style={{ ['--d' as string]: `${i * 70}ms` }}>
                 <Link
@@ -70,10 +76,12 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
                     <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-white/90 border border-[color:var(--mr-accent-line)] px-2 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
                       {p.ownBrand ? (
                         <Award className="w-3 h-3" aria-hidden="true" />
+                      ) : p.sourced ? (
+                        <PackageCheck className="w-3 h-3" aria-hidden="true" />
                       ) : (
                         <ShieldCheck className="w-3 h-3" aria-hidden="true" />
                       )}
-                      {p.ownBrand ? t('ownBrandBadge') : t('badge')}
+                      {p.ownBrand ? t('ownBrandBadge') : p.sourced ? t('sourcedBadge') : t('badge')}
                     </span>
                   </div>
                   <div className="flex flex-col flex-1 p-5">
@@ -97,12 +105,11 @@ export default async function PartnerShowcase({ locale }: PartnerShowcaseProps) 
             )
           })}
 
-          {/* When the brand cards fill whole rows, the enquiry card would sit alone on
-              the last one, so it stretches across that row as a banner instead. */}
+          {/* Alone on a row it would look lost, so there it runs across as a banner. */}
           <li
             data-reveal
-            style={{ ['--d' as string]: `${authorizedPartners.length * 70}ms` }}
-            className={ctaWide ? 'sm:col-span-2 lg:col-span-4' : undefined}
+            style={{ ['--d' as string]: `${count * 70}ms` }}
+            className={ctaSpan}
           >
             <Link
               href="/contact"

@@ -44,7 +44,7 @@ export default async function ManufacturersPage({ params }: Props) {
   const tDisclaimers = await getTranslations('disclaimers')
   const t = await getTranslations('industrial.partners.directory')
 
-  // Authorized partners get their own showcase above; the grid lists the rest.
+  // Brands in the partner block get their own showcase above; the grid lists the rest.
   const partnerSlugs = new Set(authorizedPartners.map((p) => p.slug))
   const others = manufacturers.filter((m) => !partnerSlugs.has(m.slug.current))
 

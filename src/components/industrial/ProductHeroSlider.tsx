@@ -292,6 +292,7 @@ export default function ProductHeroSlider({
           >
             <div
               className={styles.media}
+              data-shifted={s.shift ? '' : undefined}
               style={{ '--shift': s.shift ?? '0%', '--crop': `${s.cropBottom ?? 0}%`, '--focus': s.focus, '--zoom-from': s.zoomFrom } as CSSProperties}
             >
               {s.video ? (

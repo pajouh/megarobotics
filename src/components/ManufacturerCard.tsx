@@ -24,7 +24,7 @@ export default function ManufacturerCard({ manufacturer }: ManufacturerCardProps
         }`}
       >
         <div className="flex items-start justify-between gap-3 mb-5">
-          {partner ? (
+          {partner && !partner.sourced ? (
             <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--mr-accent-soft)] border border-[color:var(--mr-accent-line)] px-2 py-0.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-[color:var(--mr-accent-ink)]">
               <ShieldCheck className="w-3 h-3" aria-hidden="true" />
               {t('badge')}

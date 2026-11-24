@@ -576,6 +576,43 @@ const HEROES: Record<string, ProductHero> = {
     ],
   },
 
+  // Clip is SEER's own computer animation "06_Smart Sorting.mp4" (companies/Seer,
+  // 12 s, 1080p, "Intelligent Sorting" on seer-robotics.ai); copyright stays with
+  // SEER, so the note marks it as an animation. The head reads "X1". Specs are
+  // SEER's claims for the X1-PRO, seer-robotics.ai/media/287 (2025-10-29), same in
+  // the Chinese version; applications from media/291 (2025-12-04). SEER's European
+  // catalogue 2026 does not list the robot, so no CE or availability claims here.
+  'seer-x1-pro': {
+    name: 'SEER X1-PRO',
+    specs: [
+      { value: 40, label: { en: 'Degrees of freedom, max.', de: 'Freiheitsgrade, max.' } },
+      { value: 7, label: { en: 'Axes per arm', de: 'Achsen pro Arm' } },
+      { value: 6, unit: 'kg', label: { en: 'Load per arm', de: 'Last pro Arm' } },
+      { value: 16, unit: 'kg', label: { en: 'Both arms, short-term', de: 'Beide Arme, kurzzeitig' } },
+      { value: 700, unit: 'mm', label: { en: 'Lifting height', de: 'Hubhöhe' } },
+      { value: 45, unit: '°', label: { en: 'Bending angle, max.', de: 'Beugewinkel, max.' } },
+    ],
+    slides: [
+      {
+        id: 'smart-sorting',
+        eyebrow: { en: 'Wheeled humanoid', de: 'Humanoider auf Rädern' },
+        tagline: {
+          en: 'Picks the item from the shelf and brings it to the counter. Built to take its tasks in plain language.',
+          de: 'Nimmt die Ware aus dem Regal und bringt sie an die Theke. Ausgelegt auf Aufgaben in natürlicher Sprache.',
+        },
+        video: '/seer/hero/x1-pro/smart-sorting.mp4',
+        focus: '64% top',
+        shift: '-20%',
+        note: { en: 'Computer animation by SEER Robotics', de: 'Computeranimation von SEER Robotics' },
+        useCases: [
+          [{ en: 'Store orders', de: 'Bestellungen im Laden' }, { en: 'picking from the shelf', de: 'Entnahme aus dem Regal' }],
+          [{ en: 'Sorting', de: 'Sortieren' }, { en: 'tabletop pick and place', de: 'Pick-and-place am Tisch' }],
+          [{ en: 'Production', de: 'Produktion' }, { en: 'loading and unloading', de: 'Be- und Entladen' }],
+        ],
+      },
+    ],
+  },
+
   // Specs and wording from the MegaRobotics M100WS catalogue 2026 (values as of
   // 11/2026, base configuration). Design values only: the 200 kg short-term peak
   // stays off the hero. The clip is an AI-generated film, not footage of a real
@@ -958,6 +995,7 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'magicbot-z1-standard', slide: 'whole-body-control' },
   { slug: 'm100ws', slide: 'plant-patrol' },
   { slug: 'orionstar-luckibot-pro-autodoor', slide: 'falcon-wing-door' },
+  { slug: 'seer-x1-pro', slide: 'smart-sorting' },
 ]
 
 /**

@@ -45,7 +45,7 @@ function toBrand(m: Product['manufacturer']): CatalogBrand | undefined {
     logo: partner?.logo ?? (m.logo ? urlFor(m.logo).height(64).url() : undefined),
     logoWidth: partner?.logoWidth,
     logoHeight: partner?.logoHeight,
-    authorized: Boolean(partner),
+    authorized: Boolean(partner && !partner.sourced),
   }
 }
 

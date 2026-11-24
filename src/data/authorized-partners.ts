@@ -1,6 +1,7 @@
 /**
- * Brands MegaRobotics is an authorized reseller for, in the order the
- * business wants them shown. Logos live in /public/partners (official files
+ * Brands shown in the partner block, in the order the business wants them:
+ * those MegaRobotics is an authorized reseller for, our own brand, and brands
+ * we supply without a reseller agreement (`sourced`). Logos live in /public/partners (official files
  * from each brand's site, trimmed); `slug` is the Sanity manufacturer slug.
  */
 export interface AuthorizedPartner {
@@ -18,6 +19,14 @@ export interface AuthorizedPartner {
    * "authorized brands" count and the "Authorized" product badge.
    */
   ownBrand?: boolean
+  /**
+   * A brand we supply without a signed reseller agreement. Its card carries a
+   * neutral "Available from us" badge, and like our own brand it stays out of
+   * the marquee, the "authorized brands" count and the "Authorized" badges.
+   * Remove the flag once the agreement is signed, and raise the brand count in
+   * messages/*.json (industrial.partners).
+   */
+  sourced?: boolean
 }
 
 export const authorizedPartners: AuthorizedPartner[] = [
@@ -118,7 +127,33 @@ export const authorizedPartners: AuthorizedPartner[] = [
       de: 'Kraftsensitive Roboterarme für Forschung und KI',
     },
   },
+  {
+    slug: 'seer-robotics',
+    name: 'SEER Robotics',
+    logo: '/partners/seer-robotics.webp',
+    logoWidth: 1101,
+    logoHeight: 120,
+    country: { en: 'China', de: 'China' },
+    focus: {
+      en: 'Mobile robot controllers, autonomous forklifts and AMRs',
+      de: 'Steuerungen für mobile Roboter, autonome Gabelstapler und AMR',
+    },
+    sourced: true,
+  },
+  {
+    slug: 'orionstar',
+    name: 'OrionStar',
+    logo: '/partners/orionstar.webp',
+    logoWidth: 639,
+    logoHeight: 140,
+    country: { en: 'China', de: 'China' },
+    focus: {
+      en: 'Service robots for delivery, cleaning and reception',
+      de: 'Serviceroboter für Lieferung, Reinigung und Empfang',
+    },
+    sourced: true,
+  },
 ]
 
-/** The brands we resell, i.e. the list without our own brand. */
-export const resellerPartners = authorizedPartners.filter((p) => !p.ownBrand)
+/** The brands we are an authorized reseller for: neither our own nor merely sourced. */
+export const resellerPartners = authorizedPartners.filter((p) => !p.ownBrand && !p.sourced)

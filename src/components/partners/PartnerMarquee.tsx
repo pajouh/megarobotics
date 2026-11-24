@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { ShieldCheck } from 'lucide-react'
-// Our own brand stays out of the "Authorized reseller" strip
+// Our own brand and sourced brands stay out of the "Authorized reseller" strip
 import { resellerPartners as authorizedPartners } from '@/data/authorized-partners'
 
 interface PartnerMarqueeProps {

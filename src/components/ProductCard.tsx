@@ -4,13 +4,13 @@ import { useTranslations } from 'next-intl'
 import { ArrowUpRight, Award, ShieldCheck } from 'lucide-react'
 import { Product } from '@/types'
 import { urlFor } from '@/lib/sanity'
-import { authorizedPartners } from '@/data/authorized-partners'
+import { authorizedPartners, resellerPartners } from '@/data/authorized-partners'
 
 interface ProductCardProps {
   product: Product
 }
 
-const AUTHORIZED = new Set(authorizedPartners.filter((p) => !p.ownBrand).map((p) => p.slug))
+const AUTHORIZED = new Set(resellerPartners.map((p) => p.slug))
 const OWN_BRAND = new Set(authorizedPartners.filter((p) => p.ownBrand).map((p) => p.slug))
 
 export default function ProductCard({ product }: ProductCardProps) {

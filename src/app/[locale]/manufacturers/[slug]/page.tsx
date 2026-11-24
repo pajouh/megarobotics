@@ -186,7 +186,11 @@ export default async function ManufacturerPage({ params }: Props) {
           {partner && (
             <p className="mr-chip relative mb-6">
               <span className="mr-pulse-dot" aria-hidden="true" />
-              {partner.ownBrand ? tPartners('ownBrandEyebrow') : tPartners('eyebrow')}
+              {partner.ownBrand
+                ? tPartners('ownBrandEyebrow')
+                : partner.sourced
+                  ? tPartners('sourcedEyebrow')
+                  : tPartners('eyebrow')}
             </p>
           )}
           <div className="relative flex flex-col md:flex-row md:items-center gap-8">
