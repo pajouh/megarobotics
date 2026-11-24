@@ -138,7 +138,14 @@ nav .wrap{display:flex;align-items:center;height:60px;gap:18px}
 .run .t{height:8px;border-radius:6px;background:#262b32;overflow:hidden}
 .run .t div{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-l));transition:width .6s var(--ease)}
 .run span:last-child{font-family:var(--mono);text-align:right}
-.plist{font-size:13.5px;color:var(--soft);max-height:150px;overflow:auto;margin:0;padding-left:20px}
+.plist{font-size:13.5px;color:var(--soft);margin:0;padding:0;list-style:none}
+.plist li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 6px;border-radius:6px;cursor:pointer;break-inside:avoid}
+.plist li:hover{background:rgba(255,255,255,.05)}
+.plist li.sel{background:rgba(0,144,144,.2);color:var(--text)}
+.plist button{flex:none;background:none;border:1px solid var(--line);border-radius:6px;color:var(--muted);width:30px;height:30px;font-size:16px;line-height:1}
+.plist button:hover{color:var(--orange-l);border-color:var(--orange)}
+.btn:disabled{opacity:.4;cursor:default}
+#svg{touch-action:none}
 
 /* explorer */
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:44px}
@@ -332,7 +339,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
   <div class="wrap rv">
     <div class="eyebrow">04 · Rundgang planen</div>
     <h2>Einen Kontrollgang skizzieren – und sehen, was er für die Plattform bedeutet</h2>
-    <p class="lead">Messaufgabe wählen, dann auf das Schema klicken, um Prüfpunkte zu setzen. Der Roboter fährt nur auf Laufwegen: um Kessel, Trockner, Förderer und Bunker herum, durch die Tore und zwischen den Ebenen über die Treppen. Der Rundgang startet und endet an der Ladestation.</p>
+    <p class="lead">Klick auf eine freie Stelle setzt einen Prüfpunkt, Klick auf einen Punkt markiert ihn. Markierte Punkte lassen sich verschieben (ziehen), in der Messaufgabe ändern oder löschen (Taste Entf, Doppelklick oder × in der Liste); ein neuer Punkt wird nach dem markierten eingefügt. Der Roboter fährt nur auf Laufwegen: um Kessel, Trockner, Förderer und Bunker herum, durch die Tore und zwischen den Ebenen über die Treppen.</p>
     <div class="planner">
       <div class="map">
         <span class="maptag">Schema · keine echte Anlage</span>
@@ -351,7 +358,8 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
           <div class="kpi"><b id="kLvl">–</b><small>Ebenenwechsel</small></div>
         </div>
         <div><div class="lbl">Runden je Akkuladung (Obergrenze, ohne Last)</div><div class="runs" id="runs"></div></div>
-        <div class="btns"><button class="btn" id="undo">Letzten Punkt entfernen</button><button class="btn" id="clr">Zurücksetzen</button><button class="btn pri" id="ex">Beispielrunde</button></div>
+        <p class="note" id="selinfo" style="margin:0"></p>
+        <div class="btns"><button class="btn" id="del">Markierten Punkt löschen</button><button class="btn" id="undo">Letzten Punkt entfernen</button><button class="btn" id="clr">Zurücksetzen</button><button class="btn pri" id="ex">Beispielrunde</button></div>
         
       </div>
     </div>
@@ -554,7 +562,7 @@ drawChart();
 
 /* planner: routes follow walkways only — around equipment, through doors, stairs between levels */
 const T=[{k:'w',n:'Wärmebild',c:'#FF8A5B'},{k:'a',n:'Akustik',c:'#35BDB8'},{k:'g',n:'Gas',c:'#E3C14A'},{k:'z',n:'Anzeige',c:'#B6A3F0'}];
-let task='w',P=[],msg='';
+let task='w',P=[],msg='',sel=-1;
 const S=.15,HOME={x:470,y:505};
 const KH={x:30,y:40,w:390,h:470},HA={x:470,y:120,w:500,h:340};
 const L1=KH.y+KH.h/3,L2=KH.y+KH.h*2/3;
@@ -622,28 +630,44 @@ function plan(){
  const sp=+$('#spd').value,dw=+$('#dwl').value,t=d/sp+P.length*dw;
  let s=base();
  if(P.length&&line.length){s+=`<polyline points="${line.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="#35BDB8" stroke-width="3" stroke-dasharray="10 7" stroke-linejoin="round" stroke-linecap="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1s" repeatCount="indefinite"/></polyline>`;
-  s+=P.map((p,i)=>{const c=T.find(x=>x.k===p.t).c;return `<circle cx="${p.x}" cy="${p.y}" r="13" fill="${c}" stroke="#0F1114" stroke-width="3"/><text x="${p.x}" y="${p.y+4.5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#0F1114">${i+1}</text>`}).join('')}
+  s+=P.map((p,i)=>{const c=T.find(x=>x.k===p.t).c;return `<g data-i="${i}" style="cursor:grab">${i===sel?`<circle cx="${p.x}" cy="${p.y}" r="20" fill="none" stroke="#F1F3F2" stroke-width="2.5"/>`:''}<circle cx="${p.x}" cy="${p.y}" r="16" fill="transparent"/><circle cx="${p.x}" cy="${p.y}" r="13" fill="${c}" stroke="#0F1114" stroke-width="3"/><text x="${p.x}" y="${p.y+4.5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#0F1114" pointer-events="none">${i+1}</text></g>`}).join('')}
  $('#svg').innerHTML=s;
  $('#kLen').textContent=P.length?de(d)+' m':'–';
  $('#kTime').textContent=P.length?de(t/60,1)+' min':'–';
  $('#kPts').textContent=P.length;$('#kLvl').textContent=P.length?lc:'–';
  const runs=M.map(m=>({id:m.id,r:P.length?Math.floor(m.laufzeit*3600/t):0})),top=Math.max(1,...runs.map(r=>r.r));
  $('#runs').innerHTML=runs.map(r=>`<div class="run"><span>${r.id}</span><div class="t"><div style="width:${r.r/top*100}%"></div></div><span>${P.length?r.r+'×':'–'}</span></div>`).join('');
- $('#plist').innerHTML=P.map(p=>`<li>${T.find(x=>x.k===p.t).n} · ${zone(p)==='KH'?'Kesselhaus, Ebene '+band(p.y):'Trocknungshalle'}</li>`).join('');
+ $('#plist').innerHTML=P.map((p,i)=>`<li data-li="${i}" class="${i===sel?'sel':''}"><span>${i+1}. ${T.find(x=>x.k===p.t).n} · ${zone(p)==='KH'?'Kesselhaus, Ebene '+band(p.y):'Trocknungshalle'}</span><button data-del="${i}" aria-label="Punkt ${i+1} löschen">×</button></li>`).join('');
+ $('#del').disabled=sel<0;$('#selinfo').textContent=sel<0?'Kein Punkt markiert – ein Klick auf die Karte hängt einen Punkt hinten an.':'Punkt '+(sel+1)+' markiert – neuer Punkt wird danach eingefügt, Messaufgabe hier ändern.';
  $('#pmsg').textContent=bad?'Ein Punkt ist über die Wege nicht erreichbar.':msg;
+ if(sel>=0&&P[sel])task=P[sel].t;
  document.querySelectorAll('.task').forEach(b=>b.classList.toggle('on',b.dataset.t===task));
  $('#spdo').textContent=de(sp,1)+' m/s';$('#dwlo').textContent=dw+' s';
 }
-$('#svg').addEventListener('click',e=>{const pt=$('#svg').createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform($('#svg').getScreenCTM().inverse());
+const svgPt=e=>{const pt=$('#svg').createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform($('#svg').getScreenCTM().inverse())};
+let drag=null,raf=0;
+$('#svg').addEventListener('pointerdown',e=>{const g=e.target.closest('[data-i]');if(!g)return;const i=+g.dataset.i;sel=i;drag={i,moved:false};$('#svg').setPointerCapture(e.pointerId);e.preventDefault();plan()});
+$('#svg').addEventListener('pointermove',e=>{if(!drag)return;const p=svgPt(e),pi=P[drag.i];if(zone(p)!==zone(pi))return;const q=snap(p);if(!q)return;
+ if(Math.hypot(q.x-pi.x,q.y-pi.y)<3)return;drag.moved=true;pi.x=q.x;pi.y=q.y;msg='';if(!raf)raf=requestAnimationFrame(()=>{raf=0;plan()})});
+const endDrag=()=>{if(drag&&drag.moved)plan();setTimeout(()=>{drag=null},0)};
+$('#svg').addEventListener('pointerup',endDrag);$('#svg').addEventListener('pointercancel',endDrag);
+$('#svg').addEventListener('click',e=>{if(drag||e.target.closest('[data-i]'))return;const p=svgPt(e);
  if(!zone(p)){msg='Prüfpunkte bitte innerhalb von Kesselhaus oder Trocknungshalle setzen.';plan();return}
  const q=snap(p);if(!q){msg='Hier ist kein begehbarer Platz.';plan();return}
  msg=q.moved?'Punkt liegt in einem Sperrbereich – vor das Bauteil auf den Laufweg gesetzt.':'';
- P.push({x:q.x,y:q.y,t:task});plan()});
-$('#tasks').addEventListener('click',e=>{const b=e.target.closest('.task');if(b){task=b.dataset.t;plan()}});
+ const at=sel>=0?sel+1:P.length;P.splice(at,0,{x:q.x,y:q.y,t:task});sel=at;plan()});
+const delPt=i=>{if(i<0||i>=P.length)return;P.splice(i,1);sel=P.length?Math.min(i,P.length-1):-1;if(i>=P.length)sel=-1;msg='Punkt gelöscht.';plan()};
+$('#del').addEventListener('click',()=>delPt(sel));
+$('#plist').addEventListener('click',e=>{const d=e.target.closest('[data-del]');if(d){delPt(+d.dataset.del);return}const li=e.target.closest('[data-li]');if(li){const i=+li.dataset.li;sel=sel===i?-1:i;if(sel>=0)task=P[sel].t;plan()}});
+$('#svg').addEventListener('dblclick',e=>{const g=e.target.closest('[data-i]');if(g)delPt(+g.dataset.i)});
+addEventListener('keydown',e=>{if(sel<0||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
+ const r=$('#rundgang').getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+ if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();delPt(sel)}else if(e.key==='Escape'){sel=-1;plan()}});
+$('#tasks').addEventListener('click',e=>{const b=e.target.closest('.task');if(b){task=b.dataset.t;if(sel>=0)P[sel].t=task;plan()}});
 $('#spd').addEventListener('input',plan);$('#dwl').addEventListener('input',plan);
-$('#undo').addEventListener('click',()=>{P.pop();msg='';plan()});$('#clr').addEventListener('click',()=>{P=[];msg='';plan()});
+$('#undo').addEventListener('click',()=>{P.pop();sel=-1;msg='';plan()});$('#clr').addEventListener('click',()=>{P=[];sel=-1;msg='';plan()});
 const EX=[{x:600,y:410,t:'g'},{x:610,y:310,t:'w'},{x:830,y:310,t:'a'},{x:860,y:410,t:'g'},{x:380,y:470,t:'z'},{x:380,y:280,t:'w'},{x:380,y:110,t:'a'},{x:70,y:110,t:'w'},{x:70,y:270,t:'z'},{x:70,y:470,t:'g'}];
-const loadEx=()=>{P=EX.map(p=>{const q=snap(p);return{x:q.x,y:q.y,t:p.t}});msg=''};
+const loadEx=()=>{P=EX.map(p=>{const q=snap(p);return{x:q.x,y:q.y,t:p.t}});sel=-1;msg=''};
 $('#ex').addEventListener('click',()=>{loadEx();plan()});
 loadEx();plan();
 
