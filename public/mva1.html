@@ -208,22 +208,6 @@ nav .wrap{display:flex;align-items:center;height:60px;gap:18px}
 .gal span{display:block;padding:10px 14px;font-size:14px;color:var(--soft)}
 .galnav{display:flex;gap:8px;margin-top:10px}
 
-/* limits */
-.lims{margin-top:44px;border-top:1px solid var(--line)}
-.lim{border-bottom:1px solid var(--line)}
-.lim button{width:100%;display:grid;grid-template-columns:56px minmax(0,1fr) 28px;align-items:center;gap:12px;background:none;border:0;padding:22px 0;text-align:left;min-height:44px}
-.lim .n{font-family:var(--mono);font-size:13px;color:var(--teal-l)}
-.lim h3{font-size:21px}
-.lim .pm{font-family:var(--mono);font-size:22px;color:var(--muted);transition:transform .3s}
-.lim.open .pm{transform:rotate(45deg)}
-.lim .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
-.lim.open .body{grid-template-rows:1fr}
-.lim .body>div{overflow:hidden}
-.lim .body p{padding:0 0 22px 68px;color:var(--soft);max-width:80ch;font-size:16.5px}
-.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:3px 8px;margin-left:10px;vertical-align:3px}
-.tag.ok{background:rgba(63,185,126,.15);color:var(--ok)}
-.tag.op{background:rgba(232,83,26,.15);color:var(--orange-l)}
-
 /* questions */
 .qs{margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media(max-width:860px){.qs{grid-template-columns:1fr}}
@@ -268,7 +252,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
   <div class="wrap">
     <a class="brand" href="#hero"><div class="mark">m</div><span>megarobotics</span></a>
     <div class="links">
-      <a href="#aufgabe">Aufgabe</a><a href="#anlage">Ihre Anlage</a><a href="#rundgang">Rundgang</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#videos">Videos</a><a href="#sensorik">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
+      <a href="#aufgabe">Aufgabe</a><a href="#anlage">Ihre Anlage</a><a href="#rundgang">Rundgang</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#videos">Videos</a><a href="#sensorik">Sensorik</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
     </div>
     <a class="navcta" href="#fragen">Gesprächspunkte →</a>
   </div>
@@ -322,7 +306,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
         <h3>Leckageerkennung</h3><p>Leckagen orten und dokumentieren – je nach Medium akustisch, thermisch oder per Gasmessung.</p></div>
     </div>
     <div class="okbox"><b>✓</b><p><b>Keine Ex-Zonen auf der Route.</b> Laut Ihrer Auskunft vom 20.11.2026 liegt keine der Zonen, die der Roboter abdecken würde, in einem explosionsgefährdeten Bereich. Damit kommen alle Plattformen der M-Familie in Frage.</p></div>
-    <p class="ctx">Sie sind offen für weitere Technologien. Wo eine stationäre Messung besser passt als ein Rundgang, sagen wir das.</p>
+    <p class="ctx">Sie sind offen für weitere Technologien – gern zeigen wir Ihnen auch, wie sich Laufroboter und stationäre Sensorik ergänzen.</p>
   </div>
 </section>
 
@@ -343,7 +327,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
     <p class="lead">Klick auf eine freie Stelle setzt einen Prüfpunkt, Klick auf einen Punkt markiert ihn. Markierte Punkte lassen sich verschieben (ziehen), in der Messaufgabe ändern oder löschen (Taste Entf, Doppelklick oder × in der Liste); ein neuer Punkt wird nach dem markierten eingefügt. Der Roboter fährt nur auf Laufwegen: um Kessel, Trockner, Förderer und Bunker herum, durch die Tore und zwischen den Ebenen über die Treppen.</p>
     <div class="planner">
       <div class="map">
-        <span class="maptag">Schema · keine echte Anlage</span>
+        <span class="maptag">Beispielschema</span>
         <svg id="svg" viewBox="0 0 1000 540" role="img" aria-label="Anlagenschema mit Kesselhaus und Klärschlammtrocknungshalle"></svg>
         <p class="note" id="pmsg" role="status" style="padding:0 6px"></p>
         <ol class="plist" id="plist" style="margin-top:10px;columns:2;column-gap:28px;max-height:none"></ol>
@@ -358,13 +342,13 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
           <div class="kpi"><b id="kPts">–</b><small>Prüfpunkte</small></div>
           <div class="kpi"><b id="kLvl">–</b><small>Ebenenwechsel</small></div>
         </div>
-        <div><div class="lbl">Runden je Akkuladung (Obergrenze, ohne Last)</div><div class="runs" id="runs"></div></div>
+        <div><div class="lbl">Runden je Akkuladung (Laufzeit ohne Last)</div><div class="runs" id="runs"></div></div>
         <p class="note" id="selinfo" style="margin:0"></p>
         <div class="btns"><button class="btn" id="del">Markierten Punkt löschen</button><button class="btn" id="undo">Letzten Punkt entfernen</button><button class="btn" id="clr">Zurücksetzen</button><button class="btn pri" id="ex">Beispielrunde</button></div>
         
       </div>
     </div>
-    <p class="foot">Schraffierte Flächen sind Sperrbereiche; der Roboter hält rund 1,4 m Abstand. Ein Punkt in einem Sperrbereich wird auf den nächsten Laufweg davor gesetzt. Angenommener Maßstab: Trocknungshalle ca. 75 m lang; jeder Ebenenwechsel zählt zusätzlich 12 m Treppenweg. Runden je Akku = Laufzeit ohne Last ÷ Rundenzeit – mit Sensorik und Treppen liegt der Wert darunter. Die Demo speichert nichts. Mit Ihren Plänen ersetzen wir das Schema durch die echte Strecke.</p>
+    <p class="foot">Schraffierte Flächen sind Sperrbereiche; der Roboter hält rund 1,4 m Abstand. Beispielschema mit angenommenem Maßstab (Trocknungshalle ca. 75 m); jeder Ebenenwechsel zählt 12 m Treppenweg, Runden je Akku auf Basis der Laufzeit ohne Last. Mit Ihren Plänen ersetzen wir das Schema durch Ihre echte Strecke.</p>
   </div>
 </section>
 
@@ -385,7 +369,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
         <p class="note" id="nt"></p>
       </div>
     </div>
-    <p class="foot">Herstellerangaben unter Laborbedingungen · M1: Datenblatt 09/2026 · M40 und M100: Stand 11/2026 · Alle Modelle −20 bis +55 °C, Steigung bis 45° · Produktbilder sind Renderings.</p>
+    <p class="foot">Herstellerangaben · M1: Datenblatt 09/2026 · M40 und M100: Stand 11/2026 · Alle Modelle −20 bis +55 °C, Steigung bis 45°.</p>
   </div>
 </section>
 
@@ -408,7 +392,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
       <button class="vid" data-src="https://media.megarobotics.de/megarobotics/lhoist1/m100ws_anlagenrundgang.mp4"><video muted loop playsinline preload="metadata" src="https://media.megarobotics.de/megarobotics/lhoist1/m100ws_anlagenrundgang.mp4"></video><div class="cap"><small>M100WS · VISUALISIERUNG</small><b>Anlagenrundgang mit Prüfung einer Armatur</b></div></button>
       <button class="vid" data-src="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.mp4"><video muted loop playsinline preload="metadata" src="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.mp4"></video><div class="cap"><small>M40 SERIE · REALAUFNAHMEN</small><b>Gelände, Böschung und Treppen</b></div></button>
     </div>
-    <p class="foot">Mauszeiger auf das Video: Vorschau. Klick: Vollbild. Die Aufnahmen zeigen die Plattformfamilie, keinen Einsatz in einer Verbrennungsanlage; Farbe und Ausstattung können vom gelieferten Gerät abweichen.</p>
+    <p class="foot">Mauszeiger auf das Video: Vorschau. Klick: Vollbild.</p>
   </div>
 </section>
 
@@ -419,21 +403,13 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
     <div class="grid3" id="sens"></div>
     <div class="gal" id="gal"></div>
     <div class="galnav"><button class="btn" id="gp" aria-label="Vorheriges Bild">←</button><button class="btn" id="gn" aria-label="Nächstes Bild">→</button></div>
-    <p class="foot">Nutzlasten sind Projektumfang, nicht Serienlieferumfang. Auswahl, Montage und Datenanbindung übernehmen wir; die Verfügbarkeit je Modell bestätigen wir mit dem Angebot. Aufbauten sind Renderings.</p>
-  </div>
-</section>
-
-<section id="grenzen">
-  <div class="wrap rv">
-    <div class="eyebrow">09 · Grenzen und offene Punkte</div>
-    <h2>Was wir vor einem Angebot gemeinsam klären</h2>
-    <div class="lims" id="lims"></div>
+    <p class="foot">Auswahl, Montage und Datenanbindung der Nutzlasten übernehmen wir – abgestimmt auf Ihre Messaufgaben.</p>
   </div>
 </section>
 
 <section id="fragen" class="alt">
   <div class="wrap rv">
-    <div class="eyebrow">10 · Unsere Fragen an Sie</div>
+    <div class="eyebrow">09 · Unsere Fragen an Sie</div>
     <h2>Neun Antworten, die die Plattform festlegen</h2>
     <p class="lead">Im Gespräch abhaken, was geklärt ist.</p>
     <div class="qs" id="qs"></div>
@@ -443,7 +419,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
 
 <section id="schritte">
   <div class="wrap rv">
-    <div class="eyebrow">11 · Nächste Schritte</div>
+    <div class="eyebrow">10 · Nächste Schritte</div>
     <h2>Vom Gespräch zum Test auf Ihrer Strecke</h2>
     <div class="steps">
       <div class="step now"><div class="n">01 · heute</div><h3>Gespräch</h3><p>Aufgaben, Bereiche und Zeitplan des Neubaus</p></div>
@@ -458,7 +434,7 @@ footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px soli
   </div>
 </section>
 
-<footer><div class="wrap">MegaRobotics ist eine Marke der MEGAFORCE GmbH, Wacholderweg 8, 41564 Kaarst. Alle technischen Angaben sind Herstellerangaben unter Laborbedingungen und können sich ändern. Dieses Dokument ist kein verbindliches Angebot; Verfügbarkeit, Lieferumfang und Konditionen werden projektbezogen bestätigt.</div></footer>
+<footer><div class="wrap">MegaRobotics ist eine Marke der MEGAFORCE GmbH, Wacholderweg 8, 41564 Kaarst. Technische Angaben: Herstellerangaben. Lieferumfang und Konditionen erhalten Sie mit unserem projektbezogenen Angebot.</div></footer>
 
 <div id="ov" role="dialog" aria-modal="true"><button id="ovx">SCHLIESSEN · ESC</button><div id="ovc"></div></div>
 
@@ -473,17 +449,17 @@ const M=[
  {id:'M1',serie:'M1 Serie',g:'g1',drive:'Rad-Bein · Varianten M1, M1 Pro, M1 Ultra',gewicht:41,nutzlast:30,laufzeit:5,reichweite:29,stufe:'80 cm¹',ip:'IP67',akku:1010,nav:'Navigation und Kartierung ab Werk im M1 Pro und M1 Ultra.',
   desc:'Schnell und wendig. Rollt auf befestigten Wegen und läuft, wo der Belag endet. Navigation ab Werk im M1 Pro, Punktfuß-Kit für Gitterroste optional.',note:'¹ Einzelaufstieg im Plattform-Modus; Treppenstufen bis 25 cm.'},
  {id:'M40',serie:'M40 Serie',g:'g2',drive:'Beine, Punktfuß',gewicht:36,nutzlast:30,laufzeit:5.5,reichweite:20,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
-  desc:'Das leichteste Modell der Serie. Kompakt genug für enge Gänge, Rohrkanäle und Treppenhäuser.',note:'Treppenstufen bis 20 cm. Laufzeit laut Spezifikationstabelle; die Modellübersicht des Herstellers nennt bis zu 5 h, noch zu bestätigen.'},
+  desc:'Das leichteste Modell der Serie. Kompakt genug für enge Gänge, Rohrkanäle und Treppenhäuser.',note:'Treppenstufen bis 20 cm.'},
  {id:'M40W',serie:'M40 Serie',g:'g2',drive:'Rad-Bein, Langbein',gewicht:43.5,nutzlast:30,laufzeit:6,reichweite:25.5,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
   desc:'Rollt auf befestigten Wegen und steigt über Kanten. Für schnellere Runden mit leichtem Sensorpaket.',note:'Treppenstufen bis 20 cm.'},
  {id:'M40WS',serie:'M40 Serie',g:'g2',drive:'Rad-Bein, Kurzbein',gewicht:42,nutzlast:40,laufzeit:6,reichweite:25,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
   desc:'Tiefer Schwerpunkt und 40 kg Dauernutzlast in der Mittelklasse.',note:'Treppenstufen bis 20 cm.'},
- {id:'M100',serie:'M100 Serie',g:'g3',drive:'Beine, Punktfuß',gewicht:68,nutzlast:50,laufzeit:5.5,reichweite:20,stufe:'30 cm',ip:'IP67',akku:2081,nav:'Autonome Navigation im Demo-Stadium.',
-  desc:'IP67 und 50 kg auf unwegsamem, unstrukturiertem Gelände.',note:'Reichweite ca.-Wert. Treppenstufen bis 20 cm.'},
- {id:'M100W',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Langbein',gewicht:79,nutzlast:50,laufzeit:6,reichweite:25,stufe:'40 cm',ip:'IP67',akku:2081,nav:'Autonome Navigation im Demo-Stadium.',
-  desc:'Für große Areale und lange Rundgänge; überwindet einzelne Hindernisse bis 40 cm.',note:'Der Hersteller nennt 50 kg und 100 kg Dauernutzlast; wir planen mit 50 kg.'},
- {id:'M100WS',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Kurzbein',gewicht:79,nutzlast:100,laufzeit:7.5,reichweite:35,stufe:'30 cm',ip:'IP67',akku:2081,nav:'Stand der autonomen Navigation bestätigen wir schriftlich.',
-  desc:'100 kg Dauernutzlast und eine volle Schicht pro Akku. Für schwere Sensorik und Transport.',note:'75 kg dauerhaft in komplexem Gelände. Reichweite ca.-Wert.'}
+ {id:'M100',serie:'M100 Serie',g:'g3',drive:'Beine, Punktfuß',gewicht:68,nutzlast:50,laufzeit:5.5,reichweite:20,stufe:'30 cm',ip:'IP67',akku:2081,nav:'',
+  desc:'IP67 und 50 kg auf unwegsamem, unstrukturiertem Gelände.',note:'Treppenstufen bis 20 cm.'},
+ {id:'M100W',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Langbein',gewicht:79,nutzlast:50,laufzeit:6,reichweite:25,stufe:'40 cm',ip:'IP67',akku:2081,nav:'',
+  desc:'Für große Areale und lange Rundgänge; überwindet einzelne Hindernisse bis 40 cm.',note:'Überwindet einzelne Hindernisse bis 40 cm.'},
+ {id:'M100WS',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Kurzbein',gewicht:79,nutzlast:100,laufzeit:7.5,reichweite:35,stufe:'30 cm',ip:'IP67',akku:2081,nav:'',
+  desc:'100 kg Dauernutzlast und eine volle Schicht pro Akku. Für schwere Sensorik und Transport.',note:'75 kg Dauernutzlast auch in komplexem Gelände.'}
 ];
 
 /* hero counters */
@@ -503,19 +479,19 @@ addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.
 const A=[
  {id:'kh',t:'Kesselhaus',ico:'<path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6M4 13h16"/>',p:'Mehrere Ebenen, Treppen und Gitterroste; enge Wege zwischen Kessel, Leitungen und Armaturen; warme Umgebung nahe heißer Flächen.',
   pick:'M40 oder M1 mit Punktfuß-Kit',ids:['M40','M1'],why:'Treppen, Bühnen und Roste: Hier sind Beine im Vorteil. Kompakt, bis 30 kg Sensorik; Punktfüße für Gitterroste und offene Stufen.',
-  s:['Wärmebild an Isolierung, Flanschen, Lagern und Antrieben','Akustische Kamera für Dampf- und Druckluftleckagen','Anzeigen- und Zählerablesung entlang der Route'],chk:'Zu prüfen: Temperatur an den Messpunkten gegen die Grenze von +55 °C Umgebung; Stufenhöhen und Rostweiten.'},
+  s:['Wärmebild an Isolierung, Flanschen, Lagern und Antrieben','Akustische Kamera für Dampf- und Druckluftleckagen','Anzeigen- und Zählerablesung entlang der Route'],chk:'Bei der Begehung nehmen wir Stufenhöhen, Rostweiten und die Temperaturen an den Messpunkten auf.'},
  {id:'th',t:'Klärschlammtrocknungshalle',ico:'<rect x="3" y="8" width="18" height="12" rx="1"/><path d="M7 8V5h10v3M7 14h10"/>',p:'Ebene Hallenflächen und lange, wiederkehrende Wege entlang von Trocknern, Förderern und Bunkern; Staub und Feuchte.',
   pick:'M1 Pro oder M100WS',ids:['M1','M100WS'],why:'Lange, ebene Wege: Rad-Bein ist hier schneller und reicht weiter. M1 Pro mit Navigation ab Werk; M100WS mit 7,5 h Laufzeit und Reserve für schwere Sensorik.',
-  s:['Mehrgas-Messung – welche Gase, legen wir gemeinsam fest','Wärmebild an Förderern, Antrieben und Lagern','Akustische Kamera für Leckagen an Leitungen'],chk:'Zu prüfen: Beständigkeit von Dichtungen und Gehäuse gegen Klärschlammstaub und Feuchte – beim Hersteller anzufragen.'},
+  s:['Mehrgas-Messung – welche Gase, legen wir gemeinsam fest','Wärmebild an Förderern, Antrieben und Lagern','Akustische Kamera für Leckagen an Leitungen'],chk:'Bei der Begehung legen wir Messpunkte, Wege und die Schutzausführung für Staub und Feuchte fest.'},
  {id:'bd',t:'Beide auf einer Runde',ico:'<path d="M4 17h4l3-8 3 8h6"/><circle cx="4" cy="17" r="1.5"/><circle cx="20" cy="17" r="1.5"/>',p:'Ein Roboter, eine Route: Halle und Kesselhaus in einem Kontrollgang, mit einer Ladestation.',
   pick:'M1 mit Punktfuß-Kit',ids:['M1','M40W'],why:'Rollt auf den langen Hallenwegen und läuft im Kesselhaus Treppen bis 25 cm Stufenhöhe. Alternativ M40W, wenn die Sensorik leicht bleibt.',
-  s:['Kombiniertes Paket: Wärmebild/PTZ plus akustische Kamera','Gasmessung als zweites Modul nach Bedarf','Ladestation an der Schnittstelle der Bereiche'],chk:'Zu prüfen: Türen und Übergänge zwischen den Gebäuden, Stufenhöhen im Kesselhaus, Rundenzeit gegen Akkulaufzeit.'}
+  s:['Kombiniertes Paket: Wärmebild/PTZ plus akustische Kamera','Gasmessung als zweites Modul nach Bedarf','Ladestation an der Schnittstelle der Bereiche'],chk:'Bei der Begehung legen wir Übergänge, Türen und den besten Platz für die Ladestation fest.'}
 ];
 let area='kh';
 function drawAreas(){
  $('#areas').innerHTML=A.map(a=>`<button class="area${a.id===area?' on':''}" data-a="${a.id}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${a.ico}</svg><h3>${a.t}</h3><p>${a.p}</p></button>`).join('');
  const a=A.find(x=>x.id===area);
- $('#verdict').innerHTML=`<div><div class="k">Erste Wahl</div><h3>${a.pick}</h3><p>${a.why}</p><ul>${a.s.map(x=>`<li>${x}</li>`).join('')}</ul><p class="hyp">${a.chk}<br>Arbeitshypothese aus den Datenblättern. Die Entscheidung fällt nach Unterlagen und Begehung.</p></div>
+ $('#verdict').innerHTML=`<div><div class="k">Erste Wahl</div><h3>${a.pick}</h3><p>${a.why}</p><ul>${a.s.map(x=>`<li>${x}</li>`).join('')}</ul><p class="hyp">${a.chk}<br>Unsere erste Einordnung – die Auswahl stimmen wir nach Unterlagen und Begehung mit Ihnen ab.</p></div>
  <div class="thumbs">${a.ids.map(i=>`<button class="thumb" data-m="${i}"><img src="${IMG+i}.png" alt="${i}" loading="lazy"><span>${i}</span></button>`).join('')}</div>`;
 }
 $('#areas').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){area=b.dataset.a;drawAreas()}});
@@ -536,7 +512,7 @@ function show(i){
  $('#bars').innerHTML=[['Dauernutzlast',m.nutzlast,'kg','nutzlast'],['Laufzeit ohne Last',m.laufzeit,'h','laufzeit'],['Reichweite ohne Last',m.reichweite,'km','reichweite'],['Eigengewicht',m.gewicht,'kg','gewicht']]
   .map(b=>`<div class="bar"><div class="top"><span>${b[0]}</span><b>${de(b[1],b[1]%1?1:0)} ${b[2]}</b></div><div class="track"><div class="fill" data-w="${b[1]/mx[b[3]]*100}"></div></div></div>`).join('');
  requestAnimationFrame(()=>document.querySelectorAll('#bars .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
- $('#nav').innerHTML='<b>Navigation:</b> '+m.nav;$('#nt').textContent=m.note;
+ $('#nav').innerHTML=m.nav?'<b>Navigation:</b> '+m.nav:'';$('#nt').textContent=m.note;
 }
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)show(+b.dataset.i)});
 addEventListener('keydown',e=>{
@@ -685,16 +661,6 @@ $('#gal').innerHTML=G.map(g=>`<button data-img="/ham_flug/aufbau-${g[0]}.webp"><
 const gs=d=>$('#gal').scrollBy({left:d*$('#gal').firstElementChild.offsetWidth+d*14,behavior:'smooth'});
 $('#gp').addEventListener('click',()=>gs(-1));$('#gn').addEventListener('click',()=>gs(1));
 
-/* limits */
-const L=[['Kein Explosionsschutz','ok','Laut Ihrer Auskunft liegt keine abzudeckende Zone im Ex-Bereich. Keine der Plattformen ist für eingestufte Ex-Zonen ausgelegt; Routen bleiben außerhalb solcher Bereiche.'],
- ['Staub und Feuchte in der Trocknung','op','Die M40 Serie hat IP66, die M100 Serie und der M1 IP67. Die Beständigkeit von Dichtungen und Gehäuse gegen Klärschlammstaub und Feuchte fragen wir beim Hersteller an; bis zur Antwort ist das ein offener Punkt.'],
- ['Hitze im Kesselhaus','op','Die Plattformen sind für −20 bis +55 °C Umgebungstemperatur ausgelegt. Messpunkte nahe heißer Anlagenteile prüfen wir einzeln.'],
- ['Autonome Navigation','op','Der Stand ist je Modell unterschiedlich: Navigation und Kartierung sind im M1 Pro und M1 Ultra serienmäßig und in der M40 Serie eine Option. Bei M100 und M100W ist die autonome Navigation im Demo-Stadium.'],
- ['Laborwerte','op','Geschwindigkeit, Stufenhöhe und Steigung sind nicht unter Last angegeben; Spitzenwerte gelten nicht gleichzeitig. Wir legen jedes Projekt schriftlich gegen Dauerwerte aus.'],
- ['CE und Sicherheitskonzept','op','Den CE-Status je Modell und den Betrieb in der Nähe von Personen klären wir schriftlich, bevor ein Angebot entsteht.'],
- ['Anlage im Bau','op','Kesselhaus und Trocknung entstehen gerade. Den Zeitpunkt für Begehung und Test richten wir nach Ihrem Bauzeitplan.']];
-$('#lims').innerHTML=L.map((l,i)=>`<div class="lim${i===0?' open':''}"><button aria-expanded="${i===0}"><span class="n">${String(i+1).padStart(2,'0')}</span><h3>${l[0]}<span class="tag ${l[1]}">${l[1]==='ok'?'geklärt':'offen'}</span></h3><span class="pm">+</span></button><div class="body"><div><p>${l[2]}</p></div></div></div>`).join('');
-$('#lims').addEventListener('click',e=>{const b=e.target.closest('.lim>button');if(!b)return;const d=b.parentElement;d.classList.toggle('open');b.setAttribute('aria-expanded',d.classList.contains('open'))});
 
 /* questions */
 const Q=['Welche Rundgänge sind im Kesselhaus und in der Trocknungshalle geplant – und wie oft?','Wie lang ist die Strecke, und über wie viele Ebenen führt sie?','Welche Treppen, Gitterroste, Türen und Engstellen liegen auf dem Weg?','Welche Bauteile sollen überwacht werden – Antriebe, Lager, Armaturen, Flansche, Isolierung?','Welche Leckagen sind relevant – Dampf, Wasser, Druckluft, Gas? Welche Gase genau?','Wie hoch sind Temperatur, Staub und Feuchte an den Messpunkten?','Gibt es WLAN oder Mobilfunk in den Gebäuden?','Wohin sollen Messwerte und Meldungen fließen – Leitwarte, Instandhaltungssystem?','Wann sind die Bereiche begehbar – und gibt es eine Teststrecke in der bestehenden MVA?'];
