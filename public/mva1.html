@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MegaRobotics × MVA Bielefeld-Herford – Laufroboter für Kesselhaus und Klärschlammtrocknung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1114; --ink2:#16181D; --panel:#1B1F25; --line:#2C323A;
+  --text:#F1F3F2; --muted:#A3AEAC; --soft:#C9D1CF;
+  --teal:#009090; --teal-l:#35BDB8; --orange:#E8531A; --orange-l:#FF8A5B;
+  --ok:#3FB97E;
+  --display:'Space Grotesk',Arial,sans-serif; --body:'IBM Plex Sans',Arial,sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--body);font-size:18px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;margin:0;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(38px,5.6vw,80px)}
+h2{font-size:clamp(30px,3.6vw,52px);max-width:22ch}
+h3{font-size:21px}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--teal-l)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+section{padding:104px 0;position:relative}
+section.alt{background:var(--ink2)}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-l);display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eyebrow::after{content:"";width:64px;height:1px;background:linear-gradient(90deg,var(--orange),transparent)}
+.lead{color:var(--soft);max-width:62ch;margin-top:20px}
+.foot{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em;margin-top:28px;max-width:110ch}
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(15,17,20,.78);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .wrap{display:flex;align-items:center;height:60px;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-family:var(--display);font-weight:700;font-size:18px;flex:none}
+.mark{width:28px;height:28px;border-radius:7px;background:var(--teal);display:grid;place-items:center;font-size:17px;color:#fff}
+.links{display:flex;gap:2px;margin:0 auto;overflow-x:auto}
+.links a{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:6px;white-space:nowrap;transition:color .2s,background .2s}
+.links a:hover,.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
+.navcta{flex:none;margin-left:auto;background:var(--teal);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:8px;transition:background .2s}
+.navcta:hover{background:#00a3a3}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--orange),var(--teal-l));z-index:60}
+@media(max-width:1100px){.links{display:none}}
+
+/* hero */
+#hero{min-height:100vh;padding:0;display:flex;align-items:flex-end;overflow:hidden}
+#hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,17,20,.6) 0%,rgba(15,17,20,.3) 35%,rgba(15,17,20,.94) 86%,var(--ink) 100%)}
+#hero .wrap{position:relative;width:100%;padding-bottom:64px;padding-top:130px}
+#hero h1 span{display:block;overflow:hidden}
+#hero h1 i{display:block;font-style:normal;transform:translateY(110%);animation:rise .9s var(--ease) forwards}
+#hero h1 span:nth-child(2) i{animation-delay:.12s}
+#hero h1 span:nth-child(3) i{animation-delay:.24s}
+@keyframes rise{to{transform:none}}
+.sub{color:var(--soft);font-size:19px;max-width:60ch;margin-top:24px}
+.herocta{margin-top:28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.herocta a{background:var(--teal);color:#fff;text-decoration:none;font-weight:600;padding:14px 24px;border-radius:10px;transition:background .2s,transform .3s var(--ease)}
+.herocta a:hover{background:#00a3a3;transform:translateY(-2px)}
+.herocta span{color:var(--soft);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:44px;background:rgba(27,31,37,.72);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(8px)}
+.stat{padding:22px 26px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{font-family:var(--display);font-size:clamp(26px,3vw,40px);display:block;line-height:1.1;white-space:nowrap}
+.stat small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* generic cards */
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+@media(max-width:960px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:1fr}}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;transition:border-color .25s,transform .4s var(--ease)}
+.card:hover{border-color:#3d4550;transform:translateY(-3px)}
+.card .n{font-family:var(--mono);font-size:12px;color:var(--teal-l)}
+.card h3{margin:12px 0 8px}
+.card p{color:var(--soft);font-size:15.5px}
+.ico{width:34px;height:34px;color:var(--teal-l)}
+.okbox{display:flex;gap:16px;align-items:flex-start;margin-top:20px;background:rgba(63,185,126,.08);border:1px solid rgba(63,185,126,.35);border-radius:14px;padding:20px 24px}
+.okbox b{color:var(--ok)}
+.okbox p{color:var(--soft);font-size:16px}
+.ctx{margin-top:16px;color:var(--muted);font-size:15px;max-width:80ch}
+
+/* anlage selector */
+.areas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:44px}
+@media(max-width:860px){.areas{grid-template-columns:1fr}}
+.area{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;transition:all .3s var(--ease)}
+.area:hover{border-color:#4a535e}
+.area.on{border-color:var(--teal-l);background:linear-gradient(160deg,rgba(0,144,144,.2),var(--panel) 70%)}
+.area h3{margin:12px 0 6px}
+.area p{color:var(--soft);font-size:15px}
+.verdict{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:860px){.verdict{grid-template-columns:1fr}}
+.verdict .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.verdict h3{color:var(--teal-l);font-size:26px;margin:8px 0 10px}
+.verdict p{color:var(--soft);font-size:16px}
+.verdict ul{margin:14px 0 0;padding-left:18px;color:var(--soft);font-size:15.5px}
+.verdict li{margin:4px 0}
+.thumbs{display:flex;gap:12px;flex-wrap:wrap}
+.thumb{flex:1 1 140px;background:radial-gradient(120% 90% at 50% 20%,#F4F6F5 0%,#DDE3E1 60%,#C8D0CE 100%);border-radius:12px;padding:10px;display:grid;place-items:center;border:0}
+.thumb img{width:100%;height:110px;object-fit:contain}
+.thumb span{font-family:var(--display);font-weight:700;color:#0F1114;font-size:15px}
+.hyp{margin-top:14px;font-size:13.5px;color:var(--muted)}
+
+/* planner */
+.planner{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;margin-top:44px}
+@media(max-width:960px){.planner{grid-template-columns:1fr}}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;position:relative}
+.map svg{width:100%;height:auto;display:block;cursor:crosshair;border-radius:10px}
+.maptag{position:absolute;top:22px;right:24px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;background:rgba(15,17,20,.7);padding:4px 8px;border-radius:6px}
+.ctrl{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:18px}
+.ctrl .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.tasks{display:flex;flex-wrap:wrap;gap:8px}
+.task{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:transparent;border-radius:999px;padding:9px 14px;font-size:14px;color:var(--soft);min-height:40px}
+.task i{width:10px;height:10px;border-radius:50%}
+.task.on{border-color:var(--teal-l);color:var(--text);background:rgba(0,144,144,.16)}
+.rng{display:flex;align-items:center;gap:12px}
+.rng input{flex:1;accent-color:var(--teal)}
+.rng output{font-family:var(--mono);font-size:14px;min-width:72px;text-align:right}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kpi{background:var(--ink2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{font-family:var(--display);font-size:24px;display:block;white-space:nowrap}
+.kpi small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:14px;color:var(--soft);min-height:40px}
+.btn:hover{border-color:#4a535e;color:var(--text)}
+.btn.pri{background:var(--teal);border-color:var(--teal);color:#fff}
+.runs{display:flex;flex-direction:column;gap:6px}
+.run{display:grid;grid-template-columns:70px minmax(0,1fr) 54px;align-items:center;gap:10px;font-size:13.5px}
+.run span:first-child{font-family:var(--display);font-weight:700}
+.run .t{height:8px;border-radius:6px;background:#262b32;overflow:hidden}
+.run .t div{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-l));transition:width .6s var(--ease)}
+.run span:last-child{font-family:var(--mono);text-align:right}
+.plist{font-size:13.5px;color:var(--soft);max-height:150px;overflow:auto;margin:0;padding-left:20px}
+
+/* explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:44px}
+.tab{background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 20px;font-family:var(--display);font-weight:700;font-size:17px;color:var(--muted);transition:all .25s var(--ease)}
+.tab:hover{color:var(--text);border-color:#4a535e}
+.tab.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.explorer{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;margin-top:28px;align-items:stretch}
+@media(max-width:960px){.explorer{grid-template-columns:1fr}}
+.stage{background:radial-gradient(120% 90% at 50% 20%,#F4F6F5 0%,#DDE3E1 60%,#C8D0CE 100%);border-radius:20px;min-height:440px;position:relative;display:grid;place-items:center;overflow:hidden}
+.stage img{max-width:82%;max-height:370px;object-fit:contain;transition:opacity .35s var(--ease),transform .6s var(--ease);filter:drop-shadow(0 28px 26px rgba(15,17,20,.28))}
+.stage img.out{opacity:0;transform:translateX(30px) scale(.97)}
+.stage .ser{position:absolute;top:18px;left:20px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:#3a4249;text-transform:uppercase}
+.stage .big{position:absolute;right:18px;bottom:-14px;font-family:var(--display);font-weight:700;font-size:120px;color:rgba(15,17,20,.07);line-height:1}
+.info h3{font-size:34px}
+.drive{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.info .d{color:var(--soft);margin-top:16px;font-size:16.5px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.fact b{font-family:var(--display);font-size:21px;display:block;white-space:nowrap}
+.fact small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bars{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.bar .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bar .top b{color:var(--text);font-weight:500}
+.track{height:8px;border-radius:8px;background:#262b32;overflow:hidden;margin-top:6px}
+.fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--teal),var(--teal-l));transition:width .9s var(--ease)}
+.navst{margin-top:16px;font-size:14.5px;color:var(--soft)}
+.navst b{color:var(--orange-l);font-weight:600}
+.note{margin-top:12px;font-size:13.5px;color:var(--muted)}
+
+/* compare */
+.metric{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.chip{background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-height:40px;transition:all .2s}
+.chip.on{border-color:var(--teal-l);color:var(--text);background:rgba(0,144,144,.16)}
+.chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;align-items:end;height:320px;margin-top:36px;border-bottom:1px solid var(--line)}
+.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:10px;cursor:pointer;background:none;border:0;padding:0}
+.col .v{font-family:var(--mono);font-size:13px;white-space:nowrap}
+.col .p{width:100%;max-width:74px;border-radius:8px 8px 0 0;transition:height .9s var(--ease),filter .2s}
+.col:hover .p{filter:brightness(1.2)}
+.g1 .p{background:linear-gradient(180deg,var(--orange-l),var(--orange))}
+.g2 .p{background:linear-gradient(180deg,var(--teal-l),var(--teal))}
+.g3 .p{background:linear-gradient(180deg,#9AA7A5,#5E6866)}
+.names{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;margin-top:12px;text-align:center;font-family:var(--display);font-weight:700;font-size:15px}
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px}
+
+/* videos */
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:44px}
+@media(max-width:860px){.vids{grid-template-columns:1fr}}
+.vid{position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:16/9;cursor:pointer;border:1px solid var(--line);padding:0}
+.vid video{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .3s,transform .8s var(--ease)}
+.vid:hover video{opacity:1;transform:scale(1.02)}
+.vid .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 20px;background:linear-gradient(0deg,rgba(15,17,20,.92),transparent);text-align:left}
+.vid .cap small{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--teal-l)}
+.vid .cap b{display:block;font-family:var(--display);font-size:20px;margin-top:4px}
+
+/* gallery */
+.gal{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:28px;padding-bottom:8px}
+.gal button{flex:0 0 min(300px,78vw);scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;text-align:left}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#DDE3E1}
+.gal span{display:block;padding:10px 14px;font-size:14px;color:var(--soft)}
+.galnav{display:flex;gap:8px;margin-top:10px}
+
+/* limits */
+.lims{margin-top:44px;border-top:1px solid var(--line)}
+.lim{border-bottom:1px solid var(--line)}
+.lim button{width:100%;display:grid;grid-template-columns:56px minmax(0,1fr) 28px;align-items:center;gap:12px;background:none;border:0;padding:22px 0;text-align:left;min-height:44px}
+.lim .n{font-family:var(--mono);font-size:13px;color:var(--teal-l)}
+.lim h3{font-size:21px}
+.lim .pm{font-family:var(--mono);font-size:22px;color:var(--muted);transition:transform .3s}
+.lim.open .pm{transform:rotate(45deg)}
+.lim .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.lim.open .body{grid-template-rows:1fr}
+.lim .body>div{overflow:hidden}
+.lim .body p{padding:0 0 22px 68px;color:var(--soft);max-width:80ch;font-size:16.5px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:3px 8px;margin-left:10px;vertical-align:3px}
+.tag.ok{background:rgba(63,185,126,.15);color:var(--ok)}
+.tag.op{background:rgba(232,83,26,.15);color:var(--orange-l)}
+
+/* questions */
+.qs{margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:860px){.qs{grid-template-columns:1fr}}
+.q{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;cursor:pointer;transition:border-color .2s,opacity .3s}
+.q input{width:22px;height:22px;accent-color:var(--teal);flex:none;margin-top:2px}
+.q span{font-size:16px;color:var(--soft)}
+.q.done{opacity:.55}
+.q.done span{text-decoration:line-through}
+.qcount{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:16px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px;position:relative}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.step{border-top:2px solid var(--line);padding-top:20px}
+.step.now{border-top-color:var(--teal-l)}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--teal-l)}
+.step h3{margin:10px 0 6px}
+.step p{color:var(--soft);font-size:15.5px}
+
+/* contact/footer */
+.contact{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;margin-top:64px}
+.contact h3{font-size:28px}
+.contact p{color:var(--soft)}
+.contact .l{display:flex;flex-direction:column;gap:6px;font-size:17px}
+footer{padding:36px 0 60px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+
+/* overlay */
+#ov{position:fixed;inset:0;background:rgba(10,11,13,.94);z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
+#ov.on{display:flex}
+#ov video,#ov img{max-width:min(1400px,100%);max-height:86vh;border-radius:12px;background:#000}
+#ovx{position:absolute;top:18px;right:22px;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--soft)}
+:focus-visible{outline:2px solid var(--teal-l);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#hero h1 i{transform:none}.js .rv{opacity:1;transform:none}}
+@media(max-width:600px){.maptag{position:static;display:inline-block;margin-bottom:8px}.wrap{padding:0 18px}section{padding:76px 0}body{font-size:17px}.chart{gap:6px}.names{gap:6px;font-size:11px}.col .v{font-size:10.5px}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#hero"><div class="mark">m</div><span>megarobotics</span></a>
+    <div class="links">
+      <a href="#aufgabe">Aufgabe</a><a href="#anlage">Ihre Anlage</a><a href="#rundgang">Rundgang</a><a href="#modelle">Modelle</a><a href="#vergleich">Vergleich</a><a href="#videos">Videos</a><a href="#sensorik">Sensorik</a><a href="#grenzen">Grenzen</a><a href="#fragen">Fragen</a><a href="#schritte">Schritte</a>
+    </div>
+    <a class="navcta" href="#fragen">Gesprächspunkte →</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <video autoplay muted loop playsinline src="https://media.megarobotics.de/megarobotics/lhoist1/m100ws_anlagenrundgang.mp4"></video>
+  <div class="scrim"></div>
+  <div class="wrap">
+    <div class="eyebrow">Gespräch · 24. November 2026, 15:15 Uhr · MVA Bielefeld-Herford GmbH</div>
+    <h1><span><i>Laufroboter für Kontrollgänge</i></span><span><i>in Kesselhaus und</i></span><span><i>Klärschlammtrocknung</i></span></h1>
+    <p class="sub">Rundgänge, Bauteilüberwachung und Leckageerkennung für die neue Klärschlamm-Monoverbrennung in Bielefeld – mit der M-Familie von MegaRobotics: M1, M40 und M100.</p>
+    <div class="herocta"><a href="#aufgabe">Zur Aufgabenstellung →</a><span>Rundgang auf dem Anlagenschema selbst planen</span></div>
+    <div class="stats">
+      <div class="stat"><b data-c="7">7</b><small>Plattformen</small></div>
+      <div class="stat"><b data-c="100" data-u=" kg">100 kg</b><small>max. Dauernutzlast</small></div>
+      <div class="stat"><b data-c="7.5" data-u=" h">7,5 h</b><small>max. Laufzeit ohne Last</small></div>
+      <div class="stat"><b>IP66 / IP67</b><small>Schutzart</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="wir">
+  <div class="wrap rv">
+    <div class="eyebrow">01 · Wer wir sind</div>
+    <h2>Ein Ansprechpartner aus Kaarst – von der Streckenbewertung bis zum Service</h2>
+    <p class="lead">MegaRobotics ist die Robotikmarke der MEGAFORCE GmbH. Wir setzen Inspektions- und Sicherheitsprojekte mit Laufrobotern um. Der Roboter ist nur der Träger – ob ein Projekt funktioniert, entscheidet sich an Strecke, Nutzlast und Betreuung im Betrieb.</p>
+    <div class="grid4">
+      <div class="card"><div class="n">01</div><h3>Applikationsanalyse</h3><p>Strecke, Gelände, Nutzlast und Einsatzzyklus</p></div>
+      <div class="card"><div class="n">02</div><h3>Nutzlastintegration</h3><p>Mechanisch, elektrisch und datenseitig</p></div>
+      <div class="card"><div class="n">03</div><h3>Inbetriebnahme und Schulung</h3><p>Vor Ort, mit den ersten Routen</p></div>
+      <div class="card"><div class="n">04</div><h3>Support und Service</h3><p>Ersatzteile und Betreuung aus Deutschland</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="aufgabe" class="alt">
+  <div class="wrap rv">
+    <div class="eyebrow">02 · Ihre Aufgabenstellung</div>
+    <h2>Drei Aufgaben für den Neubau</h2>
+    <p class="lead">So haben wir Ihre Anfrage verstanden: Für die neue Klärschlamm-Monoverbrennung prüfen Sie, wie ein Laufroboter Betriebs- und Inspektionsaufgaben unterstützen kann – zuerst im Kesselhaus und in der Klärschlammtrocknungshalle.</p>
+    <div class="grid3">
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18c2-6 5-9 8-9s6 3 8 9"/><circle cx="4" cy="18" r="1.6"/><circle cx="12" cy="9" r="1.6"/><circle cx="20" cy="18" r="1.6"/></svg>
+        <h3>Rundgänge</h3><p>Wiederkehrende Kontrollgänge auf festen Routen, mit Foto- und Messprotokoll je Punkt.</p></div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 14l3-4 3 3 4-5"/></svg>
+        <h3>Bauteilüberwachung</h3><p>Temperatur, Zustand und Anzeigen an Antrieben, Lagern, Armaturen und Leitungen – Abweichungen im Zeitverlauf.</p></div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg>
+        <h3>Leckageerkennung</h3><p>Leckagen orten und dokumentieren – je nach Medium akustisch, thermisch oder per Gasmessung.</p></div>
+    </div>
+    <div class="okbox"><b>✓</b><p><b>Keine Ex-Zonen auf der Route.</b> Laut Ihrer Auskunft vom 20.11.2026 liegt keine der Zonen, die der Roboter abdecken würde, in einem explosionsgefährdeten Bereich. Damit kommen alle Plattformen der M-Familie in Frage.</p></div>
+    <p class="ctx">Sie sind offen für weitere Technologien. Wo eine stationäre Messung besser passt als ein Rundgang, sagen wir das.</p>
+  </div>
+</section>
+
+<section id="anlage">
+  <div class="wrap rv">
+    <div class="eyebrow">03 · Ihre Anlage</div>
+    <h2>Zwei Bereiche, zwei Streckenprofile</h2>
+    <p class="lead">So stellen wir uns die beiden Bereiche von außen vor. Wählen Sie einen Bereich für unsere erste Einordnung – und korrigieren Sie uns.</p>
+    <div class="areas" id="areas"></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
+</section>
+
+<section id="rundgang" class="alt">
+  <div class="wrap rv">
+    <div class="eyebrow">04 · Rundgang planen</div>
+    <h2>Einen Kontrollgang skizzieren – und sehen, was er für die Plattform bedeutet</h2>
+    <p class="lead">Messaufgabe wählen, dann auf das Schema klicken, um Prüfpunkte zu setzen. Der Rundgang startet und endet an der Ladestation. Die Rechnung zeigt Streckenlänge, Rundenzeit und wie viele Runden eine Akkuladung höchstens trägt.</p>
+    <div class="planner">
+      <div class="map">
+        <span class="maptag">Schema · keine echte Anlage</span>
+        <svg id="svg" viewBox="0 0 1000 540" role="img" aria-label="Anlagenschema mit Kesselhaus und Klärschlammtrocknungshalle"></svg>
+      </div>
+      <div class="ctrl">
+        <div><div class="lbl">Messaufgabe am nächsten Punkt</div><div class="tasks" id="tasks"></div></div>
+        <div><div class="lbl">Fahrgeschwindigkeit</div><div class="rng"><input type="range" id="spd" min="0.5" max="1.5" step="0.1" value="1"><output id="spdo">1,0 m/s</output></div></div>
+        <div><div class="lbl">Verweilzeit je Prüfpunkt</div><div class="rng"><input type="range" id="dwl" min="10" max="120" step="5" value="30"><output id="dwlo">30 s</output></div></div>
+        <div class="kpis">
+          <div class="kpi"><b id="kLen">–</b><small>Strecke</small></div>
+          <div class="kpi"><b id="kTime">–</b><small>Rundenzeit</small></div>
+          <div class="kpi"><b id="kPts">–</b><small>Prüfpunkte</small></div>
+          <div class="kpi"><b id="kLvl">–</b><small>Ebenenwechsel</small></div>
+        </div>
+        <div><div class="lbl">Runden je Akkuladung (Obergrenze, ohne Last)</div><div class="runs" id="runs"></div></div>
+        <div class="btns"><button class="btn" id="undo">Letzten Punkt entfernen</button><button class="btn" id="clr">Zurücksetzen</button><button class="btn pri" id="ex">Beispielrunde</button></div>
+        <ol class="plist" id="plist"></ol>
+      </div>
+    </div>
+    <p class="foot">Angenommener Maßstab: Trocknungshalle ca. 75 m lang. Ein Ebenenwechsel im Kesselhaus zählt als 12 m Treppenweg. Runden je Akku = Laufzeit ohne Last ÷ Rundenzeit – mit Sensorik und Treppen liegt der Wert darunter. Die Demo speichert nichts. Mit Ihren Plänen ersetzen wir das Schema durch die echte Strecke.</p>
+  </div>
+</section>
+
+<section id="modelle">
+  <div class="wrap rv">
+    <div class="eyebrow">05 · Die M-Familie</div>
+    <h2>Drei Serien, drei Nutzlastklassen</h2>
+    <p class="lead">Die Serie wählt man nach Nutzlast, den Antrieb nach Strecke. Wählen Sie ein Modell – oder blättern Sie mit den Pfeiltasten.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="explorer">
+      <div class="stage"><span class="ser" id="ser"></span><img id="img" alt=""><span class="big" id="big"></span></div>
+      <div class="info">
+        <h3 id="nm"></h3><div class="drive" id="drv"></div>
+        <p class="d" id="dsc"></p>
+        <div class="facts" id="facts"></div>
+        <div class="bars" id="bars"></div>
+        <p class="navst" id="nav"></p>
+        <p class="note" id="nt"></p>
+      </div>
+    </div>
+    <p class="foot">Herstellerangaben unter Laborbedingungen · M1: Datenblatt 09/2026 · M40 und M100: Stand 11/2026 · Alle Modelle −20 bis +55 °C, Steigung bis 45° · Produktbilder sind Renderings.</p>
+  </div>
+</section>
+
+<section id="vergleich" class="alt">
+  <div class="wrap rv">
+    <div class="eyebrow">06 · Alle Modelle im Vergleich</div>
+    <h2>Sieben Plattformen auf einen Blick</h2>
+    <div class="metric" id="metric"></div>
+    <div class="chart" id="chart"></div>
+    <div class="names" id="names"></div>
+    <div class="legend"><span><i style="background:var(--orange)"></i>M1 Serie</span><span><i style="background:var(--teal)"></i>M40 Serie</span><span><i style="background:#7C8886"></i>M100 Serie</span><span>Klick auf eine Säule öffnet das Modell</span></div>
+  </div>
+</section>
+
+<section id="videos">
+  <div class="wrap rv">
+    <div class="eyebrow">07 · In Bewegung</div>
+    <h2>Räder für die Halle, Beine für die Treppe</h2>
+    <div class="vids">
+      <button class="vid" data-src="https://media.megarobotics.de/megarobotics/lhoist1/m100ws_anlagenrundgang.mp4"><video muted loop playsinline preload="metadata" src="https://media.megarobotics.de/megarobotics/lhoist1/m100ws_anlagenrundgang.mp4"></video><div class="cap"><small>M100WS · VISUALISIERUNG</small><b>Anlagenrundgang mit Prüfung einer Armatur</b></div></button>
+      <button class="vid" data-src="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.mp4"><video muted loop playsinline preload="metadata" src="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.mp4"></video><div class="cap"><small>M40 SERIE · REALAUFNAHMEN</small><b>Gelände, Böschung und Treppen</b></div></button>
+    </div>
+    <p class="foot">Mauszeiger auf das Video: Vorschau. Klick: Vollbild. Die Aufnahmen zeigen die Plattformfamilie, keinen Einsatz in einer Verbrennungsanlage; Farbe und Ausstattung können vom gelieferten Gerät abweichen.</p>
+  </div>
+</section>
+
+<section id="sensorik" class="alt">
+  <div class="wrap rv">
+    <div class="eyebrow">08 · Nutzlasten und Integration</div>
+    <h2>Der Roboter ist der Träger, die Sensorik ist die Aufgabe</h2>
+    <div class="grid3" id="sens"></div>
+    <div class="gal" id="gal"></div>
+    <div class="galnav"><button class="btn" id="gp" aria-label="Vorheriges Bild">←</button><button class="btn" id="gn" aria-label="Nächstes Bild">→</button></div>
+    <p class="foot">Nutzlasten sind Projektumfang, nicht Serienlieferumfang. Auswahl, Montage und Datenanbindung übernehmen wir; die Verfügbarkeit je Modell bestätigen wir mit dem Angebot. Aufbauten sind Renderings.</p>
+  </div>
+</section>
+
+<section id="grenzen">
+  <div class="wrap rv">
+    <div class="eyebrow">09 · Grenzen und offene Punkte</div>
+    <h2>Was wir vor einem Angebot gemeinsam klären</h2>
+    <div class="lims" id="lims"></div>
+  </div>
+</section>
+
+<section id="fragen" class="alt">
+  <div class="wrap rv">
+    <div class="eyebrow">10 · Unsere Fragen an Sie</div>
+    <h2>Neun Antworten, die die Plattform festlegen</h2>
+    <p class="lead">Im Gespräch abhaken, was geklärt ist.</p>
+    <div class="qs" id="qs"></div>
+    <p class="qcount" id="qc"></p>
+  </div>
+</section>
+
+<section id="schritte">
+  <div class="wrap rv">
+    <div class="eyebrow">11 · Nächste Schritte</div>
+    <h2>Vom Gespräch zum Test auf Ihrer Strecke</h2>
+    <div class="steps">
+      <div class="step now"><div class="n">01 · heute</div><h3>Gespräch</h3><p>Aufgaben, Bereiche und Zeitplan des Neubaus</p></div>
+      <div class="step"><div class="n">02</div><h3>Unterlagen</h3><p>Pläne, Fotos oder ein Video der geplanten Wege</p></div>
+      <div class="step"><div class="n">03</div><h3>Begehung</h3><p>Strecke, Treppen und Messpunkte in Bielefeld</p></div>
+      <div class="step"><div class="n">04</div><h3>Vorschlag und Test</h3><p>Modell, Nutzlast und Anbindung schriftlich – dann Test auf der realen Strecke</p></div>
+    </div>
+    <div class="contact">
+      <div><h3>Masoud Pajouh</h3><p>MEGAFORCE GmbH · MegaRobotics · Kaarst</p></div>
+      <div class="l"><a href="tel:+491722008875">+49 172 200 8875</a><a href="mailto:mp@megarobotics.de">mp@megarobotics.de</a><a href="https://megarobotics.de">megarobotics.de</a></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">MegaRobotics ist eine Marke der MEGAFORCE GmbH, Wacholderweg 8, 41564 Kaarst. Alle technischen Angaben sind Herstellerangaben unter Laborbedingungen und können sich ändern. Dieses Dokument ist kein verbindliches Angebot; Verfügbarkeit, Lieferumfang und Konditionen werden projektbezogen bestätigt.</div></footer>
+
+<div id="ov" role="dialog" aria-modal="true"><button id="ovx">SCHLIESSEN · ESC</button><div id="ovc"></div></div>
+
+<script>
+{
+document.documentElement.classList.add('js');
+const IMG='https://media.megarobotics.de/megarobotics/lhoist1/';
+const $=s=>document.querySelector(s);
+const de=(n,d=0)=>n.toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+const M=[
+ {id:'M1',serie:'M1 Serie',g:'g1',drive:'Rad-Bein · Varianten M1, M1 Pro, M1 Ultra',gewicht:41,nutzlast:30,laufzeit:5,reichweite:29,stufe:'80 cm¹',ip:'IP67',akku:1010,nav:'Navigation und Kartierung ab Werk im M1 Pro und M1 Ultra.',
+  desc:'Schnell und wendig. Rollt auf befestigten Wegen und läuft, wo der Belag endet. Navigation ab Werk im M1 Pro, Punktfuß-Kit für Gitterroste optional.',note:'¹ Einzelaufstieg im Plattform-Modus; Treppenstufen bis 25 cm.'},
+ {id:'M40',serie:'M40 Serie',g:'g2',drive:'Beine, Punktfuß',gewicht:36,nutzlast:30,laufzeit:5.5,reichweite:20,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
+  desc:'Das leichteste Modell der Serie. Kompakt genug für enge Gänge, Rohrkanäle und Treppenhäuser.',note:'Treppenstufen bis 20 cm. Laufzeit laut Spezifikationstabelle; die Modellübersicht des Herstellers nennt bis zu 5 h, noch zu bestätigen.'},
+ {id:'M40W',serie:'M40 Serie',g:'g2',drive:'Rad-Bein, Langbein',gewicht:43.5,nutzlast:30,laufzeit:6,reichweite:25.5,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
+  desc:'Rollt auf befestigten Wegen und steigt über Kanten. Für schnellere Runden mit leichtem Sensorpaket.',note:'Treppenstufen bis 20 cm.'},
+ {id:'M40WS',serie:'M40 Serie',g:'g2',drive:'Rad-Bein, Kurzbein',gewicht:42,nutzlast:40,laufzeit:6,reichweite:25,stufe:'30 cm',ip:'IP66',akku:936,nav:'Autonome Navigation als Option.',
+  desc:'Tiefer Schwerpunkt und 40 kg Dauernutzlast in der Mittelklasse.',note:'Treppenstufen bis 20 cm.'},
+ {id:'M100',serie:'M100 Serie',g:'g3',drive:'Beine, Punktfuß',gewicht:68,nutzlast:50,laufzeit:5.5,reichweite:20,stufe:'30 cm',ip:'IP67',akku:2081,nav:'Autonome Navigation im Demo-Stadium.',
+  desc:'IP67 und 50 kg auf unwegsamem, unstrukturiertem Gelände.',note:'Reichweite ca.-Wert. Treppenstufen bis 20 cm.'},
+ {id:'M100W',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Langbein',gewicht:79,nutzlast:50,laufzeit:6,reichweite:25,stufe:'40 cm',ip:'IP67',akku:2081,nav:'Autonome Navigation im Demo-Stadium.',
+  desc:'Für große Areale und lange Rundgänge; überwindet einzelne Hindernisse bis 40 cm.',note:'Der Hersteller nennt 50 kg und 100 kg Dauernutzlast; wir planen mit 50 kg.'},
+ {id:'M100WS',serie:'M100 Serie',g:'g3',drive:'Rad-Bein, Kurzbein',gewicht:79,nutzlast:100,laufzeit:7.5,reichweite:35,stufe:'30 cm',ip:'IP67',akku:2081,nav:'Stand der autonomen Navigation bestätigen wir schriftlich.',
+  desc:'100 kg Dauernutzlast und eine volle Schicht pro Akku. Für schwere Sensorik und Transport.',note:'75 kg dauerhaft in komplexem Gelände. Reichweite ca.-Wert.'}
+];
+
+/* hero counters */
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const b=e.target,t=+b.dataset.c,u=b.dataset.u||'',d=t%1?1:0,t0=performance.now();
+  const f=n=>{const p=Math.min(1,(n-t0)/1200),v=t*(1-Math.pow(1-p,3));b.textContent=de(v,d)+u;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f);cio.unobserve(b)}));
+document.querySelectorAll('[data-c]').forEach(b=>cio.observe(b));
+
+/* reveal + nav state + progress */
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>rio.observe(el));
+const links=[...document.querySelectorAll('.links a')];
+const sio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>sio.observe(s));
+addEventListener('scroll',()=>{const h=document.documentElement;$('#bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+
+/* areas */
+const A=[
+ {id:'kh',t:'Kesselhaus',ico:'<path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6M4 13h16"/>',p:'Mehrere Ebenen, Treppen und Gitterroste; enge Wege zwischen Kessel, Leitungen und Armaturen; warme Umgebung nahe heißer Flächen.',
+  pick:'M40 oder M1 mit Punktfuß-Kit',ids:['M40','M1'],why:'Treppen, Bühnen und Roste: Hier sind Beine im Vorteil. Kompakt, bis 30 kg Sensorik; Punktfüße für Gitterroste und offene Stufen.',
+  s:['Wärmebild an Isolierung, Flanschen, Lagern und Antrieben','Akustische Kamera für Dampf- und Druckluftleckagen','Anzeigen- und Zählerablesung entlang der Route'],chk:'Zu prüfen: Temperatur an den Messpunkten gegen die Grenze von +55 °C Umgebung; Stufenhöhen und Rostweiten.'},
+ {id:'th',t:'Klärschlammtrocknungshalle',ico:'<rect x="3" y="8" width="18" height="12" rx="1"/><path d="M7 8V5h10v3M7 14h10"/>',p:'Ebene Hallenflächen und lange, wiederkehrende Wege entlang von Trocknern, Förderern und Bunkern; Staub und Feuchte.',
+  pick:'M1 Pro oder M100WS',ids:['M1','M100WS'],why:'Lange, ebene Wege: Rad-Bein ist hier schneller und reicht weiter. M1 Pro mit Navigation ab Werk; M100WS mit 7,5 h Laufzeit und Reserve für schwere Sensorik.',
+  s:['Mehrgas-Messung – welche Gase, legen wir gemeinsam fest','Wärmebild an Förderern, Antrieben und Lagern','Akustische Kamera für Leckagen an Leitungen'],chk:'Zu prüfen: Beständigkeit von Dichtungen und Gehäuse gegen Klärschlammstaub und Feuchte – beim Hersteller anzufragen.'},
+ {id:'bd',t:'Beide auf einer Runde',ico:'<path d="M4 17h4l3-8 3 8h6"/><circle cx="4" cy="17" r="1.5"/><circle cx="20" cy="17" r="1.5"/>',p:'Ein Roboter, eine Route: Halle und Kesselhaus in einem Kontrollgang, mit einer Ladestation.',
+  pick:'M1 mit Punktfuß-Kit',ids:['M1','M40W'],why:'Rollt auf den langen Hallenwegen und läuft im Kesselhaus Treppen bis 25 cm Stufenhöhe. Alternativ M40W, wenn die Sensorik leicht bleibt.',
+  s:['Kombiniertes Paket: Wärmebild/PTZ plus akustische Kamera','Gasmessung als zweites Modul nach Bedarf','Ladestation an der Schnittstelle der Bereiche'],chk:'Zu prüfen: Türen und Übergänge zwischen den Gebäuden, Stufenhöhen im Kesselhaus, Rundenzeit gegen Akkulaufzeit.'}
+];
+let area='kh';
+function drawAreas(){
+ $('#areas').innerHTML=A.map(a=>`<button class="area${a.id===area?' on':''}" data-a="${a.id}"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${a.ico}</svg><h3>${a.t}</h3><p>${a.p}</p></button>`).join('');
+ const a=A.find(x=>x.id===area);
+ $('#verdict').innerHTML=`<div><div class="k">Erste Wahl</div><h3>${a.pick}</h3><p>${a.why}</p><ul>${a.s.map(x=>`<li>${x}</li>`).join('')}</ul><p class="hyp">${a.chk}<br>Arbeitshypothese aus den Datenblättern. Die Entscheidung fällt nach Unterlagen und Begehung.</p></div>
+ <div class="thumbs">${a.ids.map(i=>`<button class="thumb" data-m="${i}"><img src="${IMG+i}.png" alt="${i}" loading="lazy"><span>${i}</span></button>`).join('')}</div>`;
+}
+$('#areas').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b){area=b.dataset.a;drawAreas()}});
+$('#verdict').addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(b)openModel(b.dataset.m)});
+drawAreas();
+
+/* explorer */
+let cur=0;
+const mx={nutzlast:100,laufzeit:7.5,reichweite:35,gewicht:79};
+$('#tabs').innerHTML=M.map((m,i)=>`<button class="tab" data-i="${i}">${m.id}</button>`).join('');
+function show(i){
+ cur=(i+M.length)%M.length;const m=M[cur];
+ document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===cur));
+ const im=$('#img');im.classList.add('out');
+ setTimeout(()=>{im.src=IMG+m.id+'.png';im.alt=m.id;im.onload=()=>im.classList.remove('out');im.onerror=()=>im.classList.remove('out')},220);
+ $('#ser').textContent=m.serie;$('#big').textContent=m.id;$('#nm').textContent=m.id;$('#drv').textContent=m.drive;$('#dsc').textContent=m.desc;
+ $('#facts').innerHTML=[[m.ip,'Schutzart'],[m.stufe,'Einzelstufe'],[de(m.akku)+' Wh','Akku']].map(f=>`<div class="fact"><b>${f[0]}</b><small>${f[1]}</small></div>`).join('');
+ $('#bars').innerHTML=[['Dauernutzlast',m.nutzlast,'kg','nutzlast'],['Laufzeit ohne Last',m.laufzeit,'h','laufzeit'],['Reichweite ohne Last',m.reichweite,'km','reichweite'],['Eigengewicht',m.gewicht,'kg','gewicht']]
+  .map(b=>`<div class="bar"><div class="top"><span>${b[0]}</span><b>${de(b[1],b[1]%1?1:0)} ${b[2]}</b></div><div class="track"><div class="fill" data-w="${b[1]/mx[b[3]]*100}"></div></div></div>`).join('');
+ requestAnimationFrame(()=>document.querySelectorAll('#bars .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+ $('#nav').innerHTML='<b>Navigation:</b> '+m.nav;$('#nt').textContent=m.note;
+}
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)show(+b.dataset.i)});
+addEventListener('keydown',e=>{
+ if(e.key==='Escape')closeOv();
+ const r=$('#modelle').getBoundingClientRect();if(r.top<innerHeight*.6&&r.bottom>innerHeight*.4&&!$('#ov').classList.contains('on')){if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)}
+});
+function openModel(id){show(M.findIndex(m=>m.id===id));$('#modelle').scrollIntoView({behavior:'smooth'})}
+show(0);
+
+/* compare */
+const MET=[['nutzlast','Dauernutzlast','kg'],['laufzeit','Laufzeit','h'],['reichweite','Reichweite','km'],['gewicht','Gewicht','kg'],['akku','Akku','Wh']];
+let met='nutzlast';
+$('#metric').innerHTML=MET.map(x=>`<button class="chip" data-k="${x[0]}">${x[1]}</button>`).join('');
+$('#names').innerHTML=M.map(m=>`<span>${m.id}</span>`).join('');
+function drawChart(){
+ const x=MET.find(y=>y[0]===met),top=Math.max(...M.map(m=>m[met]));
+ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.k===met));
+ $('#chart').innerHTML=M.map(m=>`<button class="col ${m.g}" data-m="${m.id}" aria-label="${m.id}"><span class="v">${de(m[met],m[met]%1?1:0)} ${x[2]}</span><span class="p" style="height:0" data-h="${m[met]/top*82}"></span></button>`).join('');
+ requestAnimationFrame(()=>requestAnimationFrame(()=>document.querySelectorAll('.col .p').forEach(p=>p.style.height=p.dataset.h+'%')));
+}
+$('#metric').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b){met=b.dataset.k;drawChart()}});
+$('#chart').addEventListener('click',e=>{const b=e.target.closest('.col');if(b)openModel(b.dataset.m)});
+drawChart();
+
+/* planner */
+const T=[{k:'w',n:'Wärmebild',c:'#FF8A5B'},{k:'a',n:'Akustik',c:'#35BDB8'},{k:'g',n:'Gas',c:'#E3C14A'},{k:'z',n:'Anzeige',c:'#B6A3F0'}];
+let task='w',P=[];
+const S=.15, HOME={x:470,y:500}, KH={x:30,y:40,w:390,h:470};
+$('#tasks').innerHTML=T.map(t=>`<button class="task" data-t="${t.k}"><i style="background:${t.c}"></i>${t.n}</button>`).join('');
+function lvl(p){return p.x<KH.x+KH.w?(p.y>KH.y+KH.h*2/3?0:p.y>KH.y+KH.h/3?1:2):0}
+function base(){
+ let s=`<defs><pattern id="gr" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#232830" stroke-width="1"/></pattern></defs>
+ <rect width="1000" height="540" fill="#14171C"/><rect width="1000" height="540" fill="url(#gr)"/>
+ <rect x="${KH.x}" y="${KH.y}" width="${KH.w}" height="${KH.h}" rx="6" fill="#1D2229" stroke="#3A424C" stroke-width="2"/>
+ <line x1="${KH.x}" x2="${KH.x+KH.w}" y1="${KH.y+KH.h/3}" y2="${KH.y+KH.h/3}" stroke="#3A424C" stroke-dasharray="6 6"/>
+ <line x1="${KH.x}" x2="${KH.x+KH.w}" y1="${KH.y+KH.h*2/3}" y2="${KH.y+KH.h*2/3}" stroke="#3A424C" stroke-dasharray="6 6"/>
+ <rect x="120" y="80" width="150" height="340" rx="10" fill="#262C34" stroke="#4A535E"/>
+ <text x="195" y="255" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="15">Kessel</text>
+ <g stroke="#4A535E" stroke-width="2">${[0,1,2,3,4,5].map(i=>`<line x1="${330+i*10}" y1="${200-i*14}" x2="${350+i*10}" y2="${200-i*14}"/>`).join('')}${[0,1,2,3,4,5].map(i=>`<line x1="${330+i*10}" y1="${357-i*14}" x2="${350+i*10}" y2="${357-i*14}"/>`).join('')}</g>
+ <text x="40" y="66" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="20">Kesselhaus</text>
+ ${['Ebene 2','Ebene 1','Ebene 0'].map((t,i)=>`<text x="40" y="${KH.y+KH.h/3*(i+1)-10}" fill="#6F7B79" font-family="IBM Plex Mono" font-size="12">${t}</text>`).join('')}
+ <rect x="470" y="120" width="500" height="340" rx="6" fill="#1D2229" stroke="#3A424C" stroke-width="2"/>
+ <text x="484" y="148" fill="#C9D1CF" font-family="Space Grotesk" font-weight="700" font-size="20">Klärschlammtrocknungshalle</text>
+ ${[0,1].map(i=>`<rect x="${520+i*220}" y="190" width="180" height="90" rx="8" fill="#262C34" stroke="#4A535E"/><text x="${610+i*220}" y="240" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="14">Trockner ${i+1}</text>`).join('')}
+ <rect x="520" y="340" width="400" height="26" rx="4" fill="#262C34" stroke="#4A535E"/><text x="720" y="358" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="12">Förderer</text>
+ <rect x="880" y="390" width="70" height="50" rx="4" fill="#262C34" stroke="#4A535E"/><text x="915" y="420" text-anchor="middle" fill="#7E8A88" font-family="IBM Plex Mono" font-size="12">Bunker</text>
+ <rect x="${HOME.x-34}" y="${HOME.y-16}" width="68" height="32" rx="6" fill="#0d3b3b" stroke="#35BDB8"/><text x="${HOME.x}" y="${HOME.y+5}" text-anchor="middle" fill="#35BDB8" font-family="IBM Plex Mono" font-size="12">Laden</text>`;
+ return s;
+}
+function plan(){
+ const pts=[HOME,...P,HOME];let d=0,lc=0;
+ for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];d+=Math.hypot(b.x-a.x,b.y-a.y)*S;const l=Math.abs(lvl(b)-lvl(a));lc+=l;d+=l*12}
+ const sp=+$('#spd').value,dw=+$('#dwl').value,t=d/sp+P.length*dw;
+ let s=base();
+ if(P.length){s+=`<polyline points="${pts.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="#35BDB8" stroke-width="3" stroke-dasharray="10 7" stroke-linejoin="round"><animate attributeName="stroke-dashoffset" from="34" to="0" dur="1s" repeatCount="indefinite"/></polyline>`;
+  s+=P.map((p,i)=>{const c=T.find(x=>x.k===p.t).c;return `<circle cx="${p.x}" cy="${p.y}" r="14" fill="${c}" stroke="#0F1114" stroke-width="3"/><text x="${p.x}" y="${p.y+4.5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#0F1114">${i+1}</text>`}).join('')}
+ $('#svg').innerHTML=s;
+ $('#kLen').textContent=P.length?de(d)+' m':'–';
+ $('#kTime').textContent=P.length?de(t/60,1)+' min':'–';
+ $('#kPts').textContent=P.length;$('#kLvl').textContent=P.length?lc:'–';
+ const runs=M.map(m=>({id:m.id,r:P.length?Math.floor(m.laufzeit*3600/t):0})),top=Math.max(1,...runs.map(r=>r.r));
+ $('#runs').innerHTML=runs.map(r=>`<div class="run"><span>${r.id}</span><div class="t"><div style="width:${r.r/top*100}%"></div></div><span>${P.length?r.r+'×':'–'}</span></div>`).join('');
+ $('#plist').innerHTML=P.map(p=>`<li>${T.find(x=>x.k===p.t).n} · ${p.x<KH.x+KH.w?'Kesselhaus, Ebene '+lvl(p):'Trocknungshalle'}</li>`).join('');
+ document.querySelectorAll('.task').forEach(b=>b.classList.toggle('on',b.dataset.t===task));
+ $('#spdo').textContent=de(sp,1)+' m/s';$('#dwlo').textContent=dw+' s';
+}
+$('#svg').addEventListener('click',e=>{const pt=$('#svg').createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform($('#svg').getScreenCTM().inverse());
+ const inKH=p.x>KH.x&&p.x<KH.x+KH.w&&p.y>KH.y&&p.y<KH.y+KH.h,inTH=p.x>470&&p.x<970&&p.y>120&&p.y<460;if(!inKH&&!inTH)return;P.push({x:Math.round(p.x),y:Math.round(p.y),t:task});plan()});
+$('#tasks').addEventListener('click',e=>{const b=e.target.closest('.task');if(b){task=b.dataset.t;plan()}});
+$('#spd').addEventListener('input',plan);$('#dwl').addEventListener('input',plan);
+$('#undo').addEventListener('click',()=>{P.pop();plan()});$('#clr').addEventListener('click',()=>{P=[];plan()});
+const EX=[{x:560,y:420,t:'g'},{x:740,y:300,t:'w'},{x:900,y:300,t:'a'},{x:930,y:440,t:'g'},{x:380,y:470,t:'z'},{x:380,y:300,t:'w'},{x:380,y:120,t:'a'},{x:80,y:110,t:'w'},{x:80,y:270,t:'z'},{x:80,y:470,t:'g'}];
+$('#ex').addEventListener('click',()=>{P=EX.map(p=>({...p}));plan()});
+P=EX.map(p=>({...p}));plan();
+
+/* sensors + gallery */
+const SE=[['Wärmebild und PTZ-Kamera','Hotspots an Isolierung, Lagern und Antrieben, Sichtprüfung mit Zoom','<circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>'],
+ ['Akustische Kamera','Ortet Dampf- und Druckluftleckagen und Teilentladungen','<path d="M3 12h3l3-7 4 14 3-7h5"/>'],
+ ['Mehrgas-Messung','Gasarten nach Ihrer Gefährdungsbeurteilung, z. B. O₂, CO, H₂S','<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>'],
+ ['Anzeigen- und Zählerablesung','Analoge Anzeigen, Füllstände, Ventilstellungen','<circle cx="12" cy="13" r="8"/><path d="M12 13l4-4"/>'],
+ ['Ladestation','Dockt an und lädt unbeaufsichtigt','<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M12 8l-2 4h4l-2 4"/>'],
+ ['Funk und Datenanbindung','WLAN oder 4G/5G; Meldungen an Leitwarte oder Instandhaltungssystem','<path d="M12 20v-8M8 8a6 6 0 0 1 8 0M5 5a10 10 0 0 1 14 0"/>']];
+$('#sens').innerHTML=SE.map(s=>`<div class="card"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">${s[2]}</svg><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join('');
+const G=[['03','Anlageninspektion mit Schutzkäfig'],['04','Anlageninspektion, flacher Aufbau'],['02','Streife und Sichtprüfung'],['05','Energieversorgung, Inspektion'],['06','Einsatz mit Funkanbindung'],['07','Inspektion mit Eingriff (Manipulatorarm)'],['01','Streife auf langen Wegen'],['08','Arealstreife']];
+$('#gal').innerHTML=G.map(g=>`<button data-img="/ham_flug/aufbau-${g[0]}.webp"><img loading="lazy" src="/ham_flug/aufbau-${g[0]}.webp" alt="${g[1]}"><span>${g[1]}</span></button>`).join('');
+const gs=d=>$('#gal').scrollBy({left:d*$('#gal').firstElementChild.offsetWidth+d*14,behavior:'smooth'});
+$('#gp').addEventListener('click',()=>gs(-1));$('#gn').addEventListener('click',()=>gs(1));
+
+/* limits */
+const L=[['Kein Explosionsschutz','ok','Laut Ihrer Auskunft liegt keine abzudeckende Zone im Ex-Bereich. Keine der Plattformen ist für eingestufte Ex-Zonen ausgelegt; Routen bleiben außerhalb solcher Bereiche.'],
+ ['Staub und Feuchte in der Trocknung','op','Die M40 Serie hat IP66, die M100 Serie und der M1 IP67. Die Beständigkeit von Dichtungen und Gehäuse gegen Klärschlammstaub und Feuchte fragen wir beim Hersteller an; bis zur Antwort ist das ein offener Punkt.'],
+ ['Hitze im Kesselhaus','op','Die Plattformen sind für −20 bis +55 °C Umgebungstemperatur ausgelegt. Messpunkte nahe heißer Anlagenteile prüfen wir einzeln.'],
+ ['Autonome Navigation','op','Der Stand ist je Modell unterschiedlich: Navigation und Kartierung sind im M1 Pro und M1 Ultra serienmäßig und in der M40 Serie eine Option. Bei M100 und M100W ist die autonome Navigation im Demo-Stadium.'],
+ ['Laborwerte','op','Geschwindigkeit, Stufenhöhe und Steigung sind nicht unter Last angegeben; Spitzenwerte gelten nicht gleichzeitig. Wir legen jedes Projekt schriftlich gegen Dauerwerte aus.'],
+ ['CE und Sicherheitskonzept','op','Den CE-Status je Modell und den Betrieb in der Nähe von Personen klären wir schriftlich, bevor ein Angebot entsteht.'],
+ ['Anlage im Bau','op','Kesselhaus und Trocknung entstehen gerade. Den Zeitpunkt für Begehung und Test richten wir nach Ihrem Bauzeitplan.']];
+$('#lims').innerHTML=L.map((l,i)=>`<div class="lim${i===0?' open':''}"><button aria-expanded="${i===0}"><span class="n">${String(i+1).padStart(2,'0')}</span><h3>${l[0]}<span class="tag ${l[1]}">${l[1]==='ok'?'geklärt':'offen'}</span></h3><span class="pm">+</span></button><div class="body"><div><p>${l[2]}</p></div></div></div>`).join('');
+$('#lims').addEventListener('click',e=>{const b=e.target.closest('.lim>button');if(!b)return;const d=b.parentElement;d.classList.toggle('open');b.setAttribute('aria-expanded',d.classList.contains('open'))});
+
+/* questions */
+const Q=['Welche Rundgänge sind im Kesselhaus und in der Trocknungshalle geplant – und wie oft?','Wie lang ist die Strecke, und über wie viele Ebenen führt sie?','Welche Treppen, Gitterroste, Türen und Engstellen liegen auf dem Weg?','Welche Bauteile sollen überwacht werden – Antriebe, Lager, Armaturen, Flansche, Isolierung?','Welche Leckagen sind relevant – Dampf, Wasser, Druckluft, Gas? Welche Gase genau?','Wie hoch sind Temperatur, Staub und Feuchte an den Messpunkten?','Gibt es WLAN oder Mobilfunk in den Gebäuden?','Wohin sollen Messwerte und Meldungen fließen – Leitwarte, Instandhaltungssystem?','Wann sind die Bereiche begehbar – und gibt es eine Teststrecke in der bestehenden MVA?'];
+$('#qs').innerHTML=Q.map((q,i)=>`<label class="q"><input type="checkbox" id="q${i}"><span>${q}</span></label>`).join('');
+const qc=()=>{const n=document.querySelectorAll('#qs input:checked').length;$('#qc').textContent=n+' von '+Q.length+' geklärt';document.querySelectorAll('.q').forEach(l=>l.classList.toggle('done',l.querySelector('input').checked))};
+$('#qs').addEventListener('change',qc);qc();
+
+/* videos + overlay */
+document.querySelectorAll('.vid').forEach(v=>{const vd=v.querySelector('video');v.addEventListener('mouseenter',()=>vd.play().catch(()=>{}));v.addEventListener('mouseleave',()=>vd.pause());
+ v.addEventListener('click',()=>openOv(`<video src="${v.dataset.src}" controls autoplay playsinline></video>`))});
+$('#gal').addEventListener('click',e=>{const b=e.target.closest('[data-img]');if(b)openOv(`<img src="${b.dataset.img}" alt="">`)});
+function openOv(h){$('#ovc').innerHTML=h;$('#ov').classList.add('on');$('#ovx').focus()}
+function closeOv(){$('#ov').classList.remove('on');$('#ovc').innerHTML=''}
+$('#ovx').addEventListener('click',closeOv);$('#ov').addEventListener('click',e=>{if(e.target.id==='ov')closeOv()});
+}
+</script>
+</body>
+</html>

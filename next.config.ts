@@ -89,6 +89,15 @@ const nextConfig: NextConfig = {
         source: '/ham_flug/:path*',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
+      // Private customer presentation (MVA Bielefeld-Herford, 24 Nov 2026)
+      {
+        source: '/mva1',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
+        source: '/mva1.html',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       // Fragenkatalog for the Rheinkalk / Lhoist presentation, and its API
       {
         source: '/lhoist1/:path*',
@@ -116,7 +125,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       // Standalone HTML presentations (public/mitsubishi1.html, public/security.html,
-      // public/lhoist1.html, public/ham_flug.html),
+      // public/lhoist1.html, public/ham_flug.html, public/mva1.html),
       // served at clean URLs. Unlisted: no link on the site, not in the sitemap,
       // noindexed. The middleware matcher skips these paths so next-intl doesn't
       // localise them. /security switches to German with ?lang=de.
@@ -125,6 +134,7 @@ const nextConfig: NextConfig = {
         { source: '/security', destination: '/security.html' },
         { source: '/lhoist1', destination: '/lhoist1.html' },
         { source: '/ham_flug', destination: '/ham_flug.html' },
+        { source: '/mva1', destination: '/mva1.html' },
       ],
       afterFiles: [],
       fallback: [],
