@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { ArrowRight } from 'lucide-react'
+import { Link } from '@/i18n/navigation'
 
 interface TechnologyCardProps {
   title: string
@@ -9,6 +11,7 @@ interface TechnologyCardProps {
   criteriaLabel?: string
   image?: { src: string; alt: string }
   index?: number
+  link?: { href: string; label: string }
 }
 
 export default function TechnologyCard({
@@ -20,6 +23,7 @@ export default function TechnologyCard({
   criteriaLabel,
   image,
   index,
+  link,
 }: TechnologyCardProps) {
   return (
     <article className="ind-card flex flex-col h-full !p-0 overflow-hidden">
@@ -82,6 +86,15 @@ export default function TechnologyCard({
             </div>
           )}
         </div>
+        {link && (
+          <Link
+            href={link.href}
+            className="mt-5 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-[color:var(--mr-accent-ink)] hover:text-[color:var(--mr-ink)] transition-colors"
+          >
+            {link.label}
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </Link>
+        )}
       </div>
     </article>
   )

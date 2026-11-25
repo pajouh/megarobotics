@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
+import { Link, permanentRedirect } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { Clock, Calendar, ArrowLeft, Twitter, Linkedin } from 'lucide-react'
@@ -9,6 +9,7 @@ import ArticleCard from '@/components/ArticleCard'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import ArticleBody from '@/components/ArticleBody'
 import StructuredData from '@/components/StructuredData'
+import { retiredArticleTarget } from '@/data/retired-pages'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { generateArticleSchema, generateAlternates, localizedUrl } from '@/lib/structured-data'
 import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
@@ -69,6 +70,8 @@ export default async function ArticlePage({ params }: Props) {
   const article = await getArticle(slug, locale as Locale)
 
   if (!article) {
+    const successor = retiredArticleTarget(slug)
+    if (successor) permanentRedirect({ href: successor, locale })
     notFound()
   }
 

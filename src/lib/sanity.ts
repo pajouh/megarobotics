@@ -374,6 +374,18 @@ export async function getProducts(limit?: number, locale: Locale = defaultLocale
   )
 }
 
+// Get the active products for a list of slugs, in that order
+export async function getProductsBySlugs(slugs: string[], locale: Locale = defaultLocale): Promise<Product[]> {
+  if (!client || slugs.length === 0) return []
+  const products: Product[] = await client.fetch(
+    `*[_type == "product" && slug.current in $slugs && isActive != false] {
+      ${getProductFields(locale)}
+    }`,
+    { slugs }
+  )
+  return products.sort((a, b) => slugs.indexOf(a.slug.current) - slugs.indexOf(b.slug.current))
+}
+
 // Get a single product by slug
 export async function getProduct(slug: string, locale: Locale = defaultLocale): Promise<Product | null> {
   if (!client) return null

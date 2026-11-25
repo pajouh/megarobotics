@@ -18,8 +18,8 @@ import styles from './ProductHeroSlider.module.css'
  *
  * Loading order: the first slide's poster is the page's largest paint, so it
  * is preloaded at high priority and nothing else in the hero is requested
- * until the page has loaded. The clips (several MB each) and the other
- * slides' posters start after that.
+ * until the page has loaded. The clips (several MB each) start after that,
+ * and each further poster one slide ahead of its turn.
  *
  * On the homepage the slides belong to different products: each then carries
  * its own name and specs (slide.product), and slideActions[i] its own CTAs.
@@ -139,6 +139,10 @@ export default function ProductHeroSlider({
   const [visible, setVisible] = useState(true)
   // false until the page has finished loading: see "Loading order" above
   const [ready, setReady] = useState(false)
+  // Posters up to this slide are requested. It only grows, so a slide that has
+  // been on screen keeps its poster.
+  const [posterReach, setPosterReach] = useState(1)
+  if (cur + 1 > posterReach) setPosterReach(cur + 1)
 
   const firstPoster = slides[0]?.video ? slides[0].poster : undefined
   if (firstPoster) preload(firstPoster, { as: 'image', fetchPriority: 'high' })
@@ -304,7 +308,7 @@ export default function ProductHeroSlider({
                   playsInline
                   loop={!!s.loop}
                   preload="none"
-                  poster={i === 0 || active || ready ? s.poster : undefined}
+                  poster={i === 0 || active || (ready && i <= posterReach) ? s.poster : undefined}
                   aria-hidden="true"
                 >
                   <source src={s.video} type="video/mp4" />

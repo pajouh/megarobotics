@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import HeroIndustrial from '@/components/industrial/HeroIndustrial'
 import TechnologyCard from '@/components/industrial/TechnologyCard'
 import CTASection from '@/components/industrial/CTASection'
+import { landingPageForTechnology, landingPagePath } from '@/data/landing-pages'
 import { pageSeo } from '@/lib/page-seo'
 import { robotTechnologyImages } from '@/lib/industrial-images'
 import { getRobotTechnologies, type Locale } from '@/lib/sanity'
@@ -23,6 +24,11 @@ export default async function RobotTechnologiesPage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations('industrial.robotTechnologies')
   const tCta = await getTranslations('industrial.home.finalCta')
+  const tLanding = await getTranslations('industrial.landingPages')
+  const buyingLink = (id: string) => {
+    const slug = landingPageForTechnology(id)
+    return slug && { href: landingPagePath(slug), label: tLanding(`buy.${slug}`) }
+  }
 
   const sanity = await getRobotTechnologies(locale as Locale)
   const items: RobotTechnologyItem[] = sanity.length
@@ -60,6 +66,7 @@ export default async function RobotTechnologiesPage({ params }: Props) {
                 applicationsLabel={t('labelApplications')}
                 criteriaLabel={t('labelCriteria')}
                 image={cmsImages[item.id] ?? robotTechnologyImages[item.id]}
+                link={buyingLink(item.id)}
               />
             ))}
           </div>

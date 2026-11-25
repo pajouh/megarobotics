@@ -346,8 +346,8 @@
           "Industrial robot arms and collaborative automation",
           "Parallel robots for high-speed picking and packaging",
           "AMR, AGV and intralogistics robots",
-          "Quadruped and legged inspection robots",
-          "Humanoid and embodied AI platforms",
+          "Quadruped robots and robot dogs for inspection and security",
+          "Humanoid robots and embodied AI platforms",
           "Cleaning and facility automation robots",
           "Grippers, force sensors, controllers and robot modules"
         ]
@@ -791,7 +791,7 @@
         },
         {
           "id": "quadruped-legged",
-          "title": "Quadruped / Legged Robots",
+          "title": "Quadruped Robots / Robot Dogs",
           "description": "Four-legged platforms for terrain-tolerant inspection and patrol in industrial environments.",
           "applications": [
             "Facility inspection",
@@ -1136,8 +1136,11 @@
     "landingPages": {
       "label": "Buying advice",
       "ipRatings": "IP ratings explained",
+      "models": "Models at a glance",
+      "lastUpdated": "Last updated",
       "names": {
         "humanoid-robots": "Humanoid robots",
+        "quadruped-robots": "Quadruped robots",
         "cobots": "Cobots",
         "robot-grippers": "Robot grippers",
         "palletizing-robots": "Palletizing robots",
@@ -1145,6 +1148,7 @@
       },
       "buy": {
         "humanoid-robots": "Buy humanoid robots",
+        "quadruped-robots": "Buy quadruped robots",
         "cobots": "Buy cobots",
         "robot-grippers": "Buy robot grippers",
         "palletizing-robots": "Buy palletizing robots",

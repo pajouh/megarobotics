@@ -7,6 +7,7 @@ import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
 import SectionHeader from '@/components/industrial/SectionHeader'
 import CTASection from '@/components/industrial/CTASection'
 import LucideIcon from '@/components/industrial/LucideIcon'
+import LandingPageLinks from '@/components/LandingPageLinks'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import StructuredData from '@/components/StructuredData'
 import Parallax, { HeroParallax } from '@/components/Parallax'
@@ -17,6 +18,7 @@ import { getProductHero, HERO_MEDIA_BASE } from '@/data/product-heroes'
 import { getSecurityContent, localize, NEED_KEYS, SECURITY_MEDIA, SECURITY_MODELS } from '@/data/security-solution'
 import { getInspectionContent } from '@/data/inspection-solution'
 import { getProduct } from '@/lib/sanity'
+import { landingPagesForSolution } from '@/data/landing-pages'
 import { pageSeo } from '@/lib/page-seo'
 import { generateFAQSchema, generateServiceSchema } from '@/lib/structured-data'
 
@@ -521,6 +523,7 @@ export default async function InspectionSecurityPage({ params }: Props) {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </p>
+          <LandingPageLinks slugs={landingPagesForSolution('inspection-security')} className="mt-8 pt-4 border-t border-[color:var(--mr-line)]" />
         </div>
       </section>
 

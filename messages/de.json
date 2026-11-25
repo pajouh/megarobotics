@@ -346,8 +346,8 @@
           "Industrieroboterarme und kollaborative Automatisierung",
           "Parallelroboter für High-Speed-Picking und Verpackung",
           "AMR, AGV und Intralogistik-Roboter",
-          "Vierbeinige und schreitende Inspektionsroboter",
-          "Humanoide und Embodied-AI-Plattformen",
+          "Laufroboter und Roboterhunde für Inspektion und Sicherheit",
+          "Humanoide Roboter und Embodied-AI-Plattformen",
           "Reinigungs- und Gebäudeautomatisierungs-Roboter",
           "Greifer, Kraftsensoren, Steuerungen und Robotermodule"
         ]
@@ -791,7 +791,7 @@
         },
         {
           "id": "quadruped-legged",
-          "title": "Vierbeinige / schreitende Roboter",
+          "title": "Laufroboter / Roboterhunde (Vierbeiner)",
           "description": "Vierbeinige Plattformen für geländetaugliche Inspektion und Patrouille in industriellen Umgebungen.",
           "applications": [
             "Anlageninspektion",
@@ -1136,8 +1136,11 @@
     "landingPages": {
       "label": "Kaufberatung",
       "ipRatings": "IP-Schutzarten erklärt",
+      "models": "Modelle im Überblick",
+      "lastUpdated": "Zuletzt aktualisiert",
       "names": {
         "humanoid-robots": "Humanoide Roboter",
+        "quadruped-robots": "Laufroboter",
         "cobots": "Cobots",
         "robot-grippers": "Robotergreifer",
         "palletizing-robots": "Palettierroboter",
@@ -1145,6 +1148,7 @@
       },
       "buy": {
         "humanoid-robots": "Humanoide Roboter kaufen",
+        "quadruped-robots": "Laufroboter kaufen",
         "cobots": "Cobots kaufen",
         "robot-grippers": "Robotergreifer kaufen",
         "palletizing-robots": "Palettierroboter kaufen",

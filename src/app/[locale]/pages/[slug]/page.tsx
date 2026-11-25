@@ -1,9 +1,14 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getPage, getAllPageSlugs, type Locale } from '@/lib/sanity'
+import { getTranslations } from 'next-intl/server'
+import type { PortableTextBlock } from '@portabletext/types'
+import { getPage, getAllPageSlugs, getProductsBySlugs, type Locale } from '@/lib/sanity'
 import PageBody from '@/components/PageBody'
 import HubSchema from '@/components/HubSchema'
-import { generateAlternates } from '@/lib/structured-data'
+import ProductCard from '@/components/ProductCard'
+import StructuredData from '@/components/StructuredData'
+import { LANDING_PAGE_SLUGS } from '@/data/landing-pages'
+import { generateAlternates, generateCollectionSchema } from '@/lib/structured-data'
 import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
 
 type Props = {
@@ -55,6 +60,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 3600
 
+/** Slugs of the products a page links to, in order of first mention. */
+function linkedProductSlugs(body: PortableTextBlock[]): string[] {
+  const slugs = body.flatMap((block) =>
+    (block.markDefs ?? []).flatMap((mark) => {
+      const href = (mark as { href?: unknown }).href
+      const match = typeof href === 'string' ? href.match(/^(?:\/de)?\/products\/([\w-]+)$/) : null
+      return match ? [match[1]] : []
+    })
+  )
+  return [...new Set(slugs)]
+}
+
 export default async function DynamicPage({ params }: Props) {
   const { slug, locale } = await params
   const page = await getPage(slug, locale as Locale)
@@ -63,9 +80,30 @@ export default async function DynamicPage({ params }: Props) {
     notFound()
   }
 
+  const t = await getTranslations('industrial.landingPages')
+  const path = `/pages/${slug}`
+  const body: PortableTextBlock[] = page.body ?? []
+
+  // Buying pages show the models they talk about right after the introduction.
+  const isLandingPage = (LANDING_PAGE_SLUGS as readonly string[]).includes(slug)
+  const products = isLandingPage ? await getProductsBySlugs(linkedProductSlugs(body), locale as Locale) : []
+  const firstHeading = body.findIndex((block) => block.style === 'h2')
+  const introEnd = products.length > 0 && firstHeading > 0 ? firstHeading : 0
+
   return (
     <div className="min-h-screen pt-24 pb-16 bg-white">
-      <HubSchema name={page.title} description={page.subtitle || undefined} path={`/pages/${slug}`} type="WebPage" />
+      <HubSchema name={page.title} description={page.subtitle || undefined} path={path} type="WebPage" />
+      {products.length > 0 && (
+        <StructuredData
+          data={generateCollectionSchema({
+            name: page.title,
+            description: page.subtitle || undefined,
+            path,
+            locale,
+            items: products.map((p) => ({ name: p.name, path: `/products/${p.slug.current}` })),
+          })}
+        />
+      )}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-12">
@@ -77,18 +115,40 @@ export default async function DynamicPage({ params }: Props) {
           )}
           {page.lastUpdated && (
             <p className="text-sm text-gray-400 mt-4">
-              Last updated: {new Date(page.lastUpdated).toLocaleDateString()}
+              {t('lastUpdated')}: {new Date(page.lastUpdated).toLocaleDateString(locale === 'de' ? 'de-DE' : 'en-GB')}
             </p>
           )}
         </header>
 
-        {/* Body Content */}
-        {page.body && (
+        {introEnd > 0 && (
           <div className="prose prose-gray max-w-none">
-            <PageBody body={page.body} />
+            <PageBody body={body.slice(0, introEnd)} />
           </div>
         )}
       </div>
+
+      {products.length > 0 && (
+        <section aria-labelledby="models" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+          <h2 id="models" className="text-2xl font-bold text-gray-900 mb-6">
+            {t('models')}
+          </h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <li key={product._id}>
+                <ProductCard product={product} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {body.length > 0 && (
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-gray max-w-none">
+            <PageBody body={body.slice(introEnd)} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

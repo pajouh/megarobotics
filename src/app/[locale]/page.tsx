@@ -32,6 +32,7 @@ import SafeNotice from '@/components/industrial/SafeNotice'
 import CTASection from '@/components/industrial/CTASection'
 import PartnerShowcase from '@/components/partners/PartnerShowcase'
 import { authorizedPartners, resellerPartners } from '@/data/authorized-partners'
+import { landingPagePath, type LandingPageSlug } from '@/data/landing-pages'
 import ProductCard from '@/components/ProductCard'
 import ArticleCard from '@/components/ArticleCard'
 import StructuredData from '@/components/StructuredData'
@@ -46,6 +47,16 @@ type Props = { params: Promise<{ locale: string }> }
 // Icons follow the order of the translated lists (whatWeDo.cards, techCoverage.items).
 const WHAT_WE_DO_ICONS = [ScanSearch, Scale, Handshake, Rocket, Network, Globe2]
 const TECH_ICONS = [Bot, Zap, Truck, PawPrint, PersonStanding, Sparkles, Hand]
+// Buying page for each technology card, where there is one.
+const TECH_LINKS: (LandingPageSlug | null)[] = [
+  'cobots',
+  null,
+  null,
+  'quadruped-robots',
+  'humanoid-robots',
+  'cleaning-robots',
+  'robot-grippers',
+]
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
@@ -228,6 +239,7 @@ export default async function HomePage({ params }: Props) {
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {techItems.map((item, idx) => {
               const Icon = TECH_ICONS[idx % TECH_ICONS.length]
+              const landingPage = TECH_LINKS[idx]
               return (
                 <li
                   key={item}
@@ -249,11 +261,21 @@ export default async function HomePage({ params }: Props) {
                     <span className="mr-index">{String(idx + 1).padStart(2, '0')}</span>
                   </div>
                   <p
-                    className={`relative mt-auto text-[color:var(--mr-ink)] font-medium leading-snug ${
+                    className={`mt-auto text-[color:var(--mr-ink)] font-medium leading-snug ${landingPage ? '' : 'relative'} ${
                       idx === 0 ? 'ind-h3 !text-xl md:!text-2xl max-w-md' : 'text-[15px]'
                     }`}
                   >
-                    {item}
+                    {landingPage ? (
+                      // Stretched over the whole card, so the card is the link
+                      <Link
+                        href={landingPagePath(landingPage)}
+                        className="after:absolute after:inset-0 after:content-[''] hover:text-[color:var(--mr-accent-ink)] transition-colors"
+                      >
+                        {item}
+                      </Link>
+                    ) : (
+                      item
+                    )}
                   </p>
                 </li>
               )

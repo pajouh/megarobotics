@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
+import { Link, permanentRedirect } from '@/i18n/navigation'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, FileText, Mail, Check, MessageSquare, ShieldCheck } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
@@ -26,6 +26,7 @@ import Disclaimer from '@/components/Disclaimer'
 import SafeNotice from '@/components/industrial/SafeNotice'
 import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
 import { getProductHero } from '@/data/product-heroes'
+import { retiredProductTarget } from '@/data/retired-pages'
 import {
   generateProductSchema,
   generateAlternates,
@@ -129,6 +130,8 @@ export default async function ProductPage({ params }: Props) {
   const tNotice = await getTranslations('industrial.safeNotice')
 
   if (!product) {
+    const successor = retiredProductTarget(slug)
+    if (successor) permanentRedirect({ href: successor, locale })
     notFound()
   }
 

@@ -1,7 +1,8 @@
+import { NextResponse, type NextRequest } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
 import { locales, defaultLocale } from './i18n/config'
 
-export default createMiddleware({
+const handleI18n = createMiddleware({
   locales,
   defaultLocale,
   localePrefix: 'as-needed', // Don't show /en prefix for default locale
@@ -13,6 +14,18 @@ export default createMiddleware({
   // other. Use an in-page language switcher/banner to offer the translation.
   localeDetection: false,
 })
+
+export default function middleware(request: NextRequest) {
+  // English lives without a prefix. next-intl sends /en/... there with a temporary
+  // 307, which kept the old /en URLs in Google's index; a 308 hands them over for good.
+  const { pathname } = request.nextUrl
+  if (pathname === '/en' || pathname.startsWith('/en/')) {
+    const url = request.nextUrl.clone()
+    url.pathname = pathname.slice(3).replace(/^\/*/, '/')
+    return NextResponse.redirect(url, 308)
+  }
+  return handleI18n(request)
+}
 
 export const config = {
   // Match all pathnames except for:
