@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useLocale } from 'next-intl'
 
 /**
  * Click-to-play video embed.
@@ -41,6 +42,7 @@ export default function VideoEmbed({
   caption?: string
   className?: string
 }) {
+  const de = useLocale() === 'de'
   const [playing, setPlaying] = useState(false)
   const own = selfHostedVideo(url)
 
@@ -97,7 +99,7 @@ export default function VideoEmbed({
             <span className="px-6 text-center">
               <span className="block text-[color:var(--mr-ink-on-dark)] font-medium">{title}</span>
               <span className="block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-[color:var(--mr-steel-on-dark)] mt-2">
-                {embedUrl ? 'Click to play — loads from YouTube' : 'Video unavailable'}
+                {embedUrl ? (de ? 'Klicken zum Abspielen, lädt von YouTube' : 'Click to play — loads from YouTube') : (de ? 'Video nicht verfügbar' : 'Video unavailable')}
               </span>
             </span>
           </button>

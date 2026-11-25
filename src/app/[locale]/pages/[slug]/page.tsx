@@ -17,7 +17,8 @@ type Props = {
 
 export async function generateStaticParams() {
   const slugs = await getAllPageSlugs()
-  return slugs.map(({ slug }) => ({ slug }))
+  // humanoid-robots has its own static route next to this folder.
+  return slugs.filter(({ slug }) => slug !== 'humanoid-robots').map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
