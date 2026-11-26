@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity'
 import { authorizedPartners } from '@/data/authorized-partners'
+import { LANDING_PAGE_SLUGS } from '@/data/landing-pages'
 
 // Cache sitemap for 1 hour to prevent excessive Sanity API calls from crawlers
 export const revalidate = 3600
@@ -180,8 +181,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // fit to be indexed yet. Remove it from this set once the title is set.
   const EXCLUDED_PAGE_SLUGS = new Set(['privacy', 'imprint', 'about-megarobotics', 'data-deletion'])
 
+  // Buying pages are rendered from code (src/data/landing, humanoid-robots.ts),
+  // so they are listed whether or not a Sanity page document exists.
+  const LANDING_SET = new Set<string>(LANDING_PAGE_SLUGS)
+  const landingPages: MetadataRoute.Sitemap = LANDING_PAGE_SLUGS.flatMap((slug) =>
+    localizedEntries(`/pages/${slug}`, { changeFrequency: 'weekly', priority: 0.8 })
+  )
+
   const cmsPagePages: MetadataRoute.Sitemap = (cmsPages || [])
-    .filter((page: { slug: string }) => page.slug && !EXCLUDED_PAGE_SLUGS.has(page.slug))
+    .filter((page: { slug: string }) => page.slug && !EXCLUDED_PAGE_SLUGS.has(page.slug) && !LANDING_SET.has(page.slug))
     .flatMap((page: SanityEntry) =>
       localizedEntries(`/pages/${page.slug}`, {
         lastModified: new Date(page._updatedAt),
@@ -209,6 +217,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...institutePages,
     ...instituteCountryPages,
     ...solutionPages,
+    ...landingPages,
     ...cmsPagePages,
   ]
 }

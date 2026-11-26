@@ -1,4 +1,6 @@
 import { client } from '@/lib/sanity'
+import { LANDING_PAGE_SLUGS, landingPagePath } from '@/data/landing-pages'
+import en from '../../../messages/en.json'
 
 // Same cache window as sitemap.ts — this is crawler-facing and Sanity-backed.
 export const revalidate = 3600
@@ -84,6 +86,10 @@ ${line('/contact', 'Contact', 'quote and availability enquiries')}
 ${line('/imprint', 'Imprint (Impressum)', 'legal entity details')}
 ${line('/privacy', 'Privacy policy')}
 
+${section(
+    'Buying pages',
+    LANDING_PAGE_SLUGS.map((slug) => line(landingPagePath(slug), en.industrial.landingPages.buy[slug], 'models compared, specs and FAQ'))
+  )}
 ${section(
     'Product families',
     families.map((f) => line(`/products/categories/${f.slug}`, clean(f.name) || f.slug))

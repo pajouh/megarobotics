@@ -1144,6 +1144,8 @@
         "cobots": "Cobots",
         "robot-grippers": "Robotergreifer",
         "palletizing-robots": "Palettierroboter",
+        "mobile-robots": "Mobile Roboter und FTS",
+        "service-robots": "Serviceroboter",
         "cleaning-robots": "Reinigungsroboter"
       },
       "buy": {
@@ -1152,6 +1154,8 @@
         "cobots": "Cobots kaufen",
         "robot-grippers": "Robotergreifer kaufen",
         "palletizing-robots": "Palettierroboter kaufen",
+        "mobile-robots": "AMR und autonome Stapler kaufen",
+        "service-robots": "Serviceroboter kaufen",
         "cleaning-robots": "Reinigungsroboter kaufen"
       }
     },

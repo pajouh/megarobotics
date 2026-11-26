@@ -9,7 +9,9 @@ import ProductCard from '@/components/ProductCard'
 import StructuredData from '@/components/StructuredData'
 import { LANDING_PAGE_SLUGS } from '@/data/landing-pages'
 import { generateAlternates, generateCollectionSchema } from '@/lib/structured-data'
-import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase } from '@/lib/page-seo'
+import { DEFAULT_OG_IMAGE, brandedTitle, clampDescription, ogBase, pageSeo } from '@/lib/page-seo'
+import CategoryLanding from '@/components/landing/CategoryLanding'
+import { CATEGORY_LANDING_SLUGS, getCategoryLanding, isCategoryLanding } from '@/data/landing'
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>
@@ -17,12 +19,19 @@ type Props = {
 
 export async function generateStaticParams() {
   const slugs = await getAllPageSlugs()
-  // humanoid-robots has its own static route next to this folder.
-  return slugs.filter(({ slug }) => slug !== 'humanoid-robots').map(({ slug }) => ({ slug }))
+  // humanoid-robots has its own static route next to this folder. The category
+  // buying pages render from src/data/landing, with or without a Sanity document.
+  const all = new Set([...slugs.map(({ slug }) => slug), ...CATEGORY_LANDING_SLUGS])
+  all.delete('humanoid-robots')
+  return [...all].map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params
+  if (isCategoryLanding(slug)) {
+    const { meta } = getCategoryLanding(slug, locale as Locale).content
+    return pageSeo({ title: meta.title, description: meta.description, path: `/pages/${slug}`, locale })
+  }
   const page = await getPage(slug, locale as Locale)
 
   if (!page) {
@@ -75,6 +84,7 @@ function linkedProductSlugs(body: PortableTextBlock[]): string[] {
 
 export default async function DynamicPage({ params }: Props) {
   const { slug, locale } = await params
+  if (isCategoryLanding(slug)) return <CategoryLanding slug={slug} locale={locale} />
   const page = await getPage(slug, locale as Locale)
 
   if (!page) {
