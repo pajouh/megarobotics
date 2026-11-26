@@ -185,6 +185,12 @@ section:last-of-type{border-bottom:0}
 @keyframes grow{from{transform:scaleX(0)}to{transform:none}}
 @media (max-width:700px){.tl .axis{margin-left:0}.tl .r{grid-template-columns:minmax(0,1fr)}}
 
+.abbr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 28px;margin:10px 0 18px}
+.abbr div{display:grid;grid-template-columns:86px minmax(0,1fr);gap:8px;border-bottom:1px dashed var(--line);padding:4px 0}
+.abbr dt{font-family:var(--mono);color:var(--ink)}
+.abbr dd{margin:0}
+footer h3{font-size:.95rem;color:var(--ink)}
+@media (max-width:900px){.abbr{grid-template-columns:minmax(0,1fr)}}
 /* projects */
 .proj{position:relative;overflow:hidden}
 .proj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
@@ -564,7 +570,32 @@ footer{padding:26px 0 70px;font-size:.8rem;color:var(--muted)}
   </div>
 </section>
 
-<footer>MegaRobotics ist eine Marke der MegaForce GmbH, Wacholderweg 8, 41564 Kaarst. Technische Werte der M-Serie: Katalog, Stand 11/2026. CENTAUR: Auslegungswerte.</footer>
+<footer>
+<h3>Abkürzungen</h3>
+<dl class="abbr">
+  <div><dt>AP</dt><dd>Arbeitspaket. AP 2 ist das Arbeitspaket „Entwicklung Fahrsystem“.</dd></div>
+  <div><dt>M 3, M 20</dt><dd>Projektmonat 3 bzw. 20, gezählt ab Projektstart.</dd></div>
+  <div><dt>BarnSCOUT</dt><dd>Arbeitstitel des Verbundvorhabens.</dd></div>
+  <div><dt>PHWT</dt><dd>Private Hochschule für Wirtschaft und Technik Vechta/Diepholz.</dd></div>
+  <div><dt>DIL</dt><dd>Deutsches Institut für Lebensmitteltechnik e. V.</dd></div>
+  <div><dt>BLE</dt><dd>Bundesanstalt für Landwirtschaft und Ernährung, Projektträger.</dd></div>
+  <div><dt>KI</dt><dd>Künstliche Intelligenz.</dd></div>
+  <div><dt>EU</dt><dd>Europäische Union.</dd></div>
+  <div><dt>IP66, IP67</dt><dd>Schutzart: staubdicht, dazu Schutz gegen starkes Strahlwasser (IP66) bzw. zeitweiliges Untertauchen (IP67).</dd></div>
+  <div><dt>M40, M100</dt><dd>Modelle der M-Serie. Die Zahl nennt die Nutzlastklasse in kg.</dd></div>
+  <div><dt>W, WS</dt><dd>Rad-Bein-Antrieb mit langem Bein (W) bzw. kurzem Bein (WS).</dd></div>
+  <div><dt>M, C</dt><dd>In der Aufgabenliste: M-Serie als Sensorträger, CENTAUR mit Oberkörpermodul.</dd></div>
+  <div><dt>θ, φ</dt><dd>Drehwinkel und Neigungswinkel des Oberkörpermoduls.</dd></div>
+  <div><dt>LiDAR</dt><dd>Laserscanner zur Entfernungsmessung und Umgebungserfassung.</dd></div>
+  <div><dt>SLAM</dt><dd>Gleichzeitige Kartierung und Ortung des Roboters.</dd></div>
+  <div><dt>RTK</dt><dd>Satellitenortung mit Korrekturdaten, zentimetergenau.</dd></div>
+  <div><dt>GPS</dt><dd>Satellitenortung.</dd></div>
+  <div><dt>4G, 5G</dt><dd>Mobilfunkstandards.</dd></div>
+  <div><dt>SDK</dt><dd>Software-Entwicklungspaket für eigene Anwendungen.</dd></div>
+  <div><dt>CO₂</dt><dd>Kohlendioxid.</dd></div>
+  <div><dt>Wh</dt><dd>Wattstunde, Maß für die Akkukapazität.</dd></div>
+</dl>
+MegaRobotics ist eine Marke der MegaForce GmbH, Wacholderweg 8, 41564 Kaarst. Technische Werte der M-Serie: Katalog, Stand 11/2026. CENTAUR: Auslegungswerte.</footer>
 </main>
 
 <script>
