@@ -15,6 +15,8 @@ interface Props {
   flagships: FlagshipItem[]
   families: CatalogFamily[]
   initial: CatalogQuery
+  /** A hero sits above the header, which then skips the navbar offset. */
+  belowHero?: boolean
 }
 
 const AVAIL_KEY: Record<string, string> = {
@@ -123,7 +125,7 @@ function ChipLane({ label, prev, next, children }: { label: string; prev: string
   )
 }
 
-export default function CatalogExplorer({ items, flagships, families, initial }: Props) {
+export default function CatalogExplorer({ items, flagships, families, initial, belowHero }: Props) {
   const t = useTranslations('industrial.catalog.explorer')
   const tAvail = useTranslations('industrial.productDetail.availability')
   const availLabel = (st?: string) => (st && AVAIL_KEY[st] ? tAvail(AVAIL_KEY[st]) : undefined)
@@ -283,7 +285,7 @@ export default function CatalogExplorer({ items, flagships, families, initial }:
   return (
     <>
       {/* ---------- Header ---------- */}
-      <header className={s.header}>
+      <header className={belowHero ? `${s.header} ${s.headerBelowHero}` : s.header}>
         <div className="mr-aurora" aria-hidden="true">
           <span />
           <span />

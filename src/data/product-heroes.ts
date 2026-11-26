@@ -242,8 +242,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'A compact humanoid with an open software stack, so labs and developers can run their own models. Swappable battery, about two hours per charge.',
           de: 'Ein kompakter Humanoid mit offenem Software-Stack für eigene Modelle. Wechselakku mit rund zwei Stunden Laufzeit.',
         },
-        image: 'https://cdn.sanity.io/images/wudur8e8/production/44ab7fc6ae3a186c295cb450acd729790667d346-4000x2500.jpg',
-        duration: 10,
+        video: '/agile/hero/agile-one-s/research-platform.mp4',
         shift: '-14%',
         useCases: [
           [{ en: 'Embodied AI', de: 'Embodied AI' }, { en: 'research & imitation learning', de: 'Forschung & Imitation Learning' }],
@@ -261,8 +260,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Three RGB-D cameras, a 360° LiDAR and a six-microphone array, with NVIDIA Jetson Thor for on-board AI.',
           de: 'Drei RGB-D-Kameras, ein 360°-LiDAR und ein Sechs-Mikrofon-Array, dazu NVIDIA Jetson Thor für KI an Bord.',
         },
-        image: `${HERO_MEDIA_BASE}/agile/hero/agile-one-s/upper-body.jpg`,
-        duration: 9,
+        video: '/agile/hero/agile-one-s/upper-body.mp4',
         useCases: [
           [{ en: 'Perception research', de: 'Wahrnehmungsforschung' }, { en: 'RGB-D and LiDAR', de: 'RGB-D und LiDAR' }],
           [{ en: 'Voice interaction', de: 'Sprachinteraktion' }, { en: 'sound-source localisation', de: 'Ortung von Schallquellen' }],
@@ -276,8 +274,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Ships with dummy hands. A Pinza gripper (1 DoF) or a four-finger dexterous hand (13 DoF) are available as options.',
           de: 'Ausgeliefert mit Attrappen-Händen. Optional gibt es den Pinza-Greifer (1 Freiheitsgrad) oder eine Vierfingerhand (13 Freiheitsgrade).',
         },
-        image: `${HERO_MEDIA_BASE}/agile/hero/agile-one-s/studio.jpg`,
-        duration: 9,
+        video: '/agile/hero/agile-one-s/studio.mp4',
         useCases: [
           [{ en: 'Whole-body control', de: 'Ganzkörperregelung' }, { en: '31 DoF in the body', de: '31 Freiheitsgrade im Körper' }],
           [{ en: 'Grasping', de: 'Greifen' }, { en: 'gripper or dexterous hand', de: 'Greifer oder Geschickhand' }],
@@ -520,8 +517,7 @@ const HEROES: Record<string, ProductHero> = {
           en: '3 kg payload, 772 mm reach and IP54 protection against dust and splashes, in a 19 kg arm for laboratory work.',
           de: '3 kg Traglast, 772 mm Reichweite und Schutzart IP54 gegen Staub und Spritzwasser, in einem 19 kg leichten Arm für die Laborarbeit.',
         },
-        image: `${HERO_MEDIA_BASE}/agile/hero/diana-3/compact-lab.jpg`,
-        duration: 9,
+        video: '/agile/hero/diana-3/compact-lab.mp4',
         useCases: [
           [{ en: 'Lab automation', de: 'Laborautomatisierung' }, { en: 'sample handling', de: 'Probenhandhabung' }],
           [{ en: 'Medical research', de: 'Medizinische Forschung' }, { en: 'research assistance', de: 'Assistenz in der Forschung' }],
@@ -535,8 +531,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Built-in Franka Control Interface at 1 kHz, the same as on Franka Research 3 and Diana 7, so code and toolchains carry over directly.',
           de: 'Integrierte Franka Control Interface mit 1 kHz, wie bei Franka Research 3 und Diana 7. Code und Toolchains lassen sich direkt übernehmen.',
         },
-        image: `${HERO_MEDIA_BASE}/agile/hero/diana-3/dual-arm.jpg`,
-        duration: 9,
+        video: '/agile/hero/diana-3/dual-arm.mp4',
         useCases: [
           [{ en: 'libfranka', de: 'libfranka' }, { en: 'real-time C++ control', de: 'Echtzeitsteuerung in C++' }],
           [{ en: 'ROS 2', de: 'ROS 2' }, { en: 'MoveIt and Gazebo', de: 'MoveIt und Gazebo' }],
@@ -567,8 +562,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Seven axes with a torque sensor in every joint, engineered and built in Germany for robotics and AI research.',
           de: 'Sieben Achsen mit Drehmomentsensor in jedem Gelenk, entwickelt und gebaut in Deutschland für Robotik- und KI-Forschung.',
         },
-        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/research-arm.jpg`,
-        duration: 9,
+        video: '/franka/hero/franka-research-3/research-arm.mp4',
         useCases: [
           [{ en: 'Control research', de: 'Regelungsforschung' }, { en: 'torque and impedance at 1 kHz', de: 'Drehmoment und Impedanz mit 1 kHz' }],
           [{ en: 'Hand guiding', de: 'Handführung' }, { en: 'sensitive contact detection', de: 'feinfühlige Kontakterkennung' }],
@@ -582,8 +576,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Diana 3, Diana 7 and Franka Research 3 all support the Franka Control Interface, so research code moves between them.',
           de: 'Diana 3, Diana 7 und Franka Research 3 unterstützen alle die Franka Control Interface. Forschungscode wandert mit.',
         },
-        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/fci-family.jpg`,
-        duration: 9,
+        video: '/franka/hero/franka-research-3/fci-family.mp4',
         useCases: [
           [{ en: 'libfranka', de: 'libfranka' }, { en: 'open-source C++', de: 'Open Source in C++' }],
           [{ en: 'franka_ros 2', de: 'franka_ros 2' }, { en: 'MoveIt, RViz, Gazebo', de: 'MoveIt, RViz, Gazebo' }],
@@ -597,8 +590,7 @@ const HEROES: Record<string, ProductHero> = {
           en: 'Two FR3 arms on one column make the Franka Research 3 Duo for bimanual research.',
           de: 'Zwei FR3-Arme an einer Säule ergeben den Franka Research 3 Duo für zweihändige Forschung.',
         },
-        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/dual-arm.jpg`,
-        duration: 9,
+        video: '/franka/hero/franka-research-3/dual-arm.mp4',
         useCases: [
           [{ en: 'Bimanual skills', de: 'Zweihändige Fähigkeiten' }, { en: 'two arms, one workspace', de: 'zwei Arme, ein Arbeitsraum' }],
           [{ en: 'Same arm', de: 'Derselbe Arm' }, { en: 'same FCI and toolchain', de: 'dieselbe FCI und Toolchain' }],
@@ -1158,6 +1150,21 @@ const HOME_SLIDES: { slug: string; slide: string }[] = [
   { slug: 'seer-x1-pro', slide: 'smart-sorting' },
 ]
 
+// Hero on /products: the newest products first, then the main lines.
+const PRODUCTS_PAGE_SLIDES: { slug: string; slide: string }[] = [
+  { slug: 'agile-one-s', slide: 'research-platform' },
+  { slug: 'diana-3', slide: 'design' },
+  { slug: 'franka-research-3', slide: 'dual-arm' },
+  { slug: 'agile-one-sn', slide: 'research-lab' },
+  { slug: 'diana-7', slide: 'precision-assembly' },
+  { slug: 'franka-research-3-duo', slide: 'teleoperation' },
+  { slug: 'mobile-fr3-duo', slide: 'mobile-manipulation' },
+  { slug: 'limx-oli', slide: 'whole-body-motion' },
+  { slug: 'magicbot-z1-standard', slide: 'whole-body-control' },
+  { slug: 'm100ws', slide: 'plant-patrol' },
+  { slug: 'seer-x1-pro', slide: 'smart-sorting' },
+]
+
 /**
  * Hero for a manufacturer page, built from that brand's products in the order
  * given. With one product that has a hero, its full slide set runs (`product`
@@ -1183,13 +1190,22 @@ export function getManufacturerHero(
   return { specs: [], slides }
 }
 
-/** Slides for the homepage hero, each carrying its product's name and specs. */
-export function getHomeProductHero(locale: Locale): ResolvedProductHero {
-  const slides = HOME_SLIDES.flatMap(({ slug, slide }) => {
+function pickedSlides(picks: { slug: string; slide: string }[], locale: Locale): ResolvedProductHero {
+  const slides = picks.flatMap(({ slug, slide }) => {
     const hero = HEROES[slug]
     const s = hero?.slides.find((x) => x.id === slide)
     if (!hero || !s) return []
     return [{ ...resolveSlide(s, locale), id: slug, product: { slug, name: hero.name, specs: resolveSpecs(hero, locale) } }]
   })
   return { specs: [], slides }
+}
+
+/** Slides for the homepage hero, each carrying its product's name and specs. */
+export function getHomeProductHero(locale: Locale): ResolvedProductHero {
+  return pickedSlides(HOME_SLIDES, locale)
+}
+
+/** Slides for the hero on the product catalogue page. */
+export function getProductsPageHero(locale: Locale): ResolvedProductHero {
+  return pickedSlides(PRODUCTS_PAGE_SLIDES, locale)
 }

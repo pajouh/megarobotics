@@ -11,6 +11,9 @@
     radial-gradient(60% 90% at 100% 0%, rgba(6, 147, 140, 0.12) 0%, transparent 60%),
     linear-gradient(180deg, #eef5f6 0%, var(--mr-paper) 100%);
 }
+.header.headerBelowHero {
+  padding-top: 40px;
+}
 .headerInner {
   position: relative;
   display: grid;

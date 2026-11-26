@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { visibleAvailability } from '@/lib/availability'
-import { ArrowRight } from 'lucide-react'
+import { Fragment } from 'react'
+import { ArrowRight, Mail } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { getProductsWithFilters, getProductFamilies, urlFor, type Locale } from '@/lib/sanity'
@@ -12,7 +13,8 @@ import { generateCollectionSchema } from '@/lib/structured-data'
 import StructuredData from '@/components/StructuredData'
 import { productFamilyFallbacks } from '@/data/product-families'
 import { authorizedPartners } from '@/data/authorized-partners'
-import { getHomeProductHero, getProductHero } from '@/data/product-heroes'
+import { getHomeProductHero, getProductHero, getProductsPageHero } from '@/data/product-heroes'
+import ProductHeroSlider from '@/components/industrial/ProductHeroSlider'
 import type { Product } from '@/types'
 
 export async function generateMetadata({
@@ -116,6 +118,26 @@ export default async function ProductsPage({ params, searchParams }: Props) {
       }
     })
 
+  // Video hero above the catalogue, one product per slide (as on the homepage).
+  const pageHero = getProductsPageHero(locale as Locale)
+  const tProducts = await getTranslations('products')
+  const tDetail = await getTranslations('industrial.productDetail')
+  const heroActions = pageHero.slides.map((sl) => {
+    const name = sl.product?.name ?? ''
+    return (
+      <Fragment key={sl.id}>
+        <Link href={`/products/${sl.product?.slug}`} className="ind-btn-primary">
+          {tProducts('hero.discover', { product: name })}
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+        <Link href={`/contact?${new URLSearchParams({ inquiry: 'availability', product: name })}`} className="ind-btn-secondary">
+          <Mail className="w-4 h-4" />
+          {tDetail('cta.requestAvailability')}
+        </Link>
+      </Fragment>
+    )
+  })
+
   const families: CatalogFamily[] = sanityFamilies.length
     ? sanityFamilies.map((f) => ({ slug: f.slug.current, title: familyTitle(f.slug.current, f.title) }))
     : productFamilyFallbacks.map((f) => ({ slug: f.slug, title: familyTitle(f.slug) }))
@@ -141,7 +163,29 @@ export default async function ProductsPage({ params, searchParams }: Props) {
           items: items.map((item) => ({ name: item.name, path: `/products/${item.slug}` })),
         })}
       />
-      <CatalogExplorer items={items} flagships={flagships} families={families} initial={initial} />
+      {pageHero.slides.length > 0 && (
+        <div className="pt-16">
+          <ProductHeroSlider
+            hero={pageHero}
+            locale={locale}
+            labels={{
+              carousel: tProducts('hero.homeCarousel'),
+              chooseSlide: tProducts('hero.chooseProduct'),
+              useCases: tProducts('hero.useCases'),
+              pause: tProducts('hero.pause'),
+              play: tProducts('hero.play'),
+            }}
+            slideActions={heroActions}
+          />
+        </div>
+      )}
+      <CatalogExplorer
+        items={items}
+        flagships={flagships}
+        families={families}
+        initial={initial}
+        belowHero={pageHero.slides.length > 0}
+      />
 
       {/* Components and distributor teasers */}
       <section className="py-12 md:py-16 ind-section-graphite relative overflow-hidden">
