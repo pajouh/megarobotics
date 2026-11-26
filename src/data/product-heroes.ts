@@ -228,7 +228,7 @@ const HEROES: Record<string, ProductHero> = {
     name: 'Agile ONE S',
     specs: [
       { value: 140, unit: 'cm', label: { en: 'Height', de: 'Größe' } },
-      { value: 40, unit: 'kg', label: { en: 'Weight', de: 'Gewicht' } },
+      { value: 43, unit: 'kg', label: { en: 'Weight', de: 'Gewicht' } },
       { value: 31, label: { en: 'DoF (body)', de: 'Freiheitsgrade (Körper)' } },
       { value: 3, unit: 'kg', label: { en: 'Payload per arm', de: 'Traglast pro Arm' } },
       { value: 140, unit: 'N·m', label: { en: 'Peak joint torque', de: 'Max. Gelenkmoment' } },
@@ -249,6 +249,39 @@ const HEROES: Record<string, ProductHero> = {
           [{ en: 'Embodied AI', de: 'Embodied AI' }, { en: 'research & imitation learning', de: 'Forschung & Imitation Learning' }],
           [{ en: 'Skill development', de: 'Fähigkeiten entwickeln' }, { en: 'URDF & USD for simulation', de: 'URDF & USD für die Simulation' }],
           [{ en: 'Universities', de: 'Hochschulen' }, { en: 'teaching & labs', de: 'Lehre & Labore' }],
+        ],
+      },
+      // upper-body, studio: photos from Agile Robots' "Agile ONE S Flyer with
+      // spec" (Nov 2026, companies/Agile/04_Products) on a gradient taken from
+      // each photo. Copyright stays with Agile Robots SE.
+      {
+        id: 'perception',
+        eyebrow: { en: 'Perception', de: 'Wahrnehmung' },
+        tagline: {
+          en: 'Three RGB-D cameras, a 360° LiDAR and a six-microphone array, with NVIDIA Jetson Thor for on-board AI.',
+          de: 'Drei RGB-D-Kameras, ein 360°-LiDAR und ein Sechs-Mikrofon-Array, dazu NVIDIA Jetson Thor für KI an Bord.',
+        },
+        image: `${HERO_MEDIA_BASE}/agile/hero/agile-one-s/upper-body.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'Perception research', de: 'Wahrnehmungsforschung' }, { en: 'RGB-D and LiDAR', de: 'RGB-D und LiDAR' }],
+          [{ en: 'Voice interaction', de: 'Sprachinteraktion' }, { en: 'sound-source localisation', de: 'Ortung von Schallquellen' }],
+          [{ en: 'On-board AI', de: 'KI an Bord' }, { en: 'Jetson Thor T5000', de: 'Jetson Thor T5000' }],
+        ],
+      },
+      {
+        id: 'hands',
+        eyebrow: { en: 'Hands of your choice', de: 'Hände nach Wahl' },
+        tagline: {
+          en: 'Ships with dummy hands. A Pinza gripper (1 DoF) or a four-finger dexterous hand (13 DoF) are available as options.',
+          de: 'Ausgeliefert mit Attrappen-Händen. Optional gibt es den Pinza-Greifer (1 Freiheitsgrad) oder eine Vierfingerhand (13 Freiheitsgrade).',
+        },
+        image: `${HERO_MEDIA_BASE}/agile/hero/agile-one-s/studio.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'Whole-body control', de: 'Ganzkörperregelung' }, { en: '31 DoF in the body', de: '31 Freiheitsgrade im Körper' }],
+          [{ en: 'Grasping', de: 'Greifen' }, { en: 'gripper or dexterous hand', de: 'Greifer oder Geschickhand' }],
+          [{ en: 'Simulation', de: 'Simulation' }, { en: 'URDF & USD assets', de: 'URDF- & USD-Modelle' }],
         ],
       },
     ],
@@ -443,6 +476,133 @@ const HEROES: Record<string, ProductHero> = {
           [{ en: 'Imitation learning', de: 'Imitation Learning' }, { en: 'teleoperated demonstrations', de: 'teleoperierte Demonstrationen' }],
           [{ en: 'Bimanual skills', de: 'Zweihändige Fähigkeiten' }, { en: 'two arms, one shared workspace', de: 'zwei Arme, ein gemeinsamer Arbeitsraum' }],
           [{ en: 'Datasets', de: 'Datensätze' }, { en: 'reproducible across institutions', de: 'reproduzierbar über Institute hinweg' }],
+        ],
+      },
+    ],
+  },
+
+  // design: two short passes cut from Agile Robots' "Diana3 Dark Shooting.mp4"
+  // (partner footage, companies/Agile/media). compact-lab, dual-arm: product
+  // renders from Agile Robots' "Diana Series + Franka Combo Flyer" (Nov 2026,
+  // companies/Agile/04_Products), set on a 16:9 studio gradient. Specs from the
+  // same flyer. Copyright in footage and renders stays with Agile Robots SE.
+  'diana-3': {
+    name: 'Diana 3',
+    specs: [
+      { value: 7, label: { en: 'Axes', de: 'Achsen' } },
+      { value: 3, unit: 'kg', label: { en: 'Payload', de: 'Traglast' } },
+      { value: 772, unit: 'mm', label: { en: 'Reach', de: 'Reichweite' } },
+      { value: 0.05, unit: 'mm', prefix: '±', decimals: 2, label: { en: 'Repeatability', de: 'Wiederholgenauigkeit' } },
+      { value: 0.5, unit: 'N', decimals: 1, label: { en: 'Force control', de: 'Kraftregelung' } },
+      { value: 'IP54', label: { en: 'Protection', de: 'Schutzart' } },
+    ],
+    slides: [
+      {
+        id: 'design',
+        eyebrow: { en: 'Force control', de: 'Kraftregelung' },
+        tagline: {
+          en: 'Torque sensors in all seven joints and 0.5 N relative force-control accuracy, the same core figures as the industrial Diana 7.',
+          de: 'Drehmomentsensoren in allen sieben Gelenken und 0,5 N relative Kraftregelgenauigkeit, dieselben Kernwerte wie beim industriellen Diana 7.',
+        },
+        video: '/agile/hero/diana-3/design.mp4',
+        loop: true,
+        duration: 10,
+        useCases: [
+          [{ en: 'Precision manipulation', de: 'Präzise Manipulation' }, { en: 'force-control research', de: 'Kraftregelungsforschung' }],
+          [{ en: 'Contact tasks', de: 'Kontaktaufgaben' }, { en: 'compliant, sensitive motion', de: 'nachgiebige, feinfühlige Bewegung' }],
+          [{ en: 'Collision detection', de: 'Kollisionserkennung' }, { en: 'torque sensing in every joint', de: 'Drehmomentmessung in jedem Gelenk' }],
+        ],
+      },
+      {
+        id: 'compact-lab',
+        eyebrow: { en: 'Built for the lab', de: 'Fürs Labor gebaut' },
+        tagline: {
+          en: '3 kg payload, 772 mm reach and IP54 protection against dust and splashes, in a 19 kg arm for laboratory work.',
+          de: '3 kg Traglast, 772 mm Reichweite und Schutzart IP54 gegen Staub und Spritzwasser, in einem 19 kg leichten Arm für die Laborarbeit.',
+        },
+        image: `${HERO_MEDIA_BASE}/agile/hero/diana-3/compact-lab.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'Lab automation', de: 'Laborautomatisierung' }, { en: 'sample handling', de: 'Probenhandhabung' }],
+          [{ en: 'Medical research', de: 'Medizinische Forschung' }, { en: 'research assistance', de: 'Assistenz in der Forschung' }],
+          [{ en: 'Universities', de: 'Hochschulen' }, { en: 'first experiments to long-term research', de: 'vom ersten Versuch bis zur Langzeitforschung' }],
+        ],
+      },
+      {
+        id: 'open-interface',
+        eyebrow: { en: 'Open interface', de: 'Offene Schnittstelle' },
+        tagline: {
+          en: 'Built-in Franka Control Interface at 1 kHz, the same as on Franka Research 3 and Diana 7, so code and toolchains carry over directly.',
+          de: 'Integrierte Franka Control Interface mit 1 kHz, wie bei Franka Research 3 und Diana 7. Code und Toolchains lassen sich direkt übernehmen.',
+        },
+        image: `${HERO_MEDIA_BASE}/agile/hero/diana-3/dual-arm.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'libfranka', de: 'libfranka' }, { en: 'real-time C++ control', de: 'Echtzeitsteuerung in C++' }],
+          [{ en: 'ROS 2', de: 'ROS 2' }, { en: 'MoveIt and Gazebo', de: 'MoveIt und Gazebo' }],
+          [{ en: 'MATLAB', de: 'MATLAB' }, { en: 'and Simulink', de: 'und Simulink' }],
+        ],
+      },
+    ],
+  },
+
+  // Product renders from Agile Robots' "Diana Series + Franka Combo Flyer"
+  // (Nov 2026, companies/Agile/04_Products), set on a 16:9 studio gradient.
+  // Specs from the same flyer. Copyright stays with Agile Robots / Franka Robotics.
+  'franka-research-3': {
+    name: 'Franka Research 3',
+    specs: [
+      { value: 7, label: { en: 'Axes', de: 'Achsen' } },
+      { value: 3, unit: 'kg', label: { en: 'Payload', de: 'Traglast' } },
+      { value: 855, unit: 'mm', label: { en: 'Reach', de: 'Reichweite' } },
+      { value: 0.1, unit: 'mm', prefix: '±', decimals: 1, label: { en: 'Repeatability', de: 'Wiederholgenauigkeit' } },
+      { value: 94.5, unit: '%', decimals: 1, label: { en: 'Workspace coverage', de: 'Arbeitsraumabdeckung' } },
+      { value: 1, unit: 'kHz', label: { en: 'Real-time control', de: 'Echtzeitsteuerung' } },
+    ],
+    slides: [
+      {
+        id: 'research-arm',
+        eyebrow: { en: 'Reference platform', de: 'Referenzplattform' },
+        tagline: {
+          en: 'Seven axes with a torque sensor in every joint, engineered and built in Germany for robotics and AI research.',
+          de: 'Sieben Achsen mit Drehmomentsensor in jedem Gelenk, entwickelt und gebaut in Deutschland für Robotik- und KI-Forschung.',
+        },
+        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/research-arm.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'Control research', de: 'Regelungsforschung' }, { en: 'torque and impedance at 1 kHz', de: 'Drehmoment und Impedanz mit 1 kHz' }],
+          [{ en: 'Hand guiding', de: 'Handführung' }, { en: 'sensitive contact detection', de: 'feinfühlige Kontakterkennung' }],
+          [{ en: 'Teaching', de: 'Lehre' }, { en: 'ROS 2 and MATLAB', de: 'ROS 2 und MATLAB' }],
+        ],
+      },
+      {
+        id: 'fci-family',
+        eyebrow: { en: 'One interface, three arms', de: 'Eine Schnittstelle, drei Arme' },
+        tagline: {
+          en: 'Diana 3, Diana 7 and Franka Research 3 all support the Franka Control Interface, so research code moves between them.',
+          de: 'Diana 3, Diana 7 und Franka Research 3 unterstützen alle die Franka Control Interface. Forschungscode wandert mit.',
+        },
+        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/fci-family.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'libfranka', de: 'libfranka' }, { en: 'open-source C++', de: 'Open Source in C++' }],
+          [{ en: 'franka_ros 2', de: 'franka_ros 2' }, { en: 'MoveIt, RViz, Gazebo', de: 'MoveIt, RViz, Gazebo' }],
+          [{ en: 'MATLAB', de: 'MATLAB' }, { en: 'and Simulink', de: 'und Simulink' }],
+        ],
+      },
+      {
+        id: 'dual-arm',
+        eyebrow: { en: 'Dual-arm research', de: 'Zweiarmige Forschung' },
+        tagline: {
+          en: 'Two FR3 arms on one column make the Franka Research 3 Duo for bimanual research.',
+          de: 'Zwei FR3-Arme an einer Säule ergeben den Franka Research 3 Duo für zweihändige Forschung.',
+        },
+        image: `${HERO_MEDIA_BASE}/franka/hero/franka-research-3/dual-arm.jpg`,
+        duration: 9,
+        useCases: [
+          [{ en: 'Bimanual skills', de: 'Zweihändige Fähigkeiten' }, { en: 'two arms, one workspace', de: 'zwei Arme, ein Arbeitsraum' }],
+          [{ en: 'Same arm', de: 'Derselbe Arm' }, { en: 'same FCI and toolchain', de: 'dieselbe FCI und Toolchain' }],
+          [{ en: 'Start small', de: 'Klein anfangen' }, { en: 'one arm first, a second later', de: 'erst ein Arm, später ein zweiter' }],
         ],
       },
     ],

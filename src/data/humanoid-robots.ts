@@ -132,7 +132,7 @@ const MODELS: HumanoidModel[] = [
     },
     specs: [
       { label: S.height, value: { en: 'approx. 140 cm', de: 'ca. 140 cm' } },
-      { label: S.weight, value: { en: 'approx. 40 kg', de: 'ca. 40 kg' } },
+      { label: S.weight, value: same('43 kg') },
       { label: S.dof, value: { en: '31 (without hands)', de: '31 (ohne Hände)' } },
       { label: S.compute, value: same('Jetson Thor T5000') },
     ],
@@ -140,7 +140,7 @@ const MODELS: HumanoidModel[] = [
     row: {
       drive: LEGS,
       height: { en: 'approx. 140 cm', de: 'ca. 140 cm' },
-      weight: { en: 'approx. 40 kg', de: 'ca. 40 kg' },
+      weight: same('43 kg'),
       dof: { en: '31 (without hands)', de: '31 (ohne Hände)' },
       payload: { en: 'up to 3 kg', de: 'bis 3 kg' },
       speed: NONE,
