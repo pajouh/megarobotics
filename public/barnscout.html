@@ -191,6 +191,16 @@ section:last-of-type{border-bottom:0}
 .abbr dd{margin:0}
 footer h3{font-size:.95rem;color:var(--ink)}
 @media (max-width:900px){.abbr{grid-template-columns:minmax(0,1fr)}}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:14px}
+.vids.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vids figure,.gal figure{margin:0}
+.vids video{width:100%;display:block;border-radius:10px;border:1px solid var(--line);background:#0c1412;aspect-ratio:16/9;object-fit:cover}
+.vids figcaption,.gal figcaption{font-size:.86rem;margin-top:6px}
+.vids figcaption small,.gal figcaption small{display:block;color:var(--muted);font-size:.76rem}
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:14px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:contain;background:radial-gradient(circle at 50% 60%,#fff,#e6ebe6);border:1px solid var(--line);border-radius:10px;padding:10px;transition:transform .3s}
+.gal figure:hover img{transform:scale(1.04)}
+@media (max-width:900px){.vids,.vids.three{grid-template-columns:minmax(0,1fr)}.gal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* projects */
 .proj{position:relative;overflow:hidden}
 .proj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
@@ -405,6 +415,14 @@ footer{padding:26px 0 70px;font-size:.8rem;color:var(--muted)}
     <div class="card rise"><h3>Geschützte Eigenentwicklung</h3><p class="muted">EU-Designs 015138894-0001 und -0002, internationale Registrierung DM/256721, deutsches Gebrauchsmuster. Erfinder: Masoud Pajouh.</p></div>
     <div class="card rise"><h3>Offene Schnittstelle</h3><p class="muted">Die CENTAUR Coupling Specification beschreibt Mechanik, Energie und Kommunikation der Kopplung und ist zur Veröffentlichung vorgesehen.</p></div>
   </div>
+  <h3 class="mt">CENTAUR im Video</h3>
+  <div class="vids">
+    <figure><video controls muted loop playsinline preload="none" poster="/barnscout/centaur-inspektion.jpg"><source src="/barnscout/centaur-inspektion.mp4" type="video/mp4"></video><figcaption><b>Inspektion an der Anlage</b><small>Fahrwerk und Oberkörper im Verbund, Messung mit Wärmebild</small></figcaption></figure>
+    <figure><video controls muted loop playsinline preload="none" poster="/barnscout/centaur-probentransport.jpg"><source src="/barnscout/centaur-probentransport.mp4" type="video/mp4"></video><figcaption><b>Probentransport im Klinikum</b><small>Übergabe, Transport und Quittierung</small></figcaption></figure>
+    <figure><video controls muted loop playsinline preload="none" poster="/barnscout/centaur-nachtlogistik.jpg"><source src="/barnscout/centaur-nachtlogistik.mp4" type="video/mp4"></video><figcaption><b>Logistik in der Nachtschicht</b><small>Material aufnehmen, fahren, einlagern</small></figcaption></figure>
+    <figure><video controls muted loop playsinline preload="none" poster="/barnscout/centaur-materialtransport.jpg"><source src="/barnscout/centaur-materialtransport.mp4" type="video/mp4"></video><figcaption><b>Materialtransport mit zwei Armen</b><small>Greifen und Ablegen an Schränken und Regalen</small></figcaption></figure>
+  </div>
+  <p class="note" style="margin-top:8px">KI-generierte Visualisierungen der vorgesehenen Abläufe.</p>
 </section>
 
 <section id="mserie" data-t="M-Serie">
@@ -435,6 +453,24 @@ footer{padding:26px 0 70px;font-size:.8rem;color:var(--muted)}
     </div>
   </div>
   <p class="note" style="margin-top:14px">Katalogwerte, Stand 11/2026. Optionen für beide Serien: Navigation mit LiDAR und SLAM, Wärmebild-Gimbal, RTK, 4G/5G, autonome Ladestation, offenes SDK.</p>
+  <h3 class="mt">Die M-Serie im Video</h3>
+  <div class="vids">
+    <figure><video controls muted loop playsinline preload="none" poster="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.jpg"><source src="https://media.megarobotics.de/megarobotics/lhoist1/m40_gelaende_treppen.mp4" type="video/mp4"></video><figcaption><b>M40 im Gelände und auf Treppen</b><small>Realaufnahme</small></figcaption></figure>
+    <figure><video controls muted loop playsinline preload="none" poster="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.jpg"><source src="https://media.megarobotics.de/megarobotics/hero/m100ws/plant-patrol.mp4" type="video/mp4"></video><figcaption><b>M100WS auf Streife im Werk</b><small>Visualisierung</small></figcaption></figure>
+  </div>
+  <h3 class="mt">Sensorik nach Aufgabe</h3>
+  <p class="muted">Dieselbe Plattformfamilie, unterschiedlich aufgebaut. Für BarnSCOUT legen wir Kamera und Sensorik gemeinsam mit den Partnern aus.</p>
+  <div class="gal">
+    <figure><img loading="lazy" src="/barnscout/sensorik-08.webp" alt="Arealstreife: Laufplattform mit Mehrfach-Kamerakopf"><figcaption><b>Arealstreife</b><small>Laufplattform mit Mehrfach-Kamerakopf</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-01.webp" alt="Streife auf langen Wegen: Rad-Bein-Plattform mit Kameraaufbau"><figcaption><b>Streife auf langen Wegen</b><small>Rad-Bein-Plattform mit Kameraaufbau</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-02.webp" alt="Streife und Sichtprüfung: Rad-Bein-Plattform mit Kamerakopf im Schutzbügel"><figcaption><b>Streife und Sichtprüfung</b><small>Rad-Bein-Plattform mit Kamerakopf im Schutzbügel</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-05.webp" alt="Inspektion: Laufplattform mit mehreren Sensoren"><figcaption><b>Inspektion</b><small>Laufplattform mit mehreren Sensoren</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-03.webp" alt="Anlageninspektion: Laufplattform mit Sensoraufbau im Schutzkorb"><figcaption><b>Anlageninspektion</b><small>Laufplattform mit Sensoraufbau im Schutzkorb</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-04.webp" alt="Anlageninspektion: Flacher Aufbau mit Sensor und Rechnereinheit"><figcaption><b>Anlageninspektion</b><small>Flacher Aufbau mit Sensor und Rechnereinheit</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-06.webp" alt="Einsatz mit Funkanbindung: Laufplattform mit Sensoraufbau und Antennen"><figcaption><b>Einsatz mit Funkanbindung</b><small>Laufplattform mit Sensoraufbau und Antennen</small></figcaption></figure>
+    <figure><img loading="lazy" src="/barnscout/sensorik-07.webp" alt="Inspektion mit Eingriff: Laufplattform mit Sensorkopf und Manipulatorarm"><figcaption><b>Inspektion mit Eingriff</b><small>Laufplattform mit Sensorkopf und Manipulatorarm</small></figcaption></figure>
+  </div>
+  <p class="note" style="margin-top:8px">Beispielkonfigurationen der Plattformfamilie, überwiegend Renderings.</p>
 </section>
 
 <section id="rundgang" data-t="Kontrollgang">
