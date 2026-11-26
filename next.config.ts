@@ -98,6 +98,10 @@ const nextConfig: NextConfig = {
         source: '/barnscout.html',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
+      {
+        source: '/barnscout/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       // Private customer presentation (MVA Bielefeld-Herford, 24 Nov 2026)
       {
         source: '/mva1',
